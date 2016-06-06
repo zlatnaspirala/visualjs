@@ -1,0 +1,1 @@
+If you wanna use visual js GUI for windows extract to this folder (root - same as rar file)
