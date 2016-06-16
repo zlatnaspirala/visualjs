@@ -26,22 +26,26 @@
          /////////////////
          //Try online 
          /////////////////
-          -Add new game Object with single image:
-          https://jsfiddle.net/zlatnaspirala/rjf0xe0a/
+          //basic free examples 2d canvas part
+          https://jsfiddle.net/zlatnaspirala 
+          
+          //paid 
+          
+          https://maximumroulette.com/framework/  
+          (server config reels slot mashine - in one file one day)
+         
+          //webGl 3d part (three.js implementation) examples 
+          
+          http://maximumroulette.com/framework/3d_Tshirts_desing/project_instance/tshirts.html?tshirts
+          (3d Tshirts desing - 2d + 3d )
+          
+          https://maximumroulette.com/framework/monsters/  TPS basic
+          ( Load character , control , shoot )
+          
+          https://maximumroulette.com/welcome/chat/   
+          (webRTC vs Three.js + cannon.js)
 
-         -Use For loop for creating objects
-         https://jsfiddle.net/zlatnaspirala/noax17kz/
-
-         -Visual JS -Add Webcam to Object
-         https://jsfiddle.net/zlatnaspirala/xsffd9v6/
-
-         -Add webcam with motion detect
-         https://jsfiddle.net/zlatnaspirala/j60hh052/
-
-          -ZoomIn/ZoomOut game_object effect
-         https://jsfiddle.net/zlatnaspirala/pjjow5q6/
-
-
+ 
 
    External licences in this project : 
 
