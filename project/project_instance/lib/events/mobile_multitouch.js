@@ -41,7 +41,7 @@ function MOBILE_CONTROL (){
   this.SCREEN.H = this.SCREEN[1];
   //Application general
   this.AUTOR = "Nikola Lukic";
-  this.APPLICATION_NAME = "mobile multi touch , system plugin for hardcorejs .";
+  this.APPLICATION_NAME = "mobile multi touch , system plugin for visual js .";
  
  
 }

@@ -371,11 +371,13 @@ this.velY = (ty/dist)*this.thrust;
 if (this.IN_MOVE == true){
 	
   if(dist > this.thrust){
-	  
- 	 
+	 
 	this.x += this.velX;
 	this.y += this.velY;
-	 
+	
+	if (ROOT.SHARE_POSITION == true) {
+	 MAIN_PEER.REMOTE_DATA.NEW_POSITION( window[this.parentGameObject] );
+	} 
 	
   }
   else{
@@ -384,12 +386,18 @@ if (this.IN_MOVE == true){
 	this.y = this.targetY; 
 	this.IN_MOVE = false;
 	ROOT.ON_TARGET_POSITION();
+	
+	if (ROOT.SHARE_POSITION == true) {
+	 MAIN_PEER.REMOTE_DATA.NEW_POSITION( window[this.parentGameObject] );
+	} 
+	
 	try{
 		if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" && APPLICATION.EDITOR == true) {
     SET_NEW_START_UP_POS( this.parentGameObject  , this.PROGRAM_NAME , this.parentModul , this.targetX , this.targetY , this.DIMENSION.W , this.DIMENSION.H );
 		}
 		
 	}catch(e){console.log(e+":::in:::SET_NEW_START_UP_POS")}
+	
    
   }
 

@@ -36,5 +36,28 @@ ROOT_AUDIO.CREATE_AUDIO_OBJECT_FROM_RESOURCE()
 }
 
 
+  function LOAD_AUDIO () {
+  
+  setTimeout( function(){
+  
+   if (typeof AUDIO_RESOURCE != 'undefined') {
+   
 	SYS.SOUND.RES = new AUDIO_RES ();
+   
+   }
+   else{
+   
+   LOAD_AUDIO ()
+   
+   }
+  
+  
+  }, 200 )
+  
+  } 
+
+	LOAD_AUDIO ()
+	
+	
+	
 	

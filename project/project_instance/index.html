@@ -20,6 +20,7 @@
 
 <script>
 //NOT INTEGRATED , STAND ALONE FILE
+SYS.SCRIPT.LOAD("lib/events/keyboard.js")
 SYS.SCRIPT.LOAD("lib/events/mobile_multitouch.js")
 SYS.SCRIPT.LOAD("res/animations/resource.nidza")
 SYS.SCRIPT.LOAD("lib/particule/particule.js")
@@ -31,8 +32,9 @@ SYS.SCRIPT.LOAD("lib/particule/particule.js")
 </head>
 <body style="margin:0;padding:0;border:none;background-color:black;">
 
-<div id="UPLOAD_BOX" style="display:block" >
-</div>
+
+<div id="RTC_HELP" style="display:none;height: 400px;overflow: auto;overflow-x: hidden;    padding-left: 50px;" ></div>
+<div id="UPLOAD_BOX" style="display:block" ></div>
 <div id="experiment" style="display:block" >
 <video id="webcam" autoplay width="640" height="480" style="display:none;position:absolute;left:0;top:0;"></video>
 <canvas id="canvas-blended" width="640" height="480" style="position:absolute;left:0;top:0;display:none;"></canvas>
@@ -54,7 +56,7 @@ SYS.SCRIPT.LOAD("lib/particule/particule.js")
 <script type="text/javascript" src="lib/program.js"></script>
 <script type="text/javascript" src="lib/system_events.js"></script>
 
-<!--script type="text/javascript" src="starter/run.js"></script-->
+ 
 
 </body>
 </html>

@@ -16,15 +16,18 @@ var APPLICATION = {
 
 NAME : "prototype VISUAL-JS framework 0.5" ,
 TYPE : "client" ,
-VERSION : "0.7" ,
+VERSION : "0.8 - multiRtc implemented" ,
 STATUS : "develop" ,
 MULTILANGUAGE : false ,
-IMAGE_LOADER_PREFIX : false , // false for fiddle support , we need absolute path . 
+IMAGE_LOADER_PREFIX : true , // false for fiddle support , we need absolute path . 
 EDITOR : true,
 EDITOR_AUTORUN : false,
 LOCAL_SERVER : "127.0.0.1", 
-ACCOUNT_SERVER : "127.0.0.1", ACCOUNT_SERVER_PORT : "3666" , ACCOUNT_SERVER_SECURE : false , ACCOUNT_SERVICE_AUTO_RUN : false,
+ACCOUNT_SERVER : "127.0.0.1", ACCOUNT_SERVER_PORT : "3666" , ACCOUNT_SERVER_SECURE : false , ACCOUNT_SERVICE_AUTO_RUN : true,
 DEVELOPERS : [ "Nikola Lukic Zlatnaspirala@gmail.com" ] , 
+
+SINGLE_BROADCAST : false , 
+MULTIRTC_PEER : true,
 
 PROGRAM : { 
     CALCULATING_POSITION_BY : "CANVAS", // MONITOR is innerWidth..Height  or CANVAS is  canvas width

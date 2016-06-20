@@ -25,7 +25,7 @@ this.width = function(){return this.DIMENSION.WIDHT()};
 this.height= function(){return this.DIMENSION.HEIGHT()}; 
 this.radius= parseFloat(radius);
 this.color  = color;
-this.border_color = "rgba(121,12,222,0.7)";
+this.border_color = "rgba(121,121,222,0.8)";
 this.border_on_focus_color = "blue";
 this.border_on_focus_width_line = 5;
 this.font = "40px Arial";
@@ -43,6 +43,14 @@ if (ROOT_GAME_OBJECT.FOCUS == true){
 s.lineWidth =  this.border_on_focus_width_line;
 s.fillStyle = this.border_on_focus_color;
 roundedRect(s,"" , this.POSITION.X(),this.POSITION.Y(),this.DIMENSION.WIDTH(),this.DIMENSION.HEIGHT(), this.radius , this.color , "stroke" , this.border_color );
+}
+else {
+	
+s.lineWidth =  this.border_width_line;
+s.fillStyle = this.border_color;
+roundedRect(s,"" , this.POSITION.X(),this.POSITION.Y(),this.DIMENSION.WIDTH(),this.DIMENSION.HEIGHT(), this.radius , this.color , "stroke" , this.border_color );	
+	
+	
 }
 
 s.textAlign = this.TEXT_ALIGN;

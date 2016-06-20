@@ -75,6 +75,11 @@ var SCRIPT = {
 //###############################################//###############################################
 //###############################################//###############################################
 
+//validate string for email 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
 
 
@@ -112,11 +117,22 @@ function LOG (){
 		 
 		 if ( this.ENABLE == true ){
 			 
-			 console.log('%c Critical : ' + data , 'background: #333; color: yellow');
+			 console.log('%c Critical : ' + data , 'background: #333; color: red');
 			 
 		 }
 		 
 	 };
+	 
+	 this.NETWORK_LOG = function(data){
+		 
+		 if ( this.ENABLE == true ){
+			 
+			 console.log('%c Network view : ' + data , 'background: #333; color: #a72f0a');
+			 
+		 }
+		 
+	 };
+	 
 	 
 
  }
@@ -760,17 +776,54 @@ return JSON.parse(localStorage.getItem(name));
 //###############################################//###############################################
 //###############################################//###############################################		
 function readXML(path , operation ){
-if (window.XMLHttpRequest) {xmlhttpGA=new XMLHttpRequest();}
-xmlhttpGA.open("GET",path,false);  
-xmlhttpGA.send();
-xmlDocGA=xmlhttpGA.responseXML;
 
+var ROOT = this;
+	
+if (window.XMLHttpRequest) {
+	ROOT.xmlhttpGA=new XMLHttpRequest();
+	}
+ROOT.xmlhttpGA.open("GET",path,true);  
+ROOT.xmlhttpGA.send();
+
+ ROOT.DONE = function(){
+	 
+	 return ROOT.RESPONSE;
+ };
+ ROOT.RESPONSE = '';
+
+ROOT.xmlhttpGA.onreadystatechange= function() {
+	
+    if (this.readyState!==4) return;
+    if (this.status!==200) return; // or whatever error handling you want
+	
+	
 if (typeof operation === 'undefined' ) {
-return xmlDocGA;
-}else if (operation == "CONVER_TO_OBJ" ) {
-return xmlToJson(xmlDocGA);
-}
 
+	ROOT.RESPONSE = this.responseText;
+	ROOT.DONE()
+    //return this.responseText;
+
+}else if (operation == "CONVER_TO_OBJ" ) {
+ 
+	return xmlToJson(this.responseXML);
+
+}
+else{
+
+ ROOT.DONE()
+ ROOT.RESPONSE = this.responseText;
+//return this.responseText;	
+	
+}
+	
+	
+	
+//    console.log( this.responseText );
+};
+ 
+
+
+ //return xmlhttpGA.onreadystatechange();
 
 }
 
@@ -1117,5 +1170,18 @@ window.oncontextmenu = function ()
 {
     return false;// cancel default menu
 }	
+
+
+///////////////////////
+//////////////////////
+// GIVE NETWORK OBJECT DRAW FUNCTION 
+/////////////////////
+ 
+
+
+/////////////////////
+////////////////////
+
+
 
 

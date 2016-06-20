@@ -8,8 +8,10 @@ function KEYBOARD( c ){
 var ROOT = this;
 
 ROOT.CAPTURE_CHAR = "";
+ROOT.CLEAR_CAPTURE_ON_PRESS_ENTER = true;
 ROOT.LAST_CAPTURE_CHAR = "";
-
+ROOT.ENTER_PRESSED = false;
+ROOT.SHIFT_PRESSED = false;
 ROOT.ACTION_ON_KEY_DOWN = function(){};
 
 this.CANVAS = c;
@@ -147,14 +149,174 @@ var keynum;
 if(window.event){ keynum = e.keyCode;}else{if(e.which){ keynum = e.which;}}
 //console.log(String.fromCharCode(keynum));
 
+if (e.keyCode == 16){
+ROOT.SHIFT_PRESSED = true;
+}
+
 if (e.keyCode == 8) {
 SYS.DEBUG.LOG("textbox delete last char!");   		
 ROOT.CAPTURE_CHAR = remove_last( ROOT.CAPTURE_CHAR );
 
 }
+else if(e.keyCode == 13){
+ROOT.ENTER_PRESSED = true;
+}
 else {
-ROOT.CAPTURE_CHAR+=(String.fromCharCode(keynum));
-ROOT.LAST_CAPTURE_CHAR = (String.fromCharCode(keynum));
+
+if (ROOT.SHIFT_PRESSED == false) {
+
+   if (e.keyCode == 189) {
+    ROOT.CAPTURE_CHAR+="_";
+	ROOT.LAST_CAPTURE_CHAR ="_";
+  }
+  else if (e.keyCode == 187) {
+    ROOT.CAPTURE_CHAR+="+";
+	ROOT.LAST_CAPTURE_CHAR ="+";
+  }
+  else if (e.keyCode == 187) {
+    ROOT.CAPTURE_CHAR+="+";
+	ROOT.LAST_CAPTURE_CHAR ="+";
+  }
+  else if (e.keyCode == 188) {
+    ROOT.CAPTURE_CHAR+=",";
+	ROOT.LAST_CAPTURE_CHAR =",";
+  }
+  else if (e.keyCode == 190) {
+    ROOT.CAPTURE_CHAR+=".";
+	ROOT.LAST_CAPTURE_CHAR =".";
+  }
+  else if (e.keyCode == 191) {
+    ROOT.CAPTURE_CHAR+="/";
+	ROOT.LAST_CAPTURE_CHAR ="/";
+  }
+  else if (e.keyCode == 186) {
+    ROOT.CAPTURE_CHAR+=";";
+	ROOT.LAST_CAPTURE_CHAR =";";
+  }
+  else if (e.keyCode == 222) {
+    ROOT.CAPTURE_CHAR+="'";
+	ROOT.LAST_CAPTURE_CHAR ="'";
+  }
+  else if (e.keyCode == 220) {
+    ROOT.CAPTURE_CHAR+= "\\";
+	ROOT.LAST_CAPTURE_CHAR ='\\';
+  }
+  else if (e.keyCode == 219) {
+    ROOT.CAPTURE_CHAR+='[';
+	ROOT.LAST_CAPTURE_CHAR ='[';
+  }
+  else if (e.keyCode == 221) {
+    ROOT.CAPTURE_CHAR+=']';
+	ROOT.LAST_CAPTURE_CHAR =']';
+  }
+  else{
+  
+	ROOT.CAPTURE_CHAR+=(String.fromCharCode(keynum).toLowerCase());
+	ROOT.LAST_CAPTURE_CHAR = (String.fromCharCode(keynum).toLowerCase());
+  
+  }
+
+
+}
+else {
+
+  if (e.keyCode == 50) {
+    ROOT.CAPTURE_CHAR+="@";
+	ROOT.LAST_CAPTURE_CHAR ="@";
+  }
+  else if (e.keyCode == 49) {
+    ROOT.CAPTURE_CHAR+="!";
+	ROOT.LAST_CAPTURE_CHAR ="!";
+  }
+  else if (e.keyCode == 51) {
+    ROOT.CAPTURE_CHAR+="#";
+	ROOT.LAST_CAPTURE_CHAR ="#";
+  }
+  else if (e.keyCode == 52) {
+    ROOT.CAPTURE_CHAR+="$";
+	ROOT.LAST_CAPTURE_CHAR ="$";
+  }
+  else if (e.keyCode == 53) {
+    ROOT.CAPTURE_CHAR+="%";
+	ROOT.LAST_CAPTURE_CHAR ="%";
+  }
+  else if (e.keyCode == 54) {
+    ROOT.CAPTURE_CHAR+="^";
+	ROOT.LAST_CAPTURE_CHAR ="^";
+  }
+  else if (e.keyCode == 55) {
+    ROOT.CAPTURE_CHAR+="&";
+	ROOT.LAST_CAPTURE_CHAR ="&";
+  }
+  else if (e.keyCode == 56) {
+    ROOT.CAPTURE_CHAR+="*";
+	ROOT.LAST_CAPTURE_CHAR ="*";
+  }
+  else if (e.keyCode == 57) {
+    ROOT.CAPTURE_CHAR+="(";
+	ROOT.LAST_CAPTURE_CHAR ="(";
+  }
+  else if (e.keyCode == 48) {
+    ROOT.CAPTURE_CHAR+=")";
+	ROOT.LAST_CAPTURE_CHAR =")";
+  }
+  else if (e.keyCode == 189) {
+    ROOT.CAPTURE_CHAR+="_";
+	ROOT.LAST_CAPTURE_CHAR ="_";
+  }
+  else if (e.keyCode == 187) {
+    ROOT.CAPTURE_CHAR+="+";
+	ROOT.LAST_CAPTURE_CHAR ="+";
+  }
+  else if (e.keyCode == 187) {
+    ROOT.CAPTURE_CHAR+="+";
+	ROOT.LAST_CAPTURE_CHAR ="+";
+  }
+  else if (e.keyCode == 188) {
+    ROOT.CAPTURE_CHAR+="<";
+	ROOT.LAST_CAPTURE_CHAR ="<";
+  }
+  else if (e.keyCode == 190) {
+    ROOT.CAPTURE_CHAR+=">";
+	ROOT.LAST_CAPTURE_CHAR =">";
+  }
+  else if (e.keyCode == 191) {
+    ROOT.CAPTURE_CHAR+="?";
+	ROOT.LAST_CAPTURE_CHAR ="?";
+  }
+  else if (e.keyCode == 186) {
+    ROOT.CAPTURE_CHAR+=":";
+	ROOT.LAST_CAPTURE_CHAR =":";
+  }
+  else if (e.keyCode == 222) {
+    ROOT.CAPTURE_CHAR+='"';
+	ROOT.LAST_CAPTURE_CHAR ='"';
+  }
+  else if (e.keyCode == 220) {
+    ROOT.CAPTURE_CHAR+='|';
+	ROOT.LAST_CAPTURE_CHAR ='|';
+  }
+  else if (e.keyCode == 219) {
+    ROOT.CAPTURE_CHAR+='{';
+	ROOT.LAST_CAPTURE_CHAR ='{';
+  }
+  else if (e.keyCode == 221) {
+    ROOT.CAPTURE_CHAR+='}';
+	ROOT.LAST_CAPTURE_CHAR ='}';
+  }
+  
+  
+  
+  
+  else {
+  
+	ROOT.CAPTURE_CHAR+=(String.fromCharCode(keynum).toUpperCase());
+	ROOT.LAST_CAPTURE_CHAR = (String.fromCharCode(keynum).toUpperCase());
+  
+  }
+
+}
+
 }
 
 
@@ -167,10 +329,23 @@ ROOT.ACTION_ON_KEY_DOWN();
 
 if (typeof ROOT.TARGET_MODUL != 'undefined' && typeof ROOT.TARGET != 'undefined' ) {
 	
+	  ROOT.CAPTURE_CHAR = ROOT.CAPTURE_CHAR.replace(/[^\x00-\x7F]/g, "");
+	  ROOT.CAPTURE_CHAR = ROOT.CAPTURE_CHAR.replace(/[^A-Za-z 0-9 \.,\?""!#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '');
+	  
    window[ROOT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT.TARGET_MODUL).GAME_OBJECTS.ACCESS(ROOT.TARGET).TEXTBOX.TEXT = ROOT.CAPTURE_CHAR;
+	if (ROOT.ENTER_PRESSED == true) {
 	
+		window[ROOT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT.TARGET_MODUL).GAME_OBJECTS.ACCESS(ROOT.TARGET).TEXTBOX.ON_PRESS_ENTER();
+	   
+	     if ( ROOT.CLEAR_CAPTURE_ON_PRESS_ENTER == true ) 
+		 {
+			 
+			 ROOT.CAPTURE_CHAR = '';
+			 
+		 }
+	}
 }
-
+ROOT.ENTER_PRESSED = false;
 //local_go.TEXTBOX.TEXT =  ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR;
 //@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -186,6 +361,21 @@ c.addEventListener('keyup', function(e)
     
 	 SYS.DEBUG.LOG(" GAME RUNNING , key up : " + e.keyCode );
 	 //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+	
+	switch(e.keyCode)
+		{
+		case 121:
+        SYS.DEBUG.LOG("F10 command -->> Show command line ");   		
+		break;
+		
+		case 16:
+		ROOT.SHIFT_PRESSED = false;
+		break;
+		
+        }
+		
+
+	
 	 
 	 if ( typeof PLAYER != 'undefined' ){ 
 	 

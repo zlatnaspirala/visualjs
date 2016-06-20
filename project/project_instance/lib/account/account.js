@@ -26,9 +26,9 @@ var ACCOUNT_SYSTEM = {
  
  
  },
- REQUEST_NEW_PASS : function(){
+ REQUEST_NEW_PASS : function(newpass){
  
- 	this.socket.emit('newpass', username );
+ 	this.socket.emit('newpass', newpass );
   
  },
  SING_UP : function(username ,  pass ){
@@ -43,10 +43,12 @@ var ACCOUNT_SYSTEM = {
  },
  FAST_LOGIN : function(){
  
-	this.socket.emit('fast_login',  L_("email")  ,  L_("sessionAccess") );
+	this.socket.emit('fast_login',  LS_GET("email")  ,  LS_GET("sessionAccess") );
 	setTimeout( function(){
-	this.socket.emit('getRoomList',  L_("email")  ,  L_("sessionAccess") );
-	this.socket.emit('loadNickName',  L_("email")  ,  L_("sessionAccess") );
+	
+	ACCOUNT_SYSTEM.socket.emit('getRoomList',  LS_GET("email")  ,  LS_GET("sessionAccess") );
+	ACCOUNT_SYSTEM.socket.emit('loadNickName',  LS_GET("email")  ,  LS_GET("sessionAccess") );
+	
 	}, 1000 );
 
  
@@ -55,14 +57,25 @@ var ACCOUNT_SYSTEM = {
  
 	this.socket.emit('sendchat',   "EMAIL HERE" ,  MSG );
  
- },
+  },
  
 
+ ON_SESSION_TAKE : function(){},
 
 
-
+ CHECK_FAST_LOGIN : function(){
+ 
+	 if (LS_GET("email") != null && LS_GET("sessionAccess") != null ) {
+        
+		ACCOUNT_SYSTEM.FAST_LOGIN()
+		
+	 }
+ 
+ },
 
 };
+
+
 
  
    //S_( "email" , E("login").value);
@@ -83,6 +96,7 @@ SYS.DEBUG.LOG("Server send signal : >TAKE< , data : " , data , " . data1 :" , da
 
 LS_SET("sessionAccess" , data);
 LS_SET("rank" , data1);
+ACCOUNT_SYSTEM.ON_SESSION_TAKE();
 //setTimeout(function(){location.href = "account.html";},350);
 
 });	

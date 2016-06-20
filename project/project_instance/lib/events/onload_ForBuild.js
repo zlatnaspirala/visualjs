@@ -2,6 +2,55 @@
 
 
 
+if (APPLICATION.MULTIRTC_PEER == true) {
+	
+	  TEST = new SYS.XML.READ ('lib/webrtc/public/index.html');
+	
+		SYS.SCRIPT.LOAD("lib/webrtc/public/RTCMultiConnection2.2.js")
+		SYS.SCRIPT.LOAD("lib/webrtc/public/linkify.js")
+	
+	     window['MAIN_PEER'] = new Object();
+		 window['MAIN_PEER'] = new Object();
+		 window['MAIN_PEER'].ADDRESS = 'localhost';
+		 
+		 
+	  ACTIVATE_PEER = function (){
+		  
+		  if (SYS.DOM.E('RTC_HELP').innerHTML == '') {
+			  
+		   SYS.DOM.E('RTC_HELP').innerHTML =  TEST.DONE();
+			  
+		  }
+		   
+ setTimeout (function(){
+			
+		
+	 if ( typeof RTCMultiConnection == 'function'   &&  typeof rtcMultiConnection == 'undefined'  && typeof getElement == 'function' ) {
+		
+			
+        SYS.SCRIPT.LOAD("lib/webrtc/public/ui.peer-connection.js")
+		
+		document.querySelector('#message-sound').src =  SYS.SOUND.RES.SOUNDS[0].src;
+
+        SYS.SCRIPT.LOAD("lib/webrtc/public/ui.users-list.js")
+        SYS.SCRIPT.LOAD("lib/webrtc/public/ui.settings.js")
+        SYS.SCRIPT.LOAD("lib/webrtc/public/ui.share-files.js")
+		
+		 
+		}
+		else{
+				
+		SYS.SCRIPT.LOAD("lib/webrtc/public/ui.main.js");
+		ACTIVATE_PEER()
+			
+		}
+
+		}, 150);
+
+	};
+
+}
+
 
 document.body.style.WebkitTransform = 'scale(1)';
 document.body.style.overflow = "hidden";
