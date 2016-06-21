@@ -118,7 +118,7 @@ CLIENT OR WEB APPLICATION #
 
 **How to start :** 
 
-       1) Copy project_instance/ folder to the www folder or use visual-js.exe and create new application (select folder for www and server path).
+       1) Copy program_instance/ folder to the www folder or use visual-js.exe and create new application (select folder for www and server path).
        2) start server_instance/editor.js
        3) In browser navigate to project-instance folder (index.html)
       
