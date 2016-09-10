@@ -1,9 +1,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 //help core functions 
 ////////////////////////////////////////////////////////////////////////////////
- 
-
 var HOST = '46.101.172.93';
+
  
 var ACCOUNTS = {
  LIST : [],
@@ -55,13 +54,20 @@ var token = function() {
 };
 
 
-// email body html 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+
+// email body html /* + this.REG_PATH */ 
 var emailtemplate = {
 
+REG_PATH : '',
 confirmLink : '',
-confirmBody : '<div style="-moz-box-shadow:inset 0 0 20px #666666;-webkit-box-shadow: inset 0 0 20px #000000;box-shadow:inset 0 0 20px #000000;" > Please verify your email by clicking this link : ',
-getConfirmBodyEmail : function(){
-var local =  '<h1>Eroulete confirmation email </h1> <br/><br/> ' + this.confirmBody + ' <br/><br/>  ' + REG_PATH  + this.confirmLink + ' </div> <br/> thanks for visit ! ';
+confirmBody : '<div style="border: solid #84ff49;border-radius: 28px;padding-left: 20px;background: black;color: lightskyblue;" >Visual JS confirmation email  </br>',
+getConfirmBodyEmail : function(ROOT_PATH){
+var local =   this.confirmBody + '<h1> Please verify your email by clicking this link :  </h1> <br/><br/>  <br/>  <a style="fontSize:200%" href="' + ROOT_PATH+'/index.html"> Confirm your email here </a>    <br/> thanks for using my app ! <br/><br/></div>';
 return local;
 },
 
@@ -73,7 +79,7 @@ return local;
 //html dinamic Activate account Event
 ///////////////////////////////////////////////////////
 function TOKEN__STACK(TOKEN_){
-return "var socket = io.connect('"+HOST+":8000'); socket.on('connect', function(){socket.emit('activateAccount', '"+TOKEN_+"' );  setTimeout(function(){location.href='../../login.html'; },1000); console.log('CONNECTED');  });";
+return "var socket = io.connect('"+HOST+":3666'); socket.on('connect', function(){socket.emit('activateAccount', '"+TOKEN_+"' );  setTimeout(function(){location.href='../../index.html'; },1000); console.log('CONNECTED');  });";
 }
 
 

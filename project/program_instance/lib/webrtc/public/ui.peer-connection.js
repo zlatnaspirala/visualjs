@@ -14,7 +14,7 @@ rtcMultiConnection.sdpConstraints.mandatory = {
 
 
 //var SIGNALING_SERVER = (location.protocol == 'https:' ? 'wss' : 'ws') + '://'+ document.domain +':12034/';
-var SIGNALING_SERVER = (location.protocol == 'https:' ? 'wss' : 'ws') + '://'+ MAIN_PEER.ADDRESS +':12034/';
+var SIGNALING_SERVER = (location.protocol == 'https:' ? 'wss' : 'ws') + '://'+ MAIN_PEER.ADDRESS +':'+MAIN_PEER.PORT +'/';
 
 rtcMultiConnection.openSignalingChannel = function(config) {
     config.channel = config.channel || this.channel;

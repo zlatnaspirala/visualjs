@@ -16,15 +16,17 @@ domains: ["gmail.com", "googlemail.com"],
 tls: {ciphers:'SSLv3'},
 auth: {
 user: "eroulete@gmail.com",
-pass: "zzzxxxcccvvv123"
+pass: "###"
 }
 }),
 //---------------------------------------------------------------------------------//---------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------//---------------------------------------------------------------------------------
 
+fs : '',
 
 createEmailVerifyFile : function(path_ , script_inner){
-	fs.writeFile( "../www/html/users/" + path_ , "<html><head><script src='../../js/socket.io.js'></script><script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script></head><body> <h1> Cool... </h1><script>"+script_inner+"</script> </head></body>", function(err) {
+	//fs.writeFile( "../www/html/users/" + path_ , "<html><head><script src='../../js/socket.io.js'></script><script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script></head><body> <h1> Cool... </h1><script>"+script_inner+"</script> </head></body>", function(err) {
+  	this.fs.writeFile(  path_ , "<html><head><script src='../../lib/io/socket.io.js'></script><script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script></head><body> <h1> Cool... </h1><script>"+script_inner+"</script> </head></body>", function(err) {
  
 	if(err) {
         return console.log(err);
@@ -32,7 +34,7 @@ createEmailVerifyFile : function(path_ , script_inner){
 	{
     console.log("The file was saved!");
 	}
-}); 
+});  
 
 },
 
@@ -41,7 +43,7 @@ createEmailVerifyFile : function(path_ , script_inner){
 SEND_EMAIL : function( sub_ , to , plain ) {
 
 this.smtpTransport.sendMail({
-   from: "Maximumroulette.com <zlatnaspirala@gmail.com>", // sender address
+   from: "Maximumroulette.com <eroulete@gmail.com>", // sender address
    to: "New user <"+to+">", // comma separated list of receivers
    subject: sub_, // Subject line
    html: plain // plaintext body
@@ -67,7 +69,7 @@ this.smtpTransport.sendMail({
 connection : require('mysql').createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'nikola',
   database : 'test'
 }), 
 
@@ -76,7 +78,7 @@ handleDisconnect : function(){
   this.connection = require('mysql').createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'nikola',
   database : 'test'
 }); 
 	this.connection.connect(function(err){

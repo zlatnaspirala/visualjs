@@ -58,7 +58,7 @@ document.body.style.overflow = "hidden";
 
 function system_ready_check(){
 	
-if (typeof GET_ALL_GAME_OBJECTS !== 'undefined') {
+if (typeof GET_ALL_GAME_OBJECTS !== 'undefined' && typeof SYS.SOUND.RES.SOUNDS != 'undefined') {
 	
 setTimeout(function(){
 
@@ -76,9 +76,9 @@ if (APPLICATION.STATUS == "production" )
 	SYS.DEBUG.LOG("APPLICATION.STATUS : production")
 	SYS.SCRIPT.LOAD("starter/visual.js")
 }
-else if (APPLICATION.STATUS == "develop" )
+else if (APPLICATION.STATUS == "develop"  &&  APPLICATION.EDITOR == true )
 {
-   SYS.DEBUG.LOG("APPLICATION.STATUS : develop");
+   SYS.DEBUG.LOG("APPLICATION.STATUS : develop" );
    GET_ALL_GAME_OBJECTS()
 }	
 	

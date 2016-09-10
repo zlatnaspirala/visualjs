@@ -119,21 +119,24 @@ function OSCILLATOR (min , max , step) {
 
 if ((typeof min === "string" || typeof min === "number" ) &&  (typeof max === "string" || typeof max === "number" ) && (typeof step === "string" || typeof step === "number" )) {	
 	
+	var ROOT = this;
 this.min = parseFloat(min);
 this.max = parseFloat(max);
 this.step = parseFloat(step);
 this.value_ = parseFloat(min);
 this.status = 0;
+this.on_maximum_value = function(){};
+this.on_minimum_value = function(){};
 this.UPDATE = function(STATUS_){
 if (STATUS_ === undefined) {
 if (this.status == 0 && this.value_ < this.max) {
 this.value_ = this.value_  + this.step;
-if (this.value_ >= this.max){ this.value_ = this.max ; this.status = 1;}
+if (this.value_ >= this.max){ this.value_ = this.max ; this.status = 1;ROOT.on_maximum_value()}
 return this.value_;
 }
 else if (this.status == 1 && this.value_ > this.min) {
 this.value_ = this.value_  - this.step;
-if (this.value_ <= this.min){ this.value_ = this.min ; this.status = 0;}
+if (this.value_ <= this.min){ this.value_ = this.min ; this.status = 0;ROOT.on_minimum_value()}
 return this.value_;
 }
 }else {
@@ -216,6 +219,19 @@ SYS.DEBUG.WARNING( "SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciptio
 //###############################################//###############################################
 function DIMENSION (w,h , type_ ) {
 
+var ROOT_DIMENSION = this;
+
+if (typeof type_ == 'undefined') {
+
+ this.type = 'REF_CANVAS';
+
+}
+else {
+
+ this.type = type_;
+
+}
+
 if (typeof w === undefined){
 this.W = 10;
 SYS.DEBUG.WARNING( "SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height.");
@@ -234,14 +250,31 @@ this.H = h;
 
 this.WIDTH = function(){
 
-return window.innerWidth/100*this.W;
+if (ROOT_DIMENSION.type == "NORMAL"){
+return window.innerWidth/100*this.W;	 
+}
+else if (ROOT_DIMENSION.type == "REF_CANVAS"){
+	
+return SYS.DOM.E( SYS.RUNNING_PROGRAMS[0] ).width/100*this.W;
+	
+}
+
+ 
 
 };
 
 this.HEIGHT = function(){
 
-return window.innerHeight/100*this.H;
 
+if (ROOT_DIMENSION.type == "NORMAL"){
+return window.innerHeight/100*this.H;	 
+}
+else if (ROOT_DIMENSION.type == "REF_CANVAS"){
+	
+return SYS.DOM.E( SYS.RUNNING_PROGRAMS[0] ).height/100*this.H;
+	
+}
+  
 };
 
 

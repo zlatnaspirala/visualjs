@@ -20,7 +20,10 @@ var ACCOUNT_SYSTEM = {
  }
  else {
  
+ this.socket = io.connect('https://'+APPLICATION.ACCOUNT_SERVER+':' + APPLICATION.ACCOUNT_SERVER_PORT);
+ ATACH_GAME_SERVER_EVENTS()
  SYS.DEBUG.LOG("Connecting to game server account.................");
+ SYS.DEBUG.WARNING("Secured connection in use.");
  
  }
  
@@ -97,28 +100,40 @@ SYS.DEBUG.LOG("Server send signal : >TAKE< , data : " , data , " . data1 :" , da
 LS_SET("sessionAccess" , data);
 LS_SET("rank" , data1);
 ACCOUNT_SYSTEM.ON_SESSION_TAKE();
-//setTimeout(function(){location.href = "account.html";},350);
+ACCOUNT_SYSTEM.socket.emit('getRoomList',  LS_GET("email")  ,  LS_GET("sessionAccess") );
 
 });	
 
 
 ACCOUNT_SYSTEM.socket.on('realtime', function (EVENT_, data) {
 
-SYS.DEBUG.LOG("Server send signal : >realtime< , event name : " + EVENT_   + " . data :" + data );
+SYS.DEBUG.NETWORK_LOG("Server send signal : >realtime< , event name : " + EVENT_   + " . data :" + data );
  
- if (EVENT_ == "registerDoneMailVerification") {
+ if (EVENT_ == "test") {
  
- // location.href = "verify.html";
  
- }
- else if (EVENT_ == "registerFeild") {
- 
- //location.href = "regfeild.html";
  
  }
+ 
  
  
 });
+
+ACCOUNT_SYSTEM.socket.on('rooms', function (EVENT_, data) {
+
+SYS.DEBUG.NETWORK_LOG("Server send signal : >rooms< , event name : " + EVENT_   + " . data :" + data );
+ 
+ if (EVENT_ == "test") {
+ 
+ 
+ 
+ }
+ 
+ 
+ 
+});
+
+//
 
 	
 ACCOUNT_SYSTEM.socket.on('NODE_SESSION', function(data) {

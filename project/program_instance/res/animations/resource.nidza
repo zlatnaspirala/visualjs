@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                             
  RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
 'character1/alienBiege_climb2.png' , 
 'character1/alienBiege_duck.png' , 
@@ -159,7 +159,22 @@
 'imagesFont1/letter_X.png' , 
 'imagesFont1/letter_Y.png' , 
 'imagesFont1/letter_Z.png' , 
-'imagesFont1/text_plus.png' , 
+'imagesFont1/letter_Z_1.png' , 
+'imagesFont1/letter_Z_2.png' , 
+'imagesFont1/letter_z_3.png' , 
+'imagesFont1/letter_Z_4.png' , 
+'imagesFont1/letter_z_5.png' , 
+'imagesFont1/letter_z_6.png' , 
+'imagesFont1/number0.png' , 
+'imagesFont1/number1.png' , 
+'imagesFont1/number2.png' , 
+'imagesFont1/number3.png' , 
+'imagesFont1/number4.png' , 
+'imagesFont1/number5.png' , 
+'imagesFont1/number6.png' , 
+'imagesFont1/number7.png' , 
+'imagesFont1/number8.png' , 
+'imagesFont1/number9.png' , 
  ] }; 
  
  RESOURCE.Items={"source":['Items/coinBronze.png' , 

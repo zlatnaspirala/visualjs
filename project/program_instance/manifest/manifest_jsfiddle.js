@@ -16,7 +16,7 @@ var APPLICATION = {
 
 NAME : "prototype VISUAL-JS framework 0.5" ,
 TYPE : "client" ,
-VERSION : "0.8 - multiRtc implemented" ,
+VERSION : "0.9" ,
 STATUS : "develop" ,
 MULTILANGUAGE : false ,
 IMAGE_LOADER_PREFIX : false , // false for fiddle support , we need absolute path . 
@@ -25,6 +25,10 @@ EDITOR_AUTORUN : false,
 LOCAL_SERVER : "127.0.0.1", 
 ACCOUNT_SERVER : "127.0.0.1", ACCOUNT_SERVER_PORT : "3666" , ACCOUNT_SERVER_SECURE : false , ACCOUNT_SERVICE_AUTO_RUN : false,
 DEVELOPERS : [ "Nikola Lukic Zlatnaspirala@gmail.com" ] , 
+
+SINGLE_BROADCAST : false , 
+MULTIRTC_PEER : true,
+BOX2D : true , 
 
 PROGRAM : { 
     CALCULATING_POSITION_BY : "CANVAS", // MONITOR is innerWidth..Height  or CANVAS is  canvas width

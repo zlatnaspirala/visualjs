@@ -66,8 +66,24 @@ var mobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(
 //###############################################//###############################################
 //###############################################//###############################################
 var SCRIPT = {
+ SCRIPT_ID : 0 , 
+ SINHRO_LOAD : {},
  LOAD : function addScript( src ) {
   var s = document.createElement( 'script' );
+  s.onload = function() {
+  
+  
+  SCRIPT.SCRIPT_ID++;
+  console.log("Script id loaded : " + SCRIPT.SCRIPT_ID + " with src : " + this.src + ">>>>>>>>>" + this.src);
+  
+  var filename = this.src.substring(this.src.lastIndexOf("/") + 1, this.src.lastIndexOf("."));
+  //console.log(filename)
+  filename = filename.replace(".","_");
+  eval('try{SCRIPT.SINHRO_LOAD._'+filename+'(s)}catch(e){}' );
+  
+  
+  
+  };
   s.setAttribute( 'src', src );
   document.body.appendChild( s );
 }
@@ -127,7 +143,7 @@ function LOG (){
 		 
 		 if ( this.ENABLE == true ){
 			 
-			 console.log('%c Network view : ' + data , 'background: #333; color: #a72f0a');
+			 console.log('%c Network view : ' + data , 'background: #333; color: #a7afaf');
 			 
 		 }
 		 
@@ -1174,13 +1190,65 @@ window.oncontextmenu = function ()
 
 ///////////////////////
 //////////////////////
-// GIVE NETWORK OBJECT DRAW FUNCTION 
+// Performance off cpu
 /////////////////////
  
-
-
+ 
+var cpu_canvas_power = 
+{
+    CPU_SPEED : 0,
+    array_of_res : [], 
+    end_count : 0,
+	count_frames : 0 , 
+	begin : null,
+    getSec : function(){ 
+		cpu_canvas_power.begin = new Date().getSeconds();
+	},
+	
+	checkForCount : function(){
+	
+	   if (cpu_canvas_power.begin == null) 
+	   {
+			cpu_canvas_power.getSec()
+	   }
+	   else if (cpu_canvas_power.begin == new Date().getSeconds()  &&  cpu_canvas_power.end_count == 0 ) {
+	   
+	   }
+	   else if (  ( cpu_canvas_power.begin + 1 ) == new Date().getSeconds()   &&  cpu_canvas_power.end_count < 2 ) {
+	   
+	    cpu_canvas_power.count_frames++;	
+		
+	   if (cpu_canvas_power.end_count == 0) {
+	       cpu_canvas_power.end_count++;
+	   }
+	   
+	   }
+	   else {
+	    
+		 if (cpu_canvas_power.array_of_res.length < 5) {
+		 if (cpu_canvas_power.count_frames != 0){
+		 cpu_canvas_power.array_of_res.push(cpu_canvas_power.count_frames) }
+		 cpu_canvas_power.count_frames = 0;
+		 cpu_canvas_power.end_count = 0;
+		 cpu_canvas_power.begin = null;
+		 }
+		 else {
+				var sum = 0;
+				for( var i = 0; i < cpu_canvas_power.array_of_res.length; i++ ){
+				sum += parseInt( cpu_canvas_power.array_of_res[i]  );  
+				}
+				cpu_canvas_power.CPU_SPEED = sum/cpu_canvas_power.array_of_res.length;
+				console.log( "cpu SPEED : " + cpu_canvas_power.CPU_SPEED );
+		 }
+			   
+	   }
+	  
+	},
+};
 /////////////////////
 ////////////////////
+
+
 
 
 

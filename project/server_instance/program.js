@@ -25,10 +25,14 @@ function read(f) {return fs.readFileSync(f).toString();}
 
 var REG_PATH = CONFIG.PATH_OF_WWW + CONFIG.REG_PATH ; 
 
+console.log('REG_PATH' , REG_PATH);
+
 include('lib/preinit.js');
 
 
 var DATABASE = require('./account/account');
+ 
+ DATABASE.fs = fs;
  
  DATABASE.handleDisconnect();
   
@@ -76,61 +80,7 @@ io.sockets.on('connection', function (socket) {
   console.log("CONNECTED WITH GAME SERVER VJS 0.5 --");
   console.log("-------------------------------------------------------------");
 
-/*
- //FILE TRANSFER 
-  var delivery = dl.listen(socket);
-       var MOME = "";
-    delivery.on('delivery.connect',function(delivery){
   
-    delivery.on('send.success',function(file){
-      console.log('File successfully sent to client!');
-    });
-
-    delivery.on('receive.success',function(file){
-    
-    if (MOME != file.name){
-    MOME = file.name;
-    var params = file.params;
-    
-    console.log("FILE IS IT IMAGE1 : " , MOME );
- 
-    //maximum size    
-  if (file.size < 250000 && ( file.name.indexOf(".png") > -1 || file.name.indexOf(".jpg") )  ) {
-    
-   var fileName = socket.email.replace('@', '___');
-   fileName = fileName.replace('a', '127');
-   fileName = fileName.replace('u', '133');
-   fileName = fileName.replace('i', '14_');
-   fileName = fileName.replace('o', '152');
-   fileName = fileName.replace('e', '16__');
-    var fileName = 'profiles/' + fileName + '.jpg';
-    
-    fs.writeFile(  fileName ,file.buffer, function(err){
-       if(err){
-         console.log('File could not be saved.');
-       }else{
-
-	 socket.emit( 'rooms' , 'PPP', "Nice profile image.Thanks for using maximumroulette" );
-	 console.log('File saved.' , fileName );   
-
-       };
-     });
-     
-     }
-     else {
-     
-      socket.emit( 'rooms' , 'ERROR', "IMAGE NOT VALID!" );
-      console.log("IMAGE NOT VALID! : ");
-	  
-	  
-     }
-     
-     // send new image to client 
-       }
-   });
-  */
-    
-	
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // GLOBAL PUBLIC CHAT - USE FOR ANY STAFF
@@ -168,21 +118,25 @@ io.sockets.on('connection', function (socket) {
 //REGISTER EVENT
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    socket.on('register', function( email , password ){
+socket.on('register', function( email , password ){
 	
+	
+       
+	   
+	    if (validateEmail(email) == true) {
+			
+			
 	    console.log("register  ACTION :" , password , " email " , email);
-		
         socket.email = email;
-        
 		var check_local = 0;
 		
 		for (var x=0;x<ACCOUNTS.LIST[0].length;x++){
 		
 		if (ACCOUNTS.LIST[0][x].email == email) {
 		
-		check_local = 1;
-		console.log("This email already exist : " , email);
-		io.sockets.emit('realtime',  "registerFeild" , "Email already exist " + email);
+			check_local = 1;
+			console.log("This email already exist : " , email);
+			io.sockets.emit('realtime',  "registerFeild" , "Email already exist " + email);
 		
 		}
 		
@@ -192,18 +146,24 @@ io.sockets.on('connection', function (socket) {
 		
 		console.log("This email is OK for register: " , email);
 		NEW_ACCOUNT_POST = {   password: password , email: email ,   token : "index" + token() };
-		ADD_NEW_ACCOUNT(NEW_ACCOUNT_POST);
+		DATABASE.ADD_NEW_ACCOUNT(NEW_ACCOUNT_POST);
 		io.sockets.emit('realtime',  "registerDoneMailVerification" , "Just goto your email and click on confirmation link.");
 		emailtemplate.confirmLink = NEW_ACCOUNT_POST.token.toString();
-		SEND_EMAIL ( 'YOUR APP SEND email confirmation' , email , emailtemplate.getConfirmBodyEmail() );
-		console.log( "confirm email was sent.");
-		mkdirp( CONFIG.PATH_OF_WWW + "/users/" + emailtemplate.confirmLink  , function(err) { 
-		console.log( "make dir error = " , err);
+		
+		
+
+		var localPath_to_confirm_file = 'http://localhost/' + "users/" + emailtemplate.confirmLink;
+		DATABASE.SEND_EMAIL ( 'YOUR APP SEND email confirmation' , email , emailtemplate.getConfirmBodyEmail(localPath_to_confirm_file) );
+		
+	  	mkdirp( CONFIG.PATH_OF_WWW + "users/" + emailtemplate.confirmLink  , function(err) { 
 		var local_1 = TOKEN__STACK(emailtemplate.confirmLink);
+		console.log( "make dir error = " , err);
+		var localPath_to_confirm_file = CONFIG.PATH_OF_WWW + "users/" + emailtemplate.confirmLink;
+		console.log(  localPath_to_confirm_file );
+		console.log( "emailtemplate.confirmLink " ,DATABASE.createEmailVerifyFile);
+		DATABASE.createEmailVerifyFile( localPath_to_confirm_file + "/index.html" , local_1 );
 		
-		createEmailVerifyFile( emailtemplate.confirmLink + "/index.html" , local_1 );
-		
-		});
+		}); 
 		
 	
 		
@@ -212,7 +172,13 @@ io.sockets.on('connection', function (socket) {
 		
 
 		
-	 
+		}
+		else{
+			
+			 socket.emit('realtime',  "registerDoneMailVerification" , "Your email is not valid. You faild both verifycation (client and server) ."); 
+			 console.log( validateEmail(email)	, " No execute here ! NO VALID EMAIL , catch this user ." );
+			
+		}
 
 		
     });
@@ -220,12 +186,12 @@ io.sockets.on('connection', function (socket) {
 	
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 		
-    socket.on('activateAccount', function(token_){
-	
-	console.log("Activate new user with token : " , token_ );
-	ACTIVATE_ACCOUNT({   active  : "yes" , token : token_ });
-	
-  	});	
+socket.on('activateAccount', function(token_){
+
+console.log("Activate new user with token : " , token_ );
+ACTIVATE_ACCOUNT({   active  : "yes" , token : token_ });
+
+});	
 	
 	
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
@@ -235,7 +201,7 @@ io.sockets.on('connection', function (socket) {
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 //LOGIN EVENT
 
-  socket.on('fast_login', function(email , accesstoken ){
+socket.on('fast_login', function(email , accesstoken ){
 	
 	    console.log("FAST LOGIN ACTION :" , accesstoken , " email " , email);
 	
@@ -250,8 +216,9 @@ io.sockets.on('connection', function (socket) {
 	  if ( result[0].online == "yes") {
 			socket.email = email;
 			usernames[email] = email;
-			console.log("USER ON SESSION ." , email  );
 			DATABASE.SETUP_SESSION(entry.token);
+			console.log("USER ON SESSION ." , email  );
+		    socket.emit('TAKE', entry.token , entry.rank );
 			return;
 	  }else{
 	  
@@ -314,7 +281,17 @@ socket.on('login', function(email , password ){
 		// update the list of users in chat, client-side
         //io.sockets.emit('NODE_SESSION', usernames);
 		return;
-		}  
+		}
+		else if (entry.active != "yes"){
+		
+		 console.log("USER NOT CONFIRM HIS EMAIL ." , email  );
+       		
+		}
+		else{
+		
+		 console.log("USER WRONG EMAIL OR PASS." , email  );
+		
+		}
 		   
 		   
 	
@@ -342,21 +319,40 @@ socket.on('login', function(email , password ){
 	
 socket.on('getRoomList', function( email , accesstoken ){
 
-
-     // var NIK  = validateAcess(email,accesstoken);
-	//  console.log(NIK);
-
- 	    var private_check = 0;
+ 	     
 		ACCOUNTS.LIST[0].forEach(function(entry) {
-        //console.log( entry.email + "<>" +  email );		
-		//console.log( entry.email ==  email );		
-		console.log( entry.token +"<>"+ accesstoken );		
+		console.log( entry.token +"< -- >"+ accesstoken );		
 	    if (entry.email == email && entry.token == accesstoken && entry.active == "yes" && entry.online == "yes" )
-		
 		{
 		
-		private_check = 1;
-		console.log("OK");
+		 
+		console.log("SECURED USER ... OK");
+		
+					DATABASE.connection.query('SELECT * from rooms', function(err, rows, fields) {
+                    if (!err){
+					
+					
+					console.log( rows , "ROW!!!!!!!!!!!!!!!!");
+					console.log( fields );
+					
+								 
+								console.log("SECURED USER ... OK getRoomsList EVENT OK" , ROOMS.LIST );
+								try{
+								ROOMS.INSERT(ROOMS.LIST);
+								}
+								catch(e){
+								
+								}
+								
+								 socket.emit( 'rooms' , 'roomList', ROOMS.LIST );
+								 /* else {
+								console.log("something wrong in getRoomsList EVENT" , private_check);
+								socket.emit( 'rooms' , 'ERROR', "You are not logged in." );
+								} */
+
+					
+					}else {}
+					});
 		
 		
 		}  
@@ -364,46 +360,8 @@ socket.on('getRoomList', function( email , accesstoken ){
 		
        });  
 		
-		
-if (private_check == 1){
-console.log("getRoomsList EVENT OK" , ROOMS.LIST );
-
- socket.emit( 'rooms' , 'roomList', ROOMS.LIST );
-
-}else {
-
-console.log("something wrong in getRoomsList EVENT" , private_check);
-
-socket.emit( 'rooms' , 'ERROR', "You are not logged in." );
-
-
-}
-
-
-
-// SEND PROFILE IMAGE
-
-try{
-      var fileName = socket.email.replace('@', '___');
-   fileName = fileName.replace('a', '127');
-   fileName = fileName.replace('u', '133');
-   fileName = fileName.replace('i', '14_');
-   fileName = fileName.replace('o', '152');
-   fileName = fileName.replace('e', '16__');
-      fileName = 'profiles/' + fileName + '.jpg';
-    
-    delivery.send({
-      name: 'fileName',
-      path : './' + fileName + ''
-    });
-    
-    console.log("OKOK<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-    }
- catch(e){
- console.log("ERROR<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<" , socket);}
+		 
  
- 
-
 });
 		
 	
@@ -505,7 +463,7 @@ var P = " <img src='http://maximumroulette.com/welcome/images/features_img.png' 
 " Please remember the password and delete this email .\n If you did not asked for password please report abuse directly in reply msg.\n" + 
 " New password : " + post + "<<<<<<<<<<<<<<COPY   \n   ";
 
-SEND_EMAIL ( "Important msg from maximumroulette.com" , email , P );
+DATABASE.SEND_EMAIL ( "Important msg from maximumroulette.com" , email , P );
 
  socket.emit( 'rooms' , 'ERROR', "New password has been sent to your email." );
 

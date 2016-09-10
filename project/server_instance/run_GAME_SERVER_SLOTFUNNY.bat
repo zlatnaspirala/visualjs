@@ -1,0 +1,1 @@
+node funnySlot.js
