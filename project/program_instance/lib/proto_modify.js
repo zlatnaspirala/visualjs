@@ -1,106 +1,42 @@
+/*
+Created by Nikola Lukic zlatnaspirala@gmail.com
+Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
 
 
+Quick Summary
+A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
 
 
-//###############################################//###############################################
-//###############################################//###############################################
-// Make 1200.99 $   looks like this 1.230,00
-//###############################################//###############################################
-//###############################################//###############################################
+Can
+ Commercial Use 
+Describes the ability to use the software for commercial purposes.
+ Modify 
+Describes the ability to modify the software and create derivatives.
+ Distribute 
+Describes the ability to distribute original or modified (derivative) works.
+ Sublicense 
+Describes the ability for you to grant/extend a license to the software.
+ Private Use 
+Describes the ability to use/modify software freely without distributing it.
 
-Number.prototype.BalanceStyle = function(decPlaces, thouSeparator, decSeparator) {
-    var n = this,
-    decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
-    decSeparator = decSeparator == undefined ? "." : decSeparator,
-    thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
-    sign = n < 0 ? "-" : "",
-    i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
-    j = (j = i.length) > 3 ? j % 3 : 0;
-    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
-};
+Cannot
+ Hold Liable 
+Describes the warranty and if the software/license owner can be charged for damages.
+ Use Trademark 
+Describes the allowance of using contributors' names, trademarks or logos.
 
-//###############################################//###############################################
-//###############################################//###############################################
-
-
-
-
-//###############################################//###############################################
-//###############################################//###############################################
-// Array works , remove all array items with same values
-//###############################################//###############################################
-//###############################################//###############################################
-function removeItem(arr){
-    var what, a= arguments, L= a.length, ax;
-    while(L> 1 && arr.length){
-        what= a[--L];
-        while((ax= arr.indexOf(what))!= -1){
-            arr.splice(ax, 1);
-        }
-    }
-    return arr;
-}
-// removeA(arrayNAME,'-delete-all-value-');
+Must
+ Include Copyright 
+Describes whether the original copyright must be retained.
+ Include License 
+Including the full text of license in modified software.
 
 
-Array.prototype.unset = function(value) {
-    if(this.indexOf(value) != -1) {
-        this.splice(this.indexOf(value), 1);
-    }   
-}
-
-
-Array.prototype.ACCESS_MODULE = function(name) {
-	
-	 
-	  for ( var x=0; x < this.length ;x++){
-		
-				if (this[ x ].NAME == name ) {
-				
-	              return  this[ x ];
-					
-				}
-		  
-	  }
-	 
-	
-};
-
-
-
-Array.prototype.ACCESS = function(name) {
-	
-	 
-	  for ( var x=0; x < this.length ;x++){
-		
-				if (this[ x ].NAME == name ) {
-				
-	              return  this[ x ];
-					
-				}
-		  
-	  }
-	 
-	
-};
-
-
-
-
-//###############################################//###############################################
-//###############################################//###############################################
-
-Element.prototype.remove = function() {
-    this.parentElement.removeChild(this);
-}
-NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
-    for(var i = this.length - 1; i >= 0; i--) {
-        if(this[i] && this[i].parentElement) {
-            this[i].parentElement.removeChild(this[i]);
-        }
-    }
-}
-//document.getElementById("my-element").remove();
-
-//###############################################//###############################################
-//###############################################//###############################################
+*//***************************************************************************/
+/*                                                                         */
+/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
+/*  Javascript Obfuscator Free Version can be downloaded here              */
+/*  http://javascriptobfuscator.com                                        */
+/*                                                                         */
+/***************************************************************************/
+Number.prototype.BalanceStyle= function(a,h,b){var f=this,a=isNaN(a= Math.abs(a))?2:a,b=b== undefined?"\x2E":b,h=h== undefined?"\x2C":h,g=f< 0?"\x2D":"",c=parseInt(f= Math.abs(+f|| 0).toFixed(a))+ "",d=(d= c.length)> 3?d% 3:0;return g+ (d?c.substr(0,d)+ h:"")+ c.substr(d).replace(/(\d{3})(?=\d)/g,"\x24\x31"+ h)+ (a?b+ Math.abs(f- c).toFixed(a).slice(2):"")};function removeItem(P){var S,o=arguments,R=o.length,Q;while(R> 1&& P.length){S= o[--R];while((Q= P.indexOf(S))!=  -1){P.splice(Q,1)}};return P}Array.prototype.unset= function(k){if(this.indexOf(k)!=  -1){this.splice(this.indexOf(k),1)}};Array.prototype.ACCESS_MODULE= function(l){for(var m=0;m< this.length;m++){if(this[m].NAME== l){return this[m]}}};Array.prototype.ACCESS= function(l){for(var m=0;m< this.length;m++){if(this[m].NAME== l){return this[m]}}};Element.prototype.remove= function(){this.parentElement.removeChild(this)};NodeList.prototype.remove= HTMLCollection.prototype.remove= function(){for(var c=this.length- 1;c>= 0;c--){if(this[c]&& this[c].parentElement){this[c].parentElement.removeChild(this[c])}}}

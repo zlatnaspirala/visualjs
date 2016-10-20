@@ -14,7 +14,7 @@ Filename : manifest.js
 //###############################################//###############################################
 var APPLICATION = {
 
-NAME : "prototype VISUAL-JS framework 0.5" ,
+NAME : "prototype VISUAL-JS framework 0.9" ,
 TYPE : "client" ,
 VERSION : "0.9" ,
 STATUS : "develop" ,
@@ -32,7 +32,7 @@ ACCESSIBILITY : {
  DEACTIVATE_VK_FOR_DESKTOP : function (){ APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP=false }, // in run time 
 },
 
-SINGLE_BROADCAST : false , 
+SINGLE_BROADCAST : true , 
 MULTIRTC_PEER : true,
 BOX2D : false ,
 

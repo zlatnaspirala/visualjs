@@ -1,51 +1,42 @@
-//###############################################//###############################################
-//###############################################//###############################################
-// INSTANCES CLASSES FOR SYSTEM BIZNIS
-//###############################################//###############################################
-//###############################################//###############################################
- 
-function RIGHT_MENU_BUTTON (text , Y_OFFSET , id , res)
-{
-		var ROOT = this;
-		 
-		this.IAM = id;
-		this.HOVER = false;
-		this.Y_OFFSET = Y_OFFSET;
-		this.text = text;
-		
-		this.icon = null;
-		if (typeof res != 'undefined'){
-
-		 var locName = "system_" + this.IAM.toString();
-		 SYS.RES.CREATE_IMG(  locName , res );
-		 this.icon = true;
-		 
-		}
-		
-		this.POSITION = {
-		
-		x : 0 , 
-		y : 0 ,
-		
-		X : function(){
-			
-			return ROOT.POSITION.x;
-			
-			},
-		Y : function(){
-			
-			return ROOT.POSITION.y + ROOT.Y_OFFSET;
-			
-			},
-		
-		}, 	
-		this.DIMENSION = new DIMENSION(12 , 2 ) ;
-
-		
-		this.TAP = function(){};
-		
-}
+/*
+Created by Nikola Lukic zlatnaspirala@gmail.com
+Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
 
 
-//###############################################//###############################################
-//###############################################//###############################################
+Quick Summary
+A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
+
+
+Can
+ Commercial Use 
+Describes the ability to use the software for commercial purposes.
+ Modify 
+Describes the ability to modify the software and create derivatives.
+ Distribute 
+Describes the ability to distribute original or modified (derivative) works.
+ Sublicense 
+Describes the ability for you to grant/extend a license to the software.
+ Private Use 
+Describes the ability to use/modify software freely without distributing it.
+
+Cannot
+ Hold Liable 
+Describes the warranty and if the software/license owner can be charged for damages.
+ Use Trademark 
+Describes the allowance of using contributors' names, trademarks or logos.
+
+Must
+ Include Copyright 
+Describes whether the original copyright must be retained.
+ Include License 
+Including the full text of license in modified software.
+
+
+*//***************************************************************************/
+/*                                                                         */
+/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
+/*  Javascript Obfuscator Free Version can be downloaded here              */
+/*  http://javascriptobfuscator.com                                        */
+/*                                                                         */
+/***************************************************************************/
+function RIGHT_MENU_BUTTON(X,Y,T,V){var W=this;this.IAM= T;this.HOVER= false;this.Y_OFFSET= Y;this.text= X;this.icon= null;if( typeof V!= "\x75\x6E\x64\x65\x66\x69\x6E\x65\x64"){var U="\x73\x79\x73\x74\x65\x6D\x5F"+ this.IAM.toString();SYS.RES.CREATE_IMG(U,V);this.icon= true};this.POSITION= {x:0,y:0,X:function(){return W.POSITION.x},Y:function(){return W.POSITION.y+ W.Y_OFFSET}},this.DIMENSION=  new DIMENSION(12,2);this.TAP= function(){}}

@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                       
  RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
 'character1/alienBiege_climb2.png' , 
 'character1/alienBiege_duck.png' , 
@@ -36,6 +36,19 @@
 'character3/alienGreen_swim2.png' , 
 'character3/alienGreen_walk1.png' , 
 'character3/alienGreen_walk2.png' , 
+ ] }; 
+ 
+ RESOURCE.character4={"source":['character4/alienYellow_climb1.png' , 
+'character4/alienYellow_climb2.png' , 
+'character4/alienYellow_duck.png' , 
+'character4/alienYellow_front.png' , 
+'character4/alienYellow_hit.png' , 
+'character4/alienYellow_jump.png' , 
+'character4/alienYellow_stand.png' , 
+'character4/alienYellow_swim1.png' , 
+'character4/alienYellow_swim2.png' , 
+'character4/alienYellow_walk1.png' , 
+'character4/alienYellow_walk2.png' , 
  ] }; 
  
  RESOURCE.characterPink={"source":['characterPink/alienPink_climb1.png' , 
@@ -175,6 +188,7 @@
 'imagesFont1/number7.png' , 
 'imagesFont1/number8.png' , 
 'imagesFont1/number9.png' , 
+'imagesFont1/text_plus.png' , 
  ] }; 
  
  RESOURCE.Items={"source":['Items/coinBronze.png' , 
@@ -402,6 +416,10 @@
 'Tiles/mushroomRed.png' , 
 'Tiles/plantPurple.png' , 
 'Tiles/rock.png' , 
+'Tiles/sign.png' , 
+'Tiles/signExit.png' , 
+'Tiles/signLeft.png' , 
+'Tiles/signRight.png' , 
 'Tiles/snow.png' , 
 'Tiles/spikes.png' , 
 'Tiles/spring.png' , 
@@ -423,6 +441,18 @@
 'Tiles/weight.png' , 
 'Tiles/weightAttached.png' , 
 'Tiles/window.png' , 
+ ] }; 
+ 
+ RESOURCE.tree1={"source":['tree1/tree20.png' , 
+'tree1/tree21.png' , 
+'tree1/tree22.png' , 
+'tree1/tree23.png' , 
+'tree1/tree24.png' , 
+'tree1/tree25.png' , 
+'tree1/tree26.png' , 
+'tree1/tree27.png' , 
+'tree1/tree28.png' , 
+'tree1/tree35.png' , 
  ] }; 
  
  RESOURCE.trees1={"source":['trees1/tree20.png' , 
@@ -455,5 +485,5 @@
 'Yellow/alienYellow_swim2.png' , 
 'Yellow/alienYellow_walk1.png' , 
 'Yellow/alienYellow_walk2.png' , 
- ] }; SYS.DEBUG.LOG('Resources loaded. ' + 31); 
-  RESOURCE.SUM = 31; 
+ ] }; SYS.DEBUG.LOG('Resources loaded. ' + 33); 
+  RESOURCE.SUM = 33; 

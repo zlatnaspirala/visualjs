@@ -87,7 +87,8 @@ SYS.DEBUG.WARNING( "SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciptio
 //###############################################//###############################################
 //###############################################//###############################################
 
-
+var isOdd = function(x) { return x & 1; };
+var isEven  = function(x) { return !( x & 1 ); };
 
 function ORBIT(cx, cy, angle, p )
 {

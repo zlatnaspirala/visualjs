@@ -17,6 +17,17 @@ SYS.SCRIPT.LOAD("lib/nui/camera/mdetect.js")
 SYS.SCRIPT.LOAD("lib/program_modul.js")
 
 
+if (APPLICATION.FACE_DETECT == true) {
+	
+  SYS.SCRIPT.LOAD("lib/tracking/js/tracking.js")
+  
+  SYS.SCRIPT.SINHRO_LOAD._tracking = function(s){
+	    SYS.SCRIPT.LOAD("lib/tracking/js/data/face-min.js")
+  };
+  
+  
+  
+}
 
 if (APPLICATION.MULTIRTC_PEER == true) {
 	
@@ -172,6 +183,7 @@ if (APPLICATION.BOX2D == true){
 document.body.style.WebkitTransform = 'scale(1)';
 document.body.style.overflow = "hidden";
 
+SYS.SCRIPT.LOAD("lib/voice/voice.js")
 
 function system_ready_check(){
 	

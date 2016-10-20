@@ -1,42 +1,1013 @@
 /*
-Created by Nikola Lukic zlatnaspirala@gmail.com
-Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
+
+*/
+//###############################################//###############################################
+//###############################################//###############################################
+// EVENTS  Atach this class to every modul
+//###############################################//###############################################
+//###############################################//###############################################
+ 
+function  EVENTS( canvas , ROOT_ENGINE ){
+
+var ROOT_EVENTS = this;
+this.ROOT_ENGINE = ROOT_ENGINE;
+
+ //Mobile device
+if (NOMOBILE == 0)
+{
+
+	canvas.addEventListener("touchstart" , function(e) {	
+	
+	e.preventDefault();	
+	
+	var touchList = e.changedTouches;
+	
+	//SYS.MOUSE.PRESS = true;
+	
+	SYS.MOUSE.x = touchList[0].pageX;
+	SYS.MOUSE.y = touchList[0].pageY;
+	
+	
+	ROOT_EVENTS.CALCULATE_TOUCH_OR_CLICK();
+	
+	} , false);
+	
+		
+	canvas.addEventListener("touchend" , function(e) {
+
+	e.preventDefault();
+
+	var touchList = e.changedTouches;
+
+	SYS.MOUSE.PRESS = false;
+
+	SYS.MOUSE.x = touchList[0].pageX;
+	SYS.MOUSE.y = touchList[0].pageY;
+
+	
+	ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
+	} , false);
+	
+	
+	
+	canvas.addEventListener("touchcancel" , function(e) {
+
+	e.preventDefault();
+
+	var touchList = e.changedTouches;
+
+	SYS.MOUSE.PRESS = false;
+	
+	SYS.MOUSE.x = touchList[0].pageX;
+	SYS.MOUSE.y = touchList[0].pageY;
+
+	ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
+	} , false);
+	
+	
+	canvas.addEventListener("touchmove" , function(e) {
+
+	e.preventDefault();
+
+	var touchList = e.changedTouches;
+
+	//SYS.MOUSE.PRESS = true;
+	
+	SYS.MOUSE.x = touchList[0].pageX;
+	SYS.MOUSE.y = touchList[0].pageY;
+
+	ROOT_EVENTS.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE();
+	} , false);
+	
+	
+}
+else
+{
+
+   //Desktop device  
+	canvas.addEventListener("click" , function(e) {
+	
+	//SYS.MOUSE.PRESS = true;
+	
+	
+	
+	SYS.MOUSE.x = e.layerX;
+	SYS.MOUSE.y = e.layerY;
+	
+	ROOT_EVENTS.CALCULATE_TOUCH_OR_CLICK();
+	//SYS.DEBUG.LOG("SYS : CLICK EVENT " + canvas);
+	
+	} , false);
+	
+	
+  canvas.addEventListener("mouseup" , function(e) {
+	
+	SYS.MOUSE.PRESS = false;
+	SYS.MOUSE.BUTTON_PRESSED = null;
+	
+	SYS.MOUSE.x = e.layerX;
+	SYS.MOUSE.y = e.layerY;
 
 
-Quick Summary
-A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
+	ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
 
 
-Can
- Commercial Use 
-Describes the ability to use the software for commercial purposes.
- Modify 
-Describes the ability to modify the software and create derivatives.
- Distribute 
-Describes the ability to distribute original or modified (derivative) works.
- Sublicense 
-Describes the ability for you to grant/extend a license to the software.
- Private Use 
-Describes the ability to use/modify software freely without distributing it.
+	} , false);
+	
+	
+  canvas.onmousemove = function(e) {
+	
+	
+	SYS.MOUSE.x = e.layerX;
+	SYS.MOUSE.y = e.layerY;
+	
+	
+	
+	ROOT_EVENTS.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE();
 
-Cannot
- Hold Liable 
-Describes the warranty and if the software/license owner can be charged for damages.
- Use Trademark 
-Describes the allowance of using contributors' names, trademarks or logos.
+	};
 
-Must
- Include Copyright 
-Describes whether the original copyright must be retained.
- Include License 
-Including the full text of license in modified software.
+ canvas.onmousedown = function(e) {
+	
+	SYS.MOUSE.PRESS = true;
+	
+	 if(e.which == 3)
+      {
+         	SYS.MOUSE.BUTTON_PRESSED = "RIGHT";
+			SYS.MOUSE.ON_RIGHT_BTN_PRESSED();
+            SYS.DEBUG.LOG("Right button clicked");
+      }
+	  else if (e.which == 2){
+	        SYS.MOUSE.BUTTON_PRESSED = "MID";
+			SYS.MOUSE.ON_MID_BTN_PRESSED();
+			SYS.DEBUG.LOG("Mid button clicked");
+	  }
+	  else if (e.which == 1){
+	        SYS.MOUSE.BUTTON_PRESSED = "LEFT";
+			SYS.MOUSE.ON_LEFT_BTN_PRESSED();
+			SYS.DEBUG.LOG("Left button clicked");
+	  } 
+	  
+	
+	
+	SYS.MOUSE.x = e.layerX;
+	SYS.MOUSE.y = e.layerY;
+	
+		
+	ROOT_EVENTS.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN();
+
+	};
+	
+
+	//console.log("This is PC desktop device.");
+}
+
+//Calculate touch or click event
+this.CALCULATE_TOUCH_OR_CLICK = function(){
 
 
-*//***************************************************************************/
-/*                                                                         */
-/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
-/*  Javascript Obfuscator Free Version can be downloaded here              */
-/*  http://javascriptobfuscator.com                                        */
-/*                                                                         */
-/***************************************************************************/
-function EVENTS(lL,lO){var lP=this;this.ROOT_ENGINE= lO;if(NOMOBILE== 0){lL.addEventListener("\x74\x6F\x75\x63\x68\x73\x74\x61\x72\x74",function(lQ){lQ.preventDefault();var lR=lQ.changedTouches;SYS.MOUSE.x= lR[0].pageX;SYS.MOUSE.y= lR[0].pageY;lP.CALCULATE_TOUCH_OR_CLICK()},false);lL.addEventListener("\x74\x6F\x75\x63\x68\x65\x6E\x64",function(lQ){lQ.preventDefault();var lR=lQ.changedTouches;SYS.MOUSE.PRESS= false;SYS.MOUSE.x= lR[0].pageX;SYS.MOUSE.y= lR[0].pageY;lP.CALCULATE_TOUCH_UP_OR_MOUSE_UP()},false);lL.addEventListener("\x74\x6F\x75\x63\x68\x63\x61\x6E\x63\x65\x6C",function(lQ){lQ.preventDefault();var lR=lQ.changedTouches;SYS.MOUSE.PRESS= false;SYS.MOUSE.x= lR[0].pageX;SYS.MOUSE.y= lR[0].pageY;lP.CALCULATE_TOUCH_UP_OR_MOUSE_UP()},false);lL.addEventListener("\x74\x6F\x75\x63\x68\x6D\x6F\x76\x65",function(lQ){lQ.preventDefault();var lR=lQ.changedTouches;SYS.MOUSE.x= lR[0].pageX;SYS.MOUSE.y= lR[0].pageY;lP.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE()},false)}else {lL.addEventListener("\x63\x6C\x69\x63\x6B",function(lQ){SYS.MOUSE.x= lQ.layerX;SYS.MOUSE.y= lQ.layerY;lP.CALCULATE_TOUCH_OR_CLICK()},false);lL.addEventListener("\x6D\x6F\x75\x73\x65\x75\x70",function(lQ){SYS.MOUSE.PRESS= false;SYS.MOUSE.BUTTON_PRESSED= null;SYS.MOUSE.x= lQ.layerX;SYS.MOUSE.y= lQ.layerY;lP.CALCULATE_TOUCH_UP_OR_MOUSE_UP()},false);lL.onmousemove= function(lQ){SYS.MOUSE.x= lQ.layerX;SYS.MOUSE.y= lQ.layerY;lP.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE()};lL.onmousedown= function(lQ){SYS.MOUSE.PRESS= true;if(lQ.which== 3){SYS.MOUSE.BUTTON_PRESSED= "\x52\x49\x47\x48\x54";SYS.DEBUG.LOG("\x52\x69\x67\x68\x74\x20\x62\x75\x74\x74\x6F\x6E\x20\x63\x6C\x69\x63\x6B\x65\x64")}else {if(lQ.which== 2){SYS.MOUSE.BUTTON_PRESSED= "\x4D\x49\x44";SYS.DEBUG.LOG("\x4D\x69\x64\x20\x62\x75\x74\x74\x6F\x6E\x20\x63\x6C\x69\x63\x6B\x65\x64")}else {if(lQ.which== 1){SYS.MOUSE.BUTTON_PRESSED= "\x4C\x45\x46\x54";SYS.DEBUG.LOG("\x4C\x65\x66\x74\x20\x62\x75\x74\x74\x6F\x6E\x20\x63\x6C\x69\x63\x6B\x65\x64")}}};SYS.MOUSE.x= lQ.layerX;SYS.MOUSE.y= lQ.layerY;lP.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN()}};this.CALCULATE_TOUCH_OR_CLICK= function(){for(var z=0;z< this.ROOT_ENGINE.MODULES.length;z++){for(var lT=0;lT< lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS.length;lT++){var lS=lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS[lT];if(SYS.MOUSE.x> lS.POSITION.X()&& SYS.MOUSE.x< lS.POSITION.X()+ lS.DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.POSITION.Y()&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.DIMENSION.HEIGHT()){if(lP.ROOT_ENGINE.ENGINE_EDITOR== false&& lS.VISIBLE!= false){SYS.DEBUG.LOG("\x53\x59\x53\x20\x3A\x20\x74\x6F\x75\x63\x68\x20\x6F\x72\x20\x63\x6C\x69\x63\x6B\x20\x65\x76\x65\x6E\x74\x20\x6F\x6E\x20\x67\x61\x6D\x65\x20\x6F\x62\x6A\x65\x63\x74\x20\x3A\x20"+ lS.NAME);lS.FOCUS= true;lS.TAP()}}}}};this.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE= function(){for(var z=0;z< this.ROOT_ENGINE.MODULES.length;z++){var lU=false;for(var lT=0;lT< lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS.length;lT++){var lS=lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS[lT];if(SYS.MOUSE.x> lS.POSITION.X()&& SYS.MOUSE.x< lS.POSITION.X()+ lS.DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.POSITION.Y()&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.DIMENSION.HEIGHT()){if(lP.ROOT_ENGINE.ENGINE_EDITOR== false&& lS.VISIBLE== true){lS.TOUCH_MOVE();if(SYS.MOUSE.PRESS== true&& lS.DRAG== true&& lU== false&& lS.DRAG_STATUS== true){lU= true;lS.DRAG_DELTA= (lS.DRAG_START_X);var lV=CONVERTOR.PIX_TO_PER(parseFloat(lS.DRAG_DELTA.toFixed(2)));lS.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(SYS.MOUSE.x).toFixed(2))- Math.abs(lV));lS.DRAG_DELTA= (lS.DRAG_START_Y);var lV=CONVERTOR.PIY_TO_PER(parseFloat(lS.DRAG_DELTA.toFixed(2)));lS.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(SYS.MOUSE.y).toFixed(2))- Math.abs(lV))}}}else {};if(lS.EDITOR.ENABLE== true){if(SYS.MOUSE.PRESS== true&& lS.EDITOR.ACTOR_DRAG== true&& lU== false){lU= true;lS.EDITOR.ACTOR_DELTA= (lS.EDITOR.ACTOR_START_X+ lS.EDITOR.ACTORS_AREA_HEIGHT);var lV=CONVERTOR.PIX_TO_PER(parseFloat(lS.EDITOR.ACTOR_DELTA.toFixed(2)));lS.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(SYS.MOUSE.x).toFixed(2))- Math.abs(lV));lS.EDITOR.ACTOR_DELTA= (lS.EDITOR.ACTOR_START_Y+ lS.EDITOR.ACTORS_AREA_HEIGHT);var lV=CONVERTOR.PIY_TO_PER(parseFloat(lS.EDITOR.ACTOR_DELTA.toFixed(2)));lS.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(SYS.MOUSE.y).toFixed(2))- Math.abs(lV))};if(lS.EDITOR.ACTOR_X_IN_MOVE== true){lS.EDITOR.ACTOR_DELTA= (lS.EDITOR.ACTOR_START_X);var lV=CONVERTOR.PIX_TO_PER(parseFloat(lS.EDITOR.ACTOR_DELTA.toFixed(1)));lS.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(SYS.MOUSE.x).toFixed(1))- Math.abs(lV))};if(lS.EDITOR.ACTOR_Y_IN_MOVE== true){lS.EDITOR.ACTOR_DELTA= (lS.EDITOR.ACTOR_START_Y);var lV=CONVERTOR.PIY_TO_PER(parseFloat(lS.EDITOR.ACTOR_DELTA.toFixed(1)));lS.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(SYS.MOUSE.y).toFixed(1))- Math.abs(lV))};if(SYS.MOUSE.x> lS.POSITION.X()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.x< lS.POSITION.X()+ lS.EDITOR.ACTORS_AREA_HEIGHT* 15&& SYS.MOUSE.y> lS.POSITION.Y()&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.EDITOR.ACTORS_AREA_HEIGHT){lS.EDITOR.ACTOR_BLUE_HOVER= true}else {lS.EDITOR.ACTOR_BLUE_HOVER= false};if(SYS.MOUSE.x> lS.POSITION.X()&& SYS.MOUSE.x< lS.POSITION.X()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.y> lS.POSITION.Y()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.EDITOR.ACTORS_AREA_HEIGHT* 15){lS.EDITOR.ACTOR_GREEN_HOVER= true}else {lS.EDITOR.ACTOR_GREEN_HOVER= false}};if(lS.EDITOR.GAME_OBJECT_MENU.VISIBLE== true){lS.EDITOR.ACTOR_DRAG= false;for(var q=0;q< lS.EDITOR.BUTTONS.length;q++){if(SYS.MOUSE.x> lS.EDITOR.BUTTONS[q].POSITION.x&& SYS.MOUSE.x< lS.EDITOR.BUTTONS[q].POSITION.x+ lS.EDITOR.BUTTONS[q].DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.EDITOR.BUTTONS[q].POSITION.y+ lS.EDITOR.BUTTONS[q].Y_OFFSET&& SYS.MOUSE.y< lS.EDITOR.BUTTONS[q].POSITION.y+ lS.EDITOR.BUTTONS[q].Y_OFFSET+ lS.EDITOR.BUTTONS[q].DIMENSION.HEIGHT()){lS.EDITOR.BUTTONS[q].HOVER= true}else {lS.EDITOR.BUTTONS[q].HOVER= false}}}}};if(lO.GUI.VISIBLE== true){for(var z=0;z< lO.GUI.BUTTONS.length;z++){if(SYS.MOUSE.x> lO.GUI.BUTTONS[z].POSITION.x&& SYS.MOUSE.x< lO.GUI.BUTTONS[z].POSITION.x+ lO.GUI.BUTTONS[z].DIMENSION.WIDTH()&& SYS.MOUSE.y> lO.GUI.BUTTONS[z].POSITION.y+ lO.GUI.BUTTONS[z].Y_OFFSET&& SYS.MOUSE.y< lO.GUI.BUTTONS[z].POSITION.y+ lO.GUI.BUTTONS[z].Y_OFFSET+ lO.GUI.BUTTONS[z].DIMENSION.HEIGHT()){lO.GUI.BUTTONS[z].HOVER= true}else {lO.GUI.BUTTONS[z].HOVER= false}}};if(lO.GUI.VISIBLE== true){for(var z=0;z< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length;z++){if(SYS.MOUSE.x> lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.x&& SYS.MOUSE.x< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.x+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].DIMENSION.WIDTH()&& SYS.MOUSE.y> lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.y+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].Y_OFFSET&& SYS.MOUSE.y< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.y+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].Y_OFFSET+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].DIMENSION.HEIGHT()){lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].HOVER= true}else {lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].HOVER= false}}}};this.CALCULATE_TOUCH_UP_OR_MOUSE_UP= function(){for(var z=0;z< this.ROOT_ENGINE.MODULES.length;z++){for(var lT=0;lT< lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS.length;lT++){var lS=lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS[lT];lS.EDITOR.ACTOR_X_IN_MOVE= false;lS.EDITOR.ACTOR_Y_IN_MOVE= false;if(lS.EDITOR.ENABLE== true){lS.EDITOR.ACTOR_DRAG= false};if(lP.ROOT_ENGINE.ENGINE_EDITOR== false){if(SYS.MOUSE.x> lS.POSITION.X()&& SYS.MOUSE.x< lS.POSITION.X()+ lS.DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.POSITION.Y()&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.DIMENSION.HEIGHT()){if(lS.VISIBLE== true){lS.TOUCH_UP();SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).style.cursor= "\x61\x75\x74\x6F"}}}}}};this.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN= function(){var mg=false;for(var z=0;z< this.ROOT_ENGINE.MODULES.length;z++){for(var lT=0;lT< lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS.length;lT++){var lS=lP.ROOT_ENGINE.MODULES[z].GAME_OBJECTS[lT];if(SYS.MOUSE.x> lS.POSITION.X()&& SYS.MOUSE.x< lS.POSITION.X()+ lS.DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.POSITION.Y()&& SYS.MOUSE.y< lS.POSITION.Y()+ lS.DIMENSION.HEIGHT()){lS.EDITOR.SELECTED= true;mg= true;if(lS.TYPE_OF_GAME_OBJECT== "\x54\x45\x58\x54\x5F\x42\x4F\x58"&& lS.TEXTBOX.EDIT== true&& lS.VISIBLE== true){if(NOMOBILE== 1){if(APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP== true){lP.ROOT_ENGINE.KEYBOARD.TARGET_MODUL= lS.PARENT;lP.ROOT_ENGINE.KEYBOARD.TARGET= lS.NAME;SHOW_KEYBOARD(lS.NAME)}else {lS.FOCUS= true;lP.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR= lS.TEXTBOX.TEXT;lP.ROOT_ENGINE.KEYBOARD.TARGET_MODUL= lS.PARENT;lP.ROOT_ENGINE.KEYBOARD.TARGET= lS.NAME}}else {lP.ROOT_ENGINE.KEYBOARD.TARGET_MODUL= lS.PARENT;lP.ROOT_ENGINE.KEYBOARD.TARGET= lS.NAME;SHOW_KEYBOARD(lS.NAME)}};if(lP.ROOT_ENGINE.ENGINE_EDITOR== false&& lS.VISIBLE== true){lS.FOCUS= true;lS.TOUCH_DOWN();SYS.DEBUG.LOG("\x53\x59\x53\x20\x3A\x20\x74\x6F\x75\x63\x68\x44\x6F\x77\x6E\x20\x6F\x72\x20\x6D\x6F\x75\x73\x65\x44\x6F\x77\x6E\x20\x65\x76\x65\x6E\x74\x20\x6F\x6E\x20\x67\x61\x6D\x65\x20\x6F\x62\x6A\x65\x63\x74\x20\x3A\x20"+ lS.NAME);if(lS.DRAG== true){if(SYS.MOUSE.BUTTON_PRESSED== "\x4C\x45\x46\x54"){SYS.DOM.E(lS.PROGRAM_NAME).style.cursor= "\x4D\x4F\x56\x45";lS.DRAG= true;lS.DRAG_START_X= parseFloat(SYS.MOUSE.x.toFixed(2)- lS.POSITION.X());lS.DRAG_START_Y= parseFloat(SYS.MOUSE.y.toFixed(2)- lS.POSITION.Y())}}}}else {lS.FOCUS= false};if(lS.EDITOR.ENABLE== true){if(lS.EDITOR.GAME_OBJECT_MENU.VISIBLE== true){lS.EDITOR.ACTOR_DRAG= false;for(var q=0;q< lS.EDITOR.BUTTONS.length;q++){if(SYS.MOUSE.x> lS.EDITOR.BUTTONS[q].POSITION.x&& SYS.MOUSE.x< lS.EDITOR.BUTTONS[q].POSITION.x+ lS.EDITOR.BUTTONS[q].DIMENSION.WIDTH()&& SYS.MOUSE.y> lS.EDITOR.BUTTONS[q].POSITION.y+ lS.EDITOR.BUTTONS[q].Y_OFFSET&& SYS.MOUSE.y< lS.EDITOR.BUTTONS[q].POSITION.y+ lS.EDITOR.BUTTONS[q].Y_OFFSET+ lS.EDITOR.BUTTONS[q].DIMENSION.HEIGHT()){if(lS.EDITOR.BUTTONS[q].IAM== "\x31"){lP.ROOT_ENGINE.MODULES[z].DESTROY_OBJECT(lS.NAME);DESTROY(lS.NAME);SYS.DEBUG.LOG("\x44\x45\x53\x54\x52\x4F\x59\x5F\x4F\x42\x4A\x45\x43\x54")}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x32"){var mc=prompt("\x44\x65\x73\x74\x72\x6F\x79\x20\x67\x61\x6D\x65\x5F\x6F\x62\x6A\x65\x63\x74\x20\x28\x20\x54\x69\x6D\x65\x20\x6E\x6F\x74\x20\x63\x6F\x75\x6E\x74\x20\x69\x6E\x20\x65\x64\x69\x74\x6F\x72\x20\x29\x3A","\x31\x30");if(!isNaN(parseFloat(mc.charAt(0)))){var lW=lS.NAME;lS.DESTROY_ME_AFTER_X_SECUND(mc,lW,z,lP)}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x41\x44\x44\x5F\x41\x4E\x49\x4D\x41\x54\x49\x4F\x4E\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x2E")};SYS.DEBUG.LOG("\x74\x65\x73\x74\x32")}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x33"){var mf="";for(var lZ in RESOURCE){if(RESOURCE.hasOwnProperty(lZ)&& lZ!= "\x53\x55\x4D"){mf+= "\x20\x20"+ lZ+ "\x2C\x20"}};var mc=prompt("\x46\x75\x6C\x6C\x20\x6C\x69\x73\x74\x20\x6F\x66\x20\x69\x6D\x61\x67\x65\x73\x20\x73\x6F\x75\x72\x63\x65\x20\x3A\x20\x0A\x20"+ mf+ "\x20\x20\x20\x0A\x20\x0A\x20\x45\x6E\x74\x65\x72\x20\x6E\x61\x6D\x65\x20\x6F\x66\x20\x61\x6E\x69\x6D\x61\x74\x69\x6F\x6E\x20\x72\x65\x73\x6F\x75\x72\x63\x65\x20\x6F\x62\x6A\x65\x63\x74\x20\x3A","\x64\x65\x6D\x6F\x31");if(isNaN(parseFloat(mc.charAt(0)))){ADD_ANIMATION(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc)}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x41\x44\x44\x5F\x41\x4E\x49\x4D\x41\x54\x49\x4F\x4E\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x2E")};SYS.DEBUG.LOG("\x61\x64\x64\x20\x61\x6E\x69\x6D\x61\x74\x69\x6F\x6E\x2E\x2E\x2E\x2E")}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x34"){if(lS.COLLISION== null){var mc=prompt("\x45\x6E\x74\x65\x72\x20\x6F\x75\x74\x6C\x69\x6E\x65\x20\x6D\x61\x72\x67\x69\x6E\x20\x63\x6F\x6C\x6C\x69\x64\x65\x72\x2E","\x31\x2E\x30\x32");if(!isNaN(parseFloat(mc.charAt(0)))){ADD_COLLISION(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc);lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x63\x6F\x6C\x6C\x69\x73\x69\x6F\x6E";SYS.DEBUG.LOG("\x61\x64\x64\x20\x63\x6F\x6C\x6C\x69\x64\x65\x72")}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x41\x44\x44\x5F\x43\x4F\x4C\x4C\x49\x53\x49\x4F\x4E\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x2E")}}else {if(lS.EDITOR.BUTTONS[q].text== "\x52\x65\x6D\x6F\x76\x65\x20\x63\x6F\x6C\x6C\x69\x73\x69\x6F\x6E"){REMOVE_COLLISION();lS.COLLISION= null;lS.EDITOR.BUTTONS[q].text= "\x41\x64\x64\x20\x63\x6F\x6C\x6C\x69\x73\x69\x6F\x6E";SYS.DEBUG.LOG("\x72\x65\x6D\x6F\x76\x65\x20\x63\x6F\x6C\x6C\x69\x64\x65\x72")}}}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x35"){if( typeof PLAYER=== "\x75\x6E\x64\x65\x66\x69\x6E\x65\x64"){var mc=prompt("\x45\x6E\x74\x65\x72\x20\x70\x6C\x61\x79\x65\x72\x20\x74\x79\x70\x65\x20\x3A\x20","\x4E\x4F\x52\x4D\x41\x4C");if(isNaN(parseFloat(mc.charAt(0)))){CREATE_PLAYER(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc,q);lS.EDITOR.BUTTONS[q].text= "\x44\x65\x61\x74\x61\x63\x68\x20\x70\x6C\x61\x79\x65\x72";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x70\x6C\x61\x79\x65\x72")}}else {if( typeof lS.PLAYER!= "\x75\x6E\x64\x65\x66\x69\x6E\x65\x64"){DEATACH_PLAYER(lS.NAME,lS.PROGRAM_NAME,lS.PARENT);delete (lS.PLAYER);delete (PLAYER);lS.EDITOR.BUTTONS[q].text= "\x41\x74\x61\x63\x68\x20\x70\x6C\x61\x79\x65\x72";SYS.DEBUG.LOG("\x64\x65\x61\x74\x61\x63\x68\x20\x70\x6C\x61\x79\x65\x72\x20\x2C\x20\x61\x6C\x73\x6F\x20\x64\x65\x73\x74\x72\x6F\x79\x20\x50\x4C\x41\x59\x45\x52\x20\x67\x6C\x6F\x62\x61\x6C\x20\x6F\x62\x6A\x65\x63\x74\x2E")}}}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x36"){if(lS.PARTICLE== null){var mc=prompt("\x45\x6E\x74\x65\x72\x20\x70\x61\x72\x74\x69\x63\x6C\x65\x20\x74\x79\x70\x65\x20\x3A\x20","\x46\x4F\x4E\x54\x41\x4E");if(isNaN(parseFloat(mc.charAt(0)))){ADD_PARTICLE(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc);lS.CREATE_PARTICLE(mc);lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x70\x61\x72\x74\x69\x63\x6C\x65";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x70\x6C\x61\x79\x65\x72")}}else {if( typeof lS.PARTICLE!= null){REMOVE_PARTICLE(lS.NAME,lS.PROGRAM_NAME,lS.PARENT);lS.TYPE_OF_GAME_OBJECT= "\x65\x6D\x70\x74\x79";delete (lS.PARTICLE);lS.PARTICLE= null;lS.EDITOR.BUTTONS[q].text= "\x41\x64\x64\x20\x70\x61\x72\x74\x69\x63\x6C\x65";SYS.DEBUG.LOG("\x70\x61\x72\x74\x69\x63\x6C\x65\x20\x72\x65\x6D\x6F\x76\x65\x64\x20\x66\x72\x6F\x6D\x20"+ lS.NAME)}}}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x37"){if(lS.TEXTBOX== null){var mc=prompt("\x45\x6E\x74\x65\x72\x20\x74\x65\x78\x74\x20\x76\x61\x6C\x75\x65\x20\x3A\x20","\x48\x45\x4C\x4C\x4F");var ma=prompt("\x45\x6E\x74\x65\x72\x20\x63\x6F\x6C\x6F\x72\x20\x76\x61\x6C\x75\x65\x20\x3A\x20","\x72\x65\x64");var md=prompt("\x45\x6E\x74\x65\x72\x20\x54\x65\x78\x74\x20\x63\x6F\x6C\x6F\x72\x20\x76\x61\x6C\x75\x65\x20\x3A\x20","\x62\x6C\x61\x63\x6B");var mb=prompt("\x45\x6E\x74\x65\x72\x20\x72\x65\x63\x74\x20\x72\x61\x64\x69\x75\x73\x20\x20\x76\x61\x6C\x75\x65\x20\x3A\x20",15);mc= ""+ mc.toString();ADD_TEXTBOX(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc,mb,ma,md);lS.CREATE_TEXTBOX(mc,mb,ma,md);lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x74\x65\x78\x74\x62\x6F\x78";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x74\x65\x78\x74\x62\x6F\x78")}else {if( typeof lS.TEXTBOX!= null){REMOVE_TEXTBOX(lS.NAME,lS.PROGRAM_NAME,lS.PARENT);lS.TYPE_OF_GAME_OBJECT= "\x65\x6D\x70\x74\x79";delete (lS.TEXTBOX);lS.TEXTBOX= null;lS.EDITOR.BUTTONS[q].text= "\x41\x64\x64\x20\x74\x65\x78\x74\x62\x6F\x78";SYS.DEBUG.LOG("\x74\x65\x78\x74\x62\x6F\x78\x20\x72\x65\x6D\x6F\x76\x65\x64\x20\x66\x72\x6F\x6D\x20"+ lS.NAME+ "\x20\x2E\x20\x41\x6E\x64\x20\x2E\x54\x45\x58\x54\x42\x4F\x58\x20\x69\x73\x20\x3A"+ lS.TEXTBOX)}}}else {if(lS.EDITOR.BUTTONS[q].IAM== "\x38"){if(lS.WEBCAM== null){var mc=prompt("\x43\x68\x6F\x6F\x73\x65\x20\x4E\x4F\x52\x4D\x41\x4C\x20\x69\x66\x20\x79\x6F\x75\x20\x77\x61\x6E\x6E\x61\x20\x73\x69\x6D\x70\x6C\x65\x20\x77\x65\x62\x63\x61\x6D\x20\x76\x69\x65\x77\x20\x6F\x72\x20\x65\x6E\x74\x65\x72\x20\x76\x61\x6C\x75\x65\x20\x27\x4E\x55\x49\x27\x20\x66\x6F\x72\x20\x6D\x6F\x74\x69\x6F\x6E\x20\x64\x65\x74\x65\x63\x74\x20\x63\x6F\x6D\x70\x6F\x6E\x65\x6E\x74\x20\x2B\x20\x77\x65\x62\x63\x61\x6D\x20\x76\x69\x65\x77\x20\x3A\x20","\x4E\x4F\x52\x4D\x41\x4C");if(mc== "\x4E\x4F\x52\x4D\x41\x4C"){var me=prompt("\x4A\x75\x73\x74\x20\x70\x72\x65\x73\x73\x20\x65\x6E\x74\x65\x72\x20\x74\x6F\x20\x6D\x61\x6B\x65\x20\x76\x69\x64\x65\x6F\x20\x77\x69\x74\x68\x20\x74\x68\x65\x20\x73\x61\x6D\x65\x20\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x73\x20\x6C\x69\x6B\x65\x20\x67\x61\x6D\x65\x5F\x6F\x62\x6A\x65\x63\x74\x20\x2C\x20\x61\x6E\x79\x20\x6F\x74\x68\x65\x72\x20\x76\x61\x6C\x75\x65\x20\x73\x65\x74\x20\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x73\x20\x6F\x66\x20\x77\x65\x62\x63\x61\x6D\x20\x76\x69\x64\x65\x6F\x2E\x20","\x47\x41\x4D\x45\x5F\x4F\x42\x4A\x45\x43\x54");if(me== "\x47\x41\x4D\x45\x5F\x4F\x42\x4A\x45\x43\x54"){lS.CREATE_WEBCAM(mc,me);ADD_WEBCAM(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc,me);lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x77\x65\x62\x63\x61\x6D";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x77\x65\x62\x63\x61\x6D")}else {lS.CREATE_WEBCAM(mc,me);ADD_WEBCAM(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc,"\x57\x45\x42\x43\x41\x4D\x5F\x44\x49\x4D\x45\x4E\x53\x49\x4F\x4E");lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x77\x65\x62\x63\x61\x6D";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x77\x65\x62\x63\x61\x6D")}}else {if(mc== "\x4E\x55\x49"){var me=prompt("\x4A\x75\x73\x74\x20\x70\x72\x65\x73\x73\x20\x65\x6E\x74\x65\x72\x20\x74\x6F\x20\x6D\x61\x6B\x65\x20\x76\x69\x64\x65\x6F\x20\x77\x69\x74\x68\x20\x74\x68\x65\x20\x73\x61\x6D\x65\x20\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x73\x20\x6C\x69\x6B\x65\x20\x67\x61\x6D\x65\x5F\x6F\x62\x6A\x65\x63\x74\x20\x2C\x20\x61\x6E\x79\x20\x6F\x74\x68\x65\x72\x20\x76\x61\x6C\x75\x65\x20\x73\x65\x74\x20\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x73\x20\x6F\x66\x20\x77\x65\x62\x63\x61\x6D\x20\x76\x69\x64\x65\x6F\x2E\x20","\x47\x41\x4D\x45\x5F\x4F\x42\x4A\x45\x43\x54");var lY=prompt("\x20\x53\x75\x6D\x20\x6F\x66\x20\x6D\x6F\x74\x69\x6F\x6E\x20\x64\x65\x74\x65\x63\x74\x20\x70\x6F\x69\x6E\x74\x20\x66\x6F\x72\x20\x76\x65\x72\x74\x69\x63\x61\x6C\x20\x6C\x69\x6E\x65\x2C\x20\x38\x20\x69\x73\x20\x6F\x70\x74\x69\x6D\x61\x6C\x20\x66\x6F\x72\x20\x6D\x61\x78\x20\x76\x61\x6C\x75\x65\x20\x61\x6E\x64\x20\x31\x20\x69\x73\x20\x6D\x69\x6E\x69\x6D\x75\x6D\x20\x2E\x20",6);var lX=prompt("\x20\x53\x75\x6D\x20\x6F\x66\x20\x6D\x6F\x74\x69\x6F\x6E\x20\x64\x65\x74\x65\x63\x74\x20\x70\x6F\x69\x6E\x74\x20\x66\x6F\x72\x20\x68\x6F\x72\x69\x7A\x6F\x6E\x74\x61\x6C\x20\x6C\x69\x6E\x65\x2C\x20\x38\x20\x69\x73\x20\x6F\x70\x74\x69\x6D\x61\x6C\x20\x66\x6F\x72\x20\x6D\x61\x78\x20\x76\x61\x6C\x75\x65\x20\x61\x6E\x64\x20\x31\x20\x69\x73\x20\x6D\x69\x6E\x69\x6D\x75\x6D\x20\x2E\x20",6);if(!isNaN(lY)&& !isNaN(lX)&& isNaN(me)){lS.CREATE_WEBCAM(mc,me);ADD_WEBCAM(lS.NAME,lS.PROGRAM_NAME,lS.PARENT,mc,me,lY,lX);lS.EDITOR.BUTTONS[q].text= "\x52\x65\x6D\x6F\x76\x65\x20\x77\x65\x62\x63\x61\x6D";SYS.DEBUG.LOG("\x61\x74\x61\x63\x68\x20\x77\x65\x62\x63\x61\x6D")}else {SYS.DEBUG.WARNING("\x20\x45\x72\x72\x6F\x72\x20\x69\x6E\x20\x43\x52\x45\x41\x54\x45\x5F\x57\x45\x42\x43\x41\x4D\x20\x70\x72\x6F\x63\x65\x64\x75\x72\x65\x20\x44\x65\x73\x63\x72\x69\x70\x74\x69\x6F\x6E\x20\x3A\x20\x74\x79\x70\x65\x20\x6F\x66\x20\x64\x69\x6D\x65\x6E\x73\x69\x6F\x6E\x73\x20\x6D\x75\x73\x74\x20\x62\x65\x20\x73\x74\x72\x69\x6E\x67\x20\x2C\x20\x53\x75\x6D\x20\x6F\x66\x20\x70\x6F\x69\x6E\x74\x20\x6D\x75\x73\x74\x20\x62\x65\x20\x6E\x75\x6D\x62\x65\x72\x2E")}}}}else {lS.DESTROY_WEBCAM();REMOVE_WEBCAM(lS.NAME,lS.PROGRAM_NAME,lS.PARENT)}}}}}}}}}}else {lS.EDITOR.GAME_OBJECT_MENU.VISIBLE= false}}};if(SYS.MOUSE.x> lS.EDITOR.ACTOR_DRAG_RECT_POS.X()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.x< lS.EDITOR.ACTOR_DRAG_RECT_POS.X()+ lS.EDITOR.ACTOR_DRAG_RECT_DIM.WIDTH()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.y> lS.EDITOR.ACTOR_DRAG_RECT_POS.Y()+ lS.EDITOR.ACTORS_AREA_HEIGHT&& SYS.MOUSE.y< lS.EDITOR.ACTOR_DRAG_RECT_POS.Y()+ lS.EDITOR.ACTOR_DRAG_RECT_DIM.HEIGHT()+ lS.EDITOR.ACTORS_AREA_HEIGHT){if(SYS.MOUSE.BUTTON_PRESSED== "\x4C\x45\x46\x54"){lS.EDITOR.ACTOR_DRAG= true;lS.EDITOR.ACTOR_START_X= parseFloat(SYS.MOUSE.x.toFixed(2)- lS.POSITION.X()- lS.EDITOR.ACTORS_AREA_HEIGHT);lS.EDITOR.ACTOR_START_Y= parseFloat(SYS.MOUSE.y.toFixed(2)- lS.POSITION.Y()- lS.EDITOR.ACTORS_AREA_HEIGHT)}else {if(SYS.MOUSE.BUTTON_PRESSED== "\x52\x49\x47\x48\x54"){if(lS.EDITOR.GAME_OBJECT_MENU.VISIBLE== false){for(var y=0;y< lS.EDITOR.BUTTONS.length;y++){lS.EDITOR.BUTTONS[y].POSITION.x= SYS.MOUSE.x;lS.EDITOR.BUTTONS[y].POSITION.y= SYS.MOUSE.y};lS.EDITOR.GAME_OBJECT_MENU.VISIBLE= true}}}};if(lS.EDITOR.ACTOR_BLUE_HOVER== true){lS.EDITOR.ACTOR_X_IN_MOVE= true;lS.EDITOR.ACTOR_START_X= parseFloat(SYS.MOUSE.x.toFixed(2)- lS.POSITION.X())}else {if(lS.EDITOR.ACTOR_GREEN_HOVER== true){lS.EDITOR.ACTOR_Y_IN_MOVE= true;lS.EDITOR.ACTOR_START_Y= parseFloat(SYS.MOUSE.y.toFixed(2)- lS.POSITION.Y())}};if(mg== false){lS.DESELECT_ALL()}};if(mg== false&& lS.NAME.indexOf("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44")==  -1){lP.ROOT_ENGINE.KEYBOARD.TARGET_MODUL= undefined;lP.ROOT_ENGINE.KEYBOARD.TARGET= undefined}}};if(lO.ENGINE_EDITOR== true){if(lO.GUI.VISIBLE== false&& mg== false&& SYS.MOUSE.BUTTON_PRESSED== "\x52\x49\x47\x48\x54"){for(var z=0;z< lO.GUI.BUTTONS.length;z++){lO.GUI.BUTTONS[z].POSITION.x= SYS.MOUSE.x;lO.GUI.BUTTONS[z].POSITION.y= SYS.MOUSE.y};lO.GUI.VISIBLE= true}else {if(lO.GUI.VISIBLE== true){for(var z=0;z< lO.GUI.BUTTONS.length;z++){if(SYS.MOUSE.x> lO.GUI.BUTTONS[z].POSITION.x&& SYS.MOUSE.x< lO.GUI.BUTTONS[z].POSITION.x+ lO.GUI.BUTTONS[z].DIMENSION.WIDTH()&& SYS.MOUSE.y> lO.GUI.BUTTONS[z].POSITION.y+ lO.GUI.BUTTONS[z].Y_OFFSET&& SYS.MOUSE.y< lO.GUI.BUTTONS[z].POSITION.y+ lO.GUI.BUTTONS[z].Y_OFFSET+ lO.GUI.BUTTONS[z].DIMENSION.HEIGHT()){if(lO.GUI.BUTTONS[z].IAM== "\x31"){var mh=prompt("\x45\x6E\x74\x65\x72\x20\x67\x61\x6D\x65\x4F\x62\x6A\x65\x63\x74\x20\x6E\x61\x6D\x65\x20\x3A","\x6E\x6F\x6E\x61\x6D\x65");if(isNaN(parseFloat(mh.charAt(0)))){var mi=prompt("\x45\x6E\x74\x65\x72\x20\x67\x61\x6D\x65\x4F\x62\x6A\x65\x63\x74\x20\x70\x61\x72\x65\x6E\x74\x20\x6D\x6F\x64\x75\x6C\x20\x3A","\x53\x54\x41\x52\x54\x45\x52");if(isNaN(parseFloat(mh.charAt(0)))){ADD(mh,45,45,10,10,lL.id,mi)}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x47\x61\x6D\x65\x4F\x62\x6A\x65\x63\x74\x20\x6E\x61\x6D\x65\x20\x63\x72\x65\x61\x74\x65\x64\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x2E")}}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x47\x61\x6D\x65\x4F\x62\x6A\x65\x63\x74\x20\x6E\x61\x6D\x65\x20\x63\x72\x65\x61\x74\x65\x64\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x2E")}}else {if(lO.GUI.BUTTONS[z].IAM== "\x32"){for(var lT=0;lT< SYS.RUNNING_PROGRAMS.length;lT++){window[SYS.RUNNING_PROGRAMS[lT]].ENGINE.EXIT_EDIT_MODE()}}else {if(lO.GUI.BUTTONS[z].IAM== "\x33"){var mh=prompt("\x45\x6E\x74\x65\x72\x20\x20\x20\x70\x72\x6F\x67\x72\x61\x6D\x20\x44\x52\x41\x57\x5F\x49\x4E\x54\x45\x52\x56\x41\x4C\x20\x3A",15);if(!isNaN(parseFloat(mh))){var mi=prompt("\x45\x6E\x74\x65\x72\x20\x20\x70\x72\x6F\x67\x72\x61\x6D\x20\x55\x50\x44\x41\x54\x45\x5F\x49\x4E\x54\x45\x52\x56\x41\x4C\x20\x3A",15);if(!isNaN(parseFloat(mi))){SYS.DEBUG.LOG("\x50\x72\x6F\x67\x72\x61\x6D\x20\x69\x6E\x74\x65\x72\x76\x61\x6C\x20\x6E\x6F\x77\x20\x69\x73\x20\x20\x20"+ mh+ "\x20\x20\x2E\x20\x62\x65\x73\x74\x20\x72\x61\x6E\x67\x65\x20\x69\x73\x20\x5B\x31\x20\x2C\x20\x37\x30\x5D\x20\x20");window[lO.PROGRAM_ID].DRAW_INTERVAL= parseFloat(mh);window[lO.PROGRAM_ID].UPDATE_INTERVAL= parseFloat(mi);SET_MAIN_INTERVAL(lO.PROGRAM_ID,mh,mi)}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x50\x72\x6F\x67\x72\x61\x6D\x20\x69\x6E\x74\x65\x72\x76\x61\x6C\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x20\x63\x68\x61\x6E\x67\x65\x64\x2E")}}else {alert("\x45\x52\x52\x4F\x52\x20\x4D\x53\x47\x3A\x20\x50\x72\x6F\x67\x72\x61\x6D\x20\x69\x6E\x74\x65\x72\x76\x61\x6C\x20\x6E\x6F\x74\x20\x73\x75\x63\x63\x65\x73\x73\x20\x63\x68\x61\x6E\x67\x65\x64\x2E")}}else {if(lO.GUI.BUTTONS[z].IAM== "\x34"){if(APPLICATION.ACCOUNT_SERVICE_AUTO_RUN== true){APPLICATION.ACCOUNT_SERVICE_AUTO_RUN= false;lO.GUI.BUTTONS[3].text= "\x53\x77\x69\x74\x63\x68\x20\x41\x75\x74\x6F\x43\x6F\x6E\x6E\x65\x63\x74\x20\x74\x6F\x20\x74\x72\x75\x65"}else {APPLICATION.ACCOUNT_SERVICE_AUTO_RUN= true;lO.GUI.BUTTONS[3].text= "\x53\x77\x69\x74\x63\x68\x20\x41\x75\x74\x6F\x43\x6F\x6E\x6E\x65\x63\x74\x74\x20\x74\x6F\x20\x66\x61\x6C\x73\x65"};SAVE("\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E",APPLICATION)}else {if(lO.GUI.BUTTONS[z].IAM== "\x35"){if(APPLICATION.EDITOR_AUTORUN== true){APPLICATION.EDITOR_AUTORUN= false;lO.GUI.BUTTONS[4].text= "\x53\x77\x69\x74\x63\x68\x20\x65\x64\x69\x74\x6F\x72\x41\x75\x74\x6F\x52\x75\x6E\x20\x74\x6F\x20\x74\x72\x75\x65"}else {APPLICATION.EDITOR_AUTORUN= true;lO.GUI.BUTTONS[4].text= "\x53\x77\x69\x74\x63\x68\x20\x65\x64\x69\x74\x6F\x72\x41\x75\x74\x6F\x52\x75\x6E\x20\x74\x6F\x20\x66\x61\x6C\x73\x65"};SAVE("\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E",APPLICATION)}}}}}}};lO.GUI.VISIBLE= false}};if(lO.GUI.LIST_OF_OBJECTS.VISIBLE== true){for(var z=0;z< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length;z++){if(SYS.MOUSE.x> lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.x&& SYS.MOUSE.x< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.x+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].DIMENSION.WIDTH()&& SYS.MOUSE.y> lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.y+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].Y_OFFSET&& SYS.MOUSE.y< lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].POSITION.y+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].Y_OFFSET+ lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].DIMENSION.HEIGHT()){lO.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[z].TAP()}}}}}}
+	for (var x=0;x<this.ROOT_ENGINE.MODULES.length;x++){
+	
+		for (var z=0;z<ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length;z++){	
+				 
+				var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+				if ( SYS.MOUSE.x > local_go.POSITION.X()  && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.POSITION.Y() && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT() ) {
+		
+		         
+				 
+                if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false && local_go.VISIBLE !=  false ){
+					
+				 SYS.DEBUG.LOG( "SYS : touch or click event on game object : " + local_go.NAME);
+				 local_go.FOCUS = true;
+				 local_go.TAP();
+				 
+				 }
+				 
+				}
+
+	    }
+   
+    }
+	
+	
+
+};
+
+// CALCULATE MOUSE MOVE OR TOUCH MOVE
+this.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE = function(){
+
+
+    for (var x=0;x<this.ROOT_ENGINE.MODULES.length;x++){
+	
+	 var first_pass = false;
+	
+		for (var z=0;z<ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length;z++){	
+				 
+				 //-------------------------------//-------------------------------//-------------------------------
+				var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+				if ( SYS.MOUSE.x > local_go.POSITION.X()  && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.POSITION.Y() && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT() ) {
+				  
+		         //SYS.DEBUG.LOG( "SYS : touchmove event on game object : " + local_go.NAME);
+				// EVENT ONLY OUT OF EDITOR
+				 if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false && local_go.VISIBLE == true){
+					 
+				 local_go.TOUCH_MOVE()
+				 
+				 		if(SYS.MOUSE.PRESS == true && local_go.DRAG == true && first_pass == false && local_go.DRAG_STATUS == true){
+					
+					 first_pass =true;
+					
+					local_go.DRAG_DELTA  =  ( local_go.DRAG_START_X    );
+					var local_ = CONVERTOR.PIX_TO_PER(  parseFloat(local_go.DRAG_DELTA.toFixed(2)) );
+					local_go.POSITION.TRANSLATE_BY_X(  parseFloat(CONVERTOR.PIX_TO_PER( SYS.MOUSE.x ).toFixed(2) )  -  Math.abs(local_)  )
+
+					local_go.DRAG_DELTA  =  ( local_go.DRAG_START_Y  );
+					var local_ = CONVERTOR.PIY_TO_PER(  parseFloat(local_go.DRAG_DELTA.toFixed(2)) );
+					local_go.POSITION.TRANSLATE_BY_Y(  parseFloat(CONVERTOR.PIY_TO_PER( SYS.MOUSE.y ).toFixed(2) )  -  Math.abs(local_)  )
+					
+					
+					}
+					
+				 
+				 
+				 
+				 }
+				  
+				}else {
+
+                 
+				
+				 
+				}
+				//-------------------------------//-------------------------------//-------------------------------
+				
+
+				
+				//-------------------------------//-------------------------------//-------------------------------
+				//EDITOR 
+				//-------------------------------//-------------------------------//-------------------------------
+				if (local_go.EDITOR.ENABLE == true) {
+				
+				//-------------------------------//-------------------------------//-------------------------------
+				// DRAG in EDITOR 
+				//-------------------------------//-------------------------------//-------------------------------
+					
+					if(SYS.MOUSE.PRESS == true && local_go.EDITOR.ACTOR_DRAG == true && first_pass == false){
+					
+					 first_pass =true;
+					
+					
+					local_go.EDITOR.ACTOR_DELTA  =  ( local_go.EDITOR.ACTOR_START_X   + local_go.EDITOR.ACTORS_AREA_HEIGHT );
+					var local_ = CONVERTOR.PIX_TO_PER(  parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)) );
+					local_go.POSITION.TRANSLATE_BY_X(  parseFloat(CONVERTOR.PIX_TO_PER( SYS.MOUSE.x ).toFixed(2) )  -  Math.abs(local_)  )
+
+					local_go.EDITOR.ACTOR_DELTA  =  ( local_go.EDITOR.ACTOR_START_Y  + local_go.EDITOR.ACTORS_AREA_HEIGHT  );
+					var local_ = CONVERTOR.PIY_TO_PER(  parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)) );
+					local_go.POSITION.TRANSLATE_BY_Y(  parseFloat(CONVERTOR.PIY_TO_PER( SYS.MOUSE.y ).toFixed(2) )  -  Math.abs(local_)  )
+					
+					
+					}
+ 	
+				//-------------------------------//-------------------------------//-------------------------------
+				//-------------------------------//-------------------------------//-------------------------------
+				
+				
+				//-------------------------------//-------------------------------//-------------------------------
+				// OBJECT MOVE
+				// ACTOR X
+				if (local_go.EDITOR.ACTOR_X_IN_MOVE == true) {
+					local_go.EDITOR.ACTOR_DELTA  =  ( local_go.EDITOR.ACTOR_START_X   );
+					var local_ = CONVERTOR.PIX_TO_PER(  parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)) );
+					local_go.POSITION.TRANSLATE_BY_X(  parseFloat(CONVERTOR.PIX_TO_PER( SYS.MOUSE.x ).toFixed(1) )  -  Math.abs(local_)  )
+				}
+				// ACTOR Y
+				if (local_go.EDITOR.ACTOR_Y_IN_MOVE == true) {
+					local_go.EDITOR.ACTOR_DELTA  =  ( local_go.EDITOR.ACTOR_START_Y  );
+					var local_ = CONVERTOR.PIY_TO_PER(  parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)) );
+					local_go.POSITION.TRANSLATE_BY_Y(  parseFloat(CONVERTOR.PIY_TO_PER( SYS.MOUSE.y ).toFixed(1) )  -  Math.abs(local_)  )
+				}
+							
+				//-------------------------------//-------------------------------//-------------------------------
+				
+	
+				//HOVER
+				//-------------------------------//-------------------------------//-------------------------------
+				if ( SYS.MOUSE.x > local_go.POSITION.X() + local_go.EDITOR.ACTORS_AREA_HEIGHT  && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.EDITOR.ACTORS_AREA_HEIGHT*15 && SYS.MOUSE.y > local_go.POSITION.Y()  && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT) {
+					
+				 local_go.EDITOR.ACTOR_BLUE_HOVER = true;
+
+ 								 
+				}else { 
+				
+				 local_go.EDITOR.ACTOR_BLUE_HOVER = false;
+				 
+				}
+				//-------------------------------//-------------------------------//-------------------------------
+				
+				 
+				
+				//-------------------------------//-------------------------------//-------------------------------
+				if ( SYS.MOUSE.x > local_go.POSITION.X() && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.EDITOR.ACTORS_AREA_HEIGHT && SYS.MOUSE.y > local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT*15 ) {
+		
+		         local_go.EDITOR.ACTOR_GREEN_HOVER = true;
+		         //SYS.DEBUG.LOG( "SYS : green Y-ACTOR event on game object : " + local_go.NAME);
+
+				}else {
+					
+					local_go.EDITOR.ACTOR_GREEN_HOVER = false;
+					
+				}
+				//-------------------------------//-------------------------------//-------------------------------
+				
+				//-------------------------------//-------------------------------//-------------------------------
+				}// END OF EDITOR
+				
+				
+				
+				
+					     if (	local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == true ) {
+			 
+			 		local_go.EDITOR.ACTOR_DRAG = false;
+					
+				 for (var q=0;q<local_go.EDITOR.BUTTONS.length;q++){
+				
+				    if ( SYS.MOUSE.x > local_go.EDITOR.BUTTONS[q].POSITION.x    && SYS.MOUSE.x < local_go.EDITOR.BUTTONS[q].POSITION.x  +  local_go.EDITOR.BUTTONS[q].DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.EDITOR.BUTTONS[q].POSITION.y  + local_go.EDITOR.BUTTONS[q].Y_OFFSET&& SYS.MOUSE.y < local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET + local_go.EDITOR.BUTTONS[q].DIMENSION.HEIGHT() ) {
+				  
+				    local_go.EDITOR.BUTTONS[q].HOVER = true; 
+				  
+					}else {
+					
+					local_go.EDITOR.BUTTONS[q].HOVER = false; 
+					
+					}
+
+				 }
+			  
+		}
+				//-------------------------------//-------------------------------//-------------------------------
+				
+				
+				
+	    }
+   
+    }
+
+			
+			
+	 if(ROOT_ENGINE.GUI.VISIBLE == true) {
+				
+				 for (var x=0;x<ROOT_ENGINE.GUI.BUTTONS.length;x++){
+				
+				    if ( SYS.MOUSE.x > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x    && SYS.MOUSE.x < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x  +  ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() && SYS.MOUSE.y > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y  + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET&& SYS.MOUSE.y < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() ) {
+
+
+					ROOT_ENGINE.GUI.BUTTONS[x].HOVER = true;
+					
+					
+					
+					}else {ROOT_ENGINE.GUI.BUTTONS[x].HOVER = false;}
+
+				 }
+				 
+				
+			}
+			
+			
+			//
+			
+				 if(ROOT_ENGINE.GUI.VISIBLE == true) {
+				
+				 for (var x=0;x<ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length;x++){
+				
+				    if ( SYS.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x    && SYS.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x  +  ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH() && SYS.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y  + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET&& SYS.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() ) {
+
+
+					ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER = true;
+					
+					
+					
+					}else {ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER = false;}
+
+				 }
+				 
+				
+			}
+			//
+			
+			
+ 
+};
+
+// CALCULATE_TOUCH_UP_OR_MOUSE_UP
+this.CALCULATE_TOUCH_UP_OR_MOUSE_UP = function(){
+
+ 
+    for (var x=0;x<this.ROOT_ENGINE.MODULES.length;x++){
+	
+		for (var z=0;z<ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length;z++){	
+				 
+  		   var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+
+		   local_go.EDITOR.ACTOR_X_IN_MOVE = false;
+		   local_go.EDITOR.ACTOR_Y_IN_MOVE = false;
+			
+			//-------------------------------//-------------------------------//-------------------------------
+			// EDITOR
+			//-------------------------------//-------------------------------//-------------------------------
+			if (local_go.EDITOR.ENABLE == true) {
+			
+			 local_go.EDITOR.ACTOR_DRAG = false;
+			  
+			
+			//-------------------------------//-------------------------------//-------------------------------
+			}// end of EDITOR
+			//-------------------------------//-------------------------------//-------------------------------
+             
+			 // EVENT ONLY OUT OF EDITOR
+			 if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false){
+				 		
+				if ( SYS.MOUSE.x > local_go.POSITION.X()  && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.POSITION.Y() && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT() ) {
+		        
+			    if (local_go.VISIBLE == true) {	
+		       local_go.TOUCH_UP()
+		       SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).style.cursor = "auto";
+				}
+			 
+			   }
+			 
+			 
+			 }
+
+			
+		 }
+				 
+   }
+
+
+};
+
+this.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN = function(){
+
+    var selected_something = false;
+
+		for (var x=0;x<this.ROOT_ENGINE.MODULES.length;x++){
+
+ 
+			for (var z=0;z<ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length;z++){	
+			
+							 
+				var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+				
+				
+				if ( SYS.MOUSE.x > local_go.POSITION.X()  && SYS.MOUSE.x < local_go.POSITION.X()  + local_go.DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.POSITION.Y() && SYS.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT() ) {
+		
+		         
+				 local_go.EDITOR.SELECTED = true;
+				
+                 selected_something = true;
+				 
+				 if (local_go.TYPE_OF_GAME_OBJECT == "TEXT_BOX" && local_go.TEXTBOX.EDIT == true  && local_go.VISIBLE == true) {
+ 				 
+                  if (NOMOBILE == 1) { // for desktop mouse		HARD CODE 0/1		 
+				 
+   
+				if ( APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP  == true ){
+				ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL =  local_go.PARENT;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+				 SHOW_KEYBOARD(local_go.NAME)
+		
+				}
+				else{//normal for desktop
+				 local_go.FOCUS = true;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR = local_go.TEXTBOX.TEXT;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL =  local_go.PARENT;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+				}
+				
+				
+				  }
+				  else { // for mobile VirtualKeyboard
+			     ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL =  local_go.PARENT;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+				 SHOW_KEYBOARD(local_go.NAME)
+					  
+				  }
+				 
+				 }
+				 
+				 // EVENT ONLY OUT OF EDITOR
+				 if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false  && local_go.VISIBLE == true){
+					 
+				 local_go.FOCUS = true;	 
+				 local_go.TOUCH_DOWN()
+				 SYS.DEBUG.LOG( "SYS : touchDown or mouseDown event on game object : " + local_go.NAME); 
+				 
+							// if drag is enabled 
+				             if (local_go.DRAG == true) {
+							 //$$$$$$$$
+							 
+		//if (  SYS.MOUSE.x > local_go.POSITION.X()    && SYS.MOUSE.x < local_go.POSITION.X() +  local_go.DIMENSION.WIDTH()  && SYS.MOUSE.y > local_go.POSITION.Y()&&SYS.MOUSE.y < local_go.POSITION.Y() +    local_go.DIMENSION.HEIGHT()) {
+			
+			if (SYS.MOUSE.BUTTON_PRESSED == "LEFT") {
+				
+			 SYS.DOM.E(local_go.PROGRAM_NAME).style.cursor = "MOVE";
+			local_go.DRAG = true;
+			local_go.DRAG_START_X =  parseFloat(    SYS.MOUSE.x.toFixed(2)  - local_go.POSITION.X()   ); 
+			local_go.DRAG_START_Y =  parseFloat(    SYS.MOUSE.y.toFixed(2)  - local_go.POSITION.Y()   ); 
+		    }
+ 
+			 
+	//	}
+							 
+							 
+							 //$$$$$$$$
+							 }
+				 
+				 
+				 }
+				 
+				 
+				 
+				}
+				else {
+			 
+				 local_go.FOCUS = false; 	
+			  
+				}
+				
+			//-------------------------------//-------------------------------//-------------------------------
+			// EDITOR
+			//-------------------------------//-------------------------------//-------------------------------
+	if (local_go.EDITOR.ENABLE == true) {
+		
+			//################
+		     if (	local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == true ) {
+			 
+			 		local_go.EDITOR.ACTOR_DRAG = false;
+					
+				 for (var q=0;q<local_go.EDITOR.BUTTONS.length;q++){
+				
+				    if ( SYS.MOUSE.x > local_go.EDITOR.BUTTONS[q].POSITION.x    && SYS.MOUSE.x < local_go.EDITOR.BUTTONS[q].POSITION.x  +  local_go.EDITOR.BUTTONS[q].DIMENSION.WIDTH() && SYS.MOUSE.y > local_go.EDITOR.BUTTONS[q].POSITION.y  + local_go.EDITOR.BUTTONS[q].Y_OFFSET&& SYS.MOUSE.y < local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET + local_go.EDITOR.BUTTONS[q].DIMENSION.HEIGHT() ) {
+						
+						//-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+					 if (local_go.EDITOR.BUTTONS[q].IAM == "1") {
+						    // DESTROY OBJECT
+							ROOT_EVENTS.ROOT_ENGINE.MODULES[x].DESTROY_OBJECT(local_go.NAME);
+						    //DESTROY( name , canvas.id  , local_go.PARENT )
+							DESTROY( local_go.NAME );
+						    SYS.DEBUG.LOG('DESTROY_OBJECT')
+						 
+					 }
+					 //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+					 else if (local_go.EDITOR.BUTTONS[q].IAM == "2") {
+						
+						var local_res = prompt("Destroy game_object ( Time not count in editor ):" , "10" );
+						if (!isNaN(parseFloat(local_res.charAt(0)))){
+							var _name = local_go.NAME;
+				 
+							local_go.DESTROY_ME_AFTER_X_SECUND(  local_res , _name , x  , ROOT_EVENTS );
+					 
+							
+						}else{alert("ERROR MSG: ADD_ANIMATION not success.");}
+						
+						SYS.DEBUG.LOG('test2')	
+							
+					 }
+					 //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "3") {
+							var resource_list = "";
+							for (var key in RESOURCE) {
+							if (RESOURCE.hasOwnProperty(key) && key != "SUM") {
+								resource_list += "  " + key + ", "; 
+							}
+							}
+							
+						 var local_res = prompt("Full list of images source : \n "+resource_list+"   \n \n Enter name of animation resource object :" , "demo1" );
+						if (isNaN(parseFloat(local_res.charAt(0)))){
+						ADD_ANIMATION( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res  );
+						}else{alert("ERROR MSG: ADD_ANIMATION not success.");}
+						
+						 
+					SYS.DEBUG.LOG('add animation....')	
+					
+					}
+					//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "4") {
+					if (local_go.COLLISION == null) {
+					////////////////////////////
+					// ADD COLLIDER
+					///////////////////////////
+						 var local_res = prompt("Enter outline margin collider." , "1.02" );
+						if (!isNaN(parseFloat(local_res.charAt(0)))){
+						
+						ADD_COLLISION( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res  );
+						local_go.EDITOR.BUTTONS[q].text = "Remove collision";
+						
+						//local_go.REMOVE_COLLISION(local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT);
+					     SYS.DEBUG.LOG('add collider')		
+						}else{alert("ERROR MSG: ADD_COLLISION not success.");}
+					//////////////////////////
+					}
+					else if ( local_go.EDITOR.BUTTONS[q].text == "Remove collision" ) {
+					
+					REMOVE_COLLISION();
+					local_go.COLLISION = null;
+					local_go.EDITOR.BUTTONS[q].text = "Add collision";
+					SYS.DEBUG.LOG('remove collider')		
+					
+					
+					}
+					
+						 
+					
+					
+					}
+					//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "5") {
+					
+					if (typeof PLAYER === 'undefined') {
+					
+						var local_res = prompt("Enter player type : " , "NORMAL" );
+						if (isNaN(parseFloat(local_res.charAt(0)))){
+						CREATE_PLAYER( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res , q);
+						local_go.EDITOR.BUTTONS[q].text = "Deatach player";
+				        SYS.DEBUG.LOG('atach player');
+							
+					
+					  }
+					  
+					  }
+					  else if ( typeof local_go.PLAYER != 'undefined'){
+					  
+					  DEATACH_PLAYER( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT  );
+					  delete(local_go.PLAYER);
+					  delete(PLAYER);
+					  local_go.EDITOR.BUTTONS[q].text = "Atach player";
+					  SYS.DEBUG.LOG('deatach player , also destroy PLAYER global object.');
+					  
+					 }
+					 
+					}
+					//-----------------------------------------------------------------------------
+					//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "6") {
+					
+					if ( local_go.PARTICLE == null) {
+					
+						var local_res = prompt("Enter particle type : " , "FONTAN" );
+						if (isNaN(parseFloat(local_res.charAt(0)))){
+				
+						ADD_PARTICLE( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res );
+						local_go.CREATE_PARTICLE(local_res)
+						local_go.EDITOR.BUTTONS[q].text = "Remove particle";
+						SYS.DEBUG.LOG('atach player');	
+					
+					  }
+					  
+					  }
+					  else if (typeof local_go.PARTICLE != null ){
+					  
+					  REMOVE_PARTICLE( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT  );
+					  local_go.TYPE_OF_GAME_OBJECT="empty";
+					  delete(local_go.PARTICLE);
+					  local_go.PARTICLE = null;
+					  local_go.EDITOR.BUTTONS[q].text = "Add particle";
+					  SYS.DEBUG.LOG('particle removed from ' + local_go.NAME);
+					  
+					 }
+					 
+					}
+					//-----------------------------------------------------------------------------
+					//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "7") {
+					
+							if ( local_go.TEXTBOX == null) {
+					
+						var local_res = prompt("Enter text value : " , "HELLO" );
+						var local_color = prompt("Enter color value : " , "red" );
+						var local_textcolor = prompt("Enter Text color value : " , "black" );
+						var local_radius = prompt("Enter rect radius  value : " , 15 );
+						local_res = "" + local_res.toString();
+						ADD_TEXTBOX( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res ,  local_radius , local_color , local_textcolor);
+						local_go.CREATE_TEXTBOX(local_res , local_radius , local_color ,local_textcolor);
+						local_go.EDITOR.BUTTONS[q].text = "Remove textbox";
+						SYS.DEBUG.LOG('atach textbox');	
+				
+					  
+					  }
+					  else if (typeof local_go.TEXTBOX != null ){
+					  
+					  REMOVE_TEXTBOX( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT  );
+					  local_go.TYPE_OF_GAME_OBJECT="empty";
+					  delete(local_go.TEXTBOX);
+					  local_go.TEXTBOX = null;
+					  local_go.EDITOR.BUTTONS[q].text = "Add textbox";
+					  SYS.DEBUG.LOG('textbox removed from ' + local_go.NAME + " . And .TEXTBOX is :" + local_go.TEXTBOX);
+					  
+					 }
+
+	
+					
+					}
+    				//-----------------------------------------------------------------------------
+								//-----------------------------------------------------------------------------
+					else if (local_go.EDITOR.BUTTONS[q].IAM == "8") {
+					
+							if ( local_go.WEBCAM == null) {
+					
+						var local_res = prompt("Choose NORMAL if you wanna simple webcam view or enter value 'NUI' for motion detect component + webcam view : " , "NORMAL" );
+						
+						if (local_res == "NORMAL") {
+							
+						
+						var local_type_of_dim = prompt("Just press enter to make video with the same dimensions like game_object , any other value set dimensions of webcam video. " , "GAME_OBJECT" );
+						
+						if (local_type_of_dim == "GAME_OBJECT") {
+							
+						local_go.CREATE_WEBCAM(local_res , local_type_of_dim);
+						ADD_WEBCAM( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res ,  local_type_of_dim);
+						
+						local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+						SYS.DEBUG.LOG('atach webcam');								
+						}else {
+							
+							// DIMENSIONS_TYPE = WEBCAM_DIMENSION
+						local_go.CREATE_WEBCAM(local_res , local_type_of_dim);
+						ADD_WEBCAM( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res ,  "WEBCAM_DIMENSION");	
+							
+						local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+						SYS.DEBUG.LOG('atach webcam');		
+						}
+						
+							
+						}else if (local_res == "NUI"){ 
+							
+						
+						
+						var local_type_of_dim = prompt("Just press enter to make video with the same dimensions like game_object , any other value set dimensions of webcam video. " , "GAME_OBJECT" );
+						
+						var detectPointByVer = prompt(" Sum of motion detect point for vertical line, 8 is optimal for max value and 1 is minimum . " , 6 );
+						var detectPointByHor = prompt(" Sum of motion detect point for horizontal line, 8 is optimal for max value and 1 is minimum . " , 6 );
+				
+						if 	(!isNaN(detectPointByVer) && !isNaN(detectPointByHor)  && isNaN(local_type_of_dim) ){
+				
+						local_go.CREATE_WEBCAM(local_res , local_type_of_dim);
+						ADD_WEBCAM( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT , local_res ,  local_type_of_dim , detectPointByVer , detectPointByHor);
+						
+						local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+						SYS.DEBUG.LOG('atach webcam');								
+							
+						}else {
+							
+							SYS.DEBUG.WARNING(" Error in CREATE_WEBCAM procedure Description : type of dimensions must be string , Sum of point must be number.")
+							
+						}
+						 
+						
+							
+						}
+						
+					  }else {
+				
+						  local_go.DESTROY_WEBCAM();
+                          REMOVE_WEBCAM( local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT);
+					  }
+					
+	
+					
+					}
+    				//-----------------------------------------------------------------------------
+					
+					
+					
+					}
+					else {
+					
+					local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = false; 
+					
+					}
+
+				 }
+			  
+		}
+		
+		//################
+	
+		
+		
+		if (  SYS.MOUSE.x > local_go.EDITOR.ACTOR_DRAG_RECT_POS.X()   + local_go.EDITOR.ACTORS_AREA_HEIGHT && SYS.MOUSE.x < local_go.EDITOR.ACTOR_DRAG_RECT_POS.X() +  local_go.EDITOR.ACTOR_DRAG_RECT_DIM.WIDTH() +local_go.EDITOR.ACTORS_AREA_HEIGHT && SYS.MOUSE.y > local_go.EDITOR.ACTOR_DRAG_RECT_POS.Y() +local_go.EDITOR.ACTORS_AREA_HEIGHT   && SYS.MOUSE.y < local_go.EDITOR.ACTOR_DRAG_RECT_POS.Y() +    local_go.EDITOR.ACTOR_DRAG_RECT_DIM.HEIGHT() +local_go.EDITOR.ACTORS_AREA_HEIGHT) {
+			
+			if (SYS.MOUSE.BUTTON_PRESSED == "LEFT") {
+			local_go.EDITOR.ACTOR_DRAG = true;
+			local_go.EDITOR.ACTOR_START_X =  parseFloat(    SYS.MOUSE.x.toFixed(2)  - local_go.POSITION.X()  - local_go.EDITOR.ACTORS_AREA_HEIGHT ); 
+			local_go.EDITOR.ACTOR_START_Y =  parseFloat(    SYS.MOUSE.y.toFixed(2)  - local_go.POSITION.Y()  - local_go.EDITOR.ACTORS_AREA_HEIGHT ); 
+		    }
+			else if (SYS.MOUSE.BUTTON_PRESSED == "RIGHT") {
+			
+			  if (	local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == false ) {
+			  
+			  		for (var w=0;w<local_go.EDITOR.BUTTONS.length;w++){
+
+						local_go.EDITOR.BUTTONS[w].POSITION.x =  SYS.MOUSE.x;
+						local_go.EDITOR.BUTTONS[w].POSITION.y =  SYS.MOUSE.y;
+			  
+					}
+					local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = true;
+					
+			  } 
+			
+			
+			
+			}
+			
+			
+			
+		}
+				
+			
+			// HOVER  ACTORS  
+				 if ( local_go.EDITOR.ACTOR_BLUE_HOVER == true ){
+				 
+				 local_go.EDITOR.ACTOR_X_IN_MOVE = true;
+				 local_go.EDITOR.ACTOR_START_X =  parseFloat(    SYS.MOUSE.x.toFixed(2)  -   local_go.POSITION.X() ); 
+				 
+				 
+				 }
+				 else if (local_go.EDITOR.ACTOR_GREEN_HOVER == true ) {
+				 
+				 local_go.EDITOR.ACTOR_Y_IN_MOVE = true;
+				 local_go.EDITOR.ACTOR_START_Y =  parseFloat(    SYS.MOUSE.y.toFixed(2)  -   local_go.POSITION.Y() ); 
+				 
+				 }
+				
+
+
+
+                           if (selected_something == false){
+						   
+						   local_go.DESELECT_ALL();
+						   
+						   }
+
+				
+			
+			//-------------------------------//-------------------------------//-------------------------------
+			}// end of EDITOR
+			//-------------------------------//-------------------------------//-------------------------------
+				
+				
+				
+				if (selected_something == false && local_go.NAME.indexOf("___VIRTUALKEYBOARD") == -1	) {
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL =  undefined;
+				 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = undefined;
+				}
+			// local_go 
+			
+			}
+			
+			
+		}
+		
+
+		
+		
+			if (ROOT_ENGINE.ENGINE_EDITOR == true ){
+		
+		    
+		
+		    if (ROOT_ENGINE.GUI.VISIBLE == false && selected_something == false  && 	SYS.MOUSE.BUTTON_PRESSED == "RIGHT" ) {
+				
+				  for (var x=0;x<ROOT_ENGINE.GUI.BUTTONS.length;x++){
+					  
+				  ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x =  SYS.MOUSE.x;
+				  ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y =  SYS.MOUSE.y;
+					  
+				  }
+				  
+				 
+				ROOT_ENGINE.GUI.VISIBLE = true;
+				
+			}
+			else if(ROOT_ENGINE.GUI.VISIBLE == true) {
+				
+
+				 for (var x=0;x<ROOT_ENGINE.GUI.BUTTONS.length;x++){
+				
+				    if ( SYS.MOUSE.x > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x    && SYS.MOUSE.x < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x  +  ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() && SYS.MOUSE.y > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y  + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET&& SYS.MOUSE.y < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() ) {
+				 
+					 if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "1") {
+					 
+						// ADD NEW OBJECT
+						var sign_name = prompt("Enter gameObject name :" , "noname" );
+						if (isNaN(parseFloat(sign_name.charAt(0)))){
+						var sign_name2 = prompt("Enter gameObject parent modul :" , "STARTER" );						
+						if (isNaN(parseFloat(sign_name.charAt(0)))){
+
+						ADD( sign_name , 45 , 45, 10, 10 , canvas.id , sign_name2 )
+
+						}else{alert("ERROR MSG: GameObject name created not success.");}
+						}else{alert("ERROR MSG: GameObject name created not success.");}
+						 
+					 }
+					 else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "2") {
+						 	for (var z=0;z<SYS.RUNNING_PROGRAMS.length;z++){
+								window[SYS.RUNNING_PROGRAMS[z]].ENGINE.EXIT_EDIT_MODE();
+							}
+					 }
+					 else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "3") {
+						 	
+						//runtime only 
+						// change draw interval and update
+						var sign_name = prompt("Enter   program DRAW_INTERVAL :" , 15 );
+						if (!isNaN(parseFloat(sign_name))){
+						var sign_name2 = prompt("Enter  program UPDATE_INTERVAL :" , 15 );						
+						if (!isNaN(parseFloat(sign_name2))){
+
+						 SYS.DEBUG.LOG("Program interval now is   " + sign_name + "  . best range is [1 , 70]  ");
+						 
+						 window[ROOT_ENGINE.PROGRAM_ID].DRAW_INTERVAL = parseFloat(sign_name);
+						 window[ROOT_ENGINE.PROGRAM_ID].UPDATE_INTERVAL = parseFloat(sign_name2);
+						 
+						  SET_MAIN_INTERVAL(  ROOT_ENGINE.PROGRAM_ID , sign_name , sign_name2 );
+
+						}else{alert("ERROR MSG: Program interval not success changed.");}
+						}else{alert("ERROR MSG: Program interval not success changed.");}
+						
+							
+					 }
+					 else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "4") {
+						 	
+						
+						if (APPLICATION.ACCOUNT_SERVICE_AUTO_RUN == true){
+						APPLICATION.ACCOUNT_SERVICE_AUTO_RUN = false;
+						ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to true";
+ 
+						}
+						else{
+						APPLICATION.ACCOUNT_SERVICE_AUTO_RUN = true;
+						ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnectt to false";		
+ 
+						}
+						
+						SAVE("Application" , APPLICATION)
+							
+					 }
+					 else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "5") {
+						 	
+						
+						if (APPLICATION.EDITOR_AUTORUN == true){
+						APPLICATION.EDITOR_AUTORUN = false;
+						ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to true";
+ 
+						}
+						else{
+						APPLICATION.EDITOR_AUTORUN = true;
+						ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to false";		
+ 
+						}
+						
+						SAVE("Application" , APPLICATION)
+							
+					 }
+					 
+					 
+					 
+					
+					}
+
+				 }
+				 
+				ROOT_ENGINE.GUI.VISIBLE = false;
+				
+			}
+		
+		
+					//
+			
+				 if(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.VISIBLE == true) {
+				
+				 for (var x=0;x<ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length;x++){
+				
+				    if ( SYS.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x    && SYS.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x  +  ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH() && SYS.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y  + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET&& SYS.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() ) {
+
+
+					ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].TAP()
+					
+					
+					}
+
+				 }
+				 
+				
+			}
+			//
+		
+		
+	        }
+		
+		
+};
+
+
+  
+}
