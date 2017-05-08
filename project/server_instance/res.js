@@ -21,7 +21,10 @@ var mkdirp = require('mkdirp')
 function read(f) {return fs.readFileSync(f).toString();}
 function include(f) {eval.apply(global, [read(f)]);}
 function getDirectories(srcpath) {
+ 
   return fs.readdirSync(srcpath).filter(function(file) {
+
+ 
     return fs.statSync(path.join(srcpath, file)).isDirectory();
   });
 }
@@ -36,21 +39,25 @@ var SUM_OF_IMAGES = 0;
 //##############################################
 function GET_FILES_NAME(path , name_of_animation_path , main_length ){
 fs.readdir(path, function(err, items) {
-
+ 
     for (var i=0; i<items.length; i++) {
 	
 	if (  i == 0 ) {
     FILE_STRING += ' \n RESOURCE.'+name_of_animation_path+'={"source":[';	
 	SUM_OF_IMAGES++;
+	 
 	}
 	 
      
-	 
+	  
+	  
 		FILE_STRING  = " "+ FILE_STRING + "'"+ name_of_animation_path + "/" + items[i] + "' , \n" ;
+		
+		console.log("name_of_animation_path" , name_of_animation_path);
 		
 		if (  (i+1) == items.length  && main_length == false) {
 		
-		//console.log(">>>>>>>>>>>>>>>" , name_of_animation_path);
+		 console.log(">>>>>>>>>>>>>>>" , name_of_animation_path);
 		FILE_STRING += " ] }; \n";  
 		
 		}
@@ -59,7 +66,8 @@ fs.readdir(path, function(err, items) {
 	  
 	    FILE_STRING += " ] }; SYS.DEBUG.LOG('Resources loaded. ' + "+SUM_OF_IMAGES+"); \n  RESOURCE.SUM = "+SUM_OF_IMAGES+"; ";
         CreateFile( APPLICATION.PATH_OF_WWW + "res/animations/resource.nidza"  ,  FILE_STRING );
-		 
+		
+         
 	   }		 
 	   
     }
@@ -72,6 +80,7 @@ fs.readdir(path, function(err, items) {
 console.log(APPLICATION.PATH_OF_WWW);
 var LIST_OFF_ALL_ANIMATION_DIR  =  getDirectories( APPLICATION.PATH_OF_WWW + "res/animations/" );
 //console.log(LIST_OFF_ALL_ANIMATION_DIR);
+
 
 var local__x  =  -1;
   console.log("   ");
@@ -96,7 +105,9 @@ for (var i in LIST_OFF_ALL_ANIMATION_DIR) {
   }
     
 }
-
+ 
+	 CreateFile( APPLICATION.PATH_OF_WWW + "res/animations/resource.list"  ,  LIST_OFF_ALL_ANIMATION_DIR );		
+	 
 function CreateFile(path_ , CONTENT ){
 
 	fs.writeFile(  path_ , CONTENT, function(err) {
