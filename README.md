@@ -1,5 +1,7 @@
 #  Visual-js game engine #
 
+[![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 ![visualjs.png](https://bitbucket.org/repo/xzgbkK/images/102940608-visualjs.png)
 
