@@ -1,8 +1,1452 @@
-/***************************************************************************/
-/*                                                                         */
-/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
-/*  Javascript Obfuscator Free Version can be downloaded here              */
-/*  http://javascriptobfuscator.com                                        */
-/*                                                                         */
-/***************************************************************************/
-eval((function(){var a=[82,66,60,87,79,72,75,71,70,86,94,85,80,74,89,65,90,81,76,88];var y=[];for(var d=0;d<a.length;d++)y[a[d]]=d+1;var v=[];for(var s=0;s<arguments.length;s++){var o=arguments[s].split('~');for(var f=o.length-1;f>=0;f--){var j=null;var l=o[f];var h=null;var p=0;var q=l.length;var r;for(var c=0;c<q;c++){var g=l.charCodeAt(c);var m=y[g];if(m){j=(m-1)*94+l.charCodeAt(c+1)-32;r=c;c++;}else if(g==96){j=94*(a.length-32+l.charCodeAt(c+1))+l.charCodeAt(c+2)-32;r=c;c+=2;}else{continue;}if(h==null)h=[];if(r>p)h.push(l.substring(p,r));h.push(o[j+1]);p=c+1;}if(h!=null){if(p<q)h.push(l.substring(p));o[f]=h.join('');}}v.push(o[0]);}var n=v.join('');var u='abcdefghijklmnopqrstuvwxyz';var i=[39,10,42,92,126,96].concat(a);var x=String.fromCharCode(64);for(var d=0;d<i.length;d++)n=n.split(x+u.charAt(d)).join(String.fromCharCode(i[d]));return n.split(x+'!').join(x);})('var _$_15ea=["BW","___@pI@gT@rBl@mE@u@h@kBfD_","","empty","Rd","RlBasBggIC@yEBo@k_@gENDBLRd_Rl","Rd_@sBggIC@yE","numberBasBNBL@s@yBgoBkMBLNBkMBl_C@kNT@gBp","undefinedBagemove Bjbox","Rl error in constructor : ( Bj , radius , color, BjColor) cant be undefined.Bagemove collisionBoBkMBl","px","video","canvas","BO_B(","B!DIB:","C@rST@kM","whiteBaBYS","limeBaBG","E@Br@uB;BakNBXBasencil BT : save draws faild. @slease give a Bu in argBasencil BT : load draws faild. @slease give a Bu in argBayINES","RV","RV2BahBl@ySB{T@k@s","IN@BrSE","IN@BrSE_@oBk_E@pBLDestroy game@kbject","1","Destroy after secundBm2B3animationBm3B3collisionBm4Bavtach playerBm5RkRPplus.pngB3particleBm6RkRPparticle.pngB3BjboxBm7RkRPBjbox.pngB3webcam Bm8RkRP@lTM@y5-Device-@vccess.png","webcam","B%Bo@rI","canvas-blended","canvas-render","B!N@rI","2dBasleas enter type of webcam componBU [ N@rI , NBkMBl ] BmBV@sEBLlocalhost","peer loaded2Ban@rI_STBfTBLB9","BW_BT_for_BVpeer","enter messagBtblack","18px @vrialB{END_B|_B{END TE@zT MS@n T@k C@r@g@gENT C@l@vNNE@y","BW_BT_for_BVpeer_B|_connect","Connect","DIByT@gIC","sharBtnew_pos","new_dimB{TBfTBLdimension&position","room-namBtyour-namBtcontinuBtlogs!","BVB]_B(","from B9 B&B] -  M@vIN B] B( Bl@gE@vD@u C@gEBzD.","zoom in  ----finished.","zoom out ----finished.Boo atached evBUE@pENT_TB}C@l_D@k@jNBoo atached evBUE@pENTBX : similar clickBoo atached evBUE@pENT_TB}C@l_@r@s","Rl_RdBasBggIC@yE_Rd","#192837B{ignaling I@s @vddressB^NameB^ChannelB^peer logsB^13px @vrialBoame :Basercent :","%  y:Bavctor- x:"," y:","bluBtgreen","red","image_BW_","ready : "];B9 BO_B((c,b,<"i,a,g,d){var f=BbBhc== B00]|| c.iBi@kfB)1])!=  -1){f.@pISI@BsBK;RJ2]+ c]= BbBBRJ2]+ c]= Bb;f.@pISI@BsBK}BJID= parse@oloat(Math.random()@c 4560000+ Math.random()@c 1230000).to@oixed(0)BCsBfENT= bBCs@gRN= dBJNB_cBCv@rT@k_@r@sDBzB7his.@o@kC@rSBDBJR\'R(3]BJEN@rME@g@vTBq= [B03]B#4Rt]B#6]B#7]B#8]B#9]];tRI@kN_BOM@v@s_E@zITBKRZSTBgrSB7his.DBZBKRZSB8z= 0RZSB8u= 0RZDE@yT@v= 0BJzoom_scale= 0BJglobal@vlpha= 1Bh( typeof jRuk)==RORxg==RORCBARq(<"<"g)BBRCBARq(<"<"1)B2RCBARq(10,10,200,200,1)}Bh( typeof iRua)==ROBbR{BADIB:(i,a)RwR{BADIB:(10,10)};RC.parentModul= b;RC.parent@Bu@kbject= c;RC.@s@gRN= d;RCR{= BbR{BJRd= nB?.B&RdRru,v,m,r,n,l,p,o,t,s,q){Bb.RdBARd(u,v,m,r,f,n,l,p,o,t,s,q)BJR\'R(4]R=sBNE@gRrz){fRm= {BQ:z,@z:f.Rq.x,@u:f.Rq.y,S@sEED:1,C@kNT@gBp:{B>BF@yE@oTBF@t@rM@sBFD@k@jN:false},Rq:f.Rq,@h@gE@v@m_@vT_M@kMENT_STBgrS:false};RJ11]]= fRm;RCRm= fRm;RL12]){window[d]B4.BOR<12B6window[d]B4.BOR<13]}};tRK= nB?.BnvC@m_@mE@u= nB?.B&TE@zT@h@k@zRrC,@h,@v,D)<#( typeof C!=RpRu@h!=RpRu@v!=RpRuD!=Rp)){tRKBA@gECT(C,f,@h,@v,D)BJR\'R(5]BJBnvC@m_@mE@uB7RK.TE@zT= C;tRK.TE@zT+= window[Bd@gRN]B4.@mE@u@h@kBfD.C@v@sT@r@gE_C@lBfBCo@kC@rSB7RK.@kNB<_ENBx= RY.B5.@h@rTT@kNS[6].Bj= B015B6S@RMR>16])}};tRI@v@oBxB\\;tRIME_@v@oBx_@z_SEC@rNDRgo,c,j,E){tRI@v@oBx= @o@c 20Bh@v@s@s@yIC@vTBq.B5=BK){DESBnk@u_DEBN(c,@o,BdBfENT,Bd@gRN)B@CBp@yISBqB\\;RC.ST@vTICBDBJCBpIDE@gRgl,@n){Bb.BQ= @l;Rfn==ROBb.margin= @nRw.margin= 1.02B@B&CBp@yISBqRgl,@n){f.CBp@yISBqBAf.CBpIDE@g(@l,@n);f.B5.@h@rTT@kNS[3].Bj= B017]R=o@vCE_DETECTR[.BwR`BP(Rz,Rz);BnvC@m_N@k@j();fR*R[.R9BEleft= RFz(R];f.R9BEtop= (RFu()+ 50R]R_R`B$_BNB}TBEleft= RFz(R]R_R`B$_BNB}TBEtop= (RFu()+ 50R]};f.R9BEopacity= 0.9}BJBwR`BP=RoI){fRjRTf.R9= SR!20RHR`B$_BNB}T= document.getElement@hyIdB)21])BhI=Rs2Be.@RBkNSR<22B6f.@RBkNSR<23]RUl= R#uRnR!20B\')RUj= R#zRnR!20B1)};f.R\'R(24];f.C@rST@kMR^RiStyleRs5];Ri@gect(RFz(),RFu(),100,100)}R=BG=Ro@v,@t){Bb.@BG= RTRxzRDBbR3zRwR3B026]};RfvRDBbR&= @vRwR&Rs7]};RftRDBbR7= @tRwR7= 1};fR:< ReNByRs]ReIDRs];f.R\'R(28];BdR%= {xRSR5;f.@R8BK;f.@R8_BQRrv)<#v=Rs9BeR*= fR*RyE@Br@uB;;Ra@kN_B>_B|B<EDR^}}elR030BeR*= fR*Ry@kN@y@uBX;Ra@kN_B>_B|B<EDR^Iam@sath@Bu@kbject.@R8BD};Ra@kN_@yE@oT_B|B<EDR^R"p<!{xRSR5)BMmRWxBMyRWy;BdR%.x= @m;BdR%.y= @y}}}}ReS@v@pE_BHSRrM){RxMRDvar N=RTN.BI= fR:;N.ID= S@uS.MBgl.@g@vND@kM_INT_@o@g@kM_T@k(1,100000)@c 78ReNB_M;N.NB_M;S@v@pE(N.NBy,N)BBS@RMR>31])}};Rb@k@vD_BIRrM){RxcRDRbRQ= @y@k@vD(M);fR:= RbRQ.BIReNB_RbRQ.NByReID= RbRQ.ID;f.@R8BDBBS@RMR>32])}};fR+RY.@BG.C@yEBfR[R:< };R$BQRrv)<#v=B 3BeR+R$@yINES;fR3<$R026BeR+R$@BYS;fR3<$R034BeR+R$RV;fR3<$R035BeR+R$RV2;fR3<$R036BeR+R$@hBlS;fR3vBBfR+R$@BYS;fR3B026]}}}}}};R$@BYR\\R"fBvR-@g@o.fillStyle= fR&;S@r@g@R.g@o.arc(@k.x,@k.y,fR7,0,2@c Math.@sI);Ri()})};R$RVR^B+R"fBvR-@gRAR&Bh@s== 0B=R.R?R7;B,R@RcR6R2};R$@yINER\\B+R"fBvR-@gRAR&Bhis@kdd(@s)B=R.R?R7;B,R@RcR6R2};R$RV2R^B+R"fBvR-@gRAR&BhisEven(@s)B=R.R?R7;B,R@RcR6R2BMs=0;R"fBvR-@gRAR&Bhis@kdd(@s)B=R.R?R7;B,R@RcR6R2};R$@hBlR\\RiStyle= fR&;R"fBvR-@g@R.g@o.arc(@k.x,@k.y,fR7@c 20,0,2@c Math.@sI);Ri()})};R$BQ();fR*R^if(f.@R8=BK)<#R"BS> 0B[R:[R"BS- 1].x!= Rax){R"p<!{xRSR5)BMmRWxBMyRWy;BdR%.x= @m;BdR%.y= @yB2R"p<!BdR%)}}};fR*Ry@kN@y@uBX= RYR*RyE@Br@uB;R^if(f.@R8=BK)<#R"BS> 0B[R:[R"BS- 1].x!= Rax){R"p<!{xRSR5)BMmRWxBMyRWy;BdR%.x= @m;BdR%.y= @yB2R"p<!BdR%)}}B@BnvNS@yBz_@h@u_BIRgg,@xBRR = @g;BcR IBi= 0;RfxRDBcR @B/ @x;BcR R;RhBBBcR @B/Rh;BcR R;Rh};B*R/R#zRGR B`R B"R#RER B`R IBi].y));RFkN_TBf@nET_RqR^if(BcR R;=RhB[.syR .BS> BcR IBi+ 1BRR IBi++;B*R/R#zRGR B`R B"R#RER B`R R}B.BcR @B/B 8]BRR R; B038];BcR IBi--;BcR IBi--;B*R/R#zRGR B`R B"R#RER B`R R}}}B.BcR R;B 8]B[.syR IBi> 1BRR IBi--;B*R/R#zRGR B`R B"R#RER B`R R}B.BcR @B/B 9]BRR R;Rh;BcR IBi++;B*R/R#zRGR B`R B"R#RER B`R R}B2}}B@B5= {SE@yECTEDBFEN@v@Bs:@lE@y@y@k_@jBk@yDB4B4_B5B-S_BfE@v_@lEI@n@lT:1R|@h@y@rE_@l@k@Br:RR@n@gEEN_@l@k@Br:RRCENBx_@kSCI@yBgk@g: new S@uS.MBgl.@kSCI@y@yBgk@g(0,2,0.01)B-_SB8z:R|SB8u:R|DE@yT@v:R|@z_IN_M@k@pE:RR@u_IN_M@k@pE:RRDBZ_@gECT_DIM: new DIB:(5,5)B-_DBZ_@gECT_@s@kS:RCB-_DBZBF@h@rTT@kNS:[ new B>_MEN@R)[40],Rv1R,N@R)[42],2Rv3R,N@R)[44],4Rv5R,N@R)[46],6Rv7R,N@R)[48],8Rv9Rt0R,N@R)[51],100B#52Rt3R,N@R)[54],120B#55Rt6R,N@R)[57],140B#58Rt9])],BO_B(_MEN@r:{@pISI@Bs:false}};BbRjnB?.BwB!BP=RoI){fRjRTf.R9= SR!60]);BwST@gE@vM(f.R9)BhI=Rs2Be.@RBkNSR<22B6f.@RBkNSR<23]RUl= R#uRnR!60B\')RUj= R#zRnR!60B1)};RL18Be.R\'R(61B6RL62]){SR!63B\'= SR!60B\';SR!63B1= SR!60B1;SR!64B\'= SR!60B\';SR!64B1= SR!60B1;f.R\'R(65]RXBsND_B$= SR!63RH@gENDE@g_B$= SR!64RHN@kTES< }}R=jE@hC@vM=RoI,T,S){RxzRDRL62Be.BwB!BPB)62],I)R_num@oield@p= TR_num@oield@l= SRXhS= f.B%.@BsND_B$.getConBjB)66RH@gC= f.B%.@gENDE@g_B$.getConBjB)66RH_N_BA@vrray();B&M@kTBq_@sBfByBxS(f);B&M@kTBq_@oIE@yDS(f)RXlIDE_INDICBzDB;BDR_BH= B!BH}B.Rz){f.BwB!BP(Rz,I)}B2S@RMR>67])}};tRIB%R[.R\'R(7]R_BH= RY.B%.N@kTES< RXhSB\\RXgCB\\R__N_< ;delete (f.B%);fRjnull}BCkN_B]_C@gEBzD= {"D@kNE":B9(){}R=sEE@gRgr){RfrRDRJ68]].@sBkT= @rBBRJ68]].~s_translate@hy@sath~@uS.D@kM.EB)~fR:.~C@kN@pE@gTBk.@sI@~f.@BG.D@g@v@j_~ENCI@y.@y@vST_@s@kS~.@BG.C@k@y@k@g~T@u@sE_@k@o_BO_~B(= _$_15ea[~r_@h@rTT@kN(_$_15ea~.@kN_@r@sDBz_S@uS~.@BG.D@g@v@j= ~]), new B>_ME~ch(B9(@k){S@r~o.begin@sath();S@r@~I@kN.BnvNS@y@vTE(~se {if(v== B0~R6g~g@o.stroke();@s++})~.@BG.T@u@sE= ~{xRS,~,y:Ray}~To(@k.x,@k.y);S@r@~.@BG.@jIDT@l~BG.@gEC@k@gD~B%.@pIDE@k~.@BG.@s@vT@l~@yoopType@vctive=~_T@u@sE= B0~};this.B&@~v@gNIN@nB)~g@o.line@jidth= f~oveTo(@k.x,@k.y)}~@o.strokeStyle= f~jE@hC@vM.DIMENSI@~this.Rq~!=Rp){~uRG~f.Rq.@~_T@k_@sE@g(Bc~])R_~his.DESBnk@u_~window[B0~his.TE@zT@h@k@z~if(z== B0~uS.DE@h@r@n.@j@~@k@n@g@vM_NBy~= B010]){~m/images/html5/~@k@vDED_BI~falseB-_~:Rax~ new @kbject();~;fR{.@~ST@gI@s_@yINES~=Ra~R_@~B9(){};f~BJD@g@v@n_~R^f~SR^~)+ B019]~Rr){~;f.B%.~BnvC@mIN@n_~S@uS.MB}SE.~f.@BG.@y~;S@r@g@o.line~@vNIM@vTBq~;f.@BG.~Rx@~Rr@~ B037]~S@r@g@o.fill~.B%= ~","res/syste~TE@zT_@h@k@z~.@sBNE@g~_T@k_@sE@g(S~ B9(z,~ B014]~@s@kSITBq~= B9(~= B02~]B#5~&&  typeof ~0B#4~BBthis~if( typeof ~_@gECBkD_~B018]~.DIB:~0B-_~IBi].y))}~= B03~B%_~IBi].x),~,B0~C@vN@p@vS~@jE@hC@vM~C@gEBz_~]).height~@k@h@tECT~(B0~Bd@kSIT~var @s=0;~S@r@g@o.m~,@vCTBk~else <#~yoopType=~_$_15ea[~]).width~}BB~Bavdd ~.EN@nINE~EDITBk~]BB~BK;t~TBfT_@~function~MENSBq~_@BY~_@s@gESS~){S@r@g@~@gI@n@lT~ull;Bb~}}BJ~=  new ~}else {~BJ@~= false~.style.~:false,~sENCI@y~D@g@v@j~@sBgl~;Bb.~= true~E@g","~;var @~@y@v@u~@nBy~@pIE@j~T@u@sE~){Bc~length~object~ent . ~M@vIN_~system~_T@v@s~s@kINT~@g@v@n~)<#f~= null~@sEE@g~ :Bm~By= ~[Bc~","@~this~f.sy~f.@s~]){f~@v@g~@vT@~;if(~ndex~text~@k@g~@v@y~ ","~T@g@~","N~@k@y~I@kN~pE@g~h@yE~e","~name~orEa~SET_~TE@g~@vME~@vTE~","S~@hTN~@k@r~= []~ush(~j,k,~{if(~v}el','@sBBT= 12034}BO typeof RzRs68]].@gEM@kTE_D@vT@v=Rk14]B=MRe= RzRs68]]RN@vDD@gESSRk69]RNBCB\'_RuD= f.BCB\'_RuD;fRH@vDED= Raconsole.logRn70])}BO typeof RGR#R`R#R^R\'RxR+71])=Rk14]){setTimeouBHRu_B\',50);returnR|{if( typeof RGR#R`R#R^R\'RxR+71])B(@k@B%=Rk72]){R|{setTimeouBHRu_B\',50);return}};RGR#R`R#R^R\'RxR+71])B(@k@B%Rn73],5,5,15,8,10);BF@p=RGR#R`R#R^R\'RxR+71]R2.RxRn73]);@pR_jRPj;@p.Ru_RcRn74],10,Rs75],Rs27]);BKRIR?fontRk76];BKRIR?BC@s@gESS_ENB@RYR-77])B$= BKRIR?TE@zT;S@uSB/RF78]);BKRIR?TE@zTRd]RNSEND_MS@n()};RGR#R`R#R^R\'RxR+71])B(@k@B%Rn79],5,5,9,7,10);BF@j=RGR#R`R#R^R\'RxR+71]R2.RxRn79]);@j.Ru_RcRn80],10,Rs75],Rs27]);@j.Rc.fontRk76];@j.Rc.EDIT=B,;@j.T@v@s= Raif(rtR:ssionDescripBM== null){MRe.C@kNNECT_T@k_CB?NNE@y()}};f.BCRo_S@uS= Ra@pRXRLRb.x,RR+ fR_lB>.1,Rs81]);@jRXRLRb.x+ fR_j/ 1.7,RR,Rs81])}RN@gEM@kTE_D@vT@vBJk@B%S:[],SB?@gER[rtR:nd({"shared_objectBE,"operaBM":Rs82]});@z.B\'_SB?@gED= true},SB?@gE_RbR[@zRXB?@gE_Rb= true},NE@j_RbR[rtR:nd({"name@kf@kbjectBE.NBL,"operaBM":Rs83],"xBERW,"yBE.Rb.y})},NE@j_DIMENSI@kNR[rtR:nd({"name@kf@kbjectBE.NBL,"operaBM":Rs84],"xBER_j,"yBER_l})},NET@jBB@m_@pIE@j:Rp@u){ifBSopR<2]){RGR#R`R#R^R\'RxR+85])B(NET@jBB@m_@k@B%BSshared_objectRtifBSopR<3]){RGR#R`R#R^R\'RxR+85])B(NET@jBB@m_Rb(@uRtifBSopR<4]){RGR#R`R#R^R\'RxR+85])B(NET@jBB@m_DIMENSI@kN(@uRtifBSopR<6]){R}RNCB?NNE@yBJnET:Rareturn SR-87])B$},SET:Rp@w){SR-87])B$= @w}};fRHCBA_@rSE@gBJnET:Rareturn SR-88])B$},SET:Rp@w){SR-88])B$= @w}}RNSEND_MS@n= Raif( typeof rtcMultiConnecBM!Rk14]){rtR:nd(SR-77])B$);SR-77])B$Rd]}},f.MRe.C@kNNECT_T@k_CB?NNE@yRYR-89]).onclick()},fRH@nSRf0];f.B.BNR% Rs91];sR9){MRe.BCB\'_RuD.D@kNE()},200RtS@uSB/r@n.@j@v@gNIN@nRn92])}RyRlBJvDD:Rpc){BFbc=Rzf.R8].R\'Rx_M@kD@r@yE(f.B ENTR2.Rx(c)RWB-d=Rzf.R8].R\'Rx_M@kD@r@yE(f.B ENTR2.Rx(c).Rb.yB-a=f.Rl.R;.x- bcB-b=f.Rl.R;.y- bd;BRR6_INITIBAS.push({x:ba,y:bb});BRR6.push(c);delete (bc);delete (bd)},Rl:[],Rl_INITIBAS:[],M@vSB@:f.NBL,R;:{x:fRW,y:RR},Ro:Ra}RyE@o@oECTSBJo@vDE:{INRJbe=sR9){RV+= 0.02BORV@i 1B=E@o@oECTS.@o@vDE.IN(RtRV= 1BPo)},B<TRJbe=sR9){RV-= 0.02BORV> 0B=E@o@oECTS.@o@vDE.B<T(RtRV= 0BPo)BPB2:{ROIN:false,ROB<T:false,@B2_IN_@oINIS@lED:Raconsole.logRn93])},@B2_B<T_@oINIS@lED:Raconsole.logRn94])},@pBA@rE:0.5,INRJ@o=@oB"ROIN= trueB-e=sR9B1.zoom_scale@i fR3@pBA@rEB=zoom_scale+= 0.01;fRXRLRb.x-R\\RR-R\\Rs81]);fR_jRPj+RDR_lRPl+RDR3IN(@oRtfR3@B2_IN_@oINIS@lED();fR3ROIN=B,BPo)},B<TRJ@o=@oB"ROB<T= trueB-e=sR9B1RW@i f.Rl.R;.xB=zoom_scale-= 0.009;fRXRLRb.x+R\\RR+R\\Rs81]);fR_jRPj-RDR_lRPl-RDR3B<T(@oRtf.zoom_scale= 0;fR3@B2_B<T_@oINIS@lED();fR3ROB<T=B,BPo)}}RyB TIC@yE= nullB"Ru_B TIC@yE= RpzB=B TIC@yE=  new B TIC@yE_@o@kNT@vN(f);f.B.BNR% Rs6]RyC@rST@kM=RADESE@yECT_BA@y= RaBFbf=Rs2]+ f.R8.toString();for(BFbg=0;bg@i Rzbf].R\'Rx(f.B ENTR2.length;bg++){Rzbf].R\'Rx(f.B ENTR2[bg].EDIB!SE@yECTED=B,}RyTB<C@l_D@k@jNRY@uSB/RF95])RyT@v@sRY@uSB/RF96])RyTB<C@l_@r@sRY@uSB/RF97])RyTB<C@l_M@k@pE=RARo_ST@vT@rS= {ST@k@s:Ra}RyBGT@vTEBJvN@n@yE:0,@g@vDI@vNS:0,BGT@vTE_@v@g@gB<NT_CENB@:RaBB@hIT(50,50,f.BGT@vTE.@vN@n@yE,f.Rb)}RyDB#= RpbhB1.@pISI@h@yERqbh.save(RBRV;B3s.B.BNR%Rk4Rv@vNR7R|R(R%Rk5RvRc.DB#(bh)R|R(R%Rf8RvRc.DB#(bh)B"@vNR7R|R(R%Rk6Rv@s@v@RER|R(R%Rf9Rv@s@v@REB"@vNR7R|R(R%RfRv@vNR7B"@s@v@RER|R(R%Rk8Rv@vNR7B"Rc.DB#(bh)R|R(R%RfRv@vNR7B"@s@v@RER|R(R%Rk61]){if(Rg.DIMENSI@kNS_B.Rd2])RZR1,f.R.@sRSf.DR*,f.DIR0))R|RZR1,f.R.@sRSR1.width,R1.height)}R|R(R%Rk65]){if(Rg.DIMENSI@kNS_B.Rd2])RZR1,f.R.@sRSf.DR*,f.DIR0))R|RZR1,f.R.@sRSR1.width,R1.height)};blend(f,bh);check@vreas(f);Rg.DB#(bh,Rg)R|R(R%Rd4]B=C@rST@kM(bh)R|R(R%Rd8]B=@sENCI@y.DB#()R|R(R%Rk7]){R|R(R%Rf1]){bR5a[100]RQR,,tR/),B&R*,B&IR0));bR5a[27]B:drawImage(image_BKem_8B8R$B&R*/B0sR&30,90,90)B:drawImage(image_BKem_connB8R$B&R*/ 1.4B8R&30,90,90);R4[101]B5.MRe.@vDD@gESSB8R$thiR B9R)R&thiR R!@c 4);R4[102]B5RHCBA_@rSE@g.@nET()B8R$thiR B9R)R&thiR R!@c 5);R4[103]B5.MRe.CB?NNE@y.@nET()B8R$thiR B9R)R&thiR R!@c 6);R4[104]+ fRH@nSB8R$thiR B9R)R&thiR R!@c 7)R}R}}}B:restore()}RyDB#_@vCTBB= Rpbh){bh.save()B:fontRk105]B:fill@gect(0,tR/),@pIE@j.@j(),1)RQR,,0,1,@pIE@j.@l()RB0.5RQR,,tR/),B&R*,B&IR0)RB0.9B)EDIB!SE@yECTEDRqR4[106]B5.NBLB8R$thiR B9R)RK-BQR R!@c 4);R4[107]+ C@kN@pE@gB!@sI@z_T@k_@sE@g(thR,.toString()).Ri+ Rs108]+ C@kN@pE@gB!@sI@u_T@k_@sE@g(tR/)).RiB8R$thiR B9R)RK-BQR R!@c 2.5);R4[109]+ thR,.Ri.toString()+ Rs110]+ tR/).RiB8R$thiR B9R)RK-BQR R!)}B:B7StyleRk111]B:B7@gectBIR RT@s@kS.@z()+BQR R!BDR RT@s@kS.@u()+BQR R!BDR RTDIM.@jIDT@l()BDR RTDIM.@lEI@n@lT());B3R _@h@y@rE_@l@B6RqbR5a[27]R|{bR5a[111]}RQR,,tR/)BDR R!B>5BDR R!)B:beR]moveToBIsR$thiR R!B>0B+,tR/)- 0.5B*R R!)RUR$thiR R!B>0B+B8R&1.4B*R R!)RUR$thiR R!B>2.5B+B8R&1/ 2B*R R!);R@fill();B3R _@n@gEEN_@l@B6RqbR5a[27]R|{bR5a[112]}RQR,,tR/)BDR R!BDR R!B>5)B:beR]moveTo(thR,- 0.5B*R B9R)R&thiR R!B>0B+)RUR$1.4B*R B9R)R&thiR R!B>0B+)RUR$1/ 2B*R B9R)R&thiR R!B>2.5B+);R@fill();bR5a[113]B:beR]arcBIsR$thiR R!/B0sR&thiR R!/B0R R!/ 2,(0)Rj,(2)Rj)B:fill();R@beR]line@jidth= 1B:B7StyleRd5]B:arcBIsR$thiR R!/B0sR&thiR R!/B0R R!,BIR _CENB@_@kSCI@y@vB!Ro()+ 0.1)Rj,BIR _CENB@_@kSCI@y@vB!Ro()- 0.1)Rj)B:B7();R@restore()B)EDIB!@nBLBNB%_MEN@r.@pISI@h@yERqfor(BFj=0;j@i f.R".length;j++){bh.save(RB1B)R"B;@l@B6==B,){bhR=RCRM@gecBHR"B;R.R"[j]RK,f.R"B;DR*,f.R"B4R0));bhR=RCTE@zT_RMTexBHR"B;text,f.R"B;R.R"[j]R&f.R"B4R0)/ 2,f.R"B;DR*RtbhR=RC@l@B6_RM@gecBHR"B;R.R"[j]RK,f.R"B;DR*,f.R"B4R0));bhR=RCTE@zT_RMTexBHR"B;text,f.R"B;R.R"[j]R&f.R"B4R0)/ 2,f.R"B;DR*)B)R"B;iconRqtryRZRzRs114]+ f.R"B;I@vM],f.R"[j]R$f.R"B;DR*- 30,f.R"[j]RK- 5,30,30)}catch(e){}}}B:restore()BORg!= null){}}}RyBCRo=RABCRo_S@uS=RARo= RaB3s.@v@rT@k_RoRqf.Rb.Ro()}B)EDIB!EN@v@h@yE==B,B1.DESTBG@u_@v@oB@!= nullB1.DESTBG@u_@v@oB@> 0B=DESTBG@u_@v@oB@--}}}B)@nR6.length> 0){for(BFbh=0;bh@i BRR6.length;bh++){Rzf.R8].R\'Rx(f.B ENTR2.Rx(BRR6[bh])RW= fRW- BRR6_INITIBAS[bh].x;Rzf.R8].R\'Rx(f.@s~s.EDIB!@vCT@k@g~B9gE@v_@lEI@n@lT~EDIB!@h@rTT@kNS~IN@n_@sBG@n@g@vMS~.Rb.@z()+ ~o_@n@vME_@k@B%=~RK+ ~EN@nINE.M@kD@r@yES.~{if(this.B._@k@~gE@v_@lEI@n@lTB8~IMENSI@kN.@jIDT@l()~_M@kD@r@yERn~is.Rb.@z()~@uS.D@kM.ERn~Rb.@z(),f.~his.Rb.@u(~MENSI@kN.@lEI@n@lT(~Rg.@pIDE@k~).@n@vME_@k@B%S~.E@o@oECTS.@B2.~bh.fillText(_$_15ea~h.fillStyle= _$_15e~@g@k@r@s.Rl~IM@vTI@kN.DB#()~@sBG@n@g@vM_N@vME~etTimeout(Rp~cMultiConnecBM.se~M@vSB@_INITI@v@yS~eration=Rk8~.fillStyle= @v@s@s@~RIN~N_peer.Rc.~bh.close@sath()B:~ Ra};this.~)B:global@vlpha= ~yIC@vTI@kN.S@uSTEM.~ f.zoom_scale@c 2;f~gTIC@yE.DB#(bh)~r@n.@y@k@nRn~windowR`~.MRe.@y@k~em_object_for_M@vI~:Rp@o){var ~.Rb.@u()~ET_Rb(f.~C@k@y@k@gB:fill~;f.MRe.~ST@vT@rS_@oBB_~= fR_~B:fill@gect(th~f.Rb.y~@kSITI@kN.@u(),~_D@g@v@n_@gECT_~B:lineTo(this~f.global@vlpha~.Rb.x~.Rb.S~= RaS~{bh.drawImage(~:Rp@z){~ f.zoom_scale,~gin@sath()B:~.length- 1]].~.DIMENSI@kN.@~[S@uS.@g@rNN~Rp){~@s@kSITI@kN~TE@zT@h@k@z~Rk2~@vIN_B\'~Rk9~f.@jE@hC@vM~Rm}~to@oixed(2)~@c Math.@sI~= Rs~@n@gB<@s~Rr}~(Rs~@r@sD@vTE~funcBM(~== true){~Rw}~_$_15ea[~)R|{~C@gE@vTE~]){this.~R{}~@vCCESS~}B"~window[~R}}~}else ~}}}}}}~@s@v@g~TBB.~;this.~@g@v@j~.value~h@tECT~this.D~@sEE@g~.NE@j_~BOf.~@cBQ~B>.5~ false~;BFb~T@u@sE~.DE@h@~ 2BD~){if(f~w@k@kM~ifBI~B;DI~+BQs~k@pE@g~stroke~BDs~S_@v@~;bh.~[j].~@k@r~){f.~@c 1~@l@v~TE@g~@v@y~@k@g~@kN_~,thi~":@z~var ~@g@k~t(f.~(thi~= {@~syst~@vME~tion~_@k@~;if(~}},@~ thi~f.@n~(@u.','@v@gENT).R"R!S.@vCCESS(fR R [bh]).@s@kSR&kN.y= R#kSR&kN.y- fR R _INR&v@yS[bh].y}};if(f.DESTR$u_@kN_R"M@v@s_E@zIT== true&& R#kSR&kN.@u()@i window[R#g@k@n@g@vM_R%].M@v@s.@r@s()){window[R#g@k@n@g@vM_R%].EN@nINE.M@kD@r@yES.@vCCESS_M@kD@r@yE(R#v@gENT).DESTR$uR!(f.R%)};f.@kN_@r@sD@vTE();f.@kN_@r@sD@vTE_S@uS()};this.R"R!_@gE@vD@u= function(){S@uS.DE@h@r@n.@y@k@n(_$_15ea[115]+ f.R%)};setTimeout(f.R"R!_@gE@vD@u,15)}~.@nR$r@s~_@k@h@tECT~@n@vME~f.@s@~@g@k@~N@vME~ITI@'));
+/**
+Copyright 2016, zlatnaspirala@gmail.com
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+ * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+ * Neither the name of zlatnaspirala@gmail.com nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+Constructor
+GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
+Type : Class
+
+Program create instance of this class  from  class modul :
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
+
+ */
+
+function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
+
+	var ROOT_GAME_OBJECT = this;
+
+	//alias global access
+	if (name == "system" || name.indexOf("___VIRTUALKEYBOARD_") != -1) {
+
+		ROOT_GAME_OBJECT.VISIBLE = true;
+		window["" + name] = this;
+	} else {
+
+		window["" + name] = this;
+		ROOT_GAME_OBJECT.VISIBLE = true;
+
+	}
+
+	this.ID = parseFloat(Math.random() * 4560000 + Math.random() * 1230000).toFixed(0);
+	this.PARENT = modul;
+	this.PROGRAM_NAME = PROGRAM_NAME;
+	this.NAME = name;
+
+	this.AUTO_UPDATE = true;
+	this.FOCUS = false; // similar SELECTED but for runtime mode only
+	this.TYPE_OF_GAME_OBJECT = "empty";
+	this.ENUMERATION = ["empty", "ANIMATION", "TEXT_BOX", "PATRICLE", "NO_RENDER", "ANIMATION_TEXT_BOX", "ANIMATION_PATRICLE"];
+	this.DESTROY_ON_GAMEMAP_EXIT = true;
+	this.DRAG_STATUS = true;
+	this.DRAG = true;
+	this.DRAG_START_X = 0;
+	this.DRAG_START_Y = 0;
+	this.DRAG_DELTA = 0;
+
+	this.zoom_scale = 0;
+	this.globalAlpha = 1;
+
+	if ((typeof x && typeof y) === "number") {
+
+		if (typeof speed === "number") {
+
+			this.POSITION = new POSITION(x, y, x, y, speed);
+
+		} else {
+
+			this.POSITION = new POSITION(x, y, x, y, 1);
+
+		}
+
+	} else {
+		this.POSITION = new POSITION(10, 10, 200, 200, 1);
+	}
+
+	if ((typeof w && typeof h) === "number") {
+
+		this.DIMENSION = new DIMENSION(w, h);
+
+	} else {
+
+		this.DIMENSION = new DIMENSION(10, 10);
+
+	}
+
+	//this.ON_TARGET_POSITION = function(){};
+	this.POSITION.parentModul = modul;
+	this.POSITION.parentGameObject = name;
+	this.POSITION.PROGRAM_NAME = PROGRAM_NAME;
+	this.POSITION.DIMENSION = this.DIMENSION;
+	//this.POSITION.ON_TARGET_POSITION = this.ON_TARGET_POSITION;
+
+
+	this.ANIMATION = null;
+	this.CREATE_ANIMATION = function (surf, TYPE_, FrameIndex, source, ID, blink_, min_, max_, step, speed_, opacity_) {
+
+	
+	
+	
+		this.ANIMATION = new ANIMATION(surf, TYPE_, FrameIndex, source, ROOT_GAME_OBJECT, ID, blink_, min_, max_, step, speed_, opacity_);
+		this.TYPE_OF_GAME_OBJECT = "ANIMATION";
+		//SYS.DEBUG.LOG("images added in memory.... ID " + ID);
+
+	};
+
+	this.CREATE_PLAYER = function (type_) {
+
+		ROOT_GAME_OBJECT.PLAYER = {
+
+			TYPE: type_,
+			X: ROOT_GAME_OBJECT.POSITION.x, // for platform
+			Y: ROOT_GAME_OBJECT.POSITION.y,
+			SPEED: 1,
+			CONTROL: {
+				RIGHT: false,
+				LEFT: false,
+				JUMP: false,
+				DOWN: false,
+			},
+			POSITION: ROOT_GAME_OBJECT.POSITION,
+			BREAK_AT_MOMENT_STATUS: false,
+
+		};
+		window["PLAYER"] = ROOT_GAME_OBJECT.PLAYER;
+		this.POSITION.PLAYER = ROOT_GAME_OBJECT.PLAYER;
+
+		if (type_ == "PLATFORMER") {
+
+			window[PROGRAM_NAME].ENGINE.GAME_TYPE = "PLATFORMER";
+			//ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
+			//ROOT_GAME_OBJECT.POSITION.SET_POSITION(45,45, "DIAMETRIC");
+
+		} else {
+
+			window[PROGRAM_NAME].ENGINE.GAME_TYPE = "NORMAL_CONTROL";
+			//ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
+
+		}
+
+	};
+
+	this.TEXTBOX = null;
+	this.TRACK_KEY = null;
+	this.CREATE_TEXTBOX = function (text, radius, color, textColor) {
+
+		if ((typeof text != "undefined" && typeof radius != "undefined" && typeof color != "undefined" && typeof textColor != "undefined")) {
+
+			this.TEXTBOX = new RECT(text, ROOT_GAME_OBJECT, radius, color, textColor);
+			this.TYPE_OF_GAME_OBJECT = "TEXT_BOX";
+			this.TRACK_KEY = true;
+			this.TEXTBOX.TEXT = text;
+			this.TEXTBOX.TEXT += window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.KEYBOARD.CAPTURE_CHAR;
+			this.FOCUS = true;
+			this.TEXTBOX.ON_PRESS_ENTER = function () {};
+			ROOT_GAME_OBJECT.EDITOR.BUTTONS[6].text = "Remove textbox";
+
+		} else {
+
+			SYS.DEBUG.WARNING("TEXT_BOX error in constructor : ( text , radius , color, textColor) cant be undefined.");
+
+		}
+	};
+
+	this.DESTROY_AFTER = null;
+	this.DESTROY_ME_AFTER_X_SECUND = function (sec, name, x, ROOT_EVENTS) {
+
+		this.DESTROY_AFTER = sec * 20;
+		if (APPLICATION.EDITOR == true) {
+			DESTROY_DELAY(name, sec, ROOT_GAME_OBJECT.PARENT, ROOT_GAME_OBJECT.PROGRAM_NAME);
+		}
+
+	};
+
+	this.COLLISION = null;
+	this.POSITION.STATIC = false;
+	this.COLIDER = function (type__, margin) {
+
+		this.TYPE = type__;
+
+		if (typeof margin === "number") {
+			this.margin = margin;
+
+		} else {
+
+			this.margin = 1.02;
+
+		}
+
+	};
+
+	this.CREATE_COLLISION = function (type__, margin) {
+
+		ROOT_GAME_OBJECT.COLLISION = new ROOT_GAME_OBJECT.COLIDER(type__, margin);
+		ROOT_GAME_OBJECT.EDITOR.BUTTONS[3].text = "Remove collision";
+
+	};
+
+	this.ON_COLLISION = function (name_) {};
+
+	// face detect tracking.js
+	this.CREATE_FACE_DETECT = function () {
+
+		ROOT_GAME_OBJECT.SET_TRACKING_VIEW("NORMAL", "NORMAL");
+		TRACK_NOW();
+
+		ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+
+			ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.left = ROOT_GAME_OBJECT.POSITION.X() + "px";
+			ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.top = (ROOT_GAME_OBJECT.POSITION.Y() + 50) + "px";
+
+			ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT.style.left = ROOT_GAME_OBJECT.POSITION.X() + "px";
+			ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT.style.top = (ROOT_GAME_OBJECT.POSITION.Y() + 50) + "px";
+
+		};
+
+		ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.opacity = 0.9;
+
+	};
+
+	this.SET_TRACKING_VIEW = function (type_, DIMENSIONS_TYPE) {
+		// just webcam view
+		ROOT_GAME_OBJECT.WEBCAM = new Object();
+		ROOT_GAME_OBJECT.WEBCAM.VIDEO = SYS.DOM.E("video");
+		ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT = document.getElementById("canvas");
+		// SET_STREAM(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
+
+		if (DIMENSIONS_TYPE == "GAME_OBJECT") {
+
+			ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
+		} else {
+
+			ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
+			ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(SYS.DOM.E("video").height);
+			ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(SYS.DOM.E("video").width);
+
+		}
+
+		ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "CUSTOM";
+
+		ROOT_GAME_OBJECT.CUSTOM = function () {
+
+			SURF.fillStyle = "white";
+			SURF.fillRect(ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), 100, 100);
+
+		};
+
+	};
+
+	// DRAW PATH
+	this.CREATE_PENCIL = function (type_, color, width) {
+
+		this.PENCIL = new Object();
+
+		if (typeof type_ != "undefined") {
+			this.PENCIL.TYPE = type_;
+		} else {
+			this.PENCIL.TYPE = "POINTS";
+		}
+
+		if (typeof color != "undefined") {
+			this.PENCIL.COLOR = color;
+		} else {
+			this.PENCIL.COLOR = "lime";
+		}
+
+		if (typeof width != "undefined") {
+			this.PENCIL.WIDTH = width;
+		} else {
+			this.PENCIL.WIDTH = 1;
+		}
+
+		ROOT_GAME_OBJECT.PENCIL.PATH = [];
+		ROOT_GAME_OBJECT.PENCIL.NAME = "";
+		ROOT_GAME_OBJECT.PENCIL.ID = "";
+		//draw
+		ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "PENCIL";
+		ROOT_GAME_OBJECT.PENCIL.LAST_POS = {
+			x: SYS.MOUSE.x,
+			y: SYS.MOUSE.y
+		};
+
+		// TRANSLATE_BY_PATH
+
+
+		ROOT_GAME_OBJECT.PENCIL.RECORD = true;
+
+		ROOT_GAME_OBJECT.PENCIL.RECORD_TYPE = function (TYPE_) {
+			if (TYPE_ == "EVERY_POINT") {
+
+				ROOT_GAME_OBJECT.ON_UPDATE_SYS = ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_EVERY_POINT;
+
+				SYS.MOUSE.ON_RIGHT_BTN_PRESSED = function () {};
+
+			} else if (TYPE_ == "ON_TAP") {
+
+				ROOT_GAME_OBJECT.ON_UPDATE_SYS = ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_ONLY_TAP; //clear colector
+				//collector on tap
+				SYS.MOUSE.ON_RIGHT_BTN_PRESSED = function () {
+
+					IamPathGameObject.PENCIL.RECORD = false;
+
+				};
+
+				SYS.MOUSE.ON_LEFT_BTN_PRESSED = function () {
+
+					ROOT_GAME_OBJECT.PENCIL.PATH.push({
+						x: SYS.MOUSE.x,
+						y: SYS.MOUSE.y
+					});
+
+					var XX = SYS.MOUSE.x;
+					var YY = SYS.MOUSE.y;
+					ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+					ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+
+				};
+
+			}
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.SAVE_DRAWS = function (name_) {
+
+			if (typeof name_ != "undefined") {
+
+				var PATH_FOR_PENCIL = new Object();
+				PATH_FOR_PENCIL.PATH = ROOT_GAME_OBJECT.PENCIL.PATH;
+				PATH_FOR_PENCIL.ID = SYS.MATH.RANDOM_INT_FROM_TO(1, 100000) * 78;
+				ROOT_GAME_OBJECT.PENCIL.NAME = name_;
+				PATH_FOR_PENCIL.NAME = name_;
+				SAVE(PATH_FOR_PENCIL.NAME, PATH_FOR_PENCIL);
+
+			} else {
+
+				SYS.DEBUG.WARNING("Pencil object : save draws faild. Please give a name in arg");
+
+			}
+
+		};
+		ROOT_GAME_OBJECT.PENCIL.LOAD_PATH = function (name_) {
+
+			if (typeof name != "undefined") {
+
+				ROOT_GAME_OBJECT.PENCIL.LOADED_PATH = LOAD(name_);
+				ROOT_GAME_OBJECT.PENCIL.PATH = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.PATH;
+				ROOT_GAME_OBJECT.PENCIL.NAME = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.NAME;
+				ROOT_GAME_OBJECT.PENCIL.ID = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.ID;
+				// ROOT_GAME_OBJECT.PENCIL.LOADED_PATH = null;
+				ROOT_GAME_OBJECT.PENCIL.RECORD = false;
+
+			} else {
+
+				SYS.DEBUG.WARNING("Pencil object : load draws faild. Please give a name in arg");
+
+			}
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW = function () {};
+
+		ROOT_GAME_OBJECT.PENCIL.CLEAR = function () {
+			ROOT_GAME_OBJECT.PENCIL.PATH = [];
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW_TYPE = function (TYPE_) {
+
+			if (TYPE_ == "LINES") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_LINES;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+			} else if (TYPE_ == "POINTS") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+			} else if (TYPE_ == "STRIP_LINES") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+			} else if (TYPE_ == "STRIP_LINES2") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES2;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+			} else if (TYPE_ == "BALLS") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_BALS;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+			} else {
+
+				ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS;
+				ROOT_GAME_OBJECT.PENCIL.TYPE = "POINTS";
+			}
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS = function () {
+
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+
+				SURF.fillStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+				SURF.beginPath();
+				SURF.arc(value_.x, value_.y, ROOT_GAME_OBJECT.PENCIL.WIDTH, 0, 2 * Math.PI);
+				SURF.fill();
+
+			});
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES = function () {
+
+			var a = 0;
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+
+				SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+				//SURF.beginPath();
+				//SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+				if (a == 0) {
+					SURF.beginPath();
+					SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+					SURF.moveTo(value_.x, value_.y);
+				}
+
+				SURF.lineTo(value_.x, value_.y);
+
+				SURF.stroke();
+				a++;
+
+			});
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW_LINES = function () {
+
+			var a = 0;
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+
+				SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+				//SURF.beginPath();
+				//SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+				if (isOdd(a)) {
+					SURF.beginPath();
+					SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+					SURF.moveTo(value_.x, value_.y);
+				}
+
+				SURF.lineTo(value_.x, value_.y);
+
+				SURF.stroke();
+				a++;
+
+			});
+
+		};
+		//
+		ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES2 = function () {
+
+			var a = 0;
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+
+				SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+				//SURF.beginPath();
+				//SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+				if (isEven(a)) {
+					SURF.beginPath();
+					SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+					SURF.moveTo(value_.x, value_.y);
+				}
+
+				//SURF.lineTo(value_.x,value_.y);
+				//SURF.stroke();
+
+				SURF.lineTo(value_.x, value_.y);
+				SURF.stroke();
+
+				a++;
+
+			});
+
+			var a = 0;
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+
+				SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+				//SURF.beginPath();
+				//SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+				if (isOdd(a)) {
+					SURF.beginPath();
+					SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+					SURF.moveTo(value_.x, value_.y);
+				}
+
+				SURF.lineTo(value_.x, value_.y);
+				SURF.stroke();
+
+				a++;
+
+			});
+
+		};
+		//
+		ROOT_GAME_OBJECT.PENCIL.DRAW_BALS = function () {
+
+			SURF.fillStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+			ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+				SURF.beginPath();
+				SURF.arc(value_.x, value_.y, ROOT_GAME_OBJECT.PENCIL.WIDTH * 20, 0, 2 * Math.PI);
+				SURF.fill();
+			});
+
+		};
+
+		ROOT_GAME_OBJECT.PENCIL.DRAW_TYPE();
+
+		//#############################
+		//#############################
+		ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+
+			if (ROOT_GAME_OBJECT.PENCIL.RECORD == true) {
+				if (ROOT_GAME_OBJECT.PENCIL.PATH.length > 0) {
+					if (ROOT_GAME_OBJECT.PENCIL.PATH[ROOT_GAME_OBJECT.PENCIL.PATH.length - 1].x != SYS.MOUSE.x) {
+
+						ROOT_GAME_OBJECT.PENCIL.PATH.push({
+							x: SYS.MOUSE.x,
+							y: SYS.MOUSE.y
+						});
+
+						var XX = SYS.MOUSE.x;
+						var YY = SYS.MOUSE.y;
+						ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+						ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+
+					}
+				} else {
+
+					ROOT_GAME_OBJECT.PENCIL.PATH.push(ROOT_GAME_OBJECT.PENCIL.LAST_POS);
+
+				}
+
+			}
+		};
+
+		ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_ONLY_TAP = function () {};
+		ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_EVERY_POINT = function () {
+
+			if (ROOT_GAME_OBJECT.PENCIL.RECORD == true) {
+				if (ROOT_GAME_OBJECT.PENCIL.PATH.length > 0) {
+					if (ROOT_GAME_OBJECT.PENCIL.PATH[ROOT_GAME_OBJECT.PENCIL.PATH.length - 1].x != SYS.MOUSE.x) {
+
+						ROOT_GAME_OBJECT.PENCIL.PATH.push({
+							x: SYS.MOUSE.x,
+							y: SYS.MOUSE.y
+						});
+
+						var XX = SYS.MOUSE.x;
+						var YY = SYS.MOUSE.y;
+						ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+						ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+
+					}
+				} else {
+
+					ROOT_GAME_OBJECT.PENCIL.PATH.push(ROOT_GAME_OBJECT.PENCIL.LAST_POS);
+
+				}
+
+			}
+		};
+		//#############################
+		//#############################
+
+
+	};
+
+	this.TRANSLATE_BY_PATH = function (PATH_, LOOP_TYPE) {
+
+		ROOT_GAME_OBJECT.sys_translateByPath = PATH_;
+		ROOT_GAME_OBJECT.sys_translateByPathIndex = 0;
+		if (typeof LOOP_TYPE != "undefined") {
+
+			ROOT_GAME_OBJECT.sys_translateByPathLoopType = LOOP_TYPE;
+			ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+
+		} else {
+
+			ROOT_GAME_OBJECT.sys_translateByPathLoopType = "STOP";
+			ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+
+		}
+
+		ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+
+		ROOT_GAME_OBJECT.POSITION.ON_TARGET_POSITION = function () {
+
+			if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "STOP") {
+				if (ROOT_GAME_OBJECT.sys_translateByPath.length > ROOT_GAME_OBJECT.sys_translateByPathIndex + 1) {
+					ROOT_GAME_OBJECT.sys_translateByPathIndex++;
+					ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+				} else {
+
+					if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE") {
+						ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "INVERSE";
+						ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+						ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+						ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+
+					}
+				}
+			} else if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "INVERSE") {
+				if (ROOT_GAME_OBJECT.sys_translateByPathIndex > 1) {
+					ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+					ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+				} else {
+
+					if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE_FOR_EVER") {
+						ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+
+						ROOT_GAME_OBJECT.sys_translateByPathIndex++;
+						ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+
+					}
+
+				}
+			} else {
+
+				/* 	 if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "STOP") {
+
+
+                }
+                else if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE"){
+
+                ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "INVERSE";
+
+                }
+                else if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE_FOR_EVER"){
+
+                ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+                }
+                 */
+			}
+
+		};
+
+	};
+
+	this.EDITOR = {
+
+		SELECTED: false,
+		ENABLE: HELLO_WORLD.ENGINE.ENGINE_EDITOR,
+		ACTORS_VISIBLE: true,
+		ACTORS_AREA_HEIGHT: 10,
+		ACTOR_BLUE_HOVER: false,
+		ACTOR_GREEN_HOVER: false,
+		ACTOR_CENTER_OSCILATOR: new SYS.MATH.OSCILLATOR(0, 2, 0.01),
+		ACTOR_START_X: 0,
+		ACTOR_START_Y: 0,
+		ACTOR_DELTA: 0,
+		ACTOR_X_IN_MOVE: false,
+		ACTOR_Y_IN_MOVE: false,
+		ACTOR_DRAG_RECT_DIM: new DIMENSION(5, 5),
+		//ACTOR_DRAG_RECT_POS : SYS.ARRAY_OPERATION.DEEP_COPY.getCloneOfObject( this.POSITION ) ,
+		ACTOR_DRAG_RECT_POS: this.POSITION,
+		ACTOR_DRAG: false,
+		BUTTONS: [
+			new RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"),
+			new RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"),
+			new RIGHT_MENU_BUTTON("Add animation ", 40, "3"),
+			new RIGHT_MENU_BUTTON("Add collision ", 60, "4"),
+			new RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"),
+			new RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"),
+			new RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"),
+			new RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png"),
+		],
+		GAME_OBJECT_MENU: {
+			VISIBLE: false,
+		},
+	};
+
+	this.WEBCAM = null;
+	this.SET_WEBCAM_VIEW = function (type_, DIMENSIONS_TYPE) {
+		// just webcam view
+		ROOT_GAME_OBJECT.WEBCAM = new Object();
+		ROOT_GAME_OBJECT.WEBCAM.VIDEO = SYS.DOM.E("webcam");
+		SET_STREAM(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
+
+		if (DIMENSIONS_TYPE == "GAME_OBJECT") {
+
+			ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
+		} else {
+
+			ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
+			ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(SYS.DOM.E("webcam").height);
+			ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(SYS.DOM.E("webcam").width);
+
+		}
+
+		if (type_ == "NORMAL") {
+			ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "WEBCAM";
+		} else if (type_ == "NUI") {
+
+			SYS.DOM.E("canvas-blended").height = SYS.DOM.E("webcam").height;
+			SYS.DOM.E("canvas-blended").width = SYS.DOM.E("webcam").width;
+			SYS.DOM.E("canvas-render").height = SYS.DOM.E("webcam").height;
+			SYS.DOM.E("canvas-render").width = SYS.DOM.E("webcam").width;
+			ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "WEBCAM_NUI";
+			ROOT_GAME_OBJECT.WEBCAM.BLEND_CANVAS = SYS.DOM.E("canvas-blended");
+			ROOT_GAME_OBJECT.WEBCAM.RENDER_CANVAS = SYS.DOM.E("canvas-render");
+			ROOT_GAME_OBJECT.WEBCAM.NOTES = [];
+		}
+	};
+	this.CREATE_WEBCAM = function (type_, DIMENSIONS_TYPE, numFieldV, numFieldH) {
+
+		if (typeof type_ != "undefined") {
+
+			if (type_ == "NUI") {
+
+				ROOT_GAME_OBJECT.SET_WEBCAM_VIEW("NUI", DIMENSIONS_TYPE);
+				ROOT_GAME_OBJECT.WEBCAM.numFieldV = numFieldV;
+				ROOT_GAME_OBJECT.WEBCAM.numFieldH = numFieldH;
+				ROOT_GAME_OBJECT.WEBCAM.BS = ROOT_GAME_OBJECT.WEBCAM.BLEND_CANVAS.getContext("2d");
+				ROOT_GAME_OBJECT.WEBCAM.RC = ROOT_GAME_OBJECT.WEBCAM.RENDER_CANVAS.getContext("2d");
+				ROOT_GAME_OBJECT.WEBCAM._N_ = new Array();
+				CREATE_MOTION_PARAMETERS(ROOT_GAME_OBJECT);
+				CREATE_MOTION_FIELDS(ROOT_GAME_OBJECT);
+				ROOT_GAME_OBJECT.WEBCAM.HIDE_INDICATED_POINT = false;
+				ROOT_GAME_OBJECT.WEBCAM.DRAW = WEBCAM_DRAW;
+			} else if ("NORMAL") {
+
+				ROOT_GAME_OBJECT.SET_WEBCAM_VIEW("NORMAL", DIMENSIONS_TYPE);
+
+			}
+		} else {
+			SYS.DEBUG.WARNING("Pleas enter type of webcam component .  [ NUI , NORMAL ]  ");
+		}
+	};
+
+	this.DESTROY_WEBCAM = function () {
+
+		ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "NO_RENDER";
+		ROOT_GAME_OBJECT.WEBCAM.DRAW = function () {};
+		ROOT_GAME_OBJECT.WEBCAM.NOTES = [];
+		ROOT_GAME_OBJECT.WEBCAM.BS = null;
+		ROOT_GAME_OBJECT.WEBCAM.RC = null;
+		ROOT_GAME_OBJECT.WEBCAM._N_ = [];
+		delete (ROOT_GAME_OBJECT.WEBCAM);
+		ROOT_GAME_OBJECT.WEBCAM = null;
+
+	};
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	// MUTIRTC_PEER
+
+	this.ON_PEER_CREATED = {
+		"DONE": function () {} /* MAIN_PEER.CHANNEL.SET('LEVEL1') }  */
+	};
+
+	this.CREATE_PEER = function (port) {
+
+		if (typeof port != "undefined") {
+			window["MAIN_PEER"].PORT = port;
+		} else {
+			window["MAIN_PEER"].PORT = 12034;
+		}
+
+		if (typeof window["MAIN_PEER"].REMOTE_DATA == "undefined") {
+
+			ROOT_GAME_OBJECT.MAIN_PEER = window["MAIN_PEER"];
+			ROOT_GAME_OBJECT.MAIN_PEER.ADDRESS = "localhost";
+			ROOT_GAME_OBJECT.MAIN_PEER.ON_PEER_CREATED = ROOT_GAME_OBJECT.ON_PEER_CREATED;
+			ROOT_GAME_OBJECT.MAIN_PEER.LOADED = function () {
+
+				console.log("peer loaded2");
+
+			};
+
+			if (typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER") == "undefined") {
+
+				setTimeout(ROOT_GAME_OBJECT.CREATE_PEER, 50);
+				return;
+
+			} else {
+				if (typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT == "function") {}
+				else {
+
+					setTimeout(ROOT_GAME_OBJECT.CREATE_PEER, 50);
+					return;
+
+				}
+
+			}
+
+			window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT("system_object_for_MAIN_peer", 5, 5, 15, 8, 10);
+			var sys_btn_alias = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS("system_object_for_MAIN_peer");
+
+			sys_btn_alias.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W;
+			sys_btn_alias.CREATE_TEXTBOX("enter message", 10, "black", "lime");
+			system_object_for_MAIN_peer.TEXTBOX.font = "18px Arial";
+
+			system_object_for_MAIN_peer.TEXTBOX.ON_PRESS_ENTER = function () {
+
+				SYS.DOM.E("SEND_BTN_").value = system_object_for_MAIN_peer.TEXTBOX.TEXT;
+				SYS.DEBUG.LOG("SEND TEXT MSG TO CURRENT CHANNEL");
+				system_object_for_MAIN_peer.TEXTBOX.TEXT = "";
+				ROOT_GAME_OBJECT.MAIN_PEER.SEND_MSG();
+
+			};
+
+			window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT("system_object_for_MAIN_peer_BTN_connect", 5, 5, 9, 7, 10);
+			var sys_btn_connect = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS("system_object_for_MAIN_peer_BTN_connect");
+			sys_btn_connect.CREATE_TEXTBOX("Connect", 10, "black", "lime");
+			sys_btn_connect.TEXTBOX.font = "18px Arial";
+			sys_btn_connect.TEXTBOX.EDIT = false;
+			sys_btn_connect.TAP = function () {
+				if (rtcMultiConnection.sessionDescription == null) {
+
+					MAIN_PEER.CONNECT_TO_CHANNEL();
+
+				}
+
+			};
+
+			///////////////////////
+			ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+
+				//sys_btn_alias.POSITION.x = ROOT_GAME_OBJECT.POSITION.x;
+				sys_btn_alias.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x, ROOT_GAME_OBJECT.POSITION.y + ROOT_GAME_OBJECT.DIMENSION.H * 1.1, "DIAMETRIC");
+				sys_btn_connect.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x + ROOT_GAME_OBJECT.DIMENSION.W / 1.7, ROOT_GAME_OBJECT.POSITION.y, "DIAMETRIC");
+
+			};
+
+			// ROOT_GAME_OBJECT.
+			//
+
+			ROOT_GAME_OBJECT.MAIN_PEER.REMOTE_DATA = {
+
+				OBJECTS: [],
+
+				//SEND DATA
+				SHARE: function (object) {
+
+					rtcMultiConnection.send({
+						"shared_object": object,
+						"operation": "share"
+					});
+					object.PEER_SHARED = true;
+
+				},
+				SHARE_POSITION: function (object) {
+
+					object.POSITION.SHARE_POSITION = true;
+
+				},
+
+				NEW_POSITION: function (object) {
+
+					rtcMultiConnection.send({
+						"nameOfObject": object.NAME,
+						"operation": "new_pos",
+						"x": object.POSITION.x,
+						"y": object.POSITION.y
+					});
+
+				},
+
+				NEW_DIMENSION: function (object) {
+
+					rtcMultiConnection.send({
+						"nameOfObject": object.NAME,
+						"operation": "new_dim",
+						"x": object.DIMENSION.W,
+						"y": object.DIMENSION.H
+					});
+
+				},
+
+				// DATA FROM SERVER
+				NETWORK_VIEW: function (e) {
+
+					if (e.operation == "share") {
+
+						window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_OBJECT(e.shared_object);
+
+					} else if (e.operation == "new_pos") {
+
+						window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_POSITION(e);
+
+					} else if (e.operation == "new_dim") {
+
+						window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_DIMENSION(e);
+
+					} else if (e.operation == "dimension&position") {}
+
+				},
+
+			};
+
+			ROOT_GAME_OBJECT.MAIN_PEER.CHANNEL = {
+
+				GET: function () {
+
+					return SYS.DOM.E("room-name").value;
+
+				},
+
+				SET: function (newvalue) {
+
+					SYS.DOM.E("room-name").value = newvalue;
+
+				},
+
+			};
+
+			ROOT_GAME_OBJECT.MAIN_PEER.LOCAL_USER = {
+
+				GET: function () {
+
+					return SYS.DOM.E("your-name").value;
+
+				},
+
+				SET: function (newvalue) {
+
+					SYS.DOM.E("your-name").value = newvalue;
+
+				},
+
+			};
+
+			ROOT_GAME_OBJECT.MAIN_PEER.SEND_MSG = function () {
+
+				if (typeof rtcMultiConnection != "undefined") {
+
+					rtcMultiConnection.send(SYS.DOM.E("SEND_BTN_").value);
+
+					SYS.DOM.E("SEND_BTN_").value = "";
+
+				}
+
+			},
+
+			ROOT_GAME_OBJECT.MAIN_PEER.CONNECT_TO_CHANNEL = function () {
+
+				SYS.DOM.E("continue").onclick();
+
+			},
+
+			ROOT_GAME_OBJECT.MAIN_PEER.LOGS = "logs!";
+			ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "MAIN_PEER_OBJECT";
+
+			setTimeout(function () {
+
+				MAIN_PEER.ON_PEER_CREATED.DONE();
+
+			}, 200);
+
+		} else {
+
+			SYS.DEBUG.WARNING("from function CREATE_PEER -  MAIN PEER OBJECT ALREADY CREATED.");
+
+		}
+	};
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	this.GROUP = {
+
+		ADD: function (name) {
+
+			var locx = window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(name).POSITION.x;
+			var locy = window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(name).POSITION.y;
+
+			var dx = ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.x - locx;
+			var dy = ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.y - locy;
+
+			ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS.push({
+				x: dx,
+				y: dy
+			});
+			ROOT_GAME_OBJECT.GROUP.GROUP.push(name);
+
+			//delete (locx);
+			//delete (locy);
+			//SYS.DEBUG.LOG(dx + "=============" + dy)
+
+		},
+		GROUP: [],
+		GROUP_INITIALS: [],
+		MASTER: ROOT_GAME_OBJECT.NAME,
+		MASTER_INITIALS: {
+			x: ROOT_GAME_OBJECT.POSITION.x,
+			y: ROOT_GAME_OBJECT.POSITION.y
+		},
+		UPDATE: function () {},
+
+	};
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+	this.EFFECTS = {
+
+		FADE: {
+			IN: function (sec) {
+
+				var TIMER = setTimeout(function () {
+
+					ROOT_GAME_OBJECT.globalAlpha += 0.02;
+					if (ROOT_GAME_OBJECT.globalAlpha < 1) {
+						ROOT_GAME_OBJECT.EFFECTS.FADE.IN();
+					} else {
+						ROOT_GAME_OBJECT.globalAlpha = 1;
+					}
+
+				}, sec);
+
+			},
+			OUT: function (sec) {
+
+				var TIMER = setTimeout(function () {
+
+					ROOT_GAME_OBJECT.globalAlpha -= 0.02;
+					if (ROOT_GAME_OBJECT.globalAlpha > 0) {
+						ROOT_GAME_OBJECT.EFFECTS.FADE.OUT();
+					} else {
+						ROOT_GAME_OBJECT.globalAlpha = 0;
+					}
+
+				}, sec);
+
+			},
+		},
+		ZOOM: {
+			STATUS_FOR_IN: false,
+			STATUS_FOR_OUT: false,
+			ZOOM_IN_FINISHED: function () {
+				console.log("zoom in  ----finished.");
+			},
+			ZOOM_OUT_FINISHED: function () {
+				console.log("zoom out ----finished.");
+			},
+			VALUE: 0.5,
+			IN: function (sec) {
+				var sec = sec;
+
+				this.STATUS_FOR_IN = true;
+
+				var TIMER = setTimeout(function () {
+
+					if (ROOT_GAME_OBJECT.zoom_scale < ROOT_GAME_OBJECT.EFFECTS.ZOOM.VALUE) {
+						ROOT_GAME_OBJECT.zoom_scale += 0.01;
+						ROOT_GAME_OBJECT.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x - ROOT_GAME_OBJECT.zoom_scale, ROOT_GAME_OBJECT.POSITION.y - ROOT_GAME_OBJECT.zoom_scale, "DIAMETRIC");
+						ROOT_GAME_OBJECT.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W + ROOT_GAME_OBJECT.zoom_scale * 2;
+						ROOT_GAME_OBJECT.DIMENSION.H = ROOT_GAME_OBJECT.DIMENSION.H + ROOT_GAME_OBJECT.zoom_scale * 2;
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.IN(sec);
+
+					} else {
+
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.ZOOM_IN_FINISHED();
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.STATUS_FOR_IN = false;
+
+					}
+
+				}, sec);
+
+			},
+			OUT: function (sec) {
+				var sec = sec;
+				this.STATUS_FOR_OUT = true;
+
+				var TIMER = setTimeout(function () {
+					if (ROOT_GAME_OBJECT.POSITION.x < ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.x) {
+						ROOT_GAME_OBJECT.zoom_scale -= 0.009;
+						ROOT_GAME_OBJECT.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x + ROOT_GAME_OBJECT.zoom_scale, ROOT_GAME_OBJECT.POSITION.y + ROOT_GAME_OBJECT.zoom_scale, "DIAMETRIC");
+						ROOT_GAME_OBJECT.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W - ROOT_GAME_OBJECT.zoom_scale * 2;
+						ROOT_GAME_OBJECT.DIMENSION.H = ROOT_GAME_OBJECT.DIMENSION.H - ROOT_GAME_OBJECT.zoom_scale * 2;
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.OUT(sec);
+					} else {
+						ROOT_GAME_OBJECT.zoom_scale = 0;
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.ZOOM_OUT_FINISHED();
+						ROOT_GAME_OBJECT.EFFECTS.ZOOM.STATUS_FOR_OUT = false;
+					}
+
+				}, sec);
+
+			},
+		},
+
+	};
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	this.PARTICLE = null;
+	this.CREATE_PARTICLE = function (type_) {
+		// NEED to be created more particle system in future !!!
+		ROOT_GAME_OBJECT.PARTICLE = new PARTICLE_FONTAN(ROOT_GAME_OBJECT);
+		ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "PATRICLE";
+
+	};
+
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	//$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	this.CUSTOM = function () {};
+
+	this.DESELECT_ALL = function () {
+
+		var exec_local = "" + ROOT_GAME_OBJECT.PROGRAM_NAME.toString();
+		for (var z = 0; z < window[exec_local].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.length; z++) {
+			window[exec_local].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS[z].EDITOR.SELECTED = false;
+		}
+
+	};
+
+	// For user override
+	this.TOUCH_DOWN = function () {
+
+		SYS.DEBUG.LOG("No atached event . EVENT_TOUCH_DOWN");
+
+	};
+	this.TAP = function () {
+
+		SYS.DEBUG.LOG("No atached event . EVENT_TAP : similar click");
+
+	};
+	this.TOUCH_UP = function () {
+
+		SYS.DEBUG.LOG("No atached event . EVENT_TOUCH_UP");
+
+	};
+	this.TOUCH_MOVE = function () {
+
+		// SYS.DEBUG.LOG("No atached event . EVENT_TOUCH_MOVE");
+
+	};
+
+	this.UPDATE_STATUS = {
+
+		STOP: function () {},
+
+	};
+
+	this.ROTATE = {
+
+		ANGLE: 0, //use for custum image drawing
+		RADIANS: 0, // fiktive
+		ROTATE_ARROUNT_CENTER: function () {
+
+			ORBIT(50, 50, ROOT_GAME_OBJECT.ROTATE.ANGLE, ROOT_GAME_OBJECT.POSITION);
+
+		},
+
+	};
+
+	this.DRAW = function (s) {
+
+		if (ROOT_GAME_OBJECT.VISIBLE == true) {
+
+			s.save();
+
+			s.globalAlpha = ROOT_GAME_OBJECT.globalAlpha;
+
+			if (this.TYPE_OF_GAME_OBJECT == "ANIMATION") {
+
+				this.ANIMATION.DRAW();
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "TEXT_BOX") {
+
+				this.TEXTBOX.DRAW(s);
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "TEXT_BOX_ANIMATION") {
+
+				this.TEXTBOX.DRAW(s);
+				this.ANIMATION.DRAW();
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "PATRICLE") {
+
+				this.PARTICLE.DRAW(s);
+			} else if (this.TYPE_OF_GAME_OBJECT == "PATRICLE_ANIMATION") {
+
+				this.PARTICLE.DRAW(s);
+				this.ANIMATION.DRAW();
+			} else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_PATRICLE") {
+
+				this.ANIMATION.DRAW();
+				this.PARTICLE.DRAW(s);
+			} else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_TEXT_BOX") {
+
+				this.ANIMATION.DRAW();
+				this.TEXTBOX.DRAW(s);
+			} else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_PATRICLE") {
+				this.ANIMATION.DRAW();
+				this.PARTICLE.DRAW(s);
+			} else if (this.TYPE_OF_GAME_OBJECT == "WEBCAM") {
+
+				if (ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT") {
+					s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.DIMENSION.WIDTH(), ROOT_GAME_OBJECT.DIMENSION.HEIGHT());
+				} else {
+					s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.WEBCAM.VIDEO.width, ROOT_GAME_OBJECT.WEBCAM.VIDEO.height);
+				}
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "WEBCAM_NUI") {
+
+				if (ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT") {
+					s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.DIMENSION.WIDTH(), ROOT_GAME_OBJECT.DIMENSION.HEIGHT());
+				} else {
+					s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.WEBCAM.VIDEO.width, ROOT_GAME_OBJECT.WEBCAM.VIDEO.height);
+				}
+				blend(ROOT_GAME_OBJECT, s);
+				checkAreas(ROOT_GAME_OBJECT);
+				ROOT_GAME_OBJECT.WEBCAM.DRAW(s, ROOT_GAME_OBJECT.WEBCAM);
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "CUSTOM") {
+
+				ROOT_GAME_OBJECT.CUSTOM(s);
+
+			} else if (this.TYPE_OF_GAME_OBJECT == "PENCIL") {
+				ROOT_GAME_OBJECT.PENCIL.DRAW();
+			} else if (this.TYPE_OF_GAME_OBJECT == "NO_RENDER") {
+				// nothing here
+			} else if (this.TYPE_OF_GAME_OBJECT == "MAIN_PEER_OBJECT") {
+
+				s.fillStyle = "#192837";
+				s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+				s.fillStyle = "lime";
+
+				s.drawImage(image_system_8, this.POSITION.X() + this.DIMENSION.WIDTH() / 2, this.POSITION.Y() + 30, 90, 90);
+				s.drawImage(image_system_conn, this.POSITION.X() + this.DIMENSION.WIDTH() / 1.4, this.POSITION.Y() + 30, 90, 90);
+
+				s.fillText("Signaling IP Address : " + this.MAIN_PEER.ADDRESS, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 4);
+				s.fillText("Name : " + this.MAIN_PEER.LOCAL_USER.GET(), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 5);
+
+				s.fillText("Channel : " + this.MAIN_PEER.CHANNEL.GET(), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 6);
+
+				s.fillText("peer logs : " + ROOT_GAME_OBJECT.MAIN_PEER.LOGS, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 7);
+				//ROOT_GAME_OBJECT.MAIN_PEER.LOGS = 'logs!';
+			}
+
+			s.restore();
+
+		}
+
+	};
+
+	this.DRAW_ACTOR = function (s) {
+
+		if (this.EDITOR.ACTORS_VISIBLE == true) {
+
+			s.save();
+
+			s.font = "13px Arial";
+
+			s.fillRect(0, this.POSITION.Y(), VIEW.W(), 1);
+			s.fillRect(this.POSITION.X(), 0, 1, VIEW.H());
+
+			s.globalAlpha = 0.5;
+			s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+			s.globalAlpha = 0.9;
+
+			if (ROOT_GAME_OBJECT.EDITOR.SELECTED == true) {
+
+				s.fillText("Name :" + this.NAME, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 4);
+				s.fillText("Percent :" + CONVERTOR.PIX_TO_PER(this.POSITION.X().toString()).toFixed(2) + "%  y:" + CONVERTOR.PIY_TO_PER(this.POSITION.Y()).toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 2.5);
+				s.fillText("Actor- x:" + this.POSITION.X().toFixed(2).toString() + " y:" + this.POSITION.Y().toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT);
+
+			}
+			//CONVERTOR.PIX_TO_PER( h );
+
+			// actor rect for drag
+			//ACTOR_DRAG_RECT
+			s.strokeStyle = "blue";
+			s.strokeRect(this.EDITOR.ACTOR_DRAG_RECT_POS.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTOR_DRAG_RECT_POS.Y() + this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTOR_DRAG_RECT_DIM.WIDTH(), this.EDITOR.ACTOR_DRAG_RECT_DIM.HEIGHT());
+
+			if (this.EDITOR.ACTOR_BLUE_HOVER == true) {
+				s.fillStyle = "lime";
+			} else {
+				s.fillStyle = "blue";
+			}
+
+			//BLU LINE ACTOR X-OSA
+			s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.EDITOR.ACTORS_AREA_HEIGHT * 15, this.EDITOR.ACTORS_AREA_HEIGHT);
+
+			s.beginPath();
+			s.moveTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5, this.POSITION.Y() - 0.5 * this.EDITOR.ACTORS_AREA_HEIGHT);
+			s.lineTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5, this.POSITION.Y() + 1.4 * this.EDITOR.ACTORS_AREA_HEIGHT);
+			s.lineTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 12.5 * 1.5, this.POSITION.Y() + 1 / 2 * this.EDITOR.ACTORS_AREA_HEIGHT);
+			s.closePath();
+			s.fill();
+
+			if (this.EDITOR.ACTOR_GREEN_HOVER == true) {
+
+				s.fillStyle = "lime";
+
+			} else {
+
+				s.fillStyle = "green";
+
+			}
+
+			//BLU LINE ACTOR X-OSA
+			s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTORS_AREA_HEIGHT * 15);
+
+			s.beginPath();
+			s.moveTo(this.POSITION.X() - 0.5 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5);
+			s.lineTo(this.POSITION.X() + 1.4 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5);
+			s.lineTo(this.POSITION.X() + 1 / 2 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 12.5 * 1.5);
+			s.closePath();
+			s.fill();
+
+			// fix color compositi near x i y
+
+
+			s.fillStyle = "red";
+			s.beginPath();
+			//s.strokeStyle = "rgba( 222 , " + this.PULSAR_G.VALUE + " , " + this.PULSAR_B.VALUE + " , " + this.PULSAR_A.VALUE + ")";
+			s.arc(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.EDITOR.ACTORS_AREA_HEIGHT / 2, (0) * Math.PI, (2) * Math.PI);
+			s.fill();
+			s.closePath();
+
+			s.beginPath();
+			s.lineWidth = 1;
+			s.strokeStyle = "white";
+			s.arc(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.EDITOR.ACTORS_AREA_HEIGHT, (this.EDITOR.ACTOR_CENTER_OSCILATOR.UPDATE() + 0.1) * Math.PI, (this.EDITOR.ACTOR_CENTER_OSCILATOR.UPDATE() - 0.1) * Math.PI);
+			s.stroke();
+
+			s.closePath();
+
+			s.restore();
+
+		}
+
+		if (ROOT_GAME_OBJECT.EDITOR.GAME_OBJECT_MENU.VISIBLE == true) {
+
+			for (var x = 0; x < ROOT_GAME_OBJECT.EDITOR.BUTTONS.length; x++) {
+
+				//s.textBaseline = 'middle';
+				s.save();
+				s.globalAlpha = 1;
+				if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].HOVER == false) {
+					s.fillStyle = APPLICATION.SYSTEM.COLOR;
+					s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+					s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+				} else {
+					s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+					s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+					s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+
+					if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].icon == true) {
+						try {
+							s.drawImage(window["image_system_" + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].IAM], ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH() - 30, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() - 5, 30, 30);
+						} catch (e) { /* Not nessesery */
+						}
+					}
+
+				}
+				s.restore();
+
+				if (ROOT_GAME_OBJECT.WEBCAM != null) {
+
+					//s.drawImage( , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X() , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT()/2 , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+
+				}
+
+			}
+
+		}
+
+	};
+
+	this.ON_UPDATE = function () {};
+	this.ON_UPDATE_SYS = function () {};
+
+	this.UPDATE = function () {
+
+		if (this.AUTO_UPDATE == true) {
+			ROOT_GAME_OBJECT.POSITION.UPDATE();
+		}
+		if (ROOT_GAME_OBJECT.EDITOR.ENABLE == false) {
+
+			if (ROOT_GAME_OBJECT.DESTROY_AFTER != null) {
+				if (ROOT_GAME_OBJECT.DESTROY_AFTER > 0) {
+					ROOT_GAME_OBJECT.DESTROY_AFTER--;
+				}
+			}
+
+		}
+		if (ROOT_GAME_OBJECT.GROUP.GROUP.length > 0) {
+			for (var s = 0; s < ROOT_GAME_OBJECT.GROUP.GROUP.length; s++) {
+
+				window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(ROOT_GAME_OBJECT.GROUP.GROUP[s]).POSITION.x = ROOT_GAME_OBJECT.POSITION.x - ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS[s].x;
+				window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(ROOT_GAME_OBJECT.GROUP.GROUP[s]).POSITION.y = ROOT_GAME_OBJECT.POSITION.y - ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS[s].y;
+
+			}
+
+		}
+
+		if (ROOT_GAME_OBJECT.DESTROY_ON_GAMEMAP_EXIT == true && ROOT_GAME_OBJECT.POSITION.Y() < window[ROOT_GAME_OBJECT.PROGRAM_NAME].MAP.UP()) {
+
+			//alert("DESTROYED " + ROOT_GAME_OBJECT.NAME)
+			window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).DESTROY_OBJECT(ROOT_GAME_OBJECT.NAME);
+		}
+
+		ROOT_GAME_OBJECT.ON_UPDATE();
+		ROOT_GAME_OBJECT.ON_UPDATE_SYS();
+
+	};
+
+	this.GAME_OBJECT_READY = function () {
+
+		SYS.DEBUG.LOG("ready : " + ROOT_GAME_OBJECT.NAME);
+		/* 	if (OVERRIDE_DRAW_FOR_NETWORK == null){
+        //ALLWAYS
+        OVERRIDE_DRAW_FOR_NETWORK = ROOT_GAME_OBJECT.DRAW;
+        OVERRIDE_UPDATE_FOR_NETWORK = ROOT_GAME_OBJECT.UPDATE;
+        OVERRIDE_POSITION_X = ROOT_GAME_OBJECT.POSITION.X;
+        OVERRIDE_POSITION_Y = ROOT_GAME_OBJECT.POSITION.Y;
+        OVERRIDE_DIMENSION_WIDTH = ROOT_GAME_OBJECT.DIMENSION.WIDTH;
+        OVERRIDE_DIMENSION_HEIGHT = ROOT_GAME_OBJECT.DIMENSION.HEIGHT;
+        }
+
+        if (OVERRIDE_ANIMATION_DRAW == null) {
+        //NOT ALWAYS
+        OVERRIDE_ANIMATION_DRAW = ROOT_GAME_OBJECT.ANIMATION.DRAW;
+        OVERRIDE_ANIMATION_X = ROOT_GAME_OBJECT.ANIMATION.X;
+        OVERRIDE_ANIMATION_Y = ROOT_GAME_OBJECT.ANIMATION.Y;
+        OVERRIDE_ANIMATION_W = ROOT_GAME_OBJECT.ANIMATION.W;
+        OVERRIDE_ANIMATION_H = ROOT_GAME_OBJECT.ANIMATION.H;
+        } */
+
+	};
+
+	setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
+
+}

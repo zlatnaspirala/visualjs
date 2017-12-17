@@ -1,63 +1,54 @@
- 
-function AUDIO_RES (res)  { 
+/**
+ * @class AUDIO_RES
+ * @constructor
+ * @param res  
+ */
+function AUDIO_RES(res) {
 
-var ROOT_AUDIO = this;
+	var ROOT_AUDIO = this;
 
+	this.res = AUDIO_RESOURCE.source;
+	this.SOUNDS = [];
+	this.SOUNDS_NAMES = [];
 
-this.res = AUDIO_RESOURCE.source;
-this.SOUNDS = [];
-this.SOUNDS_NAMES = [];
+	this.CREATE_AUDIO_OBJECT_FROM_RESOURCE = function () {
 
-this.CREATE_AUDIO_OBJECT_FROM_RESOURCE = function(){
-	
-	
-	    for (var i=0; i<AUDIO_RESOURCE.source.length; i++) {
-			
-			var audio_ = new Audio("res/audio/" + AUDIO_RESOURCE.source[i] );
-			var local1 = AUDIO_RESOURCE.source[i].replace(".ogg","");
-			var local1 = local1.replace(".mp3","");
-			window["audio_object_"+local1] = audio_;
-			ROOT_AUDIO.SOUNDS_NAMES.push( window["play_"+local1] );
+		for (var i = 0; i < AUDIO_RESOURCE.source.length; i++) {
+
+			var audio_ = new Audio("res/audio/" + AUDIO_RESOURCE.source[i]);
+			var local1 = AUDIO_RESOURCE.source[i].replace(".ogg", "");
+			var local1 = local1.replace(".mp3", "");
+			window["audio_object_" + local1] = audio_;
+			ROOT_AUDIO.SOUNDS_NAMES.push(window["play_" + local1]);
 			ROOT_AUDIO.SOUNDS.push(audio_);
 			//audio_.play();
-			
-		}
-		
-		ROOT_AUDIO.SOUNDS_NAMES.PLAY = function(name){
-			
-			
-			
-		};
-	
-};
 
-ROOT_AUDIO.CREATE_AUDIO_OBJECT_FROM_RESOURCE()
+		}
+
+		ROOT_AUDIO.SOUNDS_NAMES.PLAY = function (name) {};
+
+	};
+
+	ROOT_AUDIO.CREATE_AUDIO_OBJECT_FROM_RESOURCE();
 
 }
 
+function LOAD_AUDIO() {
 
-  function LOAD_AUDIO () {
-  
-  setTimeout( function(){
-  
-   if (typeof AUDIO_RESOURCE != 'undefined') {
-   
-	SYS.SOUND.RES = new AUDIO_RES ();
-   
-   }
-   else{
-   
-   LOAD_AUDIO ()
-   
-   }
-  
-  
-  }, 200 )
-  
-  } 
+	setTimeout(function () {
 
-	LOAD_AUDIO ()
-	
-	
-	
-	
+		if (typeof AUDIO_RESOURCE != "undefined") {
+
+			SYS.SOUND.RES = new AUDIO_RES();
+
+		} else {
+
+			LOAD_AUDIO();
+
+		}
+
+	}, 100);
+
+}
+
+LOAD_AUDIO();

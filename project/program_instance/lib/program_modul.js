@@ -1,42 +1,690 @@
-/*
-Created by Nikola Lukic zlatnaspirala@gmail.com
-Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
+//###############################################//###############################################
+//###############################################//###############################################
+// PROCEDURE , last level of system GUI SUPPORT
+//###############################################//###############################################
+//###############################################//###############################################
 
+SYS.RES.CREATE_IMG("system_conn", "res/system/images/html5/HTML5-Connectivity.png");
 
-Quick Summary
-A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
+function CREATE_SYSTEM_BUTTONS() {
 
+	if (typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]] !== "undefined" && typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE !== "undefined") {
 
-Can
- Commercial Use 
-Describes the ability to use the software for commercial purposes.
- Modify 
-Describes the ability to modify the software and create derivatives.
- Distribute 
-Describes the ability to distribute original or modified (derivative) works.
- Sublicense 
-Describes the ability for you to grant/extend a license to the software.
- Private Use 
-Describes the ability to use/modify software freely without distributing it.
+		window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.CREATE_MODUL("GUI_STARTER");
+		if (NOMOBILE == 0) {
 
-Cannot
- Hold Liable 
-Describes the warranty and if the software/license owner can be charged for damages.
- Use Trademark 
-Describes the allowance of using contributors' names, trademarks or logos.
+			CREATE_VIRTUAL_KEYBOARD();
+			HIDE_KEYBOARD();
 
-Must
- Include Copyright 
-Describes whether the original copyright must be retained.
- Include License 
-Including the full text of license in modified software.
+		} else {
 
+			if (APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP == true) {
 
-*//***************************************************************************/
-/*                                                                         */
-/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
-/*  Javascript Obfuscator Free Version can be downloaded here              */
-/*  http://javascriptobfuscator.com                                        */
-/*                                                                         */
-/***************************************************************************/
-SYS.RES.CREATE_IMG("\x73\x79\x73\x74\x65\x6D\x5F\x63\x6F\x6E\x6E","\x72\x65\x73\x2F\x73\x79\x73\x74\x65\x6D\x2F\x69\x6D\x61\x67\x65\x73\x2F\x68\x74\x6D\x6C\x35\x2F\x48\x54\x4D\x4C\x35\x2D\x43\x6F\x6E\x6E\x65\x63\x74\x69\x76\x69\x74\x79\x2E\x70\x6E\x67");function CREATE_SYSTEM_BUTTONS(){if( typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]]!== "\x75\x6E\x64\x65\x66\x69\x6E\x65\x64"&&  typeof window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE!== "\x75\x6E\x64\x65\x66\x69\x6E\x65\x64"){window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.CREATE_MODUL("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52");if(NOMOBILE== 0){CREATE_VIRTUAL_KEYBOARD();HIDE_KEYBOARD()}else {if(APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP== true){CREATE_VIRTUAL_KEYBOARD();HIDE_KEYBOARD()}}}else {setTimeout(function(){CREATE_SYSTEM_BUTTONS()},250)}}CREATE_SYSTEM_BUTTONS();window["\x43\x52\x45\x41\x54\x45\x5F\x56\x49\x52\x54\x55\x41\x4C\x5F\x4B\x45\x59\x42\x4F\x41\x52\x44"]= function(){________MAKE_VK(11,5,7,7,10);window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x53\x54\x41\x52\x54\x45\x52").NEW_OBJECT("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x4C\x41\x42\x45\x4C",18,32,60,10,1);window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x4C\x41\x42\x45\x4C").CREATE_TEXTBOX("",10,"\x62\x6C\x61\x63\x6B","\x6C\x69\x6D\x65");window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x4C\x41\x42\x45\x4C").TEXTBOX.EDIT= false;___VIRTUALKEYBOARD_LABEL.TEXT_FOR= null;___VIRTUALKEYBOARD_LABEL.DRAG= false;___VIRTUALKEYBOARD_LABEL.CAPS= false;___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN= false;___VIRTUALKEYBOARD_LABEL.SPEEDUPBACKSPACE= function(){setTimeout(function(){if(___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN== true){___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE()}},1000)};___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE= 400;___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE= function(){___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE__TIMER= setInterval(function(){if(___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN== true){___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0,___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length- 1);if(___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE< 300){___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0,___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length- 1)};if(___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE< 100){___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0,___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length- 1);___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0,___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length- 1)};if(___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE> 5){___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE= ___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE- 100}else {___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE= 5}}else {clearInterval(___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE__TIMER);___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE= 400}},___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE)}};window["\x5F\x5F\x5F\x5F\x5F\x5F\x5F\x5F\x4D\x41\x4B\x45\x5F\x56\x4B"]= function(c,k,j,l,b){for(var o=0;o< k;o= o+ 1){for(var n=0;n< c;n= n+ 1){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ n+ o;var g="";var m=0;var i=null;var d=0;if(n== 0&& o== 1){d= 16;g= "\x71"}else {if(n== 1&& o== 1){d= 22;g= "\x77"}else {if(n== 2&& o== 1){d= 4;g= "\x65"}else {if(n== 3&& o== 1){d= 17;g= "\x72"}else {if(n== 4&& o== 1){d= 19;g= "\x74"}else {if(n== 5&& o== 1){d= 25;g= "\x7A"}else {if(n== 6&& o== 1){d= 20;g= "\x75"}else {if(n== 7&& o== 1){d= 8;g= "\x69"}else {if(n== 8&& o== 1){d= 14;g= "\x6F"}else {if(n== 9&& o== 1){d= 15;g= "\x70"}else {if(n== 10&& o== 1){d= 28;g= "\x5B"}else {if(n== 10&& o== 0){d= 25;m= 10;g= "\x42\x61\x63\x6B\x73\x70\x61\x63\x65"}else {if(n== 0&& o== 2){d= 0;g= "\x61"}else {if(n== 1&& o== 2){d= 18;g= "\x73"}else {if(n== 2&& o== 2){d= 3;g= "\x64"}else {if(n== 3&& o== 2){d= 5;g= "\x66"}else {if(n== 4&& o== 2){d= 6;g= "\x67"}else {if(n== 5&& o== 2){d= 7;g= "\x68"}else {if(n== 6&& o== 2){d= 9;g= "\x6A"}else {if(n== 7&& o== 2){d= 10;g= "\x6B"}else {if(n== 8&& o== 2){d= 11;g= "\x6C"}else {if(n== 9&& o== 2){d= 28;g= "\x3B"}else {if(n== 10&& o== 2){d= 28;g= "\x27"}else {if(n== 11&& o== 2){d= 0;m= 10;g= "\x65\x6E\x74\x65\x72\x32"}else {if(n== 0&& o== 3){d= 24;g= "\x79"}else {if(n== 1&& o== 3){d= 23;g= "\x78"}else {if(n== 2&& o== 3){d= 2;g= "\x63"}else {if(n== 3&& o== 3){d= 21;g= "\x76"}else {if(n== 4&& o== 3){d= 1;g= "\x62"}else {if(n== 5&& o== 3){d= 13;g= "\x6E"}else {if(n== 6&& o== 3){d= 12;g= "\x6D"}else {if(n== 7&& o== 3){d= 27;g= "\x2C"}else {if(n== 8&& o== 3){d= 27;g= "\x2E"}else {if(n== 9&& o== 3){d= 30;g= "\x2F"}else {if(n== 10&& o== 3){d= 31;g= "\x43\x61\x70\x73"}else {if(n== 0&& o== 4){d= 24;g= "\x5F"}else {if(n== 1&& o== 4){d= 23;g= "\x2D"}else {if(n== 2&& o== 4){d= 2;g= "\x2B"}else {if(n== 3&& o== 4){d= 21;g= "\x3D"}else {if(n== 4&& o== 4){d= 1;g= "\x73\x70\x61\x63\x65";m= 24}else {if(n== 5&& o== 4){}else {if(n== 6&& o== 4){}else {if(n== 7&& o== 4){}else {if(n== 8&& o== 4){d= 27;g= "\x2E\x63\x6F\x6D"}else {if(n== 9&& o== 4){d= 30;g= "\x68\x69\x64\x65";i= "\x68\x69\x64\x65"}else {if(n== 10&& o== 4){d= 31;g= "\x45\x6E\x74\x65\x72";m= 12}else {if(n== 0&& o== 0){d= 33;g= "\x30"}else {if(n== 1&& o== 0){d= 34;g= "\x31"}else {if(n== 2&& o== 0){d= 35;g= "\x32"}else {if(n== 3&& o== 0){d= 36;g= "\x33"}else {if(n== 4&& o== 0){d= 37;g= "\x34"}else {if(n== 5&& o== 0){d= 38;g= "\x35"}else {if(n== 6&& o== 0){d= 39;g= "\x36"}else {if(n== 7&& o== 0){d= 40;g= "\x37"}else {if(n== 8&& o== 0){d= 41;g= "\x38"}else {if(n== 9&& o== 0){d= 42;g= "\x39"}else {if(n== 10&& o== 0){d= 32;g= "\x30"}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}};if(!((n>= 5&& o== 4)&& (n<= 7&& o== 4))){var a=Math.random();window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").NEW_OBJECT(f,n+ (j* n),o+ (j* 1.5* o)+ 40,l+ m,b,10);window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).CREATE_TEXTBOX(g,10,"\x62\x6C\x61\x63\x6B","\x6C\x69\x6D\x65");window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).DRAG= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.EDIT= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).PASS_VK_CODE= g;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TOUCH_UP= function(){___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN= false;___VIRTUALKEYBOARD_LABEL.SPEEDUP= false};window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TOUCH_DOWN= function(){if(window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT== "\x42\x61\x63\x6B\x73\x70\x61\x63\x65"){___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0,___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length- 1);___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN= true;___VIRTUALKEYBOARD_LABEL.SPEEDUPBACKSPACE()}else {if(window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT== "\x68\x69\x64\x65"){HIDE_KEYBOARD()}else {if(window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT== "\x45\x6E\x74\x65\x72"){VK_ENTER()}else {if(window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT== "\x43\x61\x70\x73"){VK_CAPS()}else {if(window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT== "\x73\x70\x61\x63\x65"){HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x4C\x41\x42\x45\x4C").TEXTBOX.TEXT+= "\x20"}else {HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS("\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x4C\x41\x42\x45\x4C").TEXTBOX.TEXT+= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT}}}}}}};if(o== 2&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;g= "\x5C";var a=Math.random();window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").NEW_OBJECT(f,n+ (j* n),o+ (j* 1.5* o)+ 40,l+ m,b,10);window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).CREATE_TEXTBOX(g,10,"\x62\x6C\x61\x63\x6B","\x6C\x69\x6D\x65");window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).DRAG= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.EDIT= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TAP= function(){};n= 10};if(o== 1&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;g= "\x5D";var a=Math.random();window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").NEW_OBJECT(f,n+ (j* n),o+ (j* 1.5* o)+ 40,l+ m,b,10);window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).CREATE_TEXTBOX(g,10,"\x62\x6C\x61\x63\x6B","\x6C\x69\x6D\x65");window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).DRAG= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.EDIT= false;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TAP= function(){};n= 12}}}};window["\x48\x49\x44\x45\x5F\x4B\x45\x59\x42\x4F\x41\x52\x44"]= function(){___VIRTUALKEYBOARD_LABEL.VISIBLE= false;___KBSTATUS(11,5,false);___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ""};window["\x53\x48\x4F\x57\x5F\x4B\x45\x59\x42\x4F\x41\x52\x44"]= function(p){___VIRTUALKEYBOARD_LABEL.TEXT_FOR= window[p];___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXT_FOR.TEXTBOX.TEXT;___VIRTUALKEYBOARD_LABEL.VISIBLE= true;___KBSTATUS(11,5,true)};window["\x56\x4B\x5F\x45\x4E\x54\x45\x52"]= function(){window[___VIRTUALKEYBOARD_LABEL.TEXT_FOR.NAME].TEXTBOX.TEXT= ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT;___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT= "";HIDE_KEYBOARD()};window["\x56\x4B\x5F\x43\x41\x50\x53"]= function(){if(___VIRTUALKEYBOARD_LABEL.CAPS== false){___KBSTATUS_CAPS_ON(11,5);___VIRTUALKEYBOARD_LABEL.CAPS= true}else {___KBSTATUS_CAPS_OFF(11,5);___VIRTUALKEYBOARD_LABEL.CAPS= false}};window["\x5F\x5F\x5F\x4B\x42\x53\x54\x41\x54\x55\x53"]= function(c,k,q){for(var o=0;o< k;o= o+ 1){for(var n=0;n< c;n= n+ 1){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ n+ o;var g="";var m=0;var i=null;var d=0;if(!((n>= 5&& o== 4)&& (n<= 7&& o== 4))){window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).VISIBLE= q};if(o== 2&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).VISIBLE= q;n= 10};if(o== 1&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).VISIBLE= q;n= 12}}}};window["\x5F\x5F\x5F\x4B\x42\x53\x54\x41\x54\x55\x53\x5F\x43\x41\x50\x53\x5F\x4F\x4E"]= function(c,k,q){for(var o=0;o< k;o= o+ 1){for(var n=0;n< c;n= n+ 1){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ n+ o;var g="";var m=0;var i=null;var d=0;if(f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x34\x34"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x30"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x33"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x34"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x34"){if(!((n>= 5&& o== 4)&& (n<= 7&& o== 4))){window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toUpperCase()};if(o== 2&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toUpperCase();n= 10};if(o== 1&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toUpperCase();n= 12};if(___VIRTUALKEYBOARD_101.TEXTBOX.TEXT!= "\x7B"){___VIRTUALKEYBOARD_101.TEXTBOX.TEXT= "\x7B"};if(___VIRTUALKEYBOARD_102.TEXTBOX.TEXT!= "\x22"){___VIRTUALKEYBOARD_102.TEXTBOX.TEXT= "\x22"};if(___VIRTUALKEYBOARD_93.TEXTBOX.TEXT!= "\x3F"){___VIRTUALKEYBOARD_93.TEXTBOX.TEXT= "\x3F"};if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x31\x31"){___VIRTUALKEYBOARD_111.TEXTBOX.TEXT= "\x7D"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x32"){___VIRTUALKEYBOARD_92.TEXTBOX.TEXT= "\x3A"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x31\x32"){___VIRTUALKEYBOARD_112.TEXTBOX.TEXT= "\x7C"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x37\x33"){___VIRTUALKEYBOARD_73.TEXTBOX.TEXT= "\x3C"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x38\x33"){___VIRTUALKEYBOARD_83.TEXTBOX.TEXT= "\x3E"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30"){___VIRTUALKEYBOARD_10.TEXTBOX.TEXT= "\x21"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x32\x30"){___VIRTUALKEYBOARD_20.TEXTBOX.TEXT= "\x40"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x33\x30"){___VIRTUALKEYBOARD_30.TEXTBOX.TEXT= "\x23"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x34\x30"){___VIRTUALKEYBOARD_40.TEXTBOX.TEXT= "\x24"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x35\x30"){___VIRTUALKEYBOARD_50.TEXTBOX.TEXT= "\x25"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x36\x30"){___VIRTUALKEYBOARD_60.TEXTBOX.TEXT= "\x5E"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x37\x30"){___VIRTUALKEYBOARD_70.TEXTBOX.TEXT= "\x26"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x38\x30"){___VIRTUALKEYBOARD_80.TEXTBOX.TEXT= "\x2A"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x30"){___VIRTUALKEYBOARD_90.TEXTBOX.TEXT= "\x28"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x30\x30"){___VIRTUALKEYBOARD_00.TEXTBOX.TEXT= "\x29"}}}}}}}}}}}}}}}}}}};window["\x5F\x5F\x5F\x4B\x42\x53\x54\x41\x54\x55\x53\x5F\x43\x41\x50\x53\x5F\x4F\x46\x46"]= function(c,k,q){for(var o=0;o< k;o= o+ 1){for(var n=0;n< c;n= n+ 1){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ n+ o;var g="";var m=0;var i=null;var d=0;if(f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x34\x34"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x30"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x33"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x34"&& f!= "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x34"){if(!((n>= 5&& o== 4)&& (n<= 7&& o== 4))){window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toLowerCase()};if(o== 2&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toLowerCase();n= 10};if(o== 1&& n== 10){var f="\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F"+ (n+ 1)+ o;n= 11;window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT= window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length- 1]].ENGINE.MODULES.ACCESS_MODULE("\x47\x55\x49\x5F\x53\x54\x41\x52\x54\x45\x52").GAME_OBJECTS.ACCESS(f).TEXTBOX.TEXT.toLowerCase();n= 12};if(___VIRTUALKEYBOARD_101.TEXTBOX.TEXT!= "\x5B"){___VIRTUALKEYBOARD_101.TEXTBOX.TEXT= "\x5B"};if(___VIRTUALKEYBOARD_102.TEXTBOX.TEXT!= "\x27"){___VIRTUALKEYBOARD_102.TEXTBOX.TEXT= "\x27"};if(___VIRTUALKEYBOARD_93.TEXTBOX.TEXT!= "\x2F"){___VIRTUALKEYBOARD_93.TEXTBOX.TEXT= "\x2F"};if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x31\x31"){___VIRTUALKEYBOARD_111.TEXTBOX.TEXT= "\x5D"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x33"){___VIRTUALKEYBOARD_92.TEXTBOX.TEXT= "\x3B"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x31\x32"){___VIRTUALKEYBOARD_112.TEXTBOX.TEXT= "\x5C"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x37\x33"){___VIRTUALKEYBOARD_73.TEXTBOX.TEXT= "\x2C"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x38\x33"){___VIRTUALKEYBOARD_83.TEXTBOX.TEXT= "\x2E"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30"){___VIRTUALKEYBOARD_10.TEXTBOX.TEXT= "\x31"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x32\x30"){___VIRTUALKEYBOARD_20.TEXTBOX.TEXT= "\x32"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x33\x30"){___VIRTUALKEYBOARD_30.TEXTBOX.TEXT= "\x33"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x34\x30"){___VIRTUALKEYBOARD_40.TEXTBOX.TEXT= "\x34"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x35\x30"){___VIRTUALKEYBOARD_50.TEXTBOX.TEXT= "\x35"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x36\x30"){___VIRTUALKEYBOARD_60.TEXTBOX.TEXT= "\x36"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x37\x30"){___VIRTUALKEYBOARD_70.TEXTBOX.TEXT= "\x37"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x38\x30"){___VIRTUALKEYBOARD_80.TEXTBOX.TEXT= "\x38"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x39\x30"){___VIRTUALKEYBOARD_90.TEXTBOX.TEXT= "\x39"}else {if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x30\x30"){___VIRTUALKEYBOARD_00.TEXTBOX.TEXT= "\x30"}}}}}}}}}}}}}}}};if(f== "\x5F\x5F\x5F\x56\x49\x52\x54\x55\x41\x4C\x4B\x45\x59\x42\x4F\x41\x52\x44\x5F\x31\x30\x31"){___VIRTUALKEYBOARD_101.TEXTBOX.TEXT= "\x5B"}}}}
+				CREATE_VIRTUAL_KEYBOARD();
+				HIDE_KEYBOARD();
+
+			}
+
+		}
+
+	} else {
+
+		setTimeout(function () {
+
+		    //we dont wait any async
+			CREATE_SYSTEM_BUTTONS();
+
+		}, 50);
+
+	}
+
+}
+
+CREATE_SYSTEM_BUTTONS();
+
+window["CREATE_VIRTUAL_KEYBOARD"] = function () {
+
+	________MAKE_VK(11, 5, 7, 7, 10);
+
+	// value 1 speed
+	window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("___VIRTUALKEYBOARD_LABEL", 18, 32, 60, 10, 1);
+	window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("___VIRTUALKEYBOARD_LABEL").CREATE_TEXTBOX("", 10, "black", "lime");
+	window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("___VIRTUALKEYBOARD_LABEL").TEXTBOX.EDIT = false;
+	___VIRTUALKEYBOARD_LABEL.TEXT_FOR = null;
+	___VIRTUALKEYBOARD_LABEL.DRAG = false;
+	// caps handler
+	___VIRTUALKEYBOARD_LABEL.CAPS = false;
+	// backspace handler
+	___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN = false;
+
+	___VIRTUALKEYBOARD_LABEL.SPEEDUPBACKSPACE = function () {
+		setTimeout(function () {
+
+			if (___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN == true) {
+
+				___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE();
+
+			}
+
+		}, 1000);
+
+	};
+
+	___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE = 400;
+	___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE = function () {
+
+		___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE__TIMER = setInterval(function () {
+
+			if (___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN == true) {
+
+				___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0, ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length - 1);
+
+				if (___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE < 300) {
+
+					___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0, ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length - 1);
+
+				}
+
+				if (___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE < 100) {
+
+					___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0, ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length - 1);
+					___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0, ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length - 1);
+
+				}
+
+				if (___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE > 5) {
+					___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE = ___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE - 100;
+				} else {
+					___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE = 5;
+
+				}
+				//console.log("___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE" + " " + ___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE)
+			} else {
+
+				clearInterval(___VIRTUALKEYBOARD_LABEL.SPEED__BACKSPACE__TIMER);
+				___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE = 400;
+			}
+
+		}, ___VIRTUALKEYBOARD_LABEL.DELTA_INC_TIMER_BACKSPACE);
+
+	};
+
+};
+
+window["________MAKE_VK"] = function (H, V, step, w, h) {
+
+	for (var y = 0; y < V; y = y + 1) {
+		for (var x = 0; x < H; x = x + 1) {
+
+			var name = "___VIRTUALKEYBOARD_" + x + y;
+			var PASS_VK_CODE_ = "";
+			var width_extra = 0;
+			var SPECIAL_COMMAND = null;
+
+			var LETTER = 0;
+			if (x == 0 && y == 1) {
+				LETTER = 16; //q
+				PASS_VK_CODE_ = "q";
+			} else if (x == 1 && y == 1) {
+				LETTER = 22; //w
+				PASS_VK_CODE_ = "w";
+			} else if (x == 2 && y == 1) {
+				LETTER = 4; //e
+				PASS_VK_CODE_ = "e";
+			} else if (x == 3 && y == 1) {
+				LETTER = 17; //r
+				PASS_VK_CODE_ = "r";
+			} else if (x == 4 && y == 1) {
+				LETTER = 19; //t
+				PASS_VK_CODE_ = "t";
+			} else if (x == 5 && y == 1) {
+				LETTER = 25; //z
+				PASS_VK_CODE_ = "z";
+			} else if (x == 6 && y == 1) {
+				LETTER = 20; //u
+				PASS_VK_CODE_ = "u";
+			} else if (x == 7 && y == 1) {
+				LETTER = 8; //i
+				PASS_VK_CODE_ = "i";
+			} else if (x == 8 && y == 1) {
+				LETTER = 14; //o
+				PASS_VK_CODE_ = "o";
+			} else if (x == 9 && y == 1) {
+				LETTER = 15; //p
+				PASS_VK_CODE_ = "p";
+			} else if (x == 10 && y == 1) {
+				LETTER = 28; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = "[";
+			} else if (x == 10 && y == 0) {
+
+				LETTER = 25; //Backspace
+				width_extra = 10;
+				PASS_VK_CODE_ = "Backspace";
+			}
+			//line 2
+			else if (x == 0 && y == 2) {
+				LETTER = 0; //a
+				PASS_VK_CODE_ = "a";
+			} else if (x == 1 && y == 2) {
+				LETTER = 18; //s
+				PASS_VK_CODE_ = "s";
+			} else if (x == 2 && y == 2) {
+				LETTER = 3; //d
+				PASS_VK_CODE_ = "d";
+			} else if (x == 3 && y == 2) {
+				LETTER = 5; //f
+				PASS_VK_CODE_ = "f";
+			} else if (x == 4 && y == 2) {
+				LETTER = 6; //g
+				PASS_VK_CODE_ = "g";
+			} else if (x == 5 && y == 2) {
+				LETTER = 7; //h
+				PASS_VK_CODE_ = "h";
+			} else if (x == 6 && y == 2) {
+				LETTER = 9; //j
+				PASS_VK_CODE_ = "j";
+			} else if (x == 7 && y == 2) {
+				LETTER = 10; //k
+				PASS_VK_CODE_ = "k";
+			} else if (x == 8 && y == 2) {
+				LETTER = 11; //l
+				PASS_VK_CODE_ = "l";
+			} else if (x == 9 && y == 2) {
+
+				LETTER = 28; // SPECIAL : ENTER
+				//width_extra = 10;
+				PASS_VK_CODE_ = ";";
+
+			} else if (x == 10 && y == 2) {
+
+				LETTER = 28; // SPECIAL : ENTER
+				//width_extra = 10;
+				PASS_VK_CODE_ = "'";
+
+			} else if (x == 11 && y == 2) {
+
+				LETTER = 0; // enter
+				width_extra = 10;
+				PASS_VK_CODE_ = "enter2";
+			}
+			//line 3
+			else if (x == 0 && y == 3) {
+				LETTER = 24; //y
+				PASS_VK_CODE_ = "y";
+			} else if (x == 1 && y == 3) {
+				LETTER = 23; //x
+				PASS_VK_CODE_ = "x";
+			} else if (x == 2 && y == 3) {
+				LETTER = 2; //c
+				PASS_VK_CODE_ = "c";
+			} else if (x == 3 && y == 3) {
+				LETTER = 21; //v
+				PASS_VK_CODE_ = "v";
+			} else if (x == 4 && y == 3) {
+				LETTER = 1; //b
+				PASS_VK_CODE_ = "b";
+			} else if (x == 5 && y == 3) {
+				LETTER = 13; //n
+				PASS_VK_CODE_ = "n";
+			} else if (x == 6 && y == 3) {
+				LETTER = 12; //m
+				PASS_VK_CODE_ = "m";
+			} else if (x == 7 && y == 3) {
+				LETTER = 27; //m
+				PASS_VK_CODE_ = ",";
+			} else if (x == 8 && y == 3) {
+				LETTER = 27; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = ".";
+			} else if (x == 9 && y == 3) {
+				LETTER = 30; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = "/";
+			} else if (x == 10 && y == 3) {
+				LETTER = 31; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = "Caps";
+			}
+
+			//down line
+			else if (x == 0 && y == 4) {
+				LETTER = 24; //y
+				PASS_VK_CODE_ = "_";
+			} else if (x == 1 && y == 4) {
+				LETTER = 23; //x
+				PASS_VK_CODE_ = "-";
+			} else if (x == 2 && y == 4) {
+				LETTER = 2; //c
+				PASS_VK_CODE_ = "+";
+			} else if (x == 3 && y == 4) {
+				LETTER = 21; //v
+				PASS_VK_CODE_ = "=";
+			} else if (x == 4 && y == 4) {
+				LETTER = 1; //b
+				PASS_VK_CODE_ = "space";
+				width_extra = 24;
+			} else if (x == 5 && y == 4) { /** unhandled */ }
+			else if (x == 6 && y == 4) { /** unhandled */ }
+			else if (x == 7 && y == 4) { /** unhandled */ }
+			else if (x == 8 && y == 4) {
+				LETTER = 27; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = ".com";
+			} else if (x == 9 && y == 4) {
+				LETTER = 30; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = "hide";
+				SPECIAL_COMMAND = "hide";
+			} else if (x == 10 && y == 4) {
+				LETTER = 31; //m UBACI ZA TACKU
+				PASS_VK_CODE_ = "Enter";
+				width_extra = 12;
+			}
+
+			// NUMBERS
+			else if (x == 0 && y == 0) {
+				LETTER = 33; // o
+				PASS_VK_CODE_ = "0";
+			} else if (x == 1 && y == 0) {
+				LETTER = 34; // o
+				PASS_VK_CODE_ = "1";
+			} else if (x == 2 && y == 0) {
+				LETTER = 35; // o
+				PASS_VK_CODE_ = "2";
+			} else if (x == 3 && y == 0) {
+				LETTER = 36; // o
+				PASS_VK_CODE_ = "3";
+			} else if (x == 4 && y == 0) {
+				LETTER = 37; // o
+				PASS_VK_CODE_ = "4";
+			} else if (x == 5 && y == 0) {
+				LETTER = 38; // o
+				PASS_VK_CODE_ = "5";
+			} else if (x == 6 && y == 0) {
+				LETTER = 39; // o
+				PASS_VK_CODE_ = "6";
+			} else if (x == 7 && y == 0) {
+				LETTER = 40; // o
+				PASS_VK_CODE_ = "7";
+			} else if (x == 8 && y == 0) {
+				LETTER = 41; // o
+				PASS_VK_CODE_ = "8";
+			} else if (x == 9 && y == 0) {
+				LETTER = 42; // o
+				PASS_VK_CODE_ = "9";
+			} else if (x == 10 && y == 0) {
+				LETTER = 32; // o
+				PASS_VK_CODE_ = "0";
+			}
+
+			/////////////////////////
+			// CREATING SYS KEYBOARD
+			// eliminate rigth of space
+			if (!((x >= 5 && y == 4) && (x <= 7 && y == 4))) {
+
+				var ___ID = Math.random();
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT(name, x + (step * x), y + (step * 1.5 * y) + 40, w + width_extra, h, 10);
+				//window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length-1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_ANIMATION( SURF , "DRAW_FRAME" , LETTER , RESOURCE.imagesFont1  , ___ID , "no" , 1,11,1,1,1)
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_TEXTBOX(PASS_VK_CODE_, 10, "black", "lime");
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).DRAG = false;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.EDIT = false;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).PASS_VK_CODE = PASS_VK_CODE_;
+
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TOUCH_UP = function () {
+					___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN = false;
+					___VIRTUALKEYBOARD_LABEL.SPEEDUP = false;
+
+				};
+
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TOUCH_DOWN = function () {
+
+					if (window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT == "Backspace") {
+
+						___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.substring(0, ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT.length - 1);
+						//console.log("VIRTUAL KEYBOARD : Backspace ")
+						___VIRTUALKEYBOARD_LABEL.BACKSPACE_DOWN = true;
+						___VIRTUALKEYBOARD_LABEL.SPEEDUPBACKSPACE();
+
+					} else if (window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT == "hide") {
+
+						HIDE_KEYBOARD();
+						//console.log("VIRTUAL KEYBOARD :  HIDE_KEYBOARD() ")
+
+					} else if (window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT == "Enter") {
+
+						VK_ENTER();
+						//console.log("VIRTUAL KEYBOARD :  enter!! ")
+
+					} else if (window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT == "Caps") {
+
+						VK_CAPS();
+						//console.log("VIRTUAL KEYBOARD :  caps !! ")
+
+					} else if (window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT == "space") {
+
+						HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("___VIRTUALKEYBOARD_LABEL").TEXTBOX.TEXT += " ";
+						//console.log("VIRTUAL KEYBOARD :  caps !! ")
+
+					} else {
+
+						HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("___VIRTUALKEYBOARD_LABEL").TEXTBOX.TEXT += window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(this.NAME).TEXTBOX.TEXT;
+
+					}
+
+				};
+
+			}
+
+			// extra
+			if (y == 2 && x == 10) {
+				var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+				x = 11;
+
+				PASS_VK_CODE_ = "\\";
+				var ___ID = Math.random();
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT(name, x + (step * x), y + (step * 1.5 * y) + 40, w + width_extra, h, 10);
+
+				//window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length-1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_ANIMATION( SURF , "DRAW_FRAME" , LETTER , RESOURCE.imagesFont1  , ___ID , "no" , 1,11,1,1,1)
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_TEXTBOX(PASS_VK_CODE_, 10, "black", "lime");
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).DRAG = false;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.EDIT = false;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TAP = function () {
+					//console.log("VIRTUAL KEYBOARD : " + this.NAME);
+
+				};
+
+				x = 10;
+
+			}
+
+			// extra
+			if (y == 1 && x == 10) {
+				var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+				x = 11;
+				PASS_VK_CODE_ = "]";
+				var ___ID = Math.random();
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT(name, x + (step * x), y + (step * 1.5 * y) + 40, w + width_extra, h, 10);
+				//window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length-1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_ANIMATION( SURF , "DRAW_FRAME" , LETTER , RESOURCE.imagesFont1  , ___ID , "no" , 1,11,1,1,1)
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).CREATE_TEXTBOX(PASS_VK_CODE_, 10, "black", "lime");
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).DRAG = false;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.EDIT = false;
+
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TAP = function () {
+
+					//console.log("VIRTUAL KEYBOARD : " + this.NAME);
+
+				};
+
+				x = 12;
+
+			}
+
+			///////////////////////
+
+		}
+	}
+
+};
+
+window["HIDE_KEYBOARD"] = function () {
+
+	___VIRTUALKEYBOARD_LABEL.VISIBLE = false;
+	___KBSTATUS(11, 5, false);
+	___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = "";
+
+};
+
+window["SHOW_KEYBOARD"] = function (textIsForThisNameObj) {
+
+	___VIRTUALKEYBOARD_LABEL.TEXT_FOR = window[textIsForThisNameObj];
+
+	___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXT_FOR.TEXTBOX.TEXT;
+
+	___VIRTUALKEYBOARD_LABEL.VISIBLE = true;
+	___KBSTATUS(11, 5, true);
+
+};
+
+window["VK_ENTER"] = function () {
+	window[___VIRTUALKEYBOARD_LABEL.TEXT_FOR.NAME].TEXTBOX.TEXT = ___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT;
+	___VIRTUALKEYBOARD_LABEL.TEXTBOX.TEXT = "";
+	HIDE_KEYBOARD();
+};
+
+window["VK_CAPS"] = function () {
+	if (___VIRTUALKEYBOARD_LABEL.CAPS == false) {
+		___KBSTATUS_CAPS_ON(11, 5);
+		___VIRTUALKEYBOARD_LABEL.CAPS = true;
+	} else {
+		___KBSTATUS_CAPS_OFF(11, 5);
+		___VIRTUALKEYBOARD_LABEL.CAPS = false;
+	}
+};
+
+// help hide keyb
+window["___KBSTATUS"] = function (H, V, WHAT) {
+
+	for (var y = 0; y < V; y = y + 1) {
+		for (var x = 0; x < H; x = x + 1) {
+
+			var name = "___VIRTUALKEYBOARD_" + x + y;
+			var PASS_VK_CODE_ = "";
+			var width_extra = 0;
+			var SPECIAL_COMMAND = null;
+
+			var LETTER = 0;
+
+			// CREATING SYS KEYBOARD
+			// eliminate rigth of space
+			if (!((x >= 5 && y == 4) && (x <= 7 && y == 4))) {
+
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).VISIBLE = WHAT;
+
+			}
+
+			// extra
+			if (y == 2 && x == 10) {
+				var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+				x = 11;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).VISIBLE = WHAT;
+				x = 10;
+
+			}
+
+			// extra
+			if (y == 1 && x == 10) {
+				var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+				x = 11;
+				window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).VISIBLE = WHAT;
+				x = 12;
+
+			}
+
+		}
+	}
+
+};
+
+// caps staff
+window["___KBSTATUS_CAPS_ON"] = function (H, V, WHAT) {
+
+	for (var y = 0; y < V; y = y + 1) {
+		for (var x = 0; x < H; x = x + 1) {
+
+			var name = "___VIRTUALKEYBOARD_" + x + y;
+			var PASS_VK_CODE_ = "";
+			var width_extra = 0;
+			var SPECIAL_COMMAND = null;
+			var LETTER = 0;
+
+			// CREATING SYS KEYBOARD
+			if (name != "___VIRTUALKEYBOARD_44" && name != "___VIRTUALKEYBOARD_100" && name != "___VIRTUALKEYBOARD_103" && name != "___VIRTUALKEYBOARD_104" && name != "___VIRTUALKEYBOARD_94") {
+
+				// eliminate rigth of space
+				if (!((x >= 5 && y == 4) && (x <= 7 && y == 4))) {
+
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toUpperCase();
+
+				}
+
+				// extra
+				if (y == 2 && x == 10) {
+					var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+					x = 11;
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toUpperCase();
+					x = 10;
+
+				}
+
+				// extra
+				if (y == 1 && x == 10) {
+					var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+					x = 11;
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toUpperCase();
+					x = 12;
+
+				}
+
+				//for special
+				if (___VIRTUALKEYBOARD_101.TEXTBOX.TEXT != "{") {
+					___VIRTUALKEYBOARD_101.TEXTBOX.TEXT = "{";
+				}
+
+				if (___VIRTUALKEYBOARD_102.TEXTBOX.TEXT != "\"") {
+					___VIRTUALKEYBOARD_102.TEXTBOX.TEXT = "\"";
+				}
+
+				if (___VIRTUALKEYBOARD_93.TEXTBOX.TEXT != "?") {
+					___VIRTUALKEYBOARD_93.TEXTBOX.TEXT = "?";
+				}
+
+				if (name == "___VIRTUALKEYBOARD_111") {
+					___VIRTUALKEYBOARD_111.TEXTBOX.TEXT = "}";
+				} else if (name == "___VIRTUALKEYBOARD_92") {
+					___VIRTUALKEYBOARD_92.TEXTBOX.TEXT = ":";
+				} else if (name == "___VIRTUALKEYBOARD_112") {
+					___VIRTUALKEYBOARD_112.TEXTBOX.TEXT = "|";
+				} else if (name == "___VIRTUALKEYBOARD_73") {
+					___VIRTUALKEYBOARD_73.TEXTBOX.TEXT = "<";
+				} else if (name == "___VIRTUALKEYBOARD_83") {
+					___VIRTUALKEYBOARD_83.TEXTBOX.TEXT = ">";
+				} else if (name == "___VIRTUALKEYBOARD_10") {
+					___VIRTUALKEYBOARD_10.TEXTBOX.TEXT = "!";
+				} else if (name == "___VIRTUALKEYBOARD_20") {
+					___VIRTUALKEYBOARD_20.TEXTBOX.TEXT = "@";
+				} else if (name == "___VIRTUALKEYBOARD_30") {
+					___VIRTUALKEYBOARD_30.TEXTBOX.TEXT = "#";
+				} else if (name == "___VIRTUALKEYBOARD_40") {
+					___VIRTUALKEYBOARD_40.TEXTBOX.TEXT = "$";
+				} else if (name == "___VIRTUALKEYBOARD_50") {
+					___VIRTUALKEYBOARD_50.TEXTBOX.TEXT = "%";
+				} else if (name == "___VIRTUALKEYBOARD_60") {
+					___VIRTUALKEYBOARD_60.TEXTBOX.TEXT = "^";
+				} else if (name == "___VIRTUALKEYBOARD_70") {
+					___VIRTUALKEYBOARD_70.TEXTBOX.TEXT = "&";
+				} else if (name == "___VIRTUALKEYBOARD_80") {
+					___VIRTUALKEYBOARD_80.TEXTBOX.TEXT = "*";
+				} else if (name == "___VIRTUALKEYBOARD_90") {
+					___VIRTUALKEYBOARD_90.TEXTBOX.TEXT = "(";
+				} else if (name == "___VIRTUALKEYBOARD_00") {
+					___VIRTUALKEYBOARD_00.TEXTBOX.TEXT = ")";
+				}
+
+			}
+
+		}
+	}
+
+};
+
+window["___KBSTATUS_CAPS_OFF"] = function (H, V, WHAT) {
+
+	for (var y = 0; y < V; y = y + 1) {
+		for (var x = 0; x < H; x = x + 1) {
+
+			var name = "___VIRTUALKEYBOARD_" + x + y;
+			var PASS_VK_CODE_ = "";
+			var width_extra = 0;
+			var SPECIAL_COMMAND = null;
+			var LETTER = 0;
+
+			// CREATING SYS KEYBOARD
+			if (name != "___VIRTUALKEYBOARD_44" && name != "___VIRTUALKEYBOARD_100" && name != "___VIRTUALKEYBOARD_103" && name != "___VIRTUALKEYBOARD_104" && name != "___VIRTUALKEYBOARD_94") {
+
+				// eliminate rigth of space
+				if (!((x >= 5 && y == 4) && (x <= 7 && y == 4))) {
+
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toLowerCase();
+					//console.log('caps OFF' + x + ' x y ' + y)
+
+				}
+
+				// extra
+				if (y == 2 && x == 10) {
+					var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+					x = 11;
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toLowerCase();
+					x = 10;
+
+				}
+
+				// extra
+				if (y == 1 && x == 10) {
+					var name = "___VIRTUALKEYBOARD_" + (x + 1) + y;
+					x = 11;
+					window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT = window[SYS.RUNNING_PROGRAMS[SYS.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS(name).TEXTBOX.TEXT.toLowerCase();
+					x = 12;
+
+				}
+
+				//for special
+				if (___VIRTUALKEYBOARD_101.TEXTBOX.TEXT != "[") {
+					___VIRTUALKEYBOARD_101.TEXTBOX.TEXT = "[";
+				}
+
+				if (___VIRTUALKEYBOARD_102.TEXTBOX.TEXT != "'") {
+					___VIRTUALKEYBOARD_102.TEXTBOX.TEXT = "'";
+				}
+
+				if (___VIRTUALKEYBOARD_93.TEXTBOX.TEXT != "/") {
+					___VIRTUALKEYBOARD_93.TEXTBOX.TEXT = "/";
+				}
+
+				//for special
+				if (name == "___VIRTUALKEYBOARD_111") {
+					___VIRTUALKEYBOARD_111.TEXTBOX.TEXT = "]";
+				} else if (name == "___VIRTUALKEYBOARD_93") {
+					___VIRTUALKEYBOARD_92.TEXTBOX.TEXT = ";";
+				} else if (name == "___VIRTUALKEYBOARD_112") {
+					___VIRTUALKEYBOARD_112.TEXTBOX.TEXT = "\\";
+				} else if (name == "___VIRTUALKEYBOARD_73") {
+					___VIRTUALKEYBOARD_73.TEXTBOX.TEXT = ",";
+				} else if (name == "___VIRTUALKEYBOARD_83") {
+					___VIRTUALKEYBOARD_83.TEXTBOX.TEXT = ".";
+				} else if (name == "___VIRTUALKEYBOARD_10") {
+					___VIRTUALKEYBOARD_10.TEXTBOX.TEXT = "1";
+				} else if (name == "___VIRTUALKEYBOARD_20") {
+					___VIRTUALKEYBOARD_20.TEXTBOX.TEXT = "2";
+				} else if (name == "___VIRTUALKEYBOARD_30") {
+					___VIRTUALKEYBOARD_30.TEXTBOX.TEXT = "3";
+				} else if (name == "___VIRTUALKEYBOARD_40") {
+					___VIRTUALKEYBOARD_40.TEXTBOX.TEXT = "4";
+				} else if (name == "___VIRTUALKEYBOARD_50") {
+					___VIRTUALKEYBOARD_50.TEXTBOX.TEXT = "5";
+				} else if (name == "___VIRTUALKEYBOARD_60") {
+					___VIRTUALKEYBOARD_60.TEXTBOX.TEXT = "6";
+				} else if (name == "___VIRTUALKEYBOARD_70") {
+					___VIRTUALKEYBOARD_70.TEXTBOX.TEXT = "7";
+				} else if (name == "___VIRTUALKEYBOARD_80") {
+					___VIRTUALKEYBOARD_80.TEXTBOX.TEXT = "8";
+				} else if (name == "___VIRTUALKEYBOARD_90") {
+					___VIRTUALKEYBOARD_90.TEXTBOX.TEXT = "9";
+				} else if (name == "___VIRTUALKEYBOARD_00") {
+					___VIRTUALKEYBOARD_00.TEXTBOX.TEXT = "0";
+				}
+
+			}
+			//for special
+			if (name == "___VIRTUALKEYBOARD_101") {
+				___VIRTUALKEYBOARD_101.TEXTBOX.TEXT = "[";
+			}
+
+		}
+	}
+
+};

@@ -1,42 +1,113 @@
-/*
-Created by Nikola Lukic zlatnaspirala@gmail.com
-Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
+/**
+ * Created by Nikola Lukic zlatnaspirala@gmail.com
+ * @example SYS.DEBUG.LOG('welcome to extrime')
+ * @Object SYS 
+ */
 
+var SYS = {
 
-Quick Summary
-A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
+	ROOT: this,
+	
+	/** 
+	 * Get browser data
+	 * @property {DETECTBROWSER} BROWSER
+	 */
+	BROWSER: new DETECTBROWSER(),
+	
+	/**
+    Load/Add dinamic script in runtime
+     */
+	SCRIPT: SCRIPT,
+	
+	/**
+    Works with html canvas element ,
+    create surface and setup main program loop
+     */
+	DOM: new DOM(),
+	
+	/**
+    Just list of running programs
+     */
+	RUNNING_PROGRAMS: new Array(),
+	/**
+    DEBUG
+    console.log polumorh call
+    switch on/off
+     */
+	DEBUG: new LOG(),
 
+	READY: false,
 
-Can
- Commercial Use 
-Describes the ability to use the software for commercial purposes.
- Modify 
-Describes the ability to modify the software and create derivatives.
- Distribute 
-Describes the ability to distribute original or modified (derivative) works.
- Sublicense 
-Describes the ability for you to grant/extend a license to the software.
- Private Use 
-Describes the ability to use/modify software freely without distributing it.
+	/**
+    RES - resources
+    Image object creator
+     */
+	RES: {
 
-Cannot
- Hold Liable 
-Describes the warranty and if the software/license owner can be charged for damages.
- Use Trademark 
-Describes the allowance of using contributors' names, trademarks or logos.
+		SUM_OF_LOADED_IMAGES: 0,
+		CREATE_IMG: CREATE_IMG,
 
-Must
- Include Copyright 
-Describes whether the original copyright must be retained.
- Include License 
-Including the full text of license in modified software.
+	},
 
+	// Math
+	/**
+    Math - operation
+     */
+	MATH: {
 
-*//***************************************************************************/
-/*                                                                         */
-/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
-/*  Javascript Obfuscator Free Version can be downloaded here              */
-/*  http://javascriptobfuscator.com                                        */
-/*                                                                         */
-/***************************************************************************/
-var SYS={ROOT:this,BROWSER: new DETECTBROWSER(),SCRIPT:SCRIPT,DOM: new DOM(),RUNNING_PROGRAMS: new Array(),DEBUG: new LOG(),READY:false,RES:{SUM_OF_LOADED_IMAGES:0,CREATE_IMG:CREATE_IMG},MATH:{NUMBER_ROUND:round,RANDOM_INT_FROM_TO:randomIntFromTo,TO_DEGREES:toDegrees,TO_RADIANS:toRadians,OSCILLATOR:OSCILLATOR,CONVERT:CONVERTOR,INCREMENTATOR:INCREMENTATOR},ARRAY_OPERATION:{REMOVE_ALL_ITEMS_WITH_VALUE:removeItem,DEEP_COPY:DEEP_COPY},LOCAL_STORAGE:{},MOUSE:{x:0,y:0,PRESS:false,BUTTON_PRESSED:null,ON_RIGHT_BTN_PRESSED:function(){},ON_MID_BTN_PRESSED:function(){},ON_LEFT_BTN_PRESSED:function(){}},XML:{READ:readXML},SOUND:{GEN:SOUND,RES:{}},VOICE:{SPEAK:function(){},LISTEN:function(){}},CAMERA:{SUPPORT:test_webcam_device()}}
+		NUMBER_ROUND: round,
+		RANDOM_INT_FROM_TO: randomIntFromTo,
+		TO_DEGREES: toDegrees,
+		TO_RADIANS: toRadians,
+		OSCILLATOR: OSCILLATOR,
+		CONVERT: CONVERTOR,
+		INCREMENTATOR: INCREMENTATOR,
+
+	},
+
+	ARRAY_OPERATION: {
+
+		REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
+		DEEP_COPY: DEEP_COPY,
+
+	},
+
+	LOCAL_STORAGE: {},
+
+	// Mouse or touch READ_ONLY
+	MOUSE: {
+		x: 0,
+		y: 0,
+		PRESS: false,
+		BUTTON_PRESSED: null,
+		ON_RIGHT_BTN_PRESSED: function () {},
+		ON_MID_BTN_PRESSED: function () {},
+		ON_LEFT_BTN_PRESSED: function () {},
+	},
+
+	XML: {
+
+		READ: readXML,
+
+	},
+
+	SOUND: {
+
+		GEN: SOUND,
+		RES: {},
+	},
+
+	VOICE: {
+
+		SPEAK: function () {},
+		LISTEN: function () {},
+
+	},
+
+	CAMERA: {
+
+	    SUPPORT: test_webcam_device(),
+		
+	},
+
+};

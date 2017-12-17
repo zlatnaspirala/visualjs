@@ -1,42 +1,297 @@
-/*
-Created by Nikola Lukic zlatnaspirala@gmail.com
-Copyright (c) 2016 by Nikola Lukic , All Rights Reserved. 
+/**
+* Instance of ENGINE class will handle all modules and
+* gameobjects.
+* Access trow : 
+*
+* @example Internal . Injected like property ENGINE intro PROGRAM object.  
+* @class ENGINE
+* @constructor 
+* @return nothing 
+*
+*/
+function ENGINE(c) {
+
+	var ROOT_ENGINE = this;
+	// ONE PROGRAM ONE ENGINE
+	//ENGINE WILL BE BIG SWITCHER
+	this.PROGRAM_ID = c.id;
+	//Events are part of engine
+	this.EVENTS = new EVENTS(c, ROOT_ENGINE); // destroy mem IMPORTANT events must be deatached at first time than set up to undefined .
+	this.MODULES = new Array();
+	this.GAME_TYPE = "NO_PLAYER";
+	this.KEYBOARD = new KEYBOARD(c);
+
+	if (APPLICATION.EDITOR == true) {
+
+		this.ENGINE_EDITOR = true;
+
+	} else {
+
+		this.ENGINE_EDITOR = false;
+
+	}
+
+	this.EXIT_EDIT_MODE = function () {
+
+		ROOT_ENGINE.ENGINE_EDITOR = false;
+
+		for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+
+			for (var y = 0; y < ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; y++) {
+
+				ROOT_ENGINE.MODULES[x].GAME_OBJECTS[y].EDITOR.ENABLE = false;
+
+			}
+
+		}
+
+	};
+
+	this.GO_TO_EDIT_MODE = function () {
+
+		ROOT_ENGINE.ENGINE_EDITOR = true;
+
+		for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+
+			for (var y = 0; y < ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; y++) {
+
+				ROOT_ENGINE.MODULES[x].GAME_OBJECTS[y].EDITOR.ENABLE = true;
+
+			}
+
+		}
+
+	};
+
+	this.GUI = {
+
+		VISIBLE: false,
+		BUTTONS: [
+			new RIGHT_MENU_BUTTON("Add new gameObject ", 0, "1"),
+			new RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"),
+			new RIGHT_MENU_BUTTON("Set render speed", 40, "3"),
+			new RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"),
+			new RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
+		CHECK_ON_START: function () {
+
+			if (LOAD("Application") == false) { console.log("no cache data about application"); }
+			else {
+
+				APPLICATION = LOAD("Application");
+				SYS.DEBUG.LOG("APPLICATION object was loaded from localstorage. " + APPLICATION.ACCOUNT_SERVICE_AUTO_RUN);
+				if (APPLICATION.ACCOUNT_SERVICE_AUTO_RUN == true) {
+					ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to false";
+				} else {
+					ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to true";
+				}
+
+				if (APPLICATION.EDITOR_AUTORUN == true) {
+					ROOT_ENGINE.ENGINE_EDITOR = true;
+					ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to false";
+				} else {
+					ROOT_ENGINE.ENGINE_EDITOR = false;
+					ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to true";
+				}
+
+			}
+
+		},
+		GRID: {
+			VISIBLE: true,
+			MAP_SIZE_X: 10,
+			MAP_SIZE_Y: 10,
+			STEP: 10,
+			COLOR: APPLICATION.SYSTEM.HOVER_COLOR,
+		},
+
+		LIST_OF_OBJECTS: {
+
+			VISIBLE: true,
+			LIST: ROOT_ENGINE.MODULES,
+			BUTTONS_MODULES: [],
+			BUTTONS_GAME_OBJECTS: [],
+
+			GET_MODULES: function (_give_me_reference_object_) {
+
+				for (var s = 0; s < ROOT_ENGINE.MODULES.length; s++) {
+
+					ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.push(new RIGHT_MENU_BUTTON(ROOT_ENGINE.MODULES[s].NAME, 15 * s, s + 1));
+
+					ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[s].TAP = function () {
+						//console.log(this.IAM)
+						ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS = [];
+						for (var w = 0; w < ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS.length; w++) {
+
+							ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.push(new RIGHT_MENU_BUTTON(ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS[w].NAME, 14 * w, w + 1));
+							ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].POSITION.x += 100;
+
+							var _pass_name = ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS[w].NAME;
+
+							ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w]._pass_name = _pass_name;
+
+							ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].TAP = function () {
+
+								console.log("  ON_PAGE EDITOR   :::: reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
+
+								window[_give_me_reference_object_.NAME]._REF = this._pass_name;
+
+								console.log(">>>>>>>>" + window[_give_me_reference_object_.NAME].NAME + "::::::::::" + window[_give_me_reference_object_.NAME]._REF);
+
+								window[SYS.RUNNING_PROGRAMS[0]].ENGINE.GUI.LIST_OF_OBJECTS.REMOVE_LIST_OBJ_MODULES();
+
+							};
+
+						}
+
+					};
+
+				}
+
+			},
+
+			REMOVE_LIST_OBJ_MODULES: function () {
+
+				ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES = [];
+				ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS = [];
+
+			}
+
+		},
+
+	};
+
+	this.GUI.LIST_OF_OBJECTS.GET_MODULES();
+	this.GUI.CHECK_ON_START();
+
+	this.DRAW_MODULES = function (s) {
+
+		if (ROOT_ENGINE.GUI.GRID.VISIBLE == true && ROOT_ENGINE.ENGINE_EDITOR == true) {
+
+			s.fillStyle = ROOT_ENGINE.GUI.GRID.COLOR;
+			for (var x = 0; x < ROOT_ENGINE.GUI.GRID.MAP_SIZE_X * ROOT_ENGINE.GUI.GRID.STEP; x += ROOT_ENGINE.GUI.GRID.STEP) {
+
+				s.fillRect(VIEW.W(x), VIEW.H(0), 1, VIEW.H());
+				s.fillRect(VIEW.W(0), VIEW.H(x), VIEW.W(), 1);
+
+			}
+
+		}
+
+		for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+			ROOT_ENGINE.MODULES[x].DRAW_GAME_OBJECTS(s);
+		}
+
+		if (ROOT_ENGINE.ENGINE_EDITOR == true) {
+
+			if (ROOT_ENGINE.GUI.VISIBLE == true) {
+
+				for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
+					s.textBaseline = "middle";
+
+					if (ROOT_ENGINE.GUI.BUTTONS[x].HOVER == false) {
+						s.fillStyle = APPLICATION.SYSTEM.COLOR;
+						s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+						s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+						s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+					} else {
+						s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+						s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+						s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+						s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+
+						if (ROOT_ENGINE.GUI.BUTTONS[x].icon == true) {
+							try {
+								s.drawImage(window["image_system_" + ROOT_ENGINE.GUI.BUTTONS[x].IAM], ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() - 30, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() - 5, 30, 30);
+							} catch (e) { /* Not nessesery */
+							}
+						}
+
+					}
+
+				}
+
+			}
+
+			//
+			for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length; x++) {
+				s.textBaseline = "middle";
+
+				if (ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER == false) {
+					s.fillStyle = APPLICATION.SYSTEM.COLOR;
+					s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+					s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH());
+				} else {
+					s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+					s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.COLOR;
+					s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH());
+				}
+
+			}
+
+			for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.length; x++) {
+				s.textBaseline = "middle";
+
+				if (ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].HOVER == false) {
+					s.fillStyle = APPLICATION.SYSTEM.COLOR;
+					s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+					s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH());
+				} else {
+					s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+					s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT());
+					s.fillStyle = APPLICATION.SYSTEM.COLOR;
+					s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH());
+				}
+
+			}
+
+			//
 
 
-Quick Summary
-A highly permissive license nearly identical to the MIT license but with some added trademark restrictions.
+		}
 
+	};
 
-Can
- Commercial Use 
-Describes the ability to use the software for commercial purposes.
- Modify 
-Describes the ability to modify the software and create derivatives.
- Distribute 
-Describes the ability to distribute original or modified (derivative) works.
- Sublicense 
-Describes the ability for you to grant/extend a license to the software.
- Private Use 
-Describes the ability to use/modify software freely without distributing it.
+	this.UPDATE_MODULES = function () {
 
-Cannot
- Hold Liable 
-Describes the warranty and if the software/license owner can be charged for damages.
- Use Trademark 
-Describes the allowance of using contributors' names, trademarks or logos.
+		for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
 
-Must
- Include Copyright 
-Describes whether the original copyright must be retained.
- Include License 
-Including the full text of license in modified software.
+			ROOT_ENGINE.MODULES[x].UPDATE_GAME_OBJECTS();
 
+		}
 
-*//***************************************************************************/
-/*                                                                         */
-/*  This obfuscated code was created by Javascript Obfuscator Free Version.*/
-/*  Javascript Obfuscator Free Version can be downloaded here              */
-/*  http://javascriptobfuscator.com                                        */
-/*                                                                         */
-/***************************************************************************/
-function ENGINE(a){var b=this;this.PROGRAM_ID= a.id;this.EVENTS=  new EVENTS(a,b);this.MODULES=  new Array();this.GAME_TYPE= "\x4E\x4F\x5F\x50\x4C\x41\x59\x45\x52";this.KEYBOARD=  new KEYBOARD(a);if(APPLICATION.EDITOR== true){this.ENGINE_EDITOR= true}else {this.ENGINE_EDITOR= false};this.EXIT_EDIT_MODE= function(){b.ENGINE_EDITOR= false;for(var d=0;d< b.MODULES.length;d++){for(var f=0;f< b.MODULES[d].GAME_OBJECTS.length;f++){b.MODULES[d].GAME_OBJECTS[f].EDITOR.ENABLE= false}}};this.GO_TO_EDIT_MODE= function(){b.ENGINE_EDITOR= true;for(var d=0;d< b.MODULES.length;d++){for(var f=0;f< b.MODULES[d].GAME_OBJECTS.length;f++){b.MODULES[d].GAME_OBJECTS[f].EDITOR.ENABLE= true}}};this.GUI= {VISIBLE:false,BUTTONS:[ new RIGHT_MENU_BUTTON("\x41\x64\x64\x20\x6E\x65\x77\x20\x67\x61\x6D\x65\x4F\x62\x6A\x65\x63\x74\x20",0,"\x31"), new RIGHT_MENU_BUTTON("\x45\x78\x69\x74\x20\x65\x64\x69\x74\x20\x6D\x6F\x64\x65",20,"\x32"), new RIGHT_MENU_BUTTON("\x53\x65\x74\x20\x72\x65\x6E\x64\x65\x72\x20\x73\x70\x65\x65\x64",40,"\x33"), new RIGHT_MENU_BUTTON("\x53\x77\x69\x74\x63\x68\x20\x41\x75\x74\x6F\x43\x6F\x6E\x6E\x65\x63\x74\x20\x74\x6F\x20\x74\x72\x75\x65",60,"\x34","\x72\x65\x73\x2F\x73\x79\x73\x74\x65\x6D\x2F\x69\x6D\x61\x67\x65\x73\x2F\x68\x74\x6D\x6C\x35\x2F\x48\x54\x4D\x4C\x35\x2D\x4F\x66\x66\x6C\x69\x6E\x65\x2D\x53\x74\x6F\x72\x61\x67\x65\x2E\x70\x6E\x67"), new RIGHT_MENU_BUTTON("\x53\x77\x69\x74\x63\x68\x20\x45\x64\x69\x74\x6F\x72\x41\x75\x74\x6F\x52\x75\x6E\x20\x74\x6F\x20\x74\x72\x75\x65",80,"\x35","\x72\x65\x73\x2F\x73\x79\x73\x74\x65\x6D\x2F\x69\x6D\x61\x67\x65\x73\x2F\x68\x74\x6D\x6C\x35\x2F\x48\x54\x4D\x4C\x35\x2D\x4F\x66\x66\x6C\x69\x6E\x65\x2D\x53\x74\x6F\x72\x61\x67\x65\x2E\x70\x6E\x67")],CHECK_ON_START:function(){if(LOAD("\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E")== false){}else {APPLICATION= LOAD("\x41\x70\x70\x6C\x69\x63\x61\x74\x69\x6F\x6E");SYS.DEBUG.LOG("\x41\x50\x50\x4C\x49\x43\x41\x54\x49\x4F\x4E\x20\x6F\x62\x6A\x65\x63\x74\x20\x77\x61\x73\x20\x6C\x6F\x61\x64\x65\x64\x20\x66\x72\x6F\x6D\x20\x6C\x6F\x63\x61\x6C\x73\x74\x6F\x72\x61\x67\x65\x2E\x20"+ APPLICATION.ACCOUNT_SERVICE_AUTO_RUN);if(APPLICATION.ACCOUNT_SERVICE_AUTO_RUN== true){b.GUI.BUTTONS[3].text= "\x53\x77\x69\x74\x63\x68\x20\x41\x75\x74\x6F\x43\x6F\x6E\x6E\x65\x63\x74\x20\x74\x6F\x20\x66\x61\x6C\x73\x65"}else {b.GUI.BUTTONS[3].text= "\x53\x77\x69\x74\x63\x68\x20\x41\x75\x74\x6F\x43\x6F\x6E\x6E\x65\x63\x74\x20\x74\x6F\x20\x74\x72\x75\x65"};if(APPLICATION.EDITOR_AUTORUN== true){b.ENGINE_EDITOR= true;b.GUI.BUTTONS[4].text= "\x53\x77\x69\x74\x63\x68\x20\x65\x64\x69\x74\x6F\x72\x41\x75\x74\x6F\x52\x75\x6E\x20\x74\x6F\x20\x66\x61\x6C\x73\x65"}else {b.ENGINE_EDITOR= false;b.GUI.BUTTONS[4].text= "\x53\x77\x69\x74\x63\x68\x20\x65\x64\x69\x74\x6F\x72\x41\x75\x74\x6F\x52\x75\x6E\x20\x74\x6F\x20\x74\x72\x75\x65"}}},GRID:{VISIBLE:true,MAP_SIZE_X:10,MAP_SIZE_Y:10,STEP:10,COLOR:APPLICATION.SYSTEM.HOVER_COLOR},LIST_OF_OBJECTS:{VISIBLE:true,LIST:b.MODULES,BUTTONS_MODULES:[],BUTTONS_GAME_OBJECTS:[],GET_MODULES:function(){for(var g=0;g< b.MODULES.length;g++){b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.push( new RIGHT_MENU_BUTTON(b.MODULES[g].NAME,10* g,g+ 1));b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[g].TAP= function(){b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS= [];for(var h=0;h< b.MODULES[this.IAM- 1].GAME_OBJECTS.length;h++){b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.push( new RIGHT_MENU_BUTTON(b.MODULES[this.IAM- 1].GAME_OBJECTS[h].NAME,10* h,h+ 1));b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[h].POSITION.x+= 100}}}}}};this.GUI.LIST_OF_OBJECTS.GET_MODULES();this.GUI.CHECK_ON_START();this.DRAW_MODULES= function(g){if(b.GUI.GRID.VISIBLE== true&& b.ENGINE_EDITOR== true){g.fillStyle= b.GUI.GRID.COLOR;for(var d=0;d< b.GUI.GRID.MAP_SIZE_X* b.GUI.GRID.STEP;d+= b.GUI.GRID.STEP){g.fillRect(VIEW.W(d),VIEW.H(0),1,VIEW.H());g.fillRect(VIEW.W(0),VIEW.H(d),VIEW.W(),1)}};for(var d=0;d< b.MODULES.length;d++){b.MODULES[d].DRAW_GAME_OBJECTS(g)};if(b.ENGINE_EDITOR== true){if(b.GUI.VISIBLE== true){for(var d=0;d< b.GUI.BUTTONS.length;d++){g.textBaseline= "\x6D\x69\x64\x64\x6C\x65";if(b.GUI.BUTTONS[d].HOVER== false){g.fillStyle= APPLICATION.SYSTEM.COLOR;g.fillRect(b.GUI.BUTTONS[d].POSITION.X(),b.GUI.BUTTONS[d].POSITION.Y(),b.GUI.BUTTONS[d].DIMENSION.WIDTH(),b.GUI.BUTTONS[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.TEXT_COLOR;g.fillText(b.GUI.BUTTONS[d].text,b.GUI.BUTTONS[d].POSITION.X(),b.GUI.BUTTONS[d].POSITION.Y()+ b.GUI.BUTTONS[d].DIMENSION.HEIGHT()/ 2,b.GUI.BUTTONS[d].DIMENSION.WIDTH())}else {g.fillStyle= APPLICATION.SYSTEM.HOVER_COLOR;g.fillRect(b.GUI.BUTTONS[d].POSITION.X(),b.GUI.BUTTONS[d].POSITION.Y(),b.GUI.BUTTONS[d].DIMENSION.WIDTH(),b.GUI.BUTTONS[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.TEXT_COLOR;g.fillText(b.GUI.BUTTONS[d].text,b.GUI.BUTTONS[d].POSITION.X(),b.GUI.BUTTONS[d].POSITION.Y()+ b.GUI.BUTTONS[d].DIMENSION.HEIGHT()/ 2,b.GUI.BUTTONS[d].DIMENSION.WIDTH());if(b.GUI.BUTTONS[d].icon== true){try{g.drawImage(window["\x69\x6D\x61\x67\x65\x5F\x73\x79\x73\x74\x65\x6D\x5F"+ b.GUI.BUTTONS[d].IAM],b.GUI.BUTTONS[d].POSITION.X()+ b.GUI.BUTTONS[d].DIMENSION.WIDTH()- 30,b.GUI.BUTTONS[d].POSITION.Y()- 5,30,30)}catch(e){}}}}};for(var d=0;d< b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length;d++){g.textBaseline= "\x6D\x69\x64\x64\x6C\x65";if(b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].HOVER== false){g.fillStyle= APPLICATION.SYSTEM.COLOR;g.fillRect(b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.Y(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.WIDTH(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.TEXT_COLOR;g.fillText(b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].text,b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.Y()+ b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.HEIGHT()/ 2,b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.WIDTH())}else {g.fillStyle= APPLICATION.SYSTEM.HOVER_COLOR;g.fillRect(b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.Y(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.WIDTH(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.COLOR;g.fillText(b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].text,b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].POSITION.Y()+ b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.HEIGHT()/ 2,b.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[d].DIMENSION.WIDTH())}};for(var d=0;d< b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.length;d++){g.textBaseline= "\x6D\x69\x64\x64\x6C\x65";if(b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].HOVER== false){g.fillStyle= APPLICATION.SYSTEM.COLOR;g.fillRect(b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.Y(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.WIDTH(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.TEXT_COLOR;g.fillText(b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].text,b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.Y()+ b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.HEIGHT()/ 2,b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.WIDTH())}else {g.fillStyle= APPLICATION.SYSTEM.HOVER_COLOR;g.fillRect(b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.Y(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.WIDTH(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.HEIGHT());g.fillStyle= APPLICATION.SYSTEM.COLOR;g.fillText(b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].text,b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.X(),b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].POSITION.Y()+ b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.HEIGHT()/ 2,b.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[d].DIMENSION.WIDTH())}}}};this.UPDATE_MODULES= function(){for(var d=0;d< b.MODULES.length;d++){b.MODULES[d].UPDATE_GAME_OBJECTS()}};this.CREATE_MODUL= function(i){b.MODULES.push( new MODUL(i,b.PROGRAM_ID))};this.DESTROY_MODUL= function(i){console.log(b.MODULES.indexOf(i));b.MODULES.forEach(function(k,j,l){if(k.NAME== i){if(j>  -1){b.MODULES.splice(j,1)};console.log(b.MODULES.indexOf(i))}})}}
+	};
+
+	this.CREATE_MODUL = function (name) {
+
+		// window[name] = new MODUL(name);
+
+		ROOT_ENGINE.MODULES.push(new MODUL(name, ROOT_ENGINE.PROGRAM_ID));
+
+	};
+
+	this.DESTROY_MODUL = function (name) {
+
+		// window[name] = new MODUL(name);
+		console.log(ROOT_ENGINE.MODULES.indexOf(name));
+
+		ROOT_ENGINE.MODULES.forEach(function (item, index, object) {
+			
+			// (item, index, object)
+			if (item.NAME == name) {
+
+				if (index > -1) {
+					ROOT_ENGINE.MODULES.splice(index, 1);
+				}
+
+				console.log(ROOT_ENGINE.MODULES.indexOf(name));
+			}
+
+		});
+
+	};
+
+}
+
