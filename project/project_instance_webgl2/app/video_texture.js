@@ -17,7 +17,7 @@ App.scene.outsideBox.position.z = -4
 App.scene.outsideBox.rotationSpeed = 50
 App.scene.outsideBox.rotValue = 90
 App.scene.outsideBox.LightsData.ambientLight.set(1,1,1)
-App.scene.outsideBox.streamTextures = new VIDEO_TEXTURE( "Galactic_Expansion_Fractal_Morph_Official_Video.mp4" );
+App.scene.outsideBox.streamTextures = new VIDEO_TEXTURE( "Electric_sheep_a_facinating_animated_flame_fractal.mp4" );
 
 App.scene.outsideBox.glBlend.blendEnabled = true
 App.scene.outsideBox.glBlend.blendParamSrc =  ENUMERATORS.glBlend.param[4]
@@ -25,9 +25,10 @@ App.scene.outsideBox.glBlend.blendParamDest =  ENUMERATORS.glBlend.param[4]
 
 App.scene.outsideBox.rotDirection.SetDirection(1,1,0.5)
 
+/*
 world.Add("cubeLightTex" , 1  , "insideBox"  );
-App.scene.insideBox.streamTextures = new VIDEO_TEXTURE( "Galactic_Expansion_Fractal_Morph_Official_Video.mp4" );
+App.scene.insideBox.streamTextures = new VIDEO_TEXTURE( "Electric_sheep_a_facinating_animated_flame_fractal.mp4" );
 App.scene.insideBox.glBlend.blendEnabled = true
 App.scene.insideBox.glBlend.blendParamSrc =  ENUMERATORS.glBlend.param[6]
 App.scene.insideBox.glBlend.blendParamDest =  ENUMERATORS.glBlend.param[6]
-
+*/

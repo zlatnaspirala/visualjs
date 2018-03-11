@@ -4,562 +4,588 @@
 
 THREE.MD2CharacterComplex = function () {
 
-	var scope = this;
+    var scope = this;
 
-	this.scale = 1;
+    this.scale = 1;
 
-	// animation parameters
+    // animation parameters
 
-	this.animationFPS = 6;
-	this.transitionFrames = 15;
+    this.animationFPS = 6;
+    this.transitionFrames = 15;
 
-	// movement model parameters
+    // movement model parameters
 
-	this.maxSpeed = 275;
-	this.maxReverseSpeed = - 275;
+    this.maxSpeed = 275;
+    this.maxReverseSpeed =  - 275;
 
-	this.frontAcceleration = 600;
-	this.backAcceleration = 600;
+    this.frontAcceleration = 600;
+    this.backAcceleration = 600;
 
-	this.frontDecceleration = 600;
+    this.frontDecceleration = 600;
 
-	this.angularSpeed = 2.5;
+    this.angularSpeed = 2.5;
 
-	// rig
+    // rig
 
-	this.root = new THREE.Object3D();
+    this.root = new THREE.Object3D();
 
-	this.meshBody = null;
-	this.meshWeapon = null;
+    this.meshBody = null;
+    this.meshWeapon = null;
 
-	this.controls = null;
+    this.controls = null;
 
-	// skins
+    // skins
 
-	this.skinsBody = [];
-	this.skinsWeapon = [];
+    this.skinsBody = [];
+    this.skinsWeapon = [];
 
-	this.weapons = [];
+    this.weapons = [];
 
-	this.currentSkin = undefined;
+    this.currentSkin = undefined;
 
-	//
+    //
 
-	this.onLoadComplete = function () {};
+    this.onLoadComplete = function () {};
 
-	// internals
+    // internals
 
-	this.meshes = [];
-	this.animations = {};
+    this.meshes = [];
+    this.animations = {};
 
-	this.loadCounter = 0;
+    this.loadCounter = 0;
 
-	// internal movement control variables
+    // internal movement control variables
 
-	this.speed = 0;
-	this.bodyOrientation = 0;
+    this.speed = 0;
+    this.bodyOrientation = 0;
 
-	this.walkSpeed = this.maxSpeed;
-	this.crouchSpeed = this.maxSpeed * 0.5;
+    this.walkSpeed = this.maxSpeed;
+    this.crouchSpeed = this.maxSpeed * 0.5;
 
-	// internal animation parameters
+    // internal animation parameters
 
-	this.activeAnimation = null;
-	this.oldAnimation = null;
+    this.activeAnimation = null;
+    this.oldAnimation = null;
 
-	// API
+    // API
 
-	this.enableShadows = function ( enable ) {
+    this.enableShadows = function (enable) {
 
-		for ( var i = 0; i < this.meshes.length; i ++ ) {
+        for (var i = 0; i < this.meshes.length; i++) {
 
-			this.meshes[ i ].castShadow = enable;
-			this.meshes[ i ].receiveShadow = enable;
+            this.meshes[i].castShadow = enable;
+            this.meshes[i].receiveShadow = enable;
 
-		}
+        }
 
-	};
+    };
 
-	this.setVisible = function ( enable ) {
+    this.setVisible = function (enable) {
 
-		for ( var i = 0; i < this.meshes.length; i ++ ) {
+        for (var i = 0; i < this.meshes.length; i++) {
 
-			this.meshes[ i ].visible = enable;
-			this.meshes[ i ].visible = enable;
+            this.meshes[i].visible = enable;
+            this.meshes[i].visible = enable;
 
-		}
+        }
 
-	};
+    };
 
+    this.shareParts = function (original) {
 
-	this.shareParts = function ( original ) {
+        this.animations = original.animations;
+        this.walkSpeed = original.walkSpeed;
+        this.crouchSpeed = original.crouchSpeed;
 
-		this.animations = original.animations;
-		this.walkSpeed = original.walkSpeed;
-		this.crouchSpeed = original.crouchSpeed;
+        this.skinsBody = original.skinsBody;
+        this.skinsWeapon = original.skinsWeapon;
 
-		this.skinsBody = original.skinsBody;
-		this.skinsWeapon = original.skinsWeapon;
+        // BODY
 
-		// BODY
+        var mesh = createPart(original.meshBody.geometry, this.skinsBody[0]);
+        mesh.scale.set(this.scale, this.scale, this.scale);
 
-		var mesh = createPart( original.meshBody.geometry, this.skinsBody[ 0 ] );
-		mesh.scale.set( this.scale, this.scale, this.scale );
+        this.root.position.y = original.root.position.y;
+        this.root.add(mesh);
 
-		this.root.position.y = original.root.position.y;
-		this.root.add( mesh );
+        this.meshBody = mesh;
 
-		this.meshBody = mesh;
+        this.meshes.push(mesh);
 
-		this.meshes.push( mesh );
+        // WEAPONS
 
-		// WEAPONS
+        for (var i = 0; i < original.weapons.length; i++) {
 
-		for ( var i = 0; i < original.weapons.length; i ++ ) {
+            var meshWeapon = createPart(original.weapons[i].geometry, this.skinsWeapon[i]);
+            meshWeapon.scale.set(this.scale, this.scale, this.scale);
+            meshWeapon.visible = false;
 
-			var meshWeapon = createPart( original.weapons[ i ].geometry, this.skinsWeapon[ i ] );
-			meshWeapon.scale.set( this.scale, this.scale, this.scale );
-			meshWeapon.visible = false;
+            meshWeapon.name = original.weapons[i].name;
 
-			meshWeapon.name = original.weapons[ i ].name;
+            this.root.add(meshWeapon);
 
-			this.root.add( meshWeapon );
+            this.weapons[i] = meshWeapon;
+            this.meshWeapon = meshWeapon;
 
-			this.weapons[ i ] = meshWeapon;
-			this.meshWeapon = meshWeapon;
+            this.meshes.push(meshWeapon);
 
-			this.meshes.push( meshWeapon );
+        }
 
-		}
+    };
 
-	};
+    this.loadParts = function (config) {
 
-	this.loadParts = function ( config ) {
+        this.animations = config.animations;
+        this.walkSpeed = config.walkSpeed;
+        this.crouchSpeed = config.crouchSpeed;
 
-		this.animations = config.animations;
-		this.walkSpeed = config.walkSpeed;
-		this.crouchSpeed = config.crouchSpeed;
+        this.loadCounter = config.weapons.length * 2 + config.skins.length + 1;
 
-		this.loadCounter = config.weapons.length * 2 + config.skins.length + 1;
+        var weaponsTextures = [];
+        for (var i = 0; i < config.weapons.length; i++)
+            weaponsTextures[i] = config.weapons[i][1];
 
-		var weaponsTextures = [];
-		for ( var i = 0; i < config.weapons.length; i ++ ) weaponsTextures[ i ] = config.weapons[ i ][ 1 ];
+        // SKINS
 
-		// SKINS
+        this.skinsBody = loadTextures(config.baseUrl + "skins/", config.skins);
+        this.skinsWeapon = loadTextures(config.baseUrl + "skins/", weaponsTextures);
 
-		this.skinsBody = loadTextures( config.baseUrl + "skins/", config.skins );
-		this.skinsWeapon = loadTextures( config.baseUrl + "skins/", weaponsTextures );
+        // BODY
 
-		// BODY
+        var loader = new THREE.MD2Loader();
 
-		var loader = new THREE.MD2Loader();
+        loader.load(config.baseUrl + config.body, function (geo) {
 
-		loader.load( config.baseUrl + config.body, function( geo ) {
+            geo.computeBoundingBox();
+            scope.root.position.y =  - scope.scale * geo.boundingBox.min.y;
 
-			geo.computeBoundingBox();
-			scope.root.position.y = - scope.scale * geo.boundingBox.min.y;
+            var mesh = createPart(geo, scope.skinsBody[0]);
+            mesh.scale.set(scope.scale, scope.scale, scope.scale);
 
-			var mesh = createPart( geo, scope.skinsBody[ 0 ] );
-			mesh.scale.set( scope.scale, scope.scale, scope.scale );
+            scope.root.add(mesh);
 
-			scope.root.add( mesh );
+            scope.meshBody = mesh;
+            scope.meshes.push(mesh);
 
-			scope.meshBody = mesh;
-			scope.meshes.push( mesh );
+            checkLoadingComplete();
 
-			checkLoadingComplete();
+        });
 
-		} );
+        // WEAPONS
 
-		// WEAPONS
+        var generateCallback = function (index, name) {
 
-		var generateCallback = function ( index, name ) {
+            return function (geo) {
 
-			return function( geo ) {
+                var mesh = createPart(geo, scope.skinsWeapon[index]);
+                mesh.scale.set(scope.scale, scope.scale, scope.scale);
+                mesh.visible = false;
 
-				var mesh = createPart( geo, scope.skinsWeapon[ index ] );
-				mesh.scale.set( scope.scale, scope.scale, scope.scale );
-				mesh.visible = false;
+                mesh.name = name;
 
-				mesh.name = name;
+                scope.root.add(mesh);
 
-				scope.root.add( mesh );
+                scope.weapons[index] = mesh;
+                scope.meshWeapon = mesh;
+                scope.meshes.push(mesh);
 
-				scope.weapons[ index ] = mesh;
-				scope.meshWeapon = mesh;
-				scope.meshes.push( mesh );
+                checkLoadingComplete();
 
-				checkLoadingComplete();
+            }
 
-			}
+        };
 
-		};
+        for (var i = 0; i < config.weapons.length; i++) {
 
-		for ( var i = 0; i < config.weapons.length; i ++ ) {
+            loader.load(config.baseUrl + config.weapons[i][0], generateCallback(i, config.weapons[i][0]));
 
-			loader.load( config.baseUrl + config.weapons[ i ][ 0 ], generateCallback( i, config.weapons[ i ][ 0 ] ) );
+        }
 
-		}
+    };
 
-	};
+    this.setPlaybackRate = function (rate) {
 
-	this.setPlaybackRate = function ( rate ) {
+        if (this.meshBody)
+            this.meshBody.duration = this.meshBody.baseDuration / rate;
+        if (this.meshWeapon)
+            this.meshWeapon.duration = this.meshWeapon.baseDuration / rate;
 
-		if ( this.meshBody ) this.meshBody.duration = this.meshBody.baseDuration / rate;
-		if ( this.meshWeapon ) this.meshWeapon.duration = this.meshWeapon.baseDuration / rate;
+    };
 
-	};
+    this.setWireframe = function (wireframeEnabled) {
 
-	this.setWireframe = function ( wireframeEnabled ) {
+        if (wireframeEnabled) {
 
-		if ( wireframeEnabled ) {
+            if (this.meshBody)
+                this.meshBody.material = this.meshBody.materialWireframe;
+            if (this.meshWeapon)
+                this.meshWeapon.material = this.meshWeapon.materialWireframe;
 
-			if ( this.meshBody ) this.meshBody.material = this.meshBody.materialWireframe;
-			if ( this.meshWeapon ) this.meshWeapon.material = this.meshWeapon.materialWireframe;
+        } else {
 
-		} else {
+            if (this.meshBody)
+                this.meshBody.material = this.meshBody.materialTexture;
+            if (this.meshWeapon)
+                this.meshWeapon.material = this.meshWeapon.materialTexture;
 
-			if ( this.meshBody ) this.meshBody.material = this.meshBody.materialTexture;
-			if ( this.meshWeapon ) this.meshWeapon.material = this.meshWeapon.materialTexture;
+        }
 
-		}
+    };
 
-	};
+    this.setSkin = function (index) {
 
-	this.setSkin = function( index ) {
+        if (this.meshBody && this.meshBody.material.wireframe === false) {
 
-		if ( this.meshBody && this.meshBody.material.wireframe === false ) {
+            this.meshBody.material.map = this.skinsBody[index];
+            this.currentSkin = index;
 
-			this.meshBody.material.map = this.skinsBody[ index ];
-			this.currentSkin = index;
+        }
 
-		}
+    };
 
-	};
+    this.setWeapon = function (index) {
 
-	this.setWeapon = function ( index ) {
+        for (var i = 0; i < this.weapons.length; i++)
+            this.weapons[i].visible = false;
 
-		for ( var i = 0; i < this.weapons.length; i ++ ) this.weapons[ i ].visible = false;
+        var activeWeapon = this.weapons[index];
 
-		var activeWeapon = this.weapons[ index ];
+        if (activeWeapon) {
 
-		if ( activeWeapon ) {
+            activeWeapon.visible = true;
+            this.meshWeapon = activeWeapon;
 
-			activeWeapon.visible = true;
-			this.meshWeapon = activeWeapon;
+            if (this.activeAnimation) {
 
-			if ( this.activeAnimation ) {
+                activeWeapon.playAnimation(this.activeAnimation);
+                this.meshWeapon.setAnimationTime(this.activeAnimation, this.meshBody.getAnimationTime(this.activeAnimation));
 
-				activeWeapon.playAnimation( this.activeAnimation );
-				this.meshWeapon.setAnimationTime( this.activeAnimation, this.meshBody.getAnimationTime( this.activeAnimation ) );
+            }
 
-			}
+        }
 
-		}
+    };
 
-	};
+    this.setAnimation = function (animationName) {
 
-	this.setAnimation = function ( animationName ) {
+        if (animationName === this.activeAnimation || !animationName)
+            return;
 
-		if ( animationName === this.activeAnimation || ! animationName ) return;
+        if (this.meshBody) {
 
-		if ( this.meshBody ) {
+            this.meshBody.setAnimationWeight(animationName, 0);
+            this.meshBody.playAnimation(animationName);
 
-			this.meshBody.setAnimationWeight( animationName, 0 );
-			this.meshBody.playAnimation( animationName );
+            this.oldAnimation = this.activeAnimation;
+            this.activeAnimation = animationName;
 
-			this.oldAnimation = this.activeAnimation;
-			this.activeAnimation = animationName;
+            this.blendCounter = this.transitionFrames;
 
-			this.blendCounter = this.transitionFrames;
+        }
 
-		}
+        if (this.meshWeapon) {
 
-		if ( this.meshWeapon ) {
+            this.meshWeapon.setAnimationWeight(animationName, 0);
+            this.meshWeapon.playAnimation(animationName);
 
-			this.meshWeapon.setAnimationWeight( animationName, 0 );
-			this.meshWeapon.playAnimation( animationName );
+        }
 
-		}
+    };
 
+    this.update = function (delta) {
 
-	};
+        if (this.controls)
+            this.updateMovementModel(delta);
 
-	this.update = function ( delta ) {
+        if (this.animations) {
 
-		if ( this.controls ) this.updateMovementModel( delta );
+            this.updateBehaviors(delta);
+            this.updateAnimations(delta);
 
-		if ( this.animations ) {
+        }
 
-			this.updateBehaviors( delta );
-			this.updateAnimations( delta );
+    };
 
-		}
+    this.updateAnimations = function (delta) {
 
-	};
+        var mix = 1;
 
-	this.updateAnimations = function ( delta ) {
+        if (this.blendCounter > 0) {
 
-		var mix = 1;
+            mix = (this.transitionFrames - this.blendCounter) / this.transitionFrames;
+            this.blendCounter -= 1;
 
-		if ( this.blendCounter > 0 ) {
+        }
 
-			mix = ( this.transitionFrames - this.blendCounter ) / this.transitionFrames;
-			this.blendCounter -= 1;
+        if (this.meshBody) {
 
-		}
+            this.meshBody.update(delta);
 
-		if ( this.meshBody ) {
+            this.meshBody.setAnimationWeight(this.activeAnimation, mix);
+            this.meshBody.setAnimationWeight(this.oldAnimation, 1 - mix);
 
-			this.meshBody.update( delta );
+        }
 
-			this.meshBody.setAnimationWeight( this.activeAnimation, mix );
-			this.meshBody.setAnimationWeight( this.oldAnimation,  1 - mix );
+        if (this.meshWeapon) {
 
-		}
+            this.meshWeapon.update(delta);
 
-		if ( this.meshWeapon ) {
+            this.meshWeapon.setAnimationWeight(this.activeAnimation, mix);
+            this.meshWeapon.setAnimationWeight(this.oldAnimation, 1 - mix);
 
-			this.meshWeapon.update( delta );
+        }
 
-			this.meshWeapon.setAnimationWeight( this.activeAnimation, mix );
-			this.meshWeapon.setAnimationWeight( this.oldAnimation,  1 - mix );
+    };
 
-		}
+    this.updateBehaviors = function (delta) {
 
-	};
+        var controls = this.controls;
+        var animations = this.animations;
 
-	this.updateBehaviors = function ( delta ) {
+        var moveAnimation,
+        idleAnimation;
 
-		var controls = this.controls;
-		var animations = this.animations;
+        // crouch vs stand
 
-		var moveAnimation, idleAnimation;
+        if (controls.crouch) {
 
-		// crouch vs stand
+            moveAnimation = animations["crouchMove"];
+            idleAnimation = animations["crouchIdle"];
 
-		if ( controls.crouch ) {
+        } else {
 
-			moveAnimation = animations[ "crouchMove" ];
-			idleAnimation = animations[ "crouchIdle" ];
+            moveAnimation = animations["move"];
+            idleAnimation = animations["idle"];
 
-		} else {
+        }
 
-			moveAnimation = animations[ "move" ];
-			idleAnimation = animations[ "idle" ];
+        // actions
 
-		}
+        if (controls.jump) {
 
-		// actions
+            moveAnimation = animations["jump"];
+            idleAnimation = animations["jump"];
 
-		if ( controls.jump ) {
+        }
 
-			moveAnimation = animations[ "jump" ];
-			idleAnimation = animations[ "jump" ];
+        if (controls.attack) {
 
-		}
+            if (controls.crouch) {
 
-		if ( controls.attack ) {
+                moveAnimation = animations["crouchAttack"];
+                idleAnimation = animations["crouchAttack"];
 
-			if ( controls.crouch ) {
+            } else {
 
-				moveAnimation = animations[ "crouchAttack" ];
-				idleAnimation = animations[ "crouchAttack" ];
+                moveAnimation = animations["attack"];
+                idleAnimation = animations["attack"];
+                if (PLAYER.controls.canFire == true) {
+                    PLAYER.controls.canFire = false;
+                    CANNON_SCENE.FIRE_BABY();
+                    setTimeout(function () {
+                        PLAYER.controls.canFire = true
+                    }, 1200);
+                }
 
-			} else {
+            }
 
-				moveAnimation = animations[ "attack" ];
-				idleAnimation = animations[ "attack" ];
-				if (PLAYER.controls.canFire == true){
-				PLAYER.controls.canFire = false;
-				CANNON_SCENE.FIRE_BABY();
-				setTimeout(function(){PLAYER.controls.canFire = true},1200);
-				}
-				
-			}
+        }
 
-		}
+        // set animations
 
-		// set animations
+        if (controls.moveForward || controls.moveBackward || controls.moveLeft || controls.moveRight) {
 
-		if ( controls.moveForward || controls.moveBackward || controls.moveLeft || controls.moveRight ) {
+            if (this.activeAnimation !== moveAnimation) {
 
-			if ( this.activeAnimation !== moveAnimation ) {
+                this.setAnimation(moveAnimation);
 
-				this.setAnimation( moveAnimation );
+            }
 
-			}
+        }
 
-		}
+        if (Math.abs(this.speed) < 0.2 * this.maxSpeed && !(controls.moveLeft || controls.moveRight || controls.moveForward || controls.moveBackward)) {
 
+            if (this.activeAnimation !== idleAnimation) {
 
-		if ( Math.abs( this.speed ) < 0.2 * this.maxSpeed && ! ( controls.moveLeft || controls.moveRight || controls.moveForward || controls.moveBackward ) ) {
+                this.setAnimation(idleAnimation);
 
-			if ( this.activeAnimation !== idleAnimation ) {
+            }
 
-				this.setAnimation( idleAnimation );
+        }
 
-			}
+        // set animation direction
 
-		}
+        if (controls.moveForward) {
 
-		// set animation direction
+            if (this.meshBody) {
 
-		if ( controls.moveForward ) {
+                this.meshBody.setAnimationDirectionForward(this.activeAnimation);
+                this.meshBody.setAnimationDirectionForward(this.oldAnimation);
 
-			if ( this.meshBody ) {
+            }
 
-				this.meshBody.setAnimationDirectionForward( this.activeAnimation );
-				this.meshBody.setAnimationDirectionForward( this.oldAnimation );
+            if (this.meshWeapon) {
 
-			}
+                this.meshWeapon.setAnimationDirectionForward(this.activeAnimation);
+                this.meshWeapon.setAnimationDirectionForward(this.oldAnimation);
 
-			if ( this.meshWeapon ) {
+            }
 
-				this.meshWeapon.setAnimationDirectionForward( this.activeAnimation );
-				this.meshWeapon.setAnimationDirectionForward( this.oldAnimation );
+        }
 
-			}
+        if (controls.moveBackward) {
 
-		}
+            if (this.meshBody) {
 
-		if ( controls.moveBackward ) {
+                this.meshBody.setAnimationDirectionBackward(this.activeAnimation);
+                this.meshBody.setAnimationDirectionBackward(this.oldAnimation);
 
-			if ( this.meshBody ) {
+            }
 
-				this.meshBody.setAnimationDirectionBackward( this.activeAnimation );
-				this.meshBody.setAnimationDirectionBackward( this.oldAnimation );
+            if (this.meshWeapon) {
 
-			}
+                this.meshWeapon.setAnimationDirectionBackward(this.activeAnimation);
+                this.meshWeapon.setAnimationDirectionBackward(this.oldAnimation);
 
-			if ( this.meshWeapon ) {
+            }
 
-				this.meshWeapon.setAnimationDirectionBackward( this.activeAnimation );
-				this.meshWeapon.setAnimationDirectionBackward( this.oldAnimation );
+        }
 
-			}
+    };
 
-		}
+    this.updateMovementModel = function (delta) {
 
-	};
+        var controls = this.controls;
 
-	this.updateMovementModel = function ( delta ) {
+        // speed based on controls
 
-		var controls = this.controls;
+        if (controls.crouch)
+            this.maxSpeed = this.crouchSpeed;
+        else
+            this.maxSpeed = this.walkSpeed;
 
-		// speed based on controls
+        this.maxReverseSpeed =  - this.maxSpeed;
 
-		if ( controls.crouch ) 	this.maxSpeed = this.crouchSpeed;
-		else this.maxSpeed = this.walkSpeed;
+        if (controls.moveForward)
+            this.speed = THREE.Math.clamp(this.speed + delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed);
+        if (controls.moveBackward)
+            this.speed = THREE.Math.clamp(this.speed - delta * this.backAcceleration, this.maxReverseSpeed, this.maxSpeed);
 
-		this.maxReverseSpeed = - this.maxSpeed;
+        // orientation based on controls
+        // (don't just stand while turning)
 
-		if ( controls.moveForward )  this.speed = THREE.Math.clamp( this.speed + delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed );
-		if ( controls.moveBackward ) this.speed = THREE.Math.clamp( this.speed - delta * this.backAcceleration, this.maxReverseSpeed, this.maxSpeed );
+        var dir = 1;
 
-		// orientation based on controls
-		// (don't just stand while turning)
+        if (controls.moveLeft) {
 
-		var dir = 1;
+            this.bodyOrientation += delta * this.angularSpeed;
+            this.speed = THREE.Math.clamp(this.speed + dir * delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed);
 
-		if ( controls.moveLeft ) {
+        }
 
-			this.bodyOrientation += delta * this.angularSpeed;
-			this.speed = THREE.Math.clamp( this.speed + dir * delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed );
+        if (controls.moveRight) {
 
-		}
+            this.bodyOrientation -= delta * this.angularSpeed;
+            this.speed = THREE.Math.clamp(this.speed + dir * delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed);
 
-		if ( controls.moveRight ) {
+        }
 
-			this.bodyOrientation -= delta * this.angularSpeed;
-			this.speed = THREE.Math.clamp( this.speed + dir * delta * this.frontAcceleration, this.maxReverseSpeed, this.maxSpeed );
+        // speed decay
 
-		}
+        if (!(controls.moveForward || controls.moveBackward)) {
 
-		// speed decay
+            if (this.speed > 0) {
 
-		if ( ! ( controls.moveForward || controls.moveBackward ) ) {
+                var k = exponentialEaseOut(this.speed / this.maxSpeed);
+                this.speed = THREE.Math.clamp(this.speed - k * delta * this.frontDecceleration, 0, this.maxSpeed);
 
-			if ( this.speed > 0 ) {
+            } else {
 
-				var k = exponentialEaseOut( this.speed / this.maxSpeed );
-				this.speed = THREE.Math.clamp( this.speed - k * delta * this.frontDecceleration, 0, this.maxSpeed );
+                var k = exponentialEaseOut(this.speed / this.maxReverseSpeed);
+                this.speed = THREE.Math.clamp(this.speed + k * delta * this.backAcceleration, this.maxReverseSpeed, 0);
 
-			} else {
+            }
 
-				var k = exponentialEaseOut( this.speed / this.maxReverseSpeed );
-				this.speed = THREE.Math.clamp( this.speed + k * delta * this.backAcceleration, this.maxReverseSpeed, 0 );
+        }
 
-			}
+        // displacement
 
-		}
+        var forwardDelta = this.speed * delta;
 
-		// displacement
+        this.root.position.x += Math.sin(this.bodyOrientation) * forwardDelta;
+        this.root.position.z += Math.cos(this.bodyOrientation) * forwardDelta;
 
-		var forwardDelta = this.speed * delta;
+        // steering
 
-		this.root.position.x += Math.sin( this.bodyOrientation ) * forwardDelta;
-		this.root.position.z += Math.cos( this.bodyOrientation ) * forwardDelta;
+        this.root.rotation.y = this.bodyOrientation;
 
-		// steering
+    };
 
-		this.root.rotation.y = this.bodyOrientation;
+    // internal helpers
 
-	};
+    function loadTextures(baseUrl, textureUrls) {
 
-	// internal helpers
+        var textureLoader = new THREE.TextureLoader();
+        var textures = [];
 
-	function loadTextures( baseUrl, textureUrls ) {
+        for (var i = 0; i < textureUrls.length; i++) {
 
-		var textureLoader = new THREE.TextureLoader();
-		var textures = [];
+            textures[i] = textureLoader.load(baseUrl + textureUrls[i], checkLoadingComplete);
+            textures[i].mapping = THREE.UVMapping;
+            textures[i].name = textureUrls[i];
 
-		for ( var i = 0; i < textureUrls.length; i ++ ) {
+        }
 
-			textures[ i ] = textureLoader.load( baseUrl + textureUrls[ i ], checkLoadingComplete );
-			textures[ i ].mapping = THREE.UVMapping;
-			textures[ i ].name = textureUrls[ i ];
+        return textures;
 
-		}
+    }
 
-		return textures;
+    function createPart(geometry, skinMap) {
 
-	}
+        var materialWireframe = new THREE.MeshLambertMaterial({
+                color: 0xffaa00,
+                wireframe: true,
+                morphTargets: true,
+                morphNormals: true
+            });
+        var materialTexture = new THREE.MeshLambertMaterial({
+                color: 0xffffff,
+                wireframe: false,
+                map: skinMap,
+                morphTargets: true,
+                morphNormals: true
+            });
 
-	function createPart( geometry, skinMap ) {
+        //
 
-		var materialWireframe = new THREE.MeshLambertMaterial( { color: 0xffaa00, wireframe: true, morphTargets: true, morphNormals: true } );
-		var materialTexture = new THREE.MeshLambertMaterial( { color: 0xffffff, wireframe: false, map: skinMap, morphTargets: true, morphNormals: true } );
+        var mesh = new THREE.MorphBlendMesh(geometry, materialTexture);
+        mesh.rotation.y =  - Math.PI / 2;
 
-		//
+        //
 
-		var mesh = new THREE.MorphBlendMesh( geometry, materialTexture );
-		mesh.rotation.y = - Math.PI / 2;
+        mesh.materialTexture = materialTexture;
+        mesh.materialWireframe = materialWireframe;
 
-		//
+        //
 
-		mesh.materialTexture = materialTexture;
-		mesh.materialWireframe = materialWireframe;
+        mesh.autoCreateAnimations(scope.animationFPS);
 
-		//
+        return mesh;
 
-		mesh.autoCreateAnimations( scope.animationFPS );
+    }
 
-		return mesh;
+    function checkLoadingComplete() {
 
-	}
+        scope.loadCounter -= 1;
+        if (scope.loadCounter === 0)
+            scope.onLoadComplete();
 
-	function checkLoadingComplete() {
+    }
 
-		scope.loadCounter -= 1;
-		if ( scope.loadCounter === 0 ) 	scope.onLoadComplete();
+    function exponentialEaseOut(k) {
 
-	}
+        return k === 1 ? 1 :  - Math.pow(2,  - 10 * k) + 1;
 
-	function exponentialEaseOut( k ) {
-
-		return k === 1 ? 1 : - Math.pow( 2, - 10 * k ) + 1;
-
-	}
+    }
 
 };

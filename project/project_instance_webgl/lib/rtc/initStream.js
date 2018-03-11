@@ -3,7 +3,7 @@
 /////////////////////////////////
 
 
-function VIDEO_TEXTURE (monitor_ , videoImage_) {
+function VIDEO_TEXTURE (monitor_ ) {
 
 var ROOT = this;
 ROOT.LOADED = function(){};
@@ -29,7 +29,7 @@ ROOT.movieMaterial = new THREE.MeshBasicMaterial( { map: ROOT.videoTexture, over
 var movieGeometry = new THREE.PlaneGeometry( 1000, 1000, 1, 1 );
 ROOT.movieScreen = new THREE.Mesh( movieGeometry, ROOT.movieMaterial );
 
-ROOT.movieScreen.position.set(0,500,4000);
+ROOT.movieScreen.position.set(0,500,1000);
 scene.add(ROOT.movieScreen);
 
 ROOT.AUTO_UPDATE = function(){

@@ -28,8 +28,7 @@ var textuteImageSamplers = {
 };
 
 
-App.audioSystem.createVideoAsset ("Galactic" , "Galactic_Expansion_Fractal_Morph_Official_Video.mp4")
-
+App.audioSystem.createVideoAsset ("Galactic" , "Epiclogue.mp3")
 
 App.onload = function(e){
 

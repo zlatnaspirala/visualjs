@@ -607,6 +607,8 @@ THREE.ColladaLoader = function () {
 		var list = [];
 		var walk = function(parentid, node, list) {
 
+		
+		  if (typeof node.matrix != 'undefined') {
 			var bone = {};
 			bone.name = node.sid;
 			bone.parent = parentid;
@@ -624,6 +626,8 @@ THREE.ColladaLoader = function () {
 
 				walk(node.sid, node.nodes[i], list);
 
+			}
+			
 			}
 
 		};
