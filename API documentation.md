@@ -32,6 +32,7 @@
 
   
 ##  Structure of -*<Default Name of program>*  Default :  HELLO_WORLD: 
+```javascript
       
 PROGRAM = PROTOTYPE CLASS NAME
 
@@ -59,10 +60,9 @@ UPDATE: function()
 
 UPDATE_INTERVAL: 15
 
+```
 
 
-
-   
 #### Access method is :
    
 
@@ -76,7 +76,7 @@ UPDATE_INTERVAL: 15
 
 
 ##  Structure of ENGINE 
- 
+```javascript 
 ENGINE = $2
 
 CREATE_MODUL: function(name)
@@ -104,9 +104,7 @@ MODULES: [MODUL, MODUL] (2)
 PROGRAM_ID: "HELLO_WORLD"
 
 UPDATE_MODULES: function()
-
-   
-
+```
 
 
 
@@ -125,7 +123,6 @@ UPDATE_MODULES: function()
   HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT( "GO" , 45   , 45 , 10 , 10 , 10)
   
 ```
-
 
 
 ### 2) Adding image or animation : 
@@ -148,8 +145,6 @@ UPDATE_MODULES: function()
 
 
 ```
-
-
 
 ### 3) Disable draging 
 
@@ -236,7 +231,7 @@ GO.TOUCH_UP = function(){
    
 #### Structure of SYS
 
-
+```javascript
 Object = $3
 
 ARRAY_OPERATION: {REMOVE_ALL_ITEMS_WITH_VALUE: function, DEEP_COPY: Object}
@@ -270,7 +265,7 @@ SOUND: {GEN: function, RES: AUDIO_RES}
 VOICE: {SPEAK: function, LISTEN: function}
 
 XML: {READ: function}
-
+```
    
 #### Access method is :
    
@@ -299,28 +294,26 @@ XML: {READ: function}
    
    SYS.BROWSER.NAME
    
-   // ENUM FOR prop NAME
+   // ENUMERATORS FOR prop NAME
    /*
-   mobile_firefox_android
-   mobile_firefox_android_tablet
-   opera_mobile_android
-   opera_mobile_android_tablet
-   safari_mobile_iphone
-   mobile_safari_chrome_ipad
-   desktop_safari
-   android_native
-   mobile_chrome_android_tablet
-   mobile_chrome_android
-   chrome_browser
-   firefox_desktop
-   opera_desktop
+     mobile_firefox_android
+     mobile_firefox_android_tablet
+     opera_mobile_android
+     opera_mobile_android_tablet
+     safari_mobile_iphone
+     mobile_safari_chrome_ipad
+     desktop_safari
+     android_native
+     mobile_chrome_android_tablet
+     mobile_chrome_android
+     chrome_browser
+     firefox_desktop
+     opera_desktop
    */
     
     // ENUM also can be  : unknown 
     
-    
-    // other prop
-    
+    // other property
     SYS.BROWSER.NOMOBILE 
     
     // 0 value - This is Mobile device
@@ -351,25 +344,28 @@ Examples :
 
 ### Other procedural functions 
 
+Validate email 
 ####Name : validateEmail
-####Type : function
+
+####Type : function return boolean
 #### Access method is :
 ```javascript
  //validate string for email 
   validateEmail(email)
 
 ```
-
+###Set localStorage value
 ####Name : LS_SET
+
 ####Type : function - no return value
+
 #### Access method is :
 ```javascript
  //Save data to the localstorage 
   LS_SET(name,value)
 
 ```
-
-
+### Get value from localStorage
 ####Name : LS_GET
 ####Type : function - return value from storage
 #### Access method is :
@@ -382,20 +378,13 @@ Examples :
 
 ####Name : SAVE
 ####Type : function - no return value  
+(new feature return value pass or not)
 #### Access method is :
 ```javascript
  //Save Object data to the localstorage 
   SAVE(name , obj)
 
 ```
-
-
-
-
-
-
-
-
 
 
  
