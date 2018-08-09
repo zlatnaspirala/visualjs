@@ -63,7 +63,7 @@
    - Female Body v3.blend this file has been released by AndresCuccaro under the following license: Creative Commons Attribution 3.0
   
 
-# **Instructions : ** #  
+# Instructions :  #  
   
     For build API doc : 
 	
@@ -75,7 +75,7 @@
 	
 	
 	
-# **Try online - 2d canvas part of project  ** #  
+# Try online - 2d canvas part of project   #  
 
  
   -Add new game Object with single image
@@ -184,7 +184,7 @@ module.exports = {
 This is all .
 
 
-#  CLIENT OR WEB APPLICATION 
+#  CLIENT OR WEB APPLICATION #
 
 **How to start :** 
 
@@ -209,8 +209,8 @@ node build_from_editor_to_visual_js_file.js
           Click right button and you will see content menu . First item is **Add New game object** .
           Than your game object will show at web page. Right click on rectangle area to see game object context menu.
          	
-# 	*local node.js application tools* (	*Use this in develop mode only*  ):  
-	
+# 	local node.js application tools (Use this in develop mode only):  #
+
 # 	- server_instance/res.js  - create RESOURCE  js object (  ADD image or images for animation ) #
      
            Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
@@ -251,13 +251,12 @@ server_instance/node res.js
 
 
     
-# - VISUAL JS.exe  Windows GUI freeware 
+# - VISUAL JS.exe  Windows GUI freeware #
 
 
  [Video tutorial for visual-JS source editor win gui](https://www.youtube.com/watch?v=kxUBPDhB-3I)
 
  Visual-JS GE 1.0  
-
 
 ![visual-javascript-gui-for-windows.png](https://bitbucket.org/repo/xzgbkK/images/838031220-visual-javascript-gui-for-windows.png)
 
@@ -265,11 +264,7 @@ Visual Source editor Beta 1
 
 ![New_script.png](https://bitbucket.org/repo/xzgbkK/images/1827173607-New_script.png)
 
-
 only for windows users .
-
-
-# #
 
 # 	SERVER OR GAME_SERVER APPLICATION # 
 
@@ -299,11 +294,37 @@ classic server operation with databases and sessions. (Node.js)  basic Lobby sys
 	  
 	  
 	  
-# Jsdoc used for doc generation #
+# Help about new 2d part - implementation of matter.js based typescript . #
 
-help :
- 
-jsdoc -c jsdoc.json -d doc
+I make strong relation with webpack and project . build folder is full vendor nature. Html css and resources come from dependency logic taken from source.
+
+To make all dependency works in build proccess we need some plugins.
+
+Features :
+
+Tile's background draw for images (alias sprite - but for now there's no sprite and frame by frame animation methods).
+
+Small engine config .
+
+Some option in aspect view like 
+
+npm install
+...
+
+npm install typescript
+npm i clean-webpack-plugin --save-dev
+npm i html-webpack-plugin --save-dev
+
+Possible fix : 
+
+npm i webpack --save-dev
+npm i extract-text-webpack-plugin --save-dev
+
+Fix code format : 
+
+tslint -c tslint.json 'src/**/*.ts' --fix
+
+
 	  
 	  
 	  
