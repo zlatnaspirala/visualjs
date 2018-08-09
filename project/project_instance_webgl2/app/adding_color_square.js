@@ -1,18 +1,15 @@
 /*
- 
- Nikola Lukic
- visual-JS 3d part - part of webGl2 api example
- 
+
+Nikola Lukic
+visual-JS 3d part - part of webGl2 api example
+
  */
 
+world.Add("square", 1, "MyColoredSquare1");
 
+world.Add("square", 1.1, "MyColoredSquare2");
 
-world.Add("square", 1 , "MyColoredSquare1");
-
-world.Add("square", 1.1 , "MyColoredSquare2");
-
-world.Add("square", 1.2 , "MyColoredSquare3");
-
+world.Add("square", 1.2, "MyColoredSquare3");
 
 // SET POSITION
 
@@ -24,10 +21,7 @@ App.scene.MyColoredSquare3.position.SetX(-2.5);
 //App.scene.MySquare.position.SetX(-2.5);
 //App.scene.MyCubeTex.position.SetY(1);
 //App.scene.MyPyramid.position.SetY(-2.5);
-
-
 //App.scene.objectFileChurch.position.SetX(-2.5);
-
 
 // ROTATING
 
@@ -41,10 +35,3 @@ App.scene.MyColoredSquare3.position.SetX(-2.5);
 //App.scene.MyCubeTex.rotDirection.SetDirectionZ()
 //App.scene.MyCubeTex.rotDirection.SetDirectionX()
 //App.scene.MyCubeTex.rotDirection.SetDirectionY()
-
-
-
-
-
-
-

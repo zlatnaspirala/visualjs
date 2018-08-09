@@ -48,9 +48,10 @@
         if (mobile) {
             var userAgent = navigator.userAgent.toLowerCase();
             if ((userAgent.search("android") > -1) && (userAgent.search("mobile") > -1))
-                console.log("ANDROID MOBILE")else if ((userAgent.search("android") > -1) && !(userAgent.search("mobile") > -1))
-                    console.log(" ANDROID TABLET ")
-                    TYPEOFANDROID = 1;
+			  {console.log("ANDROID MOBILE")}
+			else if ((userAgent.search("android") > -1) && !(userAgent.search("mobile") > -1))
+			  {console.log(" ANDROID TABLET ")
+			  TYPEOFANDROID = 1;}
         } else {
             NOMOBILE = 1;
         }

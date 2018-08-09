@@ -1,113 +1,113 @@
 /**
  * Created by Nikola Lukic zlatnaspirala@gmail.com
  * @example SYS.DEBUG.LOG('welcome to extrime')
- * @Object SYS 
+ * @Object {object} SYS
  */
 
 var SYS = {
 
-	ROOT: this,
-	
-	/** 
-	 * Get browser data
-	 * @property {DETECTBROWSER} BROWSER
-	 */
-	BROWSER: new DETECTBROWSER(),
-	
-	/**
+    ROOT: this,
+
+    /**
+     * Get browser data
+     * @property {DETECTBROWSER} BROWSER
+     */
+    BROWSER: new DETECTBROWSER(),
+
+    /**
     Load/Add dinamic script in runtime
      */
-	SCRIPT: SCRIPT,
-	
-	/**
+    SCRIPT: SCRIPT,
+
+    /**
     Works with html canvas element ,
     create surface and setup main program loop
      */
-	DOM: new DOM(),
-	
-	/**
+    DOM: new DOM(),
+
+    /**
     Just list of running programs
      */
-	RUNNING_PROGRAMS: new Array(),
-	/**
+    RUNNING_PROGRAMS: new Array(),
+    /**
     DEBUG
     console.log polumorh call
     switch on/off
      */
-	DEBUG: new LOG(),
+    DEBUG: new LOG(),
 
-	READY: false,
+    READY: false,
 
-	/**
+    /**
     RES - resources
     Image object creator
      */
-	RES: {
+    RES: {
 
-		SUM_OF_LOADED_IMAGES: 0,
-		CREATE_IMG: CREATE_IMG,
+        SUM_OF_LOADED_IMAGES: 0,
+        CREATE_IMG: CREATE_IMG,
 
-	},
+    },
 
-	// Math
-	/**
+    // Math
+    /**
     Math - operation
      */
-	MATH: {
+    MATH: {
 
-		NUMBER_ROUND: round,
-		RANDOM_INT_FROM_TO: randomIntFromTo,
-		TO_DEGREES: toDegrees,
-		TO_RADIANS: toRadians,
-		OSCILLATOR: OSCILLATOR,
-		CONVERT: CONVERTOR,
-		INCREMENTATOR: INCREMENTATOR,
+        NUMBER_ROUND: round,
+        RANDOM_INT_FROM_TO: randomIntFromTo,
+        TO_DEGREES: toDegrees,
+        TO_RADIANS: toRadians,
+        OSCILLATOR: OSCILLATOR,
+        CONVERT: CONVERTOR,
+        INCREMENTATOR: INCREMENTATOR,
 
-	},
+    },
 
-	ARRAY_OPERATION: {
+    ARRAY_OPERATION: {
 
-		REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
-		DEEP_COPY: DEEP_COPY,
+        REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
+        DEEP_COPY: DEEP_COPY,
 
-	},
+    },
 
-	LOCAL_STORAGE: {},
+    LOCAL_STORAGE: {},
 
-	// Mouse or touch READ_ONLY
-	MOUSE: {
-		x: 0,
-		y: 0,
-		PRESS: false,
-		BUTTON_PRESSED: null,
-		ON_RIGHT_BTN_PRESSED: function () {},
-		ON_MID_BTN_PRESSED: function () {},
-		ON_LEFT_BTN_PRESSED: function () {},
-	},
+    // Mouse or touch READ_ONLY
+    MOUSE: {
+        x: 0,
+        y: 0,
+        PRESS: false,
+        BUTTON_PRESSED: null,
+        ON_RIGHT_BTN_PRESSED: function () {},
+        ON_MID_BTN_PRESSED: function () {},
+        ON_LEFT_BTN_PRESSED: function () {},
+    },
 
-	XML: {
+    XML: {
 
-		READ: readXML,
+        READ: readXML,
 
-	},
+    },
 
-	SOUND: {
+    SOUND: {
 
-		GEN: SOUND,
-		RES: {},
-	},
+        GEN: SOUND,
+        RES: {},
+    },
 
-	VOICE: {
+    VOICE: {
 
-		SPEAK: function () {},
-		LISTEN: function () {},
+        SPEAK: function () {},
+        LISTEN: function () {},
 
-	},
+    },
 
-	CAMERA: {
+    CAMERA: {
 
-	    SUPPORT: test_webcam_device(),
-		
-	},
+        SUPPORT: test_webcam_device(),
+
+    },
 
 };

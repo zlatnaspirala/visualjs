@@ -3,9 +3,9 @@
 /*
 Created by Nikola Lukic zlatnaspirala@gmail.com
 MULTI_SCREENS
-*/
+ */
 var MULTI_SCREENS = {
 
-	//  START_UP: function () {},
+    //  START_UP: function () {},
 
 };

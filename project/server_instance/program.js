@@ -1,31 +1,31 @@
 /////////////////////////////////////////////////////
 //Developer : Nikola Lukic zlatnaspirala@gmail.com 
 /////////////////////////////////////////////////////
-/**
-GAME SERVER   FOR  VISUAL JS
-  
-
+/*
+   GAME SERVER FOR  VISUAL JS
 */
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //High definition
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-var CONFIG = require('./config');
-var dl  =			 require('delivery');
-var fs  = 			 require("fs");
-var mysql = 		 require('mysql');
-var express = 	 require("express");
-var app = 			 express();
-var http = 			 require('http');
-var https =	     require('https');
-var mkdirp =       require('mkdirp');
-var nodemailer = require('nodemailer');
+
+var CONFIG       = require('./config');
+var dl           = require('delivery');
+var fs           = require("fs");
+var mysql        = require('mysql');
+var express      = require("express");
+var app          = express();
+var http         = require('http');
+var https        = require('https');
+var mkdirp       = require('mkdirp');
+var nodemailer   = require('nodemailer');
+
 function include(f) {eval.apply(global, [read(f)]);}
 function read(f) {return fs.readFileSync(f).toString();}
 
-var REG_PATH = CONFIG.PATH_OF_WWW + CONFIG.REG_PATH ; 
-
+var REG_PATH = CONFIG.PATH_OF_WWW + CONFIG.REG_PATH; 
 console.log('REG_PATH' , REG_PATH);
+
 
 include('lib/preinit.js');
 
@@ -38,9 +38,8 @@ var DATABASE = require('./account/account');
   
 //BASE.SEND_EMAIL("test1212" , 'zlatnaspirala@gmail.com' , 'ha ha ha');
 
-DATABASE.GET_ALL_USERS();
+ DATABASE.GET_ALL_USERS();
  
-
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 // NO SECURE - HTTP 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
@@ -55,11 +54,6 @@ console.log('Socket server listening on port : ' , CONFIG.ACCOUNT_PORT);
 
 
  
-
-
-
-
-
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 //Networking
@@ -91,8 +85,7 @@ io.sockets.on('connection', function (socket) {
 		var private_email = socket.email.toString().substr(0, 4) ;
 		if (typeof socket.email != 'undefined' && data.length < 150){
 		
-		     console.log("COMMON :" + data)
-		
+		     console.log("COMMON :" + data)		
              io.sockets.emit('realtime', private_email , data);
 		
 		}
@@ -101,6 +94,7 @@ io.sockets.on('connection', function (socket) {
 	      	io.sockets.emit('realtime', private_email , " Try to send big data , 150 length is maximum for this chat.");
 		
 		}
+		
 		}
 		else{
 			// we dont have any data about client
@@ -119,13 +113,9 @@ io.sockets.on('connection', function (socket) {
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 socket.on('register', function( email , password ){
-	
-	
-       
-	   
+
 	    if (validateEmail(email) == true) {
-			
-			
+						
 	    console.log("register  ACTION :" , password , " email " , email);
         socket.email = email;
 		var check_local = 0;
@@ -149,8 +139,6 @@ socket.on('register', function( email , password ){
 		DATABASE.ADD_NEW_ACCOUNT(NEW_ACCOUNT_POST);
 		io.sockets.emit('realtime',  "registerDoneMailVerification" , "Just goto your email and click on confirmation link.");
 		emailtemplate.confirmLink = NEW_ACCOUNT_POST.token.toString();
-		
-		
 
 		var localPath_to_confirm_file = 'http://localhost/' + "users/" + emailtemplate.confirmLink;
 		DATABASE.SEND_EMAIL ( 'YOUR APP SEND email confirmation' , email , emailtemplate.getConfirmBodyEmail(localPath_to_confirm_file) );
@@ -165,12 +153,8 @@ socket.on('register', function( email , password ){
 		
 		}); 
 		
-	
-		
 		
 		}
-		
-
 		
 		}
 		else{
@@ -183,23 +167,26 @@ socket.on('register', function( email , password ){
 		
     });
 
-	
-//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-		
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+// Activate account
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+
 socket.on('activateAccount', function(token_){
 
-console.log("Activate new user with token : " , token_ );
-ACTIVATE_ACCOUNT({   active  : "yes" , token : token_ });
+ console.log("Activate new user with token : " , token_ );
+ ACTIVATE_ACCOUNT({   active  : "yes" , token : token_ });
 
 });	
 	
 	
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 
-
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 //LOGIN EVENT
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 
 socket.on('fast_login', function(email , accesstoken ){
 	
@@ -213,40 +200,40 @@ socket.on('fast_login', function(email , accesstoken ){
 
 		  var query = DATABASE.connection.query('SELECT online FROM accounts WHERE email=?' , [ email ]  , function (err, result) {
         if (!err){
-	  if ( result[0].online == "yes") {
-			socket.email = email;
-			usernames[email] = email;
-			DATABASE.SETUP_SESSION(entry.token);
-			console.log("USER ON SESSION ." , email  );
-		    socket.emit('TAKE', entry.token , entry.rank );
-			return;
-	  }else{
+        	  if ( result[0].online == "yes") {
+		    	socket.email = email;
+			    usernames[email] = email;
+				DATABASE.SETUP_SESSION(entry.token);
+				console.log("USER ON SESSION ." , email  );
+			    socket.emit('TAKE', entry.token , entry.rank );
+				return;
+	           }else{
 	  
+	  
+	           }
 	  
 	  }
-	  
-	  }else
+	  else
 	  {
 	  
 	  
 	  
 	  }
+	  
 	  });
-		}  
+	  
+	   }  
 		   
-		   
-	
-        });
+      });
 		
 	
   });
 	   
-	
 ///////////////////////////////////////////////
 //LOGIN
 socket.on('login', function(email , password ){
 	
-	DATABASE.connection.query('SELECT * from accounts', function(err, rows, fields) {
+DATABASE.connection.query('SELECT * from accounts', function(err, rows, fields) {
   if (!err){
     //console.log('Users list : ', rows);
 	ACCOUNTS.LIST = [];
@@ -312,10 +299,7 @@ socket.on('login', function(email , password ){
 	
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 //Set nickname
-
-	
-
-	
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
 	
 socket.on('getRoomList', function( email , accesstoken ){
 
