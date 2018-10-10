@@ -2,15 +2,12 @@
 
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-
 ![visualjs.png](https://bitbucket.org/repo/xzgbkK/images/102940608-visualjs.png)
 
-
-
-    creator : Nikola Lukic
-    about : Visual JS 2d canvas multiplatform game engine
+     creator : Nikola Lukic
+     about : Visual JS 2d canvas multiplatform game engine
     
-    Visual-js project parts : 
+ ##     Visual-js project parts : ##
     
     -2D PART :   
     This is JavaScript game engine  (server part node.js / client part js)
@@ -23,14 +20,11 @@
     -3D PART : 
     webGL2 based on glmatrix 2.0
 
-
-	**Basic licence rules :** 
-	
+	Basic licence rules :
 	1) Each file in this project has its own license , be careful , do not violate the basic rules.
-	
-	2) You are free to use any version of Visual JS library in any other project (even commercial projects) as long as the copyright header is left intact
+	2) You are free to use any version of Visual JS library in any other project (even commercial projects)
+	  as long as the copyright header is left intact
 	  Except for plugins on sale and graphics that come with them (they have special commercial licence).
-	
         3)Please read the following terms and conditions before using this application: 
 
         Disclaimer of warranty
@@ -38,9 +32,9 @@
           including without limitation, any warranty of merchantability or fitness for a particular purpose.   
           In no event shall the author of this software be held liable for data loss, 
           damages, loss of profits or any other kind of loss while using or misusing this software.	
-          
+       
          
-**   External licences in this project : ** 
+### External licences in this project : ###
 
    - Webcam NUI control is under :
       Created by Romuald Quantin.
@@ -68,10 +62,9 @@
   
        
 
-# **Try online - 2d canvas part of project  ** #  
+## Try online - 2d canvas part of project ##
 
-  
- 
+
   -Add new game Object with single image
 
  https://jsfiddle.net/zlatnaspirala/rjf0xe0a/
@@ -120,27 +113,20 @@
 
  https://jsfiddle.net/zlatnaspirala/dpejur8y/
 
- **view all at** :
+ ### view all ### :
  https://jsfiddle.net/user/zlatnaspirala/fiddles/ 
-
-
-
-
-
 
 ## Installation and setup  : ##
 
 
   In server Instance folder (navigate to server_instance/)
 
-**1) Install next modules :** 
+1) Install next modules :*
 
 In node.js command prompt or console enter next installation command : 
 
 ```
 #!javascript
-
-
 
 npm install mysql
 npm install delivery
@@ -174,38 +160,35 @@ module.exports = {
 
 
 ```
-
 This is all .
 
+## CLIENT OR WEB APPLICATION ##
 
-#  CLIENT OR WEB APPLICATION 
+### How to start : ###
 
-**How to start :** 
-
-       1) Copy program_instance/ folder to the www folder or use visual-js.exe and create new application (select folder for www and server path).
-          Best way : dont edit ROOT/program_instance/ - make copy of project_instance for use . Reason is to save original library . Use copy/paste to make instance 
-          client ans server folders(windows gui use it for creating new projects). No problem at all you can always download new clean project from web.
-       2) OnPage editor local usage service : start server_instance/editor.js if you want to create game objects from web page . After setup your page you must build visual.js 
-          file with command : 
-          
-
-```
-#!javascript
-
+ 1) Copy program_instance/ folder to the www folder or use visual-js.exe and create new application
+    (select folder for www and server path).
+   Best way : dont edit ROOT/program_instance/ - make copy of project_instance for use.
+   Reason is to save original library . Use copy/paste to make instance client and server folders 
+   (windows gui use it for creating new projects). No problem at all you can always download
+   new clean project from web.
+ 2) OnPage editor local usage service : start server_instance/editor.js if you want to create game
+    objects from web page . After setup your page you must build visual.js 
+    file with command : 
+     
+```javascript
 node build_from_editor_to_visual_js_file.js 
 ```
 
-          *Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.*
-
-
-       3) In browser navigate to project-instance folder (index.html)
+  *Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.*
+  3) In browser navigate to project-instance folder (index.html)
       
-          Click right button and you will see content menu . First item is **Add New game object** .
+          Click right button and you will see content menu . First item is *Add New game object* .
           Than your game object will show at web page. Right click on rectangle area to see game object context menu.
          	
-# 	*local node.js application tools* (	*Use this in develop mode only*  ):  
+## 	*local node.js application tools* (	*Use this in develop mode only*  ):  ##
 	
-# 	- server_instance/res.js  - create RESOURCE  js object (  ADD image or images for animation ) #
+### 	- server_instance/res.js  - create RESOURCE js object (ADD image or images for animation) ###
      
            Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
            run command :           
@@ -223,21 +206,21 @@ server_instance/node res.js
 
            This is good because memory safe.
 
-#ON/PAGE Editor 
+## ON/PAGE Editor ##
 
-# 	- server_instance/editor.js #
+### - server_instance/editor.js ###
 
            create game objects direct in web browser view. Takes data from system folder lib/visual_scripts/ and generate code.
            After build you can found your code intro visual.js (node build_from_editor_to_visual_js_file.js)
 
           - server_instance/build_from_editor_to_visual_js_file.js (node.js app for local use) 
-           ** ON-PAGE Editor** 
+           *ON-PAGE Editor*
 
-          If you use editor.js to visual create game object method , you must  start ***node build_from_editor_to_visual_js_file.js*** on the end of work. 
+          If you use editor.js to visual create game object method , you must  start
+	  node build_from_editor_to_visual_js_file.js on the end of work. 
           This tool will create visual.js in folder starter/ with all your game object was created in editor style .
-
-
-# 	- linux user #
+	  
+### 	- linux user ###
           
           Linux user need terminal for all jobs . 
           Example : Start ON-PAGE editor with terminal / cmd
@@ -245,13 +228,12 @@ server_instance/node res.js
 
 
     
-# - VISUAL JS.exe  Windows GUI freeware 
+## - VISUAL JS.exe  Windows GUI freeware ##
 
 
  [Video tutorial for visual-JS source editor win gui](https://www.youtube.com/watch?v=kxUBPDhB-3I)
 
  Visual-JS GE 1.0  
-
 
 ![visual-javascript-gui-for-windows.png](https://bitbucket.org/repo/xzgbkK/images/838031220-visual-javascript-gui-for-windows.png)
 
@@ -259,22 +241,14 @@ Visual Source editor Beta 1
 
 ![New_script.png](https://bitbucket.org/repo/xzgbkK/images/1827173607-New_script.png)
 
-
 only for windows users .
 
+### 	SERVER OR GAME_SERVER APPLICATION ###
 
-
-
-
-          		
-
-
-# 	SERVER OR GAME_SERVER APPLICATION # 
-
-	 in progress...
+	 Posted for slot mashine with dynamic configuration.
 	
 	
-SERVER OPERATION  :
+### SERVER OPERATION  : ###
 
 classic server operation with databases and sessions. (Node.js)  basic Lobby system (STILL DEVELOPING)
     
@@ -283,14 +257,4 @@ classic server operation with databases and sessions. (Node.js)  basic Lobby sys
         Session staff 
         Done  : register , login , request new password 
         -client network example is templates/login.js
-               
-      signaler/node signaler.js
-       Creator " Muaz Khan         
-       www.MuazKhan.com
-       MIT License       - www.WebRTC-Experiment.com/licence
-       Experiments       - github.com/muaz-khan/WebRTC-Experiment
-
-	 
-      - GAME_SERVER : (Node.js)  Specific game server must be created by developer.
-    
-      In future i will post some basic game servers ...
+  
