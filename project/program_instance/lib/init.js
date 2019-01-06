@@ -17,22 +17,22 @@
  */
 function DETECTBROWSER() {
     var HREFF,
-    HREFTXT = "unknown";
+        HREFTXT = "unknown";
     this.NAVIGATOR = navigator.userAgent;
     var NAV = navigator.userAgent;
     var gecko,
-    navIpad,
-    operatablet,
-    navIphone,
-    navFirefox,
-    navChrome,
-    navOpera,
-    navSafari,
-    navandroid,
-    mobile,
-    navMozilla,
-    navUbuntu,
-    navLinux;
+        navIpad,
+        operatablet,
+        navIphone,
+        navFirefox,
+        navChrome,
+        navOpera,
+        navSafari,
+        navandroid,
+        mobile,
+        navMozilla,
+        navUbuntu,
+        navLinux;
     navLinux = NAV.match(/Linux/gi);
     navUbuntu = NAV.match(/Ubuntu/gi);
     gecko = NAV.match(/gecko/gi);
@@ -199,7 +199,7 @@ function LOG() {
      * @param {Any} Data Just log anything like console.log dones. Usage : SYS.DEBUG.LOG("Hello")
      * @return {Any} printing console.log
      */
-    this.LOG = function (data) {
+    this.LOG = function(data) {
 
         if (this.ENABLE == true) {
 
@@ -216,7 +216,7 @@ function LOG() {
      * @param {Any} Data Just log anything like console.log dones. Usage : SYS.DEBUG.WARNING("Hello maybe something wrong!")
      * @return {Any} printing console.warn
      */
-    this.WARNING = function (data) {
+    this.WARNING = function(data) {
 
         if (this.ENABLE == true) {
 
@@ -232,7 +232,7 @@ function LOG() {
      * @param {Any} Data Just log anything like console.log dones. Usage : SYS.DEBUG.CRITICAL("Hello maybe something wrong!")
      * @return {Any} printing console.log
      */
-    this.CRITICAL = function (data) {
+    this.CRITICAL = function(data) {
 
         if (this.ENABLE == true) {
 
@@ -248,7 +248,7 @@ function LOG() {
      * @param {Any} Data Just log anything like console.log dones. Usage : SYS.DEBUG.NETWORK_LOG("Hello networking!")
      * @return {Any} printing console.log
      */
-    this.NETWORK_LOG = function (data) {
+    this.NETWORK_LOG = function(data) {
 
         if (this.ENABLE == true) {
 
@@ -278,7 +278,7 @@ function DOM() {
      * @param {String} Id Id of html element.
      * @return {HtmlObject} point to html element.
      */
-    this.E = function (id) {
+    this.E = function(id) {
         return document.getElementById(id);
     };
 
@@ -289,7 +289,7 @@ function DOM() {
      * @param {String} Id Id of html iframe element.
      * @return {Object} point to iframe document object.
      */
-    this.ACCESS_IFRAME = function (name) {
+    this.ACCESS_IFRAME = function(name) {
         return document.getElementById(name).contentWindow;
     };
 
@@ -300,7 +300,7 @@ function DOM() {
      * @param {String} Url_ Url_ of new html page.
      * @return nothing
      */
-    this.GOTO = function (url_) {
+    this.GOTO = function(url_) {
         location.assign(url_);
     };
 
@@ -311,7 +311,7 @@ function DOM() {
      * @param {method} Atach event
      * @return {Object} point to iframe document object.
      */
-    this.UPLOAD_FILE = function (id_, onchange) {
+    this.UPLOAD_FILE = function(id_, onchange) {
 
         var x = document.createElement("INPUT");
         x.setAttribute("type", "file");
@@ -321,7 +321,7 @@ function DOM() {
 
         window["FILE_" + id_] = document.getElementById(id_);
 
-        window["FILE_" + id_].onchange = function () {
+        window["FILE_" + id_].onchange = function() {
 
             SYS.DEBUG.LOG("New file comes...");
 
@@ -346,7 +346,7 @@ function DOM() {
      * @param {String} resizeType
      * @return nothing
      */
-    this.CREATE_SURFACE = function (ctx, name_of_canvas, w, h, resizeType) {
+    this.CREATE_SURFACE = function(ctx, name_of_canvas, w, h, resizeType) {
 
         this.c = document.getElementById(name_of_canvas);
 
@@ -391,7 +391,7 @@ function DOM() {
      * @param {HtmlObject} ChildDiv ChildDiv for destroying
      * @return {Any} false - if removing faild.
      */
-    this.removeElement = function (parentDiv, childDiv) {
+    this.removeElement = function(parentDiv, childDiv) {
 
         if (typeof childDiv == "undefined") {
 
@@ -415,7 +415,7 @@ function DOM() {
      * @param {string} Name Name of program (alias name of canvas element)
      * @return {Any} false -if faild
      */
-    this.DESTROY_PROGRAM = function (name) {
+    this.DESTROY_PROGRAM = function(name) {
 
         if (typeof name === "undefined") {
 
@@ -428,8 +428,8 @@ function DOM() {
         } else {
 
             //memory
-            window[name].DRAW = function () {};
-            window[name].UPDATE = function () {};
+            window[name].DRAW = function() { };
+            window[name].UPDATE = function() { };
             window[name].DRAW_INTERVAL = undefined;
             window[name].UPDATE_INTERVAL = undefined;
             window[name].AUTO_UPDATE = [];
@@ -445,7 +445,7 @@ function DOM() {
 
     };
 
-    this.LANCH_FULLSCREEN = function (element) {
+    this.LANCH_FULLSCREEN = function(element) {
         if (element.requestFullscreen) {
             element.requestFullscreen();
         } else if (element.mozRequestFullScreen) {
@@ -462,7 +462,7 @@ function DOM() {
      * @alias DOM#EXIT_FULLSCREEN
      * @return nothing
      */
-    this.EXIT_FULLSCREEN = function () {
+    this.EXIT_FULLSCREEN = function() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.mozCancelFullScreen) {
@@ -479,7 +479,7 @@ function DOM() {
      * @alias DOM#FULL_SCREEN
      * @return nothing
      */
-    this.FULL_SCREEN = function () {
+    this.FULL_SCREEN = function() {
 
         if (this.FS_FLAG == 0) {
             this.LANCH_FULLSCREEN(document.documentElement);
@@ -526,29 +526,31 @@ function SET_STREAM(video) {
      * @private
      * @memberof SET_STREAM method
      */
-    var webcamError = function (e) {
+    var webcamError = function(e) {
         alert("Webcam error!", e);
     };
 
-    if (navigator.getUserMedia) {
-
-        navigator.getUserMedia({
-            audio: true,
-            video: true
-        }, function (stream) {
-            //video.src = stream;
-            video.src = window.URL.createObjectURL(stream);
-            //initialize();
-
-        }, webcamError);
-    } else if (navigator.webkitGetUserMedia) {
+    if (navigator.webkitGetUserMedia) {
 
         navigator.webkitGetUserMedia({
             audio: true,
             video: true
-        }, function (stream) {
-            video.src = window.URL.createObjectURL(stream);
+        }, function(stream) {
+            video.srcObject = stream;
+            //video.src = window.URL.createObjectURL(stream);
             // initialize();
+        }, webcamError);
+    }
+    else if (navigator.getUserMedia) {
+
+        navigator.getUserMedia({
+            audio: true,
+            video: true
+        }, function(stream) {
+            //video.src = stream;
+            video.src = window.URL.createObjectURL(stream);
+            //initialize();
+
         }, webcamError);
     } else {
         alert("webcam broken.");
@@ -569,13 +571,13 @@ function initialize() {
     }
 }
 
-var lineLength = function (x, y, x0, y0) {
+var lineLength = function(x, y, x0, y0) {
     return Math.sqrt((x -= x0) * x + (y -= y0) * y);
 };
 
 var PAGE = {
 
-    SET_ICON: function (SRC) {
+    SET_ICON: function(SRC) {
 
         var link = document.createElement("link");
         link.type = "image/x-icon";
@@ -589,7 +591,7 @@ var PAGE = {
 
     ANIMATE_ICON: null,
 
-    ANIMATE: function () {
+    ANIMATE: function() {
 
         //this.ANIMATE_ICON = setInterval(function(){
         //},200);
@@ -669,13 +671,13 @@ function readXML(path, operation) {
     ROOT.xmlhttpGA.open("GET", path, true);
     ROOT.xmlhttpGA.send();
 
-    ROOT.DONE = function () {
+    ROOT.DONE = function() {
 
         return ROOT.RESPONSE;
     };
     ROOT.RESPONSE = "";
 
-    ROOT.xmlhttpGA.onreadystatechange = function () {
+    ROOT.xmlhttpGA.onreadystatechange = function() {
 
         if (this.readyState !== 4)
             return;
@@ -726,10 +728,10 @@ function xmlToJson(xml) {
         for (var i = 0; i < xml.childNodes.length; i++) {
             var item = xml.childNodes.item(i);
             var nodeName = item.nodeName;
-            if (typeof(obj[nodeName]) == "undefined") {
+            if (typeof (obj[nodeName]) == "undefined") {
                 obj[nodeName] = xmlToJson(item);
             } else {
-                if (typeof(obj[nodeName].push) == "undefined") {
+                if (typeof (obj[nodeName].push) == "undefined") {
                     var old = obj[nodeName];
                     obj[nodeName] = [];
                     obj[nodeName].push(old);
@@ -749,7 +751,7 @@ function xmlToJson(xml) {
 }
 
 // MONITOR AND BROWSER_VIEW- COORDINATE SYSTEM
-function MONITOR() {}
+function MONITOR() { }
 
 /**
  * VIEW
@@ -764,7 +766,7 @@ var VIEW = {
      * @param {Number} Represent percent of body width - window.innerWidth
      * @return {Number} Value in pixels
      */
-    W: function (per) {
+    W: function(per) {
 
         if (typeof per === "undefined") {
             return window.innerWidth;
@@ -781,7 +783,7 @@ var VIEW = {
      * @param {Number} Represent percent of body height - window.innerHeight
      * @return {Number} Value in pixels
      */
-    H: function (per) {
+    H: function(per) {
 
         if (typeof per === "undefined") {
             return window.innerHeight;
@@ -797,7 +799,7 @@ var VIEW = {
      * @alias VIEW#ASPECT
      * @return {Number} Value in aspectRatio for current window (body).
      */
-    ASPECT: function () {
+    ASPECT: function() {
 
         return window.innerWidth / window.innerHeight;
 
@@ -819,7 +821,7 @@ function OVERRIDE_TO_REF_CANVAS() {
 
     VIEW = {
 
-        W: function (per) {
+        W: function(per) {
 
             if (typeof per === "undefined") {
                 return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width;
@@ -828,7 +830,7 @@ function OVERRIDE_TO_REF_CANVAS() {
             }
 
         },
-        H: function (per) {
+        H: function(per) {
 
             if (typeof per === "undefined") {
                 return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height;
@@ -838,7 +840,7 @@ function OVERRIDE_TO_REF_CANVAS() {
 
         },
 
-        ASPECT: function () {
+        ASPECT: function() {
 
             return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height;
 
@@ -849,28 +851,28 @@ function OVERRIDE_TO_REF_CANVAS() {
     // override CONVERTOR
     CONVERTOR = {
 
-        PER_TO_PIX: function (v) {
+        PER_TO_PIX: function(v) {
 
             var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100;
             return v * ONE_PERCENT;
 
         },
 
-        PIX_TO_PER: function (v) {
+        PIX_TO_PER: function(v) {
 
             var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100;
             return v / ONE_PERCENT;
 
         },
 
-        PER_TO_PIY: function (v) {
+        PER_TO_PIY: function(v) {
 
             var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100;
             return v * ONE_PERCENT;
 
         },
 
-        PIY_TO_PER: function (v) {
+        PIY_TO_PER: function(v) {
 
             var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100;
             return v / ONE_PERCENT;
@@ -892,7 +894,7 @@ function OVERRIDE_TO_REF_CANVAS() {
  */
 var CONVERTOR = {
 
-    PER_TO_PIX: function (v) {
+    PER_TO_PIX: function(v) {
 
         var ONE_PERCENT = window.innerWidth / 100;
         return v * ONE_PERCENT;
@@ -907,7 +909,7 @@ var CONVERTOR = {
      * @param {Number} V V is number of pixel
      * @return {Number} Value represent number of percents.
      */
-    PIX_TO_PER: function (v) {
+    PIX_TO_PER: function(v) {
 
         var ONE_PERCENT = window.innerWidth / 100;
         return v / ONE_PERCENT;
@@ -922,7 +924,7 @@ var CONVERTOR = {
      * @param {Number} V V is number of pixel
      * @return {Number} Value represent number of percents.
      */
-    PER_TO_PIY: function (v) {
+    PER_TO_PIY: function(v) {
 
         var ONE_PERCENT = window.innerHeight / 100;
         return v * ONE_PERCENT;
@@ -937,7 +939,7 @@ var CONVERTOR = {
      * @param {Number} V V is number of pixel
      * @return {Number} Value represent number of percents.
      */
-    PIY_TO_PER: function (v) {
+    PIY_TO_PER: function(v) {
 
         var ONE_PERCENT = window.innerHeight / 100;
         return v / ONE_PERCENT;
@@ -954,31 +956,31 @@ function remove_last(str) {
 
 var DEEP_COPY = {
     //public method
-    getCloneOfObject: function (oldObject) {
+    getCloneOfObject: function(oldObject) {
         var tempClone = {};
 
-        if (typeof(oldObject) == "object")
+        if (typeof (oldObject) == "object")
             for (prop in oldObject)
                 // for array use private method getCloneOfArray
-                if ((typeof(oldObject[prop]) == "object") &&
+                if ((typeof (oldObject[prop]) == "object") &&
                     (oldObject[prop]).__isArray)
                     tempClone[prop] = this.getCloneOfArray(oldObject[prop]);
-        // for object make recursive call to getCloneOfObject
-        else if (typeof(oldObject[prop]) == "object")
-            tempClone[prop] = this.getCloneOfObject(oldObject[prop]);
-        // normal (non-object type) members
-        else
-            tempClone[prop] = oldObject[prop];
+                // for object make recursive call to getCloneOfObject
+                else if (typeof (oldObject[prop]) == "object")
+                    tempClone[prop] = this.getCloneOfObject(oldObject[prop]);
+                // normal (non-object type) members
+                else
+                    tempClone[prop] = oldObject[prop];
 
         return tempClone;
     },
 
     //private method (to copy array of objects) - getCloneOfObject will use this internally
-    getCloneOfArray: function (oldArray) {
+    getCloneOfArray: function(oldArray) {
         var tempClone = [];
 
         for (var arrIndex = 0; arrIndex <= oldArray.length; arrIndex++)
-            if (typeof(oldArray[arrIndex]) == "object")
+            if (typeof (oldArray[arrIndex]) == "object")
                 tempClone.push(this.getCloneOfObject(oldArray[arrIndex]));
             else
                 tempClone.push(oldArray[arrIndex]);
@@ -995,7 +997,7 @@ function SOUND(duration, fref) {
     osc.connect(audio.destination);
     osc.start(0);
 
-    setTimeout(function () {
+    setTimeout(function() {
         osc.stop();
         audio.close();
         audio = null;
@@ -1015,7 +1017,7 @@ function drawRotatedImage(image, x, y, angle, w, h, surf) {
     surf.translate(x + w / 2, y + h / 2);
     surf.rotate(angle);
     if (typeof image !== "undefined") {
-        surf.drawImage(image,  - (w / 2),  - (h / 2), w, h);
+        surf.drawImage(image, - (w / 2), - (h / 2), w, h);
     }
     surf.restore();
 
@@ -1064,7 +1066,7 @@ function roundedRect(SURF, t, x, y, width, height, radius, color, type, strokeCo
     SURF.restore();
 }
 
-window.oncontextmenu = function () {
+window.oncontextmenu = function() {
     return false; // cancel default menu
 };
 
@@ -1080,11 +1082,11 @@ var cpu_canvas_power = {
     end_count: 0,
     count_frames: 0,
     begin: null,
-    getSec: function () {
+    getSec: function() {
         cpu_canvas_power.begin = new Date().getSeconds();
     },
 
-    checkForCount: function () {
+    checkForCount: function() {
 
         if (cpu_canvas_power.begin == null) {
             cpu_canvas_power.getSec();
@@ -1141,10 +1143,10 @@ function TRACK_NOW() {
         camera: true
     });
 
-    tracker.on("track", function (event) {
+    tracker.on("track", function(event) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        event.data.forEach(function (rect) {
+        event.data.forEach(function(rect) {
             context.strokeStyle = "#a64ceb";
             context.strokeRect(rect.x, rect.y, rect.width, rect.height);
             context.font = "11px Helvetica";
@@ -1177,7 +1179,7 @@ function CREATE_IMG(name, src) {
 
     window["image_" + name] = new Image();
     window["image_" + name].src = src;
-    window["image_" + name].onload = function () {
+    window["image_" + name].onload = function() {
         SYS.RES.SUM_OF_LOADED_IMAGES++;
     };
 
@@ -1194,7 +1196,7 @@ var SCRIPT = {
     SINHRO_LOAD: {},
     LOAD: function addScript(src) {
         var s = document.createElement("script");
-        s.onload = function () {
+        s.onload = function() {
 
             SCRIPT.SCRIPT_ID++;
             console.log("Script id loaded : " + SCRIPT.SCRIPT_ID + " with src : " + this.src + ">>>>>>>>>" + this.src);
