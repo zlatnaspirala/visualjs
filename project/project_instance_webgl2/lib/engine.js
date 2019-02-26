@@ -746,13 +746,11 @@ function SET_STREAM(video) {
             audio: true,
             video: true
         }, function(stream) {
-            //video.src = stream;
             try {
                 video.srcObject = stream;
             } catch (error) {
                 video.src = window.URL.createObjectURL(stream);
             }
-            //initialize();
 
         }, webcamError);
     } else if (navigator.webkitGetUserMedia) {
@@ -761,8 +759,11 @@ function SET_STREAM(video) {
             audio: true,
             video: true
         }, function(stream) {
-            video.src = window.URL.createObjectURL(stream);
-
+            try {
+                video.srcObject = stream;
+            } catch (error) {
+                video.src = window.URL.createObjectURL(stream);
+            }
             // initialize();
 
         }, webcamError);
