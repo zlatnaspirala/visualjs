@@ -33,7 +33,7 @@ function isReady() {
 
 }
 
-window.load_shaders = function (href) {
+window.load_shaders = function(href) {
 
     function handler() {
         if (this.status == 200 && this.responseText != null) {
@@ -69,7 +69,7 @@ function defineWebGLWorld(cavnas) {
         console.log("      Exception in WEBGL base pocket: " + e);
     }
     /* Destructor                                    */
-    world.destroy = function () {
+    world.destroy = function() {
         delete this.gl;
         delete this;
     };
@@ -94,7 +94,7 @@ function updateFPS(elements) {
 
     if (1000 < updateTime) {
         document.getElementById('fps').innerHTML = "FPS AVG: " + Math.floor((1000 * frames / totalTime) / elements)
-             + " CUR: " + Math.floor((1000 * updateFrames / updateTime) / elements);
+            + " CUR: " + Math.floor((1000 * updateFrames / updateTime) / elements);
         updateTime = 0;
         updateFrames = 0;
     }
@@ -139,15 +139,15 @@ window.onbeforeunload = onExit;
 // Provides cancelRequestAnimFrame in a cross browser way.
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-window.cancelRequestAnimFrame = (function () {
+window.cancelRequestAnimFrame = (function() {
     return window.cancelAnimationFrame ||
-    window.webkitCancelRequestAnimationFrame ||
-    window.mozCancelRequestAnimationFrame ||
-    window.oCancelRequestAnimationFrame ||
-    window.msCancelRequestAnimationFrame ||
-    function (callback) {
-        window.clearTimeout(callback);
-    };
+        window.webkitCancelRequestAnimationFrame ||
+        window.mozCancelRequestAnimationFrame ||
+        window.oCancelRequestAnimationFrame ||
+        window.msCancelRequestAnimationFrame ||
+        function(callback) {
+            window.clearTimeout(callback);
+        };
 })();
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -171,7 +171,7 @@ function onExit() {
     objListToDispose.length = 0;
 }
 
-App.operation.destroyWorld = function () {
+App.operation.destroyWorld = function() {
     console.log("    Destroy at iteration:" + reDrawID);
     /* Stop the render                               */
     cancelRequestAnimFrame(reDrawID);
@@ -267,7 +267,7 @@ App.operation.destroyWorld = function () {
 //##################################
 // LOAD SHADERS DYNAMIC
 //##################################
-loadShaders = function (gl, id) {
+loadShaders = function(gl, id) {
     console.log("          Get the Shader");
     console.log("            Creating Shader:" + id);
     var shaderScript = document.getElementById(id);
@@ -309,7 +309,7 @@ loadShaders = function (gl, id) {
     }
 };
 
-initShaders = function (gl, fragment, vertex) {
+initShaders = function(gl, fragment, vertex) {
     console.log("      Initialize Shader");
     console.log("        Fragment Shader:" + fragment);
     console.log("        Vertex Shader:" + vertex);
@@ -432,20 +432,20 @@ initShaders = function (gl, fragment, vertex) {
 //##################################
 // MATRIX OPETARION
 //##################################
-App.operation.PUSH_MATRIX = function (mvMatrix, mvMatrixStack) {
+App.operation.PUSH_MATRIX = function(mvMatrix, mvMatrixStack) {
     var copy = mat4.create();
     mat4.copy(mvMatrix, copy);
     mvMatrixStack.push(copy);
 };
 
-App.operation.POP_MATRIX = function (mvMatrix, mvMatrixStack) {
+App.operation.POP_MATRIX = function(mvMatrix, mvMatrixStack) {
     if (mvMatrixStack.length == 0) {
         throw "Invalid popMatrix!";
     }
     mvMatrix = mvMatrixStack.pop();
 };
 
-App.operation.SET_MATRIX_UNIFORMS = function (object, pMatrix) {
+App.operation.SET_MATRIX_UNIFORMS = function(object, pMatrix) {
     this.GL.gl.uniformMatrix4fv(object.shaderProgram.pMatrixUniform, false, pMatrix);
     this.GL.gl.uniformMatrix4fv(object.shaderProgram.mvMatrixUniform, false, object.mvMatrix);
 };
@@ -454,7 +454,7 @@ App.operation.SET_MATRIX_UNIFORMS = function (object, pMatrix) {
 //REGENERATORs SHADER
 /////////////////////////////
 
-var RegenerateShader = function (id_elem, numOfSamplerInUse, mixOperand) {
+var RegenerateShader = function(id_elem, numOfSamplerInUse, mixOperand) {
 
     var e = document.getElementById(id_elem);
 
@@ -472,7 +472,7 @@ var RegenerateShader = function (id_elem, numOfSamplerInUse, mixOperand) {
 
 };
 
-var RegenerateCustomShader = function (id_elem, numOfSamplerInUse, mixOperand, code_) {
+var RegenerateCustomShader = function(id_elem, numOfSamplerInUse, mixOperand, code_) {
 
     var e = document.getElementById(id_elem);
 
@@ -494,18 +494,18 @@ function generateShaderSrc(numTextures, mixOperand) {
 
     return `
 
-    
+
     // shader for ${numTextures} textures
     precision mediump float;
     precision highp float;
-    
-    
+
+
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
-    
+
     uniform float textureSamplerAmount[${numTextures}];
     int MixOperandString = ${mixOperand};
-    
+
     uniform sampler2D uSampler;
     uniform sampler2D uSampler1;
     uniform sampler2D uSampler2;
@@ -514,9 +514,9 @@ function generateShaderSrc(numTextures, mixOperand) {
     uniform sampler2D uSampler5;
     uniform sampler2D uSampler6;
     uniform sampler2D uSampler7;
-    
+
     void main(void) {
-        
+
         vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor1 = texture2D(uSampler1, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor2 = texture2D(uSampler2, vec2(vTextureCoord.s, vTextureCoord.t));
@@ -525,30 +525,30 @@ function generateShaderSrc(numTextures, mixOperand) {
         vec4 textureColor5 = texture2D(uSampler5, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor6 = texture2D(uSampler6, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor7 = texture2D(uSampler7, vec2(vTextureCoord.s, vTextureCoord.t));
-        
+
         //MixOperandString  make it with eval todo task
-        
+
         if (  ${numTextures} == 1)
             {
-                
+
                   gl_FragColor      = vec4(textureColor.rgb * vLightWeighting, textureColor.a);
-                
+
               //  gl_FragColor = vec4( smoothstep(textureColor.r, textureColor.b,textureColor.g ) , smoothstep(textureColor.r, textureColor.b,textureColor.g ) ,0 ,smoothstep(textureColor.r, textureColor.b,textureColor.g ) );
-                
+
             }
         else if (${numTextures} == 2)
             {
                 if ( ${mixOperand} == 0){
                  // gl_FragColor = textureColor * textureColor1;
-                    
+
                   gl_FragColor      = vec4( (textureColor.rgb * textureColor1.rgb) * vLightWeighting, textureColor.a);
                 }
                 else if (${mixOperand} == 1){
-                    
+
                 //gl_FragColor = textureColor / textureColor1;
                   gl_FragColor      = vec4( (textureColor.rgb / textureColor1.rgb) * vLightWeighting, textureColor.a);
                 }
-                
+
             }
         else if (${numTextures} == 3)
             {
@@ -558,7 +558,7 @@ function generateShaderSrc(numTextures, mixOperand) {
                 else if (MixOperandString == 1){
                     gl_FragColor = vec4( (textureColor.rgb * textureColor1.rgb / textureColor2.rgb ) * vLightWeighting, textureColor.a);
                 }
-                
+
             }
         else if (${numTextures} == 4)
         {
@@ -568,27 +568,27 @@ function generateShaderSrc(numTextures, mixOperand) {
             else if (MixOperandString == 1){
                 gl_FragColor = textureColor / textureColor1 / textureColor2 /  textureColor3;
             }
-            
+
         }
-      
+
     }
-    
+
    // uniform sampler2D uSampler[${numTextures}];
    // uniform float uMixAmount[${numTextures}];
-    
+
     /*
     void main() {
         vec4 color = vec4(0);
-        
+
         for (int i = 0; i < ${numTextures}; ++i) {
             vec4 texColor = texture2D(uSampler[i], vTextureCoord);
             color = mix(color, texColor, uMixAmount[i]);
         }
-        
+
         gl_FragColor = color;
     }
     */
-    
+
     `;
 
 }
@@ -597,21 +597,21 @@ function generateShaderSrc(numTextures, mixOperand) {
 function generateCustomShaderSrc(numTextures, mixOperand, code_) {
 
     return `
-    
-    
+
+
     // shader for ${numTextures} textures
     precision mediump float;
     precision highp float;
-    
+
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
-    
+
     uniform float textureSamplerAmount[${numTextures}];
     float TimeFor;
-    
+
     int MixOperandString = ${mixOperand};
     int CODE = ${code_};
-    
+
     uniform sampler2D uSampler;
     uniform sampler2D uSampler1;
     uniform sampler2D uSampler2;
@@ -620,17 +620,17 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
     uniform sampler2D uSampler5;
     uniform sampler2D uSampler6;
     uniform sampler2D uSampler7;
-    
-    
+
+
     //test
-   
-    
-    
+
+
+
     //test
-    
-    
+
+
     void main(void) {
-        
+
         vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor1 = texture2D(uSampler1, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor2 = texture2D(uSampler2, vec2(vTextureCoord.s, vTextureCoord.t));
@@ -639,43 +639,43 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
         vec4 textureColor5 = texture2D(uSampler5, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor6 = texture2D(uSampler6, vec2(vTextureCoord.s, vTextureCoord.t));
         vec4 textureColor7 = texture2D(uSampler7, vec2(vTextureCoord.s, vTextureCoord.t));
-        
+
         //MixOperandString  make it with eval todo task
-        
+
         if (  ${numTextures} == 1)
         {
-            
-            
+
+
             if  ( CODE == 0 ) {
-                
+
                 gl_FragColor      = vec4(textureColor.rgb * vLightWeighting, textureColor.a);
-             
+
             }
             else if (CODE == 1){
-            
+
                 gl_FragColor = vec4( smoothstep(textureColor.r, textureColor.b,textureColor.g ) , smoothstep(textureColor.r, textureColor.b,textureColor.g ) , 0 , 1 );
-                
+
             }
             else if (CODE == 2){
-                
+
                 gl_FragColor = vec4( smoothstep(textureColor.r, textureColor.b , textureColor.g ) , 1 , 0 , 1 );
-                
+
             }
             else if (CODE == 3){
-                
+
                 gl_FragColor = vec4( smoothstep( textureColor.g , textureColor.b , 0.5 ) , 1 , 0 , 1 );
-                
+
             }
             else if (CODE == 4){
-                
+
                 //textureColor
                 vec2 position =  vTextureCoord;
                 float color = 0.3;
                 gl_FragColor = vec4( vec3( color , color * 0.5, sin( color + TimeFor / 3.0 ) * 0.75 ), 1.0 );
-                
+
             }
-            
-            
+
+
         }
         else if (${numTextures} == 2)
         {
@@ -685,7 +685,7 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
             else if (${mixOperand} == 1){
                 gl_FragColor      = vec4( (textureColor.rgb / textureColor1.rgb) * vLightWeighting, textureColor.a);
             }
-            
+
         }
         else if (${numTextures} == 3)
         {
@@ -695,7 +695,7 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
             else if (MixOperandString == 1){
                 gl_FragColor = vec4( (textureColor.rgb * textureColor1.rgb / textureColor2.rgb ) * vLightWeighting, textureColor.a);
             }
-            
+
         }
         else if (${numTextures} == 4)
         {
@@ -705,27 +705,27 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
             else if (MixOperandString == 1){
                 gl_FragColor = textureColor / textureColor1 / textureColor2 /  textureColor3;
             }
-            
+
         }
-        
+
     }
-    
+
     // uniform sampler2D uSampler[${numTextures}];
     // uniform float uMixAmount[${numTextures}];
-    
+
     /*
      void main() {
      vec4 color = vec4(0);
-     
+
      for (int i = 0; i < ${numTextures}; ++i) {
      vec4 texColor = texture2D(uSampler[i], vTextureCoord);
      color = mix(color, texColor, uMixAmount[i]);
      }
-     
+
      gl_FragColor = color;
      }
      */
-    
+
     `;
 
 }
@@ -734,7 +734,7 @@ function generateCustomShaderSrc(numTextures, mixOperand, code_) {
 // VIDEO WEB CAM
 //#############################
 
-var webcamError = function (e) {
+var webcamError = function(e) {
     alert('Webcam error!' + e);
 };
 
@@ -745,9 +745,13 @@ function SET_STREAM(video) {
         navigator.getUserMedia({
             audio: true,
             video: true
-        }, function (stream) {
+        }, function(stream) {
             //video.src = stream;
-            video.src = window.URL.createObjectURL(stream);
+            try {
+                video.srcObject = stream;
+            } catch (error) {
+                video.src = window.URL.createObjectURL(stream);
+            }
             //initialize();
 
         }, webcamError);
@@ -756,7 +760,7 @@ function SET_STREAM(video) {
         navigator.webkitGetUserMedia({
             audio: true,
             video: true
-        }, function (stream) {
+        }, function(stream) {
             video.src = window.URL.createObjectURL(stream);
 
             // initialize();
@@ -789,7 +793,7 @@ function ACCESS_CAMERA(htmlElement) {
 
     ROOT.texture = App.tools.loadVideoTexture("glVideoTexture", ROOT.videoImage);
 
-    ROOT.UPDATE = function () {
+    ROOT.UPDATE = function() {
 
         if (ROOT.video.readyState === ROOT.video.HAVE_ENOUGH_DATA) {
 
@@ -820,7 +824,7 @@ function VIDEO_TEXTURE(path_) {
 
     var DIV_CONTENT_STREAMS = document.getElementById('HOLDER_STREAMS');
 
-    ROOT.video.READY = function (e) {
+    ROOT.video.READY = function(e) {
 
         ROOT.videoImage = document.createElement('canvas');
         ROOT.videoImage.id = 'webcam_beta' + "IMAGE_";
@@ -843,7 +847,7 @@ function VIDEO_TEXTURE(path_) {
 
     ROOT.video.src = "res/videos/" + path_;
 
-    ROOT.UPDATE = function () {
+    ROOT.UPDATE = function() {
 
         if (ROOT.video.readyState === ROOT.video.HAVE_ENOUGH_DATA) {
 
@@ -873,7 +877,7 @@ function CANVAS2d_SURFACE_TEXTURE(path_, path_to_run_script) {
     ROOT.iframe.src = path_;
     DIV_CONTENT_STREAMS.appendChild(ROOT.iframe);
 
-    document.getElementById(ROOT.iframe.id).onload = function () {
+    document.getElementById(ROOT.iframe.id).onload = function() {
 
         ROOT.videoImage = ROOT.iframe.contentDocument.getElementById('HELLO_WORLD');
         ROOT.canvasTexture = ROOT.videoImage.getContext('2d');
@@ -885,11 +889,11 @@ function CANVAS2d_SURFACE_TEXTURE(path_, path_to_run_script) {
 
     }
 
-    ROOT.showTextureEditor = function () {
+    ROOT.showTextureEditor = function() {
 
         var T = E('HOLDER_STREAMS').style
-            T.display = 'block'
-            T.left = '0'
+        T.display = 'block'
+        T.left = '0'
 
     };
 
