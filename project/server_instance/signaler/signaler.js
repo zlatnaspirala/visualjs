@@ -16,8 +16,8 @@ var http = require('http').createServer(function (request, response) {
 */
 
 var options = {
-    key: fs.readFileSync('D:/xamp/apache/conf/ssl.key/server.key'),
-    cert: fs.readFileSync('D:/xamp/apache/conf/ssl.crt/server.crt')
+    key: fs.readFileSync('/etc/httpd/conf/ssl/maximumroulette.com.key'),
+    cert: fs.readFileSync('/etc/httpd/conf/ssl/maximumroulette_com.crt')
 };
 
 var https = require('https').createServer(options, function (request, response) {
@@ -26,7 +26,7 @@ var https = require('https').createServer(options, function (request, response) 
             file.serveFile('/index.html', 402, {}, request, response);
         } else file.serve(request, response);
     }).resume();
-}).listen(1212);
+}).listen(10066);
 
 var CHANNELS = {};
 
