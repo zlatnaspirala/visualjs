@@ -24,10 +24,10 @@
 
 	Basic licence rules :
 
-	1) Each file in this project has its own license , be careful , do not violate the basic rules.
-	2) You are free to use any version of Visual JS library in any other project (even commercial projects)
-	   as long as the copyright header is left intact. Except for plugins on sale and graphics that come
-     with them (they have special commercial licence).
+  1) Each file in this project has its own license , be careful , do not violate the basic rules.
+  2) You are free to use any version of Visual JS library in any other project (even commercial projects)
+  as long as the copyright header is left intact. Except for plugins on sale and graphics that come
+  with them (they have special commercial licence).
   3)Please read the following terms and conditions before using this application:
 
         Disclaimer of warranty
@@ -136,7 +136,7 @@
   npm install socket.io
   npm install nodemailer@0.7.0
 ```
-## Setup config.js ##
+### Setup config.js ###
 
  You will find config.js in server_instance folder : (All node.js application you can find in same folder (server_instance) .
    Some app have local usage like editor.js )
@@ -155,9 +155,7 @@ module.exports = {
 ```
 
 ### CLIENT OR WEB APPLICATION ###
-
 ##### How to start : #####
-
 <pre>
  1) Copy program_instance/ folder to the www folder or use visual-js.exe and create new application
     (select folder for www and server path).
@@ -166,30 +164,31 @@ module.exports = {
    (windows gui use it for creating new projects). No problem at all you can always download
    new clean project from web.
  2) OnPage editor local usage service : start server_instance/editor.js if you want to create game
-    objects from web page . After setup your page you must build visual.js
-    file with command :
+   objects from web page . After setup your page you must build visual.js
+   file with command :
 </pre>
 
 ```javascript
-node build_from_editor_to_visual_js_file.js
+  node build_from_editor_to_visual_js_file.js
 ```
 <pre>
   *Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.*
   3) In browser navigate to project-instance folder (index.html)
-
-          Click right button and you will see content menu . First item is *Add New game object* .
-          Than your game object will show at web page. Right click on rectangle area to see game object context menu.
+  Click right button and you will see content menu . First item is *Add New game object* .
+  Than your game object will show at web page. Right click on rectangle area to see game object context menu.
 </pre>
 
 #### 	*local node.js application tools* (	*Use this in develop mode only*  ):  ####
 
- 	- server_instance/res.js  - create RESOURCE js object (ADD image or images for animation) ###
-           Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
-           run command :
+  server_instance/res.js  - create RESOURCE js object (ADD image or images for animation) ###
+  Put image or images in one folder for example TEST_RES/ .
+  Put that folder in this location **project_instance/res/** .
+  and run command :
 
 ```
-server_instance/node res.js
+  server_instance/node res.js
 ```
+
 <pre>
   After finishing restart web page ind enter in console :  RESOURCE.TEST_RES
   RESOURCE have all images path data. When you create folder with image and build with *node res.js* we did not create images object.
@@ -209,18 +208,18 @@ server_instance/node res.js
   - server_instance/build_from_editor_to_visual_js_file.js (node.js app for local use)
   *ON-PAGE Editor*
 
-   If you use editor.js to visual create game object method , you must  start
-   node build_from_editor_to_visual_js_file.js on the end of work.
-   This tool will create visual.js in folder starter/ with all your game object was created in editor style .
+  If you use editor.js to visual create game object method , you must  start
+  node build_from_editor_to_visual_js_file.js on the end of work.
+  This tool will create visual.js in folder starter/ with all your game object was created in editor style .
 </pre>
 
 #### Linux user ####
 
 <pre>
 
-          Linux user need terminal for all jobs .
-          Example : Start ON-PAGE editor with terminal / cmd
-          start commands from terminal like this : /PATH_TO_SERVER_DIR/node editor.js
+  Linux user need terminal for all jobs .
+  Example : Start ON-PAGE editor with terminal / cmd
+  start commands from terminal like this : /PATH_TO_SERVER_DIR/node editor.js
 
 </pre>
 
