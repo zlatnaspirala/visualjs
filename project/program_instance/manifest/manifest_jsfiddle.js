@@ -10,7 +10,7 @@ var APPLICATION = {
     EDITOR_AUTORUN: false,
     LOCAL_SERVER: "127.0.0.1",
     ACCOUNT_SERVER: "127.0.0.1",
-    ACCOUNT_SERVER_PORT: "3666",
+    ACCOUNT_SERVER_PORT: "888",
     ACCOUNT_SERVER_SECURE: false,
     ACCOUNT_SERVICE_AUTO_RUN: false,
     DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
