@@ -149,7 +149,7 @@ module.exports = {
    PATH_OF_WWW : "D:/xamp/htdocs/project_instance/", // PATH_TO_WWW  EDIT HERE
    EDITOR_PORT : "1013",
    REG_PATH : "users/",
-   ACCOUNT_PORT  : 3666 ,
+   ACCOUNT_PORT  : 888 ,
    DESTROY_SESSION_AFTER_X_mSECUNDS : 20000,
 };
 ```
