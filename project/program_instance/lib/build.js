@@ -8321,14 +8321,18 @@ localStorage.setItem( name, JSON.stringify(obj));
 console.log(JSON.stringify(obj))
 }
 // Retrieve the object from storage
-function LOAD(name){
-if ( localStorage.getItem(name) == 'undefined' ||  localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
-	SYS.DEBUG.WARNING('error in loading localstorage object! name of object : name' + name + " , but value is " + localStorage.getItem(name) );
-	return false;
-}
-else {
-return JSON.parse(localStorage.getItem(name));
-}
+function LOAD(name) {
+ 
+  try {
+    if ( localStorage.getItem(name) == 'undefined' ||  localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
+      SYS.DEBUG.WARNING('error in loading localstorage object! name of object : name' + name + " , but value is " + localStorage.getItem(name) );
+      return false;
+      } else {
+        return JSON.parse(localStorage.getItem(name));
+      }
+  } catch(e) {
+    return false;
+  }
 
 }
 
