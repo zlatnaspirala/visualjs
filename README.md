@@ -1,4 +1,5 @@
-#  Visual-js game engine #
+#  Visual-js game engine 
+## VJSGE is UNDER modernization proccess.
 
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -7,66 +8,34 @@
      creator : Nikola Lukic
      about : Visual JS 2d canvas multiplatform game engine
 
- ## Visual-js project parts : ##
+ ## Visual-js project parts:
 
 <pre>
 
-    -2D PART :
+    -2D PART:
     This is JavaScript game engine  (server part node.js / client part js)
     Js framework with windows GUI editor and game instance creator.
      ( + server engine tools + server part of web apps )
 
-    -3D PART :
+    -3D PART:
     webgl based on three.js engine
 
-    -3D PART :
-    webGL2 based on glmatrix 2.0
+    -3D PART:
+    webGL2 based on glmatrix 2.0 [This is now matrix engine]
+    [MUST BE REMOVED]
 
-	Basic licence rules :
-
-	1) Each file in this project has its own license , be careful , do not violate the basic rules.
-	2) You are free to use any version of Visual JS library in any other project (even commercial projects)
-	   as long as the copyright header is left intact. Except for plugins on sale and graphics that come
-     with them (they have special commercial licence).
-  3)Please read the following terms and conditions before using this application:
-
-        Disclaimer of warranty
-          'Visual js' is provided "as-is" and without warranty of any kind, express, implied or otherwise,
-          including without limitation, any warranty of merchantability or fitness for a particular purpose.
-          In no event shall the author of this software be held liable for data loss,
-          damages, loss of profits or any other kind of loss while using or misusing this software.
+```
+Disclaimer of warranty
+  'Visual js' is provided "as-is" and without warranty of any kind, express, implied or otherwise,
+  including without limitation, any warranty of merchantability or fitness for a particular purpose.
+  In no event shall the author of this software be held liable for data loss,
+  damages, loss of profits or any other kind of loss while using or misusing this software.
+```
 
 </pre>
 
-#### External licences in this project : ####
 
-   - Webcam NUI control is under :
-      Created by Romuald Quantin.
-     http://creativecommons.org/licenses/by-nc-sa/3.0/
-
-     Download from :
-     https://www.adobe.com/devnet/archive/html5/articles/javascript-motion-detection.html
-
-   - WEBRTC - webcam communication is under :
-       Creator Muaz Khan
-
-       www.MuazKhan.com
-       MIT License       - www.WebRTC-Experiment.com/licence
-
-   - Socket.io.js        - http://socket.io/download/ ( also implemented intro build.js )
-
-   - webgl2  based on : Copyright (C) 2014  Tappali Ekanathan Keestu (keestu@gmail.com)
-    GNU General Public License
-
-   - OBJ loader : https://github.com/frenchtoast747/webgl-obj-loader
-
-   - Textures download from http://textures.com
-
-   - Female Body v3.blend this file has been released by AndresCuccaro under the following license: Creative Commons Attribution 3.0
-
-
-
-### Try online - 2d canvas part of project ###
+### Try online - 2d canvas part of project 
 
   - Add new game Object with single image
 
@@ -214,7 +183,7 @@ server_instance/node res.js
    This tool will create visual.js in folder starter/ with all your game object was created in editor style .
 </pre>
 
-#### Linux user ####
+#### Linux user
 
 <pre>
 
@@ -238,17 +207,30 @@ Visual Source editor Beta 1
 
 only for windows users .
 
-#### 	SERVER OR GAME_SERVER APPLICATION ####
 
- Posted for slot mashine with dynamic configuration.
 
- SERVER OPERATION:
- Classic server operation with databases and sessions. (Node.js)  basic Lobby system (STILL DEVELOPING)
+### External licences in this project: 
 
-<pre>
-     Creator Nikola Lukic
-	 - program.js
-        Session staff / mySQL
-        Done  : register , login , request new password
-        -client network example is templates/login.js
-</pre>
+   - Webcam NUI control is under :
+      Created by Romuald Quantin.
+     http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+     Download from :
+     https://www.adobe.com/devnet/archive/html5/articles/javascript-motion-detection.html
+
+   - WEBRTC - webcam communication is under :
+       Creator Muaz Khan
+
+       www.MuazKhan.com
+       MIT License       - www.WebRTC-Experiment.com/licence
+
+   - Socket.io.js        - http://socket.io/download/ ( also implemented intro build.js )
+
+   - webgl2  based on : Copyright (C) 2014  Tappali Ekanathan Keestu (keestu@gmail.com)
+    GNU General Public License
+
+   - OBJ loader : https://github.com/frenchtoast747/webgl-obj-loader
+
+   - Textures download from http://textures.com
+
+   - Female Body v3.blend this file has been released by AndresCuccaro under the following license: Creative Commons Attribution 3.0
