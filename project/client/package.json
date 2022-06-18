@@ -6,7 +6,12 @@
   "directories": {
     "lib": "lib"
   },
+  "devDependencies": {
+    "browser-resolve": "^2.0.0",
+    "esmify": "^2.1.1"
+  },
   "scripts": {
+    "app": "browserify application.js -p esmify > builds/visual.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
