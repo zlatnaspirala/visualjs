@@ -1,5 +1,5 @@
 
-export function ActivateModifiers() {
+export default function ActivateModifiers() {
 
   // Make 1200.99 $   looks like this 1.230,00
   Number.prototype.BalanceStyle = function (

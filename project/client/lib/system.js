@@ -3,11 +3,30 @@
  * @example SYS.DEBUG.LOG('welcome to extrime')
  * @Object {object} SYS
  */
-import {DEEP_COPY, DETECTBROWSER, SCRIPT, DOM, LOG, CREATE_IMG, test_webcam_device, CONVERTOR, removeItem} from './init';
-import {round, randomIntFromTo, toDegrees, toRadians, OSCILLATOR, INCREMENTATOR} from './math';
+import {
+  DEEP_COPY,
+  DETECTBROWSER,
+  SCRIPT,
+  DOM,
+  LOG,
+  CREATE_IMG,
+  test_webcam_device,
+  CONVERTOR,
+  removeItem,
+  readXML,
+  SOUND
+} from "./init";
 
-export var SYS = {
+import {
+  round,
+  randomIntFromTo,
+  toDegrees,
+  toRadians,
+  OSCILLATOR,
+  INCREMENTATOR,
+} from "./math";
 
+var SYS = {
   ROOT: this,
 
   /**
@@ -45,10 +64,8 @@ export var SYS = {
   Image object creator
    */
   RES: {
-
     SUM_OF_LOADED_IMAGES: 0,
     CREATE_IMG: CREATE_IMG,
-
   },
 
   // Math
@@ -56,7 +73,6 @@ export var SYS = {
   Math - operation
    */
   MATH: {
-
     NUMBER_ROUND: round,
     RANDOM_INT_FROM_TO: randomIntFromTo,
     TO_DEGREES: toDegrees,
@@ -64,14 +80,11 @@ export var SYS = {
     OSCILLATOR: OSCILLATOR,
     CONVERT: CONVERTOR,
     INCREMENTATOR: INCREMENTATOR,
-
   },
 
   ARRAY_OPERATION: {
-
     REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
     DEEP_COPY: DEEP_COPY,
-
   },
 
   LOCAL_STORAGE: {},
@@ -82,34 +95,28 @@ export var SYS = {
     y: 0,
     PRESS: false,
     BUTTON_PRESSED: null,
-    ON_RIGHT_BTN_PRESSED: function() {},
-    ON_MID_BTN_PRESSED: function() {},
-    ON_LEFT_BTN_PRESSED: function() {},
+    ON_RIGHT_BTN_PRESSED: function () {},
+    ON_MID_BTN_PRESSED: function () {},
+    ON_LEFT_BTN_PRESSED: function () {},
   },
 
   XML: {
-
     READ: readXML,
-
   },
 
   SOUND: {
-
     GEN: SOUND,
     RES: {},
   },
 
   VOICE: {
-
-    SPEAK: function() {},
-    LISTEN: function() {},
-
+    SPEAK: function () {},
+    LISTEN: function () {},
   },
 
   CAMERA: {
-
     SUPPORT: test_webcam_device(),
-
   },
-
 };
+
+export default SYS;
