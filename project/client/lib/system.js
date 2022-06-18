@@ -3,9 +3,8 @@
  * @example SYS.DEBUG.LOG('welcome to extrime')
  * @Object {object} SYS
  */
-import { DETECTBROWSER, SCRIPT, DOM, LOG, CREATE_IMG } from './init';
-import { round, randomIntFromTo, toDegrees } from './math';
-
+import {DEEP_COPY, DETECTBROWSER, SCRIPT, DOM, LOG, CREATE_IMG, test_webcam_device, CONVERTOR, removeItem} from './init';
+import {round, randomIntFromTo, toDegrees, toRadians, OSCILLATOR, INCREMENTATOR} from './math';
 
 export var SYS = {
 

@@ -94,6 +94,7 @@ exports.drawRotatedTextNoSkrech = drawRotatedTextNoSkrech;
 exports.initialize = initialize;
 exports.lineLength = void 0;
 exports.readXML = readXML;
+exports.removeItem = removeItem;
 exports.remove_last = remove_last;
 exports.roundedRect = roundedRect;
 exports.test_webcam_device = test_webcam_device;
@@ -887,7 +888,26 @@ function OVERRIDE_TO_REF_CANVAS() {
       return v / ONE_PERCENT;
     }
   };
-}
+} // Array works , remove all array items with same values
+
+
+function removeItem(arr) {
+  var what,
+      a = arguments,
+      L = a.length,
+      ax;
+
+  while (L > 1 && arr.length) {
+    what = a[--L];
+
+    while ((ax = arr.indexOf(what)) != -1) {
+      arr.splice(ax, 1);
+    }
+  }
+
+  return arr;
+} // removeA(arrayNAME,'-delete-all-value-');
+
 /**
  * CONVERTOR
  * percents to pixel convert by Width reference
@@ -1555,26 +1575,7 @@ function ActivateModifiers() {
         i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
     return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
-  }; // Array works , remove all array items with same values
-
-
-  function removeItem(arr) {
-    var what,
-        a = arguments,
-        L = a.length,
-        ax;
-
-    while (L > 1 && arr.length) {
-      what = a[--L];
-
-      while ((ax = arr.indexOf(what)) != -1) {
-        arr.splice(ax, 1);
-      }
-    }
-
-    return arr;
-  } // removeA(arrayNAME,'-delete-all-value-');
-
+  };
 
   Array.prototype.unset = function (value) {
     if (this.indexOf(value) != -1) {
@@ -1678,14 +1679,14 @@ var SYS = {
     NUMBER_ROUND: _math.round,
     RANDOM_INT_FROM_TO: _math.randomIntFromTo,
     TO_DEGREES: _math.toDegrees,
-    TO_RADIANS: toRadians,
-    OSCILLATOR: OSCILLATOR,
-    CONVERT: CONVERTOR,
-    INCREMENTATOR: INCREMENTATOR
+    TO_RADIANS: _math.toRadians,
+    OSCILLATOR: _math.OSCILLATOR,
+    CONVERT: _init.CONVERTOR,
+    INCREMENTATOR: _math.INCREMENTATOR
   },
   ARRAY_OPERATION: {
-    REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
-    DEEP_COPY: DEEP_COPY
+    REMOVE_ALL_ITEMS_WITH_VALUE: _init.removeItem,
+    DEEP_COPY: _init.DEEP_COPY
   },
   LOCAL_STORAGE: {},
   // Mouse or touch READ_ONLY
@@ -1710,7 +1711,7 @@ var SYS = {
     LISTEN: function () {}
   },
   CAMERA: {
-    SUPPORT: test_webcam_device()
+    SUPPORT: (0, _init.test_webcam_device)()
   }
 };
 exports.SYS = SYS;
