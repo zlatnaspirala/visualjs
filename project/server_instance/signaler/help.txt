@@ -1,8 +1,0 @@
-
- Install modules in this dir (local) : 
-
--npm install node-static
-
--npm install websocket
-
-

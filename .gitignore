@@ -2,3 +2,5 @@ project/server_instance/games/facebook/level1.js
 *.visualJS
 *.uni
 *.vdb
+project/server_instance/node_modules/
+project/server/node_modules/

@@ -1,77 +1,60 @@
-#  Visual-js game engine #
+
+# Visual-js game engine
 
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![visualjs.png](https://bitbucket.org/repo/xzgbkK/images/102940608-visualjs.png)
 
- # Visual-js project
-Creator: Nikola Lukic zlatnaspirala@gmail.com
-About: Visual JS 2d canvas multiplatform game engine
+## Visual-js project
+  Creator: Nikola Lukic zlatnaspirala@gmail.com
+  About: Visual JS 2d canvas multiplatform game engine
 
-### 2D PART:
-This is JavaScript game engine  (server part node.js / client part js)
-Js framework with windows GUI editor and game instance creator.
-  ( + server engine tools + server part of web apps )
+  This is JavaScript game engine  (server part node.js / client part js)
+  Js framework with windows GUI editor and game instance creator.
+    ( + server engine tools + server part of web apps )
 
-### 3D PART:
-webgl based on three.js engine
-
-
-### Try online - 2d canvas part of project ###
+### Try online - 2d canvas part of project
 
   - Add new game Object with single image
-
  https://jsfiddle.net/zlatnaspirala/rjf0xe0a/
 
  - Use For loop for creating objects
-
  https://jsfiddle.net/zlatnaspirala/noax17kz/
 
  - Visual JS -Add Webcam to Object
-
  https://jsfiddle.net/zlatnaspirala/xsffd9v6/
 
  - Add webcam with motion detect
-
  https://jsfiddle.net/zlatnaspirala/j60hh052/
 
   - ZoomIn/ZoomOut game_object effect
-
  https://jsfiddle.net/zlatnaspirala/pjjow5q6/
 
   - Translate object
-
  https://jsfiddle.net/zlatnaspirala/0tt6rmnq/
 
   - Rotate object ( OSCILLATOR class )
-
  https://jsfiddle.net/zlatnaspirala/1x7bq0gf/
 
   - Add particle
-
  https://jsfiddle.net/zlatnaspirala/hoe9auLm/
 
   - Add textbox
-
  https://jsfiddle.net/zlatnaspirala/0u5j1ap8/
 
   - Webcam image manipulation  (webcam - frame by frame)
-
  https://jsfiddle.net/zlatnaspirala/u2f9wbzh/
 
   - You can draw any native js canvas2d example in visual-js
-
  https://jsfiddle.net/zlatnaspirala/p4n98p9n/
 
   - Create animation paths
-
  https://jsfiddle.net/zlatnaspirala/dpejur8y/
 
- #### View all at ####
-
+ #### View all at
  https://jsfiddle.net/user/zlatnaspirala/fiddles/
 
-### Installation and setup  : ###
+### Installation and setup:
 
   In server Instance folder (navigate to server_instance/)
 
