@@ -2,19 +2,20 @@
 
 window.onload = function () {
 
-    SYS.SCRIPT.LOAD("res/resource.audio");
-    SYS.SCRIPT.LOAD("lib/audio/audio.js");
-    SYS.SCRIPT.LOAD("lib/events/onunload.js");
-    SYS.SCRIPT.LOAD("lib/events/onbeforeunload.js");
-    SYS.SCRIPT.LOAD("lib/events/onresize.js");
-    SYS.SCRIPT.LOAD("lib/multi_screens/multi_screens.js");
-    SYS.SCRIPT.LOAD("lib/events/keyboard_editor.js");
+//SYS.SCRIPT.LOAD("res/resource.audio");
+   // SYS.SCRIPT.LOAD("lib/audio/audio.js");
+  //  SYS.SCRIPT.LOAD("lib/events/onunload.js");
+  //  SYS.SCRIPT.LOAD("lib/events/onbeforeunload.js");
+   // SYS.SCRIPT.LOAD("lib/events/onresize.js");
+   //SYS.SCRIPT.LOAD("lib/multi_screens/multi_screens.js");
+
+  //  SYS.SCRIPT.LOAD("lib/events/keyboard_editor.js");
 
     if (APPLICATION.EDITOR == true) {
-        SYS.SCRIPT.LOAD("lib/editor/editor.js");
+    //    SYS.SCRIPT.LOAD("lib/editor/editor.js");
     }
-    SYS.SCRIPT.LOAD("lib/nui/camera/mdetect.js");
-    SYS.SCRIPT.LOAD("lib/program_modul.js");
+    // SYS.SCRIPT.LOAD("lib/nui/camera/mdetect.js");
+    // SYS.SCRIPT.LOAD("lib/program_modul.js");
 
     document.body.style.WebkitTransform = "scale(1)";
     document.body.style.overflow = "hidden";
@@ -25,9 +26,6 @@ window.onload = function () {
 
             setTimeout(function () {
 
-                //################################################################
-                // IMPORTANT - make stable system 100%
-                //################################################################
                 while (RESOURCE.SUM == 0 && typeof KEYBOARD != "function") {
                     console.log("res not ready");
                 }

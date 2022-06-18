@@ -1,14 +1,11 @@
 
-
-
-
 /**
  * NUI related code , deep depends method.
  * @function CREATE_MOTION_PARAMETERS
  * @param {GameObject} ROOT_GAME_OBJECT System usage.
  * @access no direct usage
  */
-function CREATE_MOTION_PARAMETERS(ROOT_GAME_OBJECT) {
+export function CREATE_MOTION_PARAMETERS(ROOT_GAME_OBJECT) {
 
     window["notesPosY"] = [];
     window["notesPosX"] = [];
@@ -40,7 +37,7 @@ function CREATE_MOTION_PARAMETERS(ROOT_GAME_OBJECT) {
 /**
  * @Example NUI related code , deep depends method.
  */
-function CREATE_MOTION_FIELDS(ROOT_GAME_OBJECT) {
+export function CREATE_MOTION_FIELDS(ROOT_GAME_OBJECT) {
     var source = "test";
 
     var sum = ROOT_GAME_OBJECT.WEBCAM.numFieldV * ROOT_GAME_OBJECT.WEBCAM.numFieldH;
@@ -233,7 +230,7 @@ function __DESTROY___(index, _N_) {
  * @function WEBCAM_DRAW
  * @access Global
  */
-function WEBCAM_DRAW(NUI_SURF, WEBCAM) {
+export function WEBCAM_DRAW(NUI_SURF, WEBCAM) {
 
     if (this.HIDE_INDICATED_POINT == false) {
 
@@ -306,12 +303,10 @@ function WEBCAM_DRAW(NUI_SURF, WEBCAM) {
 var NUI_CONTROLER = new Object();
 
 function WEB_CAM_NUI_MAP(ee, ALL_POINTS) {
-
     try {
         if (ee) {
             eval(" NUI_CONTROLER.point" + ee + "();");
             //console.log("INDEX :" + ee + ">>>>>>" +ALL_POINTS )
         }
     } catch (e) {}
-
 }

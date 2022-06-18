@@ -3,7 +3,7 @@
  * @constructor
  * @param res
  */
-function AUDIO_RES(res) {
+export function AUDIO_RES(res) {
 
     var ROOT_AUDIO = this;
 
@@ -33,22 +33,3 @@ function AUDIO_RES(res) {
 
 }
 
-function LOAD_AUDIO() {
-
-    setTimeout(function () {
-
-        if (typeof AUDIO_RESOURCE != "undefined") {
-
-            SYS.SOUND.RES = new AUDIO_RES();
-
-        } else {
-
-            LOAD_AUDIO();
-
-        }
-
-    }, 100);
-
-}
-
-LOAD_AUDIO();

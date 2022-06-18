@@ -8,7 +8,7 @@
  * @return {Any} nothing
  *
  */
-function ENGINE(c) {
+export function ENGINE(c) {
 
     var ROOT_ENGINE = this;
     // ONE PROGRAM ONE ENGINE

@@ -3,111 +3,114 @@
  * @example SYS.DEBUG.LOG('welcome to extrime')
  * @Object {object} SYS
  */
+import { DETECTBROWSER, SCRIPT, DOM, LOG, CREATE_IMG } from './init';
+import { round, randomIntFromTo, toDegrees } from './math';
 
-var SYS = {
 
-    ROOT: this,
+export var SYS = {
 
-    /**
-     * Get browser data
-     * @property {DETECTBROWSER} BROWSER
-     */
-    BROWSER: new DETECTBROWSER(),
+  ROOT: this,
 
-    /**
-    Load/Add dinamic script in runtime
-     */
-    SCRIPT: SCRIPT,
+  /**
+   * Get browser data
+   * @property {DETECTBROWSER} BROWSER
+   */
+  BROWSER: new DETECTBROWSER(),
 
-    /**
-    Works with html canvas element ,
-    create surface and setup main program loop
-     */
-    DOM: new DOM(),
+  /**
+  Load/Add dinamic script in runtime
+   */
+  SCRIPT: SCRIPT,
 
-    /**
-    Just list of running programs
-     */
-    RUNNING_PROGRAMS: new Array(),
-    /**
-    DEBUG
-    console.log polumorh call
-    switch on/off
-     */
-    DEBUG: new LOG(),
+  /**
+  Works with html canvas element ,
+  create surface and setup main program loop
+   */
+  DOM: new DOM(),
 
-    READY: false,
+  /**
+  Just list of running programs
+   */
+  RUNNING_PROGRAMS: new Array(),
+  /**
+  DEBUG
+  console.log polumorh call
+  switch on/off
+   */
+  DEBUG: new LOG(),
 
-    /**
-    RES - resources
-    Image object creator
-     */
-    RES: {
+  READY: false,
 
-        SUM_OF_LOADED_IMAGES: 0,
-        CREATE_IMG: CREATE_IMG,
+  /**
+  RES - resources
+  Image object creator
+   */
+  RES: {
 
-    },
+    SUM_OF_LOADED_IMAGES: 0,
+    CREATE_IMG: CREATE_IMG,
 
-    // Math
-    /**
-    Math - operation
-     */
-    MATH: {
+  },
 
-        NUMBER_ROUND: round,
-        RANDOM_INT_FROM_TO: randomIntFromTo,
-        TO_DEGREES: toDegrees,
-        TO_RADIANS: toRadians,
-        OSCILLATOR: OSCILLATOR,
-        CONVERT: CONVERTOR,
-        INCREMENTATOR: INCREMENTATOR,
+  // Math
+  /**
+  Math - operation
+   */
+  MATH: {
 
-    },
+    NUMBER_ROUND: round,
+    RANDOM_INT_FROM_TO: randomIntFromTo,
+    TO_DEGREES: toDegrees,
+    TO_RADIANS: toRadians,
+    OSCILLATOR: OSCILLATOR,
+    CONVERT: CONVERTOR,
+    INCREMENTATOR: INCREMENTATOR,
 
-    ARRAY_OPERATION: {
+  },
 
-        REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
-        DEEP_COPY: DEEP_COPY,
+  ARRAY_OPERATION: {
 
-    },
+    REMOVE_ALL_ITEMS_WITH_VALUE: removeItem,
+    DEEP_COPY: DEEP_COPY,
 
-    LOCAL_STORAGE: {},
+  },
 
-    // Mouse or touch READ_ONLY
-    MOUSE: {
-        x: 0,
-        y: 0,
-        PRESS: false,
-        BUTTON_PRESSED: null,
-        ON_RIGHT_BTN_PRESSED: function () {},
-        ON_MID_BTN_PRESSED: function () {},
-        ON_LEFT_BTN_PRESSED: function () {},
-    },
+  LOCAL_STORAGE: {},
 
-    XML: {
+  // Mouse or touch READ_ONLY
+  MOUSE: {
+    x: 0,
+    y: 0,
+    PRESS: false,
+    BUTTON_PRESSED: null,
+    ON_RIGHT_BTN_PRESSED: function() {},
+    ON_MID_BTN_PRESSED: function() {},
+    ON_LEFT_BTN_PRESSED: function() {},
+  },
 
-        READ: readXML,
+  XML: {
 
-    },
+    READ: readXML,
 
-    SOUND: {
+  },
 
-        GEN: SOUND,
-        RES: {},
-    },
+  SOUND: {
 
-    VOICE: {
+    GEN: SOUND,
+    RES: {},
+  },
 
-        SPEAK: function () {},
-        LISTEN: function () {},
+  VOICE: {
 
-    },
+    SPEAK: function() {},
+    LISTEN: function() {},
 
-    CAMERA: {
+  },
 
-        SUPPORT: test_webcam_device(),
+  CAMERA: {
 
-    },
+    SUPPORT: test_webcam_device(),
+
+  },
 
 };
