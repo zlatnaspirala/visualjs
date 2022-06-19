@@ -527,8 +527,8 @@ function ENGINE(c) {
       s.fillStyle = ROOT_ENGINE.GUI.GRID.COLOR;
 
       for (var x = 0; x < ROOT_ENGINE.GUI.GRID.MAP_SIZE_X * ROOT_ENGINE.GUI.GRID.STEP; x += ROOT_ENGINE.GUI.GRID.STEP) {
-        s.fillRect(VIEW.W(x), VIEW.H(0), 1, VIEW.H());
-        s.fillRect(VIEW.W(0), VIEW.H(x), VIEW.W(), 1);
+        s.fillRect(_init.VIEW.W(x), _init.VIEW.H(0), 1, _init.VIEW.H());
+        s.fillRect(_init.VIEW.W(0), _init.VIEW.H(x), _init.VIEW.W(), 1);
       }
     }
 
@@ -1018,37 +1018,39 @@ var _animation = require("../draw_functions/animation");
 
 var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
+var _init = require("../init");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
-Copyright 2016, zlatnaspirala@gmail.com
-All rights reserved.
+  Copyright 2016, zlatnaspirala@gmail.com
+  All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are
-met:
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are
+  met:
 
- * Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above
-copyright notice, this list of conditions and the following disclaimer
-in the documentation and/or other materials provided with the
-distribution.
- * Neither the name of zlatnaspirala@gmail.com nor the names of its
-contributors may be used to endorse or promote products derived from
-this software without specific prior written permission.
+  * Redistributions of source code must retain the above copyright
+  notice, this list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above
+  copyright notice, this list of conditions and the following disclaimer
+  in the documentation and/or other materials provided with the
+  distribution.
+  * Neither the name of zlatnaspirala@gmail.com nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
@@ -1220,8 +1222,8 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
       ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
     } else {
       ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
-      ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(_system.default.DOM.E("video").height);
-      ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(_system.default.DOM.E("video").width);
+      ROOT_GAME_OBJECT.DIMENSION.H = _init.CONVERTOR.PIY_TO_PER(_system.default.DOM.E("video").height);
+      ROOT_GAME_OBJECT.DIMENSION.W = _init.CONVERTOR.PIX_TO_PER(_system.default.DOM.E("video").width);
     }
 
     ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "CUSTOM";
@@ -1495,30 +1497,30 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
       ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
     }
 
-    ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+    ROOT_GAME_OBJECT.POSITION.TRANSLATE(_init.CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), _init.CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
 
     ROOT_GAME_OBJECT.POSITION.ON_TARGET_POSITION = function () {
       if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "STOP") {
         if (ROOT_GAME_OBJECT.sys_translateByPath.length > ROOT_GAME_OBJECT.sys_translateByPathIndex + 1) {
           ROOT_GAME_OBJECT.sys_translateByPathIndex++;
-          ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+          ROOT_GAME_OBJECT.POSITION.TRANSLATE(_init.CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), _init.CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
         } else {
           if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE") {
             ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "INVERSE";
             ROOT_GAME_OBJECT.sys_translateByPathIndex--;
             ROOT_GAME_OBJECT.sys_translateByPathIndex--;
-            ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+            ROOT_GAME_OBJECT.POSITION.TRANSLATE(_init.CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), _init.CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
           }
         }
       } else if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "INVERSE") {
         if (ROOT_GAME_OBJECT.sys_translateByPathIndex > 1) {
           ROOT_GAME_OBJECT.sys_translateByPathIndex--;
-          ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+          ROOT_GAME_OBJECT.POSITION.TRANSLATE(_init.CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), _init.CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
         } else {
           if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE_FOR_EVER") {
             ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
             ROOT_GAME_OBJECT.sys_translateByPathIndex++;
-            ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+            ROOT_GAME_OBJECT.POSITION.TRANSLATE(_init.CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), _init.CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
           }
         }
       } else {
@@ -1569,8 +1571,8 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
       ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
     } else {
       ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
-      ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(_system.default.DOM.E("webcam").height);
-      ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(_system.default.DOM.E("webcam").width);
+      ROOT_GAME_OBJECT.DIMENSION.H = _init.CONVERTOR.PIY_TO_PER(_system.default.DOM.E("webcam").height);
+      ROOT_GAME_OBJECT.DIMENSION.W = _init.CONVERTOR.PIX_TO_PER(_system.default.DOM.E("webcam").width);
     }
 
     if (type_ == "NORMAL") {
@@ -1986,15 +1988,15 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     if (this.EDITOR.ACTORS_VISIBLE == true) {
       s.save();
       s.font = "13px Arial";
-      s.fillRect(0, this.POSITION.Y(), VIEW.W(), 1);
-      s.fillRect(this.POSITION.X(), 0, 1, VIEW.H());
+      s.fillRect(0, this.POSITION.Y(), _init.VIEW.W(), 1);
+      s.fillRect(this.POSITION.X(), 0, 1, _init.VIEW.H());
       s.globalAlpha = 0.5;
       s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
       s.globalAlpha = 0.9;
 
       if (ROOT_GAME_OBJECT.EDITOR.SELECTED == true) {
         s.fillText("Name :" + this.NAME, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 4);
-        s.fillText("Percent :" + CONVERTOR.PIX_TO_PER(this.POSITION.X().toString()).toFixed(2) + "%  y:" + CONVERTOR.PIY_TO_PER(this.POSITION.Y()).toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 2.5);
+        s.fillText("Percent :" + _init.CONVERTOR.PIX_TO_PER(this.POSITION.X().toString()).toFixed(2) + "%  y:" + _init.CONVERTOR.PIY_TO_PER(this.POSITION.Y()).toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 2.5);
         s.fillText("Actor- x:" + this.POSITION.X().toFixed(2).toString() + " y:" + this.POSITION.Y().toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT);
       } //CONVERTOR.PIX_TO_PER( h );
       // actor rect for drag
@@ -2141,7 +2143,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../../manifest/manifest":17,"../draw_functions/animation":3,"../draw_functions/rect":4,"../draw_functions/systems":5,"../math":11,"../system":16}],9:[function(require,module,exports){
+},{"../../manifest/manifest":17,"../draw_functions/animation":3,"../draw_functions/rect":4,"../draw_functions/systems":5,"../init":10,"../math":11,"../system":16}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2152,6 +2154,8 @@ exports.EVENTS = EVENTS;
 var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
 var _system = _interopRequireDefault(require("../system"));
+
+var _init = require("../init");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2316,11 +2320,15 @@ function EVENTS(canvas, ROOT_ENGINE) {
             if (_system.default.MOUSE.PRESS == true && local_go.DRAG == true && first_pass == false && local_go.DRAG_STATUS == true) {
               first_pass = true;
               local_go.DRAG_DELTA = local_go.DRAG_START_X;
-              var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
-              local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
+
+              var local_ = _init.CONVERTOR.PIX_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
+
+              local_go.POSITION.TRANSLATE_BY_X(parseFloat(_init.CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
               local_go.DRAG_DELTA = local_go.DRAG_START_Y;
-              var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
-              local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
+
+              var local_ = _init.CONVERTOR.PIY_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
+
+              local_go.POSITION.TRANSLATE_BY_Y(parseFloat(_init.CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
             }
           }
         } else {} //-------------------------------//-------------------------------//-------------------------------
@@ -2336,11 +2344,15 @@ function EVENTS(canvas, ROOT_ENGINE) {
           if (_system.default.MOUSE.PRESS == true && local_go.EDITOR.ACTOR_DRAG == true && first_pass == false) {
             first_pass = true;
             local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_X + local_go.EDITOR.ACTORS_AREA_HEIGHT;
-            var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
-            local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
+
+            var local_ = _init.CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
+
+            local_go.POSITION.TRANSLATE_BY_X(parseFloat(_init.CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
             local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_Y + local_go.EDITOR.ACTORS_AREA_HEIGHT;
-            var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
-            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
+
+            var local_ = _init.CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
+
+            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(_init.CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
           } //-------------------------------//-------------------------------//-------------------------------
           //-------------------------------//-------------------------------//-------------------------------
           //-------------------------------//-------------------------------//-------------------------------
@@ -2350,15 +2362,19 @@ function EVENTS(canvas, ROOT_ENGINE) {
 
           if (local_go.EDITOR.ACTOR_X_IN_MOVE == true) {
             local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_X;
-            var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
-            local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(1)) - Math.abs(local_));
+
+            var local_ = _init.CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
+
+            local_go.POSITION.TRANSLATE_BY_X(parseFloat(_init.CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(1)) - Math.abs(local_));
           } // ACTOR Y
 
 
           if (local_go.EDITOR.ACTOR_Y_IN_MOVE == true) {
             local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_Y;
-            var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
-            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(1)) - Math.abs(local_));
+
+            var local_ = _init.CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
+
+            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(_init.CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(1)) - Math.abs(local_));
           } //-------------------------------//-------------------------------//-------------------------------
           //HOVER
           //-------------------------------//-------------------------------//-------------------------------
@@ -2839,7 +2855,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":17,"../system":16}],10:[function(require,module,exports){
+},{"../../manifest/manifest":17,"../init":10,"../system":16}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5651,7 +5667,7 @@ var APPLICATION = {
   MULTILANGUAGE: false,
   IMAGE_LOADER_PREFIX: true,
   // false for fiddle support , we need absolute path.
-  EDITOR: false,
+  EDITOR: true,
   EDITOR_AUTORUN: false,
   LOCAL_SERVER: "127.0.0.1",
   DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],

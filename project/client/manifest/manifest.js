@@ -12,7 +12,7 @@ var APPLICATION = {
     STATUS: "develop",
     MULTILANGUAGE: false,
     IMAGE_LOADER_PREFIX: true, // false for fiddle support , we need absolute path.
-    EDITOR: false,
+    EDITOR: true,
     EDITOR_AUTORUN: false,
     LOCAL_SERVER: "127.0.0.1",
     DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
