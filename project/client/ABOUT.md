@@ -379,3 +379,48 @@ GO.TOUCH_UP = function() {
   console.log("TOUCH_UP ON OBJECT OR MOBILE TOUCH_UP  : " + this.NAME);
 };
 
+
+//
+
+
+### Try online - 2d canvas part of project
+
+  - Add new game Object with single image
+ https://jsfiddle.net/zlatnaspirala/rjf0xe0a/
+
+ - Use For loop for creating objects
+ https://jsfiddle.net/zlatnaspirala/noax17kz/
+
+ - Visual JS -Add Webcam to Object
+ https://jsfiddle.net/zlatnaspirala/xsffd9v6/
+
+ - Add webcam with motion detect
+ https://jsfiddle.net/zlatnaspirala/j60hh052/
+
+  - ZoomIn/ZoomOut game_object effect
+ https://jsfiddle.net/zlatnaspirala/pjjow5q6/
+
+  - Translate object
+ https://jsfiddle.net/zlatnaspirala/0tt6rmnq/
+
+  - Rotate object ( OSCILLATOR class )
+ https://jsfiddle.net/zlatnaspirala/1x7bq0gf/
+
+  - Add particle
+ https://jsfiddle.net/zlatnaspirala/hoe9auLm/
+
+  - Add textbox
+ https://jsfiddle.net/zlatnaspirala/0u5j1ap8/
+
+  - Webcam image manipulation  (webcam - frame by frame)
+ https://jsfiddle.net/zlatnaspirala/u2f9wbzh/
+
+  - You can draw any native js canvas2d example in visual-js
+ https://jsfiddle.net/zlatnaspirala/p4n98p9n/
+
+  - Create animation paths
+ https://jsfiddle.net/zlatnaspirala/dpejur8y/
+
+ #### View all at
+ https://jsfiddle.net/user/zlatnaspirala/fiddles/
+ 
