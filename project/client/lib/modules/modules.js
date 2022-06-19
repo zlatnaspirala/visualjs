@@ -1,3 +1,6 @@
+
+import { GAME_OBJECT } from '../game_object/game_object';
+
 /**
  * @example Use MODUL class on begin of program with
  * @example HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");

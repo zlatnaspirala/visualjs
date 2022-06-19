@@ -1,3 +1,6 @@
+import SYS from './system';
+import APPLICATION from '../manifest/manifest';
+
 /**
  * Simple number round.
  * @function round

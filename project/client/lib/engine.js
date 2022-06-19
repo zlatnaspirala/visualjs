@@ -1,3 +1,11 @@
+
+import { EVENTS } from './game_object/game_object_events';
+import { KEYBOARD } from './events/keyboard';
+import { RIGHT_MENU_BUTTON } from './draw_functions/systems';
+import APPLICATION from '../manifest/manifest';
+import { LOAD } from './init';
+import { MODUL } from './modules/modules';
+
 /**
  * @Description Instance of ENGINE class will handle all modules and
  * gameobjects.

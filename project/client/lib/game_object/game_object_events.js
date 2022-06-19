@@ -1,4 +1,7 @@
 
+import APPLICATION from '../../manifest/manifest';
+import SYS from '../system';
+
 export function EVENTS(canvas, ROOT_ENGINE) {
 
   var ROOT_EVENTS = this;

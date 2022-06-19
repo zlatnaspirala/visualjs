@@ -17,20 +17,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 if (typeof AUDIO_RESOURCE != "undefined") {
   _system.default.SOUND.RES = new _audio.default();
-}
-
-(0, _program_modul.CREATE_SYSTEM_BUTTONS)(); ///////
+} ///////
 // Run
 ///////
+
 
 _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"); //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
 
 
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
-var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
-SCRIPT.LOAD('examples/templates/sound.js');
+var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // SCRIPT.LOAD('examples/templates/sound.js')
 
-},{"./lib/audio/audio":2,"./lib/program_modul":5,"./lib/proto_modify":6,"./lib/system":7,"./manifest/manifest":8}],2:[function(require,module,exports){
+(0, _program_modul.CREATE_SYSTEM_BUTTONS)();
+
+},{"./lib/audio/audio":2,"./lib/program_modul":13,"./lib/proto_modify":14,"./lib/system":15,"./manifest/manifest":16}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -71,6 +71,2579 @@ function AUDIO_RES(res) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.RECT = RECT;
+
+/**
+ * @class RECT
+ * @constructor
+ * @param TEXT
+ * @param ROOT_GAME_OBJECT
+ * @param radius color
+ * @param colorText
+ */
+function RECT(TEXT, ROOT_GAME_OBJECT, radius, color, colorText) {
+  //this.FOCUS = false;
+  this.TEXT_ANGLE = 0;
+  this.TEXT_COLOR = colorText;
+  this.TEXT_ALIGN = "center";
+  this.TEXT = TEXT;
+  this.EDIT = true;
+  this.BACKGROUND_OPACITY = 0.5;
+  this.TEXT_OPACITY = 1;
+  this.textBaseline = "middle";
+  this.textResizeByWidth = false;
+  this.POSITION = ROOT_GAME_OBJECT.POSITION;
+  this.DIMENSION = ROOT_GAME_OBJECT.DIMENSION;
+
+  this.x = function () {
+    return POSITION.X();
+  };
+
+  this.y = function () {
+    return POSITION.Y();
+  };
+
+  this.width = function () {
+    return this.DIMENSION.WIDHT();
+  };
+
+  this.height = function () {
+    return this.DIMENSION.HEIGHT();
+  };
+
+  this.radius = parseFloat(radius);
+  this.color = color;
+  this.border_color = "rgba(121,121,222,0.9)";
+  this.border_on_focus_color = "blue";
+  this.border_on_focus_width_line = 5;
+  this.font = "20px Arial";
+
+  this.DRAW = function (s) {
+    s.save();
+    s.globalAlpha = this.BACKGROUND_OPACITY;
+    roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color);
+    s.textBaseline = this.textBaseline;
+
+    if (ROOT_GAME_OBJECT.FOCUS == true) {
+      s.lineWidth = this.border_on_focus_width_line;
+      s.fillStyle = this.border_on_focus_color;
+      roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
+    } else {
+      s.lineWidth = this.border_width_line;
+      s.fillStyle = this.border_color;
+      roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
+    }
+
+    s.textAlign = this.TEXT_ALIGN;
+    s.font = this.font;
+    s.fillStyle = this.TEXT_COLOR;
+    s.globalAlpha = this.TEXT_OPACITY;
+
+    if (this.textResizeByWidth == false) {
+      drawRotatedTextNoSkrech(s, this.TEXT, this.POSITION.X(), this.POSITION.Y(), this.TEXT_ANGLE, this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+    } else {
+      drawRotatedText(s, this.TEXT, this.POSITION.X(), this.POSITION.Y(), this.TEXT_ANGLE, this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT()); //s.textAlign = "start";
+    }
+
+    s.restore();
+  };
+}
+
+},{}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RIGHT_MENU_BUTTON = RIGHT_MENU_BUTTON;
+
+var _math = require("../math");
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// WEB GUI
+function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
+  var ROOT = this;
+  this.IAM = id;
+  this.HOVER = false;
+  this.Y_OFFSET = Y_OFFSET;
+  this.text = text;
+  this.icon = null;
+
+  if (typeof res != "undefined") {
+    var locName = "system_" + this.IAM.toString();
+
+    _system.default.RES.CREATE_IMG(locName, res);
+
+    this.icon = true;
+  }
+
+  this.POSITION = {
+    x: 0,
+    y: 0,
+    X: function () {
+      return ROOT.POSITION.x;
+    },
+    Y: function () {
+      return ROOT.POSITION.y + ROOT.Y_OFFSET;
+    }
+  }, this.DIMENSION = new _math.DIMENSION(12, 2);
+
+  this.TAP = function () {};
+}
+
+},{"../math":10,"../system":15}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ENGINE = ENGINE;
+
+var _game_object_events = require("./game_object/game_object_events");
+
+var _keyboard = require("./events/keyboard");
+
+var _systems = require("./draw_functions/systems");
+
+var _manifest = _interopRequireDefault(require("../manifest/manifest"));
+
+var _init = require("./init");
+
+var _modules = require("./modules/modules");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @Description Instance of ENGINE class will handle all modules and
+ * gameobjects.
+ * Access trow :
+ * @class ENGINE
+ * @example Internal . Injected like property ENGINE intro PROGRAM object.
+ * @constructor
+ * @return {Any} nothing
+ *
+ */
+function ENGINE(c) {
+  var ROOT_ENGINE = this; // ONE PROGRAM ONE ENGINE
+  //ENGINE WILL BE BIG SWITCHER
+
+  this.PROGRAM_ID = c.id; //Events are part of engine
+
+  this.EVENTS = new _game_object_events.EVENTS(c, ROOT_ENGINE); // destroy mem IMPORTANT events must be deatached at first time than set up to undefined .
+
+  this.MODULES = new Array();
+  this.GAME_TYPE = "NO_PLAYER";
+  this.KEYBOARD = new _keyboard.KEYBOARD(c);
+
+  if (_manifest.default.EDITOR == true) {
+    this.ENGINE_EDITOR = true;
+  } else {
+    this.ENGINE_EDITOR = false;
+  }
+
+  this.EXIT_EDIT_MODE = function () {
+    ROOT_ENGINE.ENGINE_EDITOR = false;
+
+    for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+      for (var y = 0; y < ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; y++) {
+        ROOT_ENGINE.MODULES[x].GAME_OBJECTS[y].EDITOR.ENABLE = false;
+      }
+    }
+  };
+
+  this.GO_TO_EDIT_MODE = function () {
+    ROOT_ENGINE.ENGINE_EDITOR = true;
+
+    for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+      for (var y = 0; y < ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; y++) {
+        ROOT_ENGINE.MODULES[x].GAME_OBJECTS[y].EDITOR.ENABLE = true;
+      }
+    }
+  };
+
+  this.GUI = {
+    VISIBLE: false,
+    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Add new gameObject ", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Set render speed", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"), new _systems.RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
+    CHECK_ON_START: function () {
+      if ((0, _init.LOAD)("Application") == false) {
+        console.log("no cache data about application");
+      } else {
+        _manifest.default = ((0, _init.LOAD)("Application"), function () {
+          throw new Error('"' + "APPLICATION" + '" is read-only.');
+        }());
+        SYS.DEBUG.LOG("APPLICATION object was loaded from localstorage. " + _manifest.default.ACCOUNT_SERVICE_AUTO_RUN);
+
+        if (_manifest.default.ACCOUNT_SERVICE_AUTO_RUN == true) {
+          ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to false";
+        } else {
+          ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to true";
+        }
+
+        if (_manifest.default.EDITOR_AUTORUN == true) {
+          ROOT_ENGINE.ENGINE_EDITOR = true;
+          ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to false";
+        } else {
+          ROOT_ENGINE.ENGINE_EDITOR = false;
+          ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to true";
+        }
+      }
+    },
+    GRID: {
+      VISIBLE: true,
+      MAP_SIZE_X: 10,
+      MAP_SIZE_Y: 10,
+      STEP: 10,
+      COLOR: _manifest.default.SYSTEM.HOVER_COLOR
+    },
+    LIST_OF_OBJECTS: {
+      VISIBLE: true,
+      LIST: ROOT_ENGINE.MODULES,
+      BUTTONS_MODULES: [],
+      BUTTONS_GAME_OBJECTS: [],
+      GET_MODULES: function (_give_me_reference_object_) {
+        for (var s = 0; s < ROOT_ENGINE.MODULES.length; s++) {
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.push(new _systems.RIGHT_MENU_BUTTON(ROOT_ENGINE.MODULES[s].NAME, 15 * s, s + 1));
+
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[s].TAP = function () {
+            //console.log(this.IAM)
+            ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS = [];
+
+            for (var w = 0; w < ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS.length; w++) {
+              ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.push(new _systems.RIGHT_MENU_BUTTON(ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS[w].NAME, 14 * w, w + 1));
+              ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].POSITION.x += 100;
+              var _pass_name = ROOT_ENGINE.MODULES[this.IAM - 1].GAME_OBJECTS[w].NAME;
+              ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w]._pass_name = _pass_name;
+
+              ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].TAP = function () {
+                console.log("  ON_PAGE EDITOR   :::: reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
+                window[_give_me_reference_object_.NAME]._REF = this._pass_name;
+                console.log(">>>>>>>>" + window[_give_me_reference_object_.NAME].NAME + "::::::::::" + window[_give_me_reference_object_.NAME]._REF);
+                window[SYS.RUNNING_PROGRAMS[0]].ENGINE.GUI.LIST_OF_OBJECTS.REMOVE_LIST_OBJ_MODULES();
+              };
+            }
+          };
+        }
+      },
+      REMOVE_LIST_OBJ_MODULES: function () {
+        ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES = [];
+        ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS = [];
+      }
+    }
+  };
+  this.GUI.LIST_OF_OBJECTS.GET_MODULES();
+  this.GUI.CHECK_ON_START();
+
+  this.DRAW_MODULES = function (s) {
+    if (ROOT_ENGINE.GUI.GRID.VISIBLE == true && ROOT_ENGINE.ENGINE_EDITOR == true) {
+      s.fillStyle = ROOT_ENGINE.GUI.GRID.COLOR;
+
+      for (var x = 0; x < ROOT_ENGINE.GUI.GRID.MAP_SIZE_X * ROOT_ENGINE.GUI.GRID.STEP; x += ROOT_ENGINE.GUI.GRID.STEP) {
+        s.fillRect(VIEW.W(x), VIEW.H(0), 1, VIEW.H());
+        s.fillRect(VIEW.W(0), VIEW.H(x), VIEW.W(), 1);
+      }
+    }
+
+    for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+      ROOT_ENGINE.MODULES[x].DRAW_GAME_OBJECTS(s);
+    }
+
+    if (ROOT_ENGINE.ENGINE_EDITOR == true) {
+      if (ROOT_ENGINE.GUI.VISIBLE == true) {
+        for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
+          s.textBaseline = "middle";
+
+          if (ROOT_ENGINE.GUI.BUTTONS[x].HOVER == false) {
+            s.fillStyle = _manifest.default.SYSTEM.COLOR;
+            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+            s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
+            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+          } else {
+            s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
+            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+            s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
+            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+
+            if (ROOT_ENGINE.GUI.BUTTONS[x].icon == true) {
+              try {
+                s.drawImage(window["image_system_" + ROOT_ENGINE.GUI.BUTTONS[x].IAM], ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() - 30, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() - 5, 30, 30);
+              } catch (e) {
+                /* Not nessesery */
+              }
+            }
+          }
+        }
+      } //
+
+
+      for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length; x++) {
+        s.textBaseline = "middle";
+
+        if (ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER == false) {
+          s.fillStyle = _manifest.default.SYSTEM.COLOR;
+          s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
+          s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH());
+        } else {
+          s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
+          s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.COLOR;
+          s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH());
+        }
+      }
+
+      for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.length; x++) {
+        s.textBaseline = "middle";
+
+        if (ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].HOVER == false) {
+          s.fillStyle = _manifest.default.SYSTEM.COLOR;
+          s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
+          s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH());
+        } else {
+          s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
+          s.fillRect(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.COLOR;
+          s.fillText(ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].text, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.X(), ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.Y() + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH());
+        }
+      } //
+
+    }
+  };
+
+  this.UPDATE_MODULES = function () {
+    for (var x = 0; x < ROOT_ENGINE.MODULES.length; x++) {
+      ROOT_ENGINE.MODULES[x].UPDATE_GAME_OBJECTS();
+    }
+  };
+
+  this.CREATE_MODUL = function (name) {
+    // window[name] = new MODUL(name);
+    ROOT_ENGINE.MODULES.push(new _modules.MODUL(name, ROOT_ENGINE.PROGRAM_ID));
+  };
+
+  this.DESTROY_MODUL = function (name) {
+    // window[name] = new MODUL(name);
+    console.log(ROOT_ENGINE.MODULES.indexOf(name));
+    ROOT_ENGINE.MODULES.forEach(function (item, index, object) {
+      // (item, index, object)
+      if (item.NAME == name) {
+        if (index > -1) {
+          ROOT_ENGINE.MODULES.splice(index, 1);
+        }
+
+        console.log(ROOT_ENGINE.MODULES.indexOf(name));
+      }
+    });
+  };
+}
+
+},{"../manifest/manifest":16,"./draw_functions/systems":4,"./events/keyboard":6,"./game_object/game_object_events":8,"./init":9,"./modules/modules":11}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.KEYBOARD = KEYBOARD;
+
+// PLAYER CONTROL AND OTHER KEYBOARD STAFF
+function KEYBOARD(c) {
+  var ROOT = this;
+  ROOT.CAPTURE_CHAR = "";
+  ROOT.CLEAR_CAPTURE_ON_PRESS_ENTER = true;
+  ROOT.LAST_CAPTURE_CHAR = "";
+  ROOT.ENTER_PRESSED = false;
+  ROOT.SHIFT_PRESSED = false;
+
+  ROOT.ACTION_ON_KEY_DOWN = function () {};
+
+  this.CANVAS = c;
+  this.PROGRAM_NAME = c.id;
+  c.addEventListener("keydown", function (e) {
+    switch (e.keyCode) {
+      case 8:
+        e.preventDefault();
+        SYS.DEBUG.LOG("prevent default for backspace.");
+    }
+
+    SYS.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+
+    if (typeof PLAYER != "undefined") {
+      if (PLAYER.TYPE == "PLATFORMER") {
+        PLAYER.FREEZ = false;
+
+        switch (e.keyCode) {
+          case 121:
+            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+
+          case 69:
+          case 37:
+            // left
+            PLAYER.CONTROL.LEFT = true;
+            PLAYER.X = PLAYER.SPEED;
+
+            if (PLAYER.CONTROL.JUMP === false) {
+              setTimeout(function () {
+                PLAYER.POSITION.TRANSLATE_BY_Y(100);
+              }, 50);
+            }
+
+            break;
+
+          case 38:
+            // up
+            if (PLAYER.CONTROL.JUMP === false) {
+              PLAYER.BREAK_AT_MOMENT_STATUS = false;
+              PLAYER.CONTROL.JUMP = true;
+              PLAYER.Y = PLAYER.SPEED * 10;
+              console.log(">>>>>>>" + PLAYER.Y);
+              setTimeout(function () {
+                while (PLAYER.Y > 0) {
+                  PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
+                }
+
+                PLAYER.Y = -1;
+              }, 100);
+            }
+
+            break;
+
+          case 39:
+            // right
+            PLAYER.CONTROL.RIGHT = true;
+            PLAYER.X = -PLAYER.SPEED;
+
+            if (PLAYER.CONTROL.JUMP === false) {
+              setTimeout(function () {
+                PLAYER.POSITION.TRANSLATE_BY_Y(100);
+              }, 50);
+            }
+
+            break;
+
+          case 40:
+            // down
+            break;
+        }
+      } else if (PLAYER.TYPE == "NORMAL") {
+        switch (e.keyCode) {
+          case 121:
+            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+
+          case 69:
+          case 37:
+            // left
+            PLAYER.X = PLAYER.X - PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_X(PLAYER.X);
+            break;
+
+          case 38:
+            // up
+            PLAYER.Y = PLAYER.Y - PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_Y(PLAYER.Y);
+            break;
+
+          case 39:
+            // right
+            PLAYER.X = PLAYER.X + PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_X(PLAYER.X);
+            break;
+
+          case 40:
+            // down
+            PLAYER.Y = PLAYER.Y + PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_Y(PLAYER.Y);
+            break;
+        }
+      }
+    } // SPECIAL FOR TEXTBOX
+
+
+    SYS.DEBUG.LOG("KEYBOARD-->> Show users types : " + e.keyCode);
+    var keynum;
+
+    if (window.event) {
+      keynum = e.keyCode;
+    } else {
+      if (e.which) {
+        keynum = e.which;
+      }
+    } //console.log(String.fromCharCode(keynum));
+
+
+    if (e.keyCode == 16) {
+      ROOT.SHIFT_PRESSED = true;
+    }
+
+    if (e.keyCode == 8) {
+      SYS.DEBUG.LOG("textbox delete last char!");
+      ROOT.CAPTURE_CHAR = remove_last(ROOT.CAPTURE_CHAR);
+    } else if (e.keyCode == 13) {
+      ROOT.ENTER_PRESSED = true;
+    } else {
+      if (ROOT.SHIFT_PRESSED == false) {
+        if (e.keyCode == 189) {
+          ROOT.CAPTURE_CHAR += "_";
+          ROOT.LAST_CAPTURE_CHAR = "_";
+        } else if (e.keyCode == 187) {
+          ROOT.CAPTURE_CHAR += "+";
+          ROOT.LAST_CAPTURE_CHAR = "+";
+        } else if (e.keyCode == 187) {
+          ROOT.CAPTURE_CHAR += "+";
+          ROOT.LAST_CAPTURE_CHAR = "+";
+        } else if (e.keyCode == 188) {
+          ROOT.CAPTURE_CHAR += ",";
+          ROOT.LAST_CAPTURE_CHAR = ",";
+        } else if (e.keyCode == 190) {
+          ROOT.CAPTURE_CHAR += ".";
+          ROOT.LAST_CAPTURE_CHAR = ".";
+        } else if (e.keyCode == 191) {
+          ROOT.CAPTURE_CHAR += "/";
+          ROOT.LAST_CAPTURE_CHAR = "/";
+        } else if (e.keyCode == 186) {
+          ROOT.CAPTURE_CHAR += ";";
+          ROOT.LAST_CAPTURE_CHAR = ";";
+        } else if (e.keyCode == 222) {
+          ROOT.CAPTURE_CHAR += "'";
+          ROOT.LAST_CAPTURE_CHAR = "'";
+        } else if (e.keyCode == 220) {
+          ROOT.CAPTURE_CHAR += "\\";
+          ROOT.LAST_CAPTURE_CHAR = "\\";
+        } else if (e.keyCode == 219) {
+          ROOT.CAPTURE_CHAR += "[";
+          ROOT.LAST_CAPTURE_CHAR = "[";
+        } else if (e.keyCode == 221) {
+          ROOT.CAPTURE_CHAR += "]";
+          ROOT.LAST_CAPTURE_CHAR = "]";
+        } else {
+          ROOT.CAPTURE_CHAR += String.fromCharCode(keynum).toLowerCase();
+          ROOT.LAST_CAPTURE_CHAR = String.fromCharCode(keynum).toLowerCase();
+        }
+      } else {
+        if (e.keyCode == 50) {
+          ROOT.CAPTURE_CHAR += "@";
+          ROOT.LAST_CAPTURE_CHAR = "@";
+        } else if (e.keyCode == 49) {
+          ROOT.CAPTURE_CHAR += "!";
+          ROOT.LAST_CAPTURE_CHAR = "!";
+        } else if (e.keyCode == 51) {
+          ROOT.CAPTURE_CHAR += "#";
+          ROOT.LAST_CAPTURE_CHAR = "#";
+        } else if (e.keyCode == 52) {
+          ROOT.CAPTURE_CHAR += "$";
+          ROOT.LAST_CAPTURE_CHAR = "$";
+        } else if (e.keyCode == 53) {
+          ROOT.CAPTURE_CHAR += "%";
+          ROOT.LAST_CAPTURE_CHAR = "%";
+        } else if (e.keyCode == 54) {
+          ROOT.CAPTURE_CHAR += "^";
+          ROOT.LAST_CAPTURE_CHAR = "^";
+        } else if (e.keyCode == 55) {
+          ROOT.CAPTURE_CHAR += "&";
+          ROOT.LAST_CAPTURE_CHAR = "&";
+        } else if (e.keyCode == 56) {
+          ROOT.CAPTURE_CHAR += "*";
+          ROOT.LAST_CAPTURE_CHAR = "*";
+        } else if (e.keyCode == 57) {
+          ROOT.CAPTURE_CHAR += "(";
+          ROOT.LAST_CAPTURE_CHAR = "(";
+        } else if (e.keyCode == 48) {
+          ROOT.CAPTURE_CHAR += ")";
+          ROOT.LAST_CAPTURE_CHAR = ")";
+        } else if (e.keyCode == 189) {
+          ROOT.CAPTURE_CHAR += "_";
+          ROOT.LAST_CAPTURE_CHAR = "_";
+        } else if (e.keyCode == 187) {
+          ROOT.CAPTURE_CHAR += "+";
+          ROOT.LAST_CAPTURE_CHAR = "+";
+        } else if (e.keyCode == 187) {
+          ROOT.CAPTURE_CHAR += "+";
+          ROOT.LAST_CAPTURE_CHAR = "+";
+        } else if (e.keyCode == 188) {
+          ROOT.CAPTURE_CHAR += "<";
+          ROOT.LAST_CAPTURE_CHAR = "<";
+        } else if (e.keyCode == 190) {
+          ROOT.CAPTURE_CHAR += ">";
+          ROOT.LAST_CAPTURE_CHAR = ">";
+        } else if (e.keyCode == 191) {
+          ROOT.CAPTURE_CHAR += "?";
+          ROOT.LAST_CAPTURE_CHAR = "?";
+        } else if (e.keyCode == 186) {
+          ROOT.CAPTURE_CHAR += ":";
+          ROOT.LAST_CAPTURE_CHAR = ":";
+        } else if (e.keyCode == 222) {
+          ROOT.CAPTURE_CHAR += "\"";
+          ROOT.LAST_CAPTURE_CHAR = "\"";
+        } else if (e.keyCode == 220) {
+          ROOT.CAPTURE_CHAR += "|";
+          ROOT.LAST_CAPTURE_CHAR = "|";
+        } else if (e.keyCode == 219) {
+          ROOT.CAPTURE_CHAR += "{";
+          ROOT.LAST_CAPTURE_CHAR = "{";
+        } else if (e.keyCode == 221) {
+          ROOT.CAPTURE_CHAR += "}";
+          ROOT.LAST_CAPTURE_CHAR = "}";
+        } else {
+          ROOT.CAPTURE_CHAR += String.fromCharCode(keynum).toUpperCase();
+          ROOT.LAST_CAPTURE_CHAR = String.fromCharCode(keynum).toUpperCase();
+        }
+      }
+    }
+
+    ROOT.ACTION_ON_KEY_DOWN(); //@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    if (typeof ROOT.TARGET_MODUL != "undefined" && typeof ROOT.TARGET != "undefined") {
+      ROOT.CAPTURE_CHAR = ROOT.CAPTURE_CHAR.replace(/[^\x00-\x7F]/g, "");
+      ROOT.CAPTURE_CHAR = ROOT.CAPTURE_CHAR.replace(/[^A-Za-z 0-9 \.,\?""!#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, "");
+      window[ROOT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT.TARGET_MODUL).GAME_OBJECTS.ACCESS(ROOT.TARGET).TEXTBOX.TEXT = ROOT.CAPTURE_CHAR;
+
+      if (ROOT.ENTER_PRESSED == true) {
+        window[ROOT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT.TARGET_MODUL).GAME_OBJECTS.ACCESS(ROOT.TARGET).TEXTBOX.ON_PRESS_ENTER();
+
+        if (ROOT.CLEAR_CAPTURE_ON_PRESS_ENTER == true) {
+          ROOT.CAPTURE_CHAR = "";
+        }
+      }
+    }
+
+    ROOT.ENTER_PRESSED = false; //local_go.TEXTBOX.TEXT =  ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR;
+  }, false);
+  c.addEventListener("keyup", function (e) {
+    SYS.DEBUG.LOG(" GAME RUNNING , key up : " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+
+    switch (e.keyCode) {
+      case 121:
+        SYS.DEBUG.LOG("F10 command -->> Show command line ");
+        break;
+
+      case 16:
+        ROOT.SHIFT_PRESSED = false;
+        break;
+    }
+
+    if (typeof PLAYER != "undefined") {
+      if (PLAYER.TYPE == "PLATFORMER") {
+        switch (e.keyCode) {
+          case 121:
+            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+
+          case 69:
+          case 37:
+            // left
+            PLAYER.CONTROL.LEFT = false;
+
+            while (PLAYER.X > 0) {
+              PLAYER.X = PLAYER.X - PLAYER.SPEED / 5;
+            }
+
+            PLAYER.X = 0;
+            break;
+
+          case 38:
+            // up
+            while (PLAYER.Y > 0) {
+              PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
+            } //PLAYER.Y = -1;
+            //PLAYER.POSITION.TRANSLATE_BY_Y(100)
+
+
+            break;
+
+          case 39:
+            // right
+            PLAYER.CONTROL.LEFT = false;
+
+            while (PLAYER.X < 0) {
+              PLAYER.X = PLAYER.X + PLAYER.SPEED / 5;
+            }
+
+            PLAYER.X = 0;
+            break;
+
+          case 40:
+            // down
+            break;
+        }
+      } else if (PLAYER.TYPE == "NORMAL") {
+        switch (e.keyCode) {
+          case 121:
+            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+
+          case 69:
+          case 37:
+            // left
+            PLAYER.X = PLAYER.X - PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_X(PLAYER.X);
+            break;
+
+          case 38:
+            // up
+            PLAYER.Y = PLAYER.Y - PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_Y(PLAYER.Y);
+            break;
+
+          case 39:
+            // right
+            PLAYER.X = PLAYER.X + PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_X(PLAYER.X);
+            break;
+
+          case 40:
+            // down
+            PLAYER.Y = PLAYER.Y + PLAYER.SPEED;
+            PLAYER.POSITION.TRANSLATE_BY_Y(PLAYER.Y);
+            break;
+        }
+      }
+    }
+  }, false);
+}
+
+},{}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GAME_OBJECT = GAME_OBJECT;
+
+var _math = require("../math");
+
+var _system = _interopRequireDefault(require("../system"));
+
+var _systems = require("../draw_functions/systems");
+
+var _rect = require("../draw_functions/rect");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+Copyright 2016, zlatnaspirala@gmail.com
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+ * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+ * Neither the name of zlatnaspirala@gmail.com nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+Constructor
+GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
+Type : Class
+
+Program create instance of this class  from  class modul :
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
+
+ */
+function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
+  var ROOT_GAME_OBJECT = this; //alias global access
+
+  if (name == "system" || name.indexOf("___VIRTUALKEYBOARD_") != -1) {
+    ROOT_GAME_OBJECT.VISIBLE = true;
+    window["" + name] = this;
+  } else {
+    window["" + name] = this;
+    ROOT_GAME_OBJECT.VISIBLE = true;
+  }
+
+  this.ID = parseFloat(Math.random() * 4560000 + Math.random() * 1230000).toFixed(0);
+  this.PARENT = modul;
+  this.PROGRAM_NAME = PROGRAM_NAME;
+  this.NAME = name;
+  this.AUTO_UPDATE = true;
+  this.FOCUS = false; // similar SELECTED but for runtime mode only
+
+  this.TYPE_OF_GAME_OBJECT = "empty";
+  this.ENUMERATION = ["empty", "ANIMATION", "TEXT_BOX", "PATRICLE", "NO_RENDER", "ANIMATION_TEXT_BOX", "ANIMATION_PATRICLE"];
+  this.DESTROY_ON_GAMEMAP_EXIT = true;
+  this.DRAG_STATUS = true;
+  this.DRAG = true;
+  this.DRAG_START_X = 0;
+  this.DRAG_START_Y = 0;
+  this.DRAG_DELTA = 0;
+  this.zoom_scale = 0;
+  this.globalAlpha = 1;
+
+  if ((typeof x && typeof y) === "number") {
+    if (typeof speed === "number") {
+      this.POSITION = new _math.POSITION(x, y, x, y, speed);
+    } else {
+      this.POSITION = new _math.POSITION(x, y, x, y, 1);
+    }
+  } else {
+    this.POSITION = new _math.POSITION(10, 10, 200, 200, 1);
+  }
+
+  if ((typeof w && typeof h) === "number") {
+    this.DIMENSION = new _math.DIMENSION(w, h);
+  } else {
+    this.DIMENSION = new _math.DIMENSION(10, 10);
+  } //this.ON_TARGET_POSITION = function(){};
+
+
+  this.POSITION.parentModul = modul;
+  this.POSITION.parentGameObject = name;
+  this.POSITION.PROGRAM_NAME = PROGRAM_NAME;
+  this.POSITION.DIMENSION = this.DIMENSION; //this.POSITION.ON_TARGET_POSITION = this.ON_TARGET_POSITION;
+
+  this.ANIMATION = null;
+
+  this.CREATE_ANIMATION = function (surf, TYPE_, FrameIndex, source, ID, blink_, min_, max_, step, speed_, opacity_) {
+    this.ANIMATION = new ANIMATION(surf, TYPE_, FrameIndex, source, ROOT_GAME_OBJECT, ID, blink_, min_, max_, step, speed_, opacity_);
+    this.TYPE_OF_GAME_OBJECT = "ANIMATION"; //SYS.DEBUG.LOG("images added in memory.... ID " + ID);
+  };
+
+  this.CREATE_PLAYER = function (type_) {
+    ROOT_GAME_OBJECT.PLAYER = {
+      TYPE: type_,
+      X: ROOT_GAME_OBJECT.POSITION.x,
+      // for platform
+      Y: ROOT_GAME_OBJECT.POSITION.y,
+      SPEED: 1,
+      CONTROL: {
+        RIGHT: false,
+        LEFT: false,
+        JUMP: false,
+        DOWN: false
+      },
+      POSITION: ROOT_GAME_OBJECT.POSITION,
+      BREAK_AT_MOMENT_STATUS: false
+    };
+    window["PLAYER"] = ROOT_GAME_OBJECT.PLAYER;
+    this.POSITION.PLAYER = ROOT_GAME_OBJECT.PLAYER;
+
+    if (type_ == "PLATFORMER") {
+      window[PROGRAM_NAME].ENGINE.GAME_TYPE = "PLATFORMER"; //ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
+      //ROOT_GAME_OBJECT.POSITION.SET_POSITION(45,45, "DIAMETRIC");
+    } else {
+      window[PROGRAM_NAME].ENGINE.GAME_TYPE = "NORMAL_CONTROL"; //ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
+    }
+  };
+
+  this.TEXTBOX = null;
+  this.TRACK_KEY = null;
+
+  this.CREATE_TEXTBOX = function (text, radius, color, textColor) {
+    if (typeof text != "undefined" && typeof radius != "undefined" && typeof color != "undefined" && typeof textColor != "undefined") {
+      this.TEXTBOX = new _rect.RECT(text, ROOT_GAME_OBJECT, radius, color, textColor);
+      this.TYPE_OF_GAME_OBJECT = "TEXT_BOX";
+      this.TRACK_KEY = true;
+      this.TEXTBOX.TEXT = text;
+      this.TEXTBOX.TEXT += window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.KEYBOARD.CAPTURE_CHAR;
+      this.FOCUS = true;
+
+      this.TEXTBOX.ON_PRESS_ENTER = function () {};
+
+      ROOT_GAME_OBJECT.EDITOR.BUTTONS[6].text = "Remove textbox";
+    } else {
+      _system.default.DEBUG.WARNING("TEXT_BOX error in constructor : ( text , radius , color, textColor) cant be undefined.");
+    }
+  };
+
+  this.DESTROY_AFTER = null;
+
+  this.DESTROY_ME_AFTER_X_SECUND = function (sec, name, x, ROOT_EVENTS) {
+    this.DESTROY_AFTER = sec * 20;
+
+    if (APPLICATION.EDITOR == true) {
+      DESTROY_DELAY(name, sec, ROOT_GAME_OBJECT.PARENT, ROOT_GAME_OBJECT.PROGRAM_NAME);
+    }
+  };
+
+  this.COLLISION = null;
+  this.POSITION.STATIC = false;
+
+  this.COLIDER = function (type__, margin) {
+    this.TYPE = type__;
+
+    if (typeof margin === "number") {
+      this.margin = margin;
+    } else {
+      this.margin = 1.02;
+    }
+  };
+
+  this.CREATE_COLLISION = function (type__, margin) {
+    ROOT_GAME_OBJECT.COLLISION = new ROOT_GAME_OBJECT.COLIDER(type__, margin);
+    ROOT_GAME_OBJECT.EDITOR.BUTTONS[3].text = "Remove collision";
+  };
+
+  this.ON_COLLISION = function (name_) {}; // face detect tracking.js
+
+
+  this.CREATE_FACE_DETECT = function () {
+    ROOT_GAME_OBJECT.SET_TRACKING_VIEW("NORMAL", "NORMAL");
+    TRACK_NOW();
+
+    ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+      ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.left = ROOT_GAME_OBJECT.POSITION.X() + "px";
+      ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.top = ROOT_GAME_OBJECT.POSITION.Y() + 50 + "px";
+      ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT.style.left = ROOT_GAME_OBJECT.POSITION.X() + "px";
+      ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT.style.top = ROOT_GAME_OBJECT.POSITION.Y() + 50 + "px";
+    };
+
+    ROOT_GAME_OBJECT.WEBCAM.VIDEO.style.opacity = 0.9;
+  };
+
+  this.SET_TRACKING_VIEW = function (type_, DIMENSIONS_TYPE) {
+    // just webcam view
+    ROOT_GAME_OBJECT.WEBCAM = new Object();
+    ROOT_GAME_OBJECT.WEBCAM.VIDEO = _system.default.DOM.E("video");
+    ROOT_GAME_OBJECT.WEBCAM.TRACKING_CANVAS_LAYOUT = document.getElementById("canvas"); // SET_STREAM(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
+
+    if (DIMENSIONS_TYPE == "GAME_OBJECT") {
+      ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
+    } else {
+      ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
+      ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(_system.default.DOM.E("video").height);
+      ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(_system.default.DOM.E("video").width);
+    }
+
+    ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "CUSTOM";
+
+    ROOT_GAME_OBJECT.CUSTOM = function () {
+      SURF.fillStyle = "white";
+      SURF.fillRect(ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), 100, 100);
+    };
+  }; // DRAW PATH
+
+
+  this.CREATE_PENCIL = function (type_, color, width) {
+    this.PENCIL = new Object();
+
+    if (typeof type_ != "undefined") {
+      this.PENCIL.TYPE = type_;
+    } else {
+      this.PENCIL.TYPE = "POINTS";
+    }
+
+    if (typeof color != "undefined") {
+      this.PENCIL.COLOR = color;
+    } else {
+      this.PENCIL.COLOR = "lime";
+    }
+
+    if (typeof width != "undefined") {
+      this.PENCIL.WIDTH = width;
+    } else {
+      this.PENCIL.WIDTH = 1;
+    }
+
+    ROOT_GAME_OBJECT.PENCIL.PATH = [];
+    ROOT_GAME_OBJECT.PENCIL.NAME = "";
+    ROOT_GAME_OBJECT.PENCIL.ID = ""; //draw
+
+    ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "PENCIL";
+    ROOT_GAME_OBJECT.PENCIL.LAST_POS = {
+      x: _system.default.MOUSE.x,
+      y: _system.default.MOUSE.y
+    }; // TRANSLATE_BY_PATH
+
+    ROOT_GAME_OBJECT.PENCIL.RECORD = true;
+
+    ROOT_GAME_OBJECT.PENCIL.RECORD_TYPE = function (TYPE_) {
+      if (TYPE_ == "EVERY_POINT") {
+        ROOT_GAME_OBJECT.ON_UPDATE_SYS = ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_EVERY_POINT;
+
+        _system.default.MOUSE.ON_RIGHT_BTN_PRESSED = function () {};
+      } else if (TYPE_ == "ON_TAP") {
+        ROOT_GAME_OBJECT.ON_UPDATE_SYS = ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_ONLY_TAP; //clear colector
+        //collector on tap
+
+        _system.default.MOUSE.ON_RIGHT_BTN_PRESSED = function () {
+          IamPathGameObject.PENCIL.RECORD = false;
+        };
+
+        _system.default.MOUSE.ON_LEFT_BTN_PRESSED = function () {
+          ROOT_GAME_OBJECT.PENCIL.PATH.push({
+            x: _system.default.MOUSE.x,
+            y: _system.default.MOUSE.y
+          });
+          var XX = _system.default.MOUSE.x;
+          var YY = _system.default.MOUSE.y;
+          ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+          ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+        };
+      }
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.SAVE_DRAWS = function (name_) {
+      if (typeof name_ != "undefined") {
+        var PATH_FOR_PENCIL = new Object();
+        PATH_FOR_PENCIL.PATH = ROOT_GAME_OBJECT.PENCIL.PATH;
+        PATH_FOR_PENCIL.ID = _system.default.MATH.RANDOM_INT_FROM_TO(1, 100000) * 78;
+        ROOT_GAME_OBJECT.PENCIL.NAME = name_;
+        PATH_FOR_PENCIL.NAME = name_;
+        SAVE(PATH_FOR_PENCIL.NAME, PATH_FOR_PENCIL);
+      } else {
+        _system.default.DEBUG.WARNING("Pencil object : save draws faild. Please give a name in arg");
+      }
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.LOAD_PATH = function (name_) {
+      if (typeof name != "undefined") {
+        ROOT_GAME_OBJECT.PENCIL.LOADED_PATH = LOAD(name_);
+        ROOT_GAME_OBJECT.PENCIL.PATH = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.PATH;
+        ROOT_GAME_OBJECT.PENCIL.NAME = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.NAME;
+        ROOT_GAME_OBJECT.PENCIL.ID = ROOT_GAME_OBJECT.PENCIL.LOADED_PATH.ID; // ROOT_GAME_OBJECT.PENCIL.LOADED_PATH = null;
+
+        ROOT_GAME_OBJECT.PENCIL.RECORD = false;
+      } else {
+        _system.default.DEBUG.WARNING("Pencil object : load draws faild. Please give a name in arg");
+      }
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW = function () {};
+
+    ROOT_GAME_OBJECT.PENCIL.CLEAR = function () {
+      ROOT_GAME_OBJECT.PENCIL.PATH = [];
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_TYPE = function (TYPE_) {
+      if (TYPE_ == "LINES") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_LINES;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+      } else if (TYPE_ == "POINTS") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+      } else if (TYPE_ == "STRIP_LINES") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+      } else if (TYPE_ == "STRIP_LINES2") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES2;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+      } else if (TYPE_ == "BALLS") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_BALS;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = TYPE_;
+      } else {
+        ROOT_GAME_OBJECT.PENCIL.DRAW = ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS;
+        ROOT_GAME_OBJECT.PENCIL.TYPE = "POINTS";
+      }
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_POINTS = function () {
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.fillStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+        SURF.beginPath();
+        SURF.arc(value_.x, value_.y, ROOT_GAME_OBJECT.PENCIL.WIDTH, 0, 2 * Math.PI);
+        SURF.fill();
+      });
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES = function () {
+      var a = 0;
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
+        //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+        if (a == 0) {
+          SURF.beginPath();
+          SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+          SURF.moveTo(value_.x, value_.y);
+        }
+
+        SURF.lineTo(value_.x, value_.y);
+        SURF.stroke();
+        a++;
+      });
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_LINES = function () {
+      var a = 0;
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
+        //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+        if (isOdd(a)) {
+          SURF.beginPath();
+          SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+          SURF.moveTo(value_.x, value_.y);
+        }
+
+        SURF.lineTo(value_.x, value_.y);
+        SURF.stroke();
+        a++;
+      });
+    }; //
+
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_STRIP_LINES2 = function () {
+      var a = 0;
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
+        //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+        if (isEven(a)) {
+          SURF.beginPath();
+          SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+          SURF.moveTo(value_.x, value_.y);
+        } //SURF.lineTo(value_.x,value_.y);
+        //SURF.stroke();
+
+
+        SURF.lineTo(value_.x, value_.y);
+        SURF.stroke();
+        a++;
+      });
+      var a = 0;
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
+        //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
+
+        if (isOdd(a)) {
+          SURF.beginPath();
+          SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
+          SURF.moveTo(value_.x, value_.y);
+        }
+
+        SURF.lineTo(value_.x, value_.y);
+        SURF.stroke();
+        a++;
+      });
+    }; //
+
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_BALS = function () {
+      SURF.fillStyle = ROOT_GAME_OBJECT.PENCIL.COLOR;
+      ROOT_GAME_OBJECT.PENCIL.PATH.forEach(function (value_) {
+        SURF.beginPath();
+        SURF.arc(value_.x, value_.y, ROOT_GAME_OBJECT.PENCIL.WIDTH * 20, 0, 2 * Math.PI);
+        SURF.fill();
+      });
+    };
+
+    ROOT_GAME_OBJECT.PENCIL.DRAW_TYPE(); //#############################
+    //#############################
+
+    ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+      if (ROOT_GAME_OBJECT.PENCIL.RECORD == true) {
+        if (ROOT_GAME_OBJECT.PENCIL.PATH.length > 0) {
+          if (ROOT_GAME_OBJECT.PENCIL.PATH[ROOT_GAME_OBJECT.PENCIL.PATH.length - 1].x != _system.default.MOUSE.x) {
+            ROOT_GAME_OBJECT.PENCIL.PATH.push({
+              x: _system.default.MOUSE.x,
+              y: _system.default.MOUSE.y
+            });
+            var XX = _system.default.MOUSE.x;
+            var YY = _system.default.MOUSE.y;
+            ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+            ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+          }
+        } else {
+          ROOT_GAME_OBJECT.PENCIL.PATH.push(ROOT_GAME_OBJECT.PENCIL.LAST_POS);
+        }
+      }
+    };
+
+    ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_ONLY_TAP = function () {};
+
+    ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_EVERY_POINT = function () {
+      if (ROOT_GAME_OBJECT.PENCIL.RECORD == true) {
+        if (ROOT_GAME_OBJECT.PENCIL.PATH.length > 0) {
+          if (ROOT_GAME_OBJECT.PENCIL.PATH[ROOT_GAME_OBJECT.PENCIL.PATH.length - 1].x != _system.default.MOUSE.x) {
+            ROOT_GAME_OBJECT.PENCIL.PATH.push({
+              x: _system.default.MOUSE.x,
+              y: _system.default.MOUSE.y
+            });
+            var XX = _system.default.MOUSE.x;
+            var YY = _system.default.MOUSE.y;
+            ROOT_GAME_OBJECT.PENCIL.LAST_POS.x = XX;
+            ROOT_GAME_OBJECT.PENCIL.LAST_POS.y = YY;
+          }
+        } else {
+          ROOT_GAME_OBJECT.PENCIL.PATH.push(ROOT_GAME_OBJECT.PENCIL.LAST_POS);
+        }
+      }
+    }; //#############################
+    //#############################
+
+  };
+
+  this.TRANSLATE_BY_PATH = function (PATH_, LOOP_TYPE) {
+    ROOT_GAME_OBJECT.sys_translateByPath = PATH_;
+    ROOT_GAME_OBJECT.sys_translateByPathIndex = 0;
+
+    if (typeof LOOP_TYPE != "undefined") {
+      ROOT_GAME_OBJECT.sys_translateByPathLoopType = LOOP_TYPE;
+      ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+    } else {
+      ROOT_GAME_OBJECT.sys_translateByPathLoopType = "STOP";
+      ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+    }
+
+    ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+
+    ROOT_GAME_OBJECT.POSITION.ON_TARGET_POSITION = function () {
+      if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "STOP") {
+        if (ROOT_GAME_OBJECT.sys_translateByPath.length > ROOT_GAME_OBJECT.sys_translateByPathIndex + 1) {
+          ROOT_GAME_OBJECT.sys_translateByPathIndex++;
+          ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+        } else {
+          if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE") {
+            ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "INVERSE";
+            ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+            ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+            ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+          }
+        }
+      } else if (ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive == "INVERSE") {
+        if (ROOT_GAME_OBJECT.sys_translateByPathIndex > 1) {
+          ROOT_GAME_OBJECT.sys_translateByPathIndex--;
+          ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+        } else {
+          if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE_FOR_EVER") {
+            ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+            ROOT_GAME_OBJECT.sys_translateByPathIndex++;
+            ROOT_GAME_OBJECT.POSITION.TRANSLATE(CONVERTOR.PIX_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].x), CONVERTOR.PIY_TO_PER(ROOT_GAME_OBJECT.sys_translateByPath[ROOT_GAME_OBJECT.sys_translateByPathIndex].y));
+          }
+        }
+      } else {
+        /* 	 if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "STOP") {
+            }
+        else if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE"){
+          ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "INVERSE";
+          }
+        else if (ROOT_GAME_OBJECT.sys_translateByPathLoopType == "INVERSE_FOR_EVER"){
+          ROOT_GAME_OBJECT.sys_translateByPathLoopTypeActive = "STOP";
+        }
+         */
+      }
+    };
+  };
+
+  this.EDITOR = {
+    SELECTED: false,
+    ENABLE: HELLO_WORLD.ENGINE.ENGINE_EDITOR,
+    ACTORS_VISIBLE: true,
+    ACTORS_AREA_HEIGHT: 10,
+    ACTOR_BLUE_HOVER: false,
+    ACTOR_GREEN_HOVER: false,
+    ACTOR_CENTER_OSCILATOR: new _system.default.MATH.OSCILLATOR(0, 2, 0.01),
+    ACTOR_START_X: 0,
+    ACTOR_START_Y: 0,
+    ACTOR_DELTA: 0,
+    ACTOR_X_IN_MOVE: false,
+    ACTOR_Y_IN_MOVE: false,
+    ACTOR_DRAG_RECT_DIM: new _math.DIMENSION(5, 5),
+    //ACTOR_DRAG_RECT_POS : SYS.ARRAY_OPERATION.DEEP_COPY.getCloneOfObject( this.POSITION ) ,
+    ACTOR_DRAG_RECT_POS: this.POSITION,
+    ACTOR_DRAG: false,
+    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Add animation ", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Add collision ", 60, "4"), new _systems.RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"), new _systems.RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"), new _systems.RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"), new _systems.RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png")],
+    GAME_OBJECT_MENU: {
+      VISIBLE: false
+    }
+  };
+  this.WEBCAM = null;
+
+  this.SET_WEBCAM_VIEW = function (type_, DIMENSIONS_TYPE) {
+    // just webcam view
+    ROOT_GAME_OBJECT.WEBCAM = new Object();
+    ROOT_GAME_OBJECT.WEBCAM.VIDEO = _system.default.DOM.E("webcam");
+    SET_STREAM(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
+
+    if (DIMENSIONS_TYPE == "GAME_OBJECT") {
+      ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
+    } else {
+      ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "WEBCAM_DIMENSION";
+      ROOT_GAME_OBJECT.DIMENSION.H = CONVERTOR.PIY_TO_PER(_system.default.DOM.E("webcam").height);
+      ROOT_GAME_OBJECT.DIMENSION.W = CONVERTOR.PIX_TO_PER(_system.default.DOM.E("webcam").width);
+    }
+
+    if (type_ == "NORMAL") {
+      ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "WEBCAM";
+    } else if (type_ == "NUI") {
+      _system.default.DOM.E("canvas-blended").height = _system.default.DOM.E("webcam").height;
+      _system.default.DOM.E("canvas-blended").width = _system.default.DOM.E("webcam").width;
+      _system.default.DOM.E("canvas-render").height = _system.default.DOM.E("webcam").height;
+      _system.default.DOM.E("canvas-render").width = _system.default.DOM.E("webcam").width;
+      ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "WEBCAM_NUI";
+      ROOT_GAME_OBJECT.WEBCAM.BLEND_CANVAS = _system.default.DOM.E("canvas-blended");
+      ROOT_GAME_OBJECT.WEBCAM.RENDER_CANVAS = _system.default.DOM.E("canvas-render");
+      ROOT_GAME_OBJECT.WEBCAM.NOTES = [];
+    }
+  };
+
+  this.CREATE_WEBCAM = function (type_, DIMENSIONS_TYPE, numFieldV, numFieldH) {
+    if (typeof type_ != "undefined") {
+      if (type_ == "NUI") {
+        ROOT_GAME_OBJECT.SET_WEBCAM_VIEW("NUI", DIMENSIONS_TYPE);
+        ROOT_GAME_OBJECT.WEBCAM.numFieldV = numFieldV;
+        ROOT_GAME_OBJECT.WEBCAM.numFieldH = numFieldH;
+        ROOT_GAME_OBJECT.WEBCAM.BS = ROOT_GAME_OBJECT.WEBCAM.BLEND_CANVAS.getContext("2d");
+        ROOT_GAME_OBJECT.WEBCAM.RC = ROOT_GAME_OBJECT.WEBCAM.RENDER_CANVAS.getContext("2d");
+        ROOT_GAME_OBJECT.WEBCAM._N_ = new Array();
+        CREATE_MOTION_PARAMETERS(ROOT_GAME_OBJECT);
+        CREATE_MOTION_FIELDS(ROOT_GAME_OBJECT);
+        ROOT_GAME_OBJECT.WEBCAM.HIDE_INDICATED_POINT = false;
+        ROOT_GAME_OBJECT.WEBCAM.DRAW = WEBCAM_DRAW;
+      } else if ("NORMAL") {
+        ROOT_GAME_OBJECT.SET_WEBCAM_VIEW("NORMAL", DIMENSIONS_TYPE);
+      }
+    } else {
+      _system.default.DEBUG.WARNING("Pleas enter type of webcam component .  [ NUI , NORMAL ]  ");
+    }
+  };
+
+  this.DESTROY_WEBCAM = function () {
+    ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "NO_RENDER";
+
+    ROOT_GAME_OBJECT.WEBCAM.DRAW = function () {};
+
+    ROOT_GAME_OBJECT.WEBCAM.NOTES = [];
+    ROOT_GAME_OBJECT.WEBCAM.BS = null;
+    ROOT_GAME_OBJECT.WEBCAM.RC = null;
+    ROOT_GAME_OBJECT.WEBCAM._N_ = [];
+    delete ROOT_GAME_OBJECT.WEBCAM;
+    ROOT_GAME_OBJECT.WEBCAM = null;
+  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  // MUTIRTC_PEER
+
+
+  this.ON_PEER_CREATED = {
+    "DONE": function () {}
+    /* MAIN_PEER.CHANNEL.SET('LEVEL1') }  */
+
+  };
+
+  this.CREATE_PEER = function (port) {
+    if (typeof port != "undefined") {
+      window["MAIN_PEER"].PORT = port;
+    } else {
+      window["MAIN_PEER"].PORT = 12034;
+    }
+
+    if (typeof window["MAIN_PEER"].REMOTE_DATA == "undefined") {
+      ROOT_GAME_OBJECT.MAIN_PEER = window["MAIN_PEER"];
+      ROOT_GAME_OBJECT.MAIN_PEER.ADDRESS = "localhost";
+      ROOT_GAME_OBJECT.MAIN_PEER.ON_PEER_CREATED = ROOT_GAME_OBJECT.ON_PEER_CREATED;
+
+      ROOT_GAME_OBJECT.MAIN_PEER.LOADED = function () {
+        console.log("peer loaded2");
+      };
+
+      if (typeof window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER") == "undefined") {
+        setTimeout(ROOT_GAME_OBJECT.CREATE_PEER, 50);
+        return;
+      } else {
+        if (typeof window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT == "function") {} else {
+          setTimeout(ROOT_GAME_OBJECT.CREATE_PEER, 50);
+          return;
+        }
+      }
+
+      window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT("system_object_for_MAIN_peer", 5, 5, 15, 8, 10);
+
+      var sys_btn_alias = window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS("system_object_for_MAIN_peer");
+
+      sys_btn_alias.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W;
+      sys_btn_alias.CREATE_TEXTBOX("enter message", 10, "black", "lime");
+      system_object_for_MAIN_peer.TEXTBOX.font = "18px Arial";
+
+      system_object_for_MAIN_peer.TEXTBOX.ON_PRESS_ENTER = function () {
+        _system.default.DOM.E("SEND_BTN_").value = system_object_for_MAIN_peer.TEXTBOX.TEXT;
+
+        _system.default.DEBUG.LOG("SEND TEXT MSG TO CURRENT CHANNEL");
+
+        system_object_for_MAIN_peer.TEXTBOX.TEXT = "";
+        ROOT_GAME_OBJECT.MAIN_PEER.SEND_MSG();
+      };
+
+      window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").NEW_OBJECT("system_object_for_MAIN_peer_BTN_connect", 5, 5, 9, 7, 10);
+
+      var sys_btn_connect = window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("GUI_STARTER").GAME_OBJECTS.ACCESS("system_object_for_MAIN_peer_BTN_connect");
+
+      sys_btn_connect.CREATE_TEXTBOX("Connect", 10, "black", "lime");
+      sys_btn_connect.TEXTBOX.font = "18px Arial";
+      sys_btn_connect.TEXTBOX.EDIT = false;
+
+      sys_btn_connect.TAP = function () {
+        if (rtcMultiConnection.sessionDescription == null) {
+          MAIN_PEER.CONNECT_TO_CHANNEL();
+        }
+      }; ///////////////////////
+
+
+      ROOT_GAME_OBJECT.ON_UPDATE_SYS = function () {
+        //sys_btn_alias.POSITION.x = ROOT_GAME_OBJECT.POSITION.x;
+        sys_btn_alias.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x, ROOT_GAME_OBJECT.POSITION.y + ROOT_GAME_OBJECT.DIMENSION.H * 1.1, "DIAMETRIC");
+        sys_btn_connect.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x + ROOT_GAME_OBJECT.DIMENSION.W / 1.7, ROOT_GAME_OBJECT.POSITION.y, "DIAMETRIC");
+      }; // ROOT_GAME_OBJECT.
+      //
+
+
+      ROOT_GAME_OBJECT.MAIN_PEER.REMOTE_DATA = {
+        OBJECTS: [],
+        //SEND DATA
+        SHARE: function (object) {
+          rtcMultiConnection.send({
+            "shared_object": object,
+            "operation": "share"
+          });
+          object.PEER_SHARED = true;
+        },
+        SHARE_POSITION: function (object) {
+          object.POSITION.SHARE_POSITION = true;
+        },
+        NEW_POSITION: function (object) {
+          rtcMultiConnection.send({
+            "nameOfObject": object.NAME,
+            "operation": "new_pos",
+            "x": object.POSITION.x,
+            "y": object.POSITION.y
+          });
+        },
+        NEW_DIMENSION: function (object) {
+          rtcMultiConnection.send({
+            "nameOfObject": object.NAME,
+            "operation": "new_dim",
+            "x": object.DIMENSION.W,
+            "y": object.DIMENSION.H
+          });
+        },
+        // DATA FROM SERVER
+        NETWORK_VIEW: function (e) {
+          if (e.operation == "share") {
+            window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_OBJECT(e.shared_object);
+          } else if (e.operation == "new_pos") {
+            window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_POSITION(e);
+          } else if (e.operation == "new_dim") {
+            window[_system.default.RUNNING_PROGRAMS[_system.default.RUNNING_PROGRAMS.length - 1]].ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_NETWORK_DIMENSION(e);
+          } else if (e.operation == "dimension&position") {}
+        }
+      };
+      ROOT_GAME_OBJECT.MAIN_PEER.CHANNEL = {
+        GET: function () {
+          return _system.default.DOM.E("room-name").value;
+        },
+        SET: function (newvalue) {
+          _system.default.DOM.E("room-name").value = newvalue;
+        }
+      };
+      ROOT_GAME_OBJECT.MAIN_PEER.LOCAL_USER = {
+        GET: function () {
+          return _system.default.DOM.E("your-name").value;
+        },
+        SET: function (newvalue) {
+          _system.default.DOM.E("your-name").value = newvalue;
+        }
+      };
+      ROOT_GAME_OBJECT.MAIN_PEER.SEND_MSG = function () {
+        if (typeof rtcMultiConnection != "undefined") {
+          rtcMultiConnection.send(_system.default.DOM.E("SEND_BTN_").value);
+          _system.default.DOM.E("SEND_BTN_").value = "";
+        }
+      }, ROOT_GAME_OBJECT.MAIN_PEER.CONNECT_TO_CHANNEL = function () {
+        _system.default.DOM.E("continue").onclick();
+      }, ROOT_GAME_OBJECT.MAIN_PEER.LOGS = "logs!";
+      ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "MAIN_PEER_OBJECT";
+      setTimeout(function () {
+        MAIN_PEER.ON_PEER_CREATED.DONE();
+      }, 200);
+    } else {
+      _system.default.DEBUG.WARNING("from function CREATE_PEER -  MAIN PEER OBJECT ALREADY CREATED.");
+    }
+  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+  this.GROUP = {
+    ADD: function (name) {
+      var locx = window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(name).POSITION.x;
+      var locy = window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(name).POSITION.y;
+      var dx = ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.x - locx;
+      var dy = ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.y - locy;
+      ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS.push({
+        x: dx,
+        y: dy
+      });
+      ROOT_GAME_OBJECT.GROUP.GROUP.push(name); //delete (locx);
+      //delete (locy);
+      //SYS.DEBUG.LOG(dx + "=============" + dy)
+    },
+    GROUP: [],
+    GROUP_INITIALS: [],
+    MASTER: ROOT_GAME_OBJECT.NAME,
+    MASTER_INITIALS: {
+      x: ROOT_GAME_OBJECT.POSITION.x,
+      y: ROOT_GAME_OBJECT.POSITION.y
+    },
+    UPDATE: function () {}
+  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+  this.EFFECTS = {
+    FADE: {
+      IN: function (sec) {
+        var TIMER = setTimeout(function () {
+          ROOT_GAME_OBJECT.globalAlpha += 0.02;
+
+          if (ROOT_GAME_OBJECT.globalAlpha < 1) {
+            ROOT_GAME_OBJECT.EFFECTS.FADE.IN();
+          } else {
+            ROOT_GAME_OBJECT.globalAlpha = 1;
+          }
+        }, sec);
+      },
+      OUT: function (sec) {
+        var TIMER = setTimeout(function () {
+          ROOT_GAME_OBJECT.globalAlpha -= 0.02;
+
+          if (ROOT_GAME_OBJECT.globalAlpha > 0) {
+            ROOT_GAME_OBJECT.EFFECTS.FADE.OUT();
+          } else {
+            ROOT_GAME_OBJECT.globalAlpha = 0;
+          }
+        }, sec);
+      }
+    },
+    ZOOM: {
+      STATUS_FOR_IN: false,
+      STATUS_FOR_OUT: false,
+      ZOOM_IN_FINISHED: function () {
+        console.log("zoom in  ----finished.");
+      },
+      ZOOM_OUT_FINISHED: function () {
+        console.log("zoom out ----finished.");
+      },
+      VALUE: 0.5,
+      IN: function (sec) {
+        var sec = sec;
+        this.STATUS_FOR_IN = true;
+        var TIMER = setTimeout(function () {
+          if (ROOT_GAME_OBJECT.zoom_scale < ROOT_GAME_OBJECT.EFFECTS.ZOOM.VALUE) {
+            ROOT_GAME_OBJECT.zoom_scale += 0.01;
+            ROOT_GAME_OBJECT.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x - ROOT_GAME_OBJECT.zoom_scale, ROOT_GAME_OBJECT.POSITION.y - ROOT_GAME_OBJECT.zoom_scale, "DIAMETRIC");
+            ROOT_GAME_OBJECT.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W + ROOT_GAME_OBJECT.zoom_scale * 2;
+            ROOT_GAME_OBJECT.DIMENSION.H = ROOT_GAME_OBJECT.DIMENSION.H + ROOT_GAME_OBJECT.zoom_scale * 2;
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.IN(sec);
+          } else {
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.ZOOM_IN_FINISHED();
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.STATUS_FOR_IN = false;
+          }
+        }, sec);
+      },
+      OUT: function (sec) {
+        var sec = sec;
+        this.STATUS_FOR_OUT = true;
+        var TIMER = setTimeout(function () {
+          if (ROOT_GAME_OBJECT.POSITION.x < ROOT_GAME_OBJECT.GROUP.MASTER_INITIALS.x) {
+            ROOT_GAME_OBJECT.zoom_scale -= 0.009;
+            ROOT_GAME_OBJECT.POSITION.SET_POSITION(ROOT_GAME_OBJECT.POSITION.x + ROOT_GAME_OBJECT.zoom_scale, ROOT_GAME_OBJECT.POSITION.y + ROOT_GAME_OBJECT.zoom_scale, "DIAMETRIC");
+            ROOT_GAME_OBJECT.DIMENSION.W = ROOT_GAME_OBJECT.DIMENSION.W - ROOT_GAME_OBJECT.zoom_scale * 2;
+            ROOT_GAME_OBJECT.DIMENSION.H = ROOT_GAME_OBJECT.DIMENSION.H - ROOT_GAME_OBJECT.zoom_scale * 2;
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.OUT(sec);
+          } else {
+            ROOT_GAME_OBJECT.zoom_scale = 0;
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.ZOOM_OUT_FINISHED();
+            ROOT_GAME_OBJECT.EFFECTS.ZOOM.STATUS_FOR_OUT = false;
+          }
+        }, sec);
+      }
+    }
+  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+  this.PARTICLE = null;
+
+  this.CREATE_PARTICLE = function (type_) {
+    // NEED to be created more particle system in future !!!
+    ROOT_GAME_OBJECT.PARTICLE = new PARTICLE_FONTAN(ROOT_GAME_OBJECT);
+    ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "PATRICLE";
+  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+  this.CUSTOM = function () {};
+
+  this.DESELECT_ALL = function () {
+    var exec_local = "" + ROOT_GAME_OBJECT.PROGRAM_NAME.toString();
+
+    for (var z = 0; z < window[exec_local].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.length; z++) {
+      window[exec_local].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS[z].EDITOR.SELECTED = false;
+    }
+  }; // For user override
+
+
+  this.TOUCH_DOWN = function () {
+    _system.default.DEBUG.LOG("No atached event . EVENT_TOUCH_DOWN");
+  };
+
+  this.TAP = function () {
+    _system.default.DEBUG.LOG("No atached event . EVENT_TAP : similar click");
+  };
+
+  this.TOUCH_UP = function () {
+    _system.default.DEBUG.LOG("No atached event . EVENT_TOUCH_UP");
+  };
+
+  this.TOUCH_MOVE = function () {// SYS.DEBUG.LOG("No atached event . EVENT_TOUCH_MOVE");
+  };
+
+  this.UPDATE_STATUS = {
+    STOP: function () {}
+  };
+  this.ROTATE = {
+    ANGLE: 0,
+    //use for custum image drawing
+    RADIANS: 0,
+    // fiktive
+    ROTATE_ARROUNT_CENTER: function () {
+      ORBIT(50, 50, ROOT_GAME_OBJECT.ROTATE.ANGLE, ROOT_GAME_OBJECT.POSITION);
+    }
+  };
+
+  this.DRAW = function (s) {
+    if (ROOT_GAME_OBJECT.VISIBLE == true) {
+      s.save();
+      s.globalAlpha = ROOT_GAME_OBJECT.globalAlpha;
+
+      if (this.TYPE_OF_GAME_OBJECT == "ANIMATION") {
+        this.ANIMATION.DRAW();
+      } else if (this.TYPE_OF_GAME_OBJECT == "TEXT_BOX") {
+        this.TEXTBOX.DRAW(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "TEXT_BOX_ANIMATION") {
+        this.TEXTBOX.DRAW(s);
+        this.ANIMATION.DRAW();
+      } else if (this.TYPE_OF_GAME_OBJECT == "PATRICLE") {
+        this.PARTICLE.DRAW(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "PATRICLE_ANIMATION") {
+        this.PARTICLE.DRAW(s);
+        this.ANIMATION.DRAW();
+      } else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_PATRICLE") {
+        this.ANIMATION.DRAW();
+        this.PARTICLE.DRAW(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_TEXT_BOX") {
+        this.ANIMATION.DRAW();
+        this.TEXTBOX.DRAW(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "ANIMATION_PATRICLE") {
+        this.ANIMATION.DRAW();
+        this.PARTICLE.DRAW(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "WEBCAM") {
+        if (ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT") {
+          s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.DIMENSION.WIDTH(), ROOT_GAME_OBJECT.DIMENSION.HEIGHT());
+        } else {
+          s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.WEBCAM.VIDEO.width, ROOT_GAME_OBJECT.WEBCAM.VIDEO.height);
+        }
+      } else if (this.TYPE_OF_GAME_OBJECT == "WEBCAM_NUI") {
+        if (ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT") {
+          s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.DIMENSION.WIDTH(), ROOT_GAME_OBJECT.DIMENSION.HEIGHT());
+        } else {
+          s.drawImage(ROOT_GAME_OBJECT.WEBCAM.VIDEO, ROOT_GAME_OBJECT.POSITION.X(), ROOT_GAME_OBJECT.POSITION.Y(), ROOT_GAME_OBJECT.WEBCAM.VIDEO.width, ROOT_GAME_OBJECT.WEBCAM.VIDEO.height);
+        }
+
+        blend(ROOT_GAME_OBJECT, s);
+        checkAreas(ROOT_GAME_OBJECT);
+        ROOT_GAME_OBJECT.WEBCAM.DRAW(s, ROOT_GAME_OBJECT.WEBCAM);
+      } else if (this.TYPE_OF_GAME_OBJECT == "CUSTOM") {
+        ROOT_GAME_OBJECT.CUSTOM(s);
+      } else if (this.TYPE_OF_GAME_OBJECT == "PENCIL") {
+        ROOT_GAME_OBJECT.PENCIL.DRAW();
+      } else if (this.TYPE_OF_GAME_OBJECT == "NO_RENDER") {// nothing here
+      } else if (this.TYPE_OF_GAME_OBJECT == "MAIN_PEER_OBJECT") {
+        s.fillStyle = "#192837";
+        s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+        s.fillStyle = "lime";
+        s.drawImage(image_system_8, this.POSITION.X() + this.DIMENSION.WIDTH() / 2, this.POSITION.Y() + 30, 90, 90);
+        s.drawImage(image_system_conn, this.POSITION.X() + this.DIMENSION.WIDTH() / 1.4, this.POSITION.Y() + 30, 90, 90);
+        s.fillText("Signaling IP Address : " + this.MAIN_PEER.ADDRESS, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 4);
+        s.fillText("Name : " + this.MAIN_PEER.LOCAL_USER.GET(), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 5);
+        s.fillText("Channel : " + this.MAIN_PEER.CHANNEL.GET(), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 6);
+        s.fillText("peer logs : " + ROOT_GAME_OBJECT.MAIN_PEER.LOGS, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 7); //ROOT_GAME_OBJECT.MAIN_PEER.LOGS = 'logs!';
+      }
+
+      s.restore();
+    }
+  };
+
+  this.DRAW_ACTOR = function (s) {
+    if (this.EDITOR.ACTORS_VISIBLE == true) {
+      s.save();
+      s.font = "13px Arial";
+      s.fillRect(0, this.POSITION.Y(), VIEW.W(), 1);
+      s.fillRect(this.POSITION.X(), 0, 1, VIEW.H());
+      s.globalAlpha = 0.5;
+      s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+      s.globalAlpha = 0.9;
+
+      if (ROOT_GAME_OBJECT.EDITOR.SELECTED == true) {
+        s.fillText("Name :" + this.NAME, this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 4);
+        s.fillText("Percent :" + CONVERTOR.PIX_TO_PER(this.POSITION.X().toString()).toFixed(2) + "%  y:" + CONVERTOR.PIY_TO_PER(this.POSITION.Y()).toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT * 2.5);
+        s.fillText("Actor- x:" + this.POSITION.X().toFixed(2).toString() + " y:" + this.POSITION.Y().toFixed(2), this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() - this.EDITOR.ACTORS_AREA_HEIGHT);
+      } //CONVERTOR.PIX_TO_PER( h );
+      // actor rect for drag
+      //ACTOR_DRAG_RECT
+
+
+      s.strokeStyle = "blue";
+      s.strokeRect(this.EDITOR.ACTOR_DRAG_RECT_POS.X() + this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTOR_DRAG_RECT_POS.Y() + this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTOR_DRAG_RECT_DIM.WIDTH(), this.EDITOR.ACTOR_DRAG_RECT_DIM.HEIGHT());
+
+      if (this.EDITOR.ACTOR_BLUE_HOVER == true) {
+        s.fillStyle = "lime";
+      } else {
+        s.fillStyle = "blue";
+      } //BLU LINE ACTOR X-OSA
+
+
+      s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.EDITOR.ACTORS_AREA_HEIGHT * 15, this.EDITOR.ACTORS_AREA_HEIGHT);
+      s.beginPath();
+      s.moveTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5, this.POSITION.Y() - 0.5 * this.EDITOR.ACTORS_AREA_HEIGHT);
+      s.lineTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5, this.POSITION.Y() + 1.4 * this.EDITOR.ACTORS_AREA_HEIGHT);
+      s.lineTo(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT * 12.5 * 1.5, this.POSITION.Y() + 1 / 2 * this.EDITOR.ACTORS_AREA_HEIGHT);
+      s.closePath();
+      s.fill();
+
+      if (this.EDITOR.ACTOR_GREEN_HOVER == true) {
+        s.fillStyle = "lime";
+      } else {
+        s.fillStyle = "green";
+      } //BLU LINE ACTOR X-OSA
+
+
+      s.fillRect(this.POSITION.X(), this.POSITION.Y(), this.EDITOR.ACTORS_AREA_HEIGHT, this.EDITOR.ACTORS_AREA_HEIGHT * 15);
+      s.beginPath();
+      s.moveTo(this.POSITION.X() - 0.5 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5);
+      s.lineTo(this.POSITION.X() + 1.4 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 10 * 1.5);
+      s.lineTo(this.POSITION.X() + 1 / 2 * this.EDITOR.ACTORS_AREA_HEIGHT, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT * 12.5 * 1.5);
+      s.closePath();
+      s.fill(); // fix color compositi near x i y
+
+      s.fillStyle = "red";
+      s.beginPath(); //s.strokeStyle = "rgba( 222 , " + this.PULSAR_G.VALUE + " , " + this.PULSAR_B.VALUE + " , " + this.PULSAR_A.VALUE + ")";
+
+      s.arc(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.EDITOR.ACTORS_AREA_HEIGHT / 2, 0 * Math.PI, 2 * Math.PI);
+      s.fill();
+      s.closePath();
+      s.beginPath();
+      s.lineWidth = 1;
+      s.strokeStyle = "white";
+      s.arc(this.POSITION.X() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.POSITION.Y() + this.EDITOR.ACTORS_AREA_HEIGHT / 2, this.EDITOR.ACTORS_AREA_HEIGHT, (this.EDITOR.ACTOR_CENTER_OSCILATOR.UPDATE() + 0.1) * Math.PI, (this.EDITOR.ACTOR_CENTER_OSCILATOR.UPDATE() - 0.1) * Math.PI);
+      s.stroke();
+      s.closePath();
+      s.restore();
+    }
+
+    if (ROOT_GAME_OBJECT.EDITOR.GAME_OBJECT_MENU.VISIBLE == true) {
+      for (var x = 0; x < ROOT_GAME_OBJECT.EDITOR.BUTTONS.length; x++) {
+        //s.textBaseline = 'middle';
+        s.save();
+        s.globalAlpha = 1;
+
+        if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].HOVER == false) {
+          s.fillStyle = APPLICATION.SYSTEM.COLOR;
+          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+          s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+        } else {
+          s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+          s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+
+          if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].icon == true) {
+            try {
+              s.drawImage(window["image_system_" + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].IAM], ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH() - 30, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() - 5, 30, 30);
+            } catch (e) {
+              /* Not nessesery */
+            }
+          }
+        }
+
+        s.restore();
+
+        if (ROOT_GAME_OBJECT.WEBCAM != null) {//s.drawImage( , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X() , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT()/2 , ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+        }
+      }
+    }
+  };
+
+  this.ON_UPDATE = function () {};
+
+  this.ON_UPDATE_SYS = function () {};
+
+  this.UPDATE = function () {
+    if (this.AUTO_UPDATE == true) {
+      ROOT_GAME_OBJECT.POSITION.UPDATE();
+    }
+
+    if (ROOT_GAME_OBJECT.EDITOR.ENABLE == false) {
+      if (ROOT_GAME_OBJECT.DESTROY_AFTER != null) {
+        if (ROOT_GAME_OBJECT.DESTROY_AFTER > 0) {
+          ROOT_GAME_OBJECT.DESTROY_AFTER--;
+        }
+      }
+    }
+
+    if (ROOT_GAME_OBJECT.GROUP.GROUP.length > 0) {
+      for (var s = 0; s < ROOT_GAME_OBJECT.GROUP.GROUP.length; s++) {
+        window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(ROOT_GAME_OBJECT.GROUP.GROUP[s]).POSITION.x = ROOT_GAME_OBJECT.POSITION.x - ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS[s].x;
+        window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS(ROOT_GAME_OBJECT.PARENT).GAME_OBJECTS.ACCESS(ROOT_GAME_OBJECT.GROUP.GROUP[s]).POSITION.y = ROOT_GAME_OBJECT.POSITION.y - ROOT_GAME_OBJECT.GROUP.GROUP_INITIALS[s].y;
+      }
+    }
+
+    if (ROOT_GAME_OBJECT.DESTROY_ON_GAMEMAP_EXIT == true && ROOT_GAME_OBJECT.POSITION.Y() < window[ROOT_GAME_OBJECT.PROGRAM_NAME].MAP.UP()) {
+      //alert("DESTROYED " + ROOT_GAME_OBJECT.NAME)
+      window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.MODULES.ACCESS_MODULE(ROOT_GAME_OBJECT.PARENT).DESTROY_OBJECT(ROOT_GAME_OBJECT.NAME);
+    }
+
+    ROOT_GAME_OBJECT.ON_UPDATE();
+    ROOT_GAME_OBJECT.ON_UPDATE_SYS();
+  };
+
+  this.GAME_OBJECT_READY = function () {
+    _system.default.DEBUG.LOG("ready : " + ROOT_GAME_OBJECT.NAME);
+    /* 	if (OVERRIDE_DRAW_FOR_NETWORK == null){
+    //ALLWAYS
+    OVERRIDE_DRAW_FOR_NETWORK = ROOT_GAME_OBJECT.DRAW;
+    OVERRIDE_UPDATE_FOR_NETWORK = ROOT_GAME_OBJECT.UPDATE;
+    OVERRIDE_POSITION_X = ROOT_GAME_OBJECT.POSITION.X;
+    OVERRIDE_POSITION_Y = ROOT_GAME_OBJECT.POSITION.Y;
+    OVERRIDE_DIMENSION_WIDTH = ROOT_GAME_OBJECT.DIMENSION.WIDTH;
+    OVERRIDE_DIMENSION_HEIGHT = ROOT_GAME_OBJECT.DIMENSION.HEIGHT;
+    }
+      if (OVERRIDE_ANIMATION_DRAW == null) {
+    //NOT ALWAYS
+    OVERRIDE_ANIMATION_DRAW = ROOT_GAME_OBJECT.ANIMATION.DRAW;
+    OVERRIDE_ANIMATION_X = ROOT_GAME_OBJECT.ANIMATION.X;
+    OVERRIDE_ANIMATION_Y = ROOT_GAME_OBJECT.ANIMATION.Y;
+    OVERRIDE_ANIMATION_W = ROOT_GAME_OBJECT.ANIMATION.W;
+    OVERRIDE_ANIMATION_H = ROOT_GAME_OBJECT.ANIMATION.H;
+    } */
+
+  };
+
+  setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
+}
+
+},{"../draw_functions/rect":3,"../draw_functions/systems":4,"../math":10,"../system":15}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.EVENTS = EVENTS;
+
+var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function EVENTS(canvas, ROOT_ENGINE) {
+  var ROOT_EVENTS = this;
+  this.ROOT_ENGINE = ROOT_ENGINE; //Mobile device
+
+  if (NOMOBILE == 0) {
+    /**
+     * Use for Mobile device.
+     * @event touchstart
+     */
+    canvas.addEventListener("touchstart", function (e) {
+      e.preventDefault();
+      var touchList = e.changedTouches; //SYS.MOUSE.PRESS = true;
+
+      _system.default.MOUSE.x = touchList[0].pageX;
+      _system.default.MOUSE.y = touchList[0].pageY;
+      ROOT_EVENTS.CALCULATE_TOUCH_OR_CLICK();
+    }, false);
+    /**
+     * Use for Mobile device.
+     * @event touchend
+     */
+
+    canvas.addEventListener("touchend", function (e) {
+      e.preventDefault();
+      var touchList = e.changedTouches;
+      _system.default.MOUSE.PRESS = false;
+      _system.default.MOUSE.x = touchList[0].pageX;
+      _system.default.MOUSE.y = touchList[0].pageY;
+      ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
+    }, false);
+    /**
+     * Use for Mobile device.
+     * @event touchcancel
+     */
+
+    canvas.addEventListener("touchcancel", function (e) {
+      e.preventDefault();
+      var touchList = e.changedTouches;
+      _system.default.MOUSE.PRESS = false;
+      _system.default.MOUSE.x = touchList[0].pageX;
+      _system.default.MOUSE.y = touchList[0].pageY;
+      ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
+    }, false);
+    /**
+     * Use for Mobile device.
+     * @event touchmove
+     */
+
+    canvas.addEventListener("touchmove", function (e) {
+      e.preventDefault();
+      var touchList = e.changedTouches; //SYS.MOUSE.PRESS = true;
+
+      _system.default.MOUSE.x = touchList[0].pageX;
+      _system.default.MOUSE.y = touchList[0].pageY;
+      ROOT_EVENTS.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE();
+    }, false);
+  } else {
+    /**
+     * Use for Desktop device.
+     * @event click
+     */
+    canvas.addEventListener("click", function (e) {
+      //SYS.MOUSE.PRESS = true;
+      _system.default.MOUSE.x = e.layerX;
+      _system.default.MOUSE.y = e.layerY;
+      ROOT_EVENTS.CALCULATE_TOUCH_OR_CLICK(); //SYS.DEBUG.LOG("SYS : CLICK EVENT " + canvas);
+    }, false);
+    /**
+     * Use for Desktop device.
+     * @event mouseup
+     */
+
+    canvas.addEventListener("mouseup", function (e) {
+      _system.default.MOUSE.PRESS = false;
+      _system.default.MOUSE.BUTTON_PRESSED = null;
+      _system.default.MOUSE.x = e.layerX;
+      _system.default.MOUSE.y = e.layerY;
+      ROOT_EVENTS.CALCULATE_TOUCH_UP_OR_MOUSE_UP();
+    }, false);
+    /**
+     * Use for Desktop device.
+     * @event onmousemove
+     */
+
+    canvas.onmousemove = function (e) {
+      _system.default.MOUSE.x = e.layerX;
+      _system.default.MOUSE.y = e.layerY;
+      ROOT_EVENTS.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE();
+    };
+    /**
+     * Use for Desktop device.
+     * @event onmousedown
+     */
+
+
+    canvas.onmousedown = function (e) {
+      _system.default.MOUSE.PRESS = true;
+
+      if (e.which == 3) {
+        _system.default.MOUSE.BUTTON_PRESSED = "RIGHT";
+
+        _system.default.MOUSE.ON_RIGHT_BTN_PRESSED();
+
+        _system.default.DEBUG.LOG("Right button clicked");
+      } else if (e.which == 2) {
+        _system.default.MOUSE.BUTTON_PRESSED = "MID";
+
+        _system.default.MOUSE.ON_MID_BTN_PRESSED();
+
+        _system.default.DEBUG.LOG("Mid button clicked");
+      } else if (e.which == 1) {
+        _system.default.MOUSE.BUTTON_PRESSED = "LEFT";
+
+        _system.default.MOUSE.ON_LEFT_BTN_PRESSED();
+
+        _system.default.DEBUG.LOG("Left button clicked");
+      }
+
+      _system.default.MOUSE.x = e.layerX;
+      _system.default.MOUSE.y = e.layerY;
+      ROOT_EVENTS.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN();
+    }; //console.log("This is PC desktop device.");
+
+  } //Calculate touch or click event
+
+
+  this.CALCULATE_TOUCH_OR_CLICK = function () {
+    for (var x = 0; x < this.ROOT_ENGINE.MODULES.length; x++) {
+      for (var z = 0; z < ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; z++) {
+        var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+
+        if (_system.default.MOUSE.x > local_go.POSITION.X() && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.POSITION.Y() && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT()) {
+          if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false && local_go.VISIBLE != false) {
+            _system.default.DEBUG.LOG("SYS : touch or click event on game object : " + local_go.NAME);
+
+            local_go.FOCUS = true;
+            local_go.TAP();
+          }
+        }
+      }
+    }
+  }; // CALCULATE MOUSE MOVE OR TOUCH MOVE
+
+
+  this.CALCULATE_TOUCH_MOVE_OR_MOUSE_MOVE = function () {
+    for (var x = 0; x < this.ROOT_ENGINE.MODULES.length; x++) {
+      var first_pass = false;
+
+      for (var z = 0; z < ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; z++) {
+        //-------------------------------//-------------------------------//-------------------------------
+        var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+
+        if (_system.default.MOUSE.x > local_go.POSITION.X() && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.POSITION.Y() && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT()) {
+          //SYS.DEBUG.LOG( "SYS : touchmove event on game object : " + local_go.NAME);
+          // EVENT ONLY OUT OF EDITOR
+          if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false && local_go.VISIBLE == true) {
+            local_go.TOUCH_MOVE();
+
+            if (_system.default.MOUSE.PRESS == true && local_go.DRAG == true && first_pass == false && local_go.DRAG_STATUS == true) {
+              first_pass = true;
+              local_go.DRAG_DELTA = local_go.DRAG_START_X;
+              var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
+              local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
+              local_go.DRAG_DELTA = local_go.DRAG_START_Y;
+              var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.DRAG_DELTA.toFixed(2)));
+              local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
+            }
+          }
+        } else {} //-------------------------------//-------------------------------//-------------------------------
+        //-------------------------------//-------------------------------//-------------------------------
+        //EDITOR
+        //-------------------------------//-------------------------------//-------------------------------
+
+
+        if (local_go.EDITOR.ENABLE == true) {
+          //-------------------------------//-------------------------------//-------------------------------
+          // DRAG in EDITOR
+          //-------------------------------//-------------------------------//-------------------------------
+          if (_system.default.MOUSE.PRESS == true && local_go.EDITOR.ACTOR_DRAG == true && first_pass == false) {
+            first_pass = true;
+            local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_X + local_go.EDITOR.ACTORS_AREA_HEIGHT;
+            var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
+            local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(2)) - Math.abs(local_));
+            local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_Y + local_go.EDITOR.ACTORS_AREA_HEIGHT;
+            var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(2)));
+            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(2)) - Math.abs(local_));
+          } //-------------------------------//-------------------------------//-------------------------------
+          //-------------------------------//-------------------------------//-------------------------------
+          //-------------------------------//-------------------------------//-------------------------------
+          // OBJECT MOVE
+          // ACTOR X
+
+
+          if (local_go.EDITOR.ACTOR_X_IN_MOVE == true) {
+            local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_X;
+            var local_ = CONVERTOR.PIX_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
+            local_go.POSITION.TRANSLATE_BY_X(parseFloat(CONVERTOR.PIX_TO_PER(_system.default.MOUSE.x).toFixed(1)) - Math.abs(local_));
+          } // ACTOR Y
+
+
+          if (local_go.EDITOR.ACTOR_Y_IN_MOVE == true) {
+            local_go.EDITOR.ACTOR_DELTA = local_go.EDITOR.ACTOR_START_Y;
+            var local_ = CONVERTOR.PIY_TO_PER(parseFloat(local_go.EDITOR.ACTOR_DELTA.toFixed(1)));
+            local_go.POSITION.TRANSLATE_BY_Y(parseFloat(CONVERTOR.PIY_TO_PER(_system.default.MOUSE.y).toFixed(1)) - Math.abs(local_));
+          } //-------------------------------//-------------------------------//-------------------------------
+          //HOVER
+          //-------------------------------//-------------------------------//-------------------------------
+
+
+          if (_system.default.MOUSE.x > local_go.POSITION.X() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.EDITOR.ACTORS_AREA_HEIGHT * 15 && _system.default.MOUSE.y > local_go.POSITION.Y() && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT) {
+            local_go.EDITOR.ACTOR_BLUE_HOVER = true;
+          } else {
+            local_go.EDITOR.ACTOR_BLUE_HOVER = false;
+          } //-------------------------------//-------------------------------//-------------------------------
+          //-------------------------------//-------------------------------//-------------------------------
+
+
+          if (_system.default.MOUSE.x > local_go.POSITION.X() && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.y > local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT * 15) {
+            local_go.EDITOR.ACTOR_GREEN_HOVER = true; //SYS.DEBUG.LOG( "SYS : green Y-ACTOR event on game object : " + local_go.NAME);
+          } else {
+            local_go.EDITOR.ACTOR_GREEN_HOVER = false;
+          } //-------------------------------//-------------------------------//-------------------------------
+          //-------------------------------//-------------------------------//-------------------------------
+
+        } // END OF EDITOR
+
+
+        if (local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == true) {
+          local_go.EDITOR.ACTOR_DRAG = false;
+
+          for (var q = 0; q < local_go.EDITOR.BUTTONS.length; q++) {
+            if (_system.default.MOUSE.x > local_go.EDITOR.BUTTONS[q].POSITION.x && _system.default.MOUSE.x < local_go.EDITOR.BUTTONS[q].POSITION.x + local_go.EDITOR.BUTTONS[q].DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET && _system.default.MOUSE.y < local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET + local_go.EDITOR.BUTTONS[q].DIMENSION.HEIGHT()) {
+              local_go.EDITOR.BUTTONS[q].HOVER = true;
+            } else {
+              local_go.EDITOR.BUTTONS[q].HOVER = false;
+            }
+          }
+        } //-------------------------------//-------------------------------//-------------------------------
+
+      }
+    }
+
+    if (ROOT_ENGINE.GUI.VISIBLE == true) {
+      for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
+        if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT()) {
+          ROOT_ENGINE.GUI.BUTTONS[x].HOVER = true;
+        } else {
+          ROOT_ENGINE.GUI.BUTTONS[x].HOVER = false;
+        }
+      }
+    } // LIST GUI SYSTEM EVENTS
+
+
+    if (ROOT_ENGINE.GUI.VISIBLE == true) {
+      for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length; x++) {
+        if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT()) {
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER = true;
+        } else {
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].HOVER = false;
+        }
+      } //BUTTONS_GAME_OBJECTS
+
+
+      for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.length; x++) {
+        if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.x + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].HOVER = true;
+        } else {
+          ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].HOVER = false;
+        }
+      }
+    } //
+
+  }; // CALCULATE_TOUCH_UP_OR_MOUSE_UP
+
+
+  this.CALCULATE_TOUCH_UP_OR_MOUSE_UP = function () {
+    for (var x = 0; x < this.ROOT_ENGINE.MODULES.length; x++) {
+      for (var z = 0; z < ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; z++) {
+        var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+        local_go.EDITOR.ACTOR_X_IN_MOVE = false;
+        local_go.EDITOR.ACTOR_Y_IN_MOVE = false; //-------------------------------//-------------------------------//-------------------------------
+        // EDITOR
+        //-------------------------------//-------------------------------//-------------------------------
+
+        if (local_go.EDITOR.ENABLE == true) {
+          local_go.EDITOR.ACTOR_DRAG = false; //-------------------------------//-------------------------------//-------------------------------
+        } // end of EDITOR
+        //-------------------------------//-------------------------------//-------------------------------
+        // EVENT ONLY OUT OF EDITOR
+
+
+        if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false) {
+          if (_system.default.MOUSE.x > local_go.POSITION.X() && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.POSITION.Y() && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT()) {
+            if (local_go.VISIBLE == true) {
+              local_go.TOUCH_UP();
+              _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).style.cursor = "auto";
+            }
+          }
+        }
+      }
+    }
+  };
+
+  this.CALCULATE_TOUCH_DOWN_OR_MOUSE_DOWN = function () {
+    var selected_something = false;
+
+    for (var x = 0; x < this.ROOT_ENGINE.MODULES.length; x++) {
+      for (var z = 0; z < ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS.length; z++) {
+        var local_go = ROOT_EVENTS.ROOT_ENGINE.MODULES[x].GAME_OBJECTS[z];
+
+        if (_system.default.MOUSE.x > local_go.POSITION.X() && _system.default.MOUSE.x < local_go.POSITION.X() + local_go.DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.POSITION.Y() && _system.default.MOUSE.y < local_go.POSITION.Y() + local_go.DIMENSION.HEIGHT()) {
+          local_go.EDITOR.SELECTED = true;
+          selected_something = true;
+
+          if (local_go.TYPE_OF_GAME_OBJECT == "TEXT_BOX" && local_go.TEXTBOX.EDIT == true && local_go.VISIBLE == true) {
+            if (NOMOBILE == 1) {
+              // for desktop mouse		HARD CODE 0/1
+              if (_manifest.default.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP == true) {
+                ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
+                ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+                SHOW_KEYBOARD(local_go.NAME);
+              } else {
+                //normal for desktop
+                local_go.FOCUS = true;
+                ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR = local_go.TEXTBOX.TEXT;
+                ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
+                ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+              }
+            } else {
+              // for mobile VirtualKeyboard
+              ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
+              ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
+              SHOW_KEYBOARD(local_go.NAME);
+            }
+          } // EVENT ONLY OUT OF EDITOR
+
+
+          if (ROOT_EVENTS.ROOT_ENGINE.ENGINE_EDITOR == false && local_go.VISIBLE == true) {
+            local_go.FOCUS = true;
+            local_go.TOUCH_DOWN();
+
+            _system.default.DEBUG.LOG("SYS : touchDown or mouseDown event on game object : " + local_go.NAME); // if drag is enabled
+
+
+            if (local_go.DRAG == true) {
+              //$$$$$$$$
+              //if (  SYS.MOUSE.x > local_go.POSITION.X()    && SYS.MOUSE.x < local_go.POSITION.X() +  local_go.DIMENSION.WIDTH()  && SYS.MOUSE.y > local_go.POSITION.Y()&&SYS.MOUSE.y < local_go.POSITION.Y() +    local_go.DIMENSION.HEIGHT()) {
+              if (_system.default.MOUSE.BUTTON_PRESSED == "LEFT") {
+                _system.default.DOM.E(local_go.PROGRAM_NAME).style.cursor = "MOVE";
+                local_go.DRAG = true;
+                local_go.DRAG_START_X = parseFloat(_system.default.MOUSE.x.toFixed(2) - local_go.POSITION.X());
+                local_go.DRAG_START_Y = parseFloat(_system.default.MOUSE.y.toFixed(2) - local_go.POSITION.Y());
+              } //	}
+              //$$$$$$$$
+
+            }
+          }
+        } else {
+          local_go.FOCUS = false;
+        } //-------------------------------//-------------------------------//-------------------------------
+        // EDITOR
+        //-------------------------------//-------------------------------//-------------------------------
+
+
+        if (local_go.EDITOR.ENABLE == true) {
+          //################
+          if (local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == true) {
+            local_go.EDITOR.ACTOR_DRAG = false;
+
+            for (var q = 0; q < local_go.EDITOR.BUTTONS.length; q++) {
+              if (_system.default.MOUSE.x > local_go.EDITOR.BUTTONS[q].POSITION.x && _system.default.MOUSE.x < local_go.EDITOR.BUTTONS[q].POSITION.x + local_go.EDITOR.BUTTONS[q].DIMENSION.WIDTH() && _system.default.MOUSE.y > local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET && _system.default.MOUSE.y < local_go.EDITOR.BUTTONS[q].POSITION.y + local_go.EDITOR.BUTTONS[q].Y_OFFSET + local_go.EDITOR.BUTTONS[q].DIMENSION.HEIGHT()) {
+                //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+                if (local_go.EDITOR.BUTTONS[q].IAM == "1") {
+                  // DESTROY OBJECT
+                  ROOT_EVENTS.ROOT_ENGINE.MODULES[x].DESTROY_OBJECT(local_go.NAME); //DESTROY( name , canvas.id  , local_go.PARENT )
+
+                  DESTROY(local_go.NAME);
+
+                  _system.default.DEBUG.LOG("DESTROY_OBJECT");
+                } //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "2") {
+                  var local_res = prompt("Destroy game_object ( Time not count in editor ):", "10");
+
+                  if (!isNaN(parseFloat(local_res.charAt(0)))) {
+                    var _name = local_go.NAME;
+                    local_go.DESTROY_ME_AFTER_X_SECUND(local_res, _name, x, ROOT_EVENTS);
+                  } else {
+                    alert("ERROR MSG: ADD_ANIMATION not success.");
+                  }
+
+                  _system.default.DEBUG.LOG("test2");
+                } //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "3") {
+                  var resource_list = "";
+
+                  for (var key in RESOURCE) {
+                    if (RESOURCE.hasOwnProperty(key) && key != "SUM") {
+                      resource_list += "  " + key + ", ";
+                    }
+                  }
+
+                  var local_res = prompt("Full list of images source : \n " + resource_list + "   \n \n Enter name of animation resource object :", "demo1");
+
+                  if (isNaN(parseFloat(local_res.charAt(0)))) {
+                    ADD_ANIMATION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: ADD_ANIMATION not success.");
+                  }
+
+                  _system.default.DEBUG.LOG("add animation....");
+                } //-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "4") {
+                  if (local_go.COLLISION == null) {
+                    ////////////////////////////
+                    // ADD COLLIDER
+                    ///////////////////////////
+                    var local_res = prompt("Enter outline margin collider.", "1.02");
+
+                    if (!isNaN(parseFloat(local_res.charAt(0)))) {
+                      ADD_COLLISION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                      local_go.EDITOR.BUTTONS[q].text = "Remove collision"; //local_go.REMOVE_COLLISION(local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT);
+
+                      _system.default.DEBUG.LOG("add collider");
+                    } else {
+                      alert("ERROR MSG: ADD_COLLISION not success.");
+                    } //////////////////////////
+
+                  } else if (local_go.EDITOR.BUTTONS[q].text == "Remove collision") {
+                    REMOVE_COLLISION();
+                    local_go.COLLISION = null;
+                    local_go.EDITOR.BUTTONS[q].text = "Add collision";
+
+                    _system.default.DEBUG.LOG("remove collider");
+                  }
+                } //-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "5") {
+                  if (typeof PLAYER === "undefined") {
+                    var local_res = prompt("Enter player type : ", "NORMAL");
+
+                    if (isNaN(parseFloat(local_res.charAt(0)))) {
+                      CREATE_PLAYER(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, q);
+                      local_go.EDITOR.BUTTONS[q].text = "Deatach player";
+
+                      _system.default.DEBUG.LOG("atach player");
+                    }
+                  } else if (typeof local_go.PLAYER != "undefined") {
+                    DEATACH_PLAYER(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    local_go.PLAYER = undefined;
+                    PLAYER = undefined; //delete (local_go.PLAYER);
+                    //delete (PLAYER);
+
+                    local_go.EDITOR.BUTTONS[q].text = "Atach player";
+
+                    _system.default.DEBUG.LOG("deatach player , also destroy PLAYER global object.");
+                  }
+                } //-----------------------------------------------------------------------------
+                //-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "6") {
+                  if (local_go.PARTICLE == null) {
+                    var local_res = prompt("Enter particle type : ", "FONTAN");
+
+                    if (isNaN(parseFloat(local_res.charAt(0)))) {
+                      ADD_PARTICLE(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                      local_go.CREATE_PARTICLE(local_res);
+                      local_go.EDITOR.BUTTONS[q].text = "Remove particle";
+
+                      _system.default.DEBUG.LOG("atach player");
+                    }
+                  } else if (typeof local_go.PARTICLE != null) {
+                    REMOVE_PARTICLE(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    local_go.TYPE_OF_GAME_OBJECT = "empty";
+                    delete local_go.PARTICLE;
+                    local_go.PARTICLE = null;
+                    local_go.EDITOR.BUTTONS[q].text = "Add particle";
+
+                    _system.default.DEBUG.LOG("particle removed from " + local_go.NAME);
+                  }
+                } //-----------------------------------------------------------------------------
+                //-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "7") {
+                  if (local_go.TEXTBOX == null) {
+                    var local_res = prompt("Enter text value : ", "HELLO");
+                    var local_color = prompt("Enter color value : ", "red");
+                    var local_textcolor = prompt("Enter Text color value : ", "black");
+                    var local_radius = prompt("Enter rect radius  value : ", 15);
+                    local_res = "" + local_res.toString();
+                    ADD_TEXTBOX(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_radius, local_color, local_textcolor);
+                    local_go.CREATE_TEXTBOX(local_res, local_radius, local_color, local_textcolor);
+                    local_go.EDITOR.BUTTONS[q].text = "Remove textbox";
+
+                    _system.default.DEBUG.LOG("atach textbox");
+                  } else if (typeof local_go.TEXTBOX != null) {
+                    REMOVE_TEXTBOX(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    local_go.TYPE_OF_GAME_OBJECT = "empty";
+                    delete local_go.TEXTBOX;
+                    local_go.TEXTBOX = null;
+                    local_go.EDITOR.BUTTONS[q].text = "Add textbox";
+
+                    _system.default.DEBUG.LOG("textbox removed from " + local_go.NAME + " . And .TEXTBOX is :" + local_go.TEXTBOX);
+                  }
+                } //-----------------------------------------------------------------------------
+                //-----------------------------------------------------------------------------
+                else if (local_go.EDITOR.BUTTONS[q].IAM == "8") {
+                  if (local_go.WEBCAM == null) {
+                    var local_res = prompt("Choose NORMAL if you wanna simple webcam view or enter value 'NUI' for motion detect component + webcam view : ", "NORMAL");
+
+                    if (local_res == "NORMAL") {
+                      var local_type_of_dim = prompt("Just press enter to make video with the same dimensions like game_object , any other value set dimensions of webcam video. ", "GAME_OBJECT");
+
+                      if (local_type_of_dim == "GAME_OBJECT") {
+                        local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
+                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim);
+                        local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+
+                        _system.default.DEBUG.LOG("atach webcam");
+                      } else {
+                        // DIMENSIONS_TYPE = WEBCAM_DIMENSION
+                        local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
+                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, "WEBCAM_DIMENSION");
+                        local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+
+                        _system.default.DEBUG.LOG("atach webcam");
+                      }
+                    } else if (local_res == "NUI") {
+                      var local_type_of_dim = prompt("Just press enter to make video with the same dimensions like game_object , any other value set dimensions of webcam video. ", "GAME_OBJECT");
+                      var detectPointByVer = prompt(" Sum of motion detect point for vertical line, 8 is optimal for max value and 1 is minimum . ", 6);
+                      var detectPointByHor = prompt(" Sum of motion detect point for horizontal line, 8 is optimal for max value and 1 is minimum . ", 6);
+
+                      if (!isNaN(detectPointByVer) && !isNaN(detectPointByHor) && isNaN(local_type_of_dim)) {
+                        local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
+                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim, detectPointByVer, detectPointByHor);
+                        local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
+
+                        _system.default.DEBUG.LOG("atach webcam");
+                      } else {
+                        _system.default.DEBUG.WARNING(" Error in CREATE_WEBCAM procedure Description : type of dimensions must be string , Sum of point must be number.");
+                      }
+                    }
+                  } else {
+                    local_go.DESTROY_WEBCAM();
+                    REMOVE_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                  }
+                }
+              } else {
+                local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = false;
+              }
+            }
+          }
+
+          if (_system.default.MOUSE.x > local_go.EDITOR.ACTOR_DRAG_RECT_POS.X() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.x < local_go.EDITOR.ACTOR_DRAG_RECT_POS.X() + local_go.EDITOR.ACTOR_DRAG_RECT_DIM.WIDTH() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.y > local_go.EDITOR.ACTOR_DRAG_RECT_POS.Y() + local_go.EDITOR.ACTORS_AREA_HEIGHT && _system.default.MOUSE.y < local_go.EDITOR.ACTOR_DRAG_RECT_POS.Y() + local_go.EDITOR.ACTOR_DRAG_RECT_DIM.HEIGHT() + local_go.EDITOR.ACTORS_AREA_HEIGHT) {
+            if (_system.default.MOUSE.BUTTON_PRESSED == "LEFT") {
+              local_go.EDITOR.ACTOR_DRAG = true;
+              local_go.EDITOR.ACTOR_START_X = parseFloat(_system.default.MOUSE.x.toFixed(2) - local_go.POSITION.X() - local_go.EDITOR.ACTORS_AREA_HEIGHT);
+              local_go.EDITOR.ACTOR_START_Y = parseFloat(_system.default.MOUSE.y.toFixed(2) - local_go.POSITION.Y() - local_go.EDITOR.ACTORS_AREA_HEIGHT);
+            } else if (_system.default.MOUSE.BUTTON_PRESSED == "RIGHT") {
+              if (local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE == false) {
+                for (var w = 0; w < local_go.EDITOR.BUTTONS.length; w++) {
+                  local_go.EDITOR.BUTTONS[w].POSITION.x = _system.default.MOUSE.x;
+                  local_go.EDITOR.BUTTONS[w].POSITION.y = _system.default.MOUSE.y;
+                }
+
+                local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = true;
+              }
+            }
+          } // HOVER  ACTORS
+
+
+          if (local_go.EDITOR.ACTOR_BLUE_HOVER == true) {
+            local_go.EDITOR.ACTOR_X_IN_MOVE = true;
+            local_go.EDITOR.ACTOR_START_X = parseFloat(_system.default.MOUSE.x.toFixed(2) - local_go.POSITION.X());
+          } else if (local_go.EDITOR.ACTOR_GREEN_HOVER == true) {
+            local_go.EDITOR.ACTOR_Y_IN_MOVE = true;
+            local_go.EDITOR.ACTOR_START_Y = parseFloat(_system.default.MOUSE.y.toFixed(2) - local_go.POSITION.Y());
+          }
+
+          if (selected_something == false) {
+            local_go.DESELECT_ALL();
+          }
+        } // end of EDITOR
+
+
+        if (selected_something == false && local_go.NAME.indexOf("___VIRTUALKEYBOARD") == -1) {
+          ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = undefined;
+          ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = undefined;
+        } // local_go
+
+      }
+    }
+
+    if (ROOT_ENGINE.ENGINE_EDITOR == true) {
+      if (ROOT_ENGINE.GUI.VISIBLE == false && selected_something == false && _system.default.MOUSE.BUTTON_PRESSED == "RIGHT") {
+        for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
+          ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x = _system.default.MOUSE.x;
+          ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y = _system.default.MOUSE.y;
+        }
+
+        ROOT_ENGINE.GUI.VISIBLE = true;
+      } else if (ROOT_ENGINE.GUI.VISIBLE == true) {
+        for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
+          if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.x + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.BUTTONS[x].POSITION.y + ROOT_ENGINE.GUI.BUTTONS[x].Y_OFFSET + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT()) {
+            if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "1") {
+              // ADD NEW OBJECT
+              var sign_name = prompt("Enter gameObject name :", "noname");
+
+              if (isNaN(parseFloat(sign_name.charAt(0)))) {
+                var sign_name2 = prompt("Enter gameObject parent modul :", "STARTER");
+
+                if (isNaN(parseFloat(sign_name.charAt(0)))) {
+                  ADD(sign_name, 45, 45, 10, 10, canvas.id, sign_name2);
+                } else {
+                  alert("ERROR MSG: GameObject name created not success.");
+                }
+              } else {
+                alert("ERROR MSG: GameObject name created not success.");
+              }
+            } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "2") {
+              for (var z = 0; z < _system.default.RUNNING_PROGRAMS.length; z++) {
+                window[_system.default.RUNNING_PROGRAMS[z]].ENGINE.EXIT_EDIT_MODE();
+              }
+            } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "3") {
+              //runtime only
+              // change draw interval and update
+              var sign_name = prompt("Enter   program DRAW_INTERVAL :", 15);
+
+              if (!isNaN(parseFloat(sign_name))) {
+                var sign_name2 = prompt("Enter  program UPDATE_INTERVAL :", 15);
+
+                if (!isNaN(parseFloat(sign_name2))) {
+                  _system.default.DEBUG.LOG("Program interval now is   " + sign_name + "  . best range is [1 , 70]  ");
+
+                  window[ROOT_ENGINE.PROGRAM_ID].DRAW_INTERVAL = parseFloat(sign_name);
+                  window[ROOT_ENGINE.PROGRAM_ID].UPDATE_INTERVAL = parseFloat(sign_name2);
+                  SET_MAIN_INTERVAL(ROOT_ENGINE.PROGRAM_ID, sign_name, sign_name2);
+                } else {
+                  alert("ERROR MSG: Program interval not success changed.");
+                }
+              } else {
+                alert("ERROR MSG: Program interval not success changed.");
+              }
+            } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "4") {
+              if (_manifest.default.ACCOUNT_SERVICE_AUTO_RUN == true) {
+                _manifest.default.ACCOUNT_SERVICE_AUTO_RUN = false;
+                ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to true";
+              } else {
+                _manifest.default.ACCOUNT_SERVICE_AUTO_RUN = true;
+                ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnectt to false";
+              }
+
+              SAVE("Application", _manifest.default);
+            } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "5") {
+              if (_manifest.default.EDITOR_AUTORUN == true) {
+                _manifest.default.EDITOR_AUTORUN = false;
+                ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to true";
+              } else {
+                _manifest.default.EDITOR_AUTORUN = true;
+                ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to false";
+              }
+
+              SAVE("Application", _manifest.default);
+            }
+          }
+        }
+
+        ROOT_ENGINE.GUI.VISIBLE = false;
+      }
+
+      if (ROOT_ENGINE.GUI.LIST_OF_OBJECTS.VISIBLE == true) {
+        for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES.length; x++) {
+          if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.x + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].DIMENSION.HEIGHT()) {
+            ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_MODULES[x].TAP();
+          }
+        } // GUI BUTTON LIST SYSTEM TAP EVENT
+
+
+        for (var x = 0; x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS.length; x++) {
+          if (_system.default.MOUSE.x > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.x && _system.default.MOUSE.x < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.x + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.WIDTH() && _system.default.MOUSE.y > ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].Y_OFFSET && _system.default.MOUSE.y < ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].POSITION.y + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].Y_OFFSET + ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
+            ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[x].TAP();
+          }
+        }
+      }
+    }
+  };
+}
+
+},{"../../manifest/manifest":16,"../system":15}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.CONVERTOR = void 0;
 exports.CREATE_IMG = CREATE_IMG;
 exports.DEEP_COPY = void 0;
@@ -102,6 +2675,12 @@ exports.roundedRect = roundedRect;
 exports.test_webcam_device = test_webcam_device;
 exports.validateEmail = validateEmail;
 exports.xmlToJson = xmlToJson;
+
+var _system = _interopRequireDefault(require("./system"));
+
+var _program = _interopRequireDefault(require("./program"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * This class will detect you device and browser and
@@ -405,7 +2984,7 @@ function DOM() {
     window["FILE_" + id_] = document.getElementById(id_);
 
     window["FILE_" + id_].onchange = function () {
-      SYS.DEBUG.LOG("New file comes...");
+      _system.default.DEBUG.LOG("New file comes...");
     };
 
     if (typeof onchange !== "undefined") {
@@ -447,9 +3026,12 @@ function DOM() {
     }
 
     window[ctx] = this.c.getContext("2d");
-    SYS.DEBUG.LOG("SYS : Surface created , program name is " + name_of_canvas);
-    SYS.RUNNING_PROGRAMS.push(name_of_canvas);
-    window[name_of_canvas] = new PROGRAM(window[ctx], this.c);
+
+    _system.default.DEBUG.LOG("SYS : Surface created , program name is " + name_of_canvas);
+
+    _system.default.RUNNING_PROGRAMS.push(name_of_canvas);
+
+    window[name_of_canvas] = new _program.default(window[ctx], this.c);
     window[name_of_canvas].DRAW();
   };
   /**
@@ -485,9 +3067,9 @@ function DOM() {
 
   this.DESTROY_PROGRAM = function (name) {
     if (typeof name === "undefined") {
-      SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : arrg name :>> " + typeof name + " << not valid.");
+      _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : arrg name :>> " + typeof name + " << not valid.");
     } else if (typeof window[name] === "undefined") {
-      SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : program with  name: " + name + " not exist. ");
+      _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : program with  name: " + name + " not exist. ");
     } else {
       //memory
       window[name].DRAW = function () {};
@@ -502,8 +3084,9 @@ function DOM() {
       delete window[name]; //remove dom element canvas
       //this.removeElement(SYS.DOM.E(name));
 
-      SYS.RUNNING_PROGRAMS.unset(name);
-      SYS.DEBUG.LOG("SYS : log for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : program with  name :" + name + " is dead. Memory clear .");
+      _system.default.RUNNING_PROGRAMS.unset(name);
+
+      _system.default.DEBUG.LOG("SYS : log for procedure 'SYS.DOM.DESTROY_PROGRAM'  Desciption : program with  name :" + name + " is dead. Memory clear .");
     }
   };
 
@@ -697,7 +3280,8 @@ function SAVE(name, obj) {
 
 function LOAD(name) {
   if (localStorage.getItem(name) == "undefined" || localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
-    SYS.DEBUG.WARNING("error in loading localstorage object! name of object : name" + name + " , but value is " + localStorage.getItem(name));
+    _system.default.DEBUG.WARNING("error in loading localstorage object! name of object : name" + name + " , but value is " + localStorage.getItem(name));
+
     return false;
   } else {
     return JSON.parse(localStorage.getItem(name));
@@ -855,38 +3439,38 @@ function OVERRIDE_TO_REF_CANVAS() {
   exports.VIEW = VIEW = {
     W: function (per) {
       if (typeof per === "undefined") {
-        return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width;
+        return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width;
       } else {
-        return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100 * per;
+        return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width / 100 * per;
       }
     },
     H: function (per) {
       if (typeof per === "undefined") {
-        return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height;
+        return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height;
       } else {
-        return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100 * per;
+        return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height / 100 * per;
       }
     },
     ASPECT: function () {
-      return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height;
+      return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width / _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height;
     }
   }; // override CONVERTOR
 
   exports.CONVERTOR = CONVERTOR = {
     PER_TO_PIX: function (v) {
-      var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100;
+      var ONE_PERCENT = _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width / 100;
       return v * ONE_PERCENT;
     },
     PIX_TO_PER: function (v) {
-      var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100;
+      var ONE_PERCENT = _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width / 100;
       return v / ONE_PERCENT;
     },
     PER_TO_PIY: function (v) {
-      var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100;
+      var ONE_PERCENT = _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height / 100;
       return v * ONE_PERCENT;
     },
     PIY_TO_PER: function (v) {
-      var ONE_PERCENT = SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100;
+      var ONE_PERCENT = _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height / 100;
       return v / ONE_PERCENT;
     }
   };
@@ -1025,14 +3609,14 @@ function drawRotatedImage(image, x, y, angle, w, h, surf) {
 
 function drawRotatedText(s, text, x, y, angle, w, h) {
   SURF.save();
-  SURF.rotate(SYS.MATH.TO_RADIANS(angle));
+  SURF.rotate(_system.default.MATH.TO_RADIANS(angle));
   SURF.fillText(text, x + w / 2, y + h / 2, w);
   SURF.restore();
 }
 
 function drawRotatedTextNoSkrech(s, text, x, y, angle, w, h) {
   SURF.save();
-  SURF.rotate(SYS.MATH.TO_RADIANS(angle));
+  SURF.rotate(_system.default.MATH.TO_RADIANS(angle));
   SURF.fillText(text, x + w / 2, y + h / 2);
   SURF.restore();
 }
@@ -1159,7 +3743,7 @@ function CREATE_IMG(name, src) {
   window["image_" + name].src = src;
 
   window["image_" + name].onload = function () {
-    SYS.RES.SUM_OF_LOADED_IMAGES++;
+    _system.default.RES.SUM_OF_LOADED_IMAGES++;
   };
 }
 /**
@@ -1206,7 +3790,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-},{}],4:[function(require,module,exports){
+},{"./program":12,"./system":15}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1223,6 +3807,12 @@ exports.round = round;
 exports.toDegrees = toDegrees;
 exports.toRadians = toRadians;
 
+var _system = _interopRequireDefault(require("./system"));
+
+var _manifest = _interopRequireDefault(require("../manifest/manifest"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * Simple number round.
  * @function round
@@ -1232,9 +3822,9 @@ exports.toRadians = toRadians;
  */
 function round(value, decimals) {
   if (typeof value === "object" || typeof decimals === "object") {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : Replace object with string ,  this >> " + typeof value + " << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : Replace object with string ,  this >> " + typeof value + " << must be string or number.");
   } else if (typeof value === "undefined" || typeof decimals === "undefined") {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : arguments (value, decimals) cant be undefined ,  this >> " + typeof value + " << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : arguments (value, decimals) cant be undefined ,  this >> " + typeof value + " << must be string or number.");
   } else {
     return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
   }
@@ -1242,9 +3832,9 @@ function round(value, decimals) {
 
 function randomIntFromTo(min, max) {
   if (typeof min === "object" || typeof max === "object") {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : Replace object with string ,  this >> " + typeof min + " and " + typeof min + " << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : Replace object with string ,  this >> " + typeof min + " and " + typeof min + " << must be string or number.");
   } else if (typeof min === "undefined" || typeof max === "undefined") {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : arguments (min, max) cant be undefined ,  this >> " + typeof min + " and " + typeof min + "  << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : arguments (min, max) cant be undefined ,  this >> " + typeof min + " and " + typeof min + "  << must be string or number.");
   } else {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -1255,7 +3845,7 @@ function toDegrees(angle) {
   if (typeof angle === "string" || typeof angle === "number") {
     return angle * (180 / Math.PI);
   } else {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " + typeof angle + "  << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " + typeof angle + "  << must be string or number.");
   }
 }
 
@@ -1263,7 +3853,7 @@ function toRadians(angle) {
   if (typeof angle === "string" || typeof angle === "number") {
     return angle * (Math.PI / 180);
   } else {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " + typeof angle + "  << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " + typeof angle + "  << must be string or number.");
   }
 }
 
@@ -1336,7 +3926,7 @@ function OSCILLATOR(min, max, step) {
       }
     };
   } else {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
   } //AUTO UPDATE HERE
 
 } // GET INCREMENT VALUES IN REAL TIME
@@ -1378,7 +3968,7 @@ function INCREMENTATOR(min, max, step, stop_after) {
     }; //AUTO UPDATE HERE
 
   } else {
-    SYS.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
+    _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
   }
 } // MAKE MOVE WITH NEW TARGET COORDINATE
 
@@ -1394,14 +3984,16 @@ function DIMENSION(w, h, type_) {
 
   if (typeof w === undefined) {
     this.W = 10;
-    SYS.DEBUG.WARNING("SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height.");
+
+    _system.default.DEBUG.WARNING("SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height.");
   } else {
     this.W = w;
   }
 
   if (typeof h === undefined) {
     this.H = 10;
-    SYS.DEBUG.WARNING("SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height.");
+
+    _system.default.DEBUG.WARNING("SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height.");
   } else {
     this.H = h;
   }
@@ -1410,7 +4002,7 @@ function DIMENSION(w, h, type_) {
     if (ROOT_DIMENSION.type == "NORMAL") {
       return window.innerWidth / 100 * this.W;
     } else if (ROOT_DIMENSION.type == "REF_CANVAS") {
-      return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100 * this.W;
+      return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).width / 100 * this.W;
     }
   };
 
@@ -1418,7 +4010,7 @@ function DIMENSION(w, h, type_) {
     if (ROOT_DIMENSION.type == "NORMAL") {
       return window.innerHeight / 100 * this.H;
     } else if (ROOT_DIMENSION.type == "REF_CANVAS") {
-      return SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100 * this.H;
+      return _system.default.DOM.E(_system.default.RUNNING_PROGRAMS[0]).height / 100 * this.H;
     }
   };
 }
@@ -1426,7 +4018,7 @@ function DIMENSION(w, h, type_) {
 function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   var ROOT = this;
   this.FREEZ = false;
-  ROOT.CANVAS_ = window[SYS.RUNNING_PROGRAMS[0]].ENGINE.PROGRAM_ID;
+  ROOT.CANVAS_ = window[_system.default.RUNNING_PROGRAMS[0]].ENGINE.PROGRAM_ID;
 
   this.ON_TARGET_POSITION = function () {}; //parameters
 
@@ -1439,9 +4031,9 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   this.velY = 0;
   this.thrust = thrust_;
 
-  if (APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "MONITOR") {
+  if (_manifest.default.PROGRAM.CALCULATING_POSITION_BY == "MONITOR") {
     this.TYPE = "NORMAL";
-  } else if (APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "CANVAS") {
+  } else if (_manifest.default.PROGRAM.CALCULATING_POSITION_BY == "CANVAS") {
     this.TYPE = "REF_CANVAS";
   }
 
@@ -1451,7 +4043,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
     if (typeof num_ === "number") {
       this.thrust = num_;
     } else {
-      SYS.DEBUG.WARNING("SYS : warning for method 'POSITION.SET_SPEED'  Desciption : arguments (w , h ) must be type of number.");
+      _system.default.DEBUG.WARNING("SYS : warning for method 'POSITION.SET_SPEED'  Desciption : arguments (w , h ) must be type of number.");
     }
   };
 
@@ -1527,7 +4119,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
         }
 
         try {
-          if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" && APPLICATION.EDITOR == true) {
+          if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" && _manifest.default.EDITOR == true) {
             SET_NEW_START_UP_POS(this.parentGameObject, this.PROGRAM_NAME, this.parentModul, this.targetX, this.targetY, this.DIMENSION.W, this.DIMENSION.H);
           }
         } catch (e) {
@@ -1541,7 +4133,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
     if (ROOT.TYPE == "NORMAL") {
       return window.innerWidth / 100 * this.x;
     } else if (ROOT.TYPE == "REF_CANVAS") {
-      return SYS.DOM.E(ROOT.CANVAS_).width / 100 * this.x;
+      return _system.default.DOM.E(ROOT.CANVAS_).width / 100 * this.x;
     }
   };
 
@@ -1552,13 +4144,448 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
       if (ROOT.TYPE == "NORMAL") {
         return window.innerHeight / 100 * this.y;
       } else if (ROOT.TYPE == "REF_CANVAS") {
-        return SYS.DOM.E(ROOT.CANVAS_).height / 100 * this.y;
+        return _system.default.DOM.E(ROOT.CANVAS_).height / 100 * this.y;
       }
     }
   };
 }
 
-},{}],5:[function(require,module,exports){
+},{"../manifest/manifest":16,"./system":15}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MODUL = MODUL;
+
+var _game_object = require("../game_object/game_object");
+
+/**
+ * @example Use MODUL class on begin of program with
+ * @example HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
+ * @Class MODUL
+ * @constructor
+ * @param {String} Name name is passed value for modul name.
+ * @param {String} Name name is passed value for modul name.
+ */
+function MODUL(name, PROGRAM_NAME) {
+  var ROOT_MODUL = this; //ENGINE WILL BE BIG SWITCHER
+
+  this.PARENT = PROGRAM_NAME;
+  this.NAME = name;
+  this.GAME_OBJECTS = new Array();
+
+  this.NEW_OBJECT = function (name__, x, y, w, h, speed) {
+    ROOT_MODUL.GAME_OBJECTS.push(new _game_object.GAME_OBJECT(name__, ROOT_MODUL.NAME, x, y, w, h, speed, ROOT_MODUL.PARENT));
+  }; // Netwotk object
+
+
+  this.NEW_NETWORK_OBJECT = function (object_) {
+    ROOT_MODUL.GAME_OBJECTS.push(new _game_object.GAME_OBJECT(object_.NAME, ROOT_MODUL.NAME, object_.POSITION.x, object_.POSITION.y, object_.DIMENSION.W, object_.DIMENSION.H, object_.POSITION.thrust, ROOT_MODUL.PARENT));
+
+    if (object_.TYPE_OF_GAME_OBJECT.indexOf("ANIMATION") != -1) {
+      window[object_.NAME].CREATE_ANIMATION(SURF, object_.ANIMATION.TYPE, 0, RESOURCE.Tiles, 123423444, "no", 1, 11, 1, 1, 1);
+    }
+  };
+
+  this.NEW_NETWORK_POSITION = function (object_) {
+    if (typeof object_.nameOfObject !== "undefined") {
+      window[object_.nameOfObject].POSITION.SET_POSITION(object_.x, object_.y, "DIAMETRIC");
+    }
+  };
+
+  this.NEW_NETWORK_DIMENSION = function (object_) {
+    if (typeof object_.nameOfObject !== "undefined") {
+      window[object_.nameOfObject].DIMENSION.W = object_.W;
+      window[object_.nameOfObject].DIMENSION.H = object_.H;
+    }
+  };
+
+  this.DESTROY_OBJECT = function (name__) {
+    ROOT_MODUL.GAME_OBJECTS.forEach(function (item, index, object) {
+      if (item.NAME == name__) {
+        if (index > -1) {
+          ROOT_MODUL.GAME_OBJECTS.splice(index, 1);
+          delete window[name__];
+        }
+
+        console.log("OBJ DELETED:" + ROOT_MODUL.GAME_OBJECTS.indexOf(name__) + "  ACCESS GLOBAL  : " + window["name__"]);
+      }
+    });
+  };
+
+  this.DRAW_GAME_OBJECTS = function (s) {
+    for (var x = 0; x < ROOT_MODUL.GAME_OBJECTS.length; x++) {
+      ROOT_MODUL.GAME_OBJECTS[x].DRAW(s);
+
+      if (ROOT_MODUL.GAME_OBJECTS[x].EDITOR.ENABLE == true) {
+        ROOT_MODUL.GAME_OBJECTS[x].DRAW_ACTOR(s);
+      }
+    }
+  };
+
+  ROOT_MODUL.BREAK_AT_MOMENT = false;
+
+  this.UPDATE_GAME_OBJECTS = function () {
+    for (var x = 0; x < ROOT_MODUL.GAME_OBJECTS.length; x++) {
+      if (ROOT_MODUL.BREAK_AT_MOMENT == true) {
+        ROOT_MODUL.BREAK_AT_MOMENT = false;
+        console.log("BREAK");
+        break;
+      }
+
+      if (ROOT_MODUL.GAME_OBJECTS[x].COLLISION != null) {
+        for (var z = 0; z < ROOT_MODUL.GAME_OBJECTS.length; z++) {
+          // FOR PLAYER EXIST REGIME
+          if (ROOT_MODUL.GAME_OBJECTS[z].COLLISION != null && ROOT_MODUL.GAME_OBJECTS[z].NAME != ROOT_MODUL.GAME_OBJECTS[x].NAME && typeof PLAYER != "undefined" && window[ROOT_MODUL.PARENT].ENGINE.GAME_TYPE == "PLATFORMER") {
+            if (typeof PLAYER != "undefined") {
+              //&&   ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER"
+              //Y by H
+              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() - 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE right1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  } else {
+                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER" && ROOT_MODUL.GAME_OBJECTS[x].POSITION.STATIC == false) {
+                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE rigth2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    }
+                  }
+
+                  ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() + 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE left1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  } else {
+                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER" && ROOT_MODUL.GAME_OBJECTS[x].POSITION.STATIC == false) {
+                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE left2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    }
+                  }
+                }
+
+                ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+              } //
+
+
+              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                    //$$$$$$$$$$$$$$
+                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
+                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE TOP1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                      ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin; //ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      //ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y -  ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+
+                      PLAYER.FREEZ = true;
+                      PLAYER.Y = 0;
+                      PLAYER.CONTROL.JUMP = false;
+
+                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
+                        ROOT_MODUL.BREAK_AT_MOMENT = true;
+                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
+                      }
+
+                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                      break;
+                    } //$$$$$$$$$$$$$$
+
+
+                    ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                  } else {
+                    //$$$$$$$$$$$$$$
+                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
+                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE TOP2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      PLAYER.FREEZ = true;
+                      PLAYER.Y = 0;
+                      PLAYER.CONTROL.JUMP = false;
+
+                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
+                        ROOT_MODUL.BREAK_AT_MOMENT = true;
+                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
+                      }
+
+                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                      break;
+                    }
+                  }
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE botton1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin; //ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                    //ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  } else {
+                    //$$$$$$$$$$$$$$
+                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
+                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE botton2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                      PLAYER.FREEZ = true;
+                      PLAYER.Y = 0;
+                      PLAYER.CONTROL.JUMP = false;
+
+                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
+                        ROOT_MODUL.BREAK_AT_MOMENT = true;
+                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
+                      }
+
+                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                      break;
+                    } //$$$$$$$$$$$$$$
+
+                  }
+
+                  ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+                }
+              } ////////
+
+            }
+          } else if (ROOT_MODUL.GAME_OBJECTS[z].COLLISION != null && ROOT_MODUL.GAME_OBJECTS[z].NAME != ROOT_MODUL.GAME_OBJECTS[x].NAME) {
+            //&& typeof PLAYER == 'undefined'
+            //Y by H
+            if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
+              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() - 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + " COLLIDE (noplayer) right WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) rigth WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                }
+              } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() + 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) left WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) left WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                }
+              }
+            } //
+
+
+            if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) top WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) botton WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                }
+              } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
+                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) onTop WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false) {
+                  SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE (noplayer) onTop WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                  ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
+                }
+              }
+
+              ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
+            }
+          }
+        }
+      }
+
+      if (typeof ROOT_MODUL.GAME_OBJECTS[x] !== "undefined") {
+        if (ROOT_MODUL.GAME_OBJECTS[x].DESTROY_AFTER != null) {
+          if (ROOT_MODUL.GAME_OBJECTS[x].DESTROY_AFTER < 1) {
+            ROOT_MODUL.DESTROY_OBJECT(ROOT_MODUL.GAME_OBJECTS[x].NAME);
+          }
+        }
+
+        if (typeof ROOT_MODUL.GAME_OBJECTS[x] !== "undefined") {
+          ROOT_MODUL.GAME_OBJECTS[x].UPDATE();
+        }
+      }
+    }
+  };
+}
+
+},{"../game_object/game_object":7}],12:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _manifest = _interopRequireDefault(require("../manifest/manifest"));
+
+var _engine = require("./engine");
+
+var _init = require("./init");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Instance of Class PROGRAM is root for all other
+ * class instances.
+ * @example new PROGRAM
+ * @class PROGRAM
+ * @constroctor
+ * @param {2dCanvasContext} S
+ * @param {object} C
+ */
+function PROGRAM(s, c) {
+  /**
+     * @memberof PROGRAM
+     * @property {self} PROGRAM_ROOT
+     */
+  var PROGRAM_ROOT = this;
+  /**
+   * @memberof PROGRAM
+   * @property {float} DRAW_INTERVAL Loaded from : APPLICATION.PROGRAM.RENDER_SPEED
+   */
+
+  this.DRAW_INTERVAL = _manifest.default.PROGRAM.RENDER_SPEED;
+  /**
+     * @memberof PROGRAM
+     * @property {float} UPDATE_INTERVAL Default value 15
+     */
+
+  this.UPDATE_INTERVAL = 15;
+  /**
+     * @memberof PROGRAM
+     * @property {float} BASELINE Default value 'middle'
+     */
+
+  this.BASELINE = "middle";
+  /**
+   * @memberof PROGRAM
+   * @property {float} GLOBAL_TRANSLATE Default value 0
+   */
+
+  this.GLOBAL_TRANSLATE = 0;
+  /**
+     * @memberof PROGRAM
+     * @property {boolean} DO_GLOBAL_TRANSLATE Default value false
+     */
+
+  this.DO_GLOBAL_TRANSLATE = false;
+  /**
+     * @memberof PROGRAM
+     * @method TRANSLATE DO_GLOBAL_TRANSLATE
+   * @param {float} x 
+     */
+
+  PROGRAM_ROOT.TRANSLATE = function (x) {
+    PROGRAM_ROOT.GLOBAL_TRANSLATE = x;
+    PROGRAM_ROOT.DO_GLOBAL_TRANSLATE = true;
+  };
+  /**
+   * @class GAME_MAP
+     * @memberof PROGRAM
+     */
+
+
+  this.GAME_MAP = function () {
+    //screens
+    var ROOT = this;
+    this.TOTAL_LEFT = 2;
+    this.TOTAL_RIGHT = 4;
+    this.TOTAL_UP = 2;
+    this.TOTAL_DOWN = 4;
+
+    this.LEFT = function () {
+      return ROOT.TOTAL_LEFT * -_init.VIEW.W();
+    };
+
+    this.WIDTH = function () {
+      return ROOT.TOTAL_RIGHT * _init.VIEW.W();
+    };
+
+    this.UP = function () {
+      return ROOT.TOTAL_UP * -_init.VIEW.H();
+    };
+
+    this.HEIGHT = function () {
+      return ROOT.TOTAL_DOWN * _init.VIEW.W();
+    };
+
+    this.CLEAR_MAP = true;
+  };
+  /**
+     * @memberof PROGRAM
+     * @property {GAME_MAP} MAP
+     */
+
+
+  PROGRAM_ROOT.MAP = new PROGRAM_ROOT.GAME_MAP();
+  this.AUTO_UPDATE = new Array();
+  /**
+   * @memberof PROGRAM
+   * @property {ENGINE} ENGINE
+   */
+
+  this.ENGINE = new _engine.ENGINE(c);
+  s.textAlign = "start";
+  s.textBaseline = this.BASELINE;
+  /**
+    * @memberof PROGRAM
+    * @method DRAW
+  * @return void
+    */
+
+  this.DRAW = function () {
+    if (PROGRAM_ROOT.MAP.CLEAR_MAP == true) {
+      s.clearRect(PROGRAM_ROOT.MAP.LEFT(), PROGRAM_ROOT.MAP.UP(), PROGRAM_ROOT.MAP.WIDTH(), PROGRAM_ROOT.MAP.HEIGHT());
+    }
+
+    if (PROGRAM_ROOT.DO_GLOBAL_TRANSLATE == true) {
+      PROGRAM_ROOT.DO_GLOBAL_TRANSLATE = false;
+      s.translate(PROGRAM_ROOT.GLOBAL_TRANSLATE, 0);
+    }
+
+    PROGRAM_ROOT.ENGINE.DRAW_MODULES(s);
+    setTimeout(function () {
+      PROGRAM_ROOT.UPDATE();
+    }, this.UPDATE_INTERVAL);
+  };
+  /**
+   * @memberof PROGRAM
+   * @method UPDATE
+  * @return void
+   */
+
+
+  this.UPDATE = function () {
+    PROGRAM_ROOT.ENGINE.UPDATE_MODULES();
+
+    for (var x = 0; x < this.AUTO_UPDATE; x++) {
+      ROOT.AUTO_UPDATE[x].UPDATE();
+    }
+
+    setTimeout(function () {
+      PROGRAM_ROOT.DRAW();
+    }, this.DRAW_INTERVAL);
+  };
+}
+
+var _default = PROGRAM;
+exports.default = _default;
+
+},{"../manifest/manifest":16,"./engine":5,"./init":9}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1577,6 +4604,8 @@ exports.________MAKE_VK = ________MAKE_VK;
 
 var _system = _interopRequireDefault(require("./system"));
 
+var _manifest = _interopRequireDefault(require("../manifest/manifest"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function CREATE_SYSTEM_BUTTONS() {
@@ -1587,7 +4616,7 @@ function CREATE_SYSTEM_BUTTONS() {
       CREATE_VIRTUAL_KEYBOARD();
       HIDE_KEYBOARD();
     } else {
-      if (APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP == true) {
+      if (_manifest.default.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP == true) {
         CREATE_VIRTUAL_KEYBOARD();
         HIDE_KEYBOARD();
       }
@@ -2236,7 +5265,7 @@ function ___KBSTATUS_CAPS_OFF(H, V, WHAT) {
 
 ;
 
-},{"./system":7}],6:[function(require,module,exports){
+},{"../manifest/manifest":16,"./system":15}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2292,7 +5321,7 @@ function ActivateModifiers() {
   };
 }
 
-},{}],7:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2397,7 +5426,14 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"./init":3,"./math":4}],8:[function(require,module,exports){
+},{"./init":9,"./math":10}],16:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 /**
  * Filename : manifest.js
  * manifest file for visual js Application .
@@ -2406,42 +5442,48 @@ exports.default = _default;
  * www.maximumroulette.com 2016
  */
 var APPLICATION = {
-    NAME: "VISUAL-JS",
-    TYPE: "client",
-    VERSION: "3.0.0",
-    STATUS: "develop",
-    MULTILANGUAGE: false,
-    IMAGE_LOADER_PREFIX: true, // false for fiddle support , we need absolute path.
-    EDITOR: false,
-    EDITOR_AUTORUN: false,
-    LOCAL_SERVER: "127.0.0.1",
-    DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
-    ACCESSIBILITY: {
-        VIRTUAL_KEYBOARD_FOR_DESKTOP: true,
-        ACTIVATE_VK_FOR_DESKTOP: function () {
-            CREATE_VIRTUAL_KEYBOARD();
-            HIDE_KEYBOARD();
-            APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = true;
-        }, // in run time
-        DEACTIVATE_VK_FOR_DESKTOP: function () {
-            APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = false
-        }, // in run time
+  NAME: "VISUAL-JS",
+  TYPE: "client",
+  VERSION: "3.0.0",
+  STATUS: "develop",
+  MULTILANGUAGE: false,
+  IMAGE_LOADER_PREFIX: true,
+  // false for fiddle support , we need absolute path.
+  EDITOR: false,
+  EDITOR_AUTORUN: false,
+  LOCAL_SERVER: "127.0.0.1",
+  DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
+  ACCESSIBILITY: {
+    VIRTUAL_KEYBOARD_FOR_DESKTOP: true,
+    ACTIVATE_VK_FOR_DESKTOP: function () {
+      CREATE_VIRTUAL_KEYBOARD();
+      HIDE_KEYBOARD();
+      APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = true;
     },
-    SINGLE_BROADCAST: true,
-    MULTIRTC_PEER: true,
-    BOX2D: false,
-    PROGRAM: {
-        CALCULATING_POSITION_BY: "CANVAS", // MONITOR is innerWidth..Height  or CANVAS is  canvas width
-        RENDER_SPEED: 5,
-        UPDATE_SPEED: 5,
-    },
-    SYSTEM: {
-        COLOR: "#afa9aa",
-        HOVER_COLOR: "#5991FF",
-        TEXT_COLOR: "black",
-        ACTOR_X: "",
-        ACTOR_Y: "",
-    },
+    // in run time
+    DEACTIVATE_VK_FOR_DESKTOP: function () {
+      APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = false;
+    } // in run time
+
+  },
+  SINGLE_BROADCAST: true,
+  MULTIRTC_PEER: true,
+  BOX2D: false,
+  PROGRAM: {
+    CALCULATING_POSITION_BY: "CANVAS",
+    // MONITOR is innerWidth..Height  or CANVAS is  canvas width
+    RENDER_SPEED: 5,
+    UPDATE_SPEED: 5
+  },
+  SYSTEM: {
+    COLOR: "#afa9aa",
+    HOVER_COLOR: "#5991FF",
+    TEXT_COLOR: "black",
+    ACTOR_X: "",
+    ACTOR_Y: ""
+  }
 };
+var _default = APPLICATION;
+exports.default = _default;
 
 },{}]},{},[1]);

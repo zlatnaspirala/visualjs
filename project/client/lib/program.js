@@ -1,4 +1,8 @@
 
+import APPLICATION from '../manifest/manifest';
+import { ENGINE  } from './engine';
+import { VIEW } from './init';
+
 /**
  * Instance of Class PROGRAM is root for all other
  * class instances.
@@ -8,7 +12,7 @@
  * @param {2dCanvasContext} S
  * @param {object} C
  */
-export function PROGRAM(s, c) {
+function PROGRAM(s, c) {
 
   /**
      * @memberof PROGRAM
@@ -147,3 +151,5 @@ export function PROGRAM(s, c) {
   };
 
 }
+
+export default PROGRAM;

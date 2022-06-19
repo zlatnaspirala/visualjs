@@ -1,4 +1,5 @@
 import SYS from './system';
+import APPLICATION from '../manifest/manifest';
 
 export function CREATE_SYSTEM_BUTTONS() {
 

@@ -43,3 +43,5 @@ var APPLICATION = {
         ACTOR_Y: "",
     },
 };
+
+export default APPLICATION;

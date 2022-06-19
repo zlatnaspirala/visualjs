@@ -1,5 +1,8 @@
 
-// INSTANCES CLASSES FOR SYSTEM BIZNIS
+import { DIMENSION  } from "../math";
+import SYS from '../system';
+
+// WEB GUI
 export function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   var ROOT = this;
 

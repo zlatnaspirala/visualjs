@@ -1,3 +1,7 @@
+
+import SYS from './system';
+import PROGRAM from './program';
+
 /**
  * This class will detect you device and browser and
  * store data. Instance already stored intro SYS.BROWSER
