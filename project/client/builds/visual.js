@@ -11,6 +11,10 @@ var _system = _interopRequireDefault(require("./lib/system"));
 
 var _program_modul = require("./lib/program_modul");
 
+var _init = require("./lib/init");
+
+var _animation = require("./lib/draw_functions/animation");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _proto_modify.default)();
@@ -29,8 +33,20 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // SCRIPT.LOAD('examples/templates/sound.js')
 
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
+_init.RESOURCE.character1 = {
+  "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
+};
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, _init.RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
+IamNewObject.DRAG = false;
+IamNewObject.POSITION.DIMENSION.HEIGHT = IamNewObject.POSITION.DIMENSION.WIDTH;
 
-},{"./lib/audio/audio":2,"./lib/program_modul":13,"./lib/proto_modify":14,"./lib/system":15,"./manifest/manifest":16}],2:[function(require,module,exports){
+IamNewObject.TAP = function () {
+  console.log("TOUCHED: " + this.NAME);
+  IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
+};
+
+},{"./lib/audio/audio":2,"./lib/draw_functions/animation":3,"./lib/init":10,"./lib/program_modul":14,"./lib/proto_modify":15,"./lib/system":16,"./manifest/manifest":17}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66,6 +82,176 @@ function AUDIO_RES(res) {
 }
 
 },{}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ANIMATION = ANIMATION;
+
+var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
+
+var _init = require("../init");
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * ANIMATION
+ * @example new ANIMATION()
+ * @class ANIMATION
+ * @constructor
+ * @param {context2d} surf
+ * @param {String} TYPE_
+ * @param radius FrameIndex
+ * @param {String} source
+ * @param PARENT
+ * @param ID
+ * @param {yes} blink_ Every other value returns false (No blink)
+ * @param {number} min_
+ * @param {number} max_
+ * @param {number} step
+ * @param {number} speed_
+ * @param {number} opacity_
+ * @return nothing
+ *
+ * @constructor
+ * @param {String} Name name is passed value for modul name.
+ * @param {String} Name name is passed value for modul name.
+ */
+function ANIMATION(surf, TYPE_, FrameIndex, source, PARENT, ID, blink_, min_, max_, step, speed_, opacity_) {
+  var SURFACE = surf;
+  this.TYPE = TYPE_;
+  this.DRAW_TYPE = "PARENT";
+  this.ROTATE = {
+    ENABLE: true,
+    ANGLE: 0 //new SYS.MATH.OSCILLATOR(0, 360 , 0.1)
+
+  };
+
+  if (speed_ !== undefined) {
+    this.speed = speed_;
+    this.initial_speed = speed_;
+  } else {
+    this.speed = null;
+  }
+
+  if (blink_ == "yes") {
+    this.blink = new OSCILLATOR(min_, max_, step);
+  } else {
+    this.blink = null;
+  }
+
+  if (ID === undefined) {
+    var local1 = _system.default.MATH.RANDOM_INT_FROM_TO(1, 666);
+
+    var local2 = _system.default.MATH.RANDOM_INT_FROM_TO(666, 1234);
+
+    this.ID = "ID" + (local1 + local2) + local2 * 66;
+  } else {
+    this.ID = ID;
+  } // Add offset
+
+
+  this.X = function () {
+    return PARENT.POSITION.X();
+  };
+
+  this.Y = function () {
+    return PARENT.POSITION.Y();
+  };
+
+  this.W = function () {
+    return PARENT.DIMENSION.WIDTH();
+  };
+
+  this.H = function () {
+    return PARENT.DIMENSION.HEIGHT();
+  }; // OK
+
+
+  for (var x = 0; x < source.source.length; x++) {
+    window["f_" + this.ID + x] = new Image();
+
+    if (_manifest.default.IMAGE_LOADER_PREFIX == true) {
+      window["f_" + this.ID + x].src = "res/animations/" + source.source[x];
+    } else {
+      window["f_" + this.ID + x].src = source.source[x].toString();
+    }
+
+    window["f_" + this.ID + x].onload = function () {
+      _system.default.RES.SUM_OF_LOADED_IMAGES++;
+    };
+  }
+
+  this.NUMBERS_OF_FRAMES = source.source.length;
+
+  if (FrameIndex == null) {
+    this.CURRENT_FRAME = 0;
+  } else {
+    this.CURRENT_FRAME = FrameIndex;
+  }
+
+  this.SET_SPEED = function (new_speed) {
+    if (typeof new_speed != "undefined" && new_speed != null || typeof new_speed != "number") {
+      this.initial_speed = new_speed;
+    } else {
+      _system.default.DEBUG.WARNING(" SPEED ARRGS must be number .");
+    }
+  };
+
+  this.DRAW = function (x_, y_, w_, h_, blink_status) {
+    if (blink_status == "yes") {
+      SURFACE.globalAlpha = Math.sin(this.blink.UPDATE());
+    }
+
+    if (this.TYPE == "LOOP") {
+      if (this.DRAW_TYPE == "PARENT") {
+        if (this.ROTATE.ENABLE == false) {
+          SURFACE.drawImage(window["f_" + this.ID + this.CURRENT_FRAME], this.X(), this.Y(), this.W(), this.H());
+        } else {
+          (0, _init.drawRotatedImage)(window["f_" + this.ID + this.CURRENT_FRAME], this.X(), this.Y(), _system.default.MATH.TO_RADIANS(this.ROTATE.ANGLE), this.W(), this.H(), SURFACE);
+        }
+      } else if (this.DRAW_TYPE == "DIRECT") {
+        SURFACE.drawImage(window["f_" + this.ID + this.CURRENT_FRAME], x_, y_, w_, h_);
+      } else {
+        _system.default.DOM.WARN("error in draw loop , class animator with id:" + this.ID + " " + this.CURRENT_FRAME + "<");
+      }
+
+      if (this.CURRENT_FRAME < this.NUMBERS_OF_FRAMES - 1) {
+        if (this.speed == null) {
+          this.CURRENT_FRAME++;
+        } else {
+          if (this.speed > 0) {
+            this.speed--;
+          } else {
+            this.CURRENT_FRAME++;
+            this.speed = this.initial_speed;
+          }
+        }
+      } else {
+        this.CURRENT_FRAME = 0;
+      }
+    } else if (this.TYPE == "DRAW_FRAME") {
+      if (this.DRAW_TYPE == "PARENT" && this.CURRENT_FRAME < this.NUMBERS_OF_FRAMES) {
+        if (this.ROTATE.ENABLE == false) {
+          SURFACE.drawImage(window["f_" + this.ID + this.CURRENT_FRAME], this.X(), this.Y(), this.W(), this.H());
+        } else {
+          (0, _init.drawRotatedImage)(window["f_" + this.ID + this.CURRENT_FRAME], this.X(), this.Y(), _system.default.MATH.TO_RADIANS(this.ROTATE.ANGLE), this.W(), this.H(), SURFACE);
+        }
+      } else if (this.DRAW_TYPE == "DIRECT" && this.CURRENT_FRAME < this.NUMBERS_OF_FRAMES) {
+        SURFACE.drawImage(window["f_" + this.ID + this.CURRENT_FRAME], this.X(), this.Y(), this.W(), this.H());
+      } else {
+        _system.default.DEBUG.WARNING("error in animation draw procedure , class animator says : type is DRAW FRAME . this is id : " + this.ID + ">>>may be > this.CURRENT_FRAME<this.NUMBERS_OF_FRAMES is not true , Also DRAW_TYPE must be PARENT or DIRECT!");
+      }
+    }
+
+    SURFACE.globalAlpha = 1;
+  };
+}
+
+},{"../../manifest/manifest":17,"../init":10,"../system":16}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -149,7 +335,7 @@ function RECT(TEXT, ROOT_GAME_OBJECT, radius, color, colorText) {
   };
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -194,7 +380,7 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   this.TAP = function () {};
 }
 
-},{"../math":10,"../system":15}],5:[function(require,module,exports){
+},{"../math":11,"../system":16}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -440,13 +626,17 @@ function ENGINE(c) {
   };
 }
 
-},{"../manifest/manifest":16,"./draw_functions/systems":4,"./events/keyboard":6,"./game_object/game_object_events":8,"./init":9,"./modules/modules":11}],6:[function(require,module,exports){
+},{"../manifest/manifest":17,"./draw_functions/systems":5,"./events/keyboard":7,"./game_object/game_object_events":9,"./init":10,"./modules/modules":12}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.KEYBOARD = KEYBOARD;
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PLAYER CONTROL AND OTHER KEYBOARD STAFF
 function KEYBOARD(c) {
@@ -465,10 +655,13 @@ function KEYBOARD(c) {
     switch (e.keyCode) {
       case 8:
         e.preventDefault();
-        SYS.DEBUG.LOG("prevent default for backspace.");
+
+        _system.default.DEBUG.LOG("prevent default for backspace.");
+
     }
 
-    SYS.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+    _system.default.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+
 
     if (typeof PLAYER != "undefined") {
       if (PLAYER.TYPE == "PLATFORMER") {
@@ -476,7 +669,7 @@ function KEYBOARD(c) {
 
         switch (e.keyCode) {
           case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
 
           case 69:
           case 37:
@@ -530,7 +723,7 @@ function KEYBOARD(c) {
       } else if (PLAYER.TYPE == "NORMAL") {
         switch (e.keyCode) {
           case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
 
           case 69:
           case 37:
@@ -561,7 +754,8 @@ function KEYBOARD(c) {
     } // SPECIAL FOR TEXTBOX
 
 
-    SYS.DEBUG.LOG("KEYBOARD-->> Show users types : " + e.keyCode);
+    _system.default.DEBUG.LOG("KEYBOARD-->> Show users types : " + e.keyCode);
+
     var keynum;
 
     if (window.event) {
@@ -578,7 +772,8 @@ function KEYBOARD(c) {
     }
 
     if (e.keyCode == 8) {
-      SYS.DEBUG.LOG("textbox delete last char!");
+      _system.default.DEBUG.LOG("textbox delete last char!");
+
       ROOT.CAPTURE_CHAR = remove_last(ROOT.CAPTURE_CHAR);
     } else if (e.keyCode == 13) {
       ROOT.ENTER_PRESSED = true;
@@ -711,11 +906,13 @@ function KEYBOARD(c) {
     ROOT.ENTER_PRESSED = false; //local_go.TEXTBOX.TEXT =  ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR;
   }, false);
   c.addEventListener("keyup", function (e) {
-    SYS.DEBUG.LOG(" GAME RUNNING , key up : " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+    _system.default.DEBUG.LOG(" GAME RUNNING , key up : " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+
 
     switch (e.keyCode) {
       case 121:
-        SYS.DEBUG.LOG("F10 command -->> Show command line ");
+        _system.default.DEBUG.LOG("F10 command -->> Show command line ");
+
         break;
 
       case 16:
@@ -727,7 +924,7 @@ function KEYBOARD(c) {
       if (PLAYER.TYPE == "PLATFORMER") {
         switch (e.keyCode) {
           case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
 
           case 69:
           case 37:
@@ -769,7 +966,7 @@ function KEYBOARD(c) {
       } else if (PLAYER.TYPE == "NORMAL") {
         switch (e.keyCode) {
           case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
+            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
 
           case 69:
           case 37:
@@ -801,7 +998,7 @@ function KEYBOARD(c) {
   }, false);
 }
 
-},{}],7:[function(require,module,exports){
+},{"../system":16}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -816,6 +1013,10 @@ var _system = _interopRequireDefault(require("../system"));
 var _systems = require("../draw_functions/systems");
 
 var _rect = require("../draw_functions/rect");
+
+var _animation = require("../draw_functions/animation");
+
+var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -913,7 +1114,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   this.ANIMATION = null;
 
   this.CREATE_ANIMATION = function (surf, TYPE_, FrameIndex, source, ID, blink_, min_, max_, step, speed_, opacity_) {
-    this.ANIMATION = new ANIMATION(surf, TYPE_, FrameIndex, source, ROOT_GAME_OBJECT, ID, blink_, min_, max_, step, speed_, opacity_);
+    this.ANIMATION = new _animation.ANIMATION(surf, TYPE_, FrameIndex, source, ROOT_GAME_OBJECT, ID, blink_, min_, max_, step, speed_, opacity_);
     this.TYPE_OF_GAME_OBJECT = "ANIMATION"; //SYS.DEBUG.LOG("images added in memory.... ID " + ID);
   };
 
@@ -969,7 +1170,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   this.DESTROY_ME_AFTER_X_SECUND = function (sec, name, x, ROOT_EVENTS) {
     this.DESTROY_AFTER = sec * 20;
 
-    if (APPLICATION.EDITOR == true) {
+    if (_manifest.default.EDITOR == true) {
       DESTROY_DELAY(name, sec, ROOT_GAME_OBJECT.PARENT, ROOT_GAME_OBJECT.PROGRAM_NAME);
     }
   };
@@ -1855,14 +2056,14 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         s.globalAlpha = 1;
 
         if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].HOVER == false) {
-          s.fillStyle = APPLICATION.SYSTEM.COLOR;
+          s.fillStyle = _manifest.default.SYSTEM.COLOR;
           s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
-          s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+          s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
           s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
         } else {
-          s.fillStyle = APPLICATION.SYSTEM.HOVER_COLOR;
+          s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
           s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
-          s.fillStyle = APPLICATION.SYSTEM.TEXT_COLOR;
+          s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
           s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
 
           if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].icon == true) {
@@ -1940,7 +2141,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../draw_functions/rect":3,"../draw_functions/systems":4,"../math":10,"../system":15}],8:[function(require,module,exports){
+},{"../../manifest/manifest":17,"../draw_functions/animation":3,"../draw_functions/rect":4,"../draw_functions/systems":5,"../math":11,"../system":16}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2638,7 +2839,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":16,"../system":15}],9:[function(require,module,exports){
+},{"../../manifest/manifest":17,"../system":16}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2656,7 +2857,7 @@ exports.LS_GET = LS_GET;
 exports.LS_SET = LS_SET;
 exports.MONITOR = MONITOR;
 exports.OVERRIDE_TO_REF_CANVAS = OVERRIDE_TO_REF_CANVAS;
-exports.PAGE = void 0;
+exports.RESOURCE = exports.PAGE = void 0;
 exports.SAVE = SAVE;
 exports.SCRIPT = void 0;
 exports.SET_STREAM = SET_STREAM;
@@ -3593,6 +3794,7 @@ function SOUND(duration, fref) {
 }
 
 var RESOURCE = new Object();
+exports.RESOURCE = RESOURCE;
 RESOURCE.SUM = 0;
 
 function drawRotatedImage(image, x, y, angle, w, h, surf) {
@@ -3790,7 +3992,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-},{"./program":12,"./system":15}],10:[function(require,module,exports){
+},{"./program":13,"./system":16}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4150,7 +4352,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 }
 
-},{"../manifest/manifest":16,"./system":15}],11:[function(require,module,exports){
+},{"../manifest/manifest":17,"./system":16}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4422,7 +4624,7 @@ function MODUL(name, PROGRAM_NAME) {
   };
 }
 
-},{"../game_object/game_object":7}],12:[function(require,module,exports){
+},{"../game_object/game_object":8}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4585,7 +4787,7 @@ function PROGRAM(s, c) {
 var _default = PROGRAM;
 exports.default = _default;
 
-},{"../manifest/manifest":16,"./engine":5,"./init":9}],13:[function(require,module,exports){
+},{"../manifest/manifest":17,"./engine":6,"./init":10}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5265,7 +5467,7 @@ function ___KBSTATUS_CAPS_OFF(H, V, WHAT) {
 
 ;
 
-},{"../manifest/manifest":16,"./system":15}],14:[function(require,module,exports){
+},{"../manifest/manifest":17,"./system":16}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5321,7 +5523,7 @@ function ActivateModifiers() {
   };
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5426,7 +5628,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"./init":9,"./math":10}],16:[function(require,module,exports){
+},{"./init":10,"./math":11}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

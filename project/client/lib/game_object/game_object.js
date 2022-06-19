@@ -3,6 +3,8 @@ import { POSITION, DIMENSION } from '../math';
 import SYS from '../system';
 import { RIGHT_MENU_BUTTON } from '../draw_functions/systems';
 import { RECT } from '../draw_functions/rect';
+import { ANIMATION } from '../draw_functions/animation';
+import APPLICATION from '../../manifest/manifest';
 
 /**
 Copyright 2016, zlatnaspirala@gmail.com

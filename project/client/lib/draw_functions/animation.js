@@ -1,3 +1,8 @@
+
+import APPLICATION from "../../manifest/manifest";
+import { drawRotatedImage } from "../init";
+import SYS from '../system';
+
 /**
  * ANIMATION
  * @example new ANIMATION()

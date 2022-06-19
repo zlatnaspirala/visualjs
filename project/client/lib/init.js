@@ -927,7 +927,7 @@ export function SOUND(duration, fref) {
   }, duration);
 }
 
-var RESOURCE = new Object();
+export var RESOURCE = new Object();
 RESOURCE.SUM = 0;
 
 export function drawRotatedImage(image, x, y, angle, w, h, surf) {

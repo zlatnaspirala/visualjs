@@ -1,0 +1,14 @@
+{
+  "name": "test-npm-visualjs3",
+  "version": "1.0.0",
+  "description": "test-npm-visualjs3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test-npm-visualjs3"
+  ],
+  "author": "Nikola Lukic",
+  "license": "MIT"
+}
