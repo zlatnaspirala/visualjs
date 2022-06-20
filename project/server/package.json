@@ -1,7 +1,7 @@
 {
   "name": "visualjs-server",
-  "version": "0.0.1",
-  "description": "Dev tool also backend staff for visualjs client",
+  "version": "3.0.0",
+  "description": "Dev tool for visualjs3 client.",
   "main": "index.js",
   "directories": {
     "lib": "lib"

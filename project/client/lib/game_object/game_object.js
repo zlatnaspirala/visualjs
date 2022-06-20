@@ -585,9 +585,6 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
       }
     };
-    //#############################
-    //#############################
-
 
   };
 
@@ -980,12 +977,6 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     }
   };
 
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   this.GROUP = {
 
     ADD: function(name) {
@@ -1017,9 +1008,6 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     UPDATE: function() {},
 
   };
-
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
   this.EFFECTS = {
 
@@ -1111,8 +1099,6 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
   };
 
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   this.PARTICLE = null;
   this.CREATE_PARTICLE = function(type_) {
     // NEED to be created more particle system in future !!!
@@ -1121,8 +1107,6 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
   };
 
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   this.CUSTOM = function() {};
 
   this.DESELECT_ALL = function() {

@@ -1,1 +1,1 @@
-node buid_audio_res.js
+node build_audio_res.js

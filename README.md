@@ -1,24 +1,21 @@
 
-# Visual-js game engine
+# Visual-js
+### Version : 3.0.0
 
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![visualjs.png](https://bitbucket.org/repo/xzgbkK/images/102940608-visualjs.png)
-
-## Visual-js project
-  Creator: Nikola Lukic zlatnaspirala@gmail.com
-  About: Visual JS 2d canvas multiplatform game engine
-  This is JavaScript game engine  (server part node.js / client part js).
-
+Creator: Nikola Lukic zlatnaspirala@gmail.com
+About: Visual JS 2d canvas multiplatform game engine
+This is JavaScript game engine  (dev tools node.js / client js).
 
 
 ### Installation and setup:
-
-```
+```js
 npm i
 ```
 
-### Server/Editor
+## Server/Editor
+## Version : 3.0.0
 ```
 module.exports = {
 

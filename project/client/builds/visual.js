@@ -13,17 +13,15 @@ var _program_modul = require("./lib/program_modul");
 
 var _init = require("./lib/init");
 
-var _animation = require("./lib/draw_functions/animation");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _proto_modify.default)();
 
 if (typeof AUDIO_RESOURCE != "undefined") {
   _system.default.SOUND.RES = new _audio.default();
-} ///////
-// Run
-///////
+} ////////////////////////////
+// Run Instance from here
+////////////////////////////
 
 
 _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"); //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
@@ -46,7 +44,7 @@ IamNewObject.TAP = function () {
   IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 };
 
-},{"./lib/audio/audio":2,"./lib/draw_functions/animation":3,"./lib/init":10,"./lib/program_modul":14,"./lib/proto_modify":15,"./lib/system":16,"./manifest/manifest":17}],2:[function(require,module,exports){
+},{"./lib/audio/audio":2,"./lib/init":12,"./lib/program_modul":16,"./lib/proto_modify":17,"./lib/system":18,"./manifest/manifest":19}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -251,7 +249,7 @@ function ANIMATION(surf, TYPE_, FrameIndex, source, PARENT, ID, blink_, min_, ma
   };
 }
 
-},{"../../manifest/manifest":17,"../init":10,"../system":16}],4:[function(require,module,exports){
+},{"../../manifest/manifest":19,"../init":12,"../system":18}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -380,7 +378,144 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   this.TAP = function () {};
 }
 
-},{"../math":11,"../system":16}],6:[function(require,module,exports){
+},{"../math":13,"../system":18}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+
+var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * DEVS
+ */
+var LOCAL_COMMUNICATOR = new Object();
+
+if (_manifest.default.EDITOR_AUTORUN == true) {
+  LOCAL_COMMUNICATOR = io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
+  LOCAL_COMMUNICATOR.on("connect", function () {
+    console.log("CONNECTED WITH LOCAL_COMMUNICATOR");
+  });
+  LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
+    if (data != "") {
+      console.log("chat data empty", user, data);
+    } else {
+      console.log("chat data empty");
+    }
+  });
+  LOCAL_COMMUNICATOR.on("RETURN", function (action, data) {
+    if (action == "GET_ALL_GAME_OBJECTS") {
+      console.log(data + "<<<<<<<<< from ");
+    } else if (action == "LOAD_SCRIPT") {
+      console.log("LOAD_SCRIPT : " + data);
+      CALL_OR_WAIT(data);
+    } else if (action == "LOAD_SCRIPT_AFTER_F5") {} else if (action == "ERROR") {
+      alert("Server says error:" + data);
+    } // console view  DOM
+    //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
+    //var objDiv = E("console");
+    //objDiv.scrollTop = objDiv.scrollHeight;
+
+  });
+} // EDITOR ACTIONS
+
+
+function CALL_OR_WAIT(data) {
+  var data = data;
+  setTimeout(function () {
+    SYS.DEBUG.LOG(data + "...........");
+
+    if (SYS.READY == true && typeof data != "undefined") {
+      if (data.indexOf("a2") == -1) {
+        setTimeout(function () {
+          SYS.SCRIPT.LOAD(data);
+          SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
+        }, 100);
+      } else {
+        SYS.SCRIPT.LOAD(data);
+        SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
+      }
+    } else {
+      setTimeout(function () {
+        CALL_OR_WAIT(data);
+      }, 50);
+    }
+  }, 1);
+}
+
+function ADD(name, x, y, w, h, PROGRAM_NAME, MODUL) {
+  LOCAL_COMMUNICATOR.emit("ADD_NEW_GAME_OBJECT", name, x, y, w, h, PROGRAM_NAME, MODUL);
+}
+
+function GET_ALL_GAME_OBJECTS() {
+  LOCAL_COMMUNICATOR.emit("GET_ALL_GAME_OBJECTS");
+}
+
+function DESTROY(name) {
+  LOCAL_COMMUNICATOR.emit("DESTROY_GAME_OBJECT", name);
+}
+
+function DESTROY_DELAY(name, sec, MODUL, PROGRAM_NAME) {
+  LOCAL_COMMUNICATOR.emit("DESTROY_GAME_OBJECT_WITH_DELAY", name, sec, MODUL, PROGRAM_NAME);
+}
+
+function SET_NEW_START_UP_POS(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
+  LOCAL_COMMUNICATOR.emit("SET_NEW_START_UP_POSITION", name, PROGRAM_NAME, MODUL, newX, newY, w, h);
+}
+
+function ADD_ANIMATION(name, PROGRAM_NAME, MODUL, RES) {
+  LOCAL_COMMUNICATOR.emit("ADD_ANIMATION", name, PROGRAM_NAME, MODUL, RES);
+}
+
+function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {
+  LOCAL_COMMUNICATOR.emit("ADD_COLLISION", name, PROGRAM_NAME, MODUL, margin);
+}
+
+function REMOVE_COLLISION(name, PROGRAM_NAME, MODUL) {
+  LOCAL_COMMUNICATOR.emit("REMOVE_COLLISION", name, PROGRAM_NAME, MODUL);
+}
+
+function CREATE_PLAYER(name, PROGRAM_NAME, MODUL, type__, index) {
+  LOCAL_COMMUNICATOR.emit("ATACH_PLAYER", name, PROGRAM_NAME, MODUL, type__, index);
+}
+
+function DEATACH_PLAYER(name, PROGRAM_NAME, MODUL, type__) {
+  LOCAL_COMMUNICATOR.emit("DEATACH_PLAYER", name, PROGRAM_NAME, MODUL, type__);
+}
+
+function ADD_PARTICLE(name, PROGRAM_NAME, MODUL, type__) {
+  LOCAL_COMMUNICATOR.emit("ADD_PARTICLE", name, PROGRAM_NAME, MODUL, type__);
+}
+
+function REMOVE_PARTICLE(name, PROGRAM_NAME, MODUL) {
+  LOCAL_COMMUNICATOR.emit("REMOVE_PARTICLE", name, PROGRAM_NAME, MODUL);
+}
+
+function ADD_TEXTBOX(name, PROGRAM_NAME, MODUL, text, radius, color, textcolor) {
+  LOCAL_COMMUNICATOR.emit("ADD_TEXTBOX", name, PROGRAM_NAME, MODUL, text, radius, color, textcolor);
+}
+
+function REMOVE_TEXTBOX(name, PROGRAM_NAME, MODUL) {
+  LOCAL_COMMUNICATOR.emit("REMOVE_TEXTBOX", name, PROGRAM_NAME, MODUL);
+}
+
+function ADD_WEBCAM(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
+  LOCAL_COMMUNICATOR.emit("ADD_WEBCAM", name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH);
+}
+
+function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
+  LOCAL_COMMUNICATOR.emit("REMOVE_WEBCAM", name, PROGRAM_NAME, MODUL);
+}
+
+function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
+  LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
+}
+
+},{"../../manifest/manifest":19}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -405,7 +540,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * @Description Instance of ENGINE class will handle all modules and
  * gameobjects.
- * Access trow :
  * @class ENGINE
  * @example Internal . Injected like property ENGINE intro PROGRAM object.
  * @constructor
@@ -626,7 +760,7 @@ function ENGINE(c) {
   };
 }
 
-},{"../manifest/manifest":17,"./draw_functions/systems":5,"./events/keyboard":7,"./game_object/game_object_events":9,"./init":10,"./modules/modules":12}],7:[function(require,module,exports){
+},{"../manifest/manifest":19,"./draw_functions/systems":5,"./events/keyboard":8,"./game_object/game_object_events":11,"./init":12,"./modules/modules":14}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -635,6 +769,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.KEYBOARD = KEYBOARD;
 
 var _system = _interopRequireDefault(require("../system"));
+
+var _keyboard_editor = _interopRequireDefault(require("./keyboard_editor"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -651,6 +787,7 @@ function KEYBOARD(c) {
 
   this.CANVAS = c;
   this.PROGRAM_NAME = c.id;
+  ROOT.keyboardListener = new _keyboard_editor.default();
   c.addEventListener("keydown", function (e) {
     switch (e.keyCode) {
       case 8:
@@ -998,7 +1135,54 @@ function KEYBOARD(c) {
   }, false);
 }
 
-},{"../system":16}],8:[function(require,module,exports){
+},{"../system":18,"./keyboard_editor":9}],9:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+// maybe for editor can be used
+class KeyboardListener {
+  constructor() {
+    window.addEventListener("keydown", function (e) {
+      SYS.DEBUG.LOG(" kaydown event fired for keyboard_editor . e.keyCode " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
+
+      switch (e.keyCode) {
+        case 121:
+          SYS.DEBUG.LOG("F10 command -->> Show command line ");
+
+        case 115:
+          for (var z = 0; z < SYS.RUNNING_PROGRAMS.length; z++) {
+            window[SYS.RUNNING_PROGRAMS[z]].ENGINE.GO_TO_EDIT_MODE();
+          }
+
+        case 37:
+          // left
+          break;
+
+        case 38:
+          // up
+          break;
+
+        case 39:
+          // right
+          break;
+
+        case 40:
+          // down
+          break;
+      }
+    }, false);
+  }
+
+}
+
+var _default = KeyboardListener;
+exports.default = _default;
+
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1480,9 +1664,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
           ROOT_GAME_OBJECT.PENCIL.PATH.push(ROOT_GAME_OBJECT.PENCIL.LAST_POS);
         }
       }
-    }; //#############################
-    //#############################
-
+    };
   };
 
   this.TRANSLATE_BY_PATH = function (PATH_, LOOP_TYPE) {
@@ -1769,11 +1951,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     } else {
       _system.default.DEBUG.WARNING("from function CREATE_PEER -  MAIN PEER OBJECT ALREADY CREATED.");
     }
-  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+  };
 
   this.GROUP = {
     ADD: function (name) {
@@ -1797,9 +1975,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
       y: ROOT_GAME_OBJECT.POSITION.y
     },
     UPDATE: function () {}
-  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+  };
   this.EFFECTS = {
     FADE: {
       IN: function (sec) {
@@ -1869,18 +2045,14 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         }, sec);
       }
     }
-  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+  };
   this.PARTICLE = null;
 
   this.CREATE_PARTICLE = function (type_) {
     // NEED to be created more particle system in future !!!
     ROOT_GAME_OBJECT.PARTICLE = new PARTICLE_FONTAN(ROOT_GAME_OBJECT);
     ROOT_GAME_OBJECT.TYPE_OF_GAME_OBJECT = "PATRICLE";
-  }; //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$//$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+  };
 
   this.CUSTOM = function () {};
 
@@ -2143,7 +2315,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../../manifest/manifest":17,"../draw_functions/animation":3,"../draw_functions/rect":4,"../draw_functions/systems":5,"../init":10,"../math":11,"../system":16}],9:[function(require,module,exports){
+},{"../../manifest/manifest":19,"../draw_functions/animation":3,"../draw_functions/rect":4,"../draw_functions/systems":5,"../init":12,"../math":13,"../system":18}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2855,7 +3027,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":17,"../init":10,"../system":16}],10:[function(require,module,exports){
+},{"../../manifest/manifest":19,"../init":12,"../system":18}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4008,7 +4180,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-},{"./program":13,"./system":16}],11:[function(require,module,exports){
+},{"./program":15,"./system":18}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4028,6 +4200,8 @@ exports.toRadians = toRadians;
 var _system = _interopRequireDefault(require("./system"));
 
 var _manifest = _interopRequireDefault(require("../manifest/manifest"));
+
+var _editor = require("./editor/editor");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4338,7 +4512,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
 
         try {
           if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" && _manifest.default.EDITOR == true) {
-            SET_NEW_START_UP_POS(this.parentGameObject, this.PROGRAM_NAME, this.parentModul, this.targetX, this.targetY, this.DIMENSION.W, this.DIMENSION.H);
+            (0, _editor.SET_NEW_START_UP_POS)(this.parentGameObject, this.PROGRAM_NAME, this.parentModul, this.targetX, this.targetY, this.DIMENSION.W, this.DIMENSION.H);
           }
         } catch (e) {
           console.log(e + ":::in:::SET_NEW_START_UP_POS");
@@ -4368,7 +4542,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 }
 
-},{"../manifest/manifest":17,"./system":16}],12:[function(require,module,exports){
+},{"../manifest/manifest":19,"./editor/editor":6,"./system":18}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4640,7 +4814,7 @@ function MODUL(name, PROGRAM_NAME) {
   };
 }
 
-},{"../game_object/game_object":8}],13:[function(require,module,exports){
+},{"../game_object/game_object":10}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4803,7 +4977,7 @@ function PROGRAM(s, c) {
 var _default = PROGRAM;
 exports.default = _default;
 
-},{"../manifest/manifest":17,"./engine":6,"./init":10}],14:[function(require,module,exports){
+},{"../manifest/manifest":19,"./engine":7,"./init":12}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5483,7 +5657,7 @@ function ___KBSTATUS_CAPS_OFF(H, V, WHAT) {
 
 ;
 
-},{"../manifest/manifest":17,"./system":16}],15:[function(require,module,exports){
+},{"../manifest/manifest":19,"./system":18}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5539,7 +5713,7 @@ function ActivateModifiers() {
   };
 }
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5644,7 +5818,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"./init":10,"./math":11}],17:[function(require,module,exports){
+},{"./init":12,"./math":13}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

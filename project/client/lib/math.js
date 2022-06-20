@@ -1,5 +1,6 @@
 import SYS from './system';
 import APPLICATION from '../manifest/manifest';
+import { SET_NEW_START_UP_POS } from './editor/editor';
 
 /**
  * Simple number round.

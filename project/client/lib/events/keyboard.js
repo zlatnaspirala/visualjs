@@ -1,5 +1,6 @@
 
 import SYS from "../system";
+import KeyboardListener from "./keyboard_editor";
 
 // PLAYER CONTROL AND OTHER KEYBOARD STAFF
 export function KEYBOARD(c) {
@@ -15,6 +16,8 @@ export function KEYBOARD(c) {
 
   this.CANVAS = c;
   this.PROGRAM_NAME = c.id;
+
+  ROOT.keyboardListener = new KeyboardListener();
 
   c.addEventListener("keydown", function(e) {
 
