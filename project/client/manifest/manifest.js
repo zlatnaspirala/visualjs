@@ -15,7 +15,7 @@ var APPLICATION = {
     IMAGE_LOADER_PREFIX: true,
     EDITOR: true,
     EDITOR_AUTORUN: false,
-    LOCAL_SERVER: "127.0.0.1",
+    LOCAL_SERVER: "localhost",
     DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
     ACCESSIBILITY: {
         VIRTUAL_KEYBOARD_FOR_DESKTOP: true,

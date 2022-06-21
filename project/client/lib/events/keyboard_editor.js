@@ -1,4 +1,6 @@
 
+import SYS from '../system';
+
 // maybe for editor can be used
 class KeyboardListener {
 

@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/zlatnaspirala/visualjs/issues"
   },
-  "homepage": "https://github.com/zlatnaspirala/visualjs#readme"
+  "homepage": "https://github.com/zlatnaspirala/visualjs#readme",
+  "dependencies": {
+    "socket.io-client": "^4.5.1"
+  }
 }

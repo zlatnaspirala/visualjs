@@ -2,6 +2,7 @@
 /**
  * DEVS
  */
+const { io } = require("socket.io-client");
 import APPLICATION from '../../manifest/manifest';
 
 var LOCAL_COMMUNICATOR = new Object();

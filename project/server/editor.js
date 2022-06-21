@@ -34,7 +34,13 @@ var CONFIG = require("./config.js");
 var MEMORY_CLEANER_INTERVAL = 5000;
 
 var server = http.createServer(app);
-var io = require("socket.io").listen(server);
+var io = require("socket.io")(server, 
+  { cors: {
+      origin: "*",
+      methods: ["GET", "POST"],
+      allowedHeaders: ["my-custom-header"],
+      credentials: true}});
+
 server.listen(CONFIG.EDITOR_PORT);
 
 console.log("    ");
