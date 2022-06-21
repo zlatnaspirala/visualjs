@@ -1,23 +1,14 @@
 
 /**
  * @description
- * Make javascript resources objects
+ * Make javascript resources objects,
+ * This is dev tools. Dont't use it in prodc.
  * @Developer Nikola Lukic
  * @email zlatnaspirala@gmail.com
  */
 
-var dl = require('delivery');
 var fs = require("fs");
 var path = require('path');
-var mysql = require('mysql');
-var express = require("express");
-var app = express();
-var http = require('http');
-var https = require('https');
-var mkdirp = require('mkdirp')
-
-function read(f) {return fs.readFileSync(f).toString();}
-function include(f) {eval.apply(global, [read(f)]);}
 
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath).filter(function(file) {
@@ -26,86 +17,64 @@ function getDirectories(srcpath) {
 }
 
 var config = require('./config.js');
-
 var FILE_STRING = "";
 var SUM_OF_IMAGES = 0;
 
-// LIST OFF ALL FILES
 function GET_FILES_NAME(path, name_of_animation_path, main_length) {
   fs.readdir(path, function(err, items) {
-
     for(var i = 0;i < items.length;i++) {
-
       if(i == 0) {
         FILE_STRING += ' \n RESOURCE.' + name_of_animation_path + '={"source":[';
         SUM_OF_IMAGES++;
       }
-
       FILE_STRING = " " + FILE_STRING + "'" + name_of_animation_path + "/" + items[i] + "' , \n";
-
-      console.log("name_of_animation_path", name_of_animation_path);
-
       if((i + 1) == items.length && main_length == false) {
-
-        console.log(">>>>>>>>>>>>>>>", name_of_animation_path);
         FILE_STRING += " ] }; \n";
-
       }
-
       if((i + 1) == items.length && main_length == true) {
-
         FILE_STRING += " ] }; SYS.DEBUG.LOG('Resources loaded. ' + " + SUM_OF_IMAGES + "); \n  RESOURCE.SUM = " + SUM_OF_IMAGES + "; ";
         CreateFile(config.PATH_OF_WWW + "res/animations/resource.nidza", FILE_STRING);
-
       }
-
     }
-
   });
 }
 
-// LIST OFF ALL DIRECTORY
-console.log(config.PATH_OF_WWW);
+// console.log(config.PATH_OF_WWW);
 var LIST_OFF_ALL_ANIMATION_DIR = getDirectories(config.PATH_OF_WWW + "res/animations/");
-//console.log(LIST_OFF_ALL_ANIMATION_DIR);
-
 var local__x = -1;
 
-console.log("   ");
-console.log("......................................");
-console.log("Resources objects generator");
-console.log("......................................");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
+console.log('\x1b[36m%s\x1b[0m', ".                                    .");
+console.log('\x1b[36m%s\x1b[0m', ". Visual-js Resource builder         .");
+console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
 
 for(var i in LIST_OFF_ALL_ANIMATION_DIR) {
-
   local__x++;
   val = LIST_OFF_ALL_ANIMATION_DIR[i];
-  console.log("Obj Created :", LIST_OFF_ALL_ANIMATION_DIR[i]);
-
+  console.log('\x1b[33m%s\x1b[0m', "Obj Created :", LIST_OFF_ALL_ANIMATION_DIR[i]);
   if((local__x + 1) == LIST_OFF_ALL_ANIMATION_DIR.length) {
-    //console.log("POSLEDNJI");
     GET_FILES_NAME(config.PATH_OF_WWW + "res/animations/" + val, val, true);
   } else {
-    //console.log("NIJE POSLEDNJI");
     GET_FILES_NAME(config.PATH_OF_WWW + "res/animations/" + val, val, false);
   }
-
 }
 
 CreateFile(config.PATH_OF_WWW + "res/animations/resource.list", LIST_OFF_ALL_ANIMATION_DIR);
 
 function CreateFile(path_, CONTENT) {
-
-  fs.writeFile(path_, CONTENT, function(err) {
+  fs.writeFile(path_, CONTENT.toString(), function(err) {
+    var Reset = "\x1b[0m";
     if(err) {
       return console.log(err);
     } else {
-      //console.log("List of the resources object names : " , LIST_OFF_ALL_ANIMATION_DIR ); 
-      console.log("......................................");
-      console.log("   ");
-      console.log("The resources file was created DONE.");
-      console.log("   ");
+      console.log('\x1b[36m%s\x1b[42m', `${path_}`);
+      if (path_.indexOf('resource.list') !== -1) {
+        console.log("\x1b[42m", "The resources list file was created. 🤘 [DONE]", Reset );
+      } else {
+        console.log("\x1b[42m", "The resources file was created. 🤘 [DONE]", Reset);
+      }
     }
   });
-
 }

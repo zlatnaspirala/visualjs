@@ -2,24 +2,35 @@
 # Visual-js
 ### Version : 3.0.0
 
+All new version begin with 3.0.0 for client, server or GUI part.
+
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Creator: Nikola Lukic zlatnaspirala@gmail.com
-About: Visual JS 2d canvas multiplatform game engine
-This is JavaScript game engine  (dev tools node.js / client js).
+#### Creator: Nikola Lukic zlatnaspirala@gmail.com
+#### Full name: Visual-JS game engine
+#### This is JavaScript game engine (dev tools node.js / client js).
 
+### Objective
+
+ - Create UI from live page. I called `ON-PAGE-EDITOR`.
+ - Create more visual-js controls
+ - Improve of windows GUI Editor.
+ - Improve visual-js in concept of npm usage.
+   Make it usable from npm i visual-js.
 
 ### Installation and setup:
+
 ```js
 npm i
 ```
 
 ## Server/Editor
-## Version : 3.0.0
+### Version : 3.0.0
+
+### Config
 ```
 module.exports = {
-
-   VERSION : "0.5",
+   VERSION : "3.0.0",
    PATH_OF_NODE_APP : "D:/PATH_TO_SERVER_INSTANCE_FOLDER/server/" ,  // EDIT HERE
    PATH_OF_WWW : "D:/xamp/htdocs/project_instance/", // PATH_TO_WWW  EDIT HERE
    EDITOR_PORT : "1013",
@@ -45,26 +56,24 @@ node build_from_editor_to_visual_js_file.js
 Click right button and you will see content menu . First item is *Add New game object* .
 Than your game object will show at web page. Right click on rectangle area to see game object context menu.
 
-#### 	*local node.js application tools* (	*Use this in develop mode only*  ):  ####
+#### 	*local node.js application tools* (	*Use this in develop mode only*):
 
- 	- server_instance/res.js  - create RESOURCE js object (ADD image or images for animation) ###
-           Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
-           run command :
+ - server/res.js  - create RESOURCE js object (ADD image or images for animation)
+   Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
 
+Run command:
+```js
+server/node res.js
 ```
-server_instance/node res.js
-```
-<pre>
-  After finishing restart web page ind enter in console :  RESOURCE.TEST_RES
-  RESOURCE have all images path data. When you create folder with image and build with *node res.js* we did not create images object.
-  Images object will be created after you add animation to the game objects.
-</pre>
 
-  This is good because memory safe.
+After finishing restart web page and enter in console: `RESOURCE.TEST_RES`
+RESOURCE have all images path data. When you create folder with image and build with *node res.js* we did not create images object.
+Images object will be created after you add animation to the game objects (This is good because memory safe).
 
-#### ON/PAGE Editor
 
-- server_instance/editor.js
+### ON/PAGE Editor
+
+- server/editor.js
 
 Create game objects direct in web browser view. Takes data from system folder lib/visual_scripts/ and generate code.
 After build you can found your code intro visual.js (node build_from_editor_to_visual_js_file.js)
@@ -77,13 +86,12 @@ node build_from_editor_to_visual_js_file.js on the end of work.
 This tool will create visual.js in folder starter/ with all your game object was created in editor style .
 
 
-
-### VISUALJS-GUI.exe  Windows GUI open source
+### VISUALJS-GUI.exe [Windows GUI open source]
 
  [Video tutorial for visual-JS source editor win gui](https://www.youtube.com/watch?v=kxUBPDhB-3I)
 
 Name:  Visual-JS GE
-VersionL 1.1
+Version: 1.1
 
 ![visual-javascript-gui-for-windows.png](https://bitbucket.org/repo/xzgbkK/images/838031220-visual-javascript-gui-for-windows.png)
 
@@ -104,7 +112,8 @@ Visual Source editor Beta 1 only for windows users.
 - Socket.io.js        - http://socket.io/download/
 
 ### Disclaimer of warranty
- 'Visual js' is provided "as-is" and without warranty of any kind, express, implied or otherwise,
+
+'Visual js' is provided "as-is" and without warranty of any kind, express, implied or otherwise,
 including without limitation, any warranty of merchantability or fitness for a particular purpose.
 In no event shall the author of this software be held liable for data loss,
 damages, loss of profits or any other kind of loss while using or misusing this
