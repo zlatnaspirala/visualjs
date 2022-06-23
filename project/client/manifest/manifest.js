@@ -18,7 +18,7 @@ var APPLICATION = {
     LOCAL_SERVER: "localhost",
     DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
     ACCESSIBILITY: {
-        VIRTUAL_KEYBOARD_FOR_DESKTOP: true,
+        VIRTUAL_KEYBOARD_FOR_DESKTOP: false,
         ACTIVATE_VK_FOR_DESKTOP: function () {
             CREATE_VIRTUAL_KEYBOARD();
             HIDE_KEYBOARD();

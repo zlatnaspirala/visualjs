@@ -2590,19 +2590,25 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.ADD = ADD;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+
+var _system = _interopRequireDefault(require("../system"));
 
 var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * DEVS
- */
 const {
   io
 } = require("socket.io-client");
 
+console.log('\x1b[36m%s\x1b[0m', "......................................");
+console.log('\x1b[36m%s\x1b[0m', ".                                    .");
+console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
+console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
 var LOCAL_COMMUNICATOR = new Object();
 
 if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
@@ -2637,24 +2643,26 @@ if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true
 function CALL_OR_WAIT(data) {
   var data = data;
   setTimeout(function () {
-    SYS.DEBUG.LOG(data + "...........");
+    _system.default.DEBUG.LOG(data + "");
 
-    if (SYS.READY == true && typeof data != "undefined") {
+    if (typeof data != "undefined") {
       if (data.indexOf("a2") == -1) {
         setTimeout(function () {
-          SYS.SCRIPT.LOAD(data);
-          SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
+          _system.default.SCRIPT.LOAD(data);
+
+          _system.default.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
         }, 100);
       } else {
-        SYS.SCRIPT.LOAD(data);
-        SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
+        _system.default.SCRIPT.LOAD(data);
+
+        _system.default.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
       }
     } else {
       setTimeout(function () {
         CALL_OR_WAIT(data);
       }, 50);
     }
-  }, 1);
+  }, 250);
 }
 
 function ADD(name, x, y, w, h, PROGRAM_NAME, MODUL) {
@@ -2725,7 +2733,7 @@ function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
 
-},{"../../manifest/manifest":23,"socket.io-client":48}],11:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../system":22,"socket.io-client":48}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4544,6 +4552,8 @@ var _system = _interopRequireDefault(require("../system"));
 
 var _init = require("../init");
 
+var _editor = require("../editor/editor");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function EVENTS(canvas, ROOT_ENGINE) {
@@ -4953,8 +4963,8 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 else if (local_go.EDITOR.BUTTONS[q].IAM == "3") {
                   var resource_list = "";
 
-                  for (var key in RESOURCE) {
-                    if (RESOURCE.hasOwnProperty(key) && key != "SUM") {
+                  for (var key in _init.RESOURCE) {
+                    if (_init.RESOURCE.hasOwnProperty(key) && key != "SUM") {
                       resource_list += "  " + key + ", ";
                     }
                   }
@@ -5166,7 +5176,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 var sign_name2 = prompt("Enter gameObject parent modul :", "STARTER");
 
                 if (isNaN(parseFloat(sign_name.charAt(0)))) {
-                  ADD(sign_name, 45, 45, 10, 10, canvas.id, sign_name2);
+                  (0, _editor.ADD)(sign_name, 45, 45, 10, 10, canvas.id, sign_name2);
                 } else {
                   alert("ERROR MSG: GameObject name created not success.");
                 }
@@ -5242,7 +5252,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":23,"../init":16,"../system":22}],16:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../editor/editor":10,"../init":16,"../system":22}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5454,6 +5464,34 @@ function DETECTBROWSER() {
   this.NOMOBILE = NOMOBILE;
 }
 /**
+ * Loading JS scripts in runtime.
+ * @function SCRIPT.LOAD
+ * @param name
+ * @param src
+ */
+
+
+var SCRIPT = {
+  SCRIPT_ID: 0,
+  SINHRO_LOAD: {},
+  LOAD: function addScript(src) {
+    var s = document.createElement("script");
+    s.type = "module";
+
+    s.onload = function () {
+      SCRIPT.SCRIPT_ID++;
+      console.log("Script id loaded : " + SCRIPT.SCRIPT_ID + " with src : " + this.src + ">>>>>>>>>" + this.src);
+      var filename = this.src.substring(this.src.lastIndexOf("/") + 1, this.src.lastIndexOf(".")); //console.log(filename)
+
+      filename = filename.replace(".", "_");
+      eval("try{SCRIPT.SINHRO_LOAD._" + filename + "(s)}catch(e){}");
+    };
+
+    s.setAttribute("src", src);
+    document.body.appendChild(s);
+  }
+};
+/**
  * LOG is class but we use single instance.
  * Access point  : SYS.DEBUG
  * @example new LOG()  Usage : SYS.DEBUG.LOG("Hello")
@@ -5462,6 +5500,7 @@ function DETECTBROWSER() {
  * @return nothing
  */
 
+exports.SCRIPT = SCRIPT;
 
 function LOG() {
   /** We can disable logs any time
@@ -6198,6 +6237,7 @@ function SOUND(duration, fref) {
 
 var RESOURCE = new Object();
 exports.RESOURCE = RESOURCE;
+SCRIPT.LOAD("res/animations/resource.nidza");
 RESOURCE.SUM = 0;
 
 function drawRotatedImage(image, x, y, angle, w, h, surf) {
@@ -6352,33 +6392,6 @@ function CREATE_IMG(name, src) {
   };
 }
 /**
- * Loading JS scripts in runtime.
- * @function SCRIPT.LOAD
- * @param name
- * @param src
- */
-
-
-var SCRIPT = {
-  SCRIPT_ID: 0,
-  SINHRO_LOAD: {},
-  LOAD: function addScript(src) {
-    var s = document.createElement("script");
-
-    s.onload = function () {
-      SCRIPT.SCRIPT_ID++;
-      console.log("Script id loaded : " + SCRIPT.SCRIPT_ID + " with src : " + this.src + ">>>>>>>>>" + this.src);
-      var filename = this.src.substring(this.src.lastIndexOf("/") + 1, this.src.lastIndexOf(".")); //console.log(filename)
-
-      filename = filename.replace(".", "_");
-      eval("try{SCRIPT.SINHRO_LOAD._" + filename + "(s)}catch(e){}");
-    };
-
-    s.setAttribute("src", src);
-    document.body.appendChild(s);
-  }
-};
-/**
  * Validate string for email address.
  * validateEmail is global access method.
  * @example validateEmail("zlatnaspirala@gmail") will return false ,
@@ -6388,7 +6401,6 @@ var SCRIPT = {
  * @return {boolean} True : Email is valid , False email is invalid.
  */
 
-exports.SCRIPT = SCRIPT;
 
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -8061,7 +8073,7 @@ var APPLICATION = {
   LOCAL_SERVER: "localhost",
   DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
   ACCESSIBILITY: {
-    VIRTUAL_KEYBOARD_FOR_DESKTOP: true,
+    VIRTUAL_KEYBOARD_FOR_DESKTOP: false,
     ACTIVATE_VK_FOR_DESKTOP: function () {
       CREATE_VIRTUAL_KEYBOARD();
       HIDE_KEYBOARD();

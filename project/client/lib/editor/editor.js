@@ -1,9 +1,15 @@
 
-/**
- * DEVS
- */
+
 const { io } = require("socket.io-client");
+import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
+
+console.log('\x1b[36m%s\x1b[0m', "......................................");
+console.log('\x1b[36m%s\x1b[0m', ".                                    .");
+console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
+console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
 
 var LOCAL_COMMUNICATOR = new Object();
 
@@ -50,38 +56,28 @@ function CALL_OR_WAIT(data) {
 
   var data = data;
   setTimeout(function() {
-
-    SYS.DEBUG.LOG(data + "...........");
-
-    if(SYS.READY == true && typeof data != "undefined") {
-
+    SYS.DEBUG.LOG(data + "");
+    if(typeof data != "undefined") {
       if(data.indexOf("a2") == -1) {
-
         setTimeout(function() {
           SYS.SCRIPT.LOAD(data);
-          SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
+          SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
         }, 100);
-
       } else {
-
         SYS.SCRIPT.LOAD(data);
-        SYS.DEBUG.LOG(" VISUAL SCRIPT EXECUTED ");
-
+        SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
       }
-
     } else {
-
       setTimeout(function() {
         CALL_OR_WAIT(data);
       }, 50);
-
     }
 
-  }, 1);
+  }, 250);
 
 }
 
-function ADD(name, x, y, w, h, PROGRAM_NAME, MODUL) {
+export function ADD(name, x, y, w, h, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("ADD_NEW_GAME_OBJECT", name, x, y, w, h, PROGRAM_NAME, MODUL);
 }
 

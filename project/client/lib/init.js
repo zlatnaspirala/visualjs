@@ -171,6 +171,43 @@ export function DETECTBROWSER() {
 }
 
 /**
+ * Loading JS scripts in runtime.
+ * @function SCRIPT.LOAD
+ * @param name
+ * @param src
+ */
+ export var SCRIPT = {
+  SCRIPT_ID: 0,
+  SINHRO_LOAD: {},
+  LOAD: function addScript(src) {
+    var s = document.createElement("script");
+    s.type = "module";
+    s.onload = function () {
+      SCRIPT.SCRIPT_ID++;
+      console.log(
+        "Script id loaded : " +
+          SCRIPT.SCRIPT_ID +
+          " with src : " +
+          this.src +
+          ">>>>>>>>>" +
+          this.src
+      );
+
+      var filename = this.src.substring(
+        this.src.lastIndexOf("/") + 1,
+        this.src.lastIndexOf(".")
+      );
+      //console.log(filename)
+      filename = filename.replace(".", "_");
+      eval("try{SCRIPT.SINHRO_LOAD._" + filename + "(s)}catch(e){}");
+    };
+    s.setAttribute("src", src);
+    document.body.appendChild(s);
+  },
+};
+
+
+/**
  * LOG is class but we use single instance.
  * Access point  : SYS.DEBUG
  * @example new LOG()  Usage : SYS.DEBUG.LOG("Hello")
@@ -928,6 +965,7 @@ export function SOUND(duration, fref) {
 }
 
 export var RESOURCE = new Object();
+SCRIPT.LOAD("res/animations/resource.nidza");
 RESOURCE.SUM = 0;
 
 export function drawRotatedImage(image, x, y, angle, w, h, surf) {
@@ -1098,41 +1136,6 @@ export function CREATE_IMG(name, src) {
     SYS.RES.SUM_OF_LOADED_IMAGES++;
   };
 }
-
-/**
- * Loading JS scripts in runtime.
- * @function SCRIPT.LOAD
- * @param name
- * @param src
- */
-export var SCRIPT = {
-  SCRIPT_ID: 0,
-  SINHRO_LOAD: {},
-  LOAD: function addScript(src) {
-    var s = document.createElement("script");
-    s.onload = function () {
-      SCRIPT.SCRIPT_ID++;
-      console.log(
-        "Script id loaded : " +
-          SCRIPT.SCRIPT_ID +
-          " with src : " +
-          this.src +
-          ">>>>>>>>>" +
-          this.src
-      );
-
-      var filename = this.src.substring(
-        this.src.lastIndexOf("/") + 1,
-        this.src.lastIndexOf(".")
-      );
-      //console.log(filename)
-      filename = filename.replace(".", "_");
-      eval("try{SCRIPT.SINHRO_LOAD._" + filename + "(s)}catch(e){}");
-    };
-    s.setAttribute("src", src);
-    document.body.appendChild(s);
-  },
-};
 
 /**
  * Validate string for email address.

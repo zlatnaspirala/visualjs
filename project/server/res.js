@@ -24,6 +24,8 @@ function GET_FILES_NAME(path, name_of_animation_path, main_length) {
   fs.readdir(path, function(err, items) {
     for(var i = 0;i < items.length;i++) {
       if(i == 0) {
+        // import {RESOURCE} from './lib/init';
+        // FILE_STRING += "import {RESOURCE} from './lib/init'; \n";
         FILE_STRING += ' \n RESOURCE.' + name_of_animation_path + '={"source":[';
         SUM_OF_IMAGES++;
       }

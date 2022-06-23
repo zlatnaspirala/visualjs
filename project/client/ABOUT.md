@@ -1,4 +1,4 @@
-# Application Programming Interface Documentation for Visual JS 1.0 - 2d part #
+# Application Programming Interface Documentation for Visual JS 1.0 - 2d part
 
 -GAME_OBJECT is main object in this framework.Every game object can be text box , animation , collision no/off , webcam etc.
 
@@ -6,7 +6,7 @@
 This is also root javascript object for canvas 2d app .
 Prototype class name : PROGRAM (Only one program instance is possible for now )
 
-#### Access method is : ####
+#### Access method is :
 
 ```javascript
 
@@ -23,7 +23,7 @@ SYS.RUNNING_PROGRAMS[0] represent string value of canvas html tag id . Change th
   <canvas tabindex='1' width="1" height="1" id="HELLO_WORLD"></canvas>
 ```
 
-####  Structure of -*<Default Name of program>*  Default :  HELLO_WORLD: ####
+####  Structure of -*<Default Name of program>*  Default :  HELLO_WORLD:
 
 ```javascript
 

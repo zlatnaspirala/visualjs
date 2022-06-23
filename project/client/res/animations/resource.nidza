@@ -1,4 +1,5 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                      import {RESOURCE} from './lib/init'; 
+ 
  RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
 'character1/alienBiege_climb2.png' , 
 'character1/alienBiege_duck.png' , 
@@ -11,6 +12,7 @@
 'character1/alienBiege_walk1.png' , 
 'character1/alienBiege_walk2.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.character2={"source":['character2/alienBlue_climb1.png' , 
 'character2/alienBlue_climb2.png' , 
@@ -24,6 +26,7 @@
 'character2/alienBlue_walk1.png' , 
 'character2/alienBlue_walk2.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.character3={"source":['character3/alienGreen_climb1.png' , 
 'character3/alienGreen_climb2.png' , 
@@ -37,6 +40,7 @@
 'character3/alienGreen_walk1.png' , 
 'character3/alienGreen_walk2.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.character4={"source":['character4/alienYellow_climb1.png' , 
 'character4/alienYellow_climb2.png' , 
@@ -50,6 +54,7 @@
 'character4/alienYellow_walk1.png' , 
 'character4/alienYellow_walk2.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.characterPink={"source":['characterPink/alienPink_climb1.png' , 
 'characterPink/alienPink_climb2.png' , 
@@ -63,9 +68,11 @@
 'characterPink/alienPink_walk1.png' , 
 'characterPink/alienPink_walk2.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.circleSpiral1={"source":['circleSpiral1/spiral1.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.clouds={"source":['clouds/cloud1.png' , 
 'clouds/cloud2.png' , 
@@ -77,9 +84,11 @@
 'clouds/cloud8.png' , 
 'clouds/cloud9.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.demo1={"source":['demo1/lightmap.gif' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Dirt={"source":['Dirt/dirt.png' , 
 'Dirt/dirtCenter.png' , 
@@ -100,11 +109,13 @@
 'Dirt/dirtMid.png' , 
 'Dirt/dirtRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Enemies1={"source":['Enemies1/0.png' , 
 'Enemies1/1.png' , 
 'Enemies1/dead.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Grass={"source":['Grass/grass.png' , 
 'Grass/grassCenter.png' , 
@@ -125,6 +136,7 @@
 'Grass/grassMid.png' , 
 'Grass/grassRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.HUD={"source":['HUD/hudCoin.png' , 
 'HUD/hudHeart_empty.png' , 
@@ -145,6 +157,7 @@
 'HUD/hudPlayer_yellow.png' , 
 'HUD/hudX.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.imagesFont1={"source":['imagesFont1/letter_A.png' , 
 'imagesFont1/letter_B.png' , 
@@ -190,6 +203,7 @@
 'imagesFont1/number9.png' , 
 'imagesFont1/text_plus.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Items={"source":['Items/coinBronze.png' , 
 'Items/coinGold.png' , 
@@ -216,6 +230,7 @@
 'Items/keyYellow.png' , 
 'Items/star.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.keys={"source":['keys/hudKey_blue.png' , 
 'keys/hudKey_blue_empty.png' , 
@@ -226,19 +241,23 @@
 'keys/hudKey_yellow.png' , 
 'keys/hudKey_yellow_empty.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.loadingBlock={"source":['loadingBlock/alu.jpg' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.majce={"source":['majce/mask.png' , 
 'majce/shirt.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.money_penny={"source":['money_penny/gold_1.png' , 
 'money_penny/gold_2.png' , 
 'money_penny/gold_3.png' , 
 'money_penny/gold_4.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.numbers1={"source":['numbers1/0.png' , 
 'numbers1/1.png' , 
@@ -251,6 +270,7 @@
 'numbers1/8.png' , 
 'numbers1/9.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.numbers2={"source":['numbers2/text_0.png' , 
 'numbers2/text_1.png' , 
@@ -263,11 +283,13 @@
 'numbers2/text_8.png' , 
 'numbers2/text_9.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Particles={"source":['Particles/brickBrown.png' , 
 'Particles/brickGrey.png' , 
 'Particles/fireball.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Planet={"source":['Planet/planet.png' , 
 'Planet/planetCenter.png' , 
@@ -288,6 +310,7 @@
 'Planet/planetMid.png' , 
 'Planet/planetRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Sand={"source":['Sand/sand.png' , 
 'Sand/sandCenter.png' , 
@@ -308,14 +331,17 @@
 'Sand/sandMid.png' , 
 'Sand/sandRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.slotBG={"source":['slotBG/castle_grey.png' , 
 'slotBG/z.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.slotimages1={"source":['slotimages1/elementGlass025.png' , 
 'slotimages1/ram.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Snow={"source":['Snow/snow.png' , 
 'Snow/snowCenter.png' , 
@@ -336,6 +362,7 @@
 'Snow/snowMid.png' , 
 'Snow/snowRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Stone={"source":['Stone/stone.png' , 
 'Stone/stoneCenter.png' , 
@@ -356,6 +383,7 @@
 'Stone/stoneMid.png' , 
 'Stone/stoneRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.textures1={"source":['textures1/1.jpg' , 
 'textures1/10.jpg' , 
@@ -368,6 +396,7 @@
 'textures1/8.jpg' , 
 'textures1/9.jpg' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Tiles={"source":['Tiles/bomb.png' , 
 'Tiles/bombWhite.png' , 
@@ -442,6 +471,7 @@
 'Tiles/weightAttached.png' , 
 'Tiles/window.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.tree1={"source":['tree1/tree20.png' , 
 'tree1/tree21.png' , 
@@ -454,6 +484,7 @@
 'tree1/tree28.png' , 
 'tree1/tree35.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.trees1={"source":['trees1/tree20.png' , 
 'trees1/tree21.png' , 
@@ -466,6 +497,7 @@
 'trees1/tree28.png' , 
 'trees1/tree35.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.wbutton={"source":['wbutton/sign - Copy.png' , 
 'wbutton/sign.png' , 
@@ -473,6 +505,7 @@
 'wbutton/signLeft.png' , 
 'wbutton/signRight.png' , 
  ] }; 
+import {RESOURCE} from './lib/init'; 
  
  RESOURCE.Yellow={"source":['Yellow/alienYellow_climb1.png' , 
 'Yellow/alienYellow_climb2.png' , 
