@@ -19,19 +19,22 @@ function random(low, high) {
 var CONFIG = require("./config.js");
 
 var server = http.createServer(app);
-var io = require("socket.io")(server, 
-  { cors: {
+var io = require("socket.io")(server,
+  {
+    cors: {
       origin: "*",
       methods: ["GET", "POST"],
       allowedHeaders: ["my-custom-header"],
-      credentials: true}});
+      credentials: true
+    }
+  });
 
 server.listen(CONFIG.EDITOR_PORT);
 
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 console.log('\x1b[36m%s\x1b[0m', ".                                    .");
 console.log('\x1b[36m%s\x1b[0m', ". Visual-js On Page Editor           .");
-console.log('\x1b[36m%s\x1b[0m', ". Version " +  CONFIG.VERSION + "                      .");
+console.log('\x1b[36m%s\x1b[0m', ". Version " + CONFIG.VERSION + "                      .");
 console.log('\x1b[36m%s\x1b[0m', ". Port: " + CONFIG.EDITOR_PORT + "                         .");
 console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
@@ -90,7 +93,7 @@ io.sockets.on("connection", function(socket) {
     "ADD_NEW_GAME_OBJECT",
     function(name, x, y, w, h, PROGRAM_NAME, MODUL) {
       mkdirp(
-        `${CONFIG.PATH_OF_WWW}lib/visual_script/${name}`,  {recursive: true}).then((__) => {
+        `${CONFIG.PATH_OF_WWW}lib/visual_script/${name}`, {recursive: true}).then((__) => {
           console.log("ADD_NEW_GAME_OBJECT ACTION PATH =>  ", __);
           if(__) {
             var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
@@ -118,7 +121,7 @@ io.sockets.on("connection", function(socket) {
             );
           }
         }
-      );
+        );
     }
   );
 
