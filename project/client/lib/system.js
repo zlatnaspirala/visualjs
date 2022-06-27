@@ -17,6 +17,8 @@ import {
   SOUND
 } from "./init";
 
+import { RESOURCE } from "../res/animations/resource";
+
 import {
   round,
   randomIntFromTo,
@@ -66,6 +68,7 @@ var SYS = {
   RES: {
     SUM_OF_LOADED_IMAGES: 0,
     CREATE_IMG: CREATE_IMG,
+    RESOURCE: RESOURCE
   },
 
   // Math

@@ -2217,7 +2217,7 @@ var _system = _interopRequireDefault(require("./lib/system"));
 
 var _program_modul = require("./lib/program_modul");
 
-var _init = require("./lib/init");
+var _resource = require("./res/animations/resource");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2237,11 +2237,11 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // SCRIPT.LOAD('examples/templates/sound.js')
 
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
-_init.RESOURCE.character1 = {
+_resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
 HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
-HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, _init.RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, _resource.RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
 IamNewObject.DRAG = false;
 IamNewObject.POSITION.DIMENSION.HEIGHT = IamNewObject.POSITION.DIMENSION.WIDTH;
 
@@ -2250,7 +2250,7 @@ IamNewObject.TAP = function () {
   IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 };
 
-},{"./lib/audio/audio":6,"./lib/init":16,"./lib/program_modul":20,"./lib/proto_modify":21,"./lib/system":22,"./manifest/manifest":23}],6:[function(require,module,exports){
+},{"./lib/audio/audio":6,"./lib/program_modul":20,"./lib/proto_modify":21,"./lib/system":22,"./manifest/manifest":23,"./res/animations/resource":56}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2591,7 +2591,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.ADD = ADD;
+exports.ADD_ANIMATION = ADD_ANIMATION;
+exports.ADD_COLLISION = ADD_COLLISION;
+exports.ADD_PARTICLE = ADD_PARTICLE;
+exports.ADD_TEXTBOX = ADD_TEXTBOX;
+exports.ADD_WEBCAM = ADD_WEBCAM;
+exports.CREATE_PLAYER = CREATE_PLAYER;
+exports.DEATACH_PLAYER = DEATACH_PLAYER;
+exports.REMOVE_COLLISION = REMOVE_COLLISION;
+exports.REMOVE_PARTICLE = REMOVE_PARTICLE;
+exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
+exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
+exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+
+var _socket = require("../../node_modules/socket.io-client");
 
 var _system = _interopRequireDefault(require("../system"));
 
@@ -2599,20 +2613,17 @@ var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const {
-  io
-} = require("socket.io-client");
-
+// dev for io
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 console.log('\x1b[36m%s\x1b[0m', ".                                    .");
 console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
 console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
-console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software!      .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 var LOCAL_COMMUNICATOR = new Object();
 
 if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
-  LOCAL_COMMUNICATOR = io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
+  LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
   LOCAL_COMMUNICATOR.on("connect", function () {
     console.log("CONNECTED WITH LOCAL_COMMUNICATOR");
   });
@@ -2733,7 +2744,7 @@ function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
 
-},{"../../manifest/manifest":23,"../system":22,"socket.io-client":48}],11:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../../node_modules/socket.io-client":48,"../system":22}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4554,6 +4565,8 @@ var _init = require("../init");
 
 var _editor = require("../editor/editor");
 
+var _resource = require("../../res/animations/resource");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function EVENTS(canvas, ROOT_ENGINE) {
@@ -4963,8 +4976,8 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 else if (local_go.EDITOR.BUTTONS[q].IAM == "3") {
                   var resource_list = "";
 
-                  for (var key in _init.RESOURCE) {
-                    if (_init.RESOURCE.hasOwnProperty(key) && key != "SUM") {
+                  for (var key in _resource.RESOURCE) {
+                    if (_resource.RESOURCE.hasOwnProperty(key) && key != "SUM") {
                       resource_list += "  " + key + ", ";
                     }
                   }
@@ -4972,7 +4985,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                   var local_res = prompt("Full list of images source : \n " + resource_list + "   \n \n Enter name of animation resource object :", "demo1");
 
                   if (isNaN(parseFloat(local_res.charAt(0)))) {
-                    ADD_ANIMATION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                    (0, _editor.ADD_ANIMATION)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
                   } else {
                     alert("ERROR MSG: ADD_ANIMATION not success.");
                   }
@@ -5252,7 +5265,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":23,"../editor/editor":10,"../init":16,"../system":22}],16:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../../res/animations/resource":56,"../editor/editor":10,"../init":16,"../system":22}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5270,7 +5283,7 @@ exports.LS_GET = LS_GET;
 exports.LS_SET = LS_SET;
 exports.MONITOR = MONITOR;
 exports.OVERRIDE_TO_REF_CANVAS = OVERRIDE_TO_REF_CANVAS;
-exports.RESOURCE = exports.PAGE = void 0;
+exports.PAGE = void 0;
 exports.SAVE = SAVE;
 exports.SCRIPT = void 0;
 exports.SET_STREAM = SET_STREAM;
@@ -5475,8 +5488,7 @@ var SCRIPT = {
   SCRIPT_ID: 0,
   SINHRO_LOAD: {},
   LOAD: function addScript(src) {
-    var s = document.createElement("script");
-    s.type = "module";
+    var s = document.createElement("script"); // s.type = "module";
 
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
@@ -6234,11 +6246,6 @@ function SOUND(duration, fref) {
     //delete audio;
   }, duration);
 }
-
-var RESOURCE = new Object();
-exports.RESOURCE = RESOURCE;
-SCRIPT.LOAD("res/animations/resource.nidza");
-RESOURCE.SUM = 0;
 
 function drawRotatedImage(image, x, y, angle, w, h, surf) {
   surf.save();
@@ -7950,6 +7957,8 @@ exports.default = void 0;
 
 var _init = require("./init");
 
+var _resource = require("../res/animations/resource");
+
 var _math = require("./math");
 
 /**
@@ -7996,7 +8005,8 @@ var SYS = {
    */
   RES: {
     SUM_OF_LOADED_IMAGES: 0,
-    CREATE_IMG: _init.CREATE_IMG
+    CREATE_IMG: _init.CREATE_IMG,
+    RESOURCE: _resource.RESOURCE
   },
   // Math
 
@@ -8045,7 +8055,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"./init":16,"./math":17}],23:[function(require,module,exports){
+},{"../res/animations/resource":56,"./init":16,"./math":17}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12632,4 +12642,124 @@ function hasBinary(obj, toJSON) {
   return false;
 }
 
-},{}]},{},[5]);
+},{}],56:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.RESOURCE = void 0;
+
+var _system = _interopRequireDefault(require("../../lib/system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/** ojsa */
+var RESOURCE = {};
+exports.RESOURCE = RESOURCE;
+RESOURCE.SUM = 0;
+RESOURCE.character1 = {
+  "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
+};
+RESOURCE.character2 = {
+  "source": ['character2/alienBlue_climb1.png', 'character2/alienBlue_climb2.png', 'character2/alienBlue_duck.png', 'character2/alienBlue_front.png', 'character2/alienBlue_hit.png', 'character2/alienBlue_jump.png', 'character2/alienBlue_stand.png', 'character2/alienBlue_swim1.png', 'character2/alienBlue_swim2.png', 'character2/alienBlue_walk1.png', 'character2/alienBlue_walk2.png']
+};
+RESOURCE.character3 = {
+  "source": ['character3/alienGreen_climb1.png', 'character3/alienGreen_climb2.png', 'character3/alienGreen_duck.png', 'character3/alienGreen_front.png', 'character3/alienGreen_hit.png', 'character3/alienGreen_jump.png', 'character3/alienGreen_stand.png', 'character3/alienGreen_swim1.png', 'character3/alienGreen_swim2.png', 'character3/alienGreen_walk1.png', 'character3/alienGreen_walk2.png']
+};
+RESOURCE.character4 = {
+  "source": ['character4/alienYellow_climb1.png', 'character4/alienYellow_climb2.png', 'character4/alienYellow_duck.png', 'character4/alienYellow_front.png', 'character4/alienYellow_hit.png', 'character4/alienYellow_jump.png', 'character4/alienYellow_stand.png', 'character4/alienYellow_swim1.png', 'character4/alienYellow_swim2.png', 'character4/alienYellow_walk1.png', 'character4/alienYellow_walk2.png']
+};
+RESOURCE.characterPink = {
+  "source": ['characterPink/alienPink_climb1.png', 'characterPink/alienPink_climb2.png', 'characterPink/alienPink_duck.png', 'characterPink/alienPink_front.png', 'characterPink/alienPink_hit.png', 'characterPink/alienPink_jump.png', 'characterPink/alienPink_stand.png', 'characterPink/alienPink_swim1.png', 'characterPink/alienPink_swim2.png', 'characterPink/alienPink_walk1.png', 'characterPink/alienPink_walk2.png']
+};
+RESOURCE.circleSpiral1 = {
+  "source": ['circleSpiral1/spiral1.png']
+};
+RESOURCE.clouds = {
+  "source": ['clouds/cloud1.png', 'clouds/cloud2.png', 'clouds/cloud3.png', 'clouds/cloud4.png', 'clouds/cloud5.png', 'clouds/cloud6.png', 'clouds/cloud7.png', 'clouds/cloud8.png', 'clouds/cloud9.png']
+};
+RESOURCE.demo1 = {
+  "source": ['demo1/lightmap.gif']
+};
+RESOURCE.Dirt = {
+  "source": ['Dirt/dirt.png', 'Dirt/dirtCenter.png', 'Dirt/dirtCenter_rounded.png', 'Dirt/dirtCliffAlt_left.png', 'Dirt/dirtCliffAlt_right.png', 'Dirt/dirtCliff_left.png', 'Dirt/dirtCliff_right.png', 'Dirt/dirtCorner_left.png', 'Dirt/dirtCorner_right.png', 'Dirt/dirtHalf.png', 'Dirt/dirtHalf_left.png', 'Dirt/dirtHalf_mid.png', 'Dirt/dirtHalf_right.png', 'Dirt/dirtHill_left.png', 'Dirt/dirtHill_right.png', 'Dirt/dirtLeft.png', 'Dirt/dirtMid.png', 'Dirt/dirtRight.png']
+};
+RESOURCE.Enemies1 = {
+  "source": ['Enemies1/0.png', 'Enemies1/1.png', 'Enemies1/dead.png']
+};
+RESOURCE.Grass = {
+  "source": ['Grass/grass.png', 'Grass/grassCenter.png', 'Grass/grassCenter_round.png', 'Grass/grassCliffAlt_left.png', 'Grass/grassCliffAlt_right.png', 'Grass/grassCliff_left.png', 'Grass/grassCliff_right.png', 'Grass/grassCorner_left.png', 'Grass/grassCorner_right.png', 'Grass/grassHalf.png', 'Grass/grassHalf_left.png', 'Grass/grassHalf_mid.png', 'Grass/grassHalf_right.png', 'Grass/grassHill_left.png', 'Grass/grassHill_right.png', 'Grass/grassLeft.png', 'Grass/grassMid.png', 'Grass/grassRight.png']
+};
+RESOURCE.HUD = {
+  "source": ['HUD/hudCoin.png', 'HUD/hudHeart_empty.png', 'HUD/hudHeart_full.png', 'HUD/hudHeart_half.png', 'HUD/hudJewel_blue.png', 'HUD/hudJewel_blue_empty.png', 'HUD/hudJewel_green.png', 'HUD/hudJewel_green_empty.png', 'HUD/hudJewel_red.png', 'HUD/hudJewel_red_empty.png', 'HUD/hudJewel_yellow.png', 'HUD/hudJewel_yellow_empty.png', 'HUD/hudPlayer_beige.png', 'HUD/hudPlayer_blue.png', 'HUD/hudPlayer_green.png', 'HUD/hudPlayer_pink.png', 'HUD/hudPlayer_yellow.png', 'HUD/hudX.png']
+};
+RESOURCE.imagesFont1 = {
+  "source": ['imagesFont1/letter_A.png', 'imagesFont1/letter_B.png', 'imagesFont1/letter_C.png', 'imagesFont1/letter_D.png', 'imagesFont1/letter_E.png', 'imagesFont1/letter_F.png', 'imagesFont1/letter_G.png', 'imagesFont1/letter_H.png', 'imagesFont1/letter_I.png', 'imagesFont1/letter_J.png', 'imagesFont1/letter_K.png', 'imagesFont1/letter_L.png', 'imagesFont1/letter_M.png', 'imagesFont1/letter_N.png', 'imagesFont1/letter_O.png', 'imagesFont1/letter_P.png', 'imagesFont1/letter_Q.png', 'imagesFont1/letter_R.png', 'imagesFont1/letter_S.png', 'imagesFont1/letter_T.png', 'imagesFont1/letter_U.png', 'imagesFont1/letter_V.png', 'imagesFont1/letter_W.png', 'imagesFont1/letter_X.png', 'imagesFont1/letter_Y.png', 'imagesFont1/letter_Z.png', 'imagesFont1/letter_Z_1.png', 'imagesFont1/letter_Z_2.png', 'imagesFont1/letter_z_3.png', 'imagesFont1/letter_Z_4.png', 'imagesFont1/letter_z_5.png', 'imagesFont1/letter_z_6.png', 'imagesFont1/number0.png', 'imagesFont1/number1.png', 'imagesFont1/number2.png', 'imagesFont1/number3.png', 'imagesFont1/number4.png', 'imagesFont1/number5.png', 'imagesFont1/number6.png', 'imagesFont1/number7.png', 'imagesFont1/number8.png', 'imagesFont1/number9.png', 'imagesFont1/text_plus.png']
+};
+RESOURCE.Items = {
+  "source": ['Items/coinBronze.png', 'Items/coinGold.png', 'Items/coinSilver.png', 'Items/flagBlue1.png', 'Items/flagBlue2.png', 'Items/flagBlue_down.png', 'Items/flagGreen1.png', 'Items/flagGreen2.png', 'Items/flagGreen_down.png', 'Items/flagRed1.png', 'Items/flagRed2.png', 'Items/flagRed_down.png', 'Items/flagYellow1.png', 'Items/flagYellow2.png', 'Items/flagYellow_down.png', 'Items/gemBlue.png', 'Items/gemGreen.png', 'Items/gemRed.png', 'Items/gemYellow.png', 'Items/keyBlue.png', 'Items/keyGreen.png', 'Items/keyRed.png', 'Items/keyYellow.png', 'Items/star.png']
+};
+RESOURCE.keys = {
+  "source": ['keys/hudKey_blue.png', 'keys/hudKey_blue_empty.png', 'keys/hudKey_green.png', 'keys/hudKey_green_empty.png', 'keys/hudKey_red.png', 'keys/hudKey_red_empty.png', 'keys/hudKey_yellow.png', 'keys/hudKey_yellow_empty.png']
+};
+RESOURCE.loadingBlock = {
+  "source": ['loadingBlock/alu.jpg']
+};
+RESOURCE.majce = {
+  "source": ['majce/mask.png', 'majce/shirt.png']
+};
+RESOURCE.money_penny = {
+  "source": ['money_penny/gold_1.png', 'money_penny/gold_2.png', 'money_penny/gold_3.png', 'money_penny/gold_4.png']
+};
+RESOURCE.numbers1 = {
+  "source": ['numbers1/0.png', 'numbers1/1.png', 'numbers1/2.png', 'numbers1/3.png', 'numbers1/4.png', 'numbers1/5.png', 'numbers1/6.png', 'numbers1/7.png', 'numbers1/8.png', 'numbers1/9.png']
+};
+RESOURCE.numbers2 = {
+  "source": ['numbers2/text_0.png', 'numbers2/text_1.png', 'numbers2/text_2.png', 'numbers2/text_3.png', 'numbers2/text_4.png', 'numbers2/text_5.png', 'numbers2/text_6.png', 'numbers2/text_7.png', 'numbers2/text_8.png', 'numbers2/text_9.png']
+};
+RESOURCE.Particles = {
+  "source": ['Particles/brickBrown.png', 'Particles/brickGrey.png', 'Particles/fireball.png']
+};
+RESOURCE.Planet = {
+  "source": ['Planet/planet.png', 'Planet/planetCenter.png', 'Planet/planetCenter_rounded.png', 'Planet/planetCliffAlt_left.png', 'Planet/planetCliffAlt_right.png', 'Planet/planetCliff_left.png', 'Planet/planetCliff_right.png', 'Planet/planetCorner_left.png', 'Planet/planetCorner_right.png', 'Planet/planetHalf.png', 'Planet/planetHalf_left.png', 'Planet/planetHalf_mid.png', 'Planet/planetHalf_right.png', 'Planet/planetHill_left.png', 'Planet/planetHill_right.png', 'Planet/planetLeft.png', 'Planet/planetMid.png', 'Planet/planetRight.png']
+};
+RESOURCE.Sand = {
+  "source": ['Sand/sand.png', 'Sand/sandCenter.png', 'Sand/sandCenter_rounded.png', 'Sand/sandCliffAlt_left.png', 'Sand/sandCliffAlt_right.png', 'Sand/sandCliff_left.png', 'Sand/sandCliff_right.png', 'Sand/sandCorner_leftg.png', 'Sand/sandCorner_right.png', 'Sand/sandHalf.png', 'Sand/sandHalf_left.png', 'Sand/sandHalf_mid.png', 'Sand/sandHalf_right.png', 'Sand/sandHill_left.png', 'Sand/sandHill_right.png', 'Sand/sandLeft.png', 'Sand/sandMid.png', 'Sand/sandRight.png']
+};
+RESOURCE.slotBG = {
+  "source": ['slotBG/castle_grey.png', 'slotBG/z.png']
+};
+RESOURCE.slotimages1 = {
+  "source": ['slotimages1/elementGlass025.png', 'slotimages1/ram.png']
+};
+RESOURCE.Snow = {
+  "source": ['Snow/snow.png', 'Snow/snowCenter.png', 'Snow/snowCenter_rounded.png', 'Snow/snowCliffAlt_left.png', 'Snow/snowCliffAlt_right.png', 'Snow/snowCliff_left.png', 'Snow/snowCliff_right.png', 'Snow/snowCorner_left.png', 'Snow/snowCorner_right.png', 'Snow/snowHalf.png', 'Snow/snowHalf_left.png', 'Snow/snowHalf_mid.png', 'Snow/snowHalf_right.png', 'Snow/snowHill_left.png', 'Snow/snowHill_right.png', 'Snow/snowLeft.png', 'Snow/snowMid.png', 'Snow/snowRight.png']
+};
+RESOURCE.Stone = {
+  "source": ['Stone/stone.png', 'Stone/stoneCenter.png', 'Stone/stoneCenter_rounded.png', 'Stone/stoneCliffAlt_left.png', 'Stone/stoneCliffAlt_right.png', 'Stone/stoneCliff_left.png', 'Stone/stoneCliff_right.png', 'Stone/stoneCorner_left.png', 'Stone/stoneCorner_right.png', 'Stone/stoneHalf.png', 'Stone/stoneHalf_left.png', 'Stone/stoneHalf_mid.png', 'Stone/stoneHalf_right.png', 'Stone/stoneHill_left.png', 'Stone/stoneHill_right.png', 'Stone/stoneLeft.png', 'Stone/stoneMid.png', 'Stone/stoneRight.png']
+};
+RESOURCE.textures1 = {
+  "source": ['textures1/1.jpg', 'textures1/10.jpg', 'textures1/2.jpg', 'textures1/3.jpg', 'textures1/4.jpg', 'textures1/5.jpg', 'textures1/6.jpg', 'textures1/7.jpg', 'textures1/8.jpg', 'textures1/9.jpg']
+};
+RESOURCE.Tiles = {
+  "source": ['Tiles/bomb.png', 'Tiles/bombWhite.png', 'Tiles/boxCoin.png', 'Tiles/boxCoin_boxed.png', 'Tiles/boxCoin_disabled.png', 'Tiles/boxCoin_disabled_boxed.png', 'Tiles/boxCrate.png', 'Tiles/boxCrate_double.png', 'Tiles/boxCrate_single.png', 'Tiles/boxCrate_warning.png', 'Tiles/boxExplosive.png', 'Tiles/boxExplosive_disabled.png', 'Tiles/boxExplosive_used.png', 'Tiles/boxItem.png', 'Tiles/boxItem_boxed.png', 'Tiles/boxItem_disabled.png', 'Tiles/boxItem_disabled_boxed.png', 'Tiles/brickBrown.png', 'Tiles/brickGrey.png', 'Tiles/bridgeA.png', 'Tiles/bridgeB.png', 'Tiles/bush.png', 'Tiles/cactus.png', 'Tiles/chain.png', 'Tiles/doorClosed_mid.png', 'Tiles/doorClosed_top.png', 'Tiles/doorOpen_mid.png', 'Tiles/doorOpen_top.png', 'Tiles/fence.png', 'Tiles/fenceBroken.png', 'Tiles/grass.png', 'Tiles/ladderMid.png', 'Tiles/ladderTop.png', 'Tiles/lava.png', 'Tiles/lavaTop_high.png', 'Tiles/lavaTop_low.png', 'Tiles/leverLeft.png', 'Tiles/leverMid.png', 'Tiles/leverRight.png', 'Tiles/lockBlue.png', 'Tiles/lockGreen.png', 'Tiles/lockRed.png', 'Tiles/lockYellow.png', 'Tiles/mushroomBrown.png', 'Tiles/mushroomRed.png', 'Tiles/plantPurple.png', 'Tiles/rock.png', 'Tiles/sign.png', 'Tiles/signExit.png', 'Tiles/signLeft.png', 'Tiles/signRight.png', 'Tiles/snow.png', 'Tiles/spikes.png', 'Tiles/spring.png', 'Tiles/sprung.png', 'Tiles/switchBlue.png', 'Tiles/switchBlue_pressed.png', 'Tiles/switchGreen.png', 'Tiles/switchGreen_pressed.png', 'Tiles/switchRed.png', 'Tiles/switchRed_pressed.png', 'Tiles/switchYellow.png', 'Tiles/switchYellow_pressed.png', 'Tiles/torch1.png', 'Tiles/torch2.png', 'Tiles/torchOff.png', 'Tiles/water.png', 'Tiles/waterTop_high.png', 'Tiles/waterTop_low.png', 'Tiles/weight.png', 'Tiles/weightAttached.png', 'Tiles/window.png']
+};
+RESOURCE.tree1 = {
+  "source": ['tree1/tree20.png', 'tree1/tree21.png', 'tree1/tree22.png', 'tree1/tree23.png', 'tree1/tree24.png', 'tree1/tree25.png', 'tree1/tree26.png', 'tree1/tree27.png', 'tree1/tree28.png', 'tree1/tree35.png']
+};
+RESOURCE.trees1 = {
+  "source": ['trees1/tree20.png', 'trees1/tree21.png', 'trees1/tree22.png', 'trees1/tree23.png', 'trees1/tree24.png', 'trees1/tree25.png', 'trees1/tree26.png', 'trees1/tree27.png', 'trees1/tree28.png', 'trees1/tree35.png']
+};
+RESOURCE.wbutton = {
+  "source": ['wbutton/sign - Copy.png', 'wbutton/sign.png', 'wbutton/signExit.png', 'wbutton/signLeft.png', 'wbutton/signRight.png']
+};
+RESOURCE.Yellow = {
+  "source": ['Yellow/alienYellow_climb1.png', 'Yellow/alienYellow_climb2.png', 'Yellow/alienYellow_duck.png', 'Yellow/alienYellow_front.png', 'Yellow/alienYellow_hit.png', 'Yellow/alienYellow_jump.png', 'Yellow/alienYellow_stand.png', 'Yellow/alienYellow_swim1.png', 'Yellow/alienYellow_swim2.png', 'Yellow/alienYellow_walk1.png', 'Yellow/alienYellow_walk2.png']
+};
+window.RESOURCE = RESOURCE;
+/**SYS.DEBUG.LOG('Resources loaded. ' + 33);*/
+
+RESOURCE.SUM = 33;
+
+},{"../../lib/system":22}]},{},[5]);

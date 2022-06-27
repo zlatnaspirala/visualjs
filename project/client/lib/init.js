@@ -181,7 +181,7 @@ export function DETECTBROWSER() {
   SINHRO_LOAD: {},
   LOAD: function addScript(src) {
     var s = document.createElement("script");
-    s.type = "module";
+    // s.type = "module";
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
       console.log(
@@ -963,10 +963,6 @@ export function SOUND(duration, fref) {
     //delete audio;
   }, duration);
 }
-
-export var RESOURCE = new Object();
-SCRIPT.LOAD("res/animations/resource.nidza");
-RESOURCE.SUM = 0;
 
 export function drawRotatedImage(image, x, y, angle, w, h, surf) {
   surf.save();

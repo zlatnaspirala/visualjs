@@ -17,7 +17,11 @@ function getDirectories(srcpath) {
 }
 
 var config = require('./config.js');
-var FILE_STRING = "";
+var FILE_STRING = `/** ojsa */\n
+                    import SYS from '../../lib/system'
+                    export var RESOURCE = {}; \n
+                    RESOURCE.SUM = 0;   \n`;
+
 var SUM_OF_IMAGES = 0;
 
 function GET_FILES_NAME(path, name_of_animation_path, main_length) {
@@ -26,7 +30,7 @@ function GET_FILES_NAME(path, name_of_animation_path, main_length) {
       if(i == 0) {
         // import {RESOURCE} from './lib/init';
         // FILE_STRING += "import {RESOURCE} from './lib/init'; \n";
-        FILE_STRING += ' \n RESOURCE.' + name_of_animation_path + '={"source":[';
+        FILE_STRING += '  RESOURCE.' + name_of_animation_path + '={"source":[';
         SUM_OF_IMAGES++;
       }
       FILE_STRING = " " + FILE_STRING + "'" + name_of_animation_path + "/" + items[i] + "' , \n";
@@ -34,8 +38,8 @@ function GET_FILES_NAME(path, name_of_animation_path, main_length) {
         FILE_STRING += " ] }; \n";
       }
       if((i + 1) == items.length && main_length == true) {
-        FILE_STRING += " ] }; SYS.DEBUG.LOG('Resources loaded. ' + " + SUM_OF_IMAGES + "); \n  RESOURCE.SUM = " + SUM_OF_IMAGES + "; ";
-        CreateFile(config.PATH_OF_WWW + "res/animations/resource.nidza", FILE_STRING);
+        FILE_STRING += " ] }; window.RESOURCE = RESOURCE;  /**SYS.DEBUG.LOG('Resources loaded. ' + " + SUM_OF_IMAGES + ");*/ \n  RESOURCE.SUM = " + SUM_OF_IMAGES + "; ";
+        CreateFile(config.PATH_OF_WWW + "res/animations/resource.js", FILE_STRING);
       }
     }
   });

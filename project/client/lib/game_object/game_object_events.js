@@ -1,8 +1,9 @@
 
 import APPLICATION from '../../manifest/manifest';
 import SYS from '../system';
-import { CONVERTOR, RESOURCE } from '../init';
-import { ADD } from '../editor/editor';
+import { CONVERTOR } from '../init';
+import { ADD, ADD_ANIMATION } from '../editor/editor';
+import { RESOURCE } from '../../res/animations/resource';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
 

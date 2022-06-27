@@ -13,10 +13,12 @@ All new version begin with 3.0.0 for client, server or GUI part.
 ### Objective
 
  - Create UI from live page. I called `ON-PAGE-EDITOR`.
- - Create more visual-js controls
+     on right click in EDITOR = true status.
+ - Create more visual-js embedded controls.
+     Like Oscillator , make input/output pins ...
  - Improve of windows GUI Editor.
  - Improve visual-js in concept of npm usage.
-   Make it usable from npm i visual-js.
+   Make it easy usable from `npm i visual-js`.
 
 ### Installation and setup:
 
@@ -24,11 +26,16 @@ All new version begin with 3.0.0 for client, server or GUI part.
 npm i
 ```
 
+## Client
+### Config
+```js
+```
+
+
 ## Server/Editor
-### Version : 3.0.0
 
 ### Config
-```
+```js
 module.exports = {
    VERSION : "3.0.0",
    PATH_OF_NODE_APP : "D:/PATH_TO_SERVER_INSTANCE_FOLDER/server/" ,  // EDIT HERE
@@ -45,18 +52,19 @@ module.exports = {
 ##### How to start:
 
 You can use `ON-PAGE-EDITOR`, `visualjs-gui` or `visualjs` from npm service.
+Best way is to use it all.
 
 ```javascript
 node build_from_editor_to_visual_js_file.js
 ```
 
-*Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.*
+Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.
 3) In browser navigate to /client/ folder (index.html)
 
 Click right button and you will see content menu . First item is *Add New game object* .
 Than your game object will show at web page. Right click on rectangle area to see game object context menu.
 
-#### 	*local node.js application tools* (	*Use this in develop mode only*):
+#### 	local node.js application tools (Use this in develop mode only):
 
  - server/res.js  - create RESOURCE js object (ADD image or images for animation)
    Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
@@ -66,24 +74,31 @@ Run command:
 server/node res.js
 ```
 
-After finishing restart web page and enter in console: `RESOURCE.TEST_RES`
-RESOURCE have all images path data. When you create folder with image and build with *node res.js* we did not create images object.
-Images object will be created after you add animation to the game objects (This is good because memory safe).
+Note: Object `RESOURCE` is still in global space. Must be resolved [How to load script in run time from (module type) builded js bundle?].
+
+Object `RESOURCE` memory all image paths data. When you create folder and put image intro and build with `node res.js` we still did not create images object.
+Images object will be created after you add animation to the game objects (This is good because memory safe) Sometimes your app will no need some resources.
 
 
 ### ON/PAGE Editor
 
-- server/editor.js
+ To use `ON-PAGE-EDITOR` you will need to run:
+ ```js
+ server/editor.js
+```
+For interconnections used webSocket communication protocol.
 
-Create game objects direct in web browser view. Takes data from system folder lib/visual_scripts/ and generate code.
-After build you can found your code intro visual.js (node build_from_editor_to_visual_js_file.js)
+Create game objects direct in web browser view. Takes data from system folder lib/visual_scripts/ and generate code. After build you can found your code intro visual.js (`node build.js`)
 
-- server_instance/build_from_editor_to_visual_js_file.js (node.js app for local use)
-*ON-PAGE Editor*
+- server/build.js (node.js dev app for local use!)
+ There is not security validation on server part and this action use only
+ on local dev stage. After build you wil get all EDITOR created objects intro final runtime js pack.
 
-If you use editor.js to visual create game object method , you must  start
-node build_from_editor_to_visual_js_file.js on the end of work.
-This tool will create visual.js in folder starter/ with all your game object was created in editor style .
+### ON-PAGE Editor
+
+If you use editor.js to visual create game object method, you must start
+node build.js on the end of work.
+This tool will create visual.js in folder starter/ with all your game object was created in editor.
 
 
 ### VISUALJS-GUI.exe [Windows GUI open source]

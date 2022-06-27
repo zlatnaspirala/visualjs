@@ -4,7 +4,7 @@ import ActivateModifiers from './lib/proto_modify';
 import AUDIO_RES from './lib/audio/audio';
 import SYS from './lib/system';
 import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
-import {RESOURCE} from './lib/init';
+import {RESOURCE} from './res/animations/resource';
 
 ActivateModifiers();
 

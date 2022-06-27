@@ -1,6 +1,6 @@
 
-
-const { io } = require("socket.io-client");
+// dev for io
+import { io } from "../../node_modules/socket.io-client";
 import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
 
@@ -8,7 +8,7 @@ console.log('\x1b[36m%s\x1b[0m', "......................................");
 console.log('\x1b[36m%s\x1b[0m', ".                                    .");
 console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
 console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
-console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software!      .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 
 var LOCAL_COMMUNICATOR = new Object();
@@ -97,50 +97,50 @@ export function SET_NEW_START_UP_POS(name, PROGRAM_NAME, MODUL, newX, newY, w, h
   LOCAL_COMMUNICATOR.emit("SET_NEW_START_UP_POSITION", name, PROGRAM_NAME, MODUL, newX, newY, w, h);
 }
 
-function ADD_ANIMATION(name, PROGRAM_NAME, MODUL, RES) {
+export function ADD_ANIMATION(name, PROGRAM_NAME, MODUL, RES) {
   LOCAL_COMMUNICATOR.emit("ADD_ANIMATION", name, PROGRAM_NAME, MODUL, RES);
 }
 
-function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {
+export function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {
   LOCAL_COMMUNICATOR.emit("ADD_COLLISION", name, PROGRAM_NAME, MODUL, margin);
 }
 
-function REMOVE_COLLISION(name, PROGRAM_NAME, MODUL) {
+export function REMOVE_COLLISION(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_COLLISION", name, PROGRAM_NAME, MODUL);
 }
 
-function CREATE_PLAYER(name, PROGRAM_NAME, MODUL, type__, index) {
+export function CREATE_PLAYER(name, PROGRAM_NAME, MODUL, type__, index) {
   LOCAL_COMMUNICATOR.emit("ATACH_PLAYER", name, PROGRAM_NAME, MODUL, type__, index);
 }
 
-function DEATACH_PLAYER(name, PROGRAM_NAME, MODUL, type__) {
+export function DEATACH_PLAYER(name, PROGRAM_NAME, MODUL, type__) {
   LOCAL_COMMUNICATOR.emit("DEATACH_PLAYER", name, PROGRAM_NAME, MODUL, type__);
 }
 
-function ADD_PARTICLE(name, PROGRAM_NAME, MODUL, type__) {
+export function ADD_PARTICLE(name, PROGRAM_NAME, MODUL, type__) {
   LOCAL_COMMUNICATOR.emit("ADD_PARTICLE", name, PROGRAM_NAME, MODUL, type__);
 }
 
-function REMOVE_PARTICLE(name, PROGRAM_NAME, MODUL) {
+export function REMOVE_PARTICLE(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_PARTICLE", name, PROGRAM_NAME, MODUL);
 }
 
-function ADD_TEXTBOX(name, PROGRAM_NAME, MODUL, text, radius, color, textcolor) {
+export function ADD_TEXTBOX(name, PROGRAM_NAME, MODUL, text, radius, color, textcolor) {
   LOCAL_COMMUNICATOR.emit("ADD_TEXTBOX", name, PROGRAM_NAME, MODUL, text, radius, color, textcolor);
 }
 
-function REMOVE_TEXTBOX(name, PROGRAM_NAME, MODUL) {
+export function REMOVE_TEXTBOX(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_TEXTBOX", name, PROGRAM_NAME, MODUL);
 }
 
-function ADD_WEBCAM(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
+export function ADD_WEBCAM(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
   LOCAL_COMMUNICATOR.emit("ADD_WEBCAM", name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH);
 }
 
-function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
+export function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_WEBCAM", name, PROGRAM_NAME, MODUL);
 }
 
-function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
+export function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }

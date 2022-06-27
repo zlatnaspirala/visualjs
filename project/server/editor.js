@@ -6,10 +6,6 @@ var app = express();
 var http = require("http");
 var mkdirp = require("mkdirp");
 
-function read(f) {
-  return fs.readFileSync(f).toString();
-}
-
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath).filter(function(file) {
     return fs.statSync(path.join(srcpath, file)).isDirectory();
@@ -32,12 +28,13 @@ var io = require("socket.io")(server,
 
 server.listen(CONFIG.EDITOR_PORT);
 
-console.log("...........................................................");
-console.log(" Editor version : ", CONFIG.VERSION);
-console.log("...........................................................");
-console.log("...........................................................");
-console.log("Socket server listening on port : ", CONFIG.EDITOR_PORT);
-console.log("...........................................................");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
+console.log('\x1b[36m%s\x1b[0m', ".                                    .");
+console.log('\x1b[36m%s\x1b[0m', ". Visual-js On Page Editor           .");
+console.log('\x1b[36m%s\x1b[0m', ". Version " +  CONFIG.VERSION + "                      .");
+console.log('\x1b[36m%s\x1b[0m', ". Port: " + CONFIG.EDITOR_PORT + "                         .");
+console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
+console.log('\x1b[36m%s\x1b[0m', "......................................");
 
 function deleteFile(filePath) {
   fs.unlinkSync(filePath);
@@ -81,9 +78,7 @@ var usernames = {}; // not in use
 
 // Validate every signal in account view
 io.sockets.on("connection", function(socket) {
-  console.log("...........................................................");
-  console.log("EDITOR:CONECTED WITH CLIENT APPLICATION!");
-  console.log("...........................................................");
+  console.log('\x1b[32m%s\x1b[0m', "EDITOR: CONECTED WITH CLIENT APPLICATION! ");
   //SET_MAIN_INTERVAL
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME) {
     console.log("SET_MAIN_INTERVAL for  : ", PROGRAM_NAME);
@@ -191,12 +186,12 @@ io.sockets.on("connection", function(socket) {
 
     var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
     var local_pathC = "lib/visual_script/" + name + "/a3.js";
-    var ID = random(100000, 9999999);
+    var ID = random(1, 9999999);
     ID = ID.toString().replace(".", "11");
     ID = parseInt(ID);
-    createFile(
-      local_path + "/" + "a3.js",
-      "" +
+    //LOCPATH = `import SYS = require('../res/animations/resource');`;
+    var LOCPATH = ` `;
+    LOCPATH += "" +
       PROGRAM_NAME +
       ".ENGINE.MODULES.ACCESS_MODULE( '" +
       MODUL +
@@ -206,7 +201,10 @@ io.sockets.on("connection", function(socket) {
       RES +
       " , " +
       ID +
-      " , 'no' , 1,11,1,1,1);",
+      " , 'no' , 1,11,1,1,1);"
+    createFile(
+      local_path + "/" + "a3.js",
+      LOCPATH,
       local_pathC,
       "LOAD_NOW"
     );

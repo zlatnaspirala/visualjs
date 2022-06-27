@@ -1,6 +1,10 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                      import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
+                                                                                                                                                                                                                                                                                                                                                                                                                                      /** ojsa */
+
+                    import SYS from '../../lib/system'
+                    export var RESOURCE = {}; 
+
+                    RESOURCE.SUM = 0;   
+  RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
 'character1/alienBiege_climb2.png' , 
 'character1/alienBiege_duck.png' , 
 'character1/alienBiege_front.png' , 
@@ -12,9 +16,7 @@
 'character1/alienBiege_walk1.png' , 
 'character1/alienBiege_walk2.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.character2={"source":['character2/alienBlue_climb1.png' , 
+  RESOURCE.character2={"source":['character2/alienBlue_climb1.png' , 
 'character2/alienBlue_climb2.png' , 
 'character2/alienBlue_duck.png' , 
 'character2/alienBlue_front.png' , 
@@ -26,9 +28,7 @@ import {RESOURCE} from './lib/init';
 'character2/alienBlue_walk1.png' , 
 'character2/alienBlue_walk2.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.character3={"source":['character3/alienGreen_climb1.png' , 
+  RESOURCE.character3={"source":['character3/alienGreen_climb1.png' , 
 'character3/alienGreen_climb2.png' , 
 'character3/alienGreen_duck.png' , 
 'character3/alienGreen_front.png' , 
@@ -40,9 +40,7 @@ import {RESOURCE} from './lib/init';
 'character3/alienGreen_walk1.png' , 
 'character3/alienGreen_walk2.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.character4={"source":['character4/alienYellow_climb1.png' , 
+  RESOURCE.character4={"source":['character4/alienYellow_climb1.png' , 
 'character4/alienYellow_climb2.png' , 
 'character4/alienYellow_duck.png' , 
 'character4/alienYellow_front.png' , 
@@ -54,9 +52,7 @@ import {RESOURCE} from './lib/init';
 'character4/alienYellow_walk1.png' , 
 'character4/alienYellow_walk2.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.characterPink={"source":['characterPink/alienPink_climb1.png' , 
+  RESOURCE.characterPink={"source":['characterPink/alienPink_climb1.png' , 
 'characterPink/alienPink_climb2.png' , 
 'characterPink/alienPink_duck.png' , 
 'characterPink/alienPink_front.png' , 
@@ -68,13 +64,9 @@ import {RESOURCE} from './lib/init';
 'characterPink/alienPink_walk1.png' , 
 'characterPink/alienPink_walk2.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.circleSpiral1={"source":['circleSpiral1/spiral1.png' , 
+  RESOURCE.circleSpiral1={"source":['circleSpiral1/spiral1.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.clouds={"source":['clouds/cloud1.png' , 
+  RESOURCE.clouds={"source":['clouds/cloud1.png' , 
 'clouds/cloud2.png' , 
 'clouds/cloud3.png' , 
 'clouds/cloud4.png' , 
@@ -84,13 +76,9 @@ import {RESOURCE} from './lib/init';
 'clouds/cloud8.png' , 
 'clouds/cloud9.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.demo1={"source":['demo1/lightmap.gif' , 
+  RESOURCE.demo1={"source":['demo1/lightmap.gif' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Dirt={"source":['Dirt/dirt.png' , 
+  RESOURCE.Dirt={"source":['Dirt/dirt.png' , 
 'Dirt/dirtCenter.png' , 
 'Dirt/dirtCenter_rounded.png' , 
 'Dirt/dirtCliffAlt_left.png' , 
@@ -109,15 +97,11 @@ import {RESOURCE} from './lib/init';
 'Dirt/dirtMid.png' , 
 'Dirt/dirtRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Enemies1={"source":['Enemies1/0.png' , 
+  RESOURCE.Enemies1={"source":['Enemies1/0.png' , 
 'Enemies1/1.png' , 
 'Enemies1/dead.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Grass={"source":['Grass/grass.png' , 
+  RESOURCE.Grass={"source":['Grass/grass.png' , 
 'Grass/grassCenter.png' , 
 'Grass/grassCenter_round.png' , 
 'Grass/grassCliffAlt_left.png' , 
@@ -136,9 +120,7 @@ import {RESOURCE} from './lib/init';
 'Grass/grassMid.png' , 
 'Grass/grassRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.HUD={"source":['HUD/hudCoin.png' , 
+  RESOURCE.HUD={"source":['HUD/hudCoin.png' , 
 'HUD/hudHeart_empty.png' , 
 'HUD/hudHeart_full.png' , 
 'HUD/hudHeart_half.png' , 
@@ -157,9 +139,7 @@ import {RESOURCE} from './lib/init';
 'HUD/hudPlayer_yellow.png' , 
 'HUD/hudX.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.imagesFont1={"source":['imagesFont1/letter_A.png' , 
+  RESOURCE.imagesFont1={"source":['imagesFont1/letter_A.png' , 
 'imagesFont1/letter_B.png' , 
 'imagesFont1/letter_C.png' , 
 'imagesFont1/letter_D.png' , 
@@ -203,9 +183,7 @@ import {RESOURCE} from './lib/init';
 'imagesFont1/number9.png' , 
 'imagesFont1/text_plus.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Items={"source":['Items/coinBronze.png' , 
+  RESOURCE.Items={"source":['Items/coinBronze.png' , 
 'Items/coinGold.png' , 
 'Items/coinSilver.png' , 
 'Items/flagBlue1.png' , 
@@ -230,9 +208,7 @@ import {RESOURCE} from './lib/init';
 'Items/keyYellow.png' , 
 'Items/star.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.keys={"source":['keys/hudKey_blue.png' , 
+  RESOURCE.keys={"source":['keys/hudKey_blue.png' , 
 'keys/hudKey_blue_empty.png' , 
 'keys/hudKey_green.png' , 
 'keys/hudKey_green_empty.png' , 
@@ -241,25 +217,17 @@ import {RESOURCE} from './lib/init';
 'keys/hudKey_yellow.png' , 
 'keys/hudKey_yellow_empty.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.loadingBlock={"source":['loadingBlock/alu.jpg' , 
+  RESOURCE.loadingBlock={"source":['loadingBlock/alu.jpg' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.majce={"source":['majce/mask.png' , 
+  RESOURCE.majce={"source":['majce/mask.png' , 
 'majce/shirt.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.money_penny={"source":['money_penny/gold_1.png' , 
+  RESOURCE.money_penny={"source":['money_penny/gold_1.png' , 
 'money_penny/gold_2.png' , 
 'money_penny/gold_3.png' , 
 'money_penny/gold_4.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.numbers1={"source":['numbers1/0.png' , 
+  RESOURCE.numbers1={"source":['numbers1/0.png' , 
 'numbers1/1.png' , 
 'numbers1/2.png' , 
 'numbers1/3.png' , 
@@ -270,9 +238,7 @@ import {RESOURCE} from './lib/init';
 'numbers1/8.png' , 
 'numbers1/9.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.numbers2={"source":['numbers2/text_0.png' , 
+  RESOURCE.numbers2={"source":['numbers2/text_0.png' , 
 'numbers2/text_1.png' , 
 'numbers2/text_2.png' , 
 'numbers2/text_3.png' , 
@@ -283,15 +249,11 @@ import {RESOURCE} from './lib/init';
 'numbers2/text_8.png' , 
 'numbers2/text_9.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Particles={"source":['Particles/brickBrown.png' , 
+  RESOURCE.Particles={"source":['Particles/brickBrown.png' , 
 'Particles/brickGrey.png' , 
 'Particles/fireball.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Planet={"source":['Planet/planet.png' , 
+  RESOURCE.Planet={"source":['Planet/planet.png' , 
 'Planet/planetCenter.png' , 
 'Planet/planetCenter_rounded.png' , 
 'Planet/planetCliffAlt_left.png' , 
@@ -310,9 +272,7 @@ import {RESOURCE} from './lib/init';
 'Planet/planetMid.png' , 
 'Planet/planetRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Sand={"source":['Sand/sand.png' , 
+  RESOURCE.Sand={"source":['Sand/sand.png' , 
 'Sand/sandCenter.png' , 
 'Sand/sandCenter_rounded.png' , 
 'Sand/sandCliffAlt_left.png' , 
@@ -331,19 +291,13 @@ import {RESOURCE} from './lib/init';
 'Sand/sandMid.png' , 
 'Sand/sandRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.slotBG={"source":['slotBG/castle_grey.png' , 
+  RESOURCE.slotBG={"source":['slotBG/castle_grey.png' , 
 'slotBG/z.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.slotimages1={"source":['slotimages1/elementGlass025.png' , 
+  RESOURCE.slotimages1={"source":['slotimages1/elementGlass025.png' , 
 'slotimages1/ram.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Snow={"source":['Snow/snow.png' , 
+  RESOURCE.Snow={"source":['Snow/snow.png' , 
 'Snow/snowCenter.png' , 
 'Snow/snowCenter_rounded.png' , 
 'Snow/snowCliffAlt_left.png' , 
@@ -362,9 +316,7 @@ import {RESOURCE} from './lib/init';
 'Snow/snowMid.png' , 
 'Snow/snowRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Stone={"source":['Stone/stone.png' , 
+  RESOURCE.Stone={"source":['Stone/stone.png' , 
 'Stone/stoneCenter.png' , 
 'Stone/stoneCenter_rounded.png' , 
 'Stone/stoneCliffAlt_left.png' , 
@@ -383,9 +335,7 @@ import {RESOURCE} from './lib/init';
 'Stone/stoneMid.png' , 
 'Stone/stoneRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.textures1={"source":['textures1/1.jpg' , 
+  RESOURCE.textures1={"source":['textures1/1.jpg' , 
 'textures1/10.jpg' , 
 'textures1/2.jpg' , 
 'textures1/3.jpg' , 
@@ -396,9 +346,7 @@ import {RESOURCE} from './lib/init';
 'textures1/8.jpg' , 
 'textures1/9.jpg' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Tiles={"source":['Tiles/bomb.png' , 
+  RESOURCE.Tiles={"source":['Tiles/bomb.png' , 
 'Tiles/bombWhite.png' , 
 'Tiles/boxCoin.png' , 
 'Tiles/boxCoin_boxed.png' , 
@@ -471,9 +419,7 @@ import {RESOURCE} from './lib/init';
 'Tiles/weightAttached.png' , 
 'Tiles/window.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.tree1={"source":['tree1/tree20.png' , 
+  RESOURCE.tree1={"source":['tree1/tree20.png' , 
 'tree1/tree21.png' , 
 'tree1/tree22.png' , 
 'tree1/tree23.png' , 
@@ -484,9 +430,7 @@ import {RESOURCE} from './lib/init';
 'tree1/tree28.png' , 
 'tree1/tree35.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.trees1={"source":['trees1/tree20.png' , 
+  RESOURCE.trees1={"source":['trees1/tree20.png' , 
 'trees1/tree21.png' , 
 'trees1/tree22.png' , 
 'trees1/tree23.png' , 
@@ -497,17 +441,13 @@ import {RESOURCE} from './lib/init';
 'trees1/tree28.png' , 
 'trees1/tree35.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.wbutton={"source":['wbutton/sign - Copy.png' , 
+  RESOURCE.wbutton={"source":['wbutton/sign - Copy.png' , 
 'wbutton/sign.png' , 
 'wbutton/signExit.png' , 
 'wbutton/signLeft.png' , 
 'wbutton/signRight.png' , 
  ] }; 
-import {RESOURCE} from './lib/init'; 
- 
- RESOURCE.Yellow={"source":['Yellow/alienYellow_climb1.png' , 
+  RESOURCE.Yellow={"source":['Yellow/alienYellow_climb1.png' , 
 'Yellow/alienYellow_climb2.png' , 
 'Yellow/alienYellow_duck.png' , 
 'Yellow/alienYellow_front.png' , 
@@ -518,5 +458,5 @@ import {RESOURCE} from './lib/init';
 'Yellow/alienYellow_swim2.png' , 
 'Yellow/alienYellow_walk1.png' , 
 'Yellow/alienYellow_walk2.png' , 
- ] }; SYS.DEBUG.LOG('Resources loaded. ' + 33); 
+ ] }; window.RESOURCE = RESOURCE;  /**SYS.DEBUG.LOG('Resources loaded. ' + 33);*/ 
   RESOURCE.SUM = 33; 

@@ -84,7 +84,7 @@ HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT( "GO" , 45   , 45
 
 ```
 
-#### 2) Adding image or animation : #####
+#### 2) Adding image or animation:
 
 Images objects data are stored intro RESOURCE object
 
