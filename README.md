@@ -100,6 +100,8 @@ If you use editor.js to visual create game object method, you must start
 node build.js on the end of work.
 This tool will create visual.js in folder starter/ with all your game object was created in editor.
 
+New FEATURE => save stage
+
 
 ### VISUALJS-GUI.exe [Windows GUI open source]
 

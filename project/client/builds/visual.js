@@ -2217,7 +2217,7 @@ var _system = _interopRequireDefault(require("./lib/system"));
 
 var _program_modul = require("./lib/program_modul");
 
-var _resource = require("./res/animations/resource");
+var _resource = require("./res/animations/resource.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2235,10 +2235,10 @@ _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"
 
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
-
-_system.default.SCRIPT.LOAD('starter/visual.js');
-
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
+
+_system.default.SCRIPT.LOAD('starter/visual.js', true);
+
 _resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
@@ -2252,7 +2252,7 @@ IamNewObject.TAP = function () {
   IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 };
 
-},{"./lib/audio/audio":6,"./lib/program_modul":20,"./lib/proto_modify":21,"./lib/system":22,"./manifest/manifest":23,"./res/animations/resource":56}],6:[function(require,module,exports){
+},{"./lib/audio/audio":6,"./lib/program_modul":20,"./lib/proto_modify":21,"./lib/system":22,"./manifest/manifest":23,"./res/animations/resource.js":56}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2600,6 +2600,9 @@ exports.ADD_TEXTBOX = ADD_TEXTBOX;
 exports.ADD_WEBCAM = ADD_WEBCAM;
 exports.CREATE_PLAYER = CREATE_PLAYER;
 exports.DEATACH_PLAYER = DEATACH_PLAYER;
+exports.DESTROY = DESTROY;
+exports.DESTROY_DELAY = DESTROY_DELAY;
+exports.GET_ALL_GAME_OBJECTS = GET_ALL_GAME_OBJECTS;
 exports.REMOVE_COLLISION = REMOVE_COLLISION;
 exports.REMOVE_PARTICLE = REMOVE_PARTICLE;
 exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
@@ -2627,7 +2630,7 @@ var LOCAL_COMMUNICATOR = new Object();
 if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
   LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
   LOCAL_COMMUNICATOR.on("connect", function () {
-    console.log("CONNECTED WITH LOCAL_COMMUNICATOR");
+    console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
   });
   LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
     if (data != "") {
@@ -2661,14 +2664,14 @@ function CALL_OR_WAIT(data) {
     if (typeof data != "undefined") {
       if (data.indexOf("a2") == -1) {
         setTimeout(function () {
-          _system.default.SCRIPT.LOAD(data);
-
           _system.default.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
+
+          _system.default.SCRIPT.LOAD(data);
         }, 100);
       } else {
-        _system.default.SCRIPT.LOAD(data);
-
         _system.default.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
+
+        _system.default.SCRIPT.LOAD(data);
       }
     } else {
       setTimeout(function () {
@@ -3440,6 +3443,8 @@ var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 
 var _init = require("../init");
 
+var _editor = require("../editor/editor");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -3593,7 +3598,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     this.DESTROY_AFTER = sec * 20;
 
     if (_manifest.default.EDITOR == true) {
-      DESTROY_DELAY(name, sec, ROOT_GAME_OBJECT.PARENT, ROOT_GAME_OBJECT.PROGRAM_NAME);
+      (0, _editor.DESTROY_DELAY)(name, sec, ROOT_GAME_OBJECT.PARENT, ROOT_GAME_OBJECT.PROGRAM_NAME);
     }
   };
 
@@ -4551,7 +4556,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../../manifest/manifest":23,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../init":16,"../math":17,"../system":22}],15:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../editor/editor":10,"../init":16,"../math":17,"../system":22}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4567,7 +4572,7 @@ var _init = require("../init");
 
 var _editor = require("../editor/editor");
 
-var _resource = require("../../res/animations/resource");
+var _resource = require("../../res/animations/resource.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5267,7 +5272,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":23,"../../res/animations/resource":56,"../editor/editor":10,"../init":16,"../system":22}],16:[function(require,module,exports){
+},{"../../manifest/manifest":23,"../../res/animations/resource.js":56,"../editor/editor":10,"../init":16,"../system":22}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5489,8 +5494,9 @@ function DETECTBROWSER() {
 var SCRIPT = {
   SCRIPT_ID: 0,
   SINHRO_LOAD: {},
-  LOAD: function addScript(src) {
-    var s = document.createElement("script"); // s.type = "module";
+  LOAD: function addScript(src, isAsync) {
+    var s = document.createElement("script");
+    if (typeof isAsync !== 'undefined') s.type = "module";
 
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
@@ -7959,7 +7965,7 @@ exports.default = void 0;
 
 var _init = require("./init");
 
-var _resource = require("../res/animations/resource");
+var _resource = require("../res/animations/resource.js");
 
 var _math = require("./math");
 
@@ -8057,7 +8063,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"../res/animations/resource":56,"./init":16,"./math":17}],23:[function(require,module,exports){
+},{"../res/animations/resource.js":56,"./init":16,"./math":17}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

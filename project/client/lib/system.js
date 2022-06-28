@@ -17,7 +17,7 @@ import {
   SOUND
 } from "./init";
 
-import { RESOURCE } from "../res/animations/resource";
+import { RESOURCE } from "../res/animations/resource.js";
 
 import {
   round,

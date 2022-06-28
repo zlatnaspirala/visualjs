@@ -18,7 +18,7 @@ if(APPLICATION.EDITOR_AUTORUN == true || APPLICATION.EDITOR == true) {
   LOCAL_COMMUNICATOR = io.connect("http://" + APPLICATION.LOCAL_SERVER + ":1013");
 
   LOCAL_COMMUNICATOR.on("connect", function() {
-    console.log("CONNECTED WITH LOCAL_COMMUNICATOR");
+    console.log("%c" +  "Connected with Editor." , "background: #000; color: lime");
   });
 
   LOCAL_COMMUNICATOR.on("realtime", function(user, data) {
@@ -60,12 +60,16 @@ function CALL_OR_WAIT(data) {
     if(typeof data != "undefined") {
       if(data.indexOf("a2") == -1) {
         setTimeout(function() {
-          SYS.SCRIPT.LOAD(data);
+
           SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
+          SYS.SCRIPT.LOAD(data);
+          
         }, 100);
       } else {
-        SYS.SCRIPT.LOAD(data);
+
         SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
+        SYS.SCRIPT.LOAD(data);
+        
       }
     } else {
       setTimeout(function() {
@@ -81,15 +85,15 @@ export function ADD(name, x, y, w, h, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("ADD_NEW_GAME_OBJECT", name, x, y, w, h, PROGRAM_NAME, MODUL);
 }
 
-function GET_ALL_GAME_OBJECTS() {
+export function GET_ALL_GAME_OBJECTS() {
   LOCAL_COMMUNICATOR.emit("GET_ALL_GAME_OBJECTS");
 }
 
-function DESTROY(name) {
+export function DESTROY(name) {
   LOCAL_COMMUNICATOR.emit("DESTROY_GAME_OBJECT", name);
 }
 
-function DESTROY_DELAY(name, sec, MODUL, PROGRAM_NAME) {
+export function DESTROY_DELAY(name, sec, MODUL, PROGRAM_NAME) {
   LOCAL_COMMUNICATOR.emit("DESTROY_GAME_OBJECT_WITH_DELAY", name, sec, MODUL, PROGRAM_NAME);
 }
 

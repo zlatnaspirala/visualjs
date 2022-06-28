@@ -4,7 +4,7 @@ import ActivateModifiers from './lib/proto_modify';
 import AUDIO_RES from './lib/audio/audio';
 import SYS from './lib/system';
 import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
-import {RESOURCE} from './res/animations/resource';
+import {RESOURCE} from './res/animations/resource.js';
 
 ActivateModifiers();
 
@@ -22,9 +22,9 @@ SYS.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
-SYS.SCRIPT.LOAD('starter/visual.js')
-
 CREATE_SYSTEM_BUTTONS();
+
+SYS.SCRIPT.LOAD('starter/visual.js', true)
 
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png',

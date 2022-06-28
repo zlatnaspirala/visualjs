@@ -6,6 +6,7 @@ import { RECT } from '../draw_functions/rect';
 import { ANIMATION } from '../draw_functions/animation';
 import APPLICATION from '../../manifest/manifest';
 import { VIEW, CONVERTOR } from '../init';
+import { DESTROY_DELAY } from '../editor/editor';
 
 /**
   Copyright 2016, zlatnaspirala@gmail.com

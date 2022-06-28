@@ -179,9 +179,9 @@ export function DETECTBROWSER() {
  export var SCRIPT = {
   SCRIPT_ID: 0,
   SINHRO_LOAD: {},
-  LOAD: function addScript(src) {
+  LOAD: function addScript(src, isAsync) {
     var s = document.createElement("script");
-    // s.type = "module";
+    if (typeof isAsync !== 'undefined') s.type = "module";
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
       console.log(

@@ -3,7 +3,7 @@ import APPLICATION from '../../manifest/manifest';
 import SYS from '../system';
 import { CONVERTOR } from '../init';
 import { ADD, ADD_ANIMATION } from '../editor/editor';
-import { RESOURCE } from '../../res/animations/resource';
+import { RESOURCE } from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
 
