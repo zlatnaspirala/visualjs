@@ -184,12 +184,10 @@ export function DETECTBROWSER() {
     if (typeof isAsync !== 'undefined') s.type = "module";
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
-      console.log(
-        "Script id loaded : " +
+      console.log('\x1b[36m%s\x1b[0m',
+        "Script id loaded [" +
           SCRIPT.SCRIPT_ID +
-          " with src : " +
-          this.src +
-          ">>>>>>>>>" +
+          "] : " +
           this.src
       );
 
@@ -648,9 +646,9 @@ export function LOAD(name) {
     localStorage.getItem(name) == ""
   ) {
     SYS.DEBUG.WARNING(
-      "error in loading localstorage object! name of object : name" +
+      "localstorage object with name: " +
         name +
-        " , but value is " +
+        " , returns " +
         localStorage.getItem(name)
     );
     return false;

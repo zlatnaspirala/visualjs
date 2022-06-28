@@ -5500,7 +5500,7 @@ var SCRIPT = {
 
     s.onload = function () {
       SCRIPT.SCRIPT_ID++;
-      console.log("Script id loaded : " + SCRIPT.SCRIPT_ID + " with src : " + this.src + ">>>>>>>>>" + this.src);
+      console.log('\x1b[36m%s\x1b[0m', "Script id loaded [" + SCRIPT.SCRIPT_ID + "] : " + this.src);
       var filename = this.src.substring(this.src.lastIndexOf("/") + 1, this.src.lastIndexOf(".")); //console.log(filename)
 
       filename = filename.replace(".", "_");
@@ -5943,7 +5943,7 @@ function SAVE(name, obj) {
 
 function LOAD(name) {
   if (localStorage.getItem(name) == "undefined" || localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
-    _system.default.DEBUG.WARNING("error in loading localstorage object! name of object : name" + name + " , but value is " + localStorage.getItem(name));
+    _system.default.DEBUG.WARNING("localstorage object with name: " + name + " , returns " + localStorage.getItem(name));
 
     return false;
   } else {
