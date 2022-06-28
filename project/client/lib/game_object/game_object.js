@@ -7,6 +7,7 @@ import { ANIMATION } from '../draw_functions/animation';
 import APPLICATION from '../../manifest/manifest';
 import { VIEW, CONVERTOR } from '../init';
 import { DESTROY_DELAY } from '../editor/editor';
+import {PARTICLE_FONTAN} from '../particule/particule';
 
 /**
   Copyright 2016, zlatnaspirala@gmail.com
