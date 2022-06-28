@@ -3481,13 +3481,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 /**
-Constructor
-GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
-Type : Class
+  Constructor
+  GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
+  Type : Class
 
-Program create instance of this class  from  class modul :
-HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
-
+  Program create instance of this class  from  class modul :
+  HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
  */
 function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   var ROOT_GAME_OBJECT = this; //alias global access

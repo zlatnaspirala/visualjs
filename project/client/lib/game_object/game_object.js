@@ -1,12 +1,12 @@
 
-import { POSITION, DIMENSION } from '../math';
+import {POSITION, DIMENSION} from '../math';
 import SYS from '../system';
-import { RIGHT_MENU_BUTTON } from '../draw_functions/systems';
-import { RECT } from '../draw_functions/rect';
-import { ANIMATION } from '../draw_functions/animation';
+import {RIGHT_MENU_BUTTON} from '../draw_functions/systems';
+import {RECT} from '../draw_functions/rect';
+import {ANIMATION} from '../draw_functions/animation';
 import APPLICATION from '../../manifest/manifest';
-import { VIEW, CONVERTOR } from '../init';
-import { DESTROY_DELAY } from '../editor/editor';
+import {VIEW, CONVERTOR} from '../init';
+import {DESTROY_DELAY} from '../editor/editor';
 import {PARTICLE_FONTAN} from '../particule/particule';
 
 /**
@@ -41,13 +41,12 @@ import {PARTICLE_FONTAN} from '../particule/particule';
  */
 
 /**
-Constructor
-GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
-Type : Class
+  Constructor
+  GAME_OBJECT ( name  , modul , x , y , w , h , speed , PROGRAM_NAME)
+  Type : Class
 
-Program create instance of this class  from  class modul :
-HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
-
+  Program create instance of this class  from  class modul :
+  HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("STOSKE" , 22, 42, 22 , 22 , "DIAMETRIC");
  */
 
 export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
