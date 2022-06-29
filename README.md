@@ -37,13 +37,15 @@ npm i
 ### Config
 ```js
 module.exports = {
-   VERSION : "3.0.0",
-   PATH_OF_NODE_APP : "D:/PATH_TO_SERVER_INSTANCE_FOLDER/server/" ,  // EDIT HERE
-   PATH_OF_WWW : "D:/xamp/htdocs/project_instance/", // PATH_TO_WWW  EDIT HERE
-   EDITOR_PORT : "1013",
-   REG_PATH : "users/",
-   ACCOUNT_PORT  : 888 ,
-   DESTROY_SESSION_AFTER_X_mSECUNDS : 20000,
+  VERSION : "3.0.0",
+  PATH_OF_NODE_APP : "D:/PATH_TO_SERVER_INSTANCE_FOLDER/server/", // EDIT HERE
+  PATH_OF_WWW : "D:/xamp/htdocs/project_instance/", // PATH_TO_WWW  EDIT HERE
+  EDITOR_PORT : "1013",
+  DESTROY_SESSION_AFTER_X_mSECUNDS : 20000,
+  SELF_HOST: {
+    protocol: 'http',
+    port: 80
+  }
 };
 ```
 
