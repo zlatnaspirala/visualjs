@@ -2237,6 +2237,8 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
 
+_system.default.SCRIPT.LOAD("lib/events/onresize.js");
+
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
 _resource.RESOURCE.character1 = {
@@ -3031,67 +3033,10 @@ function KEYBOARD(c) {
 
     }
 
-    _system.default.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode); //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
-
+    _system.default.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode);
 
     if (typeof PLAYER != "undefined") {
-      if (PLAYER.TYPE == "PLATFORMER") {
-        PLAYER.FREEZ = false;
-
-        switch (e.keyCode) {
-          case 121:
-            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
-
-          case 69:
-          case 37:
-            // left
-            PLAYER.CONTROL.LEFT = true;
-            PLAYER.X = PLAYER.SPEED;
-
-            if (PLAYER.CONTROL.JUMP === false) {
-              setTimeout(function () {
-                PLAYER.POSITION.TRANSLATE_BY_Y(100);
-              }, 50);
-            }
-
-            break;
-
-          case 38:
-            // up
-            if (PLAYER.CONTROL.JUMP === false) {
-              PLAYER.BREAK_AT_MOMENT_STATUS = false;
-              PLAYER.CONTROL.JUMP = true;
-              PLAYER.Y = PLAYER.SPEED * 10;
-              console.log(">>>>>>>" + PLAYER.Y);
-              setTimeout(function () {
-                while (PLAYER.Y > 0) {
-                  PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
-                }
-
-                PLAYER.Y = -1;
-              }, 100);
-            }
-
-            break;
-
-          case 39:
-            // right
-            PLAYER.CONTROL.RIGHT = true;
-            PLAYER.X = -PLAYER.SPEED;
-
-            if (PLAYER.CONTROL.JUMP === false) {
-              setTimeout(function () {
-                PLAYER.POSITION.TRANSLATE_BY_Y(100);
-              }, 50);
-            }
-
-            break;
-
-          case 40:
-            // down
-            break;
-        }
-      } else if (PLAYER.TYPE == "NORMAL") {
+      if (PLAYER.TYPE == "NORMAL") {
         switch (e.keyCode) {
           case 121:
             _system.default.DEBUG.LOG("F10 command -->> Show command line ");
@@ -3292,49 +3237,7 @@ function KEYBOARD(c) {
     }
 
     if (typeof PLAYER != "undefined") {
-      if (PLAYER.TYPE == "PLATFORMER") {
-        switch (e.keyCode) {
-          case 121:
-            _system.default.DEBUG.LOG("F10 command -->> Show command line ");
-
-          case 69:
-          case 37:
-            // left
-            PLAYER.CONTROL.LEFT = false;
-
-            while (PLAYER.X > 0) {
-              PLAYER.X = PLAYER.X - PLAYER.SPEED / 5;
-            }
-
-            PLAYER.X = 0;
-            break;
-
-          case 38:
-            // up
-            while (PLAYER.Y > 0) {
-              PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
-            } //PLAYER.Y = -1;
-            //PLAYER.POSITION.TRANSLATE_BY_Y(100)
-
-
-            break;
-
-          case 39:
-            // right
-            PLAYER.CONTROL.LEFT = false;
-
-            while (PLAYER.X < 0) {
-              PLAYER.X = PLAYER.X + PLAYER.SPEED / 5;
-            }
-
-            PLAYER.X = 0;
-            break;
-
-          case 40:
-            // down
-            break;
-        }
-      } else if (PLAYER.TYPE == "NORMAL") {
+      if (PLAYER.TYPE == "NORMAL") {
         switch (e.keyCode) {
           case 121:
             _system.default.DEBUG.LOG("F10 command -->> Show command line ");
@@ -3564,13 +3467,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     };
     window["PLAYER"] = ROOT_GAME_OBJECT.PLAYER;
     this.POSITION.PLAYER = ROOT_GAME_OBJECT.PLAYER;
-
-    if (type_ == "PLATFORMER") {
-      window[PROGRAM_NAME].ENGINE.GAME_TYPE = "PLATFORMER"; //ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
-      //ROOT_GAME_OBJECT.POSITION.SET_POSITION(45,45, "DIAMETRIC");
-    } else {
-      window[PROGRAM_NAME].ENGINE.GAME_TYPE = "NORMAL_CONTROL"; //ROOT_GAME_OBJECT.POSITION.TYPE = "PLAYER";
-    }
+    window[PROGRAM_NAME].ENGINE.GAME_TYPE = "NORMAL_CONTROL";
   };
 
   this.TEXTBOX = null;
@@ -5029,13 +4926,13 @@ function EVENTS(canvas, ROOT_ENGINE) {
                     var local_res = prompt("Enter player type : ", "NORMAL");
 
                     if (isNaN(parseFloat(local_res.charAt(0)))) {
-                      CREATE_PLAYER(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, q);
+                      (0, _editor.CREATE_PLAYER)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, q);
                       local_go.EDITOR.BUTTONS[q].text = "Deatach player";
 
                       _system.default.DEBUG.LOG("atach player");
                     }
                   } else if (typeof local_go.PLAYER != "undefined") {
-                    DEATACH_PLAYER(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    (0, _editor.DEATACH_PLAYER)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                     local_go.PLAYER = undefined;
                     PLAYER = undefined; //delete (local_go.PLAYER);
                     //delete (PLAYER);
@@ -6562,8 +6459,7 @@ function OSCILLATOR(min, max, step) {
     };
   } else {
     _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
-  } //AUTO UPDATE HERE
-
+  }
 } // GET INCREMENT VALUES IN REAL TIME
 
 
@@ -6605,8 +6501,7 @@ function INCREMENTATOR(min, max, step, stop_after) {
   } else {
     _system.default.DEBUG.WARNING("SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " + typeof min + " and max >>" + typeof max + "  and step >>" + typeof step + " << must be string or number.");
   }
-} // MAKE MOVE WITH NEW TARGET COORDINATE
-
+}
 
 function DIMENSION(w, h, type_) {
   var ROOT_DIMENSION = this;
@@ -6715,18 +6610,6 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 
   this.UPDATE = function () {
-    if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE == "PLATFORMER" && typeof ROOT.PLAYER === "undefined" && typeof window["PLAYER"] !== "undefined" && PLAYER.FREEZ == false) {
-      this.thrust = 2;
-      this.IN_MOVE = true;
-      this.targetX = this.targetX + PLAYER.X;
-      this.targetY = this.targetY + PLAYER.Y;
-    } else {
-      try {//	 this.IN_MOVE = false;
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
     var tx = this.targetX - this.x,
         ty = this.targetY - this.y,
         dist = Math.sqrt(tx * tx + ty * ty),
@@ -6754,7 +6637,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
         }
 
         try {
-          if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" && _manifest.default.EDITOR == true) {
+          if (_manifest.default.EDITOR == true) {
             (0, _editor.SET_NEW_START_UP_POS)(this.parentGameObject, this.PROGRAM_NAME, this.parentModul, this.targetX, this.targetY, this.DIMENSION.W, this.DIMENSION.H);
           }
         } catch (e) {
@@ -6773,14 +6656,10 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 
   this.Y = function () {
-    if (window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE == "PLATFORMER" && typeof ROOT.PLAYER === "undefined") {
+    if (ROOT.TYPE == "NORMAL") {
       return window.innerHeight / 100 * this.y;
-    } else {
-      if (ROOT.TYPE == "NORMAL") {
-        return window.innerHeight / 100 * this.y;
-      } else if (ROOT.TYPE == "REF_CANVAS") {
-        return _system.default.DOM.E(ROOT.CANVAS_).height / 100 * this.y;
-      }
+    } else if (ROOT.TYPE == "REF_CANVAS") {
+      return _system.default.DOM.E(ROOT.CANVAS_).height / 100 * this.y;
     }
   };
 }
@@ -6871,122 +6750,7 @@ function MODUL(name, PROGRAM_NAME) {
 
       if (ROOT_MODUL.GAME_OBJECTS[x].COLLISION != null) {
         for (var z = 0; z < ROOT_MODUL.GAME_OBJECTS.length; z++) {
-          // FOR PLAYER EXIST REGIME
-          if (ROOT_MODUL.GAME_OBJECTS[z].COLLISION != null && ROOT_MODUL.GAME_OBJECTS[z].NAME != ROOT_MODUL.GAME_OBJECTS[x].NAME && typeof PLAYER != "undefined" && window[ROOT_MODUL.PARENT].ENGINE.GAME_TYPE == "PLATFORMER") {
-            if (typeof PLAYER != "undefined") {
-              //&&   ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER"
-              //Y by H
-              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
-                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() - 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
-                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
-                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE right1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                  } else {
-                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER" && ROOT_MODUL.GAME_OBJECTS[x].POSITION.STATIC == false) {
-                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE rigth2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    }
-                  }
-
-                  ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() + 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
-                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
-                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE left1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.x = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[x].POSITION.x + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                  } else {
-                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER" && ROOT_MODUL.GAME_OBJECTS[x].POSITION.STATIC == false) {
-                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE left2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.x = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetX = ROOT_MODUL.GAME_OBJECTS[z].POSITION.x - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.W * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    }
-                  }
-                }
-
-                ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-              } //
-
-
-              if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.WIDTH() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
-                if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
-                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
-                    //$$$$$$$$$$$$$$
-                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
-                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE TOP1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                      ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin; //ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y - ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      //ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y -  ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-
-                      PLAYER.FREEZ = true;
-                      PLAYER.Y = 0;
-                      PLAYER.CONTROL.JUMP = false;
-
-                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
-                        ROOT_MODUL.BREAK_AT_MOMENT = true;
-                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
-                      }
-
-                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                      break;
-                    } //$$$$$$$$$$$$$$
-
-
-                    ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                  } else {
-                    //$$$$$$$$$$$$$$
-                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
-                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE TOP2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      PLAYER.FREEZ = true;
-                      PLAYER.Y = 0;
-                      PLAYER.CONTROL.JUMP = false;
-
-                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
-                        ROOT_MODUL.BREAK_AT_MOMENT = true;
-                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
-                      }
-
-                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                      break;
-                    }
-                  }
-                } else if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT() - ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {
-                  if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.STATIC == false && ROOT_MODUL.GAME_OBJECTS[z].POSITION.IN_MOVE == true) {
-                    SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE botton1 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.y = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    ROOT_MODUL.GAME_OBJECTS[z].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[x].POSITION.y + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin; //ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                    //ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                  } else {
-                    //$$$$$$$$$$$$$$
-                    if (typeof ROOT_MODUL.GAME_OBJECTS[z].PLAYER != "undefined" && ROOT_MODUL.GAME_OBJECTS[z].PLAYER.TYPE == "PLATFORMER") {
-                      SYS.DEBUG.LOG(ROOT_MODUL.GAME_OBJECTS[z].NAME + "COLLIDE botton2 WITH:" + ROOT_MODUL.GAME_OBJECTS[x].NAME);
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.y = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      ROOT_MODUL.GAME_OBJECTS[x].POSITION.targetY = ROOT_MODUL.GAME_OBJECTS[z].POSITION.y - ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.H * ROOT_MODUL.GAME_OBJECTS[z].COLLISION.margin;
-                      PLAYER.FREEZ = true;
-                      PLAYER.Y = 0;
-                      PLAYER.CONTROL.JUMP = false;
-
-                      if (PLAYER.BREAK_AT_MOMENT_STATUS == false) {
-                        ROOT_MODUL.BREAK_AT_MOMENT = true;
-                        PLAYER.BREAK_AT_MOMENT_STATUS = true;
-                      }
-
-                      ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                      break;
-                    } //$$$$$$$$$$$$$$
-
-                  }
-
-                  ROOT_MODUL.GAME_OBJECTS[x].ON_COLLISION(ROOT_MODUL.GAME_OBJECTS[z].NAME);
-                }
-              } ////////
-
-            }
-          } else if (ROOT_MODUL.GAME_OBJECTS[z].COLLISION != null && ROOT_MODUL.GAME_OBJECTS[z].NAME != ROOT_MODUL.GAME_OBJECTS[x].NAME) {
-            //&& typeof PLAYER == 'undefined'
+          if (ROOT_MODUL.GAME_OBJECTS[z].COLLISION != null && ROOT_MODUL.GAME_OBJECTS[z].NAME != ROOT_MODUL.GAME_OBJECTS[x].NAME) {
             //Y by H
             if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.HEIGHT() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() && ROOT_MODUL.GAME_OBJECTS[z].POSITION.Y() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.Y() + ROOT_MODUL.GAME_OBJECTS[x].DIMENSION.HEIGHT()) {
               if (ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() > ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() - 2 && ROOT_MODUL.GAME_OBJECTS[z].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[z].DIMENSION.WIDTH() < ROOT_MODUL.GAME_OBJECTS[x].POSITION.X() + ROOT_MODUL.GAME_OBJECTS[x].POSITION.thrust * 12) {

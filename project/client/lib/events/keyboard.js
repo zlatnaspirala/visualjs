@@ -29,70 +29,9 @@ export function KEYBOARD(c) {
     }
 
     SYS.DEBUG.LOG(" GAME RUNNING , key pressed: " + e.keyCode);
-    //SYS.SOUND.GEN( 50 , e.keyCode * 20 );
 
     if(typeof PLAYER != "undefined") {
-
-      if(PLAYER.TYPE == "PLATFORMER") {
-
-        PLAYER.FREEZ = false;
-
-        switch(e.keyCode) {
-          case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
-
-          case 69:
-
-          case 37: // left
-            PLAYER.CONTROL.LEFT = true;
-            PLAYER.X = PLAYER.SPEED;
-            if(PLAYER.CONTROL.JUMP === false) {
-              setTimeout(function() {
-                PLAYER.POSITION.TRANSLATE_BY_Y(100);
-              }, 50);
-            }
-
-            break;
-          case 38: // up
-
-            if(PLAYER.CONTROL.JUMP === false) {
-
-              PLAYER.BREAK_AT_MOMENT_STATUS = false;
-
-              PLAYER.CONTROL.JUMP = true;
-
-              PLAYER.Y = PLAYER.SPEED * 10;
-              console.log(">>>>>>>" + PLAYER.Y);
-
-              setTimeout(function() {
-                while(PLAYER.Y > 0) {
-
-                  PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
-
-                }
-                PLAYER.Y = -1;
-              }, 100);
-
-            }
-
-            break;
-          case 39: // right
-
-            PLAYER.CONTROL.RIGHT = true;
-            PLAYER.X = -PLAYER.SPEED;
-            if(PLAYER.CONTROL.JUMP === false) {
-              setTimeout(function() {
-                PLAYER.POSITION.TRANSLATE_BY_Y(100);
-              }, 50);
-            }
-
-            break;
-          case 40: // down
-
-            break;
-        }
-
-      } else if(PLAYER.TYPE == "NORMAL") {
+      if(PLAYER.TYPE == "NORMAL") {
 
         switch(e.keyCode) {
           case 121:
@@ -312,51 +251,8 @@ export function KEYBOARD(c) {
     }
 
     if(typeof PLAYER != "undefined") {
-      if(PLAYER.TYPE == "PLATFORMER") {
-        switch(e.keyCode) {
-          case 121:
-            SYS.DEBUG.LOG("F10 command -->> Show command line ");
-          case 69:
 
-          case 37: // left
-
-            PLAYER.CONTROL.LEFT = false;
-            while(PLAYER.X > 0) {
-              PLAYER.X = PLAYER.X - PLAYER.SPEED / 5;
-            }
-
-            PLAYER.X = 0;
-
-            break;
-          case 38: // up
-            while(PLAYER.Y > 0) {
-
-              PLAYER.Y = PLAYER.Y - PLAYER.SPEED / 5;
-
-            }
-
-            //PLAYER.Y = -1;
-
-            //PLAYER.POSITION.TRANSLATE_BY_Y(100)
-
-            break;
-          case 39: // right
-            PLAYER.CONTROL.LEFT = false;
-            while(PLAYER.X < 0) {
-
-              PLAYER.X = PLAYER.X + PLAYER.SPEED / 5;
-
-            }
-
-            PLAYER.X = 0;
-
-            break;
-          case 40: // down
-
-            break;
-        }
-
-      } else if(PLAYER.TYPE == "NORMAL") {
+      if(PLAYER.TYPE == "NORMAL") {
 
         switch(e.keyCode) {
           case 121:

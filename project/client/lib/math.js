@@ -1,6 +1,6 @@
 import SYS from './system';
 import APPLICATION from '../manifest/manifest';
-import { SET_NEW_START_UP_POS } from './editor/editor';
+import {SET_NEW_START_UP_POS} from './editor/editor';
 
 /**
  * Simple number round.
@@ -10,17 +10,17 @@ import { SET_NEW_START_UP_POS } from './editor/editor';
  * @return {number} Number
  */
 export function round(value, decimals) {
-  if (typeof value === "object" || typeof decimals === "object") {
+  if(typeof value === "object" || typeof decimals === "object") {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : Replace object with string ,  this >> " +
-        typeof value +
-        " << must be string or number."
+      typeof value +
+      " << must be string or number."
     );
-  } else if (typeof value === "undefined" || typeof decimals === "undefined") {
+  } else if(typeof value === "undefined" || typeof decimals === "undefined") {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.NUMBER_ROUND'  Desciption : arguments (value, decimals) cant be undefined ,  this >> " +
-        typeof value +
-        " << must be string or number."
+      typeof value +
+      " << must be string or number."
     );
   } else {
     return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
@@ -28,21 +28,21 @@ export function round(value, decimals) {
 }
 
 export function randomIntFromTo(min, max) {
-  if (typeof min === "object" || typeof max === "object") {
+  if(typeof min === "object" || typeof max === "object") {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : Replace object with string ,  this >> " +
-        typeof min +
-        " and " +
-        typeof min +
-        " << must be string or number."
+      typeof min +
+      " and " +
+      typeof min +
+      " << must be string or number."
     );
-  } else if (typeof min === "undefined" || typeof max === "undefined") {
+  } else if(typeof min === "undefined" || typeof max === "undefined") {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.RANDOM_INT_FROM_TO'  Desciption : arguments (min, max) cant be undefined ,  this >> " +
-        typeof min +
-        " and " +
-        typeof min +
-        "  << must be string or number."
+      typeof min +
+      " and " +
+      typeof min +
+      "  << must be string or number."
     );
   } else {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -51,34 +51,34 @@ export function randomIntFromTo(min, max) {
 
 // Convert toDegrees/toRadians
 export function toDegrees(angle) {
-  if (typeof angle === "string" || typeof angle === "number") {
+  if(typeof angle === "string" || typeof angle === "number") {
     return angle * (180 / Math.PI);
   } else {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " +
-        typeof angle +
-        "  << must be string or number."
+      typeof angle +
+      "  << must be string or number."
     );
   }
 }
 
 export function toRadians(angle) {
-  if (typeof angle === "string" || typeof angle === "number") {
+  if(typeof angle === "string" || typeof angle === "number") {
     return angle * (Math.PI / 180);
   } else {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.TO_RADIANS'  Desciption : Input arr ,  angle >> " +
-        typeof angle +
-        "  << must be string or number."
+      typeof angle +
+      "  << must be string or number."
     );
   }
 }
 
-export var isOdd = function (x) {
+export var isOdd = function(x) {
   return x & 1;
 };
 
-export var isEven = function (x) {
+export var isEven = function(x) {
   return !(x & 1);
 };
 
@@ -102,7 +102,7 @@ export function ORBIT(cx, cy, angle, p) {
 
 //GET PULSE VALUES IN REAL TIME
 export function OSCILLATOR(min, max, step) {
-  if (
+  if(
     (typeof min === "string" || typeof min === "number") &&
     (typeof max === "string" || typeof max === "number") &&
     (typeof step === "string" || typeof step === "number")
@@ -113,21 +113,21 @@ export function OSCILLATOR(min, max, step) {
     this.step = parseFloat(step);
     this.value_ = parseFloat(min);
     this.status = 0;
-    this.on_maximum_value = function () {};
-    this.on_minimum_value = function () {};
-    this.UPDATE = function (STATUS_) {
-      if (STATUS_ === undefined) {
-        if (this.status == 0 && this.value_ < this.max) {
+    this.on_maximum_value = function() {};
+    this.on_minimum_value = function() {};
+    this.UPDATE = function(STATUS_) {
+      if(STATUS_ === undefined) {
+        if(this.status == 0 && this.value_ < this.max) {
           this.value_ = this.value_ + this.step;
-          if (this.value_ >= this.max) {
+          if(this.value_ >= this.max) {
             this.value_ = this.max;
             this.status = 1;
             ROOT.on_maximum_value();
           }
           return this.value_;
-        } else if (this.status == 1 && this.value_ > this.min) {
+        } else if(this.status == 1 && this.value_ > this.min) {
           this.value_ = this.value_ - this.step;
-          if (this.value_ <= this.min) {
+          if(this.value_ <= this.min) {
             this.value_ = this.min;
             this.status = 0;
             ROOT.on_minimum_value();
@@ -141,25 +141,24 @@ export function OSCILLATOR(min, max, step) {
   } else {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " +
-        typeof min +
-        " and max >>" +
-        typeof max +
-        "  and step >>" +
-        typeof step +
-        " << must be string or number."
+      typeof min +
+      " and max >>" +
+      typeof max +
+      "  and step >>" +
+      typeof step +
+      " << must be string or number."
     );
   }
-  //AUTO UPDATE HERE
 }
 
 // GET INCREMENT VALUES IN REAL TIME
 export function INCREMENTATOR(min, max, step, stop_after) {
-  if (
+  if(
     (typeof min === "string" || typeof min === "number") &&
     (typeof max === "string" || typeof max === "number") &&
     (typeof step === "string" || typeof step === "number")
   ) {
-    if (typeof stop_after != "undefined") {
+    if(typeof stop_after != "undefined") {
       this.stop_after = stop_after;
     } else {
       this.stop_after = 1;
@@ -171,13 +170,13 @@ export function INCREMENTATOR(min, max, step, stop_after) {
     this.value_ = parseFloat(min);
     this.status = 0;
 
-    this.UPDATE = function (STATUS_) {
-      if (STATUS_ === undefined) {
-        if (this.status == 0 && this.value_ < this.max) {
+    this.UPDATE = function(STATUS_) {
+      if(STATUS_ === undefined) {
+        if(this.status == 0 && this.value_ < this.max) {
           this.value_ = this.value_ + this.step;
-          if (this.value_ >= this.max) {
+          if(this.value_ >= this.max) {
             this.value_ = this.min;
-            if (this.loops == this.stop_after) {
+            if(this.loops == this.stop_after) {
               this.status = 1;
             }
           }
@@ -191,26 +190,25 @@ export function INCREMENTATOR(min, max, step, stop_after) {
   } else {
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure 'SYS.MATH.OSCILLATOR'  Desciption : Replace object with string or number,  min >> " +
-        typeof min +
-        " and max >>" +
-        typeof max +
-        "  and step >>" +
-        typeof step +
-        " << must be string or number."
+      typeof min +
+      " and max >>" +
+      typeof max +
+      "  and step >>" +
+      typeof step +
+      " << must be string or number."
     );
   }
 }
 
-// MAKE MOVE WITH NEW TARGET COORDINATE
 export function DIMENSION(w, h, type_) {
   var ROOT_DIMENSION = this;
-  if (typeof type_ == "undefined") {
+  if(typeof type_ == "undefined") {
     this.type = "REF_CANVAS";
   } else {
     this.type = type_;
   }
 
-  if (typeof w === undefined) {
+  if(typeof w === undefined) {
     this.W = 10;
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height."
@@ -218,7 +216,7 @@ export function DIMENSION(w, h, type_) {
   } else {
     this.W = w;
   }
-  if (typeof h === undefined) {
+  if(typeof h === undefined) {
     this.H = 10;
     SYS.DEBUG.WARNING(
       "SYS : warning for procedure new 'DIMENSION'  Desciption : arguments (w , h ) are  undefined ,  system will setup 10% of width and height."
@@ -227,18 +225,18 @@ export function DIMENSION(w, h, type_) {
     this.H = h;
   }
 
-  this.WIDTH = function () {
-    if (ROOT_DIMENSION.type == "NORMAL") {
+  this.WIDTH = function() {
+    if(ROOT_DIMENSION.type == "NORMAL") {
       return (window.innerWidth / 100) * this.W;
-    } else if (ROOT_DIMENSION.type == "REF_CANVAS") {
+    } else if(ROOT_DIMENSION.type == "REF_CANVAS") {
       return (SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).width / 100) * this.W;
     }
   };
 
-  this.HEIGHT = function () {
-    if (ROOT_DIMENSION.type == "NORMAL") {
+  this.HEIGHT = function() {
+    if(ROOT_DIMENSION.type == "NORMAL") {
       return (window.innerHeight / 100) * this.H;
-    } else if (ROOT_DIMENSION.type == "REF_CANVAS") {
+    } else if(ROOT_DIMENSION.type == "REF_CANVAS") {
       return (SYS.DOM.E(SYS.RUNNING_PROGRAMS[0]).height / 100) * this.H;
     }
   };
@@ -250,7 +248,7 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
 
   ROOT.CANVAS_ = window[SYS.RUNNING_PROGRAMS[0]].ENGINE.PROGRAM_ID;
 
-  this.ON_TARGET_POSITION = function () {};
+  this.ON_TARGET_POSITION = function() {};
 
   //parameters
   this.x = curentX;
@@ -261,17 +259,17 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   this.velY = 0;
 
   this.thrust = thrust_;
-  if (APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "MONITOR") {
+  if(APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "MONITOR") {
     this.TYPE = "NORMAL";
-  } else if (APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "CANVAS") {
+  } else if(APPLICATION.PROGRAM.CALCULATING_POSITION_BY == "CANVAS") {
     this.TYPE = "REF_CANVAS";
   }
 
   this.IN_MOVE = true;
   //metods
 
-  this.SET_SPEED = function (num_) {
-    if (typeof num_ === "number") {
+  this.SET_SPEED = function(num_) {
+    if(typeof num_ === "number") {
       this.thrust = num_;
     } else {
       SYS.DEBUG.WARNING(
@@ -280,22 +278,22 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
     }
   };
 
-  this.TRANSLATE_BY_X = function (x_) {
+  this.TRANSLATE_BY_X = function(x_) {
     this.IN_MOVE = true;
     this.targetX = x_;
   };
-  this.TRANSLATE_BY_Y = function (y_) {
+  this.TRANSLATE_BY_Y = function(y_) {
     this.IN_MOVE = true;
     this.targetY = y_;
   };
-  this.TRANSLATE = function (x_, y_) {
+  this.TRANSLATE = function(x_, y_) {
     this.IN_MOVE = true;
     this.targetX = x_;
     this.targetY = y_;
   };
 
-  this.SET_POSITION = function (x_, y_, type_) {
-    if (type_ == "DIAMETRIC") {
+  this.SET_POSITION = function(x_, y_, type_) {
+    if(type_ == "DIAMETRIC") {
       this.targetX = x_;
       this.targetY = y_;
 
@@ -314,25 +312,7 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
     }
   };
 
-  this.UPDATE = function () {
-    if (
-      window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE == "PLATFORMER" &&
-      typeof ROOT.PLAYER === "undefined" &&
-      typeof window["PLAYER"] !== "undefined" &&
-      PLAYER.FREEZ == false
-    ) {
-      this.thrust = 2;
-
-      this.IN_MOVE = true;
-      this.targetX = this.targetX + PLAYER.X;
-      this.targetY = this.targetY + PLAYER.Y;
-    } else {
-      try {
-        //	 this.IN_MOVE = false;
-      } catch (e) {
-        console.log(e);
-      }
-    }
+  this.UPDATE = function() {
 
     var tx = this.targetX - this.x,
       ty = this.targetY - this.y,
@@ -343,12 +323,12 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
     this.velY = (ty / dist) * this.thrust;
 
     // stop the box if its too close so it doesn't just rotate and bounce
-    if (this.IN_MOVE == true) {
-      if (dist > this.thrust) {
+    if(this.IN_MOVE == true) {
+      if(dist > this.thrust) {
         this.x += this.velX;
         this.y += this.velY;
 
-        if (ROOT.SHARE_POSITION == true) {
+        if(ROOT.SHARE_POSITION == true) {
           MAIN_PEER.REMOTE_DATA.NEW_POSITION(window[this.parentGameObject]);
         }
       } else {
@@ -357,15 +337,12 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
         this.IN_MOVE = false;
         ROOT.ON_TARGET_POSITION();
 
-        if (ROOT.SHARE_POSITION == true) {
+        if(ROOT.SHARE_POSITION == true) {
           MAIN_PEER.REMOTE_DATA.NEW_POSITION(window[this.parentGameObject]);
         }
 
         try {
-          if (
-            window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE != "PLATFORMER" &&
-            APPLICATION.EDITOR == true
-          ) {
+          if(APPLICATION.EDITOR == true) {
             SET_NEW_START_UP_POS(
               this.parentGameObject,
               this.PROGRAM_NAME,
@@ -376,33 +353,28 @@ export function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
               this.DIMENSION.H
             );
           }
-        } catch (e) {
+        } catch(e) {
           console.log(e + ":::in:::SET_NEW_START_UP_POS");
         }
       }
     }
   };
 
-  this.X = function () {
-    if (ROOT.TYPE == "NORMAL") {
+  this.X = function() {
+    if(ROOT.TYPE == "NORMAL") {
       return (window.innerWidth / 100) * this.x;
-    } else if (ROOT.TYPE == "REF_CANVAS") {
+    } else if(ROOT.TYPE == "REF_CANVAS") {
       return (SYS.DOM.E(ROOT.CANVAS_).width / 100) * this.x;
     }
   };
 
-  this.Y = function () {
-    if (
-      window[ROOT.PROGRAM_NAME].ENGINE.GAME_TYPE == "PLATFORMER" &&
-      typeof ROOT.PLAYER === "undefined"
-    ) {
+  this.Y = function() {
+
+    if(ROOT.TYPE == "NORMAL") {
       return (window.innerHeight / 100) * this.y;
-    } else {
-      if (ROOT.TYPE == "NORMAL") {
-        return (window.innerHeight / 100) * this.y;
-      } else if (ROOT.TYPE == "REF_CANVAS") {
-        return (SYS.DOM.E(ROOT.CANVAS_).height / 100) * this.y;
-      }
+    } else if(ROOT.TYPE == "REF_CANVAS") {
+      return (SYS.DOM.E(ROOT.CANVAS_).height / 100) * this.y;
     }
   };
+
 }
