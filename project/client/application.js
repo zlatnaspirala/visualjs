@@ -5,6 +5,7 @@ import AUDIO_RES from './lib/audio/audio';
 import SYS from './lib/system';
 import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
 import {RESOURCE} from './res/animations/resource.js';
+import { attachResize } from "./lib/events/onresize";
 
 ActivateModifiers();
 
@@ -23,8 +24,9 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
 CREATE_SYSTEM_BUTTONS();
+attachResize();
 
-SYS.SCRIPT.LOAD("lib/events/onresize.js");
+// SYS.SCRIPT.LOAD("lib/events/onresize.js");
 
 SYS.SCRIPT.LOAD('starter/visual.js', true)
 

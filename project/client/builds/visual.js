@@ -2219,6 +2219,8 @@ var _program_modul = require("./lib/program_modul");
 
 var _resource = require("./res/animations/resource.js");
 
+var _onresize = require("./lib/events/onresize");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _proto_modify.default)();
@@ -2236,8 +2238,7 @@ _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
-
-_system.default.SCRIPT.LOAD("lib/events/onresize.js");
+(0, _onresize.attachResize)(); // SYS.SCRIPT.LOAD("lib/events/onresize.js");
 
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
@@ -2254,7 +2255,7 @@ IamNewObject.TAP = function () {
   IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 };
 
-},{"./lib/audio/audio":6,"./lib/program_modul":21,"./lib/proto_modify":22,"./lib/system":23,"./manifest/manifest":24,"./res/animations/resource.js":57}],6:[function(require,module,exports){
+},{"./lib/audio/audio":6,"./lib/events/onresize":14,"./lib/program_modul":22,"./lib/proto_modify":23,"./lib/system":24,"./manifest/manifest":25,"./res/animations/resource.js":58}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2459,7 +2460,7 @@ function ANIMATION(surf, TYPE_, FrameIndex, source, PARENT, ID, blink_, min_, ma
   };
 }
 
-},{"../../manifest/manifest":24,"../init":16,"../system":23}],8:[function(require,module,exports){
+},{"../../manifest/manifest":25,"../init":17,"../system":24}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2588,7 +2589,7 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   this.TAP = function () {};
 }
 
-},{"../math":17,"../system":23}],10:[function(require,module,exports){
+},{"../math":18,"../system":24}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2748,10 +2749,11 @@ function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
 }
 
 function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
+  console.log("TEST");
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
 
-},{"../../manifest/manifest":24,"../../node_modules/socket.io-client":49,"../system":23}],11:[function(require,module,exports){
+},{"../../manifest/manifest":25,"../../node_modules/socket.io-client":50,"../system":24}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2996,7 +2998,7 @@ function ENGINE(c) {
   };
 }
 
-},{"../manifest/manifest":24,"./draw_functions/systems":9,"./events/keyboard":12,"./game_object/game_object_events":15,"./init":16,"./modules/modules":18}],12:[function(require,module,exports){
+},{"../manifest/manifest":25,"./draw_functions/systems":9,"./events/keyboard":12,"./game_object/game_object_events":16,"./init":17,"./modules/modules":19}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3272,7 +3274,7 @@ function KEYBOARD(c) {
   }, false);
 }
 
-},{"../system":23,"./keyboard_editor":13}],13:[function(require,module,exports){
+},{"../system":24,"./keyboard_editor":13}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3324,7 +3326,40 @@ class KeyboardListener {
 var _default = KeyboardListener;
 exports.default = _default;
 
-},{"../system":23}],14:[function(require,module,exports){
+},{"../system":24}],14:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ONRESIZE = ONRESIZE;
+exports.attachResize = attachResize;
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Class ONRESIZE representing a callback method when
+ * window.onresize trigger
+ * Override it:
+ * @method ONRESIZE
+ */
+function ONRESIZE() {}
+
+function attachResize() {
+  window.onresize = function (e) {
+    if (_system.default.DOM.RESIZE_TYPE == "DIAMETRIC") {
+      _system.default.DOM.c.width = window.innerWidth - 1; // CONVERTOR.PER_TO_PIX( SYS.DOM.W_PIX);
+
+      _system.default.DOM.c.height = window.innerHeight; // CONVERTOR.PER_TO_PIY( SYS.DOM.H_PIX);
+    }
+
+    ONRESIZE();
+  };
+}
+
+},{"../system":24}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4454,7 +4489,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../../manifest/manifest":24,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../editor/editor":10,"../init":16,"../math":17,"../particule/particule":19,"../system":23}],15:[function(require,module,exports){
+},{"../../manifest/manifest":25,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../editor/editor":10,"../init":17,"../math":18,"../particule/particule":20,"../system":24}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5118,7 +5153,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
 
                   window[ROOT_ENGINE.PROGRAM_ID].DRAW_INTERVAL = parseFloat(sign_name);
                   window[ROOT_ENGINE.PROGRAM_ID].UPDATE_INTERVAL = parseFloat(sign_name2);
-                  SET_MAIN_INTERVAL(ROOT_ENGINE.PROGRAM_ID, sign_name, sign_name2);
+                  (0, _editor.SET_MAIN_INTERVAL)(ROOT_ENGINE.PROGRAM_ID, sign_name, sign_name2);
                 } else {
                   alert("ERROR MSG: Program interval not success changed.");
                 }
@@ -5170,7 +5205,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":24,"../../res/animations/resource.js":57,"../editor/editor":10,"../init":16,"../system":23}],16:[function(require,module,exports){
+},{"../../manifest/manifest":25,"../../res/animations/resource.js":58,"../editor/editor":10,"../init":17,"../system":24}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6320,7 +6355,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-},{"./program":20,"./system":23}],17:[function(require,module,exports){
+},{"./program":21,"./system":24}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6664,7 +6699,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 }
 
-},{"../manifest/manifest":24,"./editor/editor":10,"./system":23}],18:[function(require,module,exports){
+},{"../manifest/manifest":25,"./editor/editor":10,"./system":24}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6821,7 +6856,7 @@ function MODUL(name, PROGRAM_NAME) {
   };
 }
 
-},{"../game_object/game_object":14}],19:[function(require,module,exports){
+},{"../game_object/game_object":15}],20:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6913,7 +6948,7 @@ function PARTICLE_FONTAN(GO, PARAMETERS) {
   };
 }
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7076,7 +7111,7 @@ function PROGRAM(s, c) {
 var _default = PROGRAM;
 exports.default = _default;
 
-},{"../manifest/manifest":24,"./engine":11,"./init":16}],21:[function(require,module,exports){
+},{"../manifest/manifest":25,"./engine":11,"./init":17}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7756,7 +7791,7 @@ function ___KBSTATUS_CAPS_OFF(H, V, WHAT) {
 
 ;
 
-},{"../manifest/manifest":24,"./system":23}],22:[function(require,module,exports){
+},{"../manifest/manifest":25,"./system":24}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7812,7 +7847,7 @@ function ActivateModifiers() {
   };
 }
 
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7920,7 +7955,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"../res/animations/resource.js":57,"./init":16,"./math":17}],24:[function(require,module,exports){
+},{"../res/animations/resource.js":58,"./init":17,"./math":18}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7978,7 +8013,7 @@ var APPLICATION = {
 var _default = APPLICATION;
 exports.default = _default;
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8150,7 +8185,7 @@ Emitter.prototype.hasListeners = function (event) {
   return !!this.listeners(event).length;
 };
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 (function (process){(function (){
 /* eslint-env browser */
 
@@ -8423,7 +8458,7 @@ formatters.j = function (v) {
 };
 
 }).call(this)}).call(this,require('_process'))
-},{"./common":27,"_process":4}],27:[function(require,module,exports){
+},{"./common":28,"_process":4}],28:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -8699,7 +8734,7 @@ function setup(env) {
 
 module.exports = setup;
 
-},{"ms":47}],28:[function(require,module,exports){
+},{"ms":48}],29:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasCORS = void 0;
@@ -8715,7 +8750,7 @@ catch (err) {
 }
 exports.hasCORS = value;
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 "use strict";
 // imported from https://github.com/galkn/querystring
 /**
@@ -8756,7 +8791,7 @@ function decode(qs) {
 }
 exports.decode = decode;
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = void 0;
@@ -8811,7 +8846,7 @@ function queryKey(uri, query) {
     return data;
 }
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 // imported from https://github.com/unshiftio/yeast
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -8868,7 +8903,7 @@ exports.yeast = yeast;
 for (; i < length; i++)
     map[alphabet[i]] = i;
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalThisShim = void 0;
@@ -8884,7 +8919,7 @@ exports.globalThisShim = (() => {
     }
 })();
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = exports.installTimerFunctions = exports.transports = exports.Transport = exports.protocol = exports.Socket = void 0;
@@ -8900,7 +8935,7 @@ Object.defineProperty(exports, "installTimerFunctions", { enumerable: true, get:
 var parseuri_js_1 = require("./contrib/parseuri.js");
 Object.defineProperty(exports, "parse", { enumerable: true, get: function () { return parseuri_js_1.parse; } });
 
-},{"./contrib/parseuri.js":30,"./socket.js":34,"./transport.js":35,"./transports/index.js":36,"./util.js":41}],34:[function(require,module,exports){
+},{"./contrib/parseuri.js":31,"./socket.js":35,"./transport.js":36,"./transports/index.js":37,"./util.js":42}],35:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -9513,7 +9548,7 @@ class Socket extends component_emitter_1.Emitter {
 exports.Socket = Socket;
 Socket.protocol = engine_io_parser_1.protocol;
 
-},{"./contrib/parseqs.js":29,"./contrib/parseuri.js":30,"./transports/index.js":36,"./util.js":41,"@socket.io/component-emitter":25,"debug":26,"engine.io-parser":46}],35:[function(require,module,exports){
+},{"./contrib/parseqs.js":30,"./contrib/parseuri.js":31,"./transports/index.js":37,"./util.js":42,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],36:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -9641,7 +9676,7 @@ class Transport extends component_emitter_1.Emitter {
 }
 exports.Transport = Transport;
 
-},{"./util.js":41,"@socket.io/component-emitter":25,"debug":26,"engine.io-parser":46}],36:[function(require,module,exports){
+},{"./util.js":42,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],37:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transports = void 0;
@@ -9652,7 +9687,7 @@ exports.transports = {
     polling: polling_js_1.Polling
 };
 
-},{"./polling.js":37,"./websocket.js":39}],37:[function(require,module,exports){
+},{"./polling.js":38,"./websocket.js":40}],38:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -10081,7 +10116,7 @@ function unloadHandler() {
     }
 }
 
-},{"../contrib/parseqs.js":29,"../contrib/yeast.js":31,"../globalThis.js":32,"../transport.js":35,"../util.js":41,"./xmlhttprequest.js":40,"@socket.io/component-emitter":25,"debug":26,"engine.io-parser":46}],38:[function(require,module,exports){
+},{"../contrib/parseqs.js":30,"../contrib/yeast.js":32,"../globalThis.js":33,"../transport.js":36,"../util.js":42,"./xmlhttprequest.js":41,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],39:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultBinaryType = exports.usingBrowserWebSocket = exports.WebSocket = exports.nextTick = void 0;
@@ -10099,7 +10134,7 @@ exports.WebSocket = globalThis_js_1.globalThisShim.WebSocket || globalThis_js_1.
 exports.usingBrowserWebSocket = true;
 exports.defaultBinaryType = "arraybuffer";
 
-},{"../globalThis.js":32}],39:[function(require,module,exports){
+},{"../globalThis.js":33}],40:[function(require,module,exports){
 (function (Buffer){(function (){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -10301,7 +10336,7 @@ class WS extends transport_js_1.Transport {
 exports.WS = WS;
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"../contrib/parseqs.js":29,"../contrib/yeast.js":31,"../transport.js":35,"../util.js":41,"./websocket-constructor.js":38,"buffer":2,"debug":26,"engine.io-parser":46}],40:[function(require,module,exports){
+},{"../contrib/parseqs.js":30,"../contrib/yeast.js":32,"../transport.js":36,"../util.js":42,"./websocket-constructor.js":39,"buffer":2,"debug":27,"engine.io-parser":47}],41:[function(require,module,exports){
 "use strict";
 // browser shim for xmlhttprequest module
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -10326,7 +10361,7 @@ function XHR(opts) {
 }
 exports.XHR = XHR;
 
-},{"../contrib/has-cors.js":28,"../globalThis.js":32}],41:[function(require,module,exports){
+},{"../contrib/has-cors.js":29,"../globalThis.js":33}],42:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.byteLength = exports.installTimerFunctions = exports.pick = void 0;
@@ -10386,7 +10421,7 @@ function utf8Length(str) {
     return length;
 }
 
-},{"./globalThis.js":32}],42:[function(require,module,exports){
+},{"./globalThis.js":33}],43:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERROR_PACKET = exports.PACKET_TYPES_REVERSE = exports.PACKET_TYPES = void 0;
@@ -10407,7 +10442,7 @@ Object.keys(PACKET_TYPES).forEach(key => {
 const ERROR_PACKET = { type: "error", data: "parser error" };
 exports.ERROR_PACKET = ERROR_PACKET;
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decode = exports.encode = void 0;
@@ -10456,7 +10491,7 @@ const decode = (base64) => {
 };
 exports.decode = decode;
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commons_js_1 = require("./commons.js");
@@ -10509,7 +10544,7 @@ const mapBinary = (data, binaryType) => {
 };
 exports.default = decodePacket;
 
-},{"./commons.js":42,"./contrib/base64-arraybuffer.js":43}],45:[function(require,module,exports){
+},{"./commons.js":43,"./contrib/base64-arraybuffer.js":44}],46:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commons_js_1 = require("./commons.js");
@@ -10554,7 +10589,7 @@ const encodeBlobAsBase64 = (data, callback) => {
 };
 exports.default = encodePacket;
 
-},{"./commons.js":42}],46:[function(require,module,exports){
+},{"./commons.js":43}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodePayload = exports.decodePacket = exports.encodePayload = exports.encodePacket = exports.protocol = void 0;
@@ -10594,7 +10629,7 @@ const decodePayload = (encodedPayload, binaryType) => {
 exports.decodePayload = decodePayload;
 exports.protocol = 4;
 
-},{"./decodePacket.js":44,"./encodePacket.js":45}],47:[function(require,module,exports){
+},{"./decodePacket.js":45,"./encodePacket.js":46}],48:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -10758,7 +10793,7 @@ function plural(ms, msAbs, n, name) {
   return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
 }
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 "use strict";
 /**
  * Initialize backoff timer with `opts`.
@@ -10830,7 +10865,7 @@ Backoff.prototype.setJitter = function (jitter) {
     this.jitter = jitter;
 };
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -10901,7 +10936,7 @@ Object.defineProperty(exports, "protocol", { enumerable: true, get: function () 
 
 module.exports = lookup;
 
-},{"./manager.js":50,"./socket.js":52,"./url.js":53,"debug":26,"socket.io-parser":55}],50:[function(require,module,exports){
+},{"./manager.js":51,"./socket.js":53,"./url.js":54,"debug":27,"socket.io-parser":56}],51:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -11298,7 +11333,7 @@ class Manager extends component_emitter_1.Emitter {
 }
 exports.Manager = Manager;
 
-},{"./contrib/backo2.js":48,"./on.js":51,"./socket.js":52,"@socket.io/component-emitter":25,"debug":26,"engine.io-client":33,"socket.io-parser":55}],51:[function(require,module,exports){
+},{"./contrib/backo2.js":49,"./on.js":52,"./socket.js":53,"@socket.io/component-emitter":26,"debug":27,"engine.io-client":34,"socket.io-parser":56}],52:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.on = void 0;
@@ -11310,7 +11345,7 @@ function on(obj, ev, fn) {
 }
 exports.on = on;
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -11928,7 +11963,7 @@ class Socket extends component_emitter_1.Emitter {
 }
 exports.Socket = Socket;
 
-},{"./on.js":51,"@socket.io/component-emitter":25,"debug":26,"socket.io-parser":55}],53:[function(require,module,exports){
+},{"./on.js":52,"@socket.io/component-emitter":26,"debug":27,"socket.io-parser":56}],54:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -12000,7 +12035,7 @@ function url(uri, path = "", loc) {
 }
 exports.url = url;
 
-},{"debug":26,"engine.io-client":33}],54:[function(require,module,exports){
+},{"debug":27,"engine.io-client":34}],55:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12100,7 +12135,7 @@ function _reconstructPacket(data, buffers) {
   return data;
 }
 
-},{"./is-binary.js":56}],55:[function(require,module,exports){
+},{"./is-binary.js":57}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12448,7 +12483,7 @@ class BinaryReconstructor {
 
 }
 
-},{"./binary.js":54,"./is-binary.js":56,"@socket.io/component-emitter":25}],56:[function(require,module,exports){
+},{"./binary.js":55,"./is-binary.js":57,"@socket.io/component-emitter":26}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12507,7 +12542,7 @@ function hasBinary(obj, toJSON) {
   return false;
 }
 
-},{}],57:[function(require,module,exports){
+},{}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12627,4 +12662,4 @@ window.RESOURCE = RESOURCE;
 
 RESOURCE.SUM = 33;
 
-},{"../../lib/system":23}]},{},[5]);
+},{"../../lib/system":24}]},{},[5]);

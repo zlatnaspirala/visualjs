@@ -5,14 +5,17 @@
  * Override it:
  * @method ONRESIZE
  */
-function ONRESIZE() {}
+import SYS from "../system";
 
-window.onresize = function (e) {
-    if (SYS.DOM.RESIZE_TYPE == "DIAMETRIC") {
-        SYS.DOM.c.width = window.innerWidth - 1;
-        // CONVERTOR.PER_TO_PIX( SYS.DOM.W_PIX);
-        SYS.DOM.c.height = window.innerHeight;
-        // CONVERTOR.PER_TO_PIY( SYS.DOM.H_PIX);
-    }
-    ONRESIZE();
-};
+export function ONRESIZE() {}
+export function attachResize () {
+  window.onresize = function (e) {
+      if (SYS.DOM.RESIZE_TYPE == "DIAMETRIC") {
+          SYS.DOM.c.width = window.innerWidth - 1;
+          // CONVERTOR.PER_TO_PIX( SYS.DOM.W_PIX);
+          SYS.DOM.c.height = window.innerHeight;
+          // CONVERTOR.PER_TO_PIY( SYS.DOM.H_PIX);
+      }
+      ONRESIZE();
+  };
+}

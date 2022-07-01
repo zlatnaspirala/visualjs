@@ -10,7 +10,8 @@ import {
   ADD_COLLISION,
   CREATE_PLAYER,
   DEATACH_PLAYER,
-  REMOVE_PARTICLE } from '../editor/editor';
+  REMOVE_PARTICLE,
+  SET_MAIN_INTERVAL } from '../editor/editor';
 import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {

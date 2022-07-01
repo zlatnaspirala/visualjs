@@ -81,7 +81,9 @@ var usernames = {}; // not in use
 
 // Validate every signal in account view
 io.sockets.on("connection", function(socket) {
+
   console.log('\x1b[32m%s\x1b[0m', "EDITOR: CONECTED WITH CLIENT APPLICATION! ");
+  
   //SET_MAIN_INTERVAL
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME) {
     console.log("SET_MAIN_INTERVAL for  : ", PROGRAM_NAME);
