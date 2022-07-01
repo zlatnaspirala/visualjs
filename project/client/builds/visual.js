@@ -4955,7 +4955,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                       _system.default.DEBUG.LOG("atach player");
                     }
                   } else if (typeof local_go.PARTICLE != null) {
-                    REMOVE_PARTICLE(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    (0, _editor.REMOVE_PARTICLE)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                     local_go.TYPE_OF_GAME_OBJECT = "empty";
                     delete local_go.PARTICLE;
                     local_go.PARTICLE = null;

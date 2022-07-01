@@ -9,7 +9,8 @@ import {
   ADD_TEXTBOX,
   ADD_COLLISION,
   CREATE_PLAYER,
-  DEATACH_PLAYER } from '../editor/editor';
+  DEATACH_PLAYER,
+  REMOVE_PARTICLE } from '../editor/editor';
 import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
