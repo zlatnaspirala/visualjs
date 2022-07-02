@@ -85,14 +85,17 @@ io.sockets.on("connection", function(socket) {
   console.log('\x1b[32m%s\x1b[0m', "EDITOR: CONECTED WITH CLIENT APPLICATION! ");
   
   //SET_MAIN_INTERVAL
-  socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME) {
-    console.log("SET_MAIN_INTERVAL for  : ", PROGRAM_NAME);
-    //createFile(  local_path + "/" + "a2.js" , "" + PROGRAM_NAME + ".ENGINE.MODULES.ACCESS_MODULE( '" +  MODUL + "').NEW_OBJECT('" + name + "'," + x + " , " + y + "," + w + ","  + h + ");",  local_pathC , "LOAD_NOW");
+  socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME, r, u) {
+    console.log("SET_MAIN_INTERVAL: ", PROGRAM_NAME , "new data ", r , " ", u);
+    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/redraw";
+    createFile(local_path + "/a9.js",
+     `window["${PROGRAM_NAME}"].DRAW_INTERVAL = ` + parseFloat(r) + `; \n 
+      window["${PROGRAM_NAME}"].UPDATE_INTERVAL = ` + parseFloat(u) + `; \n `,
+      local_pathC , "LOAD_NOW");
   });
 
-  // ADD_NEW_GAME_OBJECT EVENT
-  socket.on(
-    "ADD_NEW_GAME_OBJECT",
+  // a2
+  socket.on("ADD_NEW_GAME_OBJECT",
     function(name, x, y, w, h, PROGRAM_NAME, MODUL) {
       mkdirp(
         `${CONFIG.PATH_OF_WWW}lib/visual_script/${name}`, {recursive: true}).then((__) => {
@@ -127,8 +130,8 @@ io.sockets.on("connection", function(socket) {
     }
   );
 
-  socket.on(
-    "DESTROY_GAME_OBJECT_WITH_DELAY",
+  // a2
+  socket.on("DESTROY_GAME_OBJECT_WITH_DELAY",
     function(name, sec, MODUL, PROGRAM_NAME) {
       console.log("DESTROY_GAME_OBJECT_WITH_DELAY :", name, sec);
       sec = sec * 20;
@@ -152,15 +155,13 @@ io.sockets.on("connection", function(socket) {
     }
   );
 
-  // SET_NEW_START_UP_POSITION sifra 7
+  // a2
   socket.on(
     "SET_NEW_START_UP_POSITION",
     function(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
       console.log("NEW POSITION FOR ", name);
-
       var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
       var local_pathC = "lib/visual_script/" + name + "/a2.js";
-
       //createFile(  local_path + "/" + "startup_pos.js" , "" + PROGRAM_NAME + ".ENGINE.MODULES.ACCESS_MODULE( '" +  MODUL + "').GAME_OBJECTS.ACCESS('" + name + "').POSITION.SET_POSITION( "+newX+" , "+newY+");",  local_pathC , "AFTER_F5");
       createFile(
         local_path + "/" + "a2.js",
@@ -185,7 +186,7 @@ io.sockets.on("connection", function(socket) {
     }
   );
 
-  //ADD_ANIMATION  sifra 3
+  // a3
   socket.on("ADD_ANIMATION", function(name, PROGRAM_NAME, MODUL, RES) {
     console.log("ADD ANIMATION :", name, PROGRAM_NAME, MODUL, RES);
 
@@ -215,7 +216,7 @@ io.sockets.on("connection", function(socket) {
     );
   });
 
-  // ADD_COLLISION
+  // a4
   socket.on("ADD_COLLISION", function(name, PROGRAM_NAME, MODUL, margin) {
     console.log("ADD_COLLISION:", name, PROGRAM_NAME, MODUL, margin);
 
@@ -238,7 +239,7 @@ io.sockets.on("connection", function(socket) {
     );
   });
 
-  // REMOVE COLLISION
+  // a4
   socket.on("REMOVE_COLLISION", function(name, PROGRAM_NAME, MODUL) {
     console.log("REMOVE_COLLISION:", name, PROGRAM_NAME, MODUL);
 
@@ -248,9 +249,8 @@ io.sockets.on("connection", function(socket) {
     deleteFile(local_pathC);
   });
 
-  // ATACH_PLAYER sifra: a5
-  socket.on(
-    "ATACH_PLAYER",
+  // a5
+  socket.on("ATACH_PLAYER",
     function(name, PROGRAM_NAME, MODUL, type__, index_) {
       console.log("ATACH_PLAYER :", name, PROGRAM_NAME, MODUL, type__);
       var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
@@ -280,6 +280,7 @@ io.sockets.on("connection", function(socket) {
     }
   );
 
+  // a5
   socket.on("DEATACH_PLAYER", function(name, PROGRAM_NAME, MODUL) {
     console.log("DEATACH_PLAYER :", name, PROGRAM_NAME, MODUL);
     var local_pathC =
@@ -287,7 +288,7 @@ io.sockets.on("connection", function(socket) {
     deleteFile(local_pathC);
   });
 
-  //ADD PARTICLE         sifra  :  a6
+  // a6
   socket.on("ADD_PARTICLE", function(name, PROGRAM_NAME, MODUL, type__) {
     console.log("ADD_PARTICLE :", name, PROGRAM_NAME, MODUL, type__);
     var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
@@ -308,6 +309,7 @@ io.sockets.on("connection", function(socket) {
     );
   });
 
+  // a6
   socket.on("REMOVE_PARTICLE", function(name, PROGRAM_NAME, MODUL) {
     console.log("REMOVE_PARTICLE:", name, PROGRAM_NAME, MODUL);
     var local_pathC =
@@ -315,9 +317,8 @@ io.sockets.on("connection", function(socket) {
     deleteFile(local_pathC);
   });
 
-  //ADD TEXTBOX         sifra  :  a7
-  socket.on(
-    "ADD_TEXTBOX",
+  // a7
+  socket.on("ADD_TEXTBOX",
     function(name, PROGRAM_NAME, MODUL, text, radius, color, textcolor) {
       console.log("ADD_TEXTBOX :", name, PROGRAM_NAME, MODUL, text);
       var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;

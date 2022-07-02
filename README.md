@@ -26,13 +26,55 @@ All new version begin with 3.0.0 for client, server or GUI part.
 npm i
 ```
 
-## Client
-### Config
+## Client/Manifest [html5]
 ```js
+/**
+ * @Filename : manifest.js
+ * Manifest file for visual-js application.
+ */
+var APPLICATION = {
+    NAME: "VISUAL-JS",
+    TYPE: "client",
+    VERSION: "3.0.0",
+    STATUS: "develop",
+    MULTILANGUAGE: false,
+    // false for fiddle support , we need absolute path.
+    IMAGE_LOADER_PREFIX: true,
+    EDITOR: true,
+    EDITOR_AUTORUN: false,
+    LOCAL_SERVER: "localhost",
+    DEVELOPERS: ["Nikola Lukic Zlatnaspirala@gmail.com"],
+    ACCESSIBILITY: {
+        VIRTUAL_KEYBOARD_FOR_DESKTOP: false,
+        ACTIVATE_VK_FOR_DESKTOP: function () {
+            CREATE_VIRTUAL_KEYBOARD();
+            HIDE_KEYBOARD();
+            APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = true;
+        },
+        DEACTIVATE_VK_FOR_DESKTOP: function () {
+            APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP = false
+        }
+    },
+    SINGLE_BROADCAST: true,
+    MULTIRTC_PEER: true,
+    PROGRAM: {
+        // MONITOR is innerWidth.Height or CANVAS is canvas width
+        CALCULATING_POSITION_BY: "CANVAS",
+        RENDER_SPEED: 5,
+        UPDATE_SPEED: 5
+    },
+    SYSTEM: {
+        COLOR: "#afa9aa",
+        HOVER_COLOR: "#5991FF",
+        TEXT_COLOR: "black",
+        ACTOR_X: "",
+        ACTOR_Y: ""
+    },
+};
 ```
 
 
-## Server/Editor
+## Server/Editor [node.js]
 
 ### Config
 ```js
@@ -49,24 +91,26 @@ module.exports = {
 };
 ```
 
-### CLIENT OR WEB APPLICATION
+## CLIENT OR WEB APPLICATION
 
-##### How to start:
+### How to start:
 
 You can use `ON-PAGE-EDITOR`, `visualjs-gui` or `visualjs` from npm service.
 Best way is to use it all.
 
+### ON/PAGE Editor
+
 ```javascript
-node build_from_editor_to_visual_js_file.js
+node build.js
 ```
 
-Editor use lib/visual_script/ this folder for cache data -maybe you will need extra permission.
+Editor use [`lib/visual_script/`] this folder for cache data -maybe you will need extra permission.
 3) In browser navigate to /client/ folder (index.html)
 
 Click right button and you will see content menu . First item is *Add New game object* .
 Than your game object will show at web page. Right click on rectangle area to see game object context menu.
 
-#### 	local node.js application tools (Use this in develop mode only):
+local node.js application tools (Use this in develop mode only):
 
  - server/res.js  - create RESOURCE js object (ADD image or images for animation)
    Put image or images in one folder for example TEST_RES/  . Put that folder in this location **project_instance/res/** .
@@ -82,8 +126,6 @@ Object `RESOURCE` memory all image paths data. When you create folder and put im
 Images object will be created after you add animation to the game objects (This is good because memory safe) Sometimes your app will no need some resources.
 
 
-### ON/PAGE Editor
-
  To use `ON-PAGE-EDITOR` you will need to run:
  ```js
  server/editor.js
@@ -95,8 +137,6 @@ Create game objects direct in web browser view. Takes data from system folder li
 - server/build.js (node.js dev app for local use!)
  There is not security validation on server part and this action use only
  on local dev stage. After build you wil get all EDITOR created objects intro final runtime js pack.
-
-### ON-PAGE Editor
 
 If you use editor.js to visual create game object method, you must start
 node build.js on the end of work.

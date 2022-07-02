@@ -26,8 +26,6 @@ var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 CREATE_SYSTEM_BUTTONS();
 attachResize();
 
-// SYS.SCRIPT.LOAD("lib/events/onresize.js");
-
 SYS.SCRIPT.LOAD('starter/visual.js', true)
 
 RESOURCE.character1 = {

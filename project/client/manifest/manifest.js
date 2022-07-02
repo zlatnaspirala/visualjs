@@ -30,7 +30,6 @@ var APPLICATION = {
     },
     SINGLE_BROADCAST: true,
     MULTIRTC_PEER: true,
-    BOX2D: false,
     PROGRAM: {
         // MONITOR is innerWidth.Height or CANVAS is canvas width
         CALCULATING_POSITION_BY: "CANVAS",

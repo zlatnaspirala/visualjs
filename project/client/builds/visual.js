@@ -2238,7 +2238,7 @@ _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
-(0, _onresize.attachResize)(); // SYS.SCRIPT.LOAD("lib/events/onresize.js");
+(0, _onresize.attachResize)();
 
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
@@ -2748,7 +2748,7 @@ function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_WEBCAM", name, PROGRAM_NAME, MODUL);
 }
 
-function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
+function SET_MAIN_INTERVAL(PROGRAM_NAME, d, u) {
   console.log("TEST");
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
@@ -7995,7 +7995,6 @@ var APPLICATION = {
   },
   SINGLE_BROADCAST: true,
   MULTIRTC_PEER: true,
-  BOX2D: false,
   PROGRAM: {
     // MONITOR is innerWidth.Height or CANVAS is canvas width
     CALCULATING_POSITION_BY: "CANVAS",

@@ -145,7 +145,6 @@ export function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
   LOCAL_COMMUNICATOR.emit("REMOVE_WEBCAM", name, PROGRAM_NAME, MODUL);
 }
 
-export function SET_MAIN_INTERVAL(name, PROGRAM_NAME, MODUL, d, u) {
-  console.log("TEST")
+export function SET_MAIN_INTERVAL(PROGRAM_NAME, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
