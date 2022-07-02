@@ -2242,6 +2242,8 @@ var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
+_system.default.SCRIPT.LOAD("res/resource.audio");
+
 _resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
@@ -2749,7 +2751,6 @@ function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
 }
 
 function SET_MAIN_INTERVAL(PROGRAM_NAME, d, u) {
-  console.log("TEST");
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
 

@@ -88,6 +88,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME, r, u) {
     console.log("SET_MAIN_INTERVAL: ", PROGRAM_NAME , "new data ", r , " ", u);
     var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/redraw";
+    var local_pathC = "lib/visual_script/redraw/a2.js";
     createFile(local_path + "/a9.js",
      `window["${PROGRAM_NAME}"].DRAW_INTERVAL = ` + parseFloat(r) + `; \n 
       window["${PROGRAM_NAME}"].UPDATE_INTERVAL = ` + parseFloat(u) + `; \n `,
@@ -156,8 +157,7 @@ io.sockets.on("connection", function(socket) {
   );
 
   // a2
-  socket.on(
-    "SET_NEW_START_UP_POSITION",
+  socket.on("SET_NEW_START_UP_POSITION",
     function(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
       console.log("NEW POSITION FOR ", name);
       var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
@@ -219,10 +219,8 @@ io.sockets.on("connection", function(socket) {
   // a4
   socket.on("ADD_COLLISION", function(name, PROGRAM_NAME, MODUL, margin) {
     console.log("ADD_COLLISION:", name, PROGRAM_NAME, MODUL, margin);
-
     var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
     var local_pathC = "lib/visual_script/" + name + "/a4.js";
-
     createFile(
       local_path + "/" + "a4.js",
       "" +

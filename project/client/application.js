@@ -28,6 +28,8 @@ attachResize();
 
 SYS.SCRIPT.LOAD('starter/visual.js', true)
 
+SYS.SCRIPT.LOAD("res/resource.audio");
+
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png',
     'character1/alienBiege_climb2.png',

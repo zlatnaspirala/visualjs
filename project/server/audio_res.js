@@ -27,19 +27,21 @@ function GET_FILES_NAME(path) {
       local = local.replace(".", "_");
 
       if(i == 0) {
-        FILE_STRING += ' \n var AUDIO_RESOURCE = new Object(); AUDIO_RESOURCE = {"source":[';
+        FILE_STRING += ' \nvar AUDIO_RESOURCE = new Object(); AUDIO_RESOURCE = {"source":[';
         SUM_OF_AUDIOS++;
       }
 
-      FILE_STRING = " " + FILE_STRING + "'" + items[i] + "' , \n";
+      if ('resource.audio' != items[i]) {
+        FILE_STRING = " " + FILE_STRING + "'" + items[i] + "' , \n";
 
-      if((i + 1) == items.length) {
-        FILE_STRING += " ] }; \n";
-      }
+        if((i + 1) == items.length) {
+          FILE_STRING += " ] }; \n";
+        }
 
-      if((i + 1) == items.length) {
-        FILE_STRING += "SYS.DEBUG.LOG('Audio resources loaded. ' + " + SUM_OF_AUDIOS + "); \n  AUDIO_RESOURCE.SUM = " + SUM_OF_AUDIOS + "; ";
-        CreateFile(APPLICATION.PATH_OF_WWW + "res/resource.audio", FILE_STRING);
+        if((i + 1) == items.length) {
+          FILE_STRING += "\nAUDIO_RESOURCE.SUM = " + SUM_OF_AUDIOS + "; ";
+          CreateFile(APPLICATION.PATH_OF_WWW + "res/audio/resource.audio", FILE_STRING);
+        }
       }
 
     }
