@@ -2221,6 +2221,10 @@ var _resource = require("./res/animations/resource.js");
 
 var _onresize = require("./lib/events/onresize");
 
+var _ml = _interopRequireDefault(require("./lib/multilanguage/ml"));
+
+var _editor = require("./lib/editor/editor");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _proto_modify.default)();
@@ -2239,11 +2243,14 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
 (0, _onresize.attachResize)();
+(0, _editor.GET_ALL_GAME_OBJECTS)();
 
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
-_system.default.SCRIPT.LOAD("res/resource.audio");
+_system.default.SCRIPT.LOAD("res/audio/resource.audio");
 
+console.log("ML ", _ml.default);
+window.ML = _ml.default;
 _resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
@@ -2257,7 +2264,7 @@ IamNewObject.TAP = function () {
   IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 };
 
-},{"./lib/audio/audio":6,"./lib/events/onresize":14,"./lib/program_modul":22,"./lib/proto_modify":23,"./lib/system":24,"./manifest/manifest":25,"./res/animations/resource.js":58}],6:[function(require,module,exports){
+},{"./lib/audio/audio":6,"./lib/editor/editor":10,"./lib/events/onresize":14,"./lib/multilanguage/ml":20,"./lib/program_modul":23,"./lib/proto_modify":24,"./lib/system":25,"./manifest/manifest":26,"./res/animations/resource.js":59}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2462,7 +2469,7 @@ function ANIMATION(surf, TYPE_, FrameIndex, source, PARENT, ID, blink_, min_, ma
   };
 }
 
-},{"../../manifest/manifest":25,"../init":17,"../system":24}],8:[function(require,module,exports){
+},{"../../manifest/manifest":26,"../init":17,"../system":25}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2591,7 +2598,7 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   this.TAP = function () {};
 }
 
-},{"../math":18,"../system":24}],10:[function(require,module,exports){
+},{"../math":18,"../system":25}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2605,6 +2612,7 @@ exports.ADD_TEXTBOX = ADD_TEXTBOX;
 exports.ADD_WEBCAM = ADD_WEBCAM;
 exports.CREATE_PLAYER = CREATE_PLAYER;
 exports.DEATACH_PLAYER = DEATACH_PLAYER;
+exports.DELETE_FROM_VISUAL_SCRIPTS = DELETE_FROM_VISUAL_SCRIPTS;
 exports.DESTROY = DESTROY;
 exports.DESTROY_DELAY = DESTROY_DELAY;
 exports.GET_ALL_GAME_OBJECTS = GET_ALL_GAME_OBJECTS;
@@ -2752,9 +2760,14 @@ function REMOVE_WEBCAM(name, PROGRAM_NAME, MODUL) {
 
 function SET_MAIN_INTERVAL(PROGRAM_NAME, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
+} // Update 3.0.0
+
+
+function DELETE_FROM_VISUAL_SCRIPTS(PROGRAM_NAME) {
+  LOCAL_COMMUNICATOR.emit("DELETE_FROM_VISUAL_SCRIPTS", PROGRAM_NAME);
 }
 
-},{"../../manifest/manifest":25,"../../node_modules/socket.io-client":50,"../system":24}],11:[function(require,module,exports){
+},{"../../manifest/manifest":26,"../../node_modules/socket.io-client":51,"../system":25}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2773,6 +2786,8 @@ var _manifest = _interopRequireDefault(require("../manifest/manifest"));
 var _init = require("./init");
 
 var _modules = require("./modules/modules");
+
+var _system = _interopRequireDefault(require("./system"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2827,13 +2842,19 @@ function ENGINE(c) {
     VISIBLE: false,
     BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Add new gameObject ", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Set render speed", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"), new _systems.RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
     CHECK_ON_START: function () {
-      if ((0, _init.LOAD)("Application") == false) {
+      if ((0, _init.LOAD)("Application") == false || (0, _init.LOAD)("Application") == null) {
         console.log("no cache data about application");
       } else {
-        _manifest.default = ((0, _init.LOAD)("Application"), function () {
-          throw new Error('"' + "APPLICATION" + '" is read-only.');
-        }());
-        SYS.DEBUG.LOG("APPLICATION object was loaded from localstorage. " + _manifest.default.ACCOUNT_SERVICE_AUTO_RUN);
+        var APPLICATION_CLONE = (0, _init.LOAD)("Application");
+        _manifest.default.EDITOR = APPLICATION_CLONE.EDITOR;
+        _manifest.default.EDITOR_AUTORUN = APPLICATION_CLONE.EDITOR_AUTORUN;
+        _manifest.default.STATUS = APPLICATION_CLONE.STATUS;
+        _manifest.default.STATUS = APPLICATION_CLONE.STATUS;
+        _manifest.default.IMAGE_LOADER_PREFIX = APPLICATION_CLONE.IMAGE_LOADER_PREFIX;
+        _manifest.default.SYSTEM = APPLICATION_CLONE.SYSTEM;
+        _manifest.default.LOCAL_SERVER = APPLICATION_CLONE.LOCAL_SERVER;
+
+        _system.default.DEBUG.LOG("APPLICATION object was loaded from localstorage. " + _manifest.default.ACCOUNT_SERVICE_AUTO_RUN);
 
         if (_manifest.default.ACCOUNT_SERVICE_AUTO_RUN == true) {
           ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to false";
@@ -2877,10 +2898,11 @@ function ENGINE(c) {
               ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w]._pass_name = _pass_name;
 
               ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].TAP = function () {
-                console.log("  ON_PAGE EDITOR   :::: reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
+                console.log("ON_PAGE EDITOR::::reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
                 window[_give_me_reference_object_.NAME]._REF = this._pass_name;
                 console.log(">>>>>>>>" + window[_give_me_reference_object_.NAME].NAME + "::::::::::" + window[_give_me_reference_object_.NAME]._REF);
-                window[SYS.RUNNING_PROGRAMS[0]].ENGINE.GUI.LIST_OF_OBJECTS.REMOVE_LIST_OBJ_MODULES();
+
+                window[_system.default.RUNNING_PROGRAMS[0]].ENGINE.GUI.LIST_OF_OBJECTS.REMOVE_LIST_OBJ_MODULES();
               };
             }
           };
@@ -2999,7 +3021,7 @@ function ENGINE(c) {
   };
 }
 
-},{"../manifest/manifest":25,"./draw_functions/systems":9,"./events/keyboard":12,"./game_object/game_object_events":16,"./init":17,"./modules/modules":19}],12:[function(require,module,exports){
+},{"../manifest/manifest":26,"./draw_functions/systems":9,"./events/keyboard":12,"./game_object/game_object_events":16,"./init":17,"./modules/modules":19,"./system":25}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3275,7 +3297,7 @@ function KEYBOARD(c) {
   }, false);
 }
 
-},{"../system":24,"./keyboard_editor":13}],13:[function(require,module,exports){
+},{"../system":25,"./keyboard_editor":13}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3327,7 +3349,7 @@ class KeyboardListener {
 var _default = KeyboardListener;
 exports.default = _default;
 
-},{"../system":24}],14:[function(require,module,exports){
+},{"../system":25}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3360,7 +3382,7 @@ function attachResize() {
   };
 }
 
-},{"../system":24}],15:[function(require,module,exports){
+},{"../system":25}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4490,7 +4512,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   setTimeout(ROOT_GAME_OBJECT.GAME_OBJECT_READY, 15);
 }
 
-},{"../../manifest/manifest":25,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../editor/editor":10,"../init":17,"../math":18,"../particule/particule":20,"../system":24}],16:[function(require,module,exports){
+},{"../../manifest/manifest":26,"../draw_functions/animation":7,"../draw_functions/rect":8,"../draw_functions/systems":9,"../editor/editor":10,"../init":17,"../math":18,"../particule/particule":21,"../system":25}],16:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5170,7 +5192,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnectt to false";
               }
 
-              SAVE("Application", _manifest.default);
+              (0, _init.SAVE)("Application", _manifest.default);
             } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "5") {
               if (_manifest.default.EDITOR_AUTORUN == true) {
                 _manifest.default.EDITOR_AUTORUN = false;
@@ -5180,7 +5202,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 ROOT_ENGINE.GUI.BUTTONS[4].text = "Switch editorAutoRun to false";
               }
 
-              SAVE("Application", _manifest.default);
+              (0, _init.SAVE)("Application", _manifest.default);
             }
           }
         }
@@ -5206,7 +5228,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":25,"../../res/animations/resource.js":58,"../editor/editor":10,"../init":17,"../system":24}],17:[function(require,module,exports){
+},{"../../manifest/manifest":26,"../../res/animations/resource.js":59,"../editor/editor":10,"../init":17,"../system":25}],17:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5918,7 +5940,7 @@ function readXML(path, operation) {
       ROOT.RESPONSE = this.responseText;
       ROOT.DONE();
     } else if (operation == "CONVER_TO_OBJ") {
-      return xmlToJson(this.responseXML);
+      ROOT.RESPONSE = xmlToJson(this.responseXML);
     } else {
       ROOT.DONE();
       ROOT.RESPONSE = this.responseText;
@@ -6356,7 +6378,7 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-},{"./program":21,"./system":24}],18:[function(require,module,exports){
+},{"./program":22,"./system":25}],18:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6700,7 +6722,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 }
 
-},{"../manifest/manifest":25,"./editor/editor":10,"./system":24}],19:[function(require,module,exports){
+},{"../manifest/manifest":26,"./editor/editor":10,"./system":25}],19:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6863,6 +6885,50 @@ function MODUL(name, PROGRAM_NAME) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
+
+var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
+
+var _system = _interopRequireDefault(require("../system"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * @example Use MODUL class on begin of program with
+ * @example HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
+ * @description ML ML is main object for multilanuage strings returning
+ * @constructor
+ * @param {String} Name name is passed value for modul name.
+ * @param {String} Name name is passed value for modul name.
+ */
+let ML;
+
+if (_manifest.default.MULTILANGUAGE == true) {
+  ML = {
+    ROOT: void 0,
+    DATA: new _system.default.XML.READ("res/system/ml/ml.xml", "CONVER_TO_OBJ"),
+    CURRENT_LANGUAGE: "English",
+    get: function (alias) {
+      this.DATA.NewDataSet.lang.forEach(function (i) {
+        if (alias == i.ALIAS["#text"]) {
+          eval(" var RESULT = i." + ML.CURRENT_LANGUAGE + "[\"#text\"]; ");
+          console.log(RESULT);
+          return RESULT;
+        }
+      });
+    }
+  };
+}
+
+var _default = ML;
+exports.default = _default;
+
+},{"../../manifest/manifest":26,"../system":25}],21:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.PARTICLE_FONTAN = PARTICLE_FONTAN;
 
 function PARTICLE_FONTAN(GO, PARAMETERS) {
@@ -6949,7 +7015,7 @@ function PARTICLE_FONTAN(GO, PARAMETERS) {
   };
 }
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7112,7 +7178,7 @@ function PROGRAM(s, c) {
 var _default = PROGRAM;
 exports.default = _default;
 
-},{"../manifest/manifest":25,"./engine":11,"./init":17}],22:[function(require,module,exports){
+},{"../manifest/manifest":26,"./engine":11,"./init":17}],23:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7792,7 +7858,7 @@ function ___KBSTATUS_CAPS_OFF(H, V, WHAT) {
 
 ;
 
-},{"../manifest/manifest":25,"./system":24}],23:[function(require,module,exports){
+},{"../manifest/manifest":26,"./system":25}],24:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7848,7 +7914,7 @@ function ActivateModifiers() {
   };
 }
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7956,7 +8022,7 @@ var SYS = {
 var _default = SYS;
 exports.default = _default;
 
-},{"../res/animations/resource.js":58,"./init":17,"./math":18}],25:[function(require,module,exports){
+},{"../res/animations/resource.js":59,"./init":17,"./math":18}],26:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7976,7 +8042,7 @@ var APPLICATION = {
   TYPE: "client",
   VERSION: "3.0.0",
   STATUS: "develop",
-  MULTILANGUAGE: false,
+  MULTILANGUAGE: true,
   // false for fiddle support , we need absolute path.
   IMAGE_LOADER_PREFIX: true,
   EDITOR: true,
@@ -8013,7 +8079,7 @@ var APPLICATION = {
 var _default = APPLICATION;
 exports.default = _default;
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -8185,7 +8251,7 @@ Emitter.prototype.hasListeners = function (event) {
   return !!this.listeners(event).length;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (process){(function (){
 /* eslint-env browser */
 
@@ -8458,7 +8524,7 @@ formatters.j = function (v) {
 };
 
 }).call(this)}).call(this,require('_process'))
-},{"./common":28,"_process":4}],28:[function(require,module,exports){
+},{"./common":29,"_process":4}],29:[function(require,module,exports){
 
 /**
  * This is the common logic for both the Node.js and web browser
@@ -8734,7 +8800,7 @@ function setup(env) {
 
 module.exports = setup;
 
-},{"ms":48}],29:[function(require,module,exports){
+},{"ms":49}],30:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hasCORS = void 0;
@@ -8750,7 +8816,7 @@ catch (err) {
 }
 exports.hasCORS = value;
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 "use strict";
 // imported from https://github.com/galkn/querystring
 /**
@@ -8791,7 +8857,7 @@ function decode(qs) {
 }
 exports.decode = decode;
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = void 0;
@@ -8846,7 +8912,7 @@ function queryKey(uri, query) {
     return data;
 }
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 // imported from https://github.com/unshiftio/yeast
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -8903,7 +8969,7 @@ exports.yeast = yeast;
 for (; i < length; i++)
     map[alphabet[i]] = i;
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.globalThisShim = void 0;
@@ -8919,7 +8985,7 @@ exports.globalThisShim = (() => {
     }
 })();
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = exports.installTimerFunctions = exports.transports = exports.Transport = exports.protocol = exports.Socket = void 0;
@@ -8935,7 +9001,7 @@ Object.defineProperty(exports, "installTimerFunctions", { enumerable: true, get:
 var parseuri_js_1 = require("./contrib/parseuri.js");
 Object.defineProperty(exports, "parse", { enumerable: true, get: function () { return parseuri_js_1.parse; } });
 
-},{"./contrib/parseuri.js":31,"./socket.js":35,"./transport.js":36,"./transports/index.js":37,"./util.js":42}],35:[function(require,module,exports){
+},{"./contrib/parseuri.js":32,"./socket.js":36,"./transport.js":37,"./transports/index.js":38,"./util.js":43}],36:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -9548,7 +9614,7 @@ class Socket extends component_emitter_1.Emitter {
 exports.Socket = Socket;
 Socket.protocol = engine_io_parser_1.protocol;
 
-},{"./contrib/parseqs.js":30,"./contrib/parseuri.js":31,"./transports/index.js":37,"./util.js":42,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],36:[function(require,module,exports){
+},{"./contrib/parseqs.js":31,"./contrib/parseuri.js":32,"./transports/index.js":38,"./util.js":43,"@socket.io/component-emitter":27,"debug":28,"engine.io-parser":48}],37:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -9676,7 +9742,7 @@ class Transport extends component_emitter_1.Emitter {
 }
 exports.Transport = Transport;
 
-},{"./util.js":42,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],37:[function(require,module,exports){
+},{"./util.js":43,"@socket.io/component-emitter":27,"debug":28,"engine.io-parser":48}],38:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transports = void 0;
@@ -9687,7 +9753,7 @@ exports.transports = {
     polling: polling_js_1.Polling
 };
 
-},{"./polling.js":38,"./websocket.js":40}],38:[function(require,module,exports){
+},{"./polling.js":39,"./websocket.js":41}],39:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -10116,7 +10182,7 @@ function unloadHandler() {
     }
 }
 
-},{"../contrib/parseqs.js":30,"../contrib/yeast.js":32,"../globalThis.js":33,"../transport.js":36,"../util.js":42,"./xmlhttprequest.js":41,"@socket.io/component-emitter":26,"debug":27,"engine.io-parser":47}],39:[function(require,module,exports){
+},{"../contrib/parseqs.js":31,"../contrib/yeast.js":33,"../globalThis.js":34,"../transport.js":37,"../util.js":43,"./xmlhttprequest.js":42,"@socket.io/component-emitter":27,"debug":28,"engine.io-parser":48}],40:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultBinaryType = exports.usingBrowserWebSocket = exports.WebSocket = exports.nextTick = void 0;
@@ -10134,7 +10200,7 @@ exports.WebSocket = globalThis_js_1.globalThisShim.WebSocket || globalThis_js_1.
 exports.usingBrowserWebSocket = true;
 exports.defaultBinaryType = "arraybuffer";
 
-},{"../globalThis.js":33}],40:[function(require,module,exports){
+},{"../globalThis.js":34}],41:[function(require,module,exports){
 (function (Buffer){(function (){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
@@ -10336,7 +10402,7 @@ class WS extends transport_js_1.Transport {
 exports.WS = WS;
 
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"../contrib/parseqs.js":30,"../contrib/yeast.js":32,"../transport.js":36,"../util.js":42,"./websocket-constructor.js":39,"buffer":2,"debug":27,"engine.io-parser":47}],41:[function(require,module,exports){
+},{"../contrib/parseqs.js":31,"../contrib/yeast.js":33,"../transport.js":37,"../util.js":43,"./websocket-constructor.js":40,"buffer":2,"debug":28,"engine.io-parser":48}],42:[function(require,module,exports){
 "use strict";
 // browser shim for xmlhttprequest module
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -10361,7 +10427,7 @@ function XHR(opts) {
 }
 exports.XHR = XHR;
 
-},{"../contrib/has-cors.js":29,"../globalThis.js":33}],42:[function(require,module,exports){
+},{"../contrib/has-cors.js":30,"../globalThis.js":34}],43:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.byteLength = exports.installTimerFunctions = exports.pick = void 0;
@@ -10421,7 +10487,7 @@ function utf8Length(str) {
     return length;
 }
 
-},{"./globalThis.js":33}],43:[function(require,module,exports){
+},{"./globalThis.js":34}],44:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERROR_PACKET = exports.PACKET_TYPES_REVERSE = exports.PACKET_TYPES = void 0;
@@ -10442,7 +10508,7 @@ Object.keys(PACKET_TYPES).forEach(key => {
 const ERROR_PACKET = { type: "error", data: "parser error" };
 exports.ERROR_PACKET = ERROR_PACKET;
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decode = exports.encode = void 0;
@@ -10491,7 +10557,7 @@ const decode = (base64) => {
 };
 exports.decode = decode;
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commons_js_1 = require("./commons.js");
@@ -10544,7 +10610,7 @@ const mapBinary = (data, binaryType) => {
 };
 exports.default = decodePacket;
 
-},{"./commons.js":43,"./contrib/base64-arraybuffer.js":44}],46:[function(require,module,exports){
+},{"./commons.js":44,"./contrib/base64-arraybuffer.js":45}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commons_js_1 = require("./commons.js");
@@ -10589,7 +10655,7 @@ const encodeBlobAsBase64 = (data, callback) => {
 };
 exports.default = encodePacket;
 
-},{"./commons.js":43}],47:[function(require,module,exports){
+},{"./commons.js":44}],48:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decodePayload = exports.decodePacket = exports.encodePayload = exports.encodePacket = exports.protocol = void 0;
@@ -10629,7 +10695,7 @@ const decodePayload = (encodedPayload, binaryType) => {
 exports.decodePayload = decodePayload;
 exports.protocol = 4;
 
-},{"./decodePacket.js":45,"./encodePacket.js":46}],48:[function(require,module,exports){
+},{"./decodePacket.js":46,"./encodePacket.js":47}],49:[function(require,module,exports){
 /**
  * Helpers.
  */
@@ -10793,7 +10859,7 @@ function plural(ms, msAbs, n, name) {
   return Math.round(ms / n) + ' ' + name + (isPlural ? 's' : '');
 }
 
-},{}],49:[function(require,module,exports){
+},{}],50:[function(require,module,exports){
 "use strict";
 /**
  * Initialize backoff timer with `opts`.
@@ -10865,7 +10931,7 @@ Backoff.prototype.setJitter = function (jitter) {
     this.jitter = jitter;
 };
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -10936,7 +11002,7 @@ Object.defineProperty(exports, "protocol", { enumerable: true, get: function () 
 
 module.exports = lookup;
 
-},{"./manager.js":51,"./socket.js":53,"./url.js":54,"debug":27,"socket.io-parser":56}],51:[function(require,module,exports){
+},{"./manager.js":52,"./socket.js":54,"./url.js":55,"debug":28,"socket.io-parser":57}],52:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -11333,7 +11399,7 @@ class Manager extends component_emitter_1.Emitter {
 }
 exports.Manager = Manager;
 
-},{"./contrib/backo2.js":49,"./on.js":52,"./socket.js":53,"@socket.io/component-emitter":26,"debug":27,"engine.io-client":34,"socket.io-parser":56}],52:[function(require,module,exports){
+},{"./contrib/backo2.js":50,"./on.js":53,"./socket.js":54,"@socket.io/component-emitter":27,"debug":28,"engine.io-client":35,"socket.io-parser":57}],53:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.on = void 0;
@@ -11345,7 +11411,7 @@ function on(obj, ev, fn) {
 }
 exports.on = on;
 
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -11963,7 +12029,7 @@ class Socket extends component_emitter_1.Emitter {
 }
 exports.Socket = Socket;
 
-},{"./on.js":52,"@socket.io/component-emitter":26,"debug":27,"socket.io-parser":56}],54:[function(require,module,exports){
+},{"./on.js":53,"@socket.io/component-emitter":27,"debug":28,"socket.io-parser":57}],55:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -12035,7 +12101,7 @@ function url(uri, path = "", loc) {
 }
 exports.url = url;
 
-},{"debug":27,"engine.io-client":34}],55:[function(require,module,exports){
+},{"debug":28,"engine.io-client":35}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12135,7 +12201,7 @@ function _reconstructPacket(data, buffers) {
   return data;
 }
 
-},{"./is-binary.js":57}],56:[function(require,module,exports){
+},{"./is-binary.js":58}],57:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12483,7 +12549,7 @@ class BinaryReconstructor {
 
 }
 
-},{"./binary.js":55,"./is-binary.js":57,"@socket.io/component-emitter":26}],57:[function(require,module,exports){
+},{"./binary.js":56,"./is-binary.js":58,"@socket.io/component-emitter":27}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12542,7 +12608,7 @@ function hasBinary(obj, toJSON) {
   return false;
 }
 
-},{}],58:[function(require,module,exports){
+},{}],59:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12662,4 +12728,4 @@ window.RESOURCE = RESOURCE;
 
 RESOURCE.SUM = 33;
 
-},{"../../lib/system":24}]},{},[5]);
+},{"../../lib/system":25}]},{},[5]);

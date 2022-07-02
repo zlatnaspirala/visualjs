@@ -88,7 +88,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME, r, u) {
     console.log("SET_MAIN_INTERVAL: ", PROGRAM_NAME , "new data ", r , " ", u);
     var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/redraw";
-    var local_pathC = "lib/visual_script/redraw/a2.js";
+    var local_pathC = "lib/visual_script/redraw/a9.js";
     createFile(local_path + "/a9.js",
      `window["${PROGRAM_NAME}"].DRAW_INTERVAL = ` + parseFloat(r) + `; \n 
       window["${PROGRAM_NAME}"].UPDATE_INTERVAL = ` + parseFloat(u) + `; \n `,

@@ -5,6 +5,7 @@ import { RIGHT_MENU_BUTTON } from './draw_functions/systems';
 import APPLICATION from '../manifest/manifest';
 import { LOAD, VIEW } from './init';
 import { MODUL } from './modules/modules';
+import SYS from './system';
 
 /**
  * @Description Instance of ENGINE class will handle all modules and
@@ -80,11 +81,19 @@ export function ENGINE(c) {
             new RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
         CHECK_ON_START: function () {
 
-            if (LOAD("Application") == false) {
+            if (LOAD("Application") == false || LOAD("Application") == null) {
                 console.log("no cache data about application");
             } else {
 
-                APPLICATION = LOAD("Application");
+                var APPLICATION_CLONE = LOAD("Application");
+                APPLICATION.EDITOR = APPLICATION_CLONE.EDITOR;
+                APPLICATION.EDITOR_AUTORUN = APPLICATION_CLONE.EDITOR_AUTORUN;
+                APPLICATION.STATUS = APPLICATION_CLONE.STATUS;
+                APPLICATION.STATUS = APPLICATION_CLONE.STATUS;
+                APPLICATION.IMAGE_LOADER_PREFIX = APPLICATION_CLONE.IMAGE_LOADER_PREFIX;
+                APPLICATION.SYSTEM =APPLICATION_CLONE.SYSTEM;
+                APPLICATION.LOCAL_SERVER = APPLICATION_CLONE.LOCAL_SERVER;
+
                 SYS.DEBUG.LOG("APPLICATION object was loaded from localstorage. " + APPLICATION.ACCOUNT_SERVICE_AUTO_RUN);
                 if (APPLICATION.ACCOUNT_SERVICE_AUTO_RUN == true) {
                     ROOT_ENGINE.GUI.BUTTONS[3].text = "Switch AutoConnect to false";
@@ -138,7 +147,7 @@ export function ENGINE(c) {
 
                             ROOT_ENGINE.GUI.LIST_OF_OBJECTS.BUTTONS_GAME_OBJECTS[w].TAP = function () {
 
-                                console.log("  ON_PAGE EDITOR   :::: reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
+                                console.log("ON_PAGE EDITOR::::reference comes from : " + _give_me_reference_object_.NAME + " ::::::: reference for" + this._pass_name);
 
                                 window[_give_me_reference_object_.NAME]._REF = this._pass_name;
 

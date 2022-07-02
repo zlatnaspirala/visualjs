@@ -2,23 +2,8 @@ import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
 
 var CHECK_THE_ENGINE = function () {
-
-  //SYS.SCRIPT.LOAD("res/resource.audio");
-  // SYS.SCRIPT.LOAD("lib/audio/audio.js");
-  // SYS.SCRIPT.LOAD("lib/events/onunload.js");
-  // SYS.SCRIPT.LOAD("lib/events/onbeforeunload.js");
-  // SYS.SCRIPT.LOAD("lib/events/onresize.js");
-  // SYS.SCRIPT.LOAD("lib/multi_screens/multi_screens.js");
-  // SYS.SCRIPT.LOAD("lib/events/keyboard_editor.js");
-
-    if (APPLICATION.EDITOR == true) {
-    //    SYS.SCRIPT.LOAD("lib/editor/editor.js");
-    }
-    // SYS.SCRIPT.LOAD("lib/nui/camera/mdetect.js");
-
     document.body.style.WebkitTransform = "scale(1)";
     document.body.style.overflow = "hidden";
-
     // MUST BE FIXED
     function system_ready_check() {
         if (typeof GET_ALL_GAME_OBJECTS !== "undefined") {

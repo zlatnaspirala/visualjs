@@ -4,11 +4,7 @@ window.onload = function () {
 
     alert("TEST 1")
     
-  
-    
-    SYS.SCRIPT.LOAD("lib/audio/audio.js");
-    SYS.SCRIPT.LOAD("lib/events/onunload.js");
-    SYS.SCRIPT.LOAD("lib/events/onbeforeunload.js");
+
     SYS.SCRIPT.LOAD("lib/events/onresize.js");
     // SYS.SCRIPT.LOAD("lib/multi_screens/multi_screens.js");
     SYS.SCRIPT.LOAD("lib/events/keyboard_editor.js");

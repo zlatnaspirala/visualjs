@@ -6,6 +6,9 @@ import SYS from './lib/system';
 import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
 import {RESOURCE} from './res/animations/resource.js';
 import { attachResize } from "./lib/events/onresize";
+import ML from './lib/multilanguage/ml';
+
+import { GET_ALL_GAME_OBJECTS } from "./lib/editor/editor";
 
 ActivateModifiers();
 
@@ -26,9 +29,13 @@ var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 CREATE_SYSTEM_BUTTONS();
 attachResize();
 
-SYS.SCRIPT.LOAD('starter/visual.js', true)
+GET_ALL_GAME_OBJECTS();
 
-SYS.SCRIPT.LOAD("res/resource.audio");
+SYS.SCRIPT.LOAD('starter/visual.js', true)
+SYS.SCRIPT.LOAD("res/audio/resource.audio");
+
+console.log("ML ", ML);
+window.ML = ML;
 
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png',

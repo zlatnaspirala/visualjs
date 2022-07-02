@@ -672,22 +672,16 @@ export function readXML(path, operation) {
   }
   ROOT.xmlhttpGA.open("GET", path, true);
   ROOT.xmlhttpGA.send();
-  ROOT.DONE = function () {
-    return ROOT.RESPONSE;
-  };
-  ROOT.RESPONSE = "";
+  ROOT.L = "";
   ROOT.xmlhttpGA.onreadystatechange = function () {
     if (this.readyState !== 4) return;
     if (this.status !== 200) return; // or whatever error handling you want
-
     if (typeof operation === "undefined") {
-      ROOT.RESPONSE = this.responseText;
-      ROOT.DONE();
+      ROOT.L = this.responseText;
     } else if (operation == "CONVER_TO_OBJ") {
-      return xmlToJson(this.responseXML);
+      ROOT.L = xmlToJson(this.responseXML);
     } else {
-      ROOT.DONE();
-      ROOT.RESPONSE = this.responseText;
+      ROOT.L = this.responseText;
     }
   };
 }

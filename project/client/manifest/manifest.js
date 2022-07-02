@@ -10,7 +10,7 @@ var APPLICATION = {
     TYPE: "client",
     VERSION: "3.0.0",
     STATUS: "develop",
-    MULTILANGUAGE: false,
+    MULTILANGUAGE: true,
     // false for fiddle support , we need absolute path.
     IMAGE_LOADER_PREFIX: true,
     EDITOR: true,

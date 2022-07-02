@@ -1,5 +1,6 @@
 
-var ML = "multiLangauage system not loaded.";
+import APPLICATION from "../../manifest/manifest";
+import SYS from '../system';
 
 /**
  * @example Use MODUL class on begin of program with
@@ -9,11 +10,12 @@ var ML = "multiLangauage system not loaded.";
  * @param {String} Name name is passed value for modul name.
  * @param {String} Name name is passed value for modul name.
  */
+let ML;
 
 if (APPLICATION.MULTILANGUAGE == true) {
     ML = {
         ROOT: this,
-        DATA: SYS.XML.READ("res/system/ml/ml.xml", "CONVER_TO_OBJ"),
+        DATA: new SYS.XML.READ("res/system/ml/ml.xml", "CONVER_TO_OBJ"),
         CURRENT_LANGUAGE: "English",
 
         get: function (alias) {
@@ -29,3 +31,5 @@ if (APPLICATION.MULTILANGUAGE == true) {
     };
 
 }
+
+export default ML;
