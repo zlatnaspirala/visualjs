@@ -1,6 +1,9 @@
 
-import sys from 'visual-js';
+import { sys } from 'visual-js';
 
 
+sys.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 
-console.log("What is sys ", sys);
+HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
+
+console.log("What is HELLO_WORLD ", HELLO_WORLD);

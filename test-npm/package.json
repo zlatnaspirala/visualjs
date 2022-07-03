@@ -4,7 +4,7 @@
   "description": "test-npm-visualjs3",
   "main": "index.js",
   "dependencies": {
-    "visual-js": "^3.0.0",
+    "visual-js": "^3.0.1",
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {

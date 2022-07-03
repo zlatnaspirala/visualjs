@@ -348,7 +348,7 @@ export function DOM() {
    * CREATE_SURFACE - Canvas2d staff
    * @alias DOM#CREATE_SURFACE
    * @param {canvas2dContext} ctx
-   * @param {String} Name_of_canvas Id of canvas element.
+   * @param {String} Name_of_canvas Id of canvas element. Optimal.
    * @param {number} w Value for width (percent or pixel depens on resizeType)
    * @param {number} h Value for width (percent or pixel depens on resizeType)
    * @param {String} resizeType
@@ -356,6 +356,10 @@ export function DOM() {
    */
   this.CREATE_SURFACE = function (ctx, name_of_canvas, w, h, resizeType) {
     this.c = document.getElementById(name_of_canvas);
+
+    if (this.c == null) {
+      this.c = document.createElement('canvas');
+    }
 
     if (typeof resizeType === "undefined" || resizeType == "DIAMETRIC") {
       /**
