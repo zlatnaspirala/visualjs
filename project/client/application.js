@@ -20,6 +20,8 @@ if(typeof AUDIO_RESOURCE != "undefined") {
 // Run Instance from here
 ////////////////////////////
 
+
+
 SYS.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 
 //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
