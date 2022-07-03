@@ -3,9 +3,6 @@
   "version": "3.0.0",
   "description": "[TEST BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "devDependencies": {
     "browser-resolve": "^2.0.0",
     "esmify": "^2.1.1"

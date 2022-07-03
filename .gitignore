@@ -6,3 +6,4 @@ project/client/node_modules/
 project/client/package-lock.json
 project/client/lib/visual_script/**.*
 project/client/lib/visual_script/
+test-npm/node_modules/

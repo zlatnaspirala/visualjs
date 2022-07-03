@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "test-npm-visualjs3",
   "main": "index.js",
+  "dependencies": {
+    "visual-js": "^3.0.0"
+  },
+  "devDependencies": {
+    "browser-resolve": "^2.0.0",
+    "esmify": "^2.1.1"
+  },
   "scripts": {
+    "app": "browserify test.js -p esmify > builds/examples.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
