@@ -36,6 +36,7 @@ SYS.SCRIPT.LOAD("res/audio/resource.audio");
 
 console.log("ML ", ML);
 window.ML = ML;
+window.APPLICATION = manifest;
 
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png',

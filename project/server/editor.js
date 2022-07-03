@@ -84,6 +84,27 @@ io.sockets.on("connection", function(socket) {
 
   console.log('\x1b[32m%s\x1b[0m', "EDITOR: CONECTED WITH CLIENT APPLICATION! ");
   
+  // DELETE_FROM_VISUAL_SCRIPTS CMD
+  socket.on("DELETE_FROM_VISUAL_SCRIPTS", function(PROGRAM_NAME) {
+
+    var localpath = CONFIG.PATH_OF_WWW + "lib/visual_script/";
+    var LIST_OFF_ALL_GAME_OBJECT = getDirectories(localpath);
+
+    console.log(LIST_OFF_ALL_GAME_OBJECT, "<<LIST_OFF_ALL_GAME_OBJECT");
+    var local__x = 0;
+    for (var i in LIST_OFF_ALL_GAME_OBJECT) {
+
+      local__x++;
+      val = LIST_OFF_ALL_GAME_OBJECT[i];
+      console.log("VAL :", LIST_OFF_ALL_GAME_OBJECT[i]);
+      if (val != 'redraw') {
+        deleteFolder(localpath + val);
+      }
+
+    }
+    
+  });
+  
   //SET_MAIN_INTERVAL
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME, r, u) {
     console.log("SET_MAIN_INTERVAL: ", PROGRAM_NAME , "new data ", r , " ", u);
@@ -352,8 +373,7 @@ io.sockets.on("connection", function(socket) {
   });
 
   //SET_NEW_START_UP_POSITION   sifra 8
-  socket.on(
-    "ADD_WEBCAM",
+  socket.on("ADD_WEBCAM",
     function(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
       //	LOCAL_COMMUNICATOR.emit('ADD_WEBCAM',  name , PROGRAM_NAME , MODUL , type_ , type_of_dim , byV , byH);
       console.log("ADD_WEBCAM for ", name);

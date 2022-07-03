@@ -2251,6 +2251,7 @@ _system.default.SCRIPT.LOAD("res/audio/resource.audio");
 
 console.log("ML ", _ml.default);
 window.ML = _ml.default;
+window.APPLICATION = _manifest.default;
 _resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
@@ -2840,7 +2841,7 @@ function ENGINE(c) {
 
   this.GUI = {
     VISIBLE: false,
-    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Add new gameObject ", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Set render speed", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"), new _systems.RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
+    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Add new gameObject ", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Set render speed", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"), new _systems.RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png"), new _systems.RIGHT_MENU_BUTTON("Clear All", 100, "6")],
     CHECK_ON_START: function () {
       if ((0, _init.LOAD)("Application") == false || (0, _init.LOAD)("Application") == null) {
         console.log("no cache data about application");
@@ -5203,7 +5204,11 @@ function EVENTS(canvas, ROOT_ENGINE) {
               }
 
               (0, _init.SAVE)("Application", _manifest.default);
-            }
+            } else if (ROOT_ENGINE.GUI.BUTTONS[x].IAM == "6") {
+              // clear all
+              (0, _editor.DELETE_FROM_VISUAL_SCRIPTS)(ROOT_ENGINE.PROGRAM_ID);
+            } // DELETE_FROM_VISUAL_SCRIPTS
+
           }
         }
 
@@ -5925,25 +5930,18 @@ function readXML(path, operation) {
 
   ROOT.xmlhttpGA.open("GET", path, true);
   ROOT.xmlhttpGA.send();
-
-  ROOT.DONE = function () {
-    return ROOT.RESPONSE;
-  };
-
-  ROOT.RESPONSE = "";
+  ROOT.L = "";
 
   ROOT.xmlhttpGA.onreadystatechange = function () {
     if (this.readyState !== 4) return;
     if (this.status !== 200) return; // or whatever error handling you want
 
     if (typeof operation === "undefined") {
-      ROOT.RESPONSE = this.responseText;
-      ROOT.DONE();
+      ROOT.L = this.responseText;
     } else if (operation == "CONVER_TO_OBJ") {
-      ROOT.RESPONSE = xmlToJson(this.responseXML);
+      ROOT.L = xmlToJson(this.responseXML);
     } else {
-      ROOT.DONE();
-      ROOT.RESPONSE = this.responseText;
+      ROOT.L = this.responseText;
     }
   };
 }

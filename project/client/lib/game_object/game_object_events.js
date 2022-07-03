@@ -11,7 +11,8 @@ import {
   CREATE_PLAYER,
   DEATACH_PLAYER,
   REMOVE_PARTICLE,
-  SET_MAIN_INTERVAL } from '../editor/editor';
+  SET_MAIN_INTERVAL,
+  DELETE_FROM_VISUAL_SCRIPTS } from '../editor/editor';
 import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
@@ -897,7 +898,12 @@ export function EVENTS(canvas, ROOT_ENGINE) {
 
               SAVE("Application", APPLICATION);
 
+            } else if(ROOT_ENGINE.GUI.BUTTONS[x].IAM == "6") {
+              // clear all
+              DELETE_FROM_VISUAL_SCRIPTS(ROOT_ENGINE.PROGRAM_ID);
             }
+
+            // DELETE_FROM_VISUAL_SCRIPTS
 
           }
 

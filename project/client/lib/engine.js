@@ -78,7 +78,8 @@ export function ENGINE(c) {
             new RIGHT_MENU_BUTTON("Exit edit mode", 20, "2"),
             new RIGHT_MENU_BUTTON("Set render speed", 40, "3"),
             new RIGHT_MENU_BUTTON("Switch AutoConnect to true", 60, "4", "res/system/images/html5/HTML5-Offline-Storage.png"),
-            new RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png")],
+            new RIGHT_MENU_BUTTON("Switch EditorAutoRun to true", 80, "5", "res/system/images/html5/HTML5-Offline-Storage.png"),
+            new RIGHT_MENU_BUTTON("Clear All", 100, "6")],
         CHECK_ON_START: function () {
 
             if (LOAD("Application") == false || LOAD("Application") == null) {
