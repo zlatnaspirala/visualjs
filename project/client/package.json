@@ -1,7 +1,7 @@
 {
-  "name": "visualjs",
+  "name": "visual-js",
   "version": "3.0.0",
-  "description": "Revision , improve",
+  "description": "[TEST BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
   "directories": {
     "lib": "lib"

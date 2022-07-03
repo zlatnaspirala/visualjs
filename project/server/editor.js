@@ -40,8 +40,12 @@ console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software! 😘   .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 
 function deleteFile(filePath) {
-  fs.unlinkSync(filePath);
-  io.sockets.emit("RETURN", "FILE_DELETED", filePath);
+  try {
+    fs.unlinkSync(filePath);
+    io.sockets.emit("RETURN", "FILE_DELETED", filePath);
+  } catch (err) {
+    console.warn('Editor cmd deleteFile faild...');
+   }
 }
 
 function createFile(path_, script_inner, client_path, ACTION) {
@@ -99,6 +103,9 @@ io.sockets.on("connection", function(socket) {
       console.log("VAL :", LIST_OFF_ALL_GAME_OBJECT[i]);
       if (val != 'redraw') {
         deleteFolder(localpath + val);
+      } else if (val == 'redraw') {
+        var lp = localpath + val + '/a9.js';
+        deleteFile(lp);
       }
 
     }
