@@ -1,6 +1,8 @@
 
 // dev for io
-import { io } from "../../node_modules/socket.io-client";
+// import { io } from "../../node_modules/socket.io-client";
+// prodc
+import { io } from "socket.io-client";
 import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
 

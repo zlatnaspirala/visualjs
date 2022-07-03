@@ -15,7 +15,7 @@ var serverRunner;
 // Pull information from HTML POST (express4)
 var bodyParser = require("body-parser");
 // const { endianness } = require( "os" );
-// var URL_ARG = process.argv[2];
+var URL_ARG = process.argv[2];
 var options = null;
 
 if (config.SELF_HOST.protocol == 'http') {
@@ -43,7 +43,14 @@ hostingHTTP.get('*', function(req, res, next) {
   next();
 });
 
-hostingHTTP.use(express.static(config.PATH_OF_WWW));
+if (typeof URL_ARG !== 'undefined') {
+  hostingHTTP.use(express.static(URL_ARG));
+  console.log("Hosted on ", URL_ARG);
+} else {
+  hostingHTTP.use(express.static(config.PATH_OF_WWW));
+  console.log("Hosted on ", config.PATH_OF_WWW);
+}
+
 hostingHTTP.use(compression());
 hostingHTTP.use(cors());
 
