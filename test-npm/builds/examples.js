@@ -10088,6 +10088,7 @@ function DOM() {
 
     if (this.c == null) {
       this.c = document.createElement('canvas');
+      document.body.appendChild(this.c);
     }
 
     if (typeof resizeType === "undefined" || resizeType == "DIAMETRIC") {
