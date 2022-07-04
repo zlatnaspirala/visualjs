@@ -2624,7 +2624,7 @@ exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
 exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
 
-var _socket = require("../../node_modules/socket.io-client");
+var _socket = require("socket.io-client");
 
 var _system = _interopRequireDefault(require("../system"));
 
@@ -2633,6 +2633,8 @@ var _manifest = _interopRequireDefault(require("../../manifest/manifest"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // dev for io
+// import { io } from "../../node_modules/socket.io-client";
+// prodc
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 console.log('\x1b[36m%s\x1b[0m', ".                                    .");
 console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
@@ -2768,7 +2770,7 @@ function DELETE_FROM_VISUAL_SCRIPTS(PROGRAM_NAME) {
   LOCAL_COMMUNICATOR.emit("DELETE_FROM_VISUAL_SCRIPTS", PROGRAM_NAME);
 }
 
-},{"../../manifest/manifest":26,"../../node_modules/socket.io-client":51,"../system":25}],11:[function(require,module,exports){
+},{"../../manifest/manifest":26,"../system":25,"socket.io-client":51}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3919,7 +3921,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
   this.EDITOR = {
     SELECTED: false,
-    ENABLE: HELLO_WORLD.ENGINE.ENGINE_EDITOR,
+    ENABLE: _manifest.default.EDITOR,
     ACTORS_VISIBLE: true,
     ACTORS_AREA_HEIGHT: 10,
     ACTOR_BLUE_HOVER: false,
@@ -5620,7 +5622,7 @@ function DOM() {
    * CREATE_SURFACE - Canvas2d staff
    * @alias DOM#CREATE_SURFACE
    * @param {canvas2dContext} ctx
-   * @param {String} Name_of_canvas Id of canvas element.
+   * @param {String} Name_of_canvas Id of canvas element. Optimal.
    * @param {number} w Value for width (percent or pixel depens on resizeType)
    * @param {number} h Value for width (percent or pixel depens on resizeType)
    * @param {String} resizeType
@@ -5630,6 +5632,10 @@ function DOM() {
 
   this.CREATE_SURFACE = function (ctx, name_of_canvas, w, h, resizeType) {
     this.c = document.getElementById(name_of_canvas);
+
+    if (this.c == null) {
+      this.c = document.createElement('canvas');
+    }
 
     if (typeof resizeType === "undefined" || resizeType == "DIAMETRIC") {
       /**

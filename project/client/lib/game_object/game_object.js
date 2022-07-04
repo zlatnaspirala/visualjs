@@ -651,9 +651,8 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
   };
 
   this.EDITOR = {
-
     SELECTED: false,
-    ENABLE: HELLO_WORLD.ENGINE.ENGINE_EDITOR,
+    ENABLE: APPLICATION.EDITOR,
     ACTORS_VISIBLE: true,
     ACTORS_AREA_HEIGHT: 10,
     ACTOR_BLUE_HOVER: false,
