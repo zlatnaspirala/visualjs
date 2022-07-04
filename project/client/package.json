@@ -1,6 +1,6 @@
 {
   "name": "visual-js",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "[TEST BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
   "devDependencies": {
