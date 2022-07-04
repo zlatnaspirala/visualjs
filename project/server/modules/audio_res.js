@@ -2,16 +2,16 @@
 /**
  * @description
  * Make javascript audio resources objects data,
- * This is dev tools. Dont't use it in prodc.
+ * This is dev tools (GUI on page). Dont't use it in prodc.
  * @Developer Nikola Lukic
  * @email zlatnaspirala@gmail.com
  */
 
- module.exports = audio_res = () => {
+ module.exports = audio_res = (config) => {
 
   var fs = require("fs");
 
-  var APPLICATION = require('./config.js');
+  var APPLICATION = config;
   var FILE_STRING = "";
   var SUM_OF_AUDIOS = 0;
 
