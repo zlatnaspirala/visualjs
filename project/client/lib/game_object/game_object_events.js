@@ -12,7 +12,8 @@ import {
   DEATACH_PLAYER,
   REMOVE_PARTICLE,
   SET_MAIN_INTERVAL,
-  DELETE_FROM_VISUAL_SCRIPTS } from '../editor/editor';
+  DELETE_FROM_VISUAL_SCRIPTS,
+  DESTROY } from '../editor/editor';
 import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
