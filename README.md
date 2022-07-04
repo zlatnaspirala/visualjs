@@ -101,10 +101,47 @@ module.exports = {
 You can use `ON-PAGE-EDITOR`, `visualjs-gui` or `visualjs` from npm service.
 Best way is to use it all.
 
+
 ### ON/PAGE Editor
 
-```javascript
-node build.js
+From package.json:
+```
+"scripts": {
+    "pack": "node build.js",
+    "res": "node res.js",
+    "editor": "node editor.js",
+    "host": "node self-host.js"
+  }
+```
+
+```js
+npm run host
+```
+```json
+This is just a webserver for simple hosting in nodejs
+```
+
+```js
+npm run res
+```
+```json
+Just put new image in new folder with same name like image in that folder put image.
+After this cmd engine will get meta data. This is not list for direct loading images.
+Build meta data for image/images.
+```
+
+```js
+npm run editor
+```
+```json
+ This is editor to make possible concept of EDITOR-ON-PAGE.
+```
+
+```js
+npm run pack
+```
+```json
+This will pack all scripts created from editor to the `starter/visual.js`.
 ```
 
 Editor use [`cache/`] this folder for cache data -maybe you will need extra permission.

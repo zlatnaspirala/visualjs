@@ -7,8 +7,7 @@
     "pack": "node build.js",
     "res": "node res.js",
     "editor": "node editor.js",
-    "host": "node self-host.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "host": "node self-host.js"
   },
   "keywords": [
     "visualjs-server"
