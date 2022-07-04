@@ -22,9 +22,12 @@ All new version begin with 3.0.0 for client, server or GUI part.
 
 ### Installation and setup:
 
+Use this for `/project/client` part, `project/server` part also use it in `test-npm`.
 ```js
 npm i
 ```
+
+You can use this project from this git repo or you can use it from npm services like in `test-npm/` folder.
 
 ## Client/Manifest [html5]
 ```js
@@ -145,7 +148,30 @@ This tool will create visual.js in folder starter/ with all your game object was
 New FEATURE => save stage
 
 
-### VISUALJS-GUI.exe [Windows GUI open source]
+## Use visual-js from npm service
+Take a look at the `test-npm/` folder.
+
+```js
+import { sys, ActivateModifiers, loadEditor, loadEditorObjects } from 'visual-js';
+ActivateModifiers();
+
+// Run editor
+loadEditor();
+
+sys.DOM.CREATE_SURFACE("SURF", "examples", 100, 99.4, "DIAMETRIC");
+examples.ENGINE.CREATE_MODUL("STARTER");
+var smodul = examples.ENGINE.MODULES.ACCESS_MODULE("STARTER");
+
+smodul.NEW_OBJECT("IamNewObject", 25, 50, 12, 25, 10);
+
+
+// Run editor
+loadEditorObjects();
+```
+
+
+
+## VISUALJS-GUI.exe [Windows GUI open source]
 
  [Video tutorial for visual-JS source editor win gui](https://www.youtube.com/watch?v=kxUBPDhB-3I)
 
