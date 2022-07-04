@@ -50,7 +50,7 @@ function GEN(name_of_animation_path, ALL_FILES_OF_OBJECT) {
 
   ALL_FILES_OF_OBJECT.forEach(function(item) {
     console.log("EXE GEN", name_of_animation_path);
-    READ(APPLICATION.PATH_OF_WWW + "lib/visual_script/" + name_of_animation_path + "/" + item);
+    READ(APPLICATION.PATH_OF_WWW + "cache/" + name_of_animation_path + "/" + item);
   });
 
   setTimeout(function() {
@@ -60,7 +60,7 @@ function GEN(name_of_animation_path, ALL_FILES_OF_OBJECT) {
 }
 
 console.log(APPLICATION.PATH_OF_WWW);
-var LIST_OFF_ALL_VISUAL_DIR = getDirectories(APPLICATION.PATH_OF_WWW + "lib/visual_script/");
+var LIST_OFF_ALL_VISUAL_DIR = getDirectories(APPLICATION.PATH_OF_WWW + "cache/");
 var local__x = -1;
 
 
@@ -72,10 +72,10 @@ for(var i in LIST_OFF_ALL_VISUAL_DIR) {
   //console.log("Obj Created :" , LIST_OFF_ALL_VISUAL_DIR[i]);
   if((local__x + 1) == LIST_OFF_ALL_VISUAL_DIR.length) {
     console.log("Obj Created: ", LIST_OFF_ALL_VISUAL_DIR[i]);
-    GET_FILES_NAME(APPLICATION.PATH_OF_WWW + "lib/visual_script/" + LIST_OFF_ALL_VISUAL_DIR[i], LIST_OFF_ALL_VISUAL_DIR[i], true);
+    GET_FILES_NAME(APPLICATION.PATH_OF_WWW + "cache/" + LIST_OFF_ALL_VISUAL_DIR[i], LIST_OFF_ALL_VISUAL_DIR[i], true);
   } else {
     console.log("Obj Created :", LIST_OFF_ALL_VISUAL_DIR[i]);
-    GET_FILES_NAME(APPLICATION.PATH_OF_WWW + "lib/visual_script/" + LIST_OFF_ALL_VISUAL_DIR[i], LIST_OFF_ALL_VISUAL_DIR[i], false);
+    GET_FILES_NAME(APPLICATION.PATH_OF_WWW + "cache/" + LIST_OFF_ALL_VISUAL_DIR[i], LIST_OFF_ALL_VISUAL_DIR[i], false);
   }
 }
 

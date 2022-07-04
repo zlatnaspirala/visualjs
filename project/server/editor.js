@@ -91,7 +91,7 @@ io.sockets.on("connection", function(socket) {
   // DELETE_FROM_VISUAL_SCRIPTS CMD
   socket.on("DELETE_FROM_VISUAL_SCRIPTS", function(PROGRAM_NAME) {
 
-    var localpath = CONFIG.PATH_OF_WWW + "lib/visual_script/";
+    var localpath = CONFIG.PATH_OF_WWW + "cache/";
     var LIST_OFF_ALL_GAME_OBJECT = getDirectories(localpath);
 
     console.log(LIST_OFF_ALL_GAME_OBJECT, "<<LIST_OFF_ALL_GAME_OBJECT");
@@ -115,8 +115,8 @@ io.sockets.on("connection", function(socket) {
   //SET_MAIN_INTERVAL
   socket.on("SET_MAIN_INTERVAL", function(PROGRAM_NAME, r, u) {
     console.log("SET_MAIN_INTERVAL: ", PROGRAM_NAME , "new data ", r , " ", u);
-    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/redraw";
-    var local_pathC = "lib/visual_script/redraw/a9.js";
+    var local_path = CONFIG.PATH_OF_WWW + "cache/redraw";
+    var local_pathC = "cache/redraw/a9.js";
     createFile(local_path + "/a9.js",
      `window["${PROGRAM_NAME}"].DRAW_INTERVAL = ` + parseFloat(r) + `; \n 
       window["${PROGRAM_NAME}"].UPDATE_INTERVAL = ` + parseFloat(u) + `; \n `,
@@ -127,11 +127,11 @@ io.sockets.on("connection", function(socket) {
   socket.on("ADD_NEW_GAME_OBJECT",
     function(name, x, y, w, h, PROGRAM_NAME, MODUL) {
       mkdirp(
-        `${CONFIG.PATH_OF_WWW}lib/visual_script/${name}`, {recursive: true}).then((__) => {
+        `${CONFIG.PATH_OF_WWW}cache/${name}`, {recursive: true}).then((__) => {
           console.log("ADD_NEW_GAME_OBJECT ACTION PATH =>  ", __);
           if(__) {
-            var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-            var local_pathC = "lib/visual_script/" + name + "/a2.js";
+            var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+            var local_pathC = "cache/" + name + "/a2.js";
             //HELLO_WORD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("NIKOLA" , 45 , 45 , 10 , 10 , 6);
             createFile(
               local_path + "/" + "a2.js",
@@ -164,8 +164,8 @@ io.sockets.on("connection", function(socket) {
     function(name, sec, MODUL, PROGRAM_NAME) {
       console.log("DESTROY_GAME_OBJECT_WITH_DELAY :", name, sec);
       sec = sec * 20;
-      var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-      var local_pathC = "lib/visual_script/" + name + "/a2.js";
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/a2.js";
 
       createFile(
         local_path + "/" + "a2.js",
@@ -188,8 +188,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("SET_NEW_START_UP_POSITION",
     function(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
       console.log("NEW POSITION FOR ", name);
-      var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-      var local_pathC = "lib/visual_script/" + name + "/a2.js";
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/a2.js";
       //createFile(  local_path + "/" + "startup_pos.js" , "" + PROGRAM_NAME + ".ENGINE.MODULES.ACCESS_MODULE( '" +  MODUL + "').GAME_OBJECTS.ACCESS('" + name + "').POSITION.SET_POSITION( "+newX+" , "+newY+");",  local_pathC , "AFTER_F5");
       createFile(
         local_path + "/" + "a2.js",
@@ -218,8 +218,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("ADD_ANIMATION", function(name, PROGRAM_NAME, MODUL, RES) {
     console.log("ADD ANIMATION :", name, PROGRAM_NAME, MODUL, RES);
 
-    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-    var local_pathC = "lib/visual_script/" + name + "/a3.js";
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/a3.js";
     var ID = random(1, 9999999);
     ID = ID.toString().replace(".", "11");
     ID = parseInt(ID);
@@ -247,8 +247,8 @@ io.sockets.on("connection", function(socket) {
   // a4
   socket.on("ADD_COLLISION", function(name, PROGRAM_NAME, MODUL, margin) {
     console.log("ADD_COLLISION:", name, PROGRAM_NAME, MODUL, margin);
-    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-    var local_pathC = "lib/visual_script/" + name + "/a4.js";
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/a4.js";
     createFile(
       local_path + "/" + "a4.js",
       "" +
@@ -270,7 +270,7 @@ io.sockets.on("connection", function(socket) {
     console.log("REMOVE_COLLISION:", name, PROGRAM_NAME, MODUL);
 
     var local_pathC =
-      CONFIG.PATH_OF_WWW + "lib/visual_script/" + name + "/a4.js";
+      CONFIG.PATH_OF_WWW + "cache/" + name + "/a4.js";
 
     deleteFile(local_pathC);
   });
@@ -279,8 +279,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("ATACH_PLAYER",
     function(name, PROGRAM_NAME, MODUL, type__, index_) {
       console.log("ATACH_PLAYER :", name, PROGRAM_NAME, MODUL, type__);
-      var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-      var local_pathC = "lib/visual_script/" + name + "/a5.js";
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/a5.js";
       createFile(
         local_path + "/" + "a5.js",
         "" +
@@ -310,15 +310,15 @@ io.sockets.on("connection", function(socket) {
   socket.on("DEATACH_PLAYER", function(name, PROGRAM_NAME, MODUL) {
     console.log("DEATACH_PLAYER :", name, PROGRAM_NAME, MODUL);
     var local_pathC =
-      CONFIG.PATH_OF_WWW + "lib/visual_script/" + name + "/a5.js";
+      CONFIG.PATH_OF_WWW + "cache/" + name + "/a5.js";
     deleteFile(local_pathC);
   });
 
   // a6
   socket.on("ADD_PARTICLE", function(name, PROGRAM_NAME, MODUL, type__) {
     console.log("ADD_PARTICLE :", name, PROGRAM_NAME, MODUL, type__);
-    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-    var local_pathC = "lib/visual_script/" + name + "/a6.js";
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/a6.js";
     createFile(
       local_path + "/" + "a6.js",
       "" +
@@ -339,7 +339,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("REMOVE_PARTICLE", function(name, PROGRAM_NAME, MODUL) {
     console.log("REMOVE_PARTICLE:", name, PROGRAM_NAME, MODUL);
     var local_pathC =
-      CONFIG.PATH_OF_WWW + "lib/visual_script/" + name + "/a6.js";
+      CONFIG.PATH_OF_WWW + "cache/" + name + "/a6.js";
     deleteFile(local_pathC);
   });
 
@@ -347,8 +347,8 @@ io.sockets.on("connection", function(socket) {
   socket.on("ADD_TEXTBOX",
     function(name, PROGRAM_NAME, MODUL, text, radius, color, textcolor) {
       console.log("ADD_TEXTBOX :", name, PROGRAM_NAME, MODUL, text);
-      var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-      var local_pathC = "lib/visual_script/" + name + "/a7.js";
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/a7.js";
       createFile(
         local_path + "/" + "a7.js",
         "" +
@@ -375,7 +375,7 @@ io.sockets.on("connection", function(socket) {
   socket.on("REMOVE_TEXTBOX", function(name, PROGRAM_NAME, MODUL) {
     console.log("REMOVE_TEXTBOX:", name, PROGRAM_NAME, MODUL);
     var local_pathC =
-      CONFIG.PATH_OF_WWW + "lib/visual_script/" + name + "/a7.js";
+      CONFIG.PATH_OF_WWW + "cache/" + name + "/a7.js";
     deleteFile(local_pathC);
   });
 
@@ -384,8 +384,8 @@ io.sockets.on("connection", function(socket) {
     function(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
       //	LOCAL_COMMUNICATOR.emit('ADD_WEBCAM',  name , PROGRAM_NAME , MODUL , type_ , type_of_dim , byV , byH);
       console.log("ADD_WEBCAM for ", name);
-      var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
-      var local_pathC = "lib/visual_script/" + name + "/a8.js";
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/a8.js";
       //local_go.CREATE_WEBCAM(local_res , local_type_of_dim);
       if(type_ == "NORMAL") {
         createFile(
@@ -433,12 +433,12 @@ io.sockets.on("connection", function(socket) {
   //DESTROY_GAME_OBJECT
   socket.on("DESTROY_GAME_OBJECT", function(name) {
     console.log("DESTROY_GAME_OBJECT :", name);
-    var local_path = CONFIG.PATH_OF_WWW + "lib/visual_script/" + name;
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
     deleteFolder(local_path);
   });
 
   socket.on("GET_ALL_GAME_OBJECTS", function() {
-    var localpath = CONFIG.PATH_OF_WWW + "lib/visual_script/";
+    var localpath = CONFIG.PATH_OF_WWW + "cache/";
     var LIST_OFF_ALL_GAME_OBJECT = getDirectories(localpath);
     console.log(LIST_OFF_ALL_GAME_OBJECT, "<<LIST_OFF_ALL_GAME_OBJECT");
     var local__x = 0;
@@ -450,14 +450,14 @@ io.sockets.on("connection", function(socket) {
       if(local__x + 1 == LIST_OFF_ALL_GAME_OBJECT.length) {
         //console.log("POSLEDNJI");
         GET_FILES_NAME(
-          CONFIG.PATH_OF_WWW + "lib/visual_script/" + val,
+          CONFIG.PATH_OF_WWW + "cache/" + val,
           val,
           true
         );
       } else {
         //console.log("NIJE POSLEDNJI");
         GET_FILES_NAME(
-          CONFIG.PATH_OF_WWW + "lib/visual_script/" + val,
+          CONFIG.PATH_OF_WWW + "cache/" + val,
           val,
           false
         );
@@ -496,7 +496,7 @@ function GET_FILES_NAME(path, name_of_go, main_length) {
       io.sockets.emit(
         "RETURN",
         "LOAD_SCRIPT",
-        "lib/visual_script/" + name_of_go + "/" + items[i]
+        "cache/" + name_of_go + "/" + items[i]
       );
     }
   });

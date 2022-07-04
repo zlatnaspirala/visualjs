@@ -10088,6 +10088,7 @@ function DOM() {
 
     if (this.c == null) {
       this.c = document.createElement('canvas');
+      this.c.id = name_of_canvas;
       document.body.appendChild(this.c);
     }
 
@@ -11944,6 +11945,7 @@ _visualJs.sys.DOM.CREATE_SURFACE("SURF", "examples", 100, 99.4, "DIAMETRIC");
 
 examples.ENGINE.CREATE_MODUL("STARTER");
 console.log("What is sys.RUNNING_PROGRAMS ", _visualJs.sys.RUNNING_PROGRAMS);
-var smodul = examples.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // smodul.NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
+var smodul = examples.ENGINE.MODULES.ACCESS_MODULE("STARTER");
+smodul.NEW_OBJECT("IamNewObject", 25, 50, 12, 25, 10);
 
 },{"visual-js":37}]},{},[56]);

@@ -104,7 +104,7 @@ Best way is to use it all.
 node build.js
 ```
 
-Editor use [`lib/visual_script/`] this folder for cache data -maybe you will need extra permission.
+Editor use [`cache/`] this folder for cache data -maybe you will need extra permission.
 3) In browser navigate to /client/ folder (index.html)
 
 Click right button and you will see content menu . First item is *Add New game object* .
@@ -132,7 +132,7 @@ Images object will be created after you add animation to the game objects (This 
 ```
 For interconnections used webSocket communication protocol.
 
-Create game objects direct in web browser view. Takes data from system folder lib/visual_scripts/ and generate code. After build you can found your code intro visual.js (`node build.js`)
+Create game objects direct in web browser view. Takes data from system folder `cache/` and generate code. After build you can found your code intro visual.js (`node build.js`)
 
 - server/build.js (node.js dev app for local use!)
  There is not security validation on server part and this action use only

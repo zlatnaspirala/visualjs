@@ -10,6 +10,4 @@ console.log("What is sys.RUNNING_PROGRAMS ", sys.RUNNING_PROGRAMS);
 
 var smodul = examples.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
-// smodul.NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
-
-
+smodul.NEW_OBJECT("IamNewObject", 25, 50, 12, 25, 10);

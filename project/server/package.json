@@ -1,11 +1,8 @@
 {
   "name": "visual-js-server",
-  "version": "3.0.0",
+  "version": "3.0.3",
   "description": "Dev tool for visualjs3 client.",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
     "pack": "node build.js",
     "res": "node res.js",

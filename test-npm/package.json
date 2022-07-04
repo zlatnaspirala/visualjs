@@ -4,8 +4,8 @@
   "description": "test-npm-visualjs3",
   "main": "index.js",
   "dependencies": {
-    "visual-js": "^3.0.4",
-    "visual-js-server": "3.0.0",
+    "visual-js": "^3.0.5",
+    "visual-js-server": "3.0.3",
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
@@ -14,6 +14,8 @@
   },
   "scripts": {
     "app": "browserify test.js -p esmify > builds/examples.js",
+    "editor": "node editor.js",
+    "audio_res": "node audio_res.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
