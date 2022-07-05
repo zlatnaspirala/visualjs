@@ -22,21 +22,20 @@ export function ENGINE(c) {
     // ONE PROGRAM ONE ENGINE
     //ENGINE WILL BE BIG SWITCHER
     this.PROGRAM_ID = c.id;
+
+    
+    if (APPLICATION.EDITOR == true) {
+      this.ENGINE_EDITOR = true;
+    } else {
+      this.ENGINE_EDITOR = false;
+    }
+    
     //Events are part of engine
     this.EVENTS = new EVENTS(c, ROOT_ENGINE); // destroy mem IMPORTANT events must be deatached at first time than set up to undefined .
     this.MODULES = new Array();
     this.GAME_TYPE = "NO_PLAYER";
     this.KEYBOARD = new KEYBOARD(c);
 
-    if (APPLICATION.EDITOR == true) {
-
-        this.ENGINE_EDITOR = true;
-
-    } else {
-
-        this.ENGINE_EDITOR = false;
-
-    }
 
     this.EXIT_EDIT_MODE = function () {
 

@@ -2227,6 +2227,11 @@ var _editor = require("./lib/editor/editor");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+if (_manifest.default.EDITOR == true) {
+  (0, _editor.runEditor)();
+  (0, _editor.GET_ALL_GAME_OBJECTS)();
+}
+
 (0, _proto_modify.default)();
 
 if (typeof AUDIO_RESOURCE != "undefined") {
@@ -2243,7 +2248,6 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 (0, _program_modul.CREATE_SYSTEM_BUTTONS)();
 (0, _onresize.attachResize)();
-(0, _editor.GET_ALL_GAME_OBJECTS)();
 
 _system.default.SCRIPT.LOAD('starter/visual.js', true);
 
@@ -2623,6 +2627,7 @@ exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
 exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
 exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+exports.runEditor = void 0;
 
 var _socket = require("socket.io-client");
 
@@ -2641,36 +2646,44 @@ console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
 console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
 console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software!      .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
-var LOCAL_COMMUNICATOR = new Object();
+var LOCAL_COMMUNICATOR;
 
-if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
-  LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
-  LOCAL_COMMUNICATOR.on("connect", function () {
-    console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
-  });
-  LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
-    if (data != "") {
-      console.log("chat data empty", user, data);
-    } else {
-      console.log("chat data empty");
-    }
-  });
-  LOCAL_COMMUNICATOR.on("RETURN", function (action, data) {
-    if (action == "GET_ALL_GAME_OBJECTS") {
-      console.log(data + "<<<<<<<<< from ");
-    } else if (action == "LOAD_SCRIPT") {
-      console.log("LOAD_SCRIPT : " + data);
-      CALL_OR_WAIT(data);
-    } else if (action == "LOAD_SCRIPT_AFTER_F5") {} else if (action == "ERROR") {
-      alert("Server says error:" + data);
-    } // console view  DOM
-    //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
-    //var objDiv = E("console");
-    //objDiv.scrollTop = objDiv.scrollHeight;
+const runEditor = () => {
+  LOCAL_COMMUNICATOR = {};
+  console.log(_manifest.default);
 
-  });
-} // EDITOR ACTIONS
+  if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
+    LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
+    LOCAL_COMMUNICATOR.on("connect", function () {
+      console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
+    });
+    LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
+      if (data != "") {
+        console.log("chat data empty", user, data);
+      } else {
+        console.log("chat data empty");
+      }
+    });
+    LOCAL_COMMUNICATOR.on("RETURN", function (action, data) {
+      if (action == "GET_ALL_GAME_OBJECTS") {
+        console.log(data + "<<<<<<<<< from ");
+      } else if (action == "LOAD_SCRIPT") {
+        console.log("LOAD_SCRIPT : " + data);
 
+        _system.default.SCRIPT.LOAD(data);
+      } else if (action == "LOAD_SCRIPT_AFTER_F5") {} else if (action == "ERROR") {
+        alert("Server says error:" + data);
+      } // console view  DOM
+      //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
+      //var objDiv = E("console");
+      //objDiv.scrollTop = objDiv.scrollHeight;
+
+    });
+  }
+}; // EDITOR ACTIONS
+
+
+exports.runEditor = runEditor;
 
 function CALL_OR_WAIT(data) {
   var data = data;
@@ -2807,19 +2820,20 @@ function ENGINE(c) {
   var ROOT_ENGINE = this; // ONE PROGRAM ONE ENGINE
   //ENGINE WILL BE BIG SWITCHER
 
-  this.PROGRAM_ID = c.id; //Events are part of engine
+  this.PROGRAM_ID = c.id;
+
+  if (_manifest.default.EDITOR == true) {
+    this.ENGINE_EDITOR = true;
+  } else {
+    this.ENGINE_EDITOR = false;
+  } //Events are part of engine
+
 
   this.EVENTS = new _game_object_events.EVENTS(c, ROOT_ENGINE); // destroy mem IMPORTANT events must be deatached at first time than set up to undefined .
 
   this.MODULES = new Array();
   this.GAME_TYPE = "NO_PLAYER";
   this.KEYBOARD = new _keyboard.KEYBOARD(c);
-
-  if (_manifest.default.EDITOR == true) {
-    this.ENGINE_EDITOR = true;
-  } else {
-    this.ENGINE_EDITOR = false;
-  }
 
   this.EXIT_EDIT_MODE = function () {
     ROOT_ENGINE.ENGINE_EDITOR = false;
@@ -3919,9 +3933,10 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     };
   };
 
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>", window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE_EDITOR);
   this.EDITOR = {
     SELECTED: false,
-    ENABLE: _manifest.default.EDITOR,
+    ENABLE: window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.ENGINE_EDITOR,
     ACTORS_VISIBLE: true,
     ACTORS_AREA_HEIGHT: 10,
     ACTOR_BLUE_HOVER: false,
@@ -4923,7 +4938,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                   // DESTROY OBJECT
                   ROOT_EVENTS.ROOT_ENGINE.MODULES[x].DESTROY_OBJECT(local_go.NAME); //DESTROY( name , canvas.id  , local_go.PARENT )
 
-                  DESTROY(local_go.NAME);
+                  (0, _editor.DESTROY)(local_go.NAME);
 
                   _system.default.DEBUG.LOG("DESTROY_OBJECT");
                 } //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 
-import manifest from './manifest/manifest';
+import APPLICATION from './manifest/manifest';
 import ActivateModifiers from './lib/proto_modify';
 import AUDIO_RES from './lib/audio/audio';
 import SYS from './lib/system';
@@ -7,8 +7,12 @@ import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
 import {RESOURCE} from './res/animations/resource.js';
 import { attachResize } from "./lib/events/onresize";
 import ML from './lib/multilanguage/ml';
+import { runEditor, GET_ALL_GAME_OBJECTS } from "./lib/editor/editor";
 
-import { GET_ALL_GAME_OBJECTS } from "./lib/editor/editor";
+if (APPLICATION.EDITOR == true) {
+  runEditor();
+  GET_ALL_GAME_OBJECTS();
+}
 
 ActivateModifiers();
 
@@ -20,8 +24,6 @@ if(typeof AUDIO_RESOURCE != "undefined") {
 // Run Instance from here
 ////////////////////////////
 
-
-
 SYS.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 
 //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
@@ -31,14 +33,12 @@ var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 CREATE_SYSTEM_BUTTONS();
 attachResize();
 
-GET_ALL_GAME_OBJECTS();
-
 SYS.SCRIPT.LOAD('starter/visual.js', true)
 SYS.SCRIPT.LOAD("res/audio/resource.audio");
 
 console.log("ML ", ML);
 window.ML = ML;
-window.APPLICATION = manifest;
+window.APPLICATION = APPLICATION;
 
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png',

@@ -2,7 +2,7 @@
 // dev for io
 // import { io } from "../../node_modules/socket.io-client";
 // prodc
-import { io } from "socket.io-client";
+import {io} from "socket.io-client";
 import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
 
@@ -13,44 +13,50 @@ console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
 console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software!      .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
 
-var LOCAL_COMMUNICATOR = new Object();
+var LOCAL_COMMUNICATOR;
 
-if(APPLICATION.EDITOR_AUTORUN == true || APPLICATION.EDITOR == true) {
+export const runEditor = () => {
+  LOCAL_COMMUNICATOR = {};
+  console.log(APPLICATION);
 
-  LOCAL_COMMUNICATOR = io.connect("http://" + APPLICATION.LOCAL_SERVER + ":1013");
+  if(APPLICATION.EDITOR_AUTORUN == true || APPLICATION.EDITOR == true) {
 
-  LOCAL_COMMUNICATOR.on("connect", function() {
-    console.log("%c" +  "Connected with Editor." , "background: #000; color: lime");
-  });
+    LOCAL_COMMUNICATOR = io.connect("http://" + APPLICATION.LOCAL_SERVER + ":1013");
 
-  LOCAL_COMMUNICATOR.on("realtime", function(user, data) {
-    if(data != "") {
-      console.log("chat data empty", user, data);
-    } else {
-      console.log("chat data empty");
-    }
-  });
+    LOCAL_COMMUNICATOR.on("connect", function() {
+      console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
+    });
 
-  LOCAL_COMMUNICATOR.on("RETURN", function(action, data) {
+    LOCAL_COMMUNICATOR.on("realtime", function(user, data) {
+      if(data != "") {
+        console.log("chat data empty", user, data);
+      } else {
+        console.log("chat data empty");
+      }
+    });
 
-    if(action == "GET_ALL_GAME_OBJECTS") {
-      console.log(data + "<<<<<<<<< from ");
-    } else if(action == "LOAD_SCRIPT") {
-      console.log("LOAD_SCRIPT : " + data);
-      CALL_OR_WAIT(data);
-    } else if(action == "LOAD_SCRIPT_AFTER_F5") {}
-    else if(action == "ERROR") {
-      alert("Server says error:" + data);
-    }
+    LOCAL_COMMUNICATOR.on("RETURN", function(action, data) {
 
-    // console view  DOM
-    //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
-    //var objDiv = E("console");
-    //objDiv.scrollTop = objDiv.scrollHeight;
+      if(action == "GET_ALL_GAME_OBJECTS") {
+        console.log(data + "<<<<<<<<< from ");
+      } else if(action == "LOAD_SCRIPT") {
+        console.log("LOAD_SCRIPT : " + data);
+        SYS.SCRIPT.LOAD(data);
+      } else if(action == "LOAD_SCRIPT_AFTER_F5") {}
+      else if(action == "ERROR") {
+        alert("Server says error:" + data);
+      }
 
-  });
+      // console view  DOM
+      //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
+      //var objDiv = E("console");
+      //objDiv.scrollTop = objDiv.scrollHeight;
 
-}
+    });
+
+  }
+
+};
 
 // EDITOR ACTIONS
 function CALL_OR_WAIT(data) {
@@ -64,13 +70,13 @@ function CALL_OR_WAIT(data) {
 
           SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
           SYS.SCRIPT.LOAD(data);
-          
+
         }, 100);
       } else {
 
         SYS.DEBUG.LOG("VISUAL SCRIPT EDITOR ACTION EXECUTED!");
         SYS.SCRIPT.LOAD(data);
-        
+
       }
     } else {
       setTimeout(function() {

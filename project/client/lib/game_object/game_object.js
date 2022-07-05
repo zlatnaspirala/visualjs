@@ -652,7 +652,7 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
   this.EDITOR = {
     SELECTED: false,
-    ENABLE: APPLICATION.EDITOR,
+    ENABLE: window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.ENGINE_EDITOR,
     ACTORS_VISIBLE: true,
     ACTORS_AREA_HEIGHT: 10,
     ACTOR_BLUE_HOVER: false,
