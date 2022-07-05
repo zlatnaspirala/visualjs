@@ -13,7 +13,10 @@ import {
   REMOVE_PARTICLE,
   SET_MAIN_INTERVAL,
   DELETE_FROM_VISUAL_SCRIPTS,
-  DESTROY } from '../editor/editor';
+  DESTROY,
+  REMOVE_TEXTBOX,
+  ADD_WEBCAM,
+  REMOVE_WEBCAM } from '../editor/editor';
 import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {

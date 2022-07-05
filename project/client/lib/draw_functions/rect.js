@@ -1,3 +1,6 @@
+
+import { roundedRect, drawRotatedTextNoSkrech } from "../init";
+
 /**
  * @class RECT
  * @constructor

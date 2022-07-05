@@ -109,7 +109,10 @@ io.sockets.on("connection", function(socket) {
       }
 
     }
-    
+
+    // best
+    io.sockets.emit("RETURN", "REFRESH");
+
   });
   
   //SET_MAIN_INTERVAL

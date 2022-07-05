@@ -17,7 +17,7 @@ if (APPLICATION.EDITOR == true) {
 ActivateModifiers();
 
 if(typeof AUDIO_RESOURCE != "undefined") {
-  SYS.SOUND.RES = new AUDIO_RES();
+  // SYS.SOUND.RES = new AUDIO_RES();
 }
 
 ////////////////////////////

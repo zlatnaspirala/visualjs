@@ -43,6 +43,9 @@ export const runEditor = () => {
         console.log("LOAD_SCRIPT : " + data);
         SYS.SCRIPT.LOAD(data);
       } else if(action == "LOAD_SCRIPT_AFTER_F5") {}
+      else if(action == "REFRESH") {
+        location.reload();
+      }
       else if(action == "ERROR") {
         alert("Server says error:" + data);
       }

@@ -10,7 +10,8 @@
     "host": "node self-host.js"
   },
   "keywords": [
-    "visualjs-server"
+    "visualjs-server", "dev-tool", "javascript-tools",
+    "editor", "on-page-editor", "npm-visual-js"
   ],
   "author": "Nikola Lukic",
   "license": "MIT",

@@ -5,7 +5,7 @@ import {RIGHT_MENU_BUTTON} from '../draw_functions/systems';
 import {RECT} from '../draw_functions/rect';
 import {ANIMATION} from '../draw_functions/animation';
 import APPLICATION from '../../manifest/manifest';
-import {VIEW, CONVERTOR} from '../init';
+import {VIEW, CONVERTOR, SET_STREAM} from '../init';
 import {DESTROY_DELAY} from '../editor/editor';
 import {PARTICLE_FONTAN} from '../particule/particule';
 
