@@ -56,7 +56,7 @@
             // 
             this.label9.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(127)))), ((int)(((byte)(255)))));
-            this.label9.Location = new System.Drawing.Point(-9, -96);
+            this.label9.Location = new System.Drawing.Point(-9, -131);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(586, 1624);
             this.label9.TabIndex = 10;
@@ -84,10 +84,10 @@
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.linkLabel1.Location = new System.Drawing.Point(166, 310);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(188, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(197, 13);
             this.linkLabel1.TabIndex = 13;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://bitbucket.org/nikola_l/visual-js";
+            this.linkLabel1.Text = "https://github.com/zlatnaspirala/visualjs";
             // 
             // linkLabel2
             // 

@@ -12,12 +12,10 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-
 namespace Visual_JS
 {
     public partial class editor_script : Form
     {
-
         private void CheckKeyword(string word, Color color, int startIndex)
         {
             if (this.editor_text_box_1.Text.Contains(word))
@@ -30,13 +28,10 @@ namespace Visual_JS
                     this.editor_text_box_1.Select((index + startIndex), word.Length);
                     this.editor_text_box_1.SelectionColor = color;
                     this.editor_text_box_1.Select(selectStart, 0);
-                    this.editor_text_box_1.SelectionColor = Color.FromArgb(192, 192, 255);//192, 192, 255
+                    this.editor_text_box_1.SelectionColor = Color.FromArgb(192, 192, 255);
                 }
             }
         }
-
-
-
 
         public editor_script()
         {
@@ -55,9 +50,7 @@ namespace Visual_JS
             }
             else
             {
-
                 // nothing
-
             }
 
         }
@@ -211,16 +204,9 @@ namespace Visual_JS
             this.CheckKeyword(" Number", Color.YellowGreen, 0);
             this.CheckKeyword(" String", Color.YellowGreen, 0);
 
-
-
-
-
             //this.CheckKeyword("\"/", Color.YellowGreen, 0);
 
             CODE_EDITOR_ACTIVE_LINE = editor_text_box_1.GetLineFromCharIndex(editor_text_box_1.SelectionStart);
-
- 
-
 
         }
 
@@ -268,8 +254,6 @@ namespace Visual_JS
 
             } 
             SelectedPath_TREE.Text = APPLICATION_PATH_PROJECT_INSTANCE_ROOT;// + e.Node.FullPath + "\\";
-
-           
 
         
             //+  treeView1.SelectedNode.FullPath
