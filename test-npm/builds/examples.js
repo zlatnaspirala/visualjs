@@ -6972,6 +6972,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RECT = RECT;
 
+var _init = require("../init");
+
 /**
  * @class RECT
  * @constructor
@@ -7020,17 +7022,17 @@ function RECT(TEXT, ROOT_GAME_OBJECT, radius, color, colorText) {
   this.DRAW = function (s) {
     s.save();
     s.globalAlpha = this.BACKGROUND_OPACITY;
-    roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color);
+    (0, _init.roundedRect)(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color);
     s.textBaseline = this.textBaseline;
 
     if (ROOT_GAME_OBJECT.FOCUS == true) {
       s.lineWidth = this.border_on_focus_width_line;
       s.fillStyle = this.border_on_focus_color;
-      roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
+      (0, _init.roundedRect)(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
     } else {
       s.lineWidth = this.border_width_line;
       s.fillStyle = this.border_color;
-      roundedRect(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
+      (0, _init.roundedRect)(s, "", this.POSITION.X(), this.POSITION.Y(), this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT(), this.radius, this.color, "stroke", this.border_color);
     }
 
     s.textAlign = this.TEXT_ALIGN;
@@ -7039,7 +7041,7 @@ function RECT(TEXT, ROOT_GAME_OBJECT, radius, color, colorText) {
     s.globalAlpha = this.TEXT_OPACITY;
 
     if (this.textResizeByWidth == false) {
-      drawRotatedTextNoSkrech(s, this.TEXT, this.POSITION.X(), this.POSITION.Y(), this.TEXT_ANGLE, this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
+      (0, _init.drawRotatedTextNoSkrech)(s, this.TEXT, this.POSITION.X(), this.POSITION.Y(), this.TEXT_ANGLE, this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT());
     } else {
       drawRotatedText(s, this.TEXT, this.POSITION.X(), this.POSITION.Y(), this.TEXT_ANGLE, this.DIMENSION.WIDTH(), this.DIMENSION.HEIGHT()); //s.textAlign = "start";
     }
@@ -7048,7 +7050,7 @@ function RECT(TEXT, ROOT_GAME_OBJECT, radius, color, colorText) {
   };
 }
 
-},{}],40:[function(require,module,exports){
+},{"../init":47}],40:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7117,6 +7119,7 @@ exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
 exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
 exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+exports.runEditor = void 0;
 
 var _socket = require("socket.io-client");
 
@@ -7135,36 +7138,46 @@ console.log('\x1b[36m%s\x1b[0m', ". Visual-js Editor                   .");
 console.log('\x1b[36m%s\x1b[0m', ". Version 3.0.0                      .");
 console.log('\x1b[36m%s\x1b[0m', ". Thanks for using my software!      .");
 console.log('\x1b[36m%s\x1b[0m', "......................................");
-var LOCAL_COMMUNICATOR = new Object();
+var LOCAL_COMMUNICATOR;
 
-if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
-  LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
-  LOCAL_COMMUNICATOR.on("connect", function () {
-    console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
-  });
-  LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
-    if (data != "") {
-      console.log("chat data empty", user, data);
-    } else {
-      console.log("chat data empty");
-    }
-  });
-  LOCAL_COMMUNICATOR.on("RETURN", function (action, data) {
-    if (action == "GET_ALL_GAME_OBJECTS") {
-      console.log(data + "<<<<<<<<< from ");
-    } else if (action == "LOAD_SCRIPT") {
-      console.log("LOAD_SCRIPT : " + data);
-      CALL_OR_WAIT(data);
-    } else if (action == "LOAD_SCRIPT_AFTER_F5") {} else if (action == "ERROR") {
-      alert("Server says error:" + data);
-    } // console view  DOM
-    //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
-    //var objDiv = E("console");
-    //objDiv.scrollTop = objDiv.scrollHeight;
+const runEditor = () => {
+  LOCAL_COMMUNICATOR = {};
+  console.log(_manifest.default);
 
-  });
-} // EDITOR ACTIONS
+  if (_manifest.default.EDITOR_AUTORUN == true || _manifest.default.EDITOR == true) {
+    LOCAL_COMMUNICATOR = _socket.io.connect("http://" + _manifest.default.LOCAL_SERVER + ":1013");
+    LOCAL_COMMUNICATOR.on("connect", function () {
+      console.log("%c" + "Connected with Editor.", "background: #000; color: lime");
+    });
+    LOCAL_COMMUNICATOR.on("realtime", function (user, data) {
+      if (data != "") {
+        console.log("chat data empty", user, data);
+      } else {
+        console.log("chat data empty");
+      }
+    });
+    LOCAL_COMMUNICATOR.on("RETURN", function (action, data) {
+      if (action == "GET_ALL_GAME_OBJECTS") {
+        console.log(data + "<<<<<<<<< from ");
+      } else if (action == "LOAD_SCRIPT") {
+        console.log("LOAD_SCRIPT : " + data);
 
+        _system.default.SCRIPT.LOAD(data);
+      } else if (action == "LOAD_SCRIPT_AFTER_F5") {} else if (action == "REFRESH") {
+        location.reload();
+      } else if (action == "ERROR") {
+        alert("Server says error:" + data);
+      } // console view  DOM
+      //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
+      //var objDiv = E("console");
+      //objDiv.scrollTop = objDiv.scrollHeight;
+
+    });
+  }
+}; // EDITOR ACTIONS
+
+
+exports.runEditor = runEditor;
 
 function CALL_OR_WAIT(data) {
   var data = data;
@@ -7301,19 +7314,20 @@ function ENGINE(c) {
   var ROOT_ENGINE = this; // ONE PROGRAM ONE ENGINE
   //ENGINE WILL BE BIG SWITCHER
 
-  this.PROGRAM_ID = c.id; //Events are part of engine
+  this.PROGRAM_ID = c.id;
+
+  if (_manifest.default.EDITOR == true) {
+    this.ENGINE_EDITOR = true;
+  } else {
+    this.ENGINE_EDITOR = false;
+  } //Events are part of engine
+
 
   this.EVENTS = new _game_object_events.EVENTS(c, ROOT_ENGINE); // destroy mem IMPORTANT events must be deatached at first time than set up to undefined .
 
   this.MODULES = new Array();
   this.GAME_TYPE = "NO_PLAYER";
   this.KEYBOARD = new _keyboard.KEYBOARD(c);
-
-  if (_manifest.default.EDITOR == true) {
-    this.ENGINE_EDITOR = true;
-  } else {
-    this.ENGINE_EDITOR = false;
-  }
 
   this.EXIT_EDIT_MODE = function () {
     ROOT_ENGINE.ENGINE_EDITOR = false;
@@ -8382,7 +8396,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
   this.EDITOR = {
     SELECTED: false,
-    ENABLE: _manifest.default.EDITOR,
+    ENABLE: window[ROOT_GAME_OBJECT.PROGRAM_NAME].ENGINE.ENGINE_EDITOR,
     ACTORS_VISIBLE: true,
     ACTORS_AREA_HEIGHT: 10,
     ACTOR_BLUE_HOVER: false,
@@ -8408,7 +8422,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     // just webcam view
     ROOT_GAME_OBJECT.WEBCAM = new Object();
     ROOT_GAME_OBJECT.WEBCAM.VIDEO = _system.default.DOM.E("webcam");
-    SET_STREAM(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
+    (0, _init.SET_STREAM)(ROOT_GAME_OBJECT.WEBCAM.VIDEO);
 
     if (DIMENSIONS_TYPE == "GAME_OBJECT") {
       ROOT_GAME_OBJECT.WEBCAM.DIMENSIONS_TYPE = "GAME_OBJECT";
@@ -9384,7 +9398,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                   // DESTROY OBJECT
                   ROOT_EVENTS.ROOT_ENGINE.MODULES[x].DESTROY_OBJECT(local_go.NAME); //DESTROY( name , canvas.id  , local_go.PARENT )
 
-                  DESTROY(local_go.NAME);
+                  (0, _editor.DESTROY)(local_go.NAME);
 
                   _system.default.DEBUG.LOG("DESTROY_OBJECT");
                 } //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
@@ -9500,7 +9514,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
 
                     _system.default.DEBUG.LOG("atach textbox");
                   } else if (typeof local_go.TEXTBOX != null) {
-                    REMOVE_TEXTBOX(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    (0, _editor.REMOVE_TEXTBOX)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                     local_go.TYPE_OF_GAME_OBJECT = "empty";
                     delete local_go.TEXTBOX;
                     local_go.TEXTBOX = null;
@@ -9519,14 +9533,14 @@ function EVENTS(canvas, ROOT_ENGINE) {
 
                       if (local_type_of_dim == "GAME_OBJECT") {
                         local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
-                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim);
+                        (0, _editor.ADD_WEBCAM)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim);
                         local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
 
                         _system.default.DEBUG.LOG("atach webcam");
                       } else {
                         // DIMENSIONS_TYPE = WEBCAM_DIMENSION
                         local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
-                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, "WEBCAM_DIMENSION");
+                        (0, _editor.ADD_WEBCAM)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, "WEBCAM_DIMENSION");
                         local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
 
                         _system.default.DEBUG.LOG("atach webcam");
@@ -9538,7 +9552,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
 
                       if (!isNaN(detectPointByVer) && !isNaN(detectPointByHor) && isNaN(local_type_of_dim)) {
                         local_go.CREATE_WEBCAM(local_res, local_type_of_dim);
-                        ADD_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim, detectPointByVer, detectPointByHor);
+                        (0, _editor.ADD_WEBCAM)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res, local_type_of_dim, detectPointByVer, detectPointByHor);
                         local_go.EDITOR.BUTTONS[q].text = "Remove webcam";
 
                         _system.default.DEBUG.LOG("atach webcam");
@@ -9548,7 +9562,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
                     }
                   } else {
                     local_go.DESTROY_WEBCAM();
-                    REMOVE_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
+                    (0, _editor.REMOVE_WEBCAM)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                   }
                 }
               } else {
