@@ -1,7 +1,9 @@
 
-import { sys, ActivateModifiers, loadEditor, loadEditorObjects } from 'visual-js';
+import { sys, ActivateModifiers, loadEditor, runEditor, loadEditorObjects } from 'visual-js';
 ActivateModifiers();
 
+
+runEditor();
 // Run editor
 loadEditor();
 
