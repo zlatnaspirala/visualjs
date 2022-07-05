@@ -1,6 +1,6 @@
 {
   "name": "visual-js",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "description": "Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
   "devDependencies": {

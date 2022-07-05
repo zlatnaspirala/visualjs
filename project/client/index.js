@@ -12,7 +12,6 @@ import {GET_ALL_GAME_OBJECTS, runEditor} from "./lib/editor/editor";
 
 let sys = SYS,
     application = APPLICATION,
-    runEditor,
     loadEditor = CREATE_SYSTEM_BUTTONS,
     loadEditorObjects = GET_ALL_GAME_OBJECTS;
 
