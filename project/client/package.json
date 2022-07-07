@@ -1,7 +1,7 @@
 {
   "name": "visual-js",
-  "version": "3.0.16",
-  "description": "Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
+  "version": "3.0.17",
+  "description": "Fix localStorage for codepen access error; Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
   "devDependencies": {
     "browser-resolve": "^2.0.0",
