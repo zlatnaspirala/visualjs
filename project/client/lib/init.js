@@ -611,7 +611,11 @@ export var PAGE = {
  * @return nothing
  */
 export function LS_SET(name, value) {
-  localStorage.setItem(name, value);
+  try {
+    localStorage.setItem(name, value);
+  } catch(e){
+    console.info("No access for localStorage!")
+  }
 }
 
 /**
@@ -622,7 +626,13 @@ export function LS_SET(name, value) {
  * @return {Any} What ever we are stored intro localStorage.
  */
 export function LS_GET(name) {
-  return localStorage.getItem(name);
+  try {
+    var l = localStorage.getItem(name);
+    return l;
+  } catch(e) {
+    console.info("No access for localStorage!")
+    return null;
+  }
 }
 
 /**
@@ -634,8 +644,12 @@ export function LS_GET(name) {
  * @return {Any} What ever we are stored intro localStorage.
  */
 export function SAVE(name, obj) {
-  localStorage.setItem(name, JSON.stringify(obj));
-  console.log(JSON.stringify(obj));
+  try {
+    localStorage.setItem(name, JSON.stringify(obj));
+    console.log(JSON.stringify(obj));
+  } catch(e) {
+    console.info("No access for localStorage!")
+  }
 }
 
 /**
@@ -646,20 +660,24 @@ export function SAVE(name, obj) {
  * @return {Any} What ever we are stored intro localStorage.
  */
 export function LOAD(name) {
-  if (
-    localStorage.getItem(name) == "undefined" ||
-    localStorage.getItem(name) == null ||
-    localStorage.getItem(name) == ""
-  ) {
-    SYS.DEBUG.WARNING(
-      "localstorage object with name: " +
-        name +
-        " , returns " +
-        localStorage.getItem(name)
-    );
-    return false;
-  } else {
-    return JSON.parse(localStorage.getItem(name));
+  try {
+    if (
+      localStorage.getItem(name) == "undefined" ||
+      localStorage.getItem(name) == null ||
+      localStorage.getItem(name) == ""
+    ) {
+      SYS.DEBUG.WARNING(
+        "localstorage object with name: " +
+          name +
+          " , returns " +
+          localStorage.getItem(name)
+      );
+      return false;
+    } else {
+      return JSON.parse(localStorage.getItem(name));
+    }
+  } catch(e) {
+    console.info("No access for localStorage!")
   }
 }
 
