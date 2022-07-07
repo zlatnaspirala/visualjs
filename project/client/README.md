@@ -14,11 +14,13 @@ All new version begin with 3.0.0 for client, server or GUI part.
 
  - Create UI from live page. I called `ON-PAGE-EDITOR`.
      on right click in EDITOR = true status.
- - Create more visual-js embedded controls.
+ - Create more visual-js embedded visual controls.
      Like Oscillator , make input/output pins ...
  - Improve of windows GUI Editor.
  - Improve visual-js in concept of npm usage.
    Make it easy usable from `npm i visual-js`.
+ - Reconstruct from zero point `visualjs-gui`.
+   new GUI will use npm in background.
 
 ### Installation and setup:
 
@@ -102,7 +104,7 @@ You can use `ON-PAGE-EDITOR`, `visualjs-gui` or `visualjs` from npm service.
 Best way is to use it all.
 
 
-### ON/PAGE Editor
+### ON/PAGE Editor [Nodejs]
 
 From package.json:
 ```
@@ -118,14 +120,14 @@ From package.json:
 npm run host
 ```
 ```json
-This is just a webserver for simple hosting in nodejs
+This is just a webserver for simple hosting in nodejs.
 ```
 
 ```js
 npm run res
 ```
 ```json
-Just put new image in new folder with same name like image in that folder put image.
+Just put new image in new folder with same name example -> (`logo/logo.png`).
 After this cmd engine will get meta data. This is not list for direct loading images.
 Build meta data for image/images.
 ```
