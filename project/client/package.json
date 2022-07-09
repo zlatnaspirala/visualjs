@@ -1,7 +1,7 @@
 {
   "name": "visual-js",
-  "version": "3.0.18",
-  "description": " [3.0.18] ORBIT import export intro sys.MATH. added. Fix localStorage for codepen access error; Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
+  "version": "3.0.19",
+  "description": " [3.0.19] ORBIT import export intro sys.MATH. added. Fix localStorage for codepen access error; Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
   "main": "index.js",
   "devDependencies": {
     "browser-resolve": "^2.0.0",

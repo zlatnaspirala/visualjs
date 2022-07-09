@@ -91,8 +91,8 @@ export function ORBIT(cx, cy, angle, p) {
   p.y -= cy;
 
   // rotate point
-  xnew = p.x * c - p.y * s;
-  ynew = p.x * s + p.y * c;
+  let xnew = p.x * c - p.y * s;
+  let ynew = p.x * s + p.y * c;
 
   // translate point back:
   p.x = xnew + cx;
