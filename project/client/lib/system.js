@@ -26,6 +26,7 @@ import {
   toRadians,
   OSCILLATOR,
   INCREMENTATOR,
+  ORBIT
 } from "./math";
 
 var SYS = {
@@ -83,6 +84,7 @@ var SYS = {
     OSCILLATOR: OSCILLATOR,
     CONVERT: CONVERTOR,
     INCREMENTATOR: INCREMENTATOR,
+    ORBIT: ORBIT
   },
 
   ARRAY_OPERATION: {

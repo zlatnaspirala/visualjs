@@ -190,7 +190,9 @@ io.sockets.on("connection", function(socket) {
   // a2
   socket.on("SET_NEW_START_UP_POSITION",
     function(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
-      console.log("NEW POSITION FOR ", name);
+
+      // console.log("NEW POSITION FOR , process.cwd() ", process.cwd());
+      
       var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
       var local_pathC = "cache/" + name + "/a2.js";
       //createFile(  local_path + "/" + "startup_pos.js" , "" + PROGRAM_NAME + ".ENGINE.MODULES.ACCESS_MODULE( '" +  MODUL + "').GAME_OBJECTS.ACCESS('" + name + "').POSITION.SET_POSITION( "+newX+" , "+newY+");",  local_pathC , "AFTER_F5");
