@@ -5,17 +5,21 @@
   "main": "index.js",
   "dependencies": {
     "visual-js": "^3.0.19",
-    "visual-js-server": "3.0.4",
+    "visual-js-server": "3.0.7",
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
     "browser-resolve": "^2.0.0",
-    "esmify": "^2.1.1"
+    "esmify": "^2.1.1",
+    "watchify": "^4.0.0"
   },
   "scripts": {
-    "app": "browserify test.js -p esmify > builds/examples.js",
+    "app": "watchify test.js -p esmify -o builds/examples.js",
+    "build.app": "browserify test.js -p esmify > builds/examples.js",
     "editor": "node editor.js",
     "audio_res": "node audio_res.js",
+    "res": "node res.js",
+    "pack": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

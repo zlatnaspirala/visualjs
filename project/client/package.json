@@ -1,14 +1,11 @@
 {
   "name": "visual-js",
-  "version": "3.0.19",
-  "description": " [3.0.19] ORBIT import export intro sys.MATH. added. Fix localStorage for codepen access error; Almost all visualjs feature fixed for npm approach. [BETA] [WIP] Client part of visual-js game engine.",
+  "version": "3.0.20",
+  "description": "[3.0.20] Prepare for npm usage. ",
   "main": "index.js",
-  "devDependencies": {
-    "browser-resolve": "^2.0.0",
-    "esmify": "^2.1.1"
-  },
   "scripts": {
-    "app": "browserify application.js -p esmify > builds/visual.js",
+    "app": "watchify application.js -p esmify -o builds/visual.js",
+    "build.app": "browserify application.js -p esmify > builds/visual.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,5 +23,10 @@
   "homepage": "https://github.com/zlatnaspirala/visualjs#readme",
   "dependencies": {
     "socket.io-client": "^4.5.1"
+  },
+  "devDependencies": {
+    "browser-resolve": "^2.0.0",
+    "esmify": "^2.1.1",
+    "watchify": "^4.0.0"
   }
 }

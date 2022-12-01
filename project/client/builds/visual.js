@@ -5890,7 +5890,11 @@ var PAGE = {
 exports.PAGE = PAGE;
 
 function LS_SET(name, value) {
-  localStorage.setItem(name, value);
+  try {
+    localStorage.setItem(name, value);
+  } catch (e) {
+    console.info("No access for localStorage!");
+  }
 }
 /**
  * LS_GET is LocalStorage function
@@ -5902,7 +5906,13 @@ function LS_SET(name, value) {
 
 
 function LS_GET(name) {
-  return localStorage.getItem(name);
+  try {
+    var l = localStorage.getItem(name);
+    return l;
+  } catch (e) {
+    console.info("No access for localStorage!");
+    return null;
+  }
 }
 /**
  * SAVE  Put the object into storage.
@@ -5915,8 +5925,12 @@ function LS_GET(name) {
 
 
 function SAVE(name, obj) {
-  localStorage.setItem(name, JSON.stringify(obj));
-  console.log(JSON.stringify(obj));
+  try {
+    localStorage.setItem(name, JSON.stringify(obj));
+    console.log(JSON.stringify(obj));
+  } catch (e) {
+    console.info("No access for localStorage!");
+  }
 }
 /**
  * LOAD  Load a object from storage. Retrieve the object from storage
@@ -5928,12 +5942,16 @@ function SAVE(name, obj) {
 
 
 function LOAD(name) {
-  if (localStorage.getItem(name) == "undefined" || localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
-    _system.default.DEBUG.WARNING("localstorage object with name: " + name + " , returns " + localStorage.getItem(name));
+  try {
+    if (localStorage.getItem(name) == "undefined" || localStorage.getItem(name) == null || localStorage.getItem(name) == "") {
+      _system.default.DEBUG.WARNING("localstorage object with name: " + name + " , returns " + localStorage.getItem(name));
 
-    return false;
-  } else {
-    return JSON.parse(localStorage.getItem(name));
+      return false;
+    } else {
+      return JSON.parse(localStorage.getItem(name));
+    }
+  } catch (e) {
+    console.info("No access for localStorage!");
   }
 }
 /**
@@ -6489,8 +6507,8 @@ function ORBIT(cx, cy, angle, p) {
   p.x -= cx;
   p.y -= cy; // rotate point
 
-  xnew = p.x * c - p.y * s;
-  ynew = p.x * s + p.y * c; // translate point back:
+  let xnew = p.x * c - p.y * s;
+  let ynew = p.x * s + p.y * c; // translate point back:
 
   p.x = xnew + cx;
   p.y = ynew + cy;
@@ -8010,7 +8028,8 @@ var SYS = {
     TO_RADIANS: _math.toRadians,
     OSCILLATOR: _math.OSCILLATOR,
     CONVERT: _init.CONVERTOR,
-    INCREMENTATOR: _math.INCREMENTATOR
+    INCREMENTATOR: _math.INCREMENTATOR,
+    ORBIT: _math.ORBIT
   },
   ARRAY_OPERATION: {
     REMOVE_ALL_ITEMS_WITH_VALUE: _init.removeItem,

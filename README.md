@@ -79,7 +79,9 @@ var APPLICATION = {
 ```
 
 
-## Server/Editor [node.js]
+## Server/Editor [node.js] (Folder: /project/server/)
+
+This is dev tool for creating object on page.
 
 ### Config
 ```js
@@ -96,13 +98,11 @@ module.exports = {
 };
 ```
 
-## CLIENT OR WEB APPLICATION
+## CLIENT OR WEB APPLICATION (Folder: /project/client/)
 
 ### How to start:
 
-You can use `ON-PAGE-EDITOR`, `visualjs-gui` or `visualjs` from npm service.
-Best way is to use it all.
-
+You can use `EDITOR` from source this repo or `visualjs` from npm service.
 
 ### ON/PAGE Editor [Nodejs]
 
