@@ -54,12 +54,11 @@
       if(err) {
         return console.log(err);
       } else {
-        console.log("action saved");
-
         if(ACTION == "AFTER_F5") {
           io.sockets.emit("RETURN", "LOAD_SCRIPT_AFTER_F5", client_path);
         } else if(ACTION == "LOAD_NOW") {
-          io.sockets.emit("RETURN", "LOAD_SCRIPT", client_path);
+          console.log("action LOAD_NOW emited  send 1!");
+          io.sockets.emit("RETURN", "LOAD_SCRIPT", client_path, 1);
         }
       }
     });
@@ -221,7 +220,7 @@
 
       var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
       var local_pathC = "cache/" + name + "/a3.js";
-      var ID = random(1, 9999999);
+      var ID = random(1, 99999);
       ID = ID.toString().replace(".", "11");
       ID = parseInt(ID);
       //LOCPATH = `import SYS = require('../res/animations/resource');`;
@@ -442,28 +441,45 @@
       var localpath = CONFIG.PATH_OF_WWW + "cache/";
       var LIST_OFF_ALL_GAME_OBJECT = getDirectories(localpath);
       console.log(LIST_OFF_ALL_GAME_OBJECT, "<<LIST_OFF_ALL_GAME_OBJECT");
-      var local__x = 0;
+  
+      // fix async
+      var memoryTest = [];
       for(var i in LIST_OFF_ALL_GAME_OBJECT) {
-        local__x++;
         val = LIST_OFF_ALL_GAME_OBJECT[i];
-        console.log("VAL :", LIST_OFF_ALL_GAME_OBJECT[i]);
-
-        if(local__x + 1 == LIST_OFF_ALL_GAME_OBJECT.length) {
-          //console.log("POSLEDNJI");
-          GET_FILES_NAME(
-            CONFIG.PATH_OF_WWW + "cache/" + val,
-            val,
-            true
-          );
-        } else {
-          //console.log("NIJE POSLEDNJI");
-          GET_FILES_NAME(
-            CONFIG.PATH_OF_WWW + "cache/" + val,
-            val,
-            false
-          );
-        }
+        memoryTest.push(GET_FILES_NAME_TEST(CONFIG.PATH_OF_WWW + "cache/" + val));
       }
+  
+      // in hall of
+      Promise.all(memoryTest).then((e) => {
+        var sum = 0;
+        e.forEach((i) => {
+          // test
+          sum += i;
+        });
+        console.info(`Runtime wait for some generetion of scene objects`, sum);
+  
+        var local__x = 0;
+        for(var i in LIST_OFF_ALL_GAME_OBJECT) {
+          local__x++;
+          val = LIST_OFF_ALL_GAME_OBJECT[i];
+          console.info("visualjs item:", LIST_OFF_ALL_GAME_OBJECT[i]);
+          if(local__x + 1 == LIST_OFF_ALL_GAME_OBJECT.length) {
+            GET_FILES_NAME(
+              CONFIG.PATH_OF_WWW + "cache/" + val,
+              val,
+              sum
+            );
+          } else {
+            GET_FILES_NAME(
+              CONFIG.PATH_OF_WWW + "cache/" + val,
+              val,
+              sum
+            );
+          }
+        }
+  
+      });
+  
     });
 
     // Disconnect event
@@ -493,13 +509,21 @@
   function GET_FILES_NAME(path, name_of_go, main_length) {
     fs.readdir(path, function(err, items) {
       for(var i = 0;i < items.length;i++) {
-        // console.log("SCRIPT FOR POST LOAD => ", items[i]);
+        console.log("Post load:", items[i]);
         io.sockets.emit(
           "RETURN",
           "LOAD_SCRIPT",
-          "cache/" + name_of_go + "/" + items[i]
+          "cache/" + name_of_go + "/" + items[i],
+          main_length
         );
       }
+    });
+  }
+  
+  // fix async
+  function GET_FILES_NAME_TEST(path) {
+    return new Promise((resolve) => {
+      fs.readdir(path, function(err, items) { resolve(items.length) });
     });
   }
 

@@ -1,2 +1,0 @@
-
-  examples.ENGINE.MODULES.ACCESS_MODULE( 'STARTER').NEW_OBJECT('npmtest',45 , 45,10,10); 

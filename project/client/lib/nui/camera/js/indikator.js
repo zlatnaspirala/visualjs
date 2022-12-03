@@ -1,7 +1,7 @@
 
 function DRAW() {
     window["PROGRAM"] = setTimeout(draw, App.INTERVAL);
-    NUI_SURF.fontSize = "43px";
+    NUI_SURF.font = "43px";
 
     function draw() {
 

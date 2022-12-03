@@ -1,7 +1,4 @@
 
-// dev for io
-// import { io } from "../../node_modules/socket.io-client";
-// prodc
 import {io} from "socket.io-client";
 import SYS from '../system';
 import APPLICATION from '../../manifest/manifest';
@@ -17,7 +14,7 @@ var LOCAL_COMMUNICATOR;
 
 export const runEditor = () => {
   LOCAL_COMMUNICATOR = {};
-  console.log(APPLICATION);
+  let testPromiseLoadedScript = [];
 
   if(APPLICATION.EDITOR_AUTORUN == true || APPLICATION.EDITOR == true) {
 
@@ -35,25 +32,45 @@ export const runEditor = () => {
       }
     });
 
-    LOCAL_COMMUNICATOR.on("RETURN", function(action, data) {
+    function loadNext() {
+      var src = testPromiseLoadedScript.shift();
+      if (typeof src === 'undefined')
+         return;
+      var s = document.createElement("script");
+      s.src=src;
+      if(s.addEventListener) {
+        s.addEventListener("load",loadNext,false);
+      } 
+      else if(s.readyState) {
+        s.onreadystatechange = loadNext;
+      }
+      document.body.appendChild(s);
+     }
+
+    LOCAL_COMMUNICATOR.on("RETURN", function(action, data, sumOfObjs) {
 
       if(action == "GET_ALL_GAME_OBJECTS") {
-        console.log(data + "<<<<<<<<< from ");
+        console.log(data + "<GET_ALL_GAME_OBJECTS> nothing ");
       } else if(action == "LOAD_SCRIPT") {
-        console.log("LOAD_SCRIPT : " + data);
-        SYS.SCRIPT.LOAD(data);
-      } else if(action == "LOAD_SCRIPT_AFTER_F5") {}
-      else if(action == "REFRESH") {
+
+        console.log(data + "<GET_ALL_GAME_OBJECTS>  sumOfObjs ", sumOfObjs);
+        if (testPromiseLoadedScript.length == sumOfObjs - 1) {
+          // test - usually on page load
+          // put all in array
+          testPromiseLoadedScript.push(data);
+          loadNext();
+        } else {
+          testPromiseLoadedScript.push(data);
+        }
+
+      } else if(action == "LOAD_SCRIPT_AFTER_F5") {
+        // 
+      } else if(action == "REFRESH") {
         location.reload();
       }
       else if(action == "ERROR") {
         alert("Server says error:" + data);
       }
-
-      // console view  DOM
-      //$('#conversation').append('<div class="shadowDiv" >'+action + ': ' + data + '</div>');
-      //var objDiv = E("console");
-      //objDiv.scrollTop = objDiv.scrollHeight;
 
     });
 
@@ -159,7 +176,6 @@ export function SET_MAIN_INTERVAL(PROGRAM_NAME, d, u) {
   LOCAL_COMMUNICATOR.emit("SET_MAIN_INTERVAL", PROGRAM_NAME, d, u);
 }
 
-// Update 3.0.0
 export function DELETE_FROM_VISUAL_SCRIPTS(PROGRAM_NAME) {
   LOCAL_COMMUNICATOR.emit("DELETE_FROM_VISUAL_SCRIPTS", PROGRAM_NAME);
 }

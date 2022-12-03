@@ -461,24 +461,24 @@ export function EVENTS(canvas, ROOT_ENGINE) {
 
             if(NOMOBILE == 1) { // for desktop mouse		HARD CODE 0/1
 
-
               if(APPLICATION.ACCESSIBILITY.VIRTUAL_KEYBOARD_FOR_DESKTOP == true) {
                 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
                 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
                 SHOW_KEYBOARD(local_go.NAME);
 
-              } else { //normal for desktop
+              } else {
+                //normal for desktop
                 local_go.FOCUS = true;
                 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.CAPTURE_CHAR = local_go.TEXTBOX.TEXT;
                 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
                 ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
               }
 
-            } else { // for mobile VirtualKeyboard
+            } else {
+              // for mobile VirtualKeyboard
               ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET_MODUL = local_go.PARENT;
               ROOT_EVENTS.ROOT_ENGINE.KEYBOARD.TARGET = local_go.NAME;
               SHOW_KEYBOARD(local_go.NAME);
-
             }
 
           }
@@ -492,22 +492,14 @@ export function EVENTS(canvas, ROOT_ENGINE) {
 
             // if drag is enabled
             if(local_go.DRAG == true) {
-              //$$$$$$$$
-
-              //if (  SYS.MOUSE.x > local_go.POSITION.X()    && SYS.MOUSE.x < local_go.POSITION.X() +  local_go.DIMENSION.WIDTH()  && SYS.MOUSE.y > local_go.POSITION.Y()&&SYS.MOUSE.y < local_go.POSITION.Y() +    local_go.DIMENSION.HEIGHT()) {
 
               if(SYS.MOUSE.BUTTON_PRESSED == "LEFT") {
-
                 SYS.DOM.E(local_go.PROGRAM_NAME).style.cursor = "MOVE";
                 local_go.DRAG = true;
                 local_go.DRAG_START_X = parseFloat(SYS.MOUSE.x.toFixed(2) - local_go.POSITION.X());
                 local_go.DRAG_START_Y = parseFloat(SYS.MOUSE.y.toFixed(2) - local_go.POSITION.Y());
               }
 
-              //	}
-
-
-              //$$$$$$$$
             }
 
           }
@@ -579,21 +571,18 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                 //-----------------------------------------------------------------------------
                 else if(local_go.EDITOR.BUTTONS[q].IAM == "4") {
                   if(local_go.COLLISION == null) {
-                    ////////////////////////////
+
                     // ADD COLLIDER
-                    ///////////////////////////
                     var local_res = prompt("Enter outline margin collider.", "1.02");
                     if(!isNaN(parseFloat(local_res.charAt(0)))) {
-
                       ADD_COLLISION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
                       local_go.EDITOR.BUTTONS[q].text = "Remove collision";
-
                       //local_go.REMOVE_COLLISION(local_go.NAME  , local_go.PROGRAM_NAME , local_go.PARENT);
                       SYS.DEBUG.LOG("add collider");
                     } else {
                       alert("ERROR MSG: ADD_COLLISION not success.");
                     }
-                    //////////////////////////
+
                   } else if(local_go.EDITOR.BUTTONS[q].text == "Remove collision") {
 
                     REMOVE_COLLISION();

@@ -178,30 +178,29 @@ export function DETECTBROWSER() {
  */
  export var SCRIPT = {
   SCRIPT_ID: 0,
-  SINHRO_LOAD: {},
-  LOAD: function addScript(src, isAsync) {
-    var s = document.createElement("script");
-    if (typeof isAsync !== 'undefined') s.type = "module";
-    s.onload = function () {
-      SCRIPT.SCRIPT_ID++;
-      console.log('\x1b[36m%s\x1b[0m',
-        "Script id loaded [" +
-          SCRIPT.SCRIPT_ID +
-          "] : " +
-          this.src
-      );
-
-      var filename = this.src.substring(
-        this.src.lastIndexOf("/") + 1,
-        this.src.lastIndexOf(".")
-      );
-      //console.log(filename)
-      filename = filename.replace(".", "_");
-      eval("try{SCRIPT.SINHRO_LOAD._" + filename + "(s)}catch(e){}");
-    };
-    s.setAttribute("src", src);
-    document.body.appendChild(s);
-  },
+  LOAD: async function addScript(src, isAsync) {
+    return new Promise((resolve, reject) => {
+      var s = document.createElement("script");
+      if (typeof isAsync !== 'undefined') s.type = "module";
+      s.onload = function () {
+        SCRIPT.SCRIPT_ID++;
+        console.log('\x1b[36m%s\x1b[0m',
+          "Script id loaded [" +
+            SCRIPT.SCRIPT_ID +
+            "] : " +
+            this.src
+        );
+        var filename = this.src.substring(
+          this.src.lastIndexOf("/") + 1,
+          this.src.lastIndexOf(".")
+        );
+        filename = filename.replace(".", "_");
+        resolve('Async js code block loaded and executed.');
+      };
+      s.setAttribute("src", src);
+      document.body.appendChild(s);
+    })
+  }
 };
 
 
@@ -512,10 +511,10 @@ export function test_webcam_device() {
     );
   }
   if (hasGetUserMedia()) {
-    console.log("webcam operartion support");
+    // console.log("webcam operartion support");
     return true;
   } else {
-    console.log("webcam operartion faild");
+    console.warn("Webcam operation faild...");
     return false;
   }
 }
@@ -666,12 +665,12 @@ export function LOAD(name) {
       localStorage.getItem(name) == null ||
       localStorage.getItem(name) == ""
     ) {
-      SYS.DEBUG.WARNING(
-        "localstorage object with name: " +
-          name +
-          " , returns " +
-          localStorage.getItem(name)
-      );
+      // SYS.DEBUG.WARNING(
+      //   "localstorage object with name: " +
+      //     name +
+      //     " , returns " +
+      //     localStorage.getItem(name)
+      // );
       return false;
     } else {
       return JSON.parse(localStorage.getItem(name));

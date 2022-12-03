@@ -7,7 +7,7 @@ All new version begin with 3.0.0 for client, server or GUI part.
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 #### Creator: Nikola Lukic zlatnaspirala@gmail.com
-#### Full name: Visual-JS game engine
+#### Full name: Visual-js game engine
 #### This is JavaScript game engine (dev tools node.js / client js).
 
 ### Objective
