@@ -2,6 +2,12 @@
 import SYS from './system';
 import PROGRAM from './program';
 
+export function randLetter() {
+  const randomLetter = _ => String.fromCharCode(0|Math.random()*26+97),
+  randomStrOf15Chars = Array(15).fill().map(randomLetter).join('')
+  return randomStrOf15Chars;
+}
+
 /**
  * This class will detect you device and browser and
  * store data. Instance already stored intro SYS.BROWSER

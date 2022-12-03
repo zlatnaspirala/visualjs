@@ -19,10 +19,11 @@ var _ml = _interopRequireDefault(require("./lib/multilanguage/ml"));
 
 var _editor = require("./lib/editor/editor");
 
+var _init = require("./lib/init");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-if (_manifest.default.EDITOR == true) {
-  (0, _editor.runEditor)();
+if (_manifest.default.EDITOR == true) {// runEditor();
 }
 
 (0, _proto_modify.default)();
@@ -40,9 +41,11 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // Keyboard
 // CREATE_SYSTEM_BUTTONS();
 
-(0, _onresize.attachResize)(); // SYS.SCRIPT.LOAD('starter/visual.js', true).then((test)=> {
-//   console.log("Write yor code here!")
-// })
+(0, _onresize.attachResize)();
+
+_system.default.SCRIPT.LOAD('starter/visual.js', true).then(test => {
+  console.log("Write yor code here!");
+});
 
 _system.default.SCRIPT.LOAD("res/audio/resource.audio");
 
@@ -52,8 +55,8 @@ window.APPLICATION = _manifest.default;
 _resource.RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
 };
-console.log("SMODULE", SMODULE);
-(0, _editor.GET_ALL_GAME_OBJECTS)(); // HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
+console.log("SMODULE", SMODULE); // GET_ALL_GAME_OBJECTS();
+// HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
 // HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
 // IamNewObject.DRAG = false;
 // IamNewObject.POSITION.DIMENSION.HEIGHT = IamNewObject.POSITION.DIMENSION.WIDTH;
@@ -62,7 +65,7 @@ console.log("SMODULE", SMODULE);
 // IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
 // };
 
-},{"./lib/audio/audio":2,"./lib/editor/editor":6,"./lib/events/onresize":10,"./lib/multilanguage/ml":16,"./lib/program_modul":19,"./lib/proto_modify":20,"./lib/system":21,"./manifest/manifest":22,"./res/animations/resource.js":59}],2:[function(require,module,exports){
+},{"./lib/audio/audio":2,"./lib/editor/editor":6,"./lib/events/onresize":10,"./lib/init":13,"./lib/multilanguage/ml":16,"./lib/program_modul":19,"./lib/proto_modify":20,"./lib/system":21,"./manifest/manifest":22,"./res/animations/resource.js":59}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -3090,6 +3093,7 @@ exports.drawRotatedText = drawRotatedText;
 exports.drawRotatedTextNoSkrech = drawRotatedTextNoSkrech;
 exports.initialize = initialize;
 exports.lineLength = void 0;
+exports.randLetter = randLetter;
 exports.readXML = readXML;
 exports.removeItem = removeItem;
 exports.remove_last = remove_last;
@@ -3104,6 +3108,12 @@ var _program = _interopRequireDefault(require("./program"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function randLetter() {
+  const randomLetter = _ => String.fromCharCode(0 | Math.random() * 26 + 97),
+        randomStrOf15Chars = Array(15).fill().map(randomLetter).join('');
+
+  return randomStrOf15Chars;
+}
 /**
  * This class will detect you device and browser and
  * store data. Instance already stored intro SYS.BROWSER
@@ -3116,6 +3126,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @return {nothing}
  *
  */
+
+
 function DETECTBROWSER() {
   var HREFF,
       HREFTXT = "unknown";

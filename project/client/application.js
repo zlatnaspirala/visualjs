@@ -8,9 +8,10 @@ import {RESOURCE} from './res/animations/resource.js';
 import { attachResize } from "./lib/events/onresize";
 import ML from './lib/multilanguage/ml';
 import { runEditor, GET_ALL_GAME_OBJECTS } from "./lib/editor/editor";
+import { randLetter } from './lib/init';
 
 if (APPLICATION.EDITOR == true) {
-  runEditor();
+  // runEditor();
 }
 
 ActivateModifiers();
@@ -24,7 +25,6 @@ if(typeof AUDIO_RESOURCE != "undefined") {
 ////////////////////////////
 
 SYS.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
-
 //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
@@ -34,9 +34,9 @@ var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
 attachResize();
 
-// SYS.SCRIPT.LOAD('starter/visual.js', true).then((test)=> {
-//   console.log("Write yor code here!")
-// })
+SYS.SCRIPT.LOAD('starter/visual.js', true).then((test)=> {
+  console.log("Write yor code here!")
+})
 
 SYS.SCRIPT.LOAD("res/audio/resource.audio");
 
@@ -61,7 +61,7 @@ RESOURCE.character1 = {
 
 console.log("SMODULE" , SMODULE)
 
-GET_ALL_GAME_OBJECTS();
+// GET_ALL_GAME_OBJECTS();
 
 // HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
 // HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
