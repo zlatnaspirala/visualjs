@@ -38,31 +38,18 @@ function GEN(name_of_animation_path, allfiles) {
   allfiles.forEach(function(item) {
     allMyPromise.push(READ(APPLICATION.PATH_OF_WWW + "cache/" + name_of_animation_path + "/" + item));
   });
-
-  
-  console.log(".Build allfiles! ", LIST_OFF_ALL_VISUAL_DIR);
-
   Promise.all(allMyPromise).then((e) => {
-    console.log(".Build prepared for finish! ", e);
-    console.log(".Build prepared for finish! ", detIndex);
-
     if (detIndex == LIST_OFF_ALL_VISUAL_DIR.length-1) {
       console.log(".Build =============! ", detIndex);
       CreateFile(APPLICATION.PATH_OF_WWW + "starter/visual.js", TEST);
     }
     detIndex++;
   });
-
-  setTimeout(function() {
-    // CreateFile(APPLICATION.PATH_OF_WWW + "starter/visual.js", TEST);
-  }, 1000);
 }
 
 var LIST_OFF_ALL_VISUAL_DIR = getDirectories(APPLICATION.PATH_OF_WWW + "cache/");
 var local__x = -1;
-
 console.log(APPLICATION.PATH_OF_WWW);
-
 for(var i in LIST_OFF_ALL_VISUAL_DIR) {
   local__x++;
   val = LIST_OFF_ALL_VISUAL_DIR[i];
