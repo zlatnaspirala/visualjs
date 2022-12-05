@@ -29,7 +29,7 @@ export function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
       return ROOT.POSITION.y + ROOT.Y_OFFSET;
     },
   }),
-    (this.DIMENSION = new DIMENSION(12, 2));
+    (this.DIMENSION = new DIMENSION(22, 2));
 
   this.TAP = function () {};
 }

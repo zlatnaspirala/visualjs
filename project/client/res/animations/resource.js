@@ -1,7 +1,9 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                      /** ojsa */
+                                                                                                                                                                                                                                                                                                                                                                                                                                       /** ojsa */
 
-                    import SYS from '../../lib/system'
-                    export var RESOURCE = {}; 
+                    // import SYS from '../../lib/system'
+                    window.RESOURCE = {}; 
+
+                    var RESOURCE = window.RESOURCE; 
 
                     RESOURCE.SUM = 0;   
   RESOURCE.character1={"source":['character1/alienBiege_climb1.png' , 
@@ -291,6 +293,8 @@
 'Sand/sandMid.png' , 
 'Sand/sandRight.png' , 
  ] }; 
+  RESOURCE.singleImage={"source":['singleImage/tree20.png' , 
+ ] }; 
   RESOURCE.slotBG={"source":['slotBG/castle_grey.png' , 
 'slotBG/z.png' , 
  ] }; 
@@ -458,5 +462,5 @@
 'Yellow/alienYellow_swim2.png' , 
 'Yellow/alienYellow_walk1.png' , 
 'Yellow/alienYellow_walk2.png' , 
- ] }; window.RESOURCE = RESOURCE;  /**SYS.DEBUG.LOG('Resources loaded. ' + 33);*/ 
-  RESOURCE.SUM = 33; 
+ ] }; window.RESOURCE = RESOURCE;  /**SYS.DEBUG.LOG('Resources loaded. ' + 34);*/ 
+  RESOURCE.SUM = 34; 

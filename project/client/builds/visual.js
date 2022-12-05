@@ -11,8 +11,6 @@ var _system = _interopRequireDefault(require("./lib/system"));
 
 var _program_modul = require("./lib/program_modul");
 
-var _resource = require("./res/animations/resource.js");
-
 var _onresize = require("./lib/events/onresize");
 
 var _ml = _interopRequireDefault(require("./lib/multilanguage/ml"));
@@ -21,51 +19,47 @@ var _editor = require("./lib/editor/editor");
 
 var _init = require("./lib/init");
 
+var _math = require("./lib/math");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-if (_manifest.default.EDITOR == true) {// runEditor();
-}
+// ONLY WHEN EDITOR IS ACTIVE!
+(0, _editor.runEditor)();
+(0, _proto_modify.default)(); // Run Instance from here
 
-(0, _proto_modify.default)();
+_system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 
-if (typeof AUDIO_RESOURCE != "undefined") {// SYS.SOUND.RES = new AUDIO_RES();
-} ////////////////////////////
-// Run Instance from here
-////////////////////////////
-
-
-_system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC"); //NOW HELLO_WORLD IS OBJECT WITH ONE CANVAS TAG
-
-
+HELLO_WORLD.ENGINE.EXIT_EDIT_MODE();
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // Keyboard
-// CREATE_SYSTEM_BUTTONS();
+// ONLY WHEN EDITOR IS ACTIVE!
 
-(0, _onresize.attachResize)();
+(0, _program_modul.CREATE_SYSTEM_BUTTONS)();
+(0, _onresize.attachResize)(); // ONLY WHEN EDITOR IS DEACTIVE AND AFTER BUILD!
+// SYS.SCRIPT.LOAD('starter/visual.js', true).then((test)=> {
+// console.log("You can still add some post script")
+// console.log("Write yor code here!")
+// })
 
-_system.default.SCRIPT.LOAD('starter/visual.js', true).then(test => {
-  console.log("Write yor code here!");
+addEventListener("postScriptReady", e => {
+  console.log("EVENT<postScriptReady>");
+  console.log("Object from editor are defined here ->", ssss); // You need to exit editor now
+
+  _manifest.default.EDITOR = false;
+  HELLO_WORLD.ENGINE.EXIT_EDIT_MODE();
+  ssss.POSITION.TRANSLATE_BY_X(2);
 });
 
 _system.default.SCRIPT.LOAD("res/audio/resource.audio");
 
-console.log("ML ", _ml.default);
-window.ML = _ml.default;
-window.APPLICATION = _manifest.default;
-_resource.RESOURCE.character1 = {
-  "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
-};
-console.log("SMODULE", SMODULE); // GET_ALL_GAME_OBJECTS();
-// HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").NEW_OBJECT("IamNewObject", 5, 50, 12, 15, 10);
-// HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER").GAME_OBJECTS.ACCESS("IamNewObject").CREATE_ANIMATION(SURF, "DRAW_FRAME", 6, RESOURCE.character1, 1111123123, "no", 1, 11, 1, 1, 1);
-// IamNewObject.DRAG = false;
-// IamNewObject.POSITION.DIMENSION.HEIGHT = IamNewObject.POSITION.DIMENSION.WIDTH;
-// IamNewObject.TAP = function() {
-// console.log("TOUCHED: " + this.NAME);
-// IamNewObject.DESTROY_ME_AFTER_X_SECUND(0.01, "IamNewObject");
-// };
+_system.default.SCRIPT.LOAD("res/animations/resource.js");
 
-},{"./lib/audio/audio":2,"./lib/editor/editor":6,"./lib/events/onresize":10,"./lib/init":13,"./lib/multilanguage/ml":16,"./lib/program_modul":19,"./lib/proto_modify":20,"./lib/system":21,"./manifest/manifest":22,"./res/animations/resource.js":59}],2:[function(require,module,exports){
+window.ML = _ml.default;
+window.APPLICATION = _manifest.default; // ONLY WHEN EDITOR IS ACTIVE!
+
+(0, _editor.GET_ALL_GAME_OBJECTS)();
+
+},{"./lib/audio/audio":2,"./lib/editor/editor":6,"./lib/events/onresize":10,"./lib/init":13,"./lib/math":14,"./lib/multilanguage/ml":16,"./lib/program_modul":19,"./lib/proto_modify":20,"./lib/system":21,"./manifest/manifest":22}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -396,7 +390,7 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
     Y: function () {
       return ROOT.POSITION.y + ROOT.Y_OFFSET;
     }
-  }, this.DIMENSION = new _math.DIMENSION(12, 2);
+  }, this.DIMENSION = new _math.DIMENSION(22, 2);
 
   this.TAP = function () {};
 }
@@ -423,8 +417,10 @@ exports.REMOVE_COLLISION = REMOVE_COLLISION;
 exports.REMOVE_PARTICLE = REMOVE_PARTICLE;
 exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
 exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
+exports.SET_HEIGHT = SET_HEIGHT;
 exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
+exports.SET_WIDTH = SET_WIDTH;
 exports.runEditor = void 0;
 
 var _socket = require("socket.io-client");
@@ -462,7 +458,15 @@ const runEditor = () => {
 
     function loadNext() {
       var src = testPromiseLoadedScript.shift();
-      if (typeof src === 'undefined') return;
+
+      if (typeof src === 'undefined') {
+        const postScriptReady = new CustomEvent("postScriptReady", {
+          detail: 'good'
+        });
+        dispatchEvent(postScriptReady);
+        return;
+      }
+
       var s = document.createElement("script");
       s.src = src;
 
@@ -549,6 +553,14 @@ function SET_NEW_START_UP_POS(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
 
 function ADD_ANIMATION(name, PROGRAM_NAME, MODUL, RES) {
   LOCAL_COMMUNICATOR.emit("ADD_ANIMATION", name, PROGRAM_NAME, MODUL, RES);
+}
+
+function SET_WIDTH(name, PROGRAM_NAME, MODUL, W) {
+  LOCAL_COMMUNICATOR.emit("SET_WIDTH", name, PROGRAM_NAME, MODUL, W);
+}
+
+function SET_HEIGHT(name, PROGRAM_NAME, MODUL, H) {
+  LOCAL_COMMUNICATOR.emit("SET_HEIGHT", name, PROGRAM_NAME, MODUL, H);
 }
 
 function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {
@@ -1771,7 +1783,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     //ACTOR_DRAG_RECT_POS : SYS.ARRAY_OPERATION.DEEP_COPY.getCloneOfObject( this.POSITION ) ,
     ACTOR_DRAG_RECT_POS: this.POSITION,
     ACTOR_DRAG: false,
-    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Add animation ", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Add collision ", 60, "4"), new _systems.RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"), new _systems.RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"), new _systems.RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"), new _systems.RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png")],
+    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Add animation ", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Add collision ", 60, "4"), new _systems.RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"), new _systems.RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"), new _systems.RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"), new _systems.RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png"), new _systems.RIGHT_MENU_BUTTON("Set width ", 160, "B1"), new _systems.RIGHT_MENU_BUTTON("Set height ", 180, "B2")],
     GAME_OBJECT_MENU: {
       VISIBLE: false
     }
@@ -2366,10 +2378,9 @@ var _init = require("../init");
 
 var _editor = require("../editor/editor");
 
-var _resource = require("../../res/animations/resource.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {RESOURCE} from '../../res/animations/resource.js';
 function EVENTS(canvas, ROOT_ENGINE) {
   var ROOT_EVENTS = this;
   this.ROOT_ENGINE = ROOT_ENGINE; //Mobile device
@@ -2773,8 +2784,8 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 else if (local_go.EDITOR.BUTTONS[q].IAM == "3") {
                   var resource_list = "";
 
-                  for (var key in _resource.RESOURCE) {
-                    if (_resource.RESOURCE.hasOwnProperty(key) && key != "SUM") {
+                  for (var key in window.RESOURCE) {
+                    if (RESOURCE.hasOwnProperty(key) && key != "SUM") {
                       resource_list += "  " + key + ", ";
                     }
                   }
@@ -2788,7 +2799,8 @@ function EVENTS(canvas, ROOT_ENGINE) {
                   }
 
                   _system.default.DEBUG.LOG("add animation....");
-                } //-----------------------------------------------------------------------------
+                } //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+                //-----------------------------------------------------------------------------
                 else if (local_go.EDITOR.BUTTONS[q].IAM == "4") {
                   if (local_go.COLLISION == null) {
                     // ADD COLLIDER
@@ -2917,6 +2929,27 @@ function EVENTS(canvas, ROOT_ENGINE) {
                     local_go.DESTROY_WEBCAM();
                     (0, _editor.REMOVE_WEBCAM)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                   }
+                } else if (local_go.EDITOR.BUTTONS[q].IAM == "B1") {
+                  var local_res = prompt("Set width: \n Enter float or integer object width: ", "20");
+
+                  if (!isNaN(parseFloat(local_res.charAt(0)))) {
+                    //
+                    (0, _editor.SET_WIDTH)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res); // ADD_ANIMATION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: SET_WIDTH not success.");
+                  }
+
+                  _system.default.DEBUG.LOG("SET_WIDTH....");
+                } else if (local_go.EDITOR.BUTTONS[q].IAM == "B2") {
+                  var local_res = prompt("Set width: \n Enter float or integer object height: ", "20");
+
+                  if (!isNaN(parseFloat(local_res.charAt(0)))) {
+                    (0, _editor.SET_HEIGHT)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: SET_height not success.");
+                  }
+
+                  _system.default.DEBUG.LOG("SET_height....");
                 }
               } else {
                 local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = false;
@@ -3063,7 +3096,7 @@ function EVENTS(canvas, ROOT_ENGINE) {
   };
 }
 
-},{"../../manifest/manifest":22,"../../res/animations/resource.js":59,"../editor/editor":6,"../init":13,"../system":21}],13:[function(require,module,exports){
+},{"../../manifest/manifest":22,"../editor/editor":6,"../init":13,"../system":21}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12684,18 +12717,10 @@ function hasBinary(obj, toJSON) {
 },{}],59:[function(require,module,exports){
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.RESOURCE = void 0;
-
-var _system = _interopRequireDefault(require("../../lib/system"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /** ojsa */
-var RESOURCE = {};
-exports.RESOURCE = RESOURCE;
+// import SYS from '../../lib/system'
+window.RESOURCE = {};
+var RESOURCE = window.RESOURCE;
 RESOURCE.SUM = 0;
 RESOURCE.character1 = {
   "source": ['character1/alienBiege_climb1.png', 'character1/alienBiege_climb2.png', 'character1/alienBiege_duck.png', 'character1/alienBiege_front.png', 'character1/alienBiege_hit.png', 'character1/alienBiege_jump.png', 'character1/alienBiege_stand.png', 'character1/alienBiege_swim1.png', 'character1/alienBiege_swim2.png', 'character1/alienBiege_walk1.png', 'character1/alienBiege_walk2.png']
@@ -12766,6 +12791,9 @@ RESOURCE.Planet = {
 RESOURCE.Sand = {
   "source": ['Sand/sand.png', 'Sand/sandCenter.png', 'Sand/sandCenter_rounded.png', 'Sand/sandCliffAlt_left.png', 'Sand/sandCliffAlt_right.png', 'Sand/sandCliff_left.png', 'Sand/sandCliff_right.png', 'Sand/sandCorner_leftg.png', 'Sand/sandCorner_right.png', 'Sand/sandHalf.png', 'Sand/sandHalf_left.png', 'Sand/sandHalf_mid.png', 'Sand/sandHalf_right.png', 'Sand/sandHill_left.png', 'Sand/sandHill_right.png', 'Sand/sandLeft.png', 'Sand/sandMid.png', 'Sand/sandRight.png']
 };
+RESOURCE.singleImage = {
+  "source": ['singleImage/tree20.png']
+};
 RESOURCE.slotBG = {
   "source": ['slotBG/castle_grey.png', 'slotBG/z.png']
 };
@@ -12797,8 +12825,8 @@ RESOURCE.Yellow = {
   "source": ['Yellow/alienYellow_climb1.png', 'Yellow/alienYellow_climb2.png', 'Yellow/alienYellow_duck.png', 'Yellow/alienYellow_front.png', 'Yellow/alienYellow_hit.png', 'Yellow/alienYellow_jump.png', 'Yellow/alienYellow_stand.png', 'Yellow/alienYellow_swim1.png', 'Yellow/alienYellow_swim2.png', 'Yellow/alienYellow_walk1.png', 'Yellow/alienYellow_walk2.png']
 };
 window.RESOURCE = RESOURCE;
-/**SYS.DEBUG.LOG('Resources loaded. ' + 33);*/
+/**SYS.DEBUG.LOG('Resources loaded. ' + 34);*/
 
-RESOURCE.SUM = 33;
+RESOURCE.SUM = 34;
 
-},{"../../lib/system":21}]},{},[1]);
+},{}]},{},[1]);

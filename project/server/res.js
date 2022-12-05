@@ -18,8 +18,9 @@ function getDirectories(srcpath) {
 
 var config = require('./config.js');
 var FILE_STRING = `/** ojsa */\n
-                    import SYS from '../../lib/system'
-                    export var RESOURCE = {}; \n
+                    // import SYS from '../../lib/system'
+                    window.RESOURCE = {}; \n
+                    var RESOURCE = window.RESOURCE; \n
                     RESOURCE.SUM = 0;   \n`;
 
 var SUM_OF_IMAGES = 0;

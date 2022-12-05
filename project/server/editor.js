@@ -382,6 +382,48 @@ io.sockets.on("connection", function(socket) {
     deleteFile(local_pathC);
   });
 
+  // b1
+  socket.on("SET_WIDTH", function(name, PROGRAM_NAME, MODUL, W) {
+    console.log("SET_WIDTH :", name, PROGRAM_NAME, MODUL, W);
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/B1.js";
+    var LOCPATH = ` `;
+    LOCPATH += "" +
+      PROGRAM_NAME +
+      ".ENGINE.MODULES.ACCESS_MODULE( '" +
+      MODUL +
+      "').GAME_OBJECTS.ACCESS('" +
+      name +
+      "').DIMENSION.W = " + W
+    createFile(
+      local_path + "/" + "B1.js",
+      LOCPATH,
+      local_pathC,
+      "LOAD_NOW"
+    );
+  });
+
+  // b2
+  socket.on("SET_HEIGHT", function(name, PROGRAM_NAME, MODUL, H) {
+    console.log("SET_HEIGHT :", name, PROGRAM_NAME, MODUL, H);
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/B2.js";
+    var LOCPATH = ` `;
+    LOCPATH += "" +
+      PROGRAM_NAME +
+      ".ENGINE.MODULES.ACCESS_MODULE( '" +
+      MODUL +
+      "').GAME_OBJECTS.ACCESS('" +
+      name +
+      "').DIMENSION.H = " + H
+    createFile(
+      local_path + "/" + "B2.js",
+      LOCPATH,
+      local_pathC,
+      "LOAD_NOW"
+    );
+  });
+
   //SET_NEW_START_UP_POSITION   sifra 8
   socket.on("ADD_WEBCAM",
     function(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
@@ -526,6 +568,6 @@ function GET_FILES_NAME(path, name_of_go, main_length) {
 // fix async
 function GET_FILES_NAME_TEST(path) {
   return new Promise((resolve) => {
-    fs.readdir(path, function(err, items) { resolve(items.length) });
+    fs.readdir(path, function(err, items) {resolve(items.length)});
   });
 }

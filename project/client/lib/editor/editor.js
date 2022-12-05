@@ -34,8 +34,11 @@ export const runEditor = () => {
 
     function loadNext() {
       var src = testPromiseLoadedScript.shift();
-      if (typeof src === 'undefined')
+      if (typeof src === 'undefined') {
+        const postScriptReady = new CustomEvent("postScriptReady", { detail: 'good'});
+        dispatchEvent(postScriptReady);
          return;
+      }
       var s = document.createElement("script");
       s.src=src;
       if(s.addEventListener) {
@@ -130,6 +133,14 @@ export function SET_NEW_START_UP_POS(name, PROGRAM_NAME, MODUL, newX, newY, w, h
 
 export function ADD_ANIMATION(name, PROGRAM_NAME, MODUL, RES) {
   LOCAL_COMMUNICATOR.emit("ADD_ANIMATION", name, PROGRAM_NAME, MODUL, RES);
+}
+
+export function SET_WIDTH(name, PROGRAM_NAME, MODUL, W) {
+  LOCAL_COMMUNICATOR.emit("SET_WIDTH", name, PROGRAM_NAME, MODUL, W);
+}
+
+export function SET_HEIGHT(name, PROGRAM_NAME, MODUL, H) {
+  LOCAL_COMMUNICATOR.emit("SET_HEIGHT", name, PROGRAM_NAME, MODUL, H);
 }
 
 export function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {

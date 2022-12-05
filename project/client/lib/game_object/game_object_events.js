@@ -16,8 +16,10 @@ import {
   DESTROY,
   REMOVE_TEXTBOX,
   ADD_WEBCAM,
-  REMOVE_WEBCAM } from '../editor/editor';
-import {RESOURCE} from '../../res/animations/resource.js';
+  REMOVE_WEBCAM, 
+  SET_WIDTH,
+  SET_HEIGHT} from '../editor/editor';
+// import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
 
@@ -552,7 +554,7 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                 //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
                 else if(local_go.EDITOR.BUTTONS[q].IAM == "3") {
                   var resource_list = "";
-                  for(var key in RESOURCE) {
+                  for(var key in window.RESOURCE) {
                     if(RESOURCE.hasOwnProperty(key) && key != "SUM") {
                       resource_list += "  " + key + ", ";
                     }
@@ -568,6 +570,8 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                   SYS.DEBUG.LOG("add animation....");
 
                 }
+                //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
+
                 //-----------------------------------------------------------------------------
                 else if(local_go.EDITOR.BUTTONS[q].IAM == "4") {
                   if(local_go.COLLISION == null) {
@@ -736,6 +740,34 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                     REMOVE_WEBCAM(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT);
                   }
                 }
+
+                else if(local_go.EDITOR.BUTTONS[q].IAM == "B1") {
+                  var local_res = prompt("Set width: \n Enter float or integer object width: ", "20");
+                  if(!isNaN(parseFloat(local_res.charAt(0)))) {
+
+                    //
+                    SET_WIDTH(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                    // ADD_ANIMATION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+
+                  } else {
+                    alert("ERROR MSG: SET_WIDTH not success.");
+                  }
+
+                  SYS.DEBUG.LOG("SET_WIDTH....");
+
+                } else if(local_go.EDITOR.BUTTONS[q].IAM == "B2") {
+                  var local_res = prompt("Set width: \n Enter float or integer object height: ", "20");
+                  if(!isNaN(parseFloat(local_res.charAt(0)))) {
+
+                    SET_HEIGHT(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+
+                  } else {
+                    alert("ERROR MSG: SET_height not success.");
+                  }
+
+                  SYS.DEBUG.LOG("SET_height....");
+
+                } 
               } else {
                 local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = false;
               }
