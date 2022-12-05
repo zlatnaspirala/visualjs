@@ -1,6 +1,6 @@
 {
   "name": "visual-js-server",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "Dev tool for visualjs3 client.",
   "main": "index.js",
   "scripts": {

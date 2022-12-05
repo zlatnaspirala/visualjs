@@ -14,6 +14,8 @@
   ADD_TEXTBOX|REMOVE_TEXTBOX                                     a7.js
   ADD_WEBCAM                                                     a8.js
   SET_MAIN_INTERVAL                                              a9.js
+  SET_WIDTH                                                      b1.js
+  SET_HEIGHT                                                     b2.js
 
 ==============================================================================
 
