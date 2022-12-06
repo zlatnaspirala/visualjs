@@ -678,6 +678,7 @@ export function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
       new RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png"),
       new RIGHT_MENU_BUTTON("Set width ", 160, "B1"),
       new RIGHT_MENU_BUTTON("Set height ", 180, "B2"),
+      new RIGHT_MENU_BUTTON("Set animation speed ", 200, "ANIM1"),
     ],
     GAME_OBJECT_MENU: {
       VISIBLE: false,

@@ -1,5 +1,6 @@
 
- module.exports = editor = (config) => {
+module.exports = editor = (config) => {
+
   var fs = require("fs");
   var path = require("path");
   var express = require("express");
@@ -57,7 +58,6 @@
         if(ACTION == "AFTER_F5") {
           io.sockets.emit("RETURN", "LOAD_SCRIPT_AFTER_F5", client_path);
         } else if(ACTION == "LOAD_NOW") {
-          console.log("action LOAD_NOW emited  send 1!");
           io.sockets.emit("RETURN", "LOAD_SCRIPT", client_path, 1);
         }
       }
@@ -109,6 +109,9 @@
         }
 
       }
+
+      // best
+      io.sockets.emit("RETURN", "REFRESH");
 
     });
 
@@ -187,7 +190,9 @@
     // a2
     socket.on("SET_NEW_START_UP_POSITION",
       function(name, PROGRAM_NAME, MODUL, newX, newY, w, h) {
-        console.log("NEW POSITION FOR ", name);
+
+        // console.log("NEW POSITION FOR , process.cwd() ", process.cwd());
+
         var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
         var local_pathC = "cache/" + name + "/a2.js";
         //createFile(  local_path + "/" + "startup_pos.js" , "" + PROGRAM_NAME + ".ENGINE.MODULES.ACCESS_MODULE( '" +  MODUL + "').GAME_OBJECTS.ACCESS('" + name + "').POSITION.SET_POSITION( "+newX+" , "+newY+");",  local_pathC , "AFTER_F5");
@@ -220,7 +225,7 @@
 
       var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
       var local_pathC = "cache/" + name + "/a3.js";
-      var ID = random(1, 99999);
+      var ID = random(1, 9999999);
       ID = ID.toString().replace(".", "11");
       ID = parseInt(ID);
       //LOCPATH = `import SYS = require('../res/animations/resource');`;
@@ -379,6 +384,50 @@
       deleteFile(local_pathC);
     });
 
+    // b1
+    socket.on("SET_WIDTH", function(name, PROGRAM_NAME, MODUL, W) {
+      console.log("SET_WIDTH :", name, PROGRAM_NAME, MODUL, W);
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/B1.js";
+      var LOCPATH = ` `;
+      LOCPATH += "" +
+        PROGRAM_NAME +
+        ".ENGINE.MODULES.ACCESS_MODULE( '" +
+        MODUL +
+        "').GAME_OBJECTS.ACCESS('" +
+        name +
+        "').DIMENSION.W = " + W
+      createFile(
+        local_path + "/" + "B1.js",
+        LOCPATH,
+        local_pathC,
+        "LOAD_NOW"
+      );
+    });
+
+    // b2
+    socket.on("SET_HEIGHT", function(name, PROGRAM_NAME, MODUL, H) {
+      console.log("SET_HEIGHT :", name, PROGRAM_NAME, MODUL, H);
+      var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+      var local_pathC = "cache/" + name + "/B2.js";
+      var LOCPATH = ` `;
+      LOCPATH += "" +
+        PROGRAM_NAME +
+        ".ENGINE.MODULES.ACCESS_MODULE( '" +
+        MODUL +
+        "').GAME_OBJECTS.ACCESS('" +
+        name +
+        "').DIMENSION.H = " + H
+      createFile(
+        local_path + "/" + "B2.js",
+        LOCPATH,
+        local_pathC,
+        "LOAD_NOW"
+      );
+    });
+
+
+
     //SET_NEW_START_UP_POSITION   sifra 8
     socket.on("ADD_WEBCAM",
       function(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {
@@ -441,14 +490,14 @@
       var localpath = CONFIG.PATH_OF_WWW + "cache/";
       var LIST_OFF_ALL_GAME_OBJECT = getDirectories(localpath);
       console.log(LIST_OFF_ALL_GAME_OBJECT, "<<LIST_OFF_ALL_GAME_OBJECT");
-  
+
       // fix async
       var memoryTest = [];
       for(var i in LIST_OFF_ALL_GAME_OBJECT) {
         val = LIST_OFF_ALL_GAME_OBJECT[i];
         memoryTest.push(GET_FILES_NAME_TEST(CONFIG.PATH_OF_WWW + "cache/" + val));
       }
-  
+
       // in hall of
       Promise.all(memoryTest).then((e) => {
         var sum = 0;
@@ -457,7 +506,7 @@
           sum += i;
         });
         console.info(`Runtime wait for some generetion of scene objects`, sum);
-  
+
         var local__x = 0;
         for(var i in LIST_OFF_ALL_GAME_OBJECT) {
           local__x++;
@@ -477,9 +526,9 @@
             );
           }
         }
-  
+
       });
-  
+
     });
 
     // Disconnect event
@@ -519,12 +568,13 @@
       }
     });
   }
-  
+
   // fix async
   function GET_FILES_NAME_TEST(path) {
     return new Promise((resolve) => {
-      fs.readdir(path, function(err, items) { resolve(items.length) });
+      fs.readdir(path, function(err, items) {resolve(items.length)});
     });
   }
+
 
 }

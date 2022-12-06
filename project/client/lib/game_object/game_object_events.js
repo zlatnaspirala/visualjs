@@ -18,8 +18,8 @@ import {
   ADD_WEBCAM,
   REMOVE_WEBCAM, 
   SET_WIDTH,
+  SET_ANIMATION_SPEED,
   SET_HEIGHT} from '../editor/editor';
-// import {RESOURCE} from '../../res/animations/resource.js';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
 
@@ -545,10 +545,10 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                     local_go.DESTROY_ME_AFTER_X_SECUND(local_res, _name, x, ROOT_EVENTS);
 
                   } else {
-                    alert("ERROR MSG: ADD_ANIMATION not success.");
+                    alert("ERROR MSG: Destroy not success.");
                   }
 
-                  SYS.DEBUG.LOG("test2");
+                  SYS.DEBUG.LOG("Destroy...");
 
                 }
                 //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
@@ -560,15 +560,14 @@ export function EVENTS(canvas, ROOT_ENGINE) {
                     }
                   }
 
+                 // console.log("WHAT IS local_go....", local_go.ANIMATION);
+
                   var local_res = prompt("Full list of images source : \n " + resource_list + "   \n \n Enter name of animation resource object :", "demo1");
                   if(isNaN(parseFloat(local_res.charAt(0)))) {
                     ADD_ANIMATION(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
                   } else {
                     alert("ERROR MSG: ADD_ANIMATION not success.");
                   }
-
-                  SYS.DEBUG.LOG("add animation....");
-
                 }
                 //-----------------------------------------------------------------------------//-----------------------------------------------------------------------------
 
@@ -767,7 +766,15 @@ export function EVENTS(canvas, ROOT_ENGINE) {
 
                   SYS.DEBUG.LOG("SET_height....");
 
-                } 
+                } else if(local_go.EDITOR.BUTTONS[q].IAM == "ANIM1") {
+                  var local_res = prompt("Set animation speed: \n Enter float or integer : ", "5");
+                  if(!isNaN(parseFloat(local_res.charAt(0)))) {
+                    SET_ANIMATION_SPEED(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: SET_ANIMATION_SPEED not success.");
+                  }
+                  SYS.DEBUG.LOG("SET_ANIMATION_SPEED....");
+                }
               } else {
                 local_go.EDITOR.GAME_OBJECT_MENU.VISIBLE = false;
               }

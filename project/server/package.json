@@ -1,6 +1,6 @@
 {
   "name": "visual-js-server",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "Dev tool for visualjs3 client.",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,15 @@
     "host": "node self-host.js"
   },
   "keywords": [
-    "visualjs-server", "dev-tool", "javascript-tools",
-    "editor", "on-page-editor", "npm-visual-js",
-    "gui-javascript", "texture-editor", "canvas2d",
+    "visualjs-server",
+    "dev-tool",
+    "javascript-tools",
+    "editor",
+    "on-page-editor",
+    "npm-visual-js",
+    "gui-javascript",
+    "texture-editor",
+    "canvas2d",
     "matrix-engine"
   ],
   "author": "Nikola Lukic",

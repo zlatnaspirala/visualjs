@@ -9,6 +9,7 @@
 
 var fs = require("fs");
 var path = require('path');
+var config = require('./config.js');
 
 function getDirectories(srcpath) {
   return fs.readdirSync(srcpath).filter(function(file) {
@@ -16,9 +17,7 @@ function getDirectories(srcpath) {
   });
 }
 
-var config = require('./config.js');
 var FILE_STRING = `/** ojsa */\n
-                    // import SYS from '../../lib/system'
                     window.RESOURCE = {}; \n
                     var RESOURCE = window.RESOURCE; \n
                     RESOURCE.SUM = 0;   \n`;

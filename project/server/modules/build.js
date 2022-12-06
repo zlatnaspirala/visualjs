@@ -2,10 +2,9 @@
 module.exports = build = (config) => {
 
   var APPLICATION = config;
-  // var APPLICATION = require('./config.js');
   var fs = require("fs");
   var path = require('path');
-  // function read(f) {return fs.readFileSync(f).toString();}
+
   function getDirectories(srcpath) {
     return fs.readdirSync(srcpath).filter(function(file) {
       return fs.statSync(path.join(srcpath, file)).isDirectory();

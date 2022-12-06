@@ -424,6 +424,24 @@ io.sockets.on("connection", function(socket) {
     );
   });
 
+  // ANIM1
+  socket.on("SET_ANIMATION_SPEED", function(name, PROGRAM_NAME, MODUL, H) {
+    console.log("SET_ANIMATION_SPEED :", name, PROGRAM_NAME, MODUL, H);
+    var local_path = CONFIG.PATH_OF_WWW + "cache/" + name;
+    var local_pathC = "cache/" + name + "/ANIM1.js";
+    var LOCPATH = ` `;
+    LOCPATH += `${PROGRAM_NAME}.ENGINE.MODULES.ACCESS_MODULE( '` + MODUL + `').GAME_OBJECTS.ACCESS('` +
+      name +
+      `').ANIMATION.SET_SPEED(` + H + `)`;
+
+    createFile(
+      local_path + "/" + "ANIM1.js",
+      LOCPATH,
+      local_pathC,
+      "LOAD_NOW"
+    );
+  });
+
   //SET_NEW_START_UP_POSITION   sifra 8
   socket.on("ADD_WEBCAM",
     function(name, PROGRAM_NAME, MODUL, type_, type_of_dim, byV, byH) {

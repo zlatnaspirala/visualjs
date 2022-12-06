@@ -1,7 +1,8 @@
                                  /** ojsa */
 
-                    import SYS from '../../lib/system'
-                    export var RESOURCE = {}; 
+                    window.RESOURCE = {}; 
+
+                    var RESOURCE = window.RESOURCE; 
 
                     RESOURCE.SUM = 0;   
   RESOURCE.keys={"source":['keys/hudKey_blue.png' , 
