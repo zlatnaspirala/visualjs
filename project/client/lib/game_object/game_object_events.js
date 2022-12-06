@@ -19,6 +19,7 @@ import {
   REMOVE_WEBCAM, 
   SET_WIDTH,
   SET_ANIMATION_SPEED,
+  SET_ANIMATION_TYPE,
   SET_HEIGHT} from '../editor/editor';
 
 export function EVENTS(canvas, ROOT_ENGINE) {
@@ -768,8 +769,16 @@ export function EVENTS(canvas, ROOT_ENGINE) {
 
                 } else if(local_go.EDITOR.BUTTONS[q].IAM == "ANIM1") {
                   var local_res = prompt("Set animation speed: \n Enter float or integer : ", "5");
-                  if(!isNaN(parseFloat(local_res.charAt(0)))) {
+                  if(!isNaN(parseFloat(local_res.charAt(0))) && local_go.ANIMATION != null) {
                     SET_ANIMATION_SPEED(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: SET_ANIMATION_SPEED not success.");
+                  }
+                  SYS.DEBUG.LOG("SET_ANIMATION_SPEED....");
+                } else if(local_go.EDITOR.BUTTONS[q].IAM == "ANIM2") {
+                  var local_res = prompt("Set animation draw type: \n Enter LOOP or DRAW_FRAME : ", "DRAW_FRAME");
+                  if(isNaN(parseFloat(local_res.charAt(0))) && local_go.ANIMATION != null) {
+                    SET_ANIMATION_TYPE(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
                   } else {
                     alert("ERROR MSG: SET_ANIMATION_SPEED not success.");
                   }

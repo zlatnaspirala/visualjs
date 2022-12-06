@@ -418,6 +418,7 @@ exports.REMOVE_PARTICLE = REMOVE_PARTICLE;
 exports.REMOVE_TEXTBOX = REMOVE_TEXTBOX;
 exports.REMOVE_WEBCAM = REMOVE_WEBCAM;
 exports.SET_ANIMATION_SPEED = SET_ANIMATION_SPEED;
+exports.SET_ANIMATION_TYPE = SET_ANIMATION_TYPE;
 exports.SET_HEIGHT = SET_HEIGHT;
 exports.SET_MAIN_INTERVAL = SET_MAIN_INTERVAL;
 exports.SET_NEW_START_UP_POS = SET_NEW_START_UP_POS;
@@ -566,6 +567,10 @@ function SET_HEIGHT(name, PROGRAM_NAME, MODUL, H) {
 
 function SET_ANIMATION_SPEED(name, PROGRAM_NAME, MODUL, S) {
   LOCAL_COMMUNICATOR.emit("SET_ANIMATION_SPEED", name, PROGRAM_NAME, MODUL, S);
+}
+
+function SET_ANIMATION_TYPE(name, PROGRAM_NAME, MODUL, S) {
+  LOCAL_COMMUNICATOR.emit("SET_ANIMATION_TYPE", name, PROGRAM_NAME, MODUL, S);
 }
 
 function ADD_COLLISION(name, PROGRAM_NAME, MODUL, margin) {
@@ -1788,7 +1793,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
     //ACTOR_DRAG_RECT_POS : SYS.ARRAY_OPERATION.DEEP_COPY.getCloneOfObject( this.POSITION ) ,
     ACTOR_DRAG_RECT_POS: this.POSITION,
     ACTOR_DRAG: false,
-    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Add animation ", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Add collision ", 60, "4"), new _systems.RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"), new _systems.RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"), new _systems.RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"), new _systems.RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png"), new _systems.RIGHT_MENU_BUTTON("Set width ", 160, "B1"), new _systems.RIGHT_MENU_BUTTON("Set height ", 180, "B2"), new _systems.RIGHT_MENU_BUTTON("Set animation speed ", 200, "ANIM1")],
+    BUTTONS: [new _systems.RIGHT_MENU_BUTTON("Destroy gameObject", 0, "1"), new _systems.RIGHT_MENU_BUTTON("Destroy after secund ", 20, "2"), new _systems.RIGHT_MENU_BUTTON("Add animation ", 40, "3"), new _systems.RIGHT_MENU_BUTTON("Add collision ", 60, "4"), new _systems.RIGHT_MENU_BUTTON("Atach player ", 80, "5", "res/system/images/html5/plus.png"), new _systems.RIGHT_MENU_BUTTON("Add particle ", 100, "6", "res/system/images/html5/particle.png"), new _systems.RIGHT_MENU_BUTTON("Add textbox ", 120, "7", "res/system/images/html5/textbox.png"), new _systems.RIGHT_MENU_BUTTON("Add webcam  ", 140, "8", "res/system/images/html5/HTML5-Device-Access.png"), new _systems.RIGHT_MENU_BUTTON("Set width ", 160, "B1"), new _systems.RIGHT_MENU_BUTTON("Set height ", 180, "B2"), new _systems.RIGHT_MENU_BUTTON("Set animation speed ", 200, "ANIM1"), new _systems.RIGHT_MENU_BUTTON("Set animation type ", 220, "ANIM2")],
     GAME_OBJECT_MENU: {
       VISIBLE: false
     }
@@ -2282,10 +2287,11 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         s.globalAlpha = 1;
 
         if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].HOVER == false) {
+          //if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text == 'Set animation speed ' && ROOT_GAME_OBJECT.ANIMATION != null) {
           s.fillStyle = _manifest.default.SYSTEM.COLOR;
           s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
           s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
-          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH()); //}
         } else {
           s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
           s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
@@ -2956,8 +2962,18 @@ function EVENTS(canvas, ROOT_ENGINE) {
                 } else if (local_go.EDITOR.BUTTONS[q].IAM == "ANIM1") {
                   var local_res = prompt("Set animation speed: \n Enter float or integer : ", "5");
 
-                  if (!isNaN(parseFloat(local_res.charAt(0)))) {
+                  if (!isNaN(parseFloat(local_res.charAt(0))) && local_go.ANIMATION != null) {
                     (0, _editor.SET_ANIMATION_SPEED)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
+                  } else {
+                    alert("ERROR MSG: SET_ANIMATION_SPEED not success.");
+                  }
+
+                  _system.default.DEBUG.LOG("SET_ANIMATION_SPEED....");
+                } else if (local_go.EDITOR.BUTTONS[q].IAM == "ANIM2") {
+                  var local_res = prompt("Set animation draw type: \n Enter LOOP or DRAW_FRAME : ", "DRAW_FRAME");
+
+                  if (isNaN(parseFloat(local_res.charAt(0))) && local_go.ANIMATION != null) {
+                    (0, _editor.SET_ANIMATION_TYPE)(local_go.NAME, local_go.PROGRAM_NAME, local_go.PARENT, local_res);
                   } else {
                     alert("ERROR MSG: SET_ANIMATION_SPEED not success.");
                   }
