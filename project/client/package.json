@@ -1,7 +1,7 @@
 {
   "name": "visual-js",
-  "version": "3.0.23",
-  "description": "[3.0.23] Prepare for npm usage.",
+  "version": "3.0.24",
+  "description": "[3.0.24] Prepare for npm usage.",
   "main": "index.js",
   "scripts": {
     "app": "watchify application.js -p esmify -o builds/visual.js",

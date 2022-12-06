@@ -4,8 +4,8 @@
   "description": "test-npm-visual-js 3.0.0, All in one Client part + editor tools.",
   "main": "index.js",
   "dependencies": {
-    "visual-js": "^3.0.23",
-    "visual-js-server": "3.0.11",
+    "visual-js": "^3.0.24",
+    "visual-js-server": "3.0.12",
     "socket.io-client": "^4.5.1"
   },
   "devDependencies": {
