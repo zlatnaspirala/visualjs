@@ -358,6 +358,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.RIGHT_MENU_BUTTON = RIGHT_MENU_BUTTON;
 
+var _init = require("../init");
+
 var _math = require("../math");
 
 var _system = _interopRequireDefault(require("../system"));
@@ -395,7 +397,7 @@ function RIGHT_MENU_BUTTON(text, Y_OFFSET, id, res) {
   this.TAP = function () {};
 }
 
-},{"../math":14,"../system":21}],6:[function(require,module,exports){
+},{"../init":13,"../math":14,"../system":21}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -792,18 +794,18 @@ function ENGINE(c) {
         s.font = _manifest.default.SYSTEM.FONT;
 
         for (var x = 0; x < ROOT_ENGINE.GUI.BUTTONS.length; x++) {
-          s.textBaseline = "middle";
+          s.textBaseline = "bottom";
 
           if (ROOT_ENGINE.GUI.BUTTONS[x].HOVER == false) {
             s.fillStyle = _manifest.default.SYSTEM.COLOR;
-            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), 20);
             s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
-            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + 15, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
           } else {
             s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
-            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT());
+            s.fillRect(ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y(), ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH(), 20);
             s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
-            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
+            s.fillText(ROOT_ENGINE.GUI.BUTTONS[x].text, ROOT_ENGINE.GUI.BUTTONS[x].POSITION.X(), ROOT_ENGINE.GUI.BUTTONS[x].POSITION.Y() + 15, ROOT_ENGINE.GUI.BUTTONS[x].DIMENSION.WIDTH());
 
             if (ROOT_ENGINE.GUI.BUTTONS[x].icon == true) {
               try {
@@ -2282,21 +2284,23 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
 
     if (ROOT_GAME_OBJECT.EDITOR.GAME_OBJECT_MENU.VISIBLE == true) {
       for (var x = 0; x < ROOT_GAME_OBJECT.EDITOR.BUTTONS.length; x++) {
-        //s.textBaseline = 'middle';
         s.save();
+        s.textBaseline = 'bottom';
         s.globalAlpha = 1;
 
         if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].HOVER == false) {
           //if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text == 'Set animation speed ' && ROOT_GAME_OBJECT.ANIMATION != null) {
-          s.fillStyle = _manifest.default.SYSTEM.COLOR;
-          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.COLOR; // s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+
+          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), 20);
           s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
-          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH()); //}
+          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + 15, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH()); //}
         } else {
-          s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR;
-          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+          s.fillStyle = _manifest.default.SYSTEM.HOVER_COLOR; //s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT());
+
+          s.fillRect(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH(), 20);
           s.fillStyle = _manifest.default.SYSTEM.TEXT_COLOR;
-          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.HEIGHT() / 2, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
+          s.fillText(ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].text, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.X(), ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].POSITION.Y() + 15, ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].DIMENSION.WIDTH());
 
           if (ROOT_GAME_OBJECT.EDITOR.BUTTONS[x].icon == true) {
             try {
@@ -4328,6 +4332,8 @@ var _manifest = _interopRequireDefault(require("../manifest/manifest"));
 
 var _editor = require("./editor/editor");
 
+var _init = require("./init");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
@@ -4586,10 +4592,10 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
       this.y = y_;
       this.IN_MOVE = false;
     } else {
-      this.targetX = CONVERTOR.PIX_TO_PER(x_);
-      this.targetY = CONVERTOR.PIX_TO_PER(y_);
-      this.x = CONVERTOR.PIY_TO_PER(x_);
-      this.y = CONVERTOR.PIY_TO_PER(y_);
+      this.targetX = _init.CONVERTOR.PIX_TO_PER(x_);
+      this.targetY = _init.CONVERTOR.PIX_TO_PER(y_);
+      this.x = _init.CONVERTOR.PIY_TO_PER(x_);
+      this.y = _init.CONVERTOR.PIY_TO_PER(y_);
       this.IN_MOVE = false;
     }
   };
@@ -4649,7 +4655,7 @@ function POSITION(curentX, curentY, targetX_, targetY_, thrust_) {
   };
 }
 
-},{"../manifest/manifest":22,"./editor/editor":6,"./system":21}],15:[function(require,module,exports){
+},{"../manifest/manifest":22,"./editor/editor":6,"./init":13,"./system":21}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
