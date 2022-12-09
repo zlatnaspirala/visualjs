@@ -4,13 +4,13 @@ module.exports = build = (config) => {
   var APPLICATION = config;
   var fs = require("fs");
   var path = require('path');
-
+  // function read(f) {return fs.readFileSync(f).toString();}
   function getDirectories(srcpath) {
     return fs.readdirSync(srcpath).filter(function(file) {
       return fs.statSync(path.join(srcpath, file)).isDirectory();
     });
   }
-
+  
   // LIST OFF ALL FILES
   async function GET_FILES_NAME(path, name_of_animation_path, main_length) {
     var name_of_animation_path = name_of_animation_path;
@@ -26,12 +26,12 @@ module.exports = build = (config) => {
           setTimeout(function() {
             resolve()
             GEN(name_of_animation_path, ALL_FILES_OF_OBJECT);
-          }, 1);
+          }, 100);
         }
       });
     });
   }
-
+  
   var TEST;
   var detIndex = 0;
   function GEN(name_of_animation_path, allfiles) {
@@ -41,14 +41,14 @@ module.exports = build = (config) => {
       allMyPromise.push(READ(APPLICATION.PATH_OF_WWW + "cache/" + name_of_animation_path + "/" + item));
     });
     Promise.all(allMyPromise).then((e) => {
-      if(detIndex == LIST_OFF_ALL_VISUAL_DIR.length - 1) {
+      if (detIndex == LIST_OFF_ALL_VISUAL_DIR.length-1) {
         console.log(".Build =============! ", detIndex);
         CreateFile(APPLICATION.PATH_OF_WWW + "starter/visual.js", TEST);
       }
       detIndex++;
     });
   }
-
+  
   var LIST_OFF_ALL_VISUAL_DIR = getDirectories(APPLICATION.PATH_OF_WWW + "cache/");
   var local__x = -1;
   console.log(APPLICATION.PATH_OF_WWW);
@@ -63,7 +63,7 @@ module.exports = build = (config) => {
       GET_FILES_NAME(APPLICATION.PATH_OF_WWW + "cache/" + LIST_OFF_ALL_VISUAL_DIR[i], LIST_OFF_ALL_VISUAL_DIR[i], false);
     }
   }
-
+  
   function CreateFile(path_, CONTENT) {
     fs.writeFile(path_, CONTENT, function(err) {
       if(err) {
@@ -75,7 +75,7 @@ module.exports = build = (config) => {
       }
     });
   }
-
+  
   function READ(filePath) {
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, {encoding: 'utf-8'}, function(err, data) {
@@ -89,6 +89,5 @@ module.exports = build = (config) => {
       });
     });
   }
-
-
+  
 }

@@ -24,7 +24,7 @@ async function GET_FILES_NAME(path, name_of_animation_path, main_length) {
         setTimeout(function() {
           resolve()
           GEN(name_of_animation_path, ALL_FILES_OF_OBJECT);
-        }, 1);
+        }, 100);
       }
     });
   });
