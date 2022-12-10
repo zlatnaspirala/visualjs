@@ -16,11 +16,10 @@ All new version begin with 3.0.0 for client, server or GUI part.
      on right click in EDITOR = true status.
  - Create more visual-js embedded visual controls.
      Like Oscillator , make input/output pins ...
- - Improve of windows GUI Editor.
- - Improve visual-js in concept of npm usage.
+ - [ALMOST DONE]Improve visual-js in concept of npm usage.
    Make it easy usable from `npm i visual-js`.
- - Reconstruct from zero point `visualjs-gui`.
-   new GUI will use npm in background.
+ - [WIP] Reconstruct from zero point `visualjs-gui`.
+   new GUI will use npm in background.(`visualjs-gui` in useless for now)
 
 ### Installation and setup:
 
