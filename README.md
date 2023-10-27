@@ -6,8 +6,7 @@ All new version begin with 3.0.0 for client, server or GUI part.
 
 [![Join the chat at https://gitter.im/Visual-JS-game-engine/Lobby](https://badges.gitter.im/Visual-JS-game-engine/Lobby.svg)](https://gitter.im/Visual-JS-game-engine/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-#### Creator: Nikola Lukic zlatnaspirala@gmail.com
-#### Full name: Visual-JS game engine
+#### Full name: visual-js game engine
 #### This is JavaScript game engine (dev tools node.js / client js).
 
 ### Objective
@@ -264,22 +263,6 @@ node editor.js
 ```
 
 
-
-
-
-## VISUALJS-GUI.exe [Windows GUI open source]
-
- [Video tutorial for visual-JS source editor win gui](https://www.youtube.com/watch?v=kxUBPDhB-3I)
-
-Name:  Visual-JS GE
-Version: 1.1
-
-![visual-javascript-gui-for-windows.png](https://bitbucket.org/repo/xzgbkK/images/838031220-visual-javascript-gui-for-windows.png)
-
-Visual Source editor Beta 1 only for windows users.
-![New_script.png](https://bitbucket.org/repo/xzgbkK/images/1827173607-New_script.png)
-
-
 ### External licences in this project:
 
 - Webcam NUI control is under:
@@ -298,3 +281,6 @@ Visual Source editor Beta 1 only for windows users.
 including without limitation, any warranty of merchantability or fitness for a particular purpose.
 In no event shall the author of this software be held liable for data loss,
 damages, loss of profits or any other kind of loss while using or misusing this
+
+
+#### Creator: Nikola Lukic zlatnaspirala@gmail.com
