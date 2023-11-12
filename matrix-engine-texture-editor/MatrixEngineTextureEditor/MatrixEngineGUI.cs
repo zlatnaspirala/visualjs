@@ -80,6 +80,8 @@ namespace matrix_engine {
             URLTEXT.Text = navUrl;
             // chromiumWebBrowser1.Load(navUrl);
 
+            cmdStream.txtBxStdin.Text = @"npm run host-for-gui";
+            cmdStream.btnSendStdinToProcess.PerformClick();
 
             }
 
