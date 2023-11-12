@@ -1,0 +1,71 @@
+{
+  "name": "matrix-engine-gui",
+  "version": "1.0.0",
+  "description": "How to use matrix engine from npm service.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "matrix-gui-install": "npm i",
+    "examples": "watchify App-Examples.js -p [esmify --noImplicitAny] -o builds/examples.me.js",
+    "build.roulette": "browserify projects/matrix-roulette/App.js -p esmify > builds/roulette.js",
+    "build.examples": "browserify App-Examples.js -p esmify > builds/examples.me.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "info": "echo \"Matrix engine writen in ECMA6. \n  From begin it was opengles1.1 in future i will find easy procedure for switch 3d context [webgl/webgl2] [shader opengles 3/2/1.1] Enjoy!  \n  Nikola Lukic @zlatnaspirala  \""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zlatnaspirala/matrix-engine.git"
+  },
+  "keywords": [
+    "matrix-engine",
+    "matrix-engine-examples",
+    "raycast-triangle",
+    "3d-font",
+    "vertices-font",
+    "plane-text",
+    "UV-fonts",
+    "pwa",
+    "powerfull",
+    "fast-render",
+    "alternative-3d",
+    "alternative",
+    "webgl",
+    "webgl2",
+    "glmatrix",
+    "glmatrix2",
+    "opengles1.1",
+    "opengles2",
+    "opengles300",
+    "popMatrix",
+    "pushMatrix",
+    "blender-glmatrix-export",
+    "obj",
+    "games",
+    "web-anatomy",
+    "3d-roulette",
+    "3d-roulette-webgl",
+    "3d-roulette-real-physics",
+    "web-anatomy"
+  ],
+  "author": "Nikola Lukic zlatnaspirala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zlatnaspirala/matrix-engine/issues"
+  },
+  "homepage": "https://github.com/zlatnaspirala/matrix-engine#readme",
+  "dependencies": {
+    "audio-commander": "^1.0.3",
+    "fs": "0.0.1-security",
+    "matrix-engine": "^1.9.34",
+    "matrix-engine-plugins": "0.1.0",
+    "matrix-network": "^1.0.12",
+    "nidza": "^1.2.15",
+    "nui-commander": "0.0.7",
+    "voice-commander": "0.0.5"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1",
+    "watchify": "^4.0.0"
+  }
+}
