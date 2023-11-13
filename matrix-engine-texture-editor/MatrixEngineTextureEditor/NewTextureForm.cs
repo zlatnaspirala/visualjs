@@ -17,17 +17,17 @@ namespace matrix_engine {
         public NewTextureForm(MatrixEngineGUI MF_) {
             InitializeComponent();
             MAINFORM = MF_;
-
-            }
+        }
 
         private void w_Click(object sender, EventArgs e) {
             APP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\matrix-texture-tool\\" + textureProjectName.Text;
             System.IO.Directory.CreateDirectory(APP_DIR);
-
-                        
+                                    
             textureProjectName.Text = APP_DIR;
             MAINFORM.Text = APP_DIR;
             MAINFORM.START(APP_DIR);
+
+            progressBar1.Value = 50;
         }
     }
 }

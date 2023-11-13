@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-
  ﻿
 /***************************************************************************************
 *  Author: Curt C.
@@ -23,6 +22,8 @@ using System.Windows.Forms;
 
 namespace CmdWindowControlTestApp
 {
+
+    
     /// <summary>
     /// Form which displays options for running a command-line command, and monitoring and
     /// displaying that command standard output and standard error text output.
@@ -40,6 +41,7 @@ namespace CmdWindowControlTestApp
     {
         // Command line process that is being monitored for standard output/standard error text output.
         private Process runningProcess;
+        public int _PID_;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -168,6 +170,9 @@ namespace CmdWindowControlTestApp
             // Create the process, using the ProcessInfo object just created.
             runningProcess = Process.Start(pinfo);
 
+            _PID_ = runningProcess.Id;
+            this.Text =  _PID_.ToString();
+            groupBox3.Text = _PID_.ToString();
             // Give the text box control the process so it can start monitoring output
             rtb.ExecutingProcess = runningProcess;
 
@@ -201,8 +206,12 @@ namespace CmdWindowControlTestApp
         private void rtb_StdoutTextRead(string text)
         {
             // Do custom handling of the standard output text here ...
-            //Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
-        }
+            Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
+            if (text.Contains("http://127.0.0.1")) {
+                text = text.Replace("  ", "");
+                result.Text = text;
+                }
+            }
 
         /// <summary>
         /// Event method for the EOnStderrTextRead event - called when standard error text is read
@@ -212,12 +221,30 @@ namespace CmdWindowControlTestApp
         {
             // Do custom handling of the standard error text here ...
             //Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
+
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.btnRunCommand.PerformClick();
+
+           
         }
 
-    }
+        private void KILL_Click(object sender, EventArgs e) {
+            runningProcess.Kill();
+
+            }
+
+        private void groupBox3_Enter(object sender, EventArgs e) {
+
+            }
+
+        private void killProc_Click(object sender, EventArgs e) {
+
+            txtBxStdin.Text = @"taskkill /F " + _PID_;
+            btnSendStdinToProcess.PerformClick();
+
+            }
+        }
 }
