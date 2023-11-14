@@ -38,7 +38,7 @@ namespace CmdWindowControlTestApp {
     /// </remarks>
     public partial class MainForm : Form {
         // Command line process that is being monitored for standard output/standard error text output.
-        private Process runningProcess;
+        public Process runningProcess;
         public int _PID_;
 
         /// <summary>
@@ -219,8 +219,9 @@ namespace CmdWindowControlTestApp {
 
         private void killProc_Click(object sender, EventArgs e) {
 
-            txtBxStdin.Text = @"taskkill /F " + _PID_;
-            btnSendStdinToProcess.PerformClick();
+            this.Hide();
+           //  txtBxStdin.Text = @"taskkill /F " + _PID_;
+           // btnSendStdinToProcess.PerformClick();
 
         }
     }

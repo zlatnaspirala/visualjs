@@ -28,6 +28,7 @@ namespace matrix_engine {
                 MAINFORM.button1.PerformClick();
 
                 MAINFORM.LOAD(APP_DIR);
+                MAINFORM.APP_NAME = textureProjectName.Text;
 
                 this.Close();
                 this.Dispose();

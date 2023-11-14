@@ -71,6 +71,33 @@ namespace matrix_engine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to // Editor mode
+        ///import {sys, ActivateModifiers,  loadEditor, runEditor, loadEditorObjects} from &apos;visual-js&apos;;
+        ///
+        ///var runTextureEditor = (curTexId) =&gt; {
+        ///  // Visual-JS 3 part
+        ///  // must be fixed - double call
+        ///  if(typeof window.RESOURCE !== &apos;undefined&apos;) return;
+        ///
+        ///  // Final build
+        ///  // application.EDITOR = false;
+        ///
+        ///  ActivateModifiers();
+        ///
+        ///  // Run editor
+        ///  runEditor();
+        ///  loadEditor();
+        ///
+        ///  sys.DOM.CREATE_SURFACE(&quot;SURF&quot;, curTexId, 100, 99.4, &quot;DIAMETRIC&quot;);
+        ///  actualTexture.ENGINE.CREATE_MODUL(&quot;STARTER&quot;) [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string gui_texture_editor {
+            get {
+                return ResourceManager.GetString("gui_texture_editor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///  &quot;name&quot;: &quot;matrix-engine-gui&quot;,
         ///  &quot;version&quot;: &quot;1.0.0&quot;,

@@ -26,6 +26,7 @@ namespace matrix_engine {
             textureProjectName.Text = APP_DIR;
             MAINFORM.Text = APP_DIR;
             MAINFORM.START(APP_DIR);
+            MAINFORM.APP_NAME = textureProjectName.Text;
 
             progressBar1.Value = 50;
         }

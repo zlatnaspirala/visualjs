@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace matrix_engine {
     public partial class MatrixEngineGUI : Form {
+        public string APP_NAME = "";
         CmdWindowControlTestApp.MainForm cmdStream;
         CmdWindowControlTestApp.MainForm cmdLoader;
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
@@ -63,7 +64,7 @@ namespace matrix_engine {
             cmdVJS3EDITOR.Show();
             cmdVJS3WATCH.Show();
 
-            scriptGUIEditor = new ScritpEditor(APP_DIR);
+            scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
             scriptGUIEditor.Show();
         }
 
@@ -133,6 +134,13 @@ namespace matrix_engine {
 
         private void cmdLoaderLoader(object sender, EventArgs e) {
             // cmdLoader.Size = new Size(this.Size.Width, this.Size.Height / 3);
+
+            string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\gui-texture-editor.js";
+            string PACKAGE_CONTENT = matrix_engine.Properties.Resources.gui_texture_editor.ToString();
+            if (File.Exists(TEXTURE_JS_FILE) != true) {
+                File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+            }
+
             cmdLoader.Location = new Point(Location.X + Size.Width / 2, Location.Y + 3 * this.Size.Height / 4);
 
             cmdLoader.txtBxStdin.Text = @"c:";
@@ -150,11 +158,7 @@ namespace matrix_engine {
             // Install new instance - for now matrix-engine
             cmdStream.Size = new Size(this.Size.Width, this.Size.Height / 3);
             cmdStream.Location = new Point(Location.X, Location.Y);
-            
-            string APP_PACKAGE = APP_DIR + @"\\package.json";
-            string PACKAGE_CONTENT = matrix_engine.Properties.Resources.package.ToString();
-            File.WriteAllText(APP_PACKAGE, PACKAGE_CONTENT);
-
+        
             cmdStream.txtBxStdin.Text = @"c:";
             cmdStream.btnSendStdinToProcess.PerformClick();
             
@@ -190,11 +194,25 @@ namespace matrix_engine {
         }
 
         private void unLoadProjectToolStripMenuItem_Click(object sender, EventArgs e) {
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3EDITOR._PID_ + @" /T ";
+            killSubProcess();
+        }
+
+        private void killAllNodeOnMyComputerToolStripMenuItem_Click(object sender, EventArgs e) {
+            killNODEProcess();
+        }
+
+        public void killNODEProcess() {
+            cmdKillerProc.txtBxStdin.Text = @"taskkill /im node /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3WATCH._PID_ + @" /T ";
+            
+        }
+
+        public void killSubProcess() {
+            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3EDITOR._PID_ + @" /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdLoader._PID_ + @" /T ";
+            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3WATCH._PID_ + @" /T /F";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdLoader._PID_ + @" /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
 
             if (cmdStream != null) {
@@ -202,31 +220,25 @@ namespace matrix_engine {
                 cmdStream.Dispose();
             }
 
+            cmdLoader.runningProcess.Close();
             cmdLoader.Close();
             cmdLoader.Dispose();
 
+            cmdVJS3EDITOR.runningProcess.Close();
             cmdVJS3EDITOR.Close();
             cmdVJS3EDITOR.Dispose();
 
+            cmdVJS3WATCH.runningProcess.Close();
             cmdVJS3WATCH.Close();
             cmdVJS3WATCH.Dispose();
-        }
-
-        private void killAllNodeOnMyComputerToolStripMenuItem_Click(object sender, EventArgs e) {
-            killSubProcess();
-        }
-
-        public void killSubProcess() {
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /im node /T /F";
-            cmdKillerProc.btnSendStdinToProcess.PerformClick();
-            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             killSubProcess();
             Application.Exit();
 
-            cmdVJS3EDITOR.Show();
+            // force error hot fix 
+            // cmdVJS3EDITOR.Show();
         }
 
         private void mATRIXTEXEDITORToolStripMenuItem_Click(object sender, EventArgs e) {

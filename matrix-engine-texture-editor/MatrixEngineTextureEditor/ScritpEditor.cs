@@ -12,9 +12,11 @@ using System.Windows.Forms;
 namespace matrix_engine {
     public partial class ScritpEditor : Form {
 
-        public ScritpEditor(String P) {
+        public ScritpEditor(String P, String APP_NAME) {
             InitializeComponent();
-            // APP_DIR - p
+            // APP_DIR - p APP_NAME
+
+
             StreamReader sr = new StreamReader(P + "\\2DTextureEditor\\tex1.js");
             CODE_EDITOR.Text = sr.ReadToEnd().ToString();
             sr.Close();
