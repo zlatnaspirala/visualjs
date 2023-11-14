@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
- ﻿
+
 /***************************************************************************************
 *  Author: Curt C.
 *  Email : harpyeaglecp@aol.com
@@ -20,10 +20,9 @@ using System.Windows.Forms;
 * >>> Please leave this header intact when using this file in other projects <<<
 ***************************************************************************************/
 
-namespace CmdWindowControlTestApp
-{
+namespace CmdWindowControlTestApp {
 
-    
+
     /// <summary>
     /// Form which displays options for running a command-line command, and monitoring and
     /// displaying that command standard output and standard error text output.
@@ -37,8 +36,7 @@ namespace CmdWindowControlTestApp
     /// supply the command line arguments:  " /c ping localhost ".
     /// This is the easiest way to run command-line processes.
     /// </remarks>
-    public partial class MainForm : Form
-    {
+    public partial class MainForm : Form {
         // Command line process that is being monitored for standard output/standard error text output.
         private Process runningProcess;
         public int _PID_;
@@ -46,8 +44,7 @@ namespace CmdWindowControlTestApp
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
-        public MainForm()
-        {
+        public MainForm() {
             InitializeComponent();
         }
 
@@ -56,28 +53,22 @@ namespace CmdWindowControlTestApp
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.Forms.FormClosingEventArgs"/> instance containing the event data.</param>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             DestroyExecutingProcess();
         }
 
         /// <summary>
         /// Kills and disposes of the currently executing process (if a valid process exists).
         /// </summary>
-        private void DestroyExecutingProcess()
-        {
-            try
-            {
-                if (runningProcess != null)
-                {
+        private void DestroyExecutingProcess() {
+            try {
+                if (runningProcess != null) {
                     if (runningProcess.HasExited == false)
                         runningProcess.Kill();
                     runningProcess.Dispose();
                     runningProcess = null;
                 }
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("DestoryExecutingProcess: Exception=" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -88,28 +79,23 @@ namespace CmdWindowControlTestApp
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnRunCommand_Click(object sender, EventArgs e)
-        {
+        private void btnRunCommand_Click(object sender, EventArgs e) {
             string cmdDirectory = "";
             string cmd;
             string cmdPath;
             string args;
 
-            try
-            {
+            try {
                 DestroyExecutingProcess();
 
                 cmd = txtBxCmd.Text.Trim();
                 cmdDirectory = txtBxDirectory.Text.Trim();
                 args = txtBxArgs.Text.Trim();
 
-                if (cmdDirectory.Length > 0)
-                {
+                if (cmdDirectory.Length > 0) {
                     // Combine directory and command to make full path to command
                     cmdPath = Path.Combine(cmdDirectory, cmd);
-                }
-                else
-                {
+                } else {
                     // Assume that the command directory is in the PATH environment variable
                     cmdPath = cmd;
                 }
@@ -117,16 +103,13 @@ namespace CmdWindowControlTestApp
 
                 // When running a command-line process via the Process class, invoke the command using the Windows
                 // command line interpretter "cmd.exe", with the "/c" argument, followed by the desired command to run
-                if (cmdPath.ToUpper().StartsWith("CMD.EXE") == false && cmdPath.ToUpper().StartsWith("CMD ") == false)
-                {
+                if (cmdPath.ToUpper().StartsWith("CMD.EXE") == false && cmdPath.ToUpper().StartsWith("CMD ") == false) {
                     args = " /c " + cmdPath + " " + args;
                     cmdPath = "cmd.exe";
                 }
-                    
+
                 RunCmdLineProcess(cmdPath, args, cmdDirectory);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 MessageBox.Show("Error starting process:\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -139,19 +122,16 @@ namespace CmdWindowControlTestApp
         /// <param name="arguments">The command line arguments to the executable (optional)</param>
         /// <param name="workingDirectory">The working directory for the command (can be null/blank for no arguments).</param>
         /// <returns>Running process</returns>
-        private Process RunCmdLineProcess(string executableName, string arguments, string workingDirectory)
-        {
+        private Process RunCmdLineProcess(string executableName, string arguments, string workingDirectory) {
             string currentDirectory = Directory.GetCurrentDirectory();
 
             executableName = (executableName == null) ? "" : executableName.Trim();
 
-            if (executableName.Length <= 0)
-            {
+            if (executableName.Length <= 0) {
                 throw new ArgumentException("Unable to start process - executableName was not supplied.");
             }
 
-            if (string.IsNullOrEmpty(workingDirectory) == false)
-            {
+            if (string.IsNullOrEmpty(workingDirectory) == false) {
                 if (Directory.Exists(workingDirectory) == false)
                     throw new DirectoryNotFoundException("RunCmdLineProcessForSynchronousRead: Supplied working directory does not exist");
             }
@@ -171,7 +151,7 @@ namespace CmdWindowControlTestApp
             runningProcess = Process.Start(pinfo);
 
             _PID_ = runningProcess.Id;
-            this.Text =  _PID_.ToString();
+            this.Text = _PID_.ToString();
             groupBox3.Text = _PID_.ToString();
             // Give the text box control the process so it can start monitoring output
             rtb.ExecutingProcess = runningProcess;
@@ -184,8 +164,7 @@ namespace CmdWindowControlTestApp
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnSendStdinToProcess_Click(object sender, EventArgs e)
-        {
+        private void btnSendStdinToProcess_Click(object sender, EventArgs e) {
             rtb.WriteTextToProcessStdin(txtBxStdin.Text.Trim());
         }
 
@@ -194,8 +173,7 @@ namespace CmdWindowControlTestApp
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnClearTextBox_Click(object sender, EventArgs e)
-        {
+        private void btnClearTextBox_Click(object sender, EventArgs e) {
             rtb.Clear();
         }
 
@@ -203,48 +181,47 @@ namespace CmdWindowControlTestApp
         /// Event method for the EOnStdoutTextRead event - called when standard output text is read
         /// </summary>
         /// <param name="text">The standard output text of the running command.</param>
-        private void rtb_StdoutTextRead(string text)
-        {
+        private void rtb_StdoutTextRead(string text) {
             // Do custom handling of the standard output text here ...
             Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
             if (text.Contains("http://127.0.0.1")) {
                 text = text.Replace("  ", "");
                 result.Text = text;
-                }
+            } else if (text.Contains("my software")) {
+                resultEditor.Text = text;
             }
+        }
 
         /// <summary>
         /// Event method for the EOnStderrTextRead event - called when standard error text is read
         /// </summary>
         /// <param name="text">The standard error text of the running command.</param>
-        private void rtb_StderrTextRead(string text)
-        {
+        private void rtb_StderrTextRead(string text) {
             // Do custom handling of the standard error text here ...
             //Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
 
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
+        private void MainForm_Load(object sender, EventArgs e) {
             this.btnRunCommand.PerformClick();
 
-           
         }
 
         private void KILL_Click(object sender, EventArgs e) {
             runningProcess.Kill();
 
-            }
+
+        }
 
         private void groupBox3_Enter(object sender, EventArgs e) {
 
-            }
+        }
 
         private void killProc_Click(object sender, EventArgs e) {
 
             txtBxStdin.Text = @"taskkill /F " + _PID_;
             btnSendStdinToProcess.PerformClick();
 
-            }
         }
+    }
 }

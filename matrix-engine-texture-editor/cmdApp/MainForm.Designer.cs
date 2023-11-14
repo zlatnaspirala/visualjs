@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.killProc = new System.Windows.Forms.Button();
+            this.rtb = new CmdWindow.CmdWindowBoxSync();
+            this.result = new System.Windows.Forms.TextBox();
             this.btnRunCommand = new System.Windows.Forms.Button();
             this.txtBxStdin = new System.Windows.Forms.TextBox();
             this.btnSendStdinToProcess = new System.Windows.Forms.Button();
@@ -42,16 +45,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.KILL = new System.Windows.Forms.Button();
-            this.result = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rtb = new CmdWindow.CmdWindowBoxSync();
-            this.killProc = new System.Windows.Forms.Button();
+            this.resultEditor = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.killProc);
             this.groupBox3.Controls.Add(this.rtb);
             this.groupBox3.Controls.Add(this.result);
@@ -64,6 +66,46 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // killProc
+            // 
+            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.killProc.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.killProc.Location = new System.Drawing.Point(658, 186);
+            this.killProc.Margin = new System.Windows.Forms.Padding(4);
+            this.killProc.Name = "killProc";
+            this.killProc.Size = new System.Drawing.Size(55, 26);
+            this.killProc.TabIndex = 41;
+            this.killProc.Text = "KILL";
+            this.killProc.UseVisualStyleBackColor = true;
+            this.killProc.Click += new System.EventHandler(this.killProc_Click);
+            // 
+            // rtb
+            // 
+            this.rtb.BackColor = System.Drawing.Color.Black;
+            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtb.ExecutingProcess = null;
+            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb.ForeColor = System.Drawing.Color.Lime;
+            this.rtb.IgnoreOutputTextMatchingLastInput = true;
+            this.rtb.Location = new System.Drawing.Point(4, 18);
+            this.rtb.Multiline = true;
+            this.rtb.Name = "rtb";
+            this.rtb.Size = new System.Drawing.Size(718, 167);
+            this.rtb.TabIndex = 0;
+            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
+            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
+            // 
+            // result
+            // 
+            this.result.BackColor = System.Drawing.Color.Black;
+            this.result.ForeColor = System.Drawing.Color.Lime;
+            this.result.Location = new System.Drawing.Point(2, 185);
+            this.result.Margin = new System.Windows.Forms.Padding(4);
+            this.result.Name = "result";
+            this.result.Size = new System.Drawing.Size(220, 27);
+            this.result.TabIndex = 40;
+            this.toolTip.SetToolTip(this.result, "Text to send to the standard input stream of running process.");
             // 
             // btnRunCommand
             // 
@@ -187,17 +229,6 @@
             this.KILL.UseVisualStyleBackColor = true;
             this.KILL.Click += new System.EventHandler(this.KILL_Click);
             // 
-            // result
-            // 
-            this.result.BackColor = System.Drawing.Color.Black;
-            this.result.ForeColor = System.Drawing.Color.Lime;
-            this.result.Location = new System.Drawing.Point(2, 185);
-            this.result.Margin = new System.Windows.Forms.Padding(4);
-            this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(359, 27);
-            this.result.TabIndex = 40;
-            this.toolTip.SetToolTip(this.result, "Text to send to the standard input stream of running process.");
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label3);
@@ -216,41 +247,23 @@
             this.panel1.Size = new System.Drawing.Size(315, 314);
             this.panel1.TabIndex = 41;
             // 
-            // rtb
+            // resultEditor
             // 
-            this.rtb.BackColor = System.Drawing.Color.Black;
-            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb.ExecutingProcess = null;
-            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb.ForeColor = System.Drawing.Color.Lime;
-            this.rtb.IgnoreOutputTextMatchingLastInput = true;
-            this.rtb.Location = new System.Drawing.Point(4, 18);
-            this.rtb.Multiline = true;
-            this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(718, 167);
-            this.rtb.TabIndex = 0;
-            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
-            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
-            // 
-            // killProc
-            // 
-            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.killProc.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(658, 186);
-            this.killProc.Margin = new System.Windows.Forms.Padding(4);
-            this.killProc.Name = "killProc";
-            this.killProc.Size = new System.Drawing.Size(55, 26);
-            this.killProc.TabIndex = 41;
-            this.killProc.Text = "KILL";
-            this.killProc.UseVisualStyleBackColor = true;
-            this.killProc.Click += new System.EventHandler(this.killProc_Click);
+            this.resultEditor.BackColor = System.Drawing.Color.Black;
+            this.resultEditor.ForeColor = System.Drawing.Color.Lime;
+            this.resultEditor.Location = new System.Drawing.Point(230, 185);
+            this.resultEditor.Margin = new System.Windows.Forms.Padding(4);
+            this.resultEditor.Name = "resultEditor";
+            this.resultEditor.Size = new System.Drawing.Size(220, 27);
+            this.resultEditor.TabIndex = 42;
+            this.toolTip.SetToolTip(this.resultEditor, "Text to send to the standard input stream of running process.");
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(733, 555);
+            this.ClientSize = new System.Drawing.Size(733, 223);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Stormfaze", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,6 +300,7 @@
         public System.Windows.Forms.TextBox result;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Button killProc;
+        public System.Windows.Forms.TextBox resultEditor;
         }
 }
 

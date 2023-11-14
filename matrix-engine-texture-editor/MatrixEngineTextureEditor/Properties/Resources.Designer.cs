@@ -61,6 +61,16 @@ namespace matrix_engine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap android_icon {
+            get {
+                object obj = ResourceManager.GetObject("android_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///  &quot;name&quot;: &quot;matrix-engine-gui&quot;,
         ///  &quot;version&quot;: &quot;1.0.0&quot;,
@@ -96,6 +106,16 @@ namespace matrix_engine.Properties {
         internal static string query {
             get {
                 return ResourceManager.GetString("query", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap slogan {
+            get {
+                object obj = ResourceManager.GetObject("slogan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

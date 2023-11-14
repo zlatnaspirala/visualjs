@@ -33,7 +33,7 @@ namespace matrix_engine {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Stormfaze", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(71, 84);
+            this.label1.Location = new System.Drawing.Point(71, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(282, 19);
             this.label1.TabIndex = 7;
@@ -43,12 +43,12 @@ namespace matrix_engine {
             // 
             this.textureProjectName.BackColor = System.Drawing.Color.Black;
             this.textureProjectName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textureProjectName.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textureProjectName.Font = new System.Drawing.Font("Stormfaze", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textureProjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.textureProjectName.Location = new System.Drawing.Point(74, 109);
+            this.textureProjectName.Location = new System.Drawing.Point(74, 89);
             this.textureProjectName.Multiline = true;
             this.textureProjectName.Name = "textureProjectName";
-            this.textureProjectName.Size = new System.Drawing.Size(404, 39);
+            this.textureProjectName.Size = new System.Drawing.Size(404, 29);
             this.textureProjectName.TabIndex = 6;
             // 
             // w
@@ -56,9 +56,9 @@ namespace matrix_engine {
             this.w.BackColor = System.Drawing.Color.Black;
             this.w.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.w.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.w.Location = new System.Drawing.Point(75, 162);
+            this.w.Location = new System.Drawing.Point(74, 124);
             this.w.Name = "w";
-            this.w.Size = new System.Drawing.Size(403, 43);
+            this.w.Size = new System.Drawing.Size(403, 29);
             this.w.TabIndex = 5;
             this.w.Text = "Load";
             this.w.UseVisualStyleBackColor = false;
@@ -69,16 +69,17 @@ namespace matrix_engine {
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(549, 288);
+            this.ClientSize = new System.Drawing.Size(549, 225);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textureProjectName);
             this.Controls.Add(this.w);
             this.Font = new System.Drawing.Font("Stormfaze", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Lime;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoadForm";
-            this.Text = "LoadForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Load textureEditor project";
             this.ResumeLayout(false);
             this.PerformLayout();
 
