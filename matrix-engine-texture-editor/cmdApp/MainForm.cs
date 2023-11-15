@@ -185,6 +185,7 @@ namespace CmdWindowControlTestApp {
             // Do custom handling of the standard output text here ...
             Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
             if (text.Contains("http://127.0.0.1")) {
+                text = text.Replace("http://127.0.0.1", "http://localhost");
                 text = text.Replace("  ", "");
                 result.Text = text;
             } else if (text.Contains("my software")) {

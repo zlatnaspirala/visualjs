@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +33,17 @@ namespace matrix_engine {
             cmdStream.Show();
         }
 
+        public void LOAD(String ARG) {
+            APP_DIR = ARG;
+
+            setupEditorConfig();
+
+            cmdLoader = new CmdWindowControlTestApp.MainForm();
+            cmdLoader.Load += cmdLoaderLoader;
+            cmdLoader.Show();
+            cmdLoader.result.TextChanged += detectHost;
+        }
+
 
         private void detectHost(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
@@ -44,16 +57,12 @@ namespace matrix_engine {
             // URLTEXT.Text = navUrl;
             // chromiumWebBrowser1.Load(URLTEXT.Text);
             // runWatchAndEditor();
-
-            //
-
-
         }
 
         public void runWatchAndEditor() {
             cmdKillerProc = new CmdWindowControlTestApp.MainForm();
             cmdKillerProc.Load += cmdKillerLoader;
-            cmdKillerProc.Show();
+            // cmdKillerProc.Show();
             // Hosting runs now 
             cmdVJS3EDITOR = new CmdWindowControlTestApp.MainForm();
             cmdVJS3EDITOR.Load += cmdEDITORLoader;
@@ -66,21 +75,14 @@ namespace matrix_engine {
 
             scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
             scriptGUIEditor.Show();
-        }
-
-        public void LOAD(String ARG) {
-            APP_DIR = ARG;
-            cmdLoader = new CmdWindowControlTestApp.MainForm();
-            cmdLoader.Load += cmdLoaderLoader;
-            cmdLoader.Show();
-            cmdLoader.result.TextChanged += detectHost;
+            scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
         }
 
         public MatrixEngineGUI(string args) {
             InitializeComponent();
             string URLStart = "https://maximumroulette.com/apps/matrix-engine/examples-build.html";
             URLTEXT.Text = URLStart;
-            
+
             if (args.ToString() != "") {
                 URLStart = args.Replace("url=", "");
                 chromiumWebBrowser1.LoadUrl(URLStart);
@@ -93,8 +95,20 @@ namespace matrix_engine {
 
         }
 
-        private void MatrixEngineGUI_Load(object sender, EventArgs e) {
+        private void setupEditorConfig () {
+            string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\editor.js";
+            string FORNODEPATH = APP_DIR.Replace(@"\", @"//");
+            string PATH_ = FORNODEPATH + @"2DTextureEditor//";
+            StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
+            string PACKAGE_CONTENT = sr.ReadToEnd().ToString();
+            sr.Close();
+            PACKAGE_CONTENT = PACKAGE_CONTENT.Replace("<PATH_OF_NODE_APP>", PATH_);
+            PACKAGE_CONTENT = PACKAGE_CONTENT.Replace("<PATH_OF_WWW>", PATH_);
+            File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+        }
 
+        private void MatrixEngineGUI_Load(object sender, EventArgs e) {
+          
         }
 
         private void cmdKillerLoader(object sender, EventArgs e) {
@@ -104,7 +118,7 @@ namespace matrix_engine {
         private void cmdWATCHLoader(object sender, EventArgs e) {
 
             // cmdVJS3WATCH.Size = new Size(this.Size.Width/2, this.Size.Height/5);
-            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 2, Location.Y + this.Size.Height / 4);
+            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 100*65, Location.Y + this.Size.Height / 4);
 
             cmdVJS3WATCH.txtBxStdin.Text = @"c:";
             cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
@@ -120,7 +134,7 @@ namespace matrix_engine {
 
         private void cmdEDITORLoader(object sender, EventArgs e) {
             cmdVJS3EDITOR.resultEditor.TextChanged += detectEditorRunStatus;
-            cmdVJS3EDITOR.Location = new Point(Location.X + Size.Width / 2, Location.Y + 2 * this.Size.Height / 4);
+            cmdVJS3EDITOR.Location = new Point(Location.X + Size.Width / 100 * 65, Location.Y + 2 * this.Size.Height / 4);
 
             cmdVJS3EDITOR.txtBxStdin.Text = @"c:";
             cmdVJS3EDITOR.btnSendStdinToProcess.PerformClick();
@@ -136,12 +150,18 @@ namespace matrix_engine {
             // cmdLoader.Size = new Size(this.Size.Width, this.Size.Height / 3);
 
             string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\gui-texture-editor.js";
-            string PACKAGE_CONTENT = matrix_engine.Properties.Resources.gui_texture_editor.ToString();
+
+            // from amtrix engine git pull
+            StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
+            string PACKAGE_CONTENT = sr.ReadToEnd().ToString();
+            // from visual studi project static
+            // string PACKAGE_CONTENT = matrix_engine.Properties.Resources.gui_texture_editor.ToString();
+
             if (File.Exists(TEXTURE_JS_FILE) != true) {
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
             }
 
-            cmdLoader.Location = new Point(Location.X + Size.Width / 2, Location.Y + 3 * this.Size.Height / 4);
+            cmdLoader.Location = new Point(Location.X + Size.Width / 100 * 65, Location.Y + 3 * this.Size.Height / 4);
 
             cmdLoader.txtBxStdin.Text = @"c:";
             cmdLoader.btnSendStdinToProcess.PerformClick();
@@ -202,18 +222,45 @@ namespace matrix_engine {
         }
 
         public void killNODEProcess() {
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /im node /T /F";
+            cmdKillerProc.txtBxStdin.Text = @"taskkill /im node.exe /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-            
+        }
+
+        /// <summary>
+        /// Kill a process, and all of its children, grandchildren, etc.
+        /// </summary>
+        /// <param name="pid">Process ID.</param>
+        private static void KillProcessAndChildren(int pid) {
+            // Cannot close 'system idle process'.
+            if (pid == 0) {
+                return;
+            }
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher
+                    ("Select * From Win32_Process Where ParentProcessID=" + pid);
+            ManagementObjectCollection moc = searcher.Get();
+            foreach (ManagementObject mo in moc) {
+                KillProcessAndChildren(Convert.ToInt32(mo["ProcessID"]));
+            }
+            try {
+                Process proc = Process.GetProcessById(pid);
+                proc.Kill();
+            } catch (ArgumentException) {
+                // Process already exited.
+            }
         }
 
         public void killSubProcess() {
+            KillProcessAndChildren(cmdVJS3EDITOR._PID_);
+            KillProcessAndChildren(cmdVJS3WATCH._PID_);
+            KillProcessAndChildren(cmdLoader._PID_);
+            /*
             cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3EDITOR._PID_ + @" /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
             cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3WATCH._PID_ + @" /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
             cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdLoader._PID_ + @" /T /F";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
+           */
 
             if (cmdStream != null) {
                 cmdStream.Close();
@@ -221,14 +268,16 @@ namespace matrix_engine {
             }
 
             cmdLoader.runningProcess.Close();
+            cmdVJS3EDITOR.runningProcess.Close();
+            cmdVJS3WATCH.runningProcess.Close();
+
             cmdLoader.Close();
             cmdLoader.Dispose();
-
-            cmdVJS3EDITOR.runningProcess.Close();
+           
             cmdVJS3EDITOR.Close();
             cmdVJS3EDITOR.Dispose();
 
-            cmdVJS3WATCH.runningProcess.Close();
+            
             cmdVJS3WATCH.Close();
             cmdVJS3WATCH.Dispose();
         }
@@ -236,7 +285,6 @@ namespace matrix_engine {
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             killSubProcess();
             Application.Exit();
-
             // force error hot fix 
             // cmdVJS3EDITOR.Show();
         }
@@ -259,6 +307,51 @@ namespace matrix_engine {
 
         private void exitEditorModeToolStripMenuItem_Click(object sender, EventArgs e) {
             //chromiumWebBrowser1
+        }
+
+        private void hideAllToolStripMenuItem_Click(object sender, EventArgs e) {
+            cmdLoader.Hide();
+            cmdVJS3EDITOR.Hide();
+            cmdVJS3WATCH.Hide();
+        }
+
+        private void showFreeTerminalToolStripMenuItem_Click(object sender, EventArgs e) {
+            cmdKillerProc.Show();
+        }
+
+  
+        private void x512ToolStripMenuItem_Click(object sender, EventArgs e) {
+            chromiumWebBrowser1.Dock = DockStyle.None;
+            chromiumWebBrowser1.Width = 512;
+            chromiumWebBrowser1.Height = 512;
+
+            chromiumWebBrowser1.Location = new Point(20, 10);
+        }
+
+        private void x1024ToolStripMenuItem_Click(object sender, EventArgs e) {
+            chromiumWebBrowser1.Dock = DockStyle.None;
+            chromiumWebBrowser1.Width = 1024;
+            chromiumWebBrowser1.Height = 1024;
+
+            chromiumWebBrowser1.Location = new Point(20, 10);
+        }
+
+        private void iPhone13Pro390X844ToolStripMenuItem_Click(object sender, EventArgs e) {
+            chromiumWebBrowser1.Dock = DockStyle.None;
+            chromiumWebBrowser1.Width = 390;
+            chromiumWebBrowser1.Height = 844;
+
+            chromiumWebBrowser1.Location = new Point(20, 10);
+        }
+
+        private void fILLDOCKToolStripMenuItem_Click(object sender, EventArgs e) {
+            chromiumWebBrowser1.Dock = DockStyle.Fill;
+        }
+
+        private void showAllToolStripMenuItem_Click(object sender, EventArgs e) {
+            cmdLoader.Show();
+            cmdVJS3EDITOR.Show();
+            cmdVJS3WATCH.Show();
         }
     }
 }

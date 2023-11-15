@@ -27,6 +27,7 @@ namespace matrix_engine {
             this.CODE_EDITOR = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SCRIPT_SRC = new System.Windows.Forms.Label();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CODE_EDITOR
@@ -62,12 +63,27 @@ namespace matrix_engine {
             this.SCRIPT_SRC.TabIndex = 10;
             this.SCRIPT_SRC.Text = "FILE PATH";
             // 
+            // saveBtn
+            // 
+            this.saveBtn.BackColor = System.Drawing.Color.Black;
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveBtn.ForeColor = System.Drawing.Color.Lime;
+            this.saveBtn.Location = new System.Drawing.Point(421, 493);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(68, 29);
+            this.saveBtn.TabIndex = 13;
+            this.saveBtn.Text = "SAVE";
+            this.saveBtn.UseVisualStyleBackColor = false;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            // 
             // ScritpEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(673, 530);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.SCRIPT_SRC);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CODE_EDITOR);
@@ -86,5 +102,6 @@ namespace matrix_engine {
         private System.Windows.Forms.RichTextBox CODE_EDITOR;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label SCRIPT_SRC;
+        private System.Windows.Forms.Button saveBtn;
     }
 }
