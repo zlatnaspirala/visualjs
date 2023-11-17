@@ -41,14 +41,14 @@ namespace matrix_engine {
             setupEditorConfig();
             cmdLoader = new CmdWindowControlTestApp.MainForm();
             cmdLoader.Load += cmdLoaderLoader;
-            // cmdLoader.Show();
+            cmdLoader.Show();
             cmdLoader.result.TextChanged += detectHost;
         }
 
 
         private void detectHost(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
-            URLTEXT.Text = navUrl + "\\gui.html";
+            URLTEXT.Text = navUrl + "/gui.html";
             chromiumWebBrowser1.Load(URLTEXT.Text);
             FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
             // run from hare
@@ -72,11 +72,12 @@ namespace matrix_engine {
             cmdVJS3WATCH = new CmdWindowControlTestApp.MainForm();
             cmdVJS3WATCH.Load += cmdWATCHLoader;
             // default visible non
-            // cmdVJS3EDITOR.Show();
-            // cmdVJS3WATCH.Show();
+            cmdVJS3EDITOR.Show();
+            cmdVJS3WATCH.Show();
             scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
             scriptGUIEditor.Show();
             scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
+            scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
         }
 
         public MatrixEngineGUI(string args) {
@@ -215,8 +216,8 @@ namespace matrix_engine {
                 // Directory.Delete(cacheDirBase + "\\GPUCache", true);
                 // Directory.Delete(cacheDirBase + "\\Local Storage", true);
                 // Directory.Delete(cacheDirBase + "\\Session Storage", true);
-                if (chromiumWebBrowser1 != null) { chromiumWebBrowser1.Reload(true); }
-                if (FSBrowser != null) { FSBrowser.chromiumWebBrowser1.Reload(true); }
+                if (chromiumWebBrowser1 != null && chromiumWebBrowser1.IsDisposed == false) { chromiumWebBrowser1.Reload(true); }
+                if (FSBrowser.IsDisposed == false && FSBrowser.chromiumWebBrowser1.IsDisposed == false) { FSBrowser.chromiumWebBrowser1.Reload(true); }
             }
         }
 

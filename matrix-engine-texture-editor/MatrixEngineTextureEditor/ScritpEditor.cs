@@ -28,9 +28,7 @@ namespace matrix_engine {
         private void saveBtn_Click(object sender, EventArgs e) {
             string TEXTURE_JS_FILE = PATH;
             string PACKAGE_CONTENT = CODE_EDITOR.Text;
-            // if (File.Exists(TEXTURE_JS_FILE) != true) {
             File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
-            // }
         }
 
         private void button1_Click(object sender, EventArgs e) {

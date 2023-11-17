@@ -50,7 +50,7 @@ namespace matrix_engine {
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Lime;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(7, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(304, 25);
             this.label1.TabIndex = 9;
@@ -59,11 +59,11 @@ namespace matrix_engine {
             // SCRIPT_SRC
             // 
             this.SCRIPT_SRC.AutoSize = true;
-            this.SCRIPT_SRC.Font = new System.Drawing.Font("Stormfaze", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SCRIPT_SRC.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SCRIPT_SRC.ForeColor = System.Drawing.Color.Lime;
-            this.SCRIPT_SRC.Location = new System.Drawing.Point(14, 579);
+            this.SCRIPT_SRC.Location = new System.Drawing.Point(14, 566);
             this.SCRIPT_SRC.Name = "SCRIPT_SRC";
-            this.SCRIPT_SRC.Size = new System.Drawing.Size(71, 16);
+            this.SCRIPT_SRC.Size = new System.Drawing.Size(72, 14);
             this.SCRIPT_SRC.TabIndex = 10;
             this.SCRIPT_SRC.Text = "FILE PATH";
             // 
@@ -99,9 +99,9 @@ namespace matrix_engine {
             // 
             this.pictureBox1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(558, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(593, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(103, 100);
+            this.pictureBox1.Size = new System.Drawing.Size(68, 70);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
@@ -132,9 +132,9 @@ namespace matrix_engine {
 
         private System.Windows.Forms.RichTextBox CODE_EDITOR;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label SCRIPT_SRC;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label SCRIPT_SRC;
     }
 }
