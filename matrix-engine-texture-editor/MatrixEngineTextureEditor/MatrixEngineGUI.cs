@@ -78,7 +78,7 @@ namespace matrix_engine {
             scriptGUIEditor.Show();
             scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
             scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
-            scriptGUIEditor.cmdLoader = cmdLoader;
+            scriptGUIEditor.cmdVJS3WATCH = cmdVJS3WATCH;
         }
 
         public MatrixEngineGUI(string args) {

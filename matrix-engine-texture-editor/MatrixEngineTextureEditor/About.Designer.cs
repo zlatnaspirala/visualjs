@@ -43,9 +43,9 @@ namespace matrix_engine {
             this.label1.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(15, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(465, 25);
+            this.label1.Size = new System.Drawing.Size(462, 25);
             this.label1.TabIndex = 8;
-            this.label1.Text = "About MAtrix Engine GUI texture editor";
+            this.label1.Text = "About Matrix Engine GUI texture editor\r\n";
             // 
             // label2
             // 
@@ -97,7 +97,7 @@ namespace matrix_engine {
             this.pictureBox1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = global::matrix_engine.Properties.Resources.android_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(523, 34);
+            this.pictureBox1.Location = new System.Drawing.Point(523, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(116, 116);
             this.pictureBox1.TabIndex = 13;
@@ -120,7 +120,7 @@ namespace matrix_engine {
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(520, 153);
+            this.label6.Location = new System.Drawing.Point(520, 147);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(127, 15);
             this.label6.TabIndex = 15;
