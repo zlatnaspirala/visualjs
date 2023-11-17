@@ -11,7 +11,8 @@ using System.Windows.Forms;
 
 namespace matrix_engine {
     public partial class ScritpEditor : Form {
-        public string PATH = ""; 
+        public string PATH = "";
+        public CmdWindowControlTestApp.MainForm cmdVJS3WATCH;
         public ScritpEditor(String P, String APP_NAME) {
             InitializeComponent();
             // APP_DIR - p APP_NAME
@@ -26,9 +27,17 @@ namespace matrix_engine {
         }
 
         private void saveBtn_Click(object sender, EventArgs e) {
-            string TEXTURE_JS_FILE = PATH;
-            string PACKAGE_CONTENT = CODE_EDITOR.Text;
-            File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+
+            try {
+                string TEXTURE_JS_FILE = PATH;
+                string PACKAGE_CONTENT = CODE_EDITOR.Text;
+                File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+
+                cmdVJS3WATCH.txtBxStdin.Text = @"npm run gui-editor";
+                cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
+
+            } catch (Exception err) {}
+
         }
 
         private void button1_Click(object sender, EventArgs e) {

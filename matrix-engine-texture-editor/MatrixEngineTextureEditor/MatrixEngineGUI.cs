@@ -78,6 +78,7 @@ namespace matrix_engine {
             scriptGUIEditor.Show();
             scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
             scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
+            scriptGUIEditor.cmdLoader = cmdLoader;
         }
 
         public MatrixEngineGUI(string args) {
@@ -216,14 +217,17 @@ namespace matrix_engine {
                 // Directory.Delete(cacheDirBase + "\\GPUCache", true);
                 // Directory.Delete(cacheDirBase + "\\Local Storage", true);
                 // Directory.Delete(cacheDirBase + "\\Session Storage", true);
-                if (chromiumWebBrowser1 != null && chromiumWebBrowser1.IsDisposed == false) { chromiumWebBrowser1.Reload(true); }
+                if (chromiumWebBrowser1 != null && chromiumWebBrowser1.IsDisposed == false) {
+                    ClearCache();
+                }
                 if (FSBrowser.IsDisposed == false && FSBrowser.chromiumWebBrowser1.IsDisposed == false) { FSBrowser.chromiumWebBrowser1.Reload(true); }
             }
         }
 
-        private async Task ClearCache(object sender) {
+        private async void ClearCache() {
             using (var devToolsClient = chromiumWebBrowser1.GetDevToolsClient()) {
                 var response = await devToolsClient.Network.ClearBrowserCacheAsync();
+                chromiumWebBrowser1.Reload(true);
             }
         }
 
