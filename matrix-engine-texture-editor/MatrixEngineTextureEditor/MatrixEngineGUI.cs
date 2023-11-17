@@ -221,6 +221,12 @@ namespace matrix_engine {
             }
         }
 
+        private async Task ClearCache(object sender) {
+            using (var devToolsClient = chromiumWebBrowser1.GetDevToolsClient()) {
+                var response = await devToolsClient.Network.ClearBrowserCacheAsync();
+            }
+        }
+
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e) {
             NTP = new NewTextureForm(this);
             NTP.Show();
@@ -449,8 +455,13 @@ namespace matrix_engine {
         }
 
         private void scriptEditorToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (scriptGUIEditor != null) { 
+            if (scriptGUIEditor.IsDisposed == false) {
                 scriptGUIEditor.Show();
+            } else {
+                scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
+                scriptGUIEditor.Show();
+                scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
+                scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
             }
         }
     }
