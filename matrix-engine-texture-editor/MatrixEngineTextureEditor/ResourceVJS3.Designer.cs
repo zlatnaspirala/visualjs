@@ -33,11 +33,11 @@ namespace matrix_engine {
             // 
             // FILEPREVIEW
             // 
-            this.FILEPREVIEW.Location = new System.Drawing.Point(14, 48);
+            this.FILEPREVIEW.Location = new System.Drawing.Point(3, 41);
             this.FILEPREVIEW.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.FILEPREVIEW.MinimumSize = new System.Drawing.Size(33, 25);
             this.FILEPREVIEW.Name = "FILEPREVIEW";
-            this.FILEPREVIEW.Size = new System.Drawing.Size(530, 503);
+            this.FILEPREVIEW.Size = new System.Drawing.Size(776, 370);
             this.FILEPREVIEW.TabIndex = 0;
             // 
             // labelPath
@@ -45,19 +45,20 @@ namespace matrix_engine {
             this.labelPath.AutoSize = true;
             this.labelPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelPath.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPath.Location = new System.Drawing.Point(11, 555);
+            this.labelPath.Location = new System.Drawing.Point(4, 415);
             this.labelPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPath.Name = "labelPath";
             this.labelPath.Size = new System.Drawing.Size(191, 14);
             this.labelPath.TabIndex = 9;
             this.labelPath.Text = "RUN MAtrixEngine Tool editor\r\n";
+            this.labelPath.Click += new System.EventHandler(this.labelPath_Click);
             // 
             // BACK
             // 
             this.BACK.BackColor = System.Drawing.Color.Black;
             this.BACK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BACK.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BACK.Location = new System.Drawing.Point(12, 12);
+            this.BACK.Location = new System.Drawing.Point(3, 5);
             this.BACK.Name = "BACK";
             this.BACK.Size = new System.Drawing.Size(68, 29);
             this.BACK.TabIndex = 13;
@@ -70,9 +71,9 @@ namespace matrix_engine {
             this.ADDNEWIMAGE.BackColor = System.Drawing.Color.Black;
             this.ADDNEWIMAGE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ADDNEWIMAGE.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ADDNEWIMAGE.Location = new System.Drawing.Point(552, 48);
+            this.ADDNEWIMAGE.Location = new System.Drawing.Point(77, 5);
             this.ADDNEWIMAGE.Name = "ADDNEWIMAGE";
-            this.ADDNEWIMAGE.Size = new System.Drawing.Size(280, 29);
+            this.ADDNEWIMAGE.Size = new System.Drawing.Size(187, 29);
             this.ADDNEWIMAGE.TabIndex = 14;
             this.ADDNEWIMAGE.Text = "Add new image/images";
             this.ADDNEWIMAGE.UseVisualStyleBackColor = false;
@@ -90,7 +91,7 @@ namespace matrix_engine {
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(844, 577);
+            this.ClientSize = new System.Drawing.Size(783, 430);
             this.Controls.Add(this.ADDNEWIMAGE);
             this.Controls.Add(this.BACK);
             this.Controls.Add(this.labelPath);
