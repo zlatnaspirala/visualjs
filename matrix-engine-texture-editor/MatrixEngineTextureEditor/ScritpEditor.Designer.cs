@@ -37,7 +37,7 @@ namespace matrix_engine {
             // 
             this.CODE_EDITOR.BackColor = System.Drawing.Color.Black;
             this.CODE_EDITOR.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CODE_EDITOR.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CODE_EDITOR.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CODE_EDITOR.ForeColor = System.Drawing.Color.Lime;
             this.CODE_EDITOR.Location = new System.Drawing.Point(12, 85);
             this.CODE_EDITOR.Name = "CODE_EDITOR";

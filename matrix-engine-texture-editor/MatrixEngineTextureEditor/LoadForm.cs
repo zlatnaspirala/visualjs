@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace matrix_engine {
 
-
     public partial class LoadForm : Form {
 
         MatrixEngineGUI MAINFORM;
@@ -20,12 +19,8 @@ namespace matrix_engine {
             }
 
         private void w_Click(object sender, EventArgs e) {
-
             try {
                 var APP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\" + textureProjectName.Text + @"\matrix-engine\";
-
-
-
                 // var APP_DIR = @"localhost:8080";
                 MAINFORM.URLTEXT.Text = @"http://127.0.0.1:8080";
                 MAINFORM.button1.PerformClick();
@@ -35,10 +30,9 @@ namespace matrix_engine {
 
                 this.Close();
                 this.Dispose();
-                } catch (SyntaxErrorException err) {
+            } catch (SyntaxErrorException err) {
                 Console.WriteLine("ERR IN LOAD " + err);
-                }
-
-         }
+            }
         }
     }
+}
