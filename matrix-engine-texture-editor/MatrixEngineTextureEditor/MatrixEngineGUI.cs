@@ -30,6 +30,8 @@ namespace matrix_engine {
         public Boolean NODE_DEP_INSTALLER = false;
         private Boolean FLAG_FIRST_TIME = true;
 
+        int Y_POS = 0;
+
         public void START(String ARG) {
             APP_DIR = ARG;
             cmdStream = new CmdWindowControlTestApp.MainForm();
@@ -87,6 +89,11 @@ namespace matrix_engine {
             // test res
             resForm = new ResourceVJS3(APP_DIR, this);
             resForm.Show();
+            resForm.Location = new Point(0, this.Size.Height / 100 * 65);
+            resForm.Size = new Size(this.Size.Width, this.Size.Height / 100 * 35);
+            Y_POS = resForm.Location.Y;
+            this.hideAllToolStripMenuItem.PerformClick();
+            
         }
 
         public MatrixEngineGUI(string args) {
@@ -120,6 +127,19 @@ namespace matrix_engine {
             cmdKillerProc.txtBxStdin.Text = @"node res.js";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
         }
+
+        public void fixPaths() {
+            cmdKillerProc.Show();
+            cmdKillerProc.txtBxStdin.Text = @"c:";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR + @"\2DTextureEditor";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            cmdKillerProc.txtBxStdin.Text = @"node install-paths.js";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+        }
+
         private void setupEditorConfig () {
             string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\editor.js";
             string FORNODEPATH = APP_DIR.Replace(@"\", @"//");
@@ -498,9 +518,27 @@ namespace matrix_engine {
             } catch (Exception err) {   }
         }
 
+        public Rectangle GetScreen() {
+            return Screen.FromControl(this).Bounds;
+        }
+
+        
+        private void SHOW_RES_FORM(object sender, EventArgs e) {
+            if (resForm != null && resForm.IsDisposed == false) {
+                Y_POS = Y_POS - 10;
+                resForm.Location = new Point(resForm.Location.X, Y_POS);
+                if (Y_POS < GetScreen().Height /100 * 65) {
+                    timer1.Stop();
+                }
+            }
+
+        }
+
         private void resourcesToolStripMenuItem_Click(object sender, EventArgs e) {
             if (resForm != null && resForm.IsDisposed == false) {
-                resForm.Show();
+                // resForm.Show();
+                Y_POS = resForm.Location.Y;
+                timer1.Start();
             }
         }
     }

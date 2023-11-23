@@ -29,6 +29,7 @@ namespace matrix_engine
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MatrixEngineGUI));
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
             this.button1 = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@ namespace matrix_engine
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mATRIXTEXEDITORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.URLTEXT = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -386,6 +388,11 @@ namespace matrix_engine
             this.URLTEXT.TabIndex = 4;
             this.URLTEXT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.SHOW_RES_FORM);
+            // 
             // MatrixEngineGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 18F);
@@ -450,6 +457,7 @@ namespace matrix_engine
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem resourcesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
