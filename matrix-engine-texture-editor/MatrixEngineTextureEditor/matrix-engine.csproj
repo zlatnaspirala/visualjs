@@ -54,8 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -103,12 +102,6 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditorConfig.Designer.cs">
-      <DependentUpon>EditorConfig.cs</DependentUpon>
-    </Compile>
     <Compile Include="FS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,9 +142,6 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditorConfig.resx">
-      <DependentUpon>EditorConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FS.resx">
       <DependentUpon>FS.cs</DependentUpon>
@@ -199,6 +189,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\shadedDark35.png" />
+    <None Include="Resources\exitLeft.png" />
+    <None Include="Resources\exitRight.png" />
+    <None Include="Resources\logo-test.png" />
+    <Content Include="logo-test.ico" />
+    <Content Include="logo.ico" />
     <Content Include="Resources\resolutions.txt" />
     <None Include="Resources\gui-texture-editor.js" />
     <None Include="Resources\webgl2glmatrix2.jpg" />

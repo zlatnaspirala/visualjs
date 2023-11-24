@@ -80,6 +80,11 @@ namespace matrix_engine {
         private void ResourceVJS3_Load(object sender, EventArgs e) {
             FILEPREVIEW.Navigate(RES_PATH);
 
+            toolTip1.SetToolTip(this.BUILDBTN, "Resource filename or folder cant be with `-` for example  image-test1.png - To make it work rename to image_test1.png !");
+            toolTip1.SetToolTip(this.hideMe, "Hide Resource Form.");
+            toolTip1.SetToolTip(this.ADDNEWIMAGE, "Select one or more images. After selecting new items resource will be builded. All new images goews intro one folder with same name.");
+            toolTip1.SetToolTip(this.BACK, "Works only for editable resource navigator.");
+
             // TEST
             // Obtain a handle to the system image list.
             // Obtain a handle to the system image list.
@@ -181,7 +186,7 @@ namespace matrix_engine {
         }
 
         private void BUILDBTN_Click(object sender, EventArgs e) {
-            MAINFORM.fixPaths();
+            MAINFORM.buildRes();
         }
     }
 }

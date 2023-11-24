@@ -33,14 +33,15 @@ namespace matrix_engine {
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.hideMe = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.BUILDBTN = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // FILEPREVIEW
@@ -50,7 +51,7 @@ namespace matrix_engine {
             this.FILEPREVIEW.Margin = new System.Windows.Forms.Padding(0);
             this.FILEPREVIEW.MinimumSize = new System.Drawing.Size(33, 25);
             this.FILEPREVIEW.Name = "FILEPREVIEW";
-            this.FILEPREVIEW.Size = new System.Drawing.Size(795, 282);
+            this.FILEPREVIEW.Size = new System.Drawing.Size(795, 272);
             this.FILEPREVIEW.TabIndex = 0;
             this.FILEPREVIEW.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.FILEPREVIEW_DocumentCompleted);
             // 
@@ -112,7 +113,7 @@ namespace matrix_engine {
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(793, 280);
+            this.listView1.Size = new System.Drawing.Size(1220, 270);
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -121,23 +122,11 @@ namespace matrix_engine {
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(0, 41);
+            this.tabControl1.Location = new System.Drawing.Point(0, 42);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(809, 317);
+            this.tabControl1.Size = new System.Drawing.Size(1236, 307);
             this.tabControl1.TabIndex = 16;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.DimGray;
-            this.tabPage1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
-            this.tabPage1.Controls.Add(this.FILEPREVIEW);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(801, 288);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Editable";
             // 
             // tabPage2
             // 
@@ -148,16 +137,28 @@ namespace matrix_engine {
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(801, 288);
+            this.tabPage2.Size = new System.Drawing.Size(1228, 278);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.DimGray;
+            this.tabPage1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
+            this.tabPage1.Controls.Add(this.FILEPREVIEW);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(801, 278);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Editable";
             // 
             // hideMe
             // 
             this.hideMe.BackColor = System.Drawing.Color.Black;
             this.hideMe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.hideMe.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hideMe.Location = new System.Drawing.Point(566, 6);
+            this.hideMe.Location = new System.Drawing.Point(993, 5);
             this.hideMe.Name = "hideMe";
             this.hideMe.Size = new System.Drawing.Size(231, 29);
             this.hideMe.TabIndex = 17;
@@ -183,13 +184,18 @@ namespace matrix_engine {
             this.BUILDBTN.UseVisualStyleBackColor = false;
             this.BUILDBTN.Click += new System.EventHandler(this.BUILDBTN_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
+            this.toolTip1.ToolTipTitle = "Help and warns";
+            // 
             // ResourceVJS3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(809, 358);
+            this.ClientSize = new System.Drawing.Size(1236, 349);
             this.Controls.Add(this.BUILDBTN);
             this.Controls.Add(this.hideMe);
             this.Controls.Add(this.tabControl1);
@@ -206,8 +212,8 @@ namespace matrix_engine {
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ResourceVJS3_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,5 +234,6 @@ namespace matrix_engine {
         private System.Windows.Forms.Button hideMe;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BUILDBTN;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

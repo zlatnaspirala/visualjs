@@ -24,6 +24,7 @@ namespace matrix_engine {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoadForm));
             this.label1 = new System.Windows.Forms.Label();
             this.textureProjectName = new System.Windows.Forms.TextBox();
             this.w = new System.Windows.Forms.Button();
@@ -78,9 +79,9 @@ namespace matrix_engine {
             this.label2.Location = new System.Drawing.Point(159, 13);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(357, 25);
+            this.label2.Size = new System.Drawing.Size(351, 25);
             this.label2.TabIndex = 8;
-            this.label2.Text = "RUN MAtrixEngine Tool editor\r\n";
+            this.label2.Text = "Run MatrixEngine Tool Editor\r\n";
             // 
             // pictureBox1
             // 
@@ -106,6 +107,7 @@ namespace matrix_engine {
             this.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Lime;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "LoadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

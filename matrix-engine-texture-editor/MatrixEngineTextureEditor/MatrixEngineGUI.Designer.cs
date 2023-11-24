@@ -37,7 +37,6 @@ namespace matrix_engine
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unLoadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.killAllNodeOnMyComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +66,10 @@ namespace matrix_engine
             this.exitEditorModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mATRIXTEXEDITORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.URLTEXT = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +90,7 @@ namespace matrix_engine
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.Lime;
             this.button1.Location = new System.Drawing.Point(12, 12);
@@ -108,7 +110,8 @@ namespace matrix_engine
             this.startToolStripMenuItem,
             this.buildToolStripMenuItem,
             this.editorToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.aboutToolStripMenuItem,
+            this.exitToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 908);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1563, 24);
@@ -120,12 +123,12 @@ namespace matrix_engine
             this.startToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
             this.loadProjectToolStripMenuItem,
-            this.unLoadProjectToolStripMenuItem,
             this.killAllNodeOnMyComputerToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.startToolStripMenuItem.Text = "Start";
+            this.startToolStripMenuItem.Click += new System.EventHandler(this.startToolStripMenuItem_Click);
             // 
             // newProjectToolStripMenuItem
             // 
@@ -143,13 +146,6 @@ namespace matrix_engine
             this.loadProjectToolStripMenuItem.Text = "Run editor";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
             // 
-            // unLoadProjectToolStripMenuItem
-            // 
-            this.unLoadProjectToolStripMenuItem.Name = "unLoadProjectToolStripMenuItem";
-            this.unLoadProjectToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.unLoadProjectToolStripMenuItem.Text = "UnLoad project";
-            this.unLoadProjectToolStripMenuItem.Click += new System.EventHandler(this.unLoadProjectToolStripMenuItem_Click);
-            // 
             // killAllNodeOnMyComputerToolStripMenuItem
             // 
             this.killAllNodeOnMyComputerToolStripMenuItem.Name = "killAllNodeOnMyComputerToolStripMenuItem";
@@ -159,9 +155,10 @@ namespace matrix_engine
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.exitRight;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Text = "&&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem
@@ -363,8 +360,9 @@ namespace matrix_engine
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mATRIXTEXEDITORToolStripMenuItem});
+            this.aboutToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.logo_test;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // mATRIXTEXEDITORToolStripMenuItem
@@ -375,11 +373,19 @@ namespace matrix_engine
             this.mATRIXTEXEDITORToolStripMenuItem.Text = "MATRIX TEX EDITOR";
             this.mATRIXTEXEDITORToolStripMenuItem.Click += new System.EventHandler(this.mATRIXTEXEDITORToolStripMenuItem_Click);
             // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Image = global::matrix_engine.Properties.Resources.exitRight;
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(92, 20);
+            this.exitToolStripMenuItem1.Text = "Quit App";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
+            // 
             // URLTEXT
             // 
             this.URLTEXT.BackColor = System.Drawing.Color.Black;
             this.URLTEXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.URLTEXT.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.URLTEXT.Font = new System.Drawing.Font("Orbitron", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.URLTEXT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.URLTEXT.Location = new System.Drawing.Point(92, 12);
             this.URLTEXT.Multiline = true;
@@ -392,6 +398,10 @@ namespace matrix_engine
             // 
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.SHOW_RES_FORM);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
             // MatrixEngineGUI
             // 
@@ -409,9 +419,11 @@ namespace matrix_engine
             this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "MatrixEngineGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Matrix-Engine GUI Texture Editor";
+            this.Text = "Matrix-Engine GUI Texture Editor ver 1.0.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.MinimumSizeChanged += new System.EventHandler(this.MatrixEngineGUI_MinimumSizeChanged);
             this.Load += new System.EventHandler(this.MatrixEngineGUI_Load);
+            this.Resize += new System.EventHandler(this.MatrixEngineGUI_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -427,7 +439,6 @@ namespace matrix_engine
         private System.Windows.Forms.ToolStripMenuItem loadProjectToolStripMenuItem;
         public System.Windows.Forms.TextBox URLTEXT;
         public System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStripMenuItem unLoadProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem killAllNodeOnMyComputerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
@@ -458,6 +469,8 @@ namespace matrix_engine
         private System.Windows.Forms.ToolStripMenuItem resourcesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
     }
 }
 

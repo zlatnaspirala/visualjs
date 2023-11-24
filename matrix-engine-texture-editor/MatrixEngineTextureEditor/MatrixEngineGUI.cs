@@ -29,7 +29,6 @@ namespace matrix_engine {
         public String APP_DIR;
         public Boolean NODE_DEP_INSTALLER = false;
         private Boolean FLAG_FIRST_TIME = true;
-
         int Y_POS = 0;
 
         public void START(String ARG) {
@@ -42,6 +41,7 @@ namespace matrix_engine {
         public void LOAD(String ARG) {
             APP_DIR = ARG;
             setupEditorConfig();
+            setupResConfig();
             cmdLoader = new CmdWindowControlTestApp.MainForm();
             cmdLoader.Load += cmdLoaderLoader;
             cmdLoader.Show();
@@ -80,29 +80,24 @@ namespace matrix_engine {
             // default visible non
             cmdVJS3EDITOR.Show();
             cmdVJS3WATCH.Show();
-            scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
+            scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
             scriptGUIEditor.Show();
             scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
             scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
             scriptGUIEditor.cmdVJS3WATCH = cmdVJS3WATCH;
-
-            // test res
+            // Res
             resForm = new ResourceVJS3(APP_DIR, this);
             resForm.Show();
             resForm.Location = new Point(0, this.Size.Height / 100 * 65);
             resForm.Size = new Size(this.Size.Width, this.Size.Height / 100 * 35);
             Y_POS = resForm.Location.Y;
             this.hideAllToolStripMenuItem.PerformClick();
-            
         }
 
         public MatrixEngineGUI(string args) {
             InitializeComponent();
             string URLStart = "https://maximumroulette.com/apps/matrix-engine/examples-build.html";
             URLTEXT.Text = URLStart;
-            // FSBrowser = new FS();
-            // FSBrowser.Location = new Point(this.Size.Width / 4 * 3, 50);
-            // FSBrowser.Show();
             if (args.ToString() != "") {
                 URLStart = args.Replace("url=", "");
                 chromiumWebBrowser1.LoadUrl(URLStart);
@@ -113,9 +108,8 @@ namespace matrix_engine {
                 this.Text = "Matrix-Engine [" + URLStart + "]";
             }
         }
-        private void chromiumWebBrowser1_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) {
-            //
-        }
+        private void chromiumWebBrowser1_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) {}
+
         public void buildRes() {
             cmdKillerProc.Show();
             cmdKillerProc.txtBxStdin.Text = @"c:";
@@ -129,6 +123,7 @@ namespace matrix_engine {
         }
 
         public void fixPaths() {
+            // SOLUTION TWO - NOT IN USE FOR NOW
             cmdKillerProc.Show();
             cmdKillerProc.txtBxStdin.Text = @"c:";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
@@ -140,8 +135,20 @@ namespace matrix_engine {
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
         }
 
-        private void setupEditorConfig () {
+        private void setupEditorConfig() {
             string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\editor.js";
+            string FORNODEPATH = APP_DIR.Replace(@"\", @"//");
+            string PATH_ = FORNODEPATH + @"2DTextureEditor//";
+            StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
+            string PACKAGE_CONTENT = sr.ReadToEnd().ToString();
+            sr.Close();
+            PACKAGE_CONTENT = PACKAGE_CONTENT.Replace("<PATH_OF_NODE_APP>", PATH_);
+            PACKAGE_CONTENT = PACKAGE_CONTENT.Replace("<PATH_OF_WWW>", PATH_);
+            File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+        }
+
+        private void setupResConfig() {
+            string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\config.js";
             string FORNODEPATH = APP_DIR.Replace(@"\", @"//");
             string PATH_ = FORNODEPATH + @"2DTextureEditor//";
             StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
@@ -154,17 +161,18 @@ namespace matrix_engine {
 
         private void MatrixEngineGUI_Load(object sender, EventArgs e) {
 
-            var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
+            var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == true) {
                 NODE_DEP_INSTALLER = true;
+                newProjectToolStripMenuItem.Enabled = false;
             }
-            
+            toolTip1.SetToolTip(this.button1, "Manual reload web part.");
+            toolTip1.SetToolTip(this.URLTEXT, "Main URL (can be manipulated but general no need for edit).");
         }
 
-        private void cmdKillerLoader(object sender, EventArgs e) {
-            
-        }
+        private void cmdKillerLoader(object sender, EventArgs e) { }
 
         private void cmdWATCHLoader(object sender, EventArgs e) {
 
@@ -263,18 +271,31 @@ namespace matrix_engine {
         }
 
         private async void ClearCache() {
-            using (var devToolsClient = chromiumWebBrowser1.GetDevToolsClient()) {
+            try {
+                using (var devToolsClient = chromiumWebBrowser1.GetDevToolsClient()) {
                 var response = await devToolsClient.Network.ClearBrowserCacheAsync();
-                // chromiumWebBrowser1.Reload(true);
                 chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+                }
+            } catch (Exception err) {
+                MessageBox.Show("ERROR IN CLEAR CACHE [chromiumWebBrowser1]", err.ToString());
             }
         }
 
         private async void ClearCachePopup() {
-            using (var devToolsClient = FSBrowser.chromiumWebBrowser1.GetDevToolsClient()) {
-                var response = await devToolsClient.Network.ClearBrowserCacheAsync();
-                // FSBrowser.chromiumWebBrowser1.Reload(true);
-                FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+            try {
+                using (var devToolsClient = FSBrowser.chromiumWebBrowser1.GetDevToolsClient()) {
+                    var response = await devToolsClient.Network.ClearBrowserCacheAsync();
+                    FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+                }
+            } catch (Exception err) {
+                MessageBox.Show( "PLease wait one sec... ", err.ToString());
+                Thread.Sleep(1000);
+                using (var devToolsClient = FSBrowser.chromiumWebBrowser1.GetDevToolsClient()) {
+                    var response = await devToolsClient.Network.ClearBrowserCacheAsync();
+                    FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+                }
+                
+
             }
         }
 
@@ -303,6 +324,7 @@ namespace matrix_engine {
 
         /// <summary>
         /// Kill a process, and all of its children, grandchildren, etc.
+        /// Also build res and used like free terminal!
         /// </summary>
         /// <param name="pid">Process ID.</param>
         private static void KillProcessAndChildren(int pid) {
@@ -326,33 +348,21 @@ namespace matrix_engine {
 
         public void killSubProcess() {
             try {
+
+                if (cmdVJS3EDITOR == null) {
+                    return;
+                }
                 KillProcessAndChildren(cmdVJS3EDITOR._PID_);
                 KillProcessAndChildren(cmdVJS3WATCH._PID_);
                 KillProcessAndChildren(cmdLoader._PID_);
-                /*
-                cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3EDITOR._PID_ + @" /T /F";
-                cmdKillerProc.btnSendStdinToProcess.PerformClick();
-                cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdVJS3WATCH._PID_ + @" /T /F";
-                cmdKillerProc.btnSendStdinToProcess.PerformClick();
-                cmdKillerProc.txtBxStdin.Text = @"taskkill /pid " + cmdLoader._PID_ + @" /T /F";
-                cmdKillerProc.btnSendStdinToProcess.PerformClick();
-               */
-
                 if (cmdStream != null) {
                     cmdStream.Close();
                     cmdStream.Dispose();
                 }
-
-               //cmdLoader.runningProcess.Close();
-               // cmdVJS3EDITOR.runningProcess.Close();
-               // cmdVJS3WATCH.runningProcess.Close();
-
                 cmdLoader.Close();
                 cmdLoader.Dispose();
-
                 cmdVJS3EDITOR.Close();
                 cmdVJS3EDITOR.Dispose();
-
                 cmdVJS3WATCH.Close();
                 cmdVJS3WATCH.Dispose();
             } catch (Exception err) { }
@@ -363,6 +373,11 @@ namespace matrix_engine {
             Application.Exit();
             // force error hot fix 
             // cmdVJS3EDITOR.Show();
+        }
+
+        void OnProcessExit(object sender, EventArgs e) {
+            killSubProcess();
+            // Console.WriteLine("I'm out of here!");
         }
 
         private void mATRIXTEXEDITORToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -377,14 +392,18 @@ namespace matrix_engine {
             k.Modifiers = CefEventFlags.None;
             k.Type = KeyEventType.KeyDown;
             k.IsSystemKey = false;
-            FSBrowser.chromiumWebBrowser1.Focus();
-            FSBrowser.chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
-            chromiumWebBrowser1.Focus();
-            chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
+            if (FSBrowser != null) {
+              FSBrowser.chromiumWebBrowser1.Focus();
+              FSBrowser.chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
+            }
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Focus();
+                chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
+            }
         }
 
         private void exitEditorModeToolStripMenuItem_Click(object sender, EventArgs e) {
-            // chromiumWebBrowser1
+            MessageBox.Show("For now you need to exit EDITOR MODE from web part right click context menu.", "MatrixEngine Texture Editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void hideAllToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -404,36 +423,46 @@ namespace matrix_engine {
         }
           
         private void x512ToolStripMenuItem_Click(object sender, EventArgs e) {
-            chromiumWebBrowser1.Dock = DockStyle.None;
-            chromiumWebBrowser1.Width = 512;
-            chromiumWebBrowser1.Height = 512;
-            chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10*4);
-            FSBrowser.Text = @"PowerOf2 [" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
-            FSBrowser.Size = new Size(512, 512);
-            // FSBrowser.chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Dock = DockStyle.None;
+                chromiumWebBrowser1.Width = 512;
+                chromiumWebBrowser1.Height = 512;
+                chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10);
+            }
+            if (FSBrowser != null) {
+                FSBrowser.Text = @"PowerOf2 [" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+                FSBrowser.Size = new Size(512, 512);
+            }
             button1.PerformClick();
         }
 
         private void x1024ToolStripMenuItem_Click(object sender, EventArgs e) {
-            FSBrowser.Size = new Size(1024, 1024);
-            chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
-            chromiumWebBrowser1.Dock = DockStyle.None;
-            chromiumWebBrowser1.Width = 1024;
-            chromiumWebBrowser1.Height = 1024;
-            // FSBrowser.chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
-            FSBrowser.Text = @"PowerOf2 [" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
+                chromiumWebBrowser1.Dock = DockStyle.None;
+                chromiumWebBrowser1.Width = 1024;
+                chromiumWebBrowser1.Height = 1024;
+            }
+            if (FSBrowser != null) {
+                FSBrowser.Size = new Size(1024, 1024);
+                FSBrowser.Text = @"PowerOf2 [" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+            }
             button1.PerformClick();
         }
 
         private void iPhone13Pro390X844ToolStripMenuItem_Click(object sender, EventArgs e) {
-            chromiumWebBrowser1.Dock = DockStyle.None;
-            chromiumWebBrowser1.Width = 390;
-            chromiumWebBrowser1.Height = 844;
-            chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
-            // FSBrowser.chromiumWebBrowser1.Dock = DockStyle.None;
-            FSBrowser.Size = new Size(390, 844);
-            // FSBrowser.chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
-            FSBrowser.Text = @"Device: iPhone13Pro[" + FSBrowser.chromiumWebBrowser1.Width + "x" + FSBrowser.chromiumWebBrowser1.Height + "]";
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Dock = DockStyle.None;
+                chromiumWebBrowser1.Width = 390;
+                chromiumWebBrowser1.Height = 844;
+                chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
+            }
+            if (FSBrowser != null) {
+                // FSBrowser.chromiumWebBrowser1.Dock = DockStyle.None;
+                FSBrowser.Size = new Size(390, 844);
+                // FSBrowser.chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+                FSBrowser.Text = @"Device: iPhone13Pro[" + FSBrowser.chromiumWebBrowser1.Width + "x" + FSBrowser.chromiumWebBrowser1.Height + "]";
+            }
             button1.PerformClick();
         }
 
@@ -456,8 +485,16 @@ namespace matrix_engine {
                 if (chromiumWebBrowser1 != null) {
                     chromiumWebBrowser1.Hide();
                 }
-                FSBrowser.Show();
-                button1.PerformClick();
+
+                if (FSBrowser != null && FSBrowser.IsDisposed == false) {
+                    FSBrowser.Show();
+                    button1.PerformClick();
+                } else {
+                    FSBrowser = new FS();
+                    FSBrowser.Show();
+                    button1.PerformClick();
+                }
+
             } catch (Exception err) {
                 FSBrowser = new FS();
                 FSBrowser.Show();
@@ -470,31 +507,41 @@ namespace matrix_engine {
             chromiumWebBrowser1.Width = 414;
             chromiumWebBrowser1.Height = 896;
             chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
-            FSBrowser.Text = @"Device: iphoneXR[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
-            FSBrowser.Size = new Size(414, 896);
-            FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+            if (FSBrowser != null) {
+                FSBrowser.Text = @"Device: iphoneXR[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+                FSBrowser.Size = new Size(414, 896);
+                FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+            }
             button1.PerformClick();
         }
 
         private void iphoneXS375x812ToolStripMenuItem_Click(object sender, EventArgs e) {
-            chromiumWebBrowser1.Dock = DockStyle.None;
-            chromiumWebBrowser1.Width = 375;
-            chromiumWebBrowser1.Height = 812;
-            chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
-            FSBrowser.Text = @"Device: iphoneXS[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
-            FSBrowser.Size = new Size(375, 812);
-            FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 3);
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Dock = DockStyle.None;
+                chromiumWebBrowser1.Width = 375;
+                chromiumWebBrowser1.Height = 812;
+                chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
+            }
+            if (FSBrowser != null) {
+                FSBrowser.Text = @"Device: iphoneXS[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+                FSBrowser.Size = new Size(375, 812);
+                FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 3);
+            }
             button1.PerformClick();
         }
 
         private void iphoneX275x812ToolStripMenuItem_Click(object sender, EventArgs e) {
-            chromiumWebBrowser1.Dock = DockStyle.None;
-            chromiumWebBrowser1.Width = 275;
-            chromiumWebBrowser1.Height = 812;
-            chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
-            FSBrowser.Text = @"Device: iphoneX[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
-            FSBrowser.Size = new Size(375, 812);
-            FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Dock = DockStyle.None;
+                chromiumWebBrowser1.Width = 275;
+                chromiumWebBrowser1.Height = 812;
+                chromiumWebBrowser1.Location = new Point(this.Size.Width / 3, 50);
+            }
+            if (FSBrowser != null) {
+                FSBrowser.Text = @"Device: iphoneX[" + chromiumWebBrowser1.Width + "x" + chromiumWebBrowser1.Height + "]";
+                FSBrowser.Size = new Size(375, 812);
+                FSBrowser.Location = new Point(this.Size.Width / 3, this.Size.Height / 10 * 4);
+            }
             button1.PerformClick();
         }
 
@@ -502,7 +549,7 @@ namespace matrix_engine {
             if (scriptGUIEditor.IsDisposed == false) {
                 scriptGUIEditor.Show();
             } else {
-                scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME);
+                scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
                 scriptGUIEditor.Show();
                 scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 65, 20);
                 scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
@@ -540,6 +587,37 @@ namespace matrix_engine {
                 Y_POS = resForm.Location.Y;
                 timer1.Start();
             }
+        }
+
+        private void startToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void MatrixEngineGUI_MinimumSizeChanged(object sender, EventArgs e) {
+           // 
+        }
+
+        private void MatrixEngineGUI_Resize(object sender, EventArgs e) {
+            if (WindowState == FormWindowState.Minimized) {
+                if (resForm != null) {
+                    resForm.Hide();
+                }
+                if (scriptGUIEditor != null) {
+                    scriptGUIEditor.Hide();
+                }
+            } else if (WindowState == FormWindowState.Maximized) {
+                if (resForm != null) {
+                    resForm.Show();
+                }
+                if (scriptGUIEditor != null) {
+                    scriptGUIEditor.Show();
+                }
+            }
+        }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e) {
+            killSubProcess();
+            Application.Exit();
         }
     }
 }
