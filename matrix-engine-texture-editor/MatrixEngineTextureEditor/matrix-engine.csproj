@@ -189,12 +189,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\tablet.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\transparentDark20.png" />
     <None Include="Resources\shadedDark35.png" />
     <None Include="Resources\exitLeft.png" />
     <None Include="Resources\exitRight.png" />
     <None Include="Resources\logo-test.png" />
     <Content Include="logo-test.ico" />
     <Content Include="logo.ico" />
+    <None Include="Resources\larger.png" />
     <Content Include="Resources\resolutions.txt" />
     <None Include="Resources\gui-texture-editor.js" />
     <None Include="Resources\webgl2glmatrix2.jpg" />
