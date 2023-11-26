@@ -1,6 +1,6 @@
 {
   "name": "visual-js",
-  "version": "3.0.26",
+  "version": "3.0.28",
   "description": "[3.0.26] Prepare for npm usage. Special integration for matrix engine 1.9.0 Thunder.",
   "main": "index.js",
   "scripts": {
