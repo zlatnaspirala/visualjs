@@ -51,7 +51,9 @@ namespace matrix_engine {
         private void detectHost(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
             URLTEXT.Text = navUrl + "/gui.html";
-            chromiumWebBrowser1.Load(URLTEXT.Text);
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Load(URLTEXT.Text);
+            }
             if (FSBrowser != null) {
                 FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
             }
@@ -62,7 +64,11 @@ namespace matrix_engine {
         private void detectEditorRunStatus(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
             URLTEXT.Text = navUrl + "\\gui.html";
-            chromiumWebBrowser1.Load(URLTEXT.Text);
+
+            if (chromiumWebBrowser1 != null) {
+                chromiumWebBrowser1.Load(URLTEXT.Text);
+            }
+
             if (FSBrowser != null) {
                 FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
             }
@@ -120,6 +126,10 @@ namespace matrix_engine {
 
             cmdKillerProc.txtBxStdin.Text = @"node res.js";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            button1.PerformClick();
+            //cmdKillerProc.txtBxStdin.Text = @"npm run gui-editor";
+            //cmdKillerProc.btnSendStdinToProcess.PerformClick();
         }
 
         public void fixPaths() {
