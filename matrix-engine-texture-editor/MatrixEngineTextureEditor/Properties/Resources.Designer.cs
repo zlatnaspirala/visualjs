@@ -120,6 +120,26 @@ namespace matrix_engine.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap html5 {
+            get {
+                object obj = ResourceManager.GetObject("html5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap html564 {
+            get {
+                object obj = ResourceManager.GetObject("html564", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap larger {
             get {
                 object obj = ResourceManager.GetObject("larger", resourceCulture);
@@ -133,6 +153,16 @@ namespace matrix_engine.Properties {
         internal static System.Drawing.Bitmap logo_test {
             get {
                 object obj = ResourceManager.GetObject("logo_test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap me {
+            get {
+                object obj = ResourceManager.GetObject("me", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -232,6 +262,16 @@ namespace matrix_engine.Properties {
         internal static System.Drawing.Bitmap warning {
             get {
                 object obj = ResourceManager.GetObject("warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap windows_logo_7753 {
+            get {
+                object obj = ResourceManager.GetObject("windows_logo_7753", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

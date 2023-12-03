@@ -117,43 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Author: Nikola Lukic 
-Email: zlatnaspirala@gmail.com
-web: maximumroulette.com
-GPL v3 
-
-Used in this project :
-
-Icons in packager form uset from : Icon by Iconpacks
-https://iconpacks.net/?utm_source=link-attribution&amp;utm_content=6646 
-
-Author: Curt C.
-
-Email : harpyeaglecp@aol.com
-Project File: "Solving Problems of Monitoring Standard Output 
-                      and Error Streams Of A Running Process" 
-for http://www.codeproject.com
-This software is released under the Code Project Open License (CPOL)
-See official license description at: http://www.codeproject.com/info/cpol10.aspx
-This software is provided AS-IS without any warranty of any kind.
-</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>For 3d view used matrix-engine [webgl glmatrix library]. 
-For 2scanvas part used visual-js . Visual studio used for GUI part.
-[open source] Links:
-
-https://github.com/zlatnaspirala/matrix-engine 
-LICENCE: MIT only `lib` folder is under GPLv3
-All other MIT &gt; it is absolutely free to use it with no publish source.
-
-https://github.com/zlatnaspirala/visualjs
-source under GPLv3 - But it is absolutely free to use it with no publish source.
-Only source modify need to be posted in about description.
-
-For example any form of usage from npm service is absolutely free.
- 
-This software is provided AS-IS without any warranty of any kind.</value>
-  </data>
 </root>

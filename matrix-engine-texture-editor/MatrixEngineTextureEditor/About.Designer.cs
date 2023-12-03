@@ -54,6 +54,7 @@ namespace matrix_engine {
             this.linkLabel7 = new System.Windows.Forms.LinkLabel();
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -64,7 +65,7 @@ namespace matrix_engine {
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label1.Location = new System.Drawing.Point(15, 14);
+            this.label1.Location = new System.Drawing.Point(15, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(462, 25);
             this.label1.TabIndex = 8;
@@ -75,7 +76,7 @@ namespace matrix_engine {
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label2.Location = new System.Drawing.Point(12, 366);
+            this.label2.Location = new System.Drawing.Point(12, 357);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(161, 16);
             this.label2.TabIndex = 9;
@@ -85,9 +86,9 @@ namespace matrix_engine {
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 396);
+            this.label3.Location = new System.Drawing.Point(12, 375);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(514, 224);
+            this.label3.Size = new System.Drawing.Size(514, 266);
             this.label3.TabIndex = 10;
             this.label3.Text = resources.GetString("label3.Text");
             // 
@@ -121,9 +122,9 @@ namespace matrix_engine {
             this.pictureBox1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = global::matrix_engine.Properties.Resources.android_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(661, 202);
+            this.pictureBox1.Location = new System.Drawing.Point(661, 227);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(35, 31);
+            this.pictureBox1.Size = new System.Drawing.Size(32, 31);
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
@@ -361,7 +362,7 @@ namespace matrix_engine {
             this.linkLabel7.AutoSize = true;
             this.linkLabel7.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel7.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.linkLabel7.Location = new System.Drawing.Point(658, 185);
+            this.linkLabel7.Location = new System.Drawing.Point(658, 198);
             this.linkLabel7.Name = "linkLabel7";
             this.linkLabel7.Size = new System.Drawing.Size(194, 14);
             this.linkLabel7.TabIndex = 34;
@@ -374,7 +375,7 @@ namespace matrix_engine {
             this.linkLabel8.AutoSize = true;
             this.linkLabel8.Font = new System.Drawing.Font("Teko SemiBold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel8.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.linkLabel8.Location = new System.Drawing.Point(132, 623);
+            this.linkLabel8.Location = new System.Drawing.Point(132, 643);
             this.linkLabel8.Name = "linkLabel8";
             this.linkLabel8.Size = new System.Drawing.Size(408, 16);
             this.linkLabel8.TabIndex = 35;
@@ -387,18 +388,29 @@ namespace matrix_engine {
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(12, 622);
+            this.label17.Location = new System.Drawing.Point(12, 642);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(123, 15);
             this.label17.TabIndex = 36;
             this.label17.Text = "Visit article page:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(658, 185);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(67, 15);
+            this.label18.TabIndex = 37;
+            this.label18.Text = "Web site:";
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ClientSize = new System.Drawing.Size(879, 646);
+            this.ClientSize = new System.Drawing.Size(879, 667);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.linkLabel8);
             this.Controls.Add(this.linkLabel7);
@@ -474,5 +486,6 @@ namespace matrix_engine {
         private System.Windows.Forms.LinkLabel linkLabel7;
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
     }

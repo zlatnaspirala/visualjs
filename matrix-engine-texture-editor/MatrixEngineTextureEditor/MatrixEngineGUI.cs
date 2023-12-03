@@ -21,6 +21,7 @@ namespace matrix_engine {
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
         CmdWindowControlTestApp.MainForm cmdVJS3WATCH;
         public CmdWindowControlTestApp.MainForm cmdKillerProc;
+        public PackageForm packager;
         ResourceVJS3 resForm;
         ScritpEditor scriptGUIEditor;
         NewTextureForm NTP;
@@ -628,6 +629,11 @@ namespace matrix_engine {
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e) {
             killSubProcess();
             Application.Exit();
+        }
+
+        private void makeFinalPackageAndExportToolStripMenuItem_Click(object sender, EventArgs e) {
+            packager = new PackageForm();
+            packager.Show();
         }
     }
 }

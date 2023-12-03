@@ -162,6 +162,7 @@ namespace matrix_engine
             this.makeFinalPackageAndExportToolStripMenuItem.Name = "makeFinalPackageAndExportToolStripMenuItem";
             this.makeFinalPackageAndExportToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.makeFinalPackageAndExportToolStripMenuItem.Text = "Make final package and export";
+            this.makeFinalPackageAndExportToolStripMenuItem.Click += new System.EventHandler(this.makeFinalPackageAndExportToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
