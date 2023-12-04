@@ -20,7 +20,7 @@ namespace matrix_engine {
         CmdWindowControlTestApp.MainForm cmdLoader;
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
         CmdWindowControlTestApp.MainForm cmdVJS3WATCH;
-        public CmdWindowControlTestApp.MainForm cmdKillerProc;
+        public CmdWindowControlTestApp.MainForm cmdKillerProc = null;
         public PackageForm packager;
         ResourceVJS3 resForm;
         ScritpEditor scriptGUIEditor;
@@ -37,6 +37,14 @@ namespace matrix_engine {
             cmdStream = new CmdWindowControlTestApp.MainForm();
             cmdStream.Load += cdmStreamWizardloaded;
             cmdStream.Show();
+            //npmadded
+            cmdStream.resultNpmI.TextChanged += NPMDONE;
+        }
+        protected void NPMDONE(object sender, EventArgs e) {
+            Thread.Sleep(400);
+            cmdStream.Close();
+            cmdStream.Dispose();
+            MessageBox.Show("Deps library installed! Now you can run editor.", "Matrix-engine cloned.", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void LOAD(String ARG) {
@@ -76,8 +84,10 @@ namespace matrix_engine {
         }
 
         public void runWatchAndEditor() {
-            cmdKillerProc = new CmdWindowControlTestApp.MainForm();
-            cmdKillerProc.Load += cmdKillerLoader;
+            if (cmdKillerProc == null) {
+                cmdKillerProc = new CmdWindowControlTestApp.MainForm();
+                cmdKillerProc.Load += cmdKillerLoader;
+            }
             // cmdKillerProc.Show();
             // Hosting runs now 
             cmdVJS3EDITOR = new CmdWindowControlTestApp.MainForm();
@@ -188,7 +198,7 @@ namespace matrix_engine {
         private void cmdWATCHLoader(object sender, EventArgs e) {
 
             // cmdVJS3WATCH.Size = new Size(this.Size.Width/2, this.Size.Height/5);
-            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 100*65, Location.Y + this.Size.Height / 4);
+            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 100*55, Location.Y + this.Size.Height / 4);
 
             cmdVJS3WATCH.txtBxStdin.Text = @"c:";
             cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
@@ -204,7 +214,7 @@ namespace matrix_engine {
 
         private void cmdEDITORLoader(object sender, EventArgs e) {
             cmdVJS3EDITOR.resultEditor.TextChanged += detectEditorRunStatus;
-            cmdVJS3EDITOR.Location = new Point(Location.X + Size.Width / 100 * 65, Location.Y + 2 * this.Size.Height / 4);
+            cmdVJS3EDITOR.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 2 * this.Size.Height / 4);
 
             cmdVJS3EDITOR.txtBxStdin.Text = @"c:";
             cmdVJS3EDITOR.btnSendStdinToProcess.PerformClick();
@@ -228,7 +238,7 @@ namespace matrix_engine {
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
             }
 
-            cmdLoader.Location = new Point(Location.X + Size.Width / 100 * 65, Location.Y + 3 * this.Size.Height / 4);
+            cmdLoader.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 3 * this.Size.Height / 4);
 
             cmdLoader.txtBxStdin.Text = @"c:";
             cmdLoader.btnSendStdinToProcess.PerformClick();
@@ -243,7 +253,7 @@ namespace matrix_engine {
 
         private void cdmStreamWizardloaded(object sender, EventArgs e) {
             // Install new instance - for now matrix-engine
-            cmdStream.Size = new Size(this.Size.Width, this.Size.Height / 3);
+            cmdStream.Size = new Size(this.Size.Width, this.Size.Height / 4);
             cmdStream.Location = new Point(Location.X, Location.Y);
         
             cmdStream.txtBxStdin.Text = @"c:";
@@ -316,8 +326,13 @@ namespace matrix_engine {
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e) {
-            LOADFORM = new LoadForm(this);
-            LOADFORM.Show();
+            var APP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\" + @"\matrixengine\matrix-engine\";
+            if (Directory.Exists(APP_DIR)) {
+                LOADFORM = new LoadForm(this);
+                LOADFORM.Show();
+            } else {
+                MessageBox.Show("No dep library! Please install deps.", "Matrix-Engine GUI Editor warn msg.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void unLoadProjectToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -329,8 +344,12 @@ namespace matrix_engine {
         }
 
         public void killNODEProcess() {
-            cmdKillerProc.txtBxStdin.Text = @"taskkill /im node.exe /T /F";
-            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            if (cmdKillerProc != null) {
+                cmdKillerProc.txtBxStdin.Text = @"taskkill /im node.exe /T /F";
+                cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            } else {
+                //MessageBox.Show("Nothing for dispose!");
+            }
         }
 
         /// <summary>
@@ -557,7 +576,7 @@ namespace matrix_engine {
         }
 
         private void scriptEditorToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (scriptGUIEditor.IsDisposed == false) {
+            if (scriptGUIEditor != null && scriptGUIEditor.IsDisposed == false) {
                 scriptGUIEditor.Show();
             } else {
                 scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
@@ -632,8 +651,20 @@ namespace matrix_engine {
         }
 
         private void makeFinalPackageAndExportToolStripMenuItem_Click(object sender, EventArgs e) {
-            packager = new PackageForm();
+            packager = new PackageForm(this);
             packager.Show();
+        }
+
+        private void stopEditorToolStripMenuItem_Click(object sender, EventArgs e) {
+            // Stop editor
+            // cmdVJS3EDITOR._PID_
+            if (cmdVJS3EDITOR != null) {
+                KillProcessAndChildren(cmdVJS3EDITOR._PID_);
+                KillProcessAndChildren(cmdVJS3WATCH._PID_);
+                MessageBox.Show("Editor stoped!", "MatrixEngine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } else {
+                MessageBox.Show("Editor is not active!", "MatrixEngine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }          
         }
     }
 }

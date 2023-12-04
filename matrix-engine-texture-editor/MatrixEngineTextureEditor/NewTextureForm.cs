@@ -24,6 +24,8 @@ namespace matrix_engine {
             MAINFORM.Text = APP_DIR;
             MAINFORM.START(APP_DIR);
             MAINFORM.APP_NAME = textureProjectName.Text;
+            this.Close();
+            this.Dispose();
         }
     }
 }

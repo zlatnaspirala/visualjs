@@ -47,12 +47,14 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.KILL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.resultNpmI = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.resultNpmI);
             this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.killProc);
             this.groupBox3.Controls.Add(this.rtb);
@@ -73,10 +75,10 @@
             // 
             this.resultEditor.BackColor = System.Drawing.Color.Black;
             this.resultEditor.ForeColor = System.Drawing.Color.Lime;
-            this.resultEditor.Location = new System.Drawing.Point(276, 195);
+            this.resultEditor.Location = new System.Drawing.Point(570, 242);
             this.resultEditor.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.resultEditor.Name = "resultEditor";
-            this.resultEditor.Size = new System.Drawing.Size(263, 27);
+            this.resultEditor.Size = new System.Drawing.Size(145, 27);
             this.resultEditor.TabIndex = 42;
             this.toolTip.SetToolTip(this.resultEditor, "Text to send to the standard input stream of running process.");
             // 
@@ -84,7 +86,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(712, 195);
+            this.killProc.Location = new System.Drawing.Point(712, 197);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -114,17 +116,17 @@
             // 
             this.result.BackColor = System.Drawing.Color.Black;
             this.result.ForeColor = System.Drawing.Color.Lime;
-            this.result.Location = new System.Drawing.Point(2, 195);
+            this.result.Location = new System.Drawing.Point(401, 242);
             this.result.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(263, 27);
+            this.result.Size = new System.Drawing.Size(159, 27);
             this.result.TabIndex = 40;
             this.toolTip.SetToolTip(this.result, "Text to send to the standard input stream of running process.");
             // 
             // btnRunCommand
             // 
             this.btnRunCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunCommand.Location = new System.Drawing.Point(2, 125);
+            this.btnRunCommand.Location = new System.Drawing.Point(2, 107);
             this.btnRunCommand.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnRunCommand.Name = "btnRunCommand";
             this.btnRunCommand.Size = new System.Drawing.Size(373, 33);
@@ -137,7 +139,7 @@
             // 
             this.txtBxStdin.BackColor = System.Drawing.Color.Black;
             this.txtBxStdin.ForeColor = System.Drawing.Color.Lime;
-            this.txtBxStdin.Location = new System.Drawing.Point(2, 207);
+            this.txtBxStdin.Location = new System.Drawing.Point(2, 189);
             this.txtBxStdin.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxStdin.Name = "txtBxStdin";
             this.txtBxStdin.Size = new System.Drawing.Size(372, 27);
@@ -147,7 +149,7 @@
             // btnSendStdinToProcess
             // 
             this.btnSendStdinToProcess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendStdinToProcess.Location = new System.Drawing.Point(2, 166);
+            this.btnSendStdinToProcess.Location = new System.Drawing.Point(2, 148);
             this.btnSendStdinToProcess.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnSendStdinToProcess.Name = "btnSendStdinToProcess";
             this.btnSendStdinToProcess.Size = new System.Drawing.Size(373, 33);
@@ -160,7 +162,7 @@
             // 
             this.txtBxCmd.BackColor = System.Drawing.Color.Black;
             this.txtBxCmd.ForeColor = System.Drawing.Color.Lime;
-            this.txtBxCmd.Location = new System.Drawing.Point(121, 29);
+            this.txtBxCmd.Location = new System.Drawing.Point(121, 11);
             this.txtBxCmd.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxCmd.Name = "txtBxCmd";
             this.txtBxCmd.Size = new System.Drawing.Size(254, 27);
@@ -171,7 +173,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 32);
+            this.label1.Location = new System.Drawing.Point(4, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 20);
@@ -181,7 +183,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 96);
+            this.label2.Location = new System.Drawing.Point(4, 78);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(152, 20);
@@ -192,7 +194,7 @@
             // 
             this.txtBxArgs.BackColor = System.Drawing.Color.Black;
             this.txtBxArgs.ForeColor = System.Drawing.Color.Lime;
-            this.txtBxArgs.Location = new System.Drawing.Point(169, 87);
+            this.txtBxArgs.Location = new System.Drawing.Point(169, 69);
             this.txtBxArgs.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxArgs.Name = "txtBxArgs";
             this.txtBxArgs.Size = new System.Drawing.Size(206, 27);
@@ -202,7 +204,7 @@
             // btnClearTextBox
             // 
             this.btnClearTextBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearTextBox.Location = new System.Drawing.Point(2, 245);
+            this.btnClearTextBox.Location = new System.Drawing.Point(2, 227);
             this.btnClearTextBox.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnClearTextBox.Name = "btnClearTextBox";
             this.btnClearTextBox.Size = new System.Drawing.Size(373, 33);
@@ -216,7 +218,7 @@
             // 
             this.txtBxDirectory.BackColor = System.Drawing.Color.Black;
             this.txtBxDirectory.ForeColor = System.Drawing.Color.Lime;
-            this.txtBxDirectory.Location = new System.Drawing.Point(169, 60);
+            this.txtBxDirectory.Location = new System.Drawing.Point(169, 42);
             this.txtBxDirectory.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxDirectory.Name = "txtBxDirectory";
             this.txtBxDirectory.Size = new System.Drawing.Size(206, 27);
@@ -226,7 +228,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(4, 63);
+            this.label3.Location = new System.Drawing.Point(4, 45);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(138, 20);
@@ -236,7 +238,7 @@
             // KILL
             // 
             this.KILL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.KILL.Location = new System.Drawing.Point(0, 286);
+            this.KILL.Location = new System.Drawing.Point(0, 268);
             this.KILL.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.KILL.Name = "KILL";
             this.KILL.Size = new System.Drawing.Size(376, 33);
@@ -259,18 +261,29 @@
             this.panel1.Controls.Add(this.txtBxDirectory);
             this.panel1.Controls.Add(this.txtBxArgs);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(240, 236);
+            this.panel1.Location = new System.Drawing.Point(6, 235);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 331);
+            this.panel1.Size = new System.Drawing.Size(378, 307);
             this.panel1.TabIndex = 41;
+            // 
+            // resultNpmI
+            // 
+            this.resultNpmI.BackColor = System.Drawing.Color.Black;
+            this.resultNpmI.ForeColor = System.Drawing.Color.Lime;
+            this.resultNpmI.Location = new System.Drawing.Point(725, 242);
+            this.resultNpmI.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.resultNpmI.Name = "resultNpmI";
+            this.resultNpmI.Size = new System.Drawing.Size(91, 27);
+            this.resultNpmI.TabIndex = 43;
+            this.toolTip.SetToolTip(this.resultNpmI, "Text to send to the standard input stream of running process.");
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(820, 228);
+            this.ClientSize = new System.Drawing.Size(820, 231);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -309,6 +322,7 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Button killProc;
         public System.Windows.Forms.TextBox resultEditor;
-        }
+        public System.Windows.Forms.TextBox resultNpmI;
+    }
 }
 

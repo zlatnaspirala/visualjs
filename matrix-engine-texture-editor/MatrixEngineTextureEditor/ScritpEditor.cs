@@ -58,5 +58,18 @@ namespace matrix_engine {
             }
         }
 
+        private void prepareForPackBtn_Click(object sender, EventArgs e) {
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("runEditor();", "// PRAGMA runEditor();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditor();", "// PRAGMA loadEditor();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditorObjects();", "// PRAGMA loadEditorObjects();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// APPLICATION .EDITOR = false;", " APPLICATION.EDITOR = false;");
+        }
+
+        private void backToCodingBtn_Click(object sender, EventArgs e) {
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// PRAGMA runEditor();", "runEditor();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// PRAGMA loadEditor();", "loadEditor();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// PRAGMA loadEditorObjects();", "loadEditorObjects();");
+            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("APPLICATION.EDITOR = false;", "// APPLICATION.EDITOR = false;");
+        }
     }
 }

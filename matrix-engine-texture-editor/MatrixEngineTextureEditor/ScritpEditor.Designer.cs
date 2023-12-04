@@ -32,15 +32,17 @@ namespace matrix_engine {
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.prepareForPackBtn = new System.Windows.Forms.Button();
+            this.backToCodingBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // CODE_EDITOR
             // 
-            this.CODE_EDITOR.BackColor = System.Drawing.Color.Black;
+            this.CODE_EDITOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.CODE_EDITOR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CODE_EDITOR.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CODE_EDITOR.ForeColor = System.Drawing.Color.Lime;
+            this.CODE_EDITOR.ForeColor = System.Drawing.Color.Black;
             this.CODE_EDITOR.Location = new System.Drawing.Point(12, 80);
             this.CODE_EDITOR.Name = "CODE_EDITOR";
             this.CODE_EDITOR.Size = new System.Drawing.Size(649, 474);
@@ -108,12 +110,45 @@ namespace matrix_engine {
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
+            // prepareForPackBtn
+            // 
+            this.prepareForPackBtn.BackColor = System.Drawing.Color.Black;
+            this.prepareForPackBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prepareForPackBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepareForPackBtn.ForeColor = System.Drawing.Color.Lime;
+            this.prepareForPackBtn.Image = global::matrix_engine.Properties.Resources.transparentDark20;
+            this.prepareForPackBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.prepareForPackBtn.Location = new System.Drawing.Point(12, 562);
+            this.prepareForPackBtn.Name = "prepareForPackBtn";
+            this.prepareForPackBtn.Size = new System.Drawing.Size(236, 29);
+            this.prepareForPackBtn.TabIndex = 16;
+            this.prepareForPackBtn.Text = "Prepare for final build";
+            this.toolTip1.SetToolTip(this.prepareForPackBtn, "Simple deactivate editor .");
+            this.prepareForPackBtn.UseVisualStyleBackColor = false;
+            this.prepareForPackBtn.Click += new System.EventHandler(this.prepareForPackBtn_Click);
+            // 
+            // backToCodingBtn
+            // 
+            this.backToCodingBtn.BackColor = System.Drawing.Color.Black;
+            this.backToCodingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backToCodingBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backToCodingBtn.ForeColor = System.Drawing.Color.Lime;
+            this.backToCodingBtn.Location = new System.Drawing.Point(254, 562);
+            this.backToCodingBtn.Name = "backToCodingBtn";
+            this.backToCodingBtn.Size = new System.Drawing.Size(145, 29);
+            this.backToCodingBtn.TabIndex = 17;
+            this.backToCodingBtn.Text = "Back to coding";
+            this.backToCodingBtn.UseVisualStyleBackColor = false;
+            this.backToCodingBtn.Click += new System.EventHandler(this.backToCodingBtn_Click);
+            // 
             // ScritpEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(673, 598);
+            this.Controls.Add(this.backToCodingBtn);
+            this.Controls.Add(this.prepareForPackBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
@@ -140,5 +175,7 @@ namespace matrix_engine {
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Label SCRIPT_SRC;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button prepareForPackBtn;
+        private System.Windows.Forms.Button backToCodingBtn;
     }
 }

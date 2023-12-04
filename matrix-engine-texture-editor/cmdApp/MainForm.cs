@@ -190,6 +190,8 @@ namespace CmdWindowControlTestApp {
                 result.Text = text;
             } else if (text.Contains("my software")) {
                 resultEditor.Text = text;
+            } else if (text.Contains("npm audit fix")) {
+                resultNpmI.Text = "npm done";
             }
         }
 

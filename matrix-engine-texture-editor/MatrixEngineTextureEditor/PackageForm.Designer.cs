@@ -27,7 +27,7 @@ namespace matrix_engine {
             this.buildcanvas2dBtn = new System.Windows.Forms.Button();
             this.buildForMEngineBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BuildForHybrid = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buildcanvas2dBtn
@@ -71,28 +71,29 @@ namespace matrix_engine {
             this.label1.TabIndex = 9;
             this.label1.Text = "Matrix Engine - Packager";
             // 
-            // button1
+            // BuildForHybrid
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkOrange;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = global::matrix_engine.Properties.Resources.windows_logo_7753;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(85, 277);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(503, 81);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Export for windows desktop - hybrid app";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BuildForHybrid.BackColor = System.Drawing.Color.DarkOrange;
+            this.BuildForHybrid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BuildForHybrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BuildForHybrid.ForeColor = System.Drawing.Color.Black;
+            this.BuildForHybrid.Image = global::matrix_engine.Properties.Resources.windows_logo_7753;
+            this.BuildForHybrid.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BuildForHybrid.Location = new System.Drawing.Point(85, 277);
+            this.BuildForHybrid.Name = "BuildForHybrid";
+            this.BuildForHybrid.Size = new System.Drawing.Size(503, 81);
+            this.BuildForHybrid.TabIndex = 11;
+            this.BuildForHybrid.Text = "Export for windows desktop - hybrid app";
+            this.BuildForHybrid.UseVisualStyleBackColor = false;
+            this.BuildForHybrid.Click += new System.EventHandler(this.BuildForHybrid_Click);
             // 
             // PackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(777, 406);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(850, 406);
+            this.Controls.Add(this.BuildForHybrid);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buildForMEngineBtn);
             this.Controls.Add(this.buildcanvas2dBtn);
@@ -114,6 +115,6 @@ namespace matrix_engine {
         public System.Windows.Forms.Button buildcanvas2dBtn;
         public System.Windows.Forms.Button buildForMEngineBtn;
         private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button BuildForHybrid;
     }
 }
