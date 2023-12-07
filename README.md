@@ -1,4 +1,3 @@
-
 # Visual-js
 ### Version : 3.0.0
 
@@ -15,10 +14,9 @@ All new version begin with 3.0.0 for client, server or GUI part.
      on right click in EDITOR = true status.
  - Create more visual-js embedded visual controls.
      Like Oscillator , make input/output pins ...
- - [ALMOST DONE]Improve visual-js in concept of npm usage.
+ - [DONE]Improve visual-js in concept of npm usage.
    Make it easy usable from `npm i visual-js`.
- - [WIP] Reconstruct from zero point `visualjs-gui`.
-   new GUI will use npm in background.(`visualjs-gui` in useless for now)
+ - [WIP] Matrix-engine GUI Texture, This is c# application.The main goal of this app is to automate all the necessary actions related to installing, starting and building the final script for matrix-engine or for any other purpose.
 
 ### Installation and setup:
 
@@ -78,7 +76,6 @@ var APPLICATION = {
 
 
 ## Server/Editor [node.js] (Folder: /project/server/)
-
 This is dev tool for creating object on page.
 
 ### Config
@@ -229,15 +226,14 @@ I use browserify for building bundle:
  `browserify test.js -p esmify > builds/examples.js`
 
 
-### Note
+### Note ⛔
 ```json
   Don't use editor features on public server.
-  There is not that kind of validation!
+  Please do not run editor tools on a public server. There is no form of abuse protection.
 ```
 
-In same package you can install `visual-js-server` (not matter if you
-have have defined nice paths in config.js), 
-now you can run editor feature, just create file editor.js with content:
+`visual-js-server` is also part of this git repo project,
+You can run editor feature, just create file editor.js with content:
 
 ```js
 let tools = require('visual-js-server');
