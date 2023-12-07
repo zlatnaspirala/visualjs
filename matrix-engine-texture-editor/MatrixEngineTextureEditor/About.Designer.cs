@@ -109,9 +109,9 @@ namespace matrix_engine {
             this.w.BackColor = System.Drawing.Color.Black;
             this.w.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.w.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.w.Location = new System.Drawing.Point(728, 600);
+            this.w.Location = new System.Drawing.Point(749, 598);
             this.w.Name = "w";
-            this.w.Size = new System.Drawing.Size(139, 34);
+            this.w.Size = new System.Drawing.Size(121, 57);
             this.w.TabIndex = 12;
             this.w.Text = "HIDE";
             this.w.UseVisualStyleBackColor = false;
@@ -207,7 +207,7 @@ namespace matrix_engine {
             this.pictureBox2.InitialImage = global::matrix_engine.Properties.Resources.android_icon;
             this.pictureBox2.Location = new System.Drawing.Point(483, 14);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(372, 120);
+            this.pictureBox2.Size = new System.Drawing.Size(389, 120);
             this.pictureBox2.TabIndex = 20;
             this.pictureBox2.TabStop = false;
             // 

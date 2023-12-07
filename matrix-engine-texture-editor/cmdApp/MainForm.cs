@@ -46,6 +46,7 @@ namespace CmdWindowControlTestApp {
         /// </summary>
         public MainForm() {
             InitializeComponent();
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
 
         /// <summary>
@@ -192,6 +193,10 @@ namespace CmdWindowControlTestApp {
                 resultEditor.Text = text;
             } else if (text.Contains("npm audit fix")) {
                 resultNpmI.Text = "npm done";
+            } else if (text.Contains("Build succeeded")) {
+                nativeExeBuild.Text = "native-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            } else if (text.Contains("The build file was created")) {
+                buildFinalVJS3.Text = "VJS3 BUILD VISUAL.JS - final build";
             }
         }
 
@@ -202,8 +207,8 @@ namespace CmdWindowControlTestApp {
         private void rtb_StderrTextRead(string text) {
             // Do custom handling of the standard error text here ...
             //Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
-
         }
+
 
         private void MainForm_Load(object sender, EventArgs e) {
             this.btnRunCommand.PerformClick();
@@ -212,20 +217,14 @@ namespace CmdWindowControlTestApp {
 
         private void KILL_Click(object sender, EventArgs e) {
             runningProcess.Kill();
-
-
         }
 
         private void groupBox3_Enter(object sender, EventArgs e) {
-
+            //
         }
 
         private void killProc_Click(object sender, EventArgs e) {
-
             this.Hide();
-           //  txtBxStdin.Text = @"taskkill /F " + _PID_;
-           // btnSendStdinToProcess.PerformClick();
-
         }
     }
 }

@@ -37,6 +37,7 @@ namespace matrix_engine
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.killAllNodeOnMyComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeFinalPackageAndExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,6 @@ namespace matrix_engine
             this.URLTEXT = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.stopEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,6 +149,14 @@ namespace matrix_engine
             this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.loadProjectToolStripMenuItem.Text = "Run editor";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
+            // 
+            // stopEditorToolStripMenuItem
+            // 
+            this.stopEditorToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.shadedDark35;
+            this.stopEditorToolStripMenuItem.Name = "stopEditorToolStripMenuItem";
+            this.stopEditorToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.stopEditorToolStripMenuItem.Text = "Stop editor";
+            this.stopEditorToolStripMenuItem.Click += new System.EventHandler(this.stopEditorToolStripMenuItem_Click);
             // 
             // killAllNodeOnMyComputerToolStripMenuItem
             // 
@@ -416,14 +424,6 @@ namespace matrix_engine
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
-            // stopEditorToolStripMenuItem
-            // 
-            this.stopEditorToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.shadedDark35;
-            this.stopEditorToolStripMenuItem.Name = "stopEditorToolStripMenuItem";
-            this.stopEditorToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.stopEditorToolStripMenuItem.Text = "Stop editor";
-            this.stopEditorToolStripMenuItem.Click += new System.EventHandler(this.stopEditorToolStripMenuItem_Click);
-            // 
             // MatrixEngineGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 18F);
@@ -493,7 +493,7 @@ namespace matrix_engine
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem makeFinalPackageAndExportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopEditorToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem stopEditorToolStripMenuItem;
     }
 }
 
