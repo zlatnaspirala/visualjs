@@ -16,6 +16,7 @@ using System.Windows.Forms;
 namespace matrix_engine {
     public partial class MatrixEngineGUI : Form {
         public string APP_NAME = "";
+        public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
         CmdWindowControlTestApp.MainForm cmdStream;
         CmdWindowControlTestApp.MainForm cmdLoader;
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
@@ -44,9 +45,8 @@ namespace matrix_engine {
         public void NATIVE_EXE_DONE(object sender, EventArgs e) {
             // EXPORTS
             MessageBox.Show("Windows desktop application builded [matrix-engine.exe]", "Matrix-engine native app builded.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            // test  no no
+            // test maybe baby
             cmdKillerProc.nativeExeBuild.TextChanged -= NATIVE_EXE_DONE;
-            // cmdKillerProc.nativeExeBuild.Text = "";
 
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
@@ -71,7 +71,7 @@ namespace matrix_engine {
 
             if (File.Exists(APP_NATIVEPATHFILE)) {
                 MessageBox.Show("Native build exist, nice!");
-                var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "win-desktop";
                 if (Directory.Exists(APP_DIR_TEST_EXPORTS__) == false) {
                     Directory.CreateDirectory(APP_DIR_TEST_EXPORTS__);
                 } else {
@@ -79,13 +79,9 @@ namespace matrix_engine {
                     return;
                 }
                 cmdKillerProc.txtBxStdin.Text = "xcopy /e /k /h /i \"" + Path.GetDirectoryName(APP_NATIVEPATH) + "\" \"" + APP_DIR_TEST_EXPORTS__ + "\\" + "\"";
-                cmdKillerProc.btnSendStdinToProcess.PerformClick(); 
-                // xcopy /e /k /h /i srcdir destdir
-
-                // Thread.Sleep(2000);
-                // cmdKillerProc.txtBxStdin.Text = @"matrix-engine.exe";
-                // cmdKillerProc.btnSendStdinToProcess.PerformClick();
-                // cmdKillerProc.BIGTEXT.Text = "Running native desktop matrix-engine.exe ...";
+                cmdKillerProc.btnSendStdinToProcess.PerformClick();
+                LAST_NATIVE_BUILD_CONFIG_PATH = APP_DIR_TEST_EXPORTS__;
+                packager.NATIVEBuildPATH.Text = LAST_NATIVE_BUILD_CONFIG_PATH;
                 return;
             }
         }
@@ -217,7 +213,7 @@ namespace matrix_engine {
         }
 
         public void BUILD_VJS3_FINAL(object sender, EventArgs e) {
-            MessageBox.Show("Final build finished! Nice.", "Matrix-engine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // MessageBox.Show("Final build finished! Nice.", "Matrix-engine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // statusBuildVJS3
             packager.statusBuildVJS3.Text = "Build done.";
             packager.statusBuildVJS3.ForeColor = Color.Green;
@@ -261,15 +257,13 @@ namespace matrix_engine {
         }
 
         private void MatrixEngineGUI_Load(object sender, EventArgs e) {
-
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
-
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == true) {
                 NODE_DEP_INSTALLER = true;
                 newProjectToolStripMenuItem.Enabled = false;
             }
-            toolTip1.SetToolTip(this.button1, "Manual reload web part.");
+            toolTip1.SetToolTip(this.button1, "Manual reload web app.");
             toolTip1.SetToolTip(this.URLTEXT, "Main URL (can be manipulated but general no need for edit).");
         }
 
@@ -328,7 +322,6 @@ namespace matrix_engine {
 
             cmdLoader.txtBxStdin.Text = @"npm run host-for-gui";
             cmdLoader.btnSendStdinToProcess.PerformClick();
-
         }
 
         private void cdmStreamWizardloaded(object sender, EventArgs e) {
@@ -442,7 +435,7 @@ namespace matrix_engine {
         /// Also build res and used like free terminal!
         /// </summary>
         /// <param name="pid">Process ID.</param>
-        private static void KillProcessAndChildren(int pid) {
+        public static void KillProcessAndChildren(int pid) {
             // Cannot close 'system idle process'.
             if (pid == 0) {
                 return;
@@ -492,7 +485,6 @@ namespace matrix_engine {
 
         void OnProcessExit(object sender, EventArgs e) {
             killSubProcess();
-            // Console.WriteLine("I'm out of here!");
         }
 
         private void mATRIXTEXEDITORToolStripMenuItem_Click(object sender, EventArgs e) {
