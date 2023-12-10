@@ -44,7 +44,9 @@ namespace matrix_engine {
 
         public void NATIVE_EXE_DONE(object sender, EventArgs e) {
             // EXPORTS
-            MessageBox.Show("Windows desktop application builded [matrix-engine.exe]", "Matrix-engine native app builded.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Windows desktop application builded [matrix-engine.exe] successful.", "Matrix-engine native app builded.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            cmdKillerProc.BIGTEXT.Text = "Copying the new instance to the exports folder.";
+
             // test maybe baby
             cmdKillerProc.nativeExeBuild.TextChanged -= NATIVE_EXE_DONE;
 
@@ -82,6 +84,8 @@ namespace matrix_engine {
                 cmdKillerProc.btnSendStdinToProcess.PerformClick();
                 LAST_NATIVE_BUILD_CONFIG_PATH = APP_DIR_TEST_EXPORTS__;
                 packager.NATIVEBuildPATH.Text = LAST_NATIVE_BUILD_CONFIG_PATH;
+
+                cmdKillerProc.LINK.Text = "Saved in " + APP_DIR_TEST_EXPORTS__;
                 return;
             }
         }

@@ -231,5 +231,13 @@ namespace CmdWindowControlTestApp {
         private void killProc_Click(object sender, EventArgs e) {
             this.Hide();
         }
+
+        private void CLEAR_Click(object sender, EventArgs e) {
+            rtb.Text = "";
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            System.Windows.Forms.Clipboard.SetText(rtb.Text);
+        }
     }
 }
