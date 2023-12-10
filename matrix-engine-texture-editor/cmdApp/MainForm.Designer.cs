@@ -30,10 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
             this.nativeExeBuild = new System.Windows.Forms.TextBox();
             this.resultNpmI = new System.Windows.Forms.TextBox();
             this.resultEditor = new System.Windows.Forms.TextBox();
             this.killProc = new System.Windows.Forms.Button();
+            this.rtb = new CmdWindow.CmdWindowBoxSync();
             this.result = new System.Windows.Forms.TextBox();
             this.btnRunCommand = new System.Windows.Forms.Button();
             this.txtBxStdin = new System.Windows.Forms.TextBox();
@@ -49,9 +51,7 @@
             this.KILL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BIGTEXT = new System.Windows.Forms.Label();
-            this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.rtb = new CmdWindow.CmdWindowBoxSync();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -71,11 +71,22 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(785, 333);
+            this.groupBox3.Size = new System.Drawing.Size(785, 229);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // buildFinalVJS3
+            // 
+            this.buildFinalVJS3.BackColor = System.Drawing.Color.Black;
+            this.buildFinalVJS3.ForeColor = System.Drawing.Color.Lime;
+            this.buildFinalVJS3.Location = new System.Drawing.Point(544, 276);
+            this.buildFinalVJS3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.buildFinalVJS3.Name = "buildFinalVJS3";
+            this.buildFinalVJS3.Size = new System.Drawing.Size(133, 27);
+            this.buildFinalVJS3.TabIndex = 45;
+            this.toolTip.SetToolTip(this.buildFinalVJS3, "Text to send to the standard input stream of running process.");
             // 
             // nativeExeBuild
             // 
@@ -122,6 +133,23 @@
             this.killProc.Text = "HIDE";
             this.killProc.UseVisualStyleBackColor = true;
             this.killProc.Click += new System.EventHandler(this.killProc_Click);
+            // 
+            // rtb
+            // 
+            this.rtb.BackColor = System.Drawing.Color.Black;
+            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtb.ExecutingProcess = null;
+            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb.ForeColor = System.Drawing.Color.Lime;
+            this.rtb.IgnoreOutputTextMatchingLastInput = true;
+            this.rtb.Location = new System.Drawing.Point(5, 19);
+            this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.rtb.Multiline = true;
+            this.rtb.Name = "rtb";
+            this.rtb.Size = new System.Drawing.Size(772, 176);
+            this.rtb.TabIndex = 0;
+            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
+            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
             // 
             // result
             // 
@@ -288,17 +316,6 @@
             this.BIGTEXT.Size = new System.Drawing.Size(0, 22);
             this.BIGTEXT.TabIndex = 42;
             // 
-            // buildFinalVJS3
-            // 
-            this.buildFinalVJS3.BackColor = System.Drawing.Color.Black;
-            this.buildFinalVJS3.ForeColor = System.Drawing.Color.Lime;
-            this.buildFinalVJS3.Location = new System.Drawing.Point(544, 276);
-            this.buildFinalVJS3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.buildFinalVJS3.Name = "buildFinalVJS3";
-            this.buildFinalVJS3.Size = new System.Drawing.Size(133, 27);
-            this.buildFinalVJS3.TabIndex = 45;
-            this.toolTip.SetToolTip(this.buildFinalVJS3, "Text to send to the standard input stream of running process.");
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -310,29 +327,12 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "WAIT FOR LINK";
             // 
-            // rtb
-            // 
-            this.rtb.BackColor = System.Drawing.Color.Black;
-            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb.ExecutingProcess = null;
-            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb.ForeColor = System.Drawing.Color.Lime;
-            this.rtb.IgnoreOutputTextMatchingLastInput = true;
-            this.rtb.Location = new System.Drawing.Point(5, 19);
-            this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rtb.Multiline = true;
-            this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(772, 176);
-            this.rtb.TabIndex = 0;
-            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
-            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1293, 487);
+            this.ClientSize = new System.Drawing.Size(1124, 233);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.BIGTEXT);
             this.Controls.Add(this.panel1);

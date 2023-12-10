@@ -110,41 +110,38 @@ namespace matrix_engine {
         }
 
         private void runLastNATIVEBuildBtn_Click(object sender, EventArgs e) {
-            if (NATIVEBuildPATH.Text == "") return;
+            if (NATIVEBuildPATH.Text == "" || MAINFORM.cmdKillerProc == null) {
+                MessageBox.Show("No NATIVEBuildPATH or cmdKillerProc = null ");
+                return;
+            }
             // RUNNING
-            // MAINFORM.cmdKillerProc.Close();
-            // MAINFORM.cmdKillerProc.Dispose();
-            // MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
             MAINFORM.cmdKillerProc.Show();
-
             MAINFORM.cmdKillerProc.txtBxStdin.Text = @"c:";
             MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
-
             MAINFORM.cmdKillerProc.txtBxStdin.Text = @"cd " + NATIVEBuildPATH.Text;
             MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
-
             // This is PUBLIC FOLDER 
-            // C:\Users\Nikola Lukic\AppData\Roaming\matrix-texture-tool\matrixengine\matrix-engine\public
             var APP_DIR = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             APP_DIR = APP_DIR + @"\public";
             // MessageBox.Show(APP_DIR);
-
             if (isSelfHost.Checked) {
                 APP_DIR = "http://localhost";
-                MAINFORM.cmdKillerProc.txtBxStdin.Text = "matrix-engine.exe url=http://localhost"; //  + APP_DIR;
+                MAINFORM.cmdKillerProc.txtBxStdin.Text = "matrix-engine.exe url=http://localhost/public/gui.html";
             } else {
                 MAINFORM.cmdKillerProc.txtBxStdin.Text = "matrix-engine.exe url=\"" + APP_DIR + "\"";
             }
-
-            // MAINFORM.cmdKillerProc.txtBxStdin.Text = "matrix-engine.exe url=\"" + APP_DIR + "\"";
             MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
             MAINFORM.cmdKillerProc.BIGTEXT.Text = "Running native desktop matrix-engine.exe ...";
         }
 
         private void isSelfHost_CheckedChanged(object sender, EventArgs e) {
-            var APP_DIRINFLY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            var APP_DIRINFLY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine";
             if (isSelfHost.Checked) {
                 HOST_LOCALHOST = new CmdWindowControlTestApp.MainForm();
+                // this is http server only for package LOCALHOST STATUS
+                // Final web app path is your job. You need to have public web server for hosting!
+                // ME and ME GUI will create final html/js/css [ecma6]
+                HOST_LOCALHOST.preventSignalForHost = true;
                 HOST_LOCALHOST.Show();
                 HOST_LOCALHOST.txtBxStdin.Text = @"c:";
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
@@ -155,6 +152,9 @@ namespace matrix_engine {
             } else {
                 // checkedthecheckbox = false;
                 KillProcessAndChildren(HOST_LOCALHOST._PID_);
+                // test
+                HOST_LOCALHOST.Close();
+                HOST_LOCALHOST.Dispose();
             }
         }
 

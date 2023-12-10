@@ -41,6 +41,8 @@ namespace CmdWindowControlTestApp {
         public Process runningProcess;
         public int _PID_;
 
+        public Boolean preventSignalForHost = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
@@ -187,6 +189,9 @@ namespace CmdWindowControlTestApp {
             Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
             if (text.Contains("http://127.0.0.1")) {
                 // text = text.Replace("http://127.0.0.1", "http://localhost");
+                if (preventSignalForHost == true) {
+                    return;
+                }
                 text = text.Replace("  ", "");
                 result.Text = text;
             } else if (text.Contains("my software")) {
