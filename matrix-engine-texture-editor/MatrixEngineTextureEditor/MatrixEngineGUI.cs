@@ -72,7 +72,7 @@ namespace matrix_engine {
             }
 
             if (File.Exists(APP_NATIVEPATHFILE)) {
-                MessageBox.Show("Native build exist, nice!");
+                // MessageBox.Show("Native build exist, nice!");
                 var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "win-desktop";
                 if (Directory.Exists(APP_DIR_TEST_EXPORTS__) == false) {
                     Directory.CreateDirectory(APP_DIR_TEST_EXPORTS__);
@@ -185,6 +185,9 @@ namespace matrix_engine {
         private void chromiumWebBrowser1_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) {}
 
         public void buildRes() {
+            if (cmdKillerProc == null) {
+                cmdKillerProc = new CmdWindowControlTestApp.MainForm();
+            }
             cmdKillerProc.Show();
             cmdKillerProc.txtBxStdin.Text = @"c:";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
@@ -217,10 +220,33 @@ namespace matrix_engine {
         }
 
         public void BUILD_VJS3_FINAL(object sender, EventArgs e) {
-            // MessageBox.Show("Final build finished! Nice.", "Matrix-engine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Final build for canvas2d code finished! Nice.", "Matrix-engine GUI editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // statusBuildVJS3
             packager.statusBuildVJS3.Text = "Build done.";
             packager.statusBuildVJS3.ForeColor = Color.Green;
+
+            // test
+            var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            if (Directory.Exists(APP_DIR_TEST) == false) {
+                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                return;
+            }
+            cmdKillerProc.txtBxStdin.Text = @"c:";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            APP_DIR_TEST = APP_DIR_TEST + "2DTextureEditor";
+            cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR_TEST;
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            /////
+            ///
+            var APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
+            if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) { Directory.CreateDirectory(APP_DIR_TEST_EXPORTS); }
+              var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "2dcanvas";
+                 //
+            cmdKillerProc.txtBxStdin.Text = "xcopy /e /k /h /i \"" + APP_DIR_TEST + "\" \"" + APP_DIR_TEST_EXPORTS__ + "\\" + "\"";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            packager.webAppExportPath.Text = APP_DIR_TEST_EXPORTS__;
+
+            //
         }
 
         public void fixPaths() {

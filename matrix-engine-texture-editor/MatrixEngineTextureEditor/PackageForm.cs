@@ -18,6 +18,7 @@ namespace matrix_engine {
         public string APP_DIR_TEST;
         public string APP_DIR_TEST_EXPORTS;
         public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
+        private string TEXT_NOLIB = "No dep library exist, please install deps.";
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST; 
 
         public PackageForm(MatrixEngineGUI MAIN) {
@@ -25,14 +26,14 @@ namespace matrix_engine {
             MAINFORM = MAIN;
             APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 return;
             }
 
             // Environment.SpecialFolder.Desktop
             APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
             if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 Directory.CreateDirectory(APP_DIR_TEST_EXPORTS);
             }
             // APP_DIR_TEST_EXPORTS
@@ -42,7 +43,7 @@ namespace matrix_engine {
         private void BuildForHybrid_Click(object sender, EventArgs e) {
             APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -92,7 +93,7 @@ namespace matrix_engine {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            Process.Start(APP_DIR_TEST_EXPORTS);
+            Process.Start(webAppExportPath.Text.ToString());
         }
 
         private void button1_Click_1(object sender, EventArgs e) {
@@ -147,7 +148,7 @@ namespace matrix_engine {
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
                 HOST_LOCALHOST.txtBxStdin.Text = @"cd " + APP_DIRINFLY;
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
-                HOST_LOCALHOST.txtBxStdin.Text = @"http-server -p " + HOSTPORT.Text;
+                HOST_LOCALHOST.txtBxStdin.Text = @"http-server ./ -p " + HOSTPORT.Text; // + " -d true";
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
             } else {
                 // checkedthecheckbox = false;
@@ -181,6 +182,14 @@ namespace matrix_engine {
                 // Process already exited.
             }
         }
+        private void openfolderNative_Click(object sender, EventArgs e) {
+            Process.Start(NATIVEBuildPATH.Text.ToString());
+        }
 
+        private void runInChrome_Click(object sender, EventArgs e) {
+            var t = "\"" + webAppExportPath.Text.ToString() +"\"";
+            Process.Start("chrome.exe", t);
+            // Process.Start("chrome.exe", "http://www.YourUrl.com");
+        }
     }
 }
