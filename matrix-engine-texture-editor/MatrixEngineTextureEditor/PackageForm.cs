@@ -19,7 +19,8 @@ namespace matrix_engine {
         public string APP_DIR_TEST_EXPORTS;
         public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
         private string TEXT_NOLIB = "No dep library exist, please install deps.";
-        CmdWindowControlTestApp.MainForm HOST_LOCALHOST; 
+        CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
+        CmdWindowControlTestApp.Android ANDROID_CMD;
 
         public PackageForm(MatrixEngineGUI MAIN) {
             InitializeComponent();
@@ -47,15 +48,17 @@ namespace matrix_engine {
                 return;
             }
 
-            if (MAINFORM.cmdKillerProc == null) {
+            if (MAINFORM.cmdKillerProc == null || MAINFORM.cmdKillerProc.IsDisposed == true) {
                 MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
                 MAINFORM.cmdKillerProc.Load += MAINFORM.cmdKillerLoader;
+
+                MAINFORM.cmdKillerProc.TransparencyKey = Color.Turquoise;
+                MAINFORM.cmdKillerProc.BackColor = Color.Turquoise;
                 // MessageBox.Show("No project started. ", "Matrix-engine error msg.", MessageBoxButtons.OK);
-                // return;
             }
 
-            var APP_NATIVEPATH = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\";
-            var APP_NATIVEPATHFILE = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\matrix-engine.exe";
+            // var APP_NATIVEPATH = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\";
+            // var APP_NATIVEPATHFILE = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\matrix-engine.exe";
 
             MAINFORM.cmdKillerProc.nativeExeBuild.TextChanged += MAINFORM.NATIVE_EXE_DONE;
 
@@ -66,7 +69,10 @@ namespace matrix_engine {
             MAINFORM.cmdKillerProc.txtBxStdin.Text = @"c:";
             MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
 
-            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR_TEST; // + @"\2DTextureEditor";
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR_TEST;
+            MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"npm run build.gui.app";
             MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
 
             MAINFORM.cmdKillerProc.txtBxStdin.Text = @"desktop-build.bat";
@@ -85,6 +91,7 @@ namespace matrix_engine {
             Thread.Sleep(1000);
             MAINFORM.cmdKillerProc.BIGTEXT.Text = "Build final visual.js file and prepare HTML page!";
             MAINFORM.cmdKillerProc.buildFinalVJS3.TextChanged += MAINFORM.BUILD_VJS3_FINAL;
+            MAINFORM.cmdKillerProc.exported2d.TextChanged += MAINFORM.WEB2DEXPORT_READY;
             MAINFORM.buildFinalVisualJS();
         }
 
@@ -112,7 +119,7 @@ namespace matrix_engine {
 
         private void runLastNATIVEBuildBtn_Click(object sender, EventArgs e) {
             if (NATIVEBuildPATH.Text == "" || MAINFORM.cmdKillerProc == null) {
-                MessageBox.Show("No NATIVEBuildPATH or cmdKillerProc = null ");
+                MessageBox.Show("No actual build.");
                 return;
             }
             // RUNNING
@@ -183,13 +190,59 @@ namespace matrix_engine {
             }
         }
         private void openfolderNative_Click(object sender, EventArgs e) {
-            Process.Start(NATIVEBuildPATH.Text.ToString());
+            try {
+                Process.Start(NATIVEBuildPATH.Text.ToString());
+            } catch (Exception err) { }
         }
 
         private void runInChrome_Click(object sender, EventArgs e) {
-            var t = "\"" + webAppExportPath.Text.ToString() +"\"";
+            var t = "\"" + webAppExportPath.Text.ToString() + "\\GUI.html" + "\"";
             Process.Start("chrome.exe", t);
             // Process.Start("chrome.exe", "http://www.YourUrl.com");
+        }
+
+        private void runInFF_Click(object sender, EventArgs e) {
+            var t = "\"" + webAppExportPath.Text.ToString() + "\\GUI.html" + "\"";
+            Process.Start("firefox.exe", t);
+        }
+
+        private void runInOpera_Click(object sender, EventArgs e) {
+            var t = "\"" + webAppExportPath.Text.ToString() + "\\GUI.html" + "\"";
+            Process.Start("opera.exe", t);
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            var t = "\"" + webAppExportPath.Text.ToString() + "\\GUI.html" + "\"";
+            Process.Start("msedge.exe", t);
+        }
+
+        private void buildForAndroid_Click(object sender, EventArgs e) {
+            var APP_DIRINFLY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine";
+
+            // "cd ~/Android/Sdk/tools/bin && ./avdmanager list avd"
+            ANDROID_CMD = new CmdWindowControlTestApp.Android();
+            ANDROID_CMD.Show();
+            // ANDROID_CMD.txtBxStdin.Text = @"c:";
+            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            ANDROID_CMD.txtBxStdin.Text = ANDROIDSDKPATH.Text.ToString()[0] + ":";
+            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+
+            ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROIDSDKPATH.Text.ToString();
+            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            // List devices:
+            // ANDROID_CMD.txtBxStdin.Text = @"cd tools/bin && avdmanager.bat list avd";
+            // ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -avd pixel_7_pro";
+            ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -list-avds";
+            // 7.6_Fold-in_with_outer_display_API_30
+            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+        }
+
+        private void ANDROIDSDKPATH_TextChanged(object sender, EventArgs e) {
+
+        }
+
+        private void setAndroidSDKBtn_Click(object sender, EventArgs e) {
+
         }
     }
 }

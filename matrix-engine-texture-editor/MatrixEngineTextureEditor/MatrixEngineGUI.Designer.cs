@@ -41,6 +41,8 @@ namespace matrix_engine
             this.killAllNodeOnMyComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeFinalPackageAndExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cLEARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eXPORTSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nodeWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,8 +128,9 @@ namespace matrix_engine
             this.newProjectToolStripMenuItem,
             this.loadProjectToolStripMenuItem,
             this.stopEditorToolStripMenuItem,
-            this.killAllNodeOnMyComputerToolStripMenuItem,
             this.makeFinalPackageAndExportToolStripMenuItem,
+            this.cLEARToolStripMenuItem,
+            this.killAllNodeOnMyComputerToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.startToolStripMenuItem.Name = "startToolStripMenuItem";
             this.startToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
@@ -160,6 +163,7 @@ namespace matrix_engine
             // 
             // killAllNodeOnMyComputerToolStripMenuItem
             // 
+            this.killAllNodeOnMyComputerToolStripMenuItem.Enabled = false;
             this.killAllNodeOnMyComputerToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.warning;
             this.killAllNodeOnMyComputerToolStripMenuItem.Name = "killAllNodeOnMyComputerToolStripMenuItem";
             this.killAllNodeOnMyComputerToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
@@ -181,6 +185,22 @@ namespace matrix_engine
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.exitToolStripMenuItem.Text = "&&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // cLEARToolStripMenuItem
+            // 
+            this.cLEARToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eXPORTSToolStripMenuItem});
+            this.cLEARToolStripMenuItem.Name = "cLEARToolStripMenuItem";
+            this.cLEARToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.cLEARToolStripMenuItem.Text = "Clear";
+            // 
+            // eXPORTSToolStripMenuItem
+            // 
+            this.eXPORTSToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.warning;
+            this.eXPORTSToolStripMenuItem.Name = "eXPORTSToolStripMenuItem";
+            this.eXPORTSToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.eXPORTSToolStripMenuItem.Text = "All Exports packs";
+            this.eXPORTSToolStripMenuItem.Click += new System.EventHandler(this.eXPORTSToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem
             // 
@@ -494,6 +514,8 @@ namespace matrix_engine
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem makeFinalPackageAndExportToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem stopEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cLEARToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eXPORTSToolStripMenuItem;
     }
 }
 

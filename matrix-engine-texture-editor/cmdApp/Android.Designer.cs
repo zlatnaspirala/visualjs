@@ -1,6 +1,6 @@
 ﻿namespace CmdWindowControlTestApp
 {
-    partial class MainForm
+    partial class Android
     {
         /// <summary>
         /// Required designer variable.
@@ -54,14 +54,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.BIGTEXT = new System.Windows.Forms.Label();
             this.LINK = new System.Windows.Forms.LinkLabel();
-            this.exported2d = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.exported2d);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.CLEAR);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
@@ -77,7 +77,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(785, 331);
+            this.groupBox3.Size = new System.Drawing.Size(785, 203);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
@@ -358,19 +358,24 @@
             this.LINK.Size = new System.Drawing.Size(0, 16);
             this.LINK.TabIndex = 43;
             // 
-            // exported2d
+            // pictureBox1
             // 
-            this.exported2d.Location = new System.Drawing.Point(699, 284);
-            this.exported2d.Name = "exported2d";
-            this.exported2d.Size = new System.Drawing.Size(100, 27);
-            this.exported2d.TabIndex = 48;
+            this.pictureBox1.BackgroundImage = global::CommandWindowControlTestApp.Properties.Resources._64x64;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(1146, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 75);
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
             // 
-            // MainForm
+            // Android
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1238, 339);
+            this.ClientSize = new System.Drawing.Size(1238, 199);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LINK);
             this.Controls.Add(this.BIGTEXT);
             this.Controls.Add(this.panel1);
@@ -379,15 +384,16 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.Name = "MainForm";
+            this.Name = "Android";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Android_FormClosing);
+            this.Load += new System.EventHandler(this.Android_Load);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,7 +425,7 @@
         public System.Windows.Forms.LinkLabel LINK;
         public System.Windows.Forms.Button CLEAR;
         public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.TextBox exported2d;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
