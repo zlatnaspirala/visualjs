@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.LINK = new System.Windows.Forms.LinkLabel();
+            this.exported2d = new System.Windows.Forms.TextBox();
+            this.BIGTEXT = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.CLEAR = new System.Windows.Forms.Button();
             this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
@@ -52,16 +55,15 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.KILL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BIGTEXT = new System.Windows.Forms.Label();
-            this.LINK = new System.Windows.Forms.LinkLabel();
-            this.exported2d = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.LINK);
             this.groupBox3.Controls.Add(this.exported2d);
+            this.groupBox3.Controls.Add(this.BIGTEXT);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.CLEAR);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
@@ -77,17 +79,44 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(785, 331);
+            this.groupBox3.Size = new System.Drawing.Size(789, 204);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // LINK
+            // 
+            this.LINK.AutoSize = true;
+            this.LINK.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LINK.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.LINK.Location = new System.Drawing.Point(11, 181);
+            this.LINK.Name = "LINK";
+            this.LINK.Size = new System.Drawing.Size(0, 16);
+            this.LINK.TabIndex = 43;
+            // 
+            // exported2d
+            // 
+            this.exported2d.Location = new System.Drawing.Point(699, 276);
+            this.exported2d.Name = "exported2d";
+            this.exported2d.Size = new System.Drawing.Size(100, 27);
+            this.exported2d.TabIndex = 48;
+            // 
+            // BIGTEXT
+            // 
+            this.BIGTEXT.AutoSize = true;
+            this.BIGTEXT.Font = new System.Drawing.Font("Orbitron", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BIGTEXT.ForeColor = System.Drawing.Color.OrangeRed;
+            this.BIGTEXT.Location = new System.Drawing.Point(11, 159);
+            this.BIGTEXT.Name = "BIGTEXT";
+            this.BIGTEXT.Size = new System.Drawing.Size(0, 18);
+            this.BIGTEXT.TabIndex = 42;
+            // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(456, 170);
+            this.button1.Location = new System.Drawing.Point(456, 147);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -100,7 +129,7 @@
             // 
             this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(566, 170);
+            this.CLEAR.Location = new System.Drawing.Point(566, 147);
             this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.CLEAR.Name = "CLEAR";
             this.CLEAR.Size = new System.Drawing.Size(100, 27);
@@ -116,7 +145,7 @@
             this.buildFinalVJS3.Location = new System.Drawing.Point(544, 276);
             this.buildFinalVJS3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buildFinalVJS3.Name = "buildFinalVJS3";
-            this.buildFinalVJS3.Size = new System.Drawing.Size(133, 27);
+            this.buildFinalVJS3.Size = new System.Drawing.Size(145, 27);
             this.buildFinalVJS3.TabIndex = 45;
             this.toolTip.SetToolTip(this.buildFinalVJS3, "Text to send to the standard input stream of running process.");
             // 
@@ -157,7 +186,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(676, 170);
+            this.killProc.Location = new System.Drawing.Point(676, 147);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -174,11 +203,11 @@
             this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb.ForeColor = System.Drawing.Color.Lime;
             this.rtb.IgnoreOutputTextMatchingLastInput = true;
-            this.rtb.Location = new System.Drawing.Point(5, 19);
+            this.rtb.Location = new System.Drawing.Point(5, 18);
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(772, 151);
+            this.rtb.Size = new System.Drawing.Size(772, 122);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
@@ -338,58 +367,30 @@
             this.panel1.Size = new System.Drawing.Size(378, 307);
             this.panel1.TabIndex = 41;
             // 
-            // BIGTEXT
-            // 
-            this.BIGTEXT.AutoSize = true;
-            this.BIGTEXT.Font = new System.Drawing.Font("Orbitron", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BIGTEXT.ForeColor = System.Drawing.Color.OrangeRed;
-            this.BIGTEXT.Location = new System.Drawing.Point(803, 96);
-            this.BIGTEXT.Name = "BIGTEXT";
-            this.BIGTEXT.Size = new System.Drawing.Size(0, 18);
-            this.BIGTEXT.TabIndex = 42;
-            // 
-            // LINK
-            // 
-            this.LINK.AutoSize = true;
-            this.LINK.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LINK.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.LINK.Location = new System.Drawing.Point(803, 146);
-            this.LINK.Name = "LINK";
-            this.LINK.Size = new System.Drawing.Size(0, 16);
-            this.LINK.TabIndex = 43;
-            // 
-            // exported2d
-            // 
-            this.exported2d.Location = new System.Drawing.Point(699, 284);
-            this.exported2d.Name = "exported2d";
-            this.exported2d.Size = new System.Drawing.Size(100, 27);
-            this.exported2d.TabIndex = 48;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1238, 339);
-            this.Controls.Add(this.LINK);
-            this.Controls.Add(this.BIGTEXT);
+            this.ClientSize = new System.Drawing.Size(824, 206);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseMove);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,9 @@ namespace matrix_engine {
         private string TEXT_NOLIB = "No dep library exist, please install deps.";
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
         CmdWindowControlTestApp.Android ANDROID_CMD;
+
+        // dev
+        private RegistryKey key;
 
         public PackageForm(MatrixEngineGUI MAIN) {
             InitializeComponent();
@@ -96,7 +100,17 @@ namespace matrix_engine {
         }
 
         private void PackageForm_Load(object sender, EventArgs e) {
-
+            // GUI CACHE MEMORY
+            if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE") == null) {
+                key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE");
+                key.SetValue("androidSDKPath", "yes");
+                // key.SetValue("app.dir", APP_DIR);
+                key.Close();
+            } else {
+                key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+                ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
+                key.Close();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -218,31 +232,50 @@ namespace matrix_engine {
 
         private void buildForAndroid_Click(object sender, EventArgs e) {
             var APP_DIRINFLY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine";
-
             // "cd ~/Android/Sdk/tools/bin && ./avdmanager list avd"
             ANDROID_CMD = new CmdWindowControlTestApp.Android();
             ANDROID_CMD.Show();
             // ANDROID_CMD.txtBxStdin.Text = @"c:";
-            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            
             ANDROID_CMD.txtBxStdin.Text = ANDROIDSDKPATH.Text.ToString()[0] + ":";
             ANDROID_CMD.btnSendStdinToProcess.PerformClick();
 
             ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROIDSDKPATH.Text.ToString();
             ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+
+            // >>>>  $ANDROID_SDK_HOME/.android/avd/
+            // C:\Users\Nikola Lukic\.android\avd
+            var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
+            if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
+                // ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROID_AVD_FILES_PATH;
+                ANDROID_CMD.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH.ToString() + "\"";
+                ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            }
+            
+
             // List devices:
-            // ANDROID_CMD.txtBxStdin.Text = @"cd tools/bin && avdmanager.bat list avd";
-            // ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -avd pixel_7_pro";
-            ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -list-avds";
-            // 7.6_Fold-in_with_outer_display_API_30
+            // ANDROID_CMD.txtBxStdin.Text = @"cd tools/bin && avdmanager.bat list device";
+            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            ANDROID_CMD.txtBxStdin.Text = @"cd emulator && emulator -list-avds";
             ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            // pixel_xl
+            ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
+            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            // -list-avds
+            // ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -list-avds";
+            // 7.6_Fold-in_with_outer_display_API_30
+            // 7.6_Fold-in_with_outer_display_API_30
+
         }
 
         private void ANDROIDSDKPATH_TextChanged(object sender, EventArgs e) {
-
+            // 
         }
 
         private void setAndroidSDKBtn_Click(object sender, EventArgs e) {
-
+            key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+            key.SetValue("androidSDKPath", ANDROIDSDKPATH.Text);
+            key.Close();
         }
     }
 }
