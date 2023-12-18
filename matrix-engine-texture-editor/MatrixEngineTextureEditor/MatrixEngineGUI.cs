@@ -159,10 +159,10 @@ namespace matrix_engine {
             scriptGUIEditor.cmdVJS3WATCH = cmdVJS3WATCH;
 
             // test
-            scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
+            /*scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
             scriptGUIEditor3d.Show();
             scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
-            scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;*/
             // scriptGUIEditor3d.cmdVJS3WATCH = cmdVJS3WATCH;
 
             // Res
@@ -731,8 +731,7 @@ namespace matrix_engine {
         }
 
         private void resourcesToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (resForm != null && resForm.IsDisposed == false) {
-                // resForm.Show();
+            if (resForm != null) {
                 Y_POS = resForm.Location.Y;
                 timer1.Start();
             }

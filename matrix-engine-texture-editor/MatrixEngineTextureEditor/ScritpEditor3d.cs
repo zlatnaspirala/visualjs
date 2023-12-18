@@ -20,6 +20,7 @@ namespace matrix_engine {
             InitializeComponent();
             // APP_DIR - p APP_NAME
             PATH = P + "\\.js";
+            // ERROR PATH
             StreamReader sr = new StreamReader(PATH);
             CODE_EDITOR.Text = sr.ReadToEnd().ToString();
             sr.Close();

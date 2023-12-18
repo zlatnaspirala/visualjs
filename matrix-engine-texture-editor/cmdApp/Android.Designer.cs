@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.killProc = new System.Windows.Forms.Button();
             this.CLEAR = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.rtb = new CmdWindow.CmdWindowBoxSync();
             this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
             this.nativeExeBuild = new System.Windows.Forms.TextBox();
             this.resultNpmI = new System.Windows.Forms.TextBox();
             this.resultEditor = new System.Windows.Forms.TextBox();
-            this.killProc = new System.Windows.Forms.Button();
-            this.rtb = new CmdWindow.CmdWindowBoxSync();
             this.result = new System.Windows.Forms.TextBox();
             this.btnRunCommand = new System.Windows.Forms.Button();
             this.txtBxStdin = new System.Windows.Forms.TextBox();
@@ -71,24 +71,49 @@
             this.groupBox3.Controls.Add(this.resultNpmI);
             this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.result);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.Lime;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(1238, 397);
+            this.groupBox3.Size = new System.Drawing.Size(1238, 218);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
+            // killProc
+            // 
+            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.killProc.Location = new System.Drawing.Point(1101, 0);
+            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.killProc.Name = "killProc";
+            this.killProc.Size = new System.Drawing.Size(100, 27);
+            this.killProc.TabIndex = 41;
+            this.killProc.Text = "HIDE";
+            this.killProc.UseVisualStyleBackColor = true;
+            this.killProc.Click += new System.EventHandler(this.killProc_Click);
+            // 
+            // CLEAR
+            // 
+            this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CLEAR.Location = new System.Drawing.Point(991, 0);
+            this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.CLEAR.Name = "CLEAR";
+            this.CLEAR.Size = new System.Drawing.Size(100, 27);
+            this.CLEAR.TabIndex = 46;
+            this.CLEAR.Text = "CLEAR";
+            this.CLEAR.UseVisualStyleBackColor = true;
+            this.CLEAR.Click += new System.EventHandler(this.CLEAR_Click);
+            // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(434, 13);
+            this.button1.Location = new System.Drawing.Point(881, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -97,18 +122,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // CLEAR
+            // rtb
             // 
-            this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(544, 13);
-            this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.CLEAR.Name = "CLEAR";
-            this.CLEAR.Size = new System.Drawing.Size(100, 27);
-            this.CLEAR.TabIndex = 46;
-            this.CLEAR.Text = "CLEAR";
-            this.CLEAR.UseVisualStyleBackColor = true;
-            this.CLEAR.Click += new System.EventHandler(this.CLEAR_Click);
+            this.rtb.BackColor = System.Drawing.Color.Black;
+            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb.ExecutingProcess = null;
+            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb.ForeColor = System.Drawing.Color.Lime;
+            this.rtb.IgnoreOutputTextMatchingLastInput = true;
+            this.rtb.Location = new System.Drawing.Point(4, 23);
+            this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.rtb.Multiline = true;
+            this.rtb.Name = "rtb";
+            this.rtb.Size = new System.Drawing.Size(1230, 192);
+            this.rtb.TabIndex = 0;
+            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
+            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
             // 
             // buildFinalVJS3
             // 
@@ -153,37 +183,6 @@
             this.resultEditor.Size = new System.Drawing.Size(145, 27);
             this.resultEditor.TabIndex = 42;
             this.toolTip.SetToolTip(this.resultEditor, "Text to send to the standard input stream of running process.");
-            // 
-            // killProc
-            // 
-            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(654, 13);
-            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.killProc.Name = "killProc";
-            this.killProc.Size = new System.Drawing.Size(100, 27);
-            this.killProc.TabIndex = 41;
-            this.killProc.Text = "HIDE";
-            this.killProc.UseVisualStyleBackColor = true;
-            this.killProc.Click += new System.EventHandler(this.killProc_Click);
-            // 
-            // rtb
-            // 
-            this.rtb.BackColor = System.Drawing.Color.Black;
-            this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb.ExecutingProcess = null;
-            this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtb.ForeColor = System.Drawing.Color.Lime;
-            this.rtb.IgnoreOutputTextMatchingLastInput = true;
-            this.rtb.Location = new System.Drawing.Point(4, 23);
-            this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rtb.Multiline = true;
-            this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1230, 371);
-            this.rtb.TabIndex = 0;
-            this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
-            this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
             // 
             // result
             // 
@@ -376,7 +375,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1238, 397);
+            this.ClientSize = new System.Drawing.Size(1238, 534);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LINK);

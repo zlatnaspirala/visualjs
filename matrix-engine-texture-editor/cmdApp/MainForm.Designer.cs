@@ -62,24 +62,25 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.LINK);
-            this.groupBox3.Controls.Add(this.exported2d);
             this.groupBox3.Controls.Add(this.BIGTEXT);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.CLEAR);
+            this.groupBox3.Controls.Add(this.killProc);
+            this.groupBox3.Controls.Add(this.rtb);
+            this.groupBox3.Controls.Add(this.result);
+            this.groupBox3.Controls.Add(this.exported2d);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
             this.groupBox3.Controls.Add(this.nativeExeBuild);
             this.groupBox3.Controls.Add(this.resultNpmI);
             this.groupBox3.Controls.Add(this.resultEditor);
-            this.groupBox3.Controls.Add(this.killProc);
-            this.groupBox3.Controls.Add(this.rtb);
-            this.groupBox3.Controls.Add(this.result);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.Lime;
-            this.groupBox3.Location = new System.Drawing.Point(1, -4);
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(789, 204);
+            this.groupBox3.Size = new System.Drawing.Size(843, 362);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
@@ -97,7 +98,7 @@
             // 
             // exported2d
             // 
-            this.exported2d.Location = new System.Drawing.Point(699, 276);
+            this.exported2d.Location = new System.Drawing.Point(694, 307);
             this.exported2d.Name = "exported2d";
             this.exported2d.Size = new System.Drawing.Size(100, 27);
             this.exported2d.TabIndex = 48;
@@ -116,7 +117,7 @@
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(456, 147);
+            this.button1.Location = new System.Drawing.Point(369, 16);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -129,7 +130,7 @@
             // 
             this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(566, 147);
+            this.CLEAR.Location = new System.Drawing.Point(479, 16);
             this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.CLEAR.Name = "CLEAR";
             this.CLEAR.Size = new System.Drawing.Size(100, 27);
@@ -142,7 +143,7 @@
             // 
             this.buildFinalVJS3.BackColor = System.Drawing.Color.Black;
             this.buildFinalVJS3.ForeColor = System.Drawing.Color.Lime;
-            this.buildFinalVJS3.Location = new System.Drawing.Point(544, 276);
+            this.buildFinalVJS3.Location = new System.Drawing.Point(539, 307);
             this.buildFinalVJS3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.buildFinalVJS3.Name = "buildFinalVJS3";
             this.buildFinalVJS3.Size = new System.Drawing.Size(145, 27);
@@ -153,7 +154,7 @@
             // 
             this.nativeExeBuild.BackColor = System.Drawing.Color.Black;
             this.nativeExeBuild.ForeColor = System.Drawing.Color.Lime;
-            this.nativeExeBuild.Location = new System.Drawing.Point(401, 276);
+            this.nativeExeBuild.Location = new System.Drawing.Point(396, 307);
             this.nativeExeBuild.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.nativeExeBuild.Name = "nativeExeBuild";
             this.nativeExeBuild.Size = new System.Drawing.Size(133, 27);
@@ -164,7 +165,7 @@
             // 
             this.resultNpmI.BackColor = System.Drawing.Color.Black;
             this.resultNpmI.ForeColor = System.Drawing.Color.Lime;
-            this.resultNpmI.Location = new System.Drawing.Point(699, 242);
+            this.resultNpmI.Location = new System.Drawing.Point(694, 273);
             this.resultNpmI.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.resultNpmI.Name = "resultNpmI";
             this.resultNpmI.Size = new System.Drawing.Size(91, 27);
@@ -175,7 +176,7 @@
             // 
             this.resultEditor.BackColor = System.Drawing.Color.Black;
             this.resultEditor.ForeColor = System.Drawing.Color.Lime;
-            this.resultEditor.Location = new System.Drawing.Point(544, 242);
+            this.resultEditor.Location = new System.Drawing.Point(539, 273);
             this.resultEditor.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.resultEditor.Name = "resultEditor";
             this.resultEditor.Size = new System.Drawing.Size(145, 27);
@@ -186,7 +187,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(676, 147);
+            this.killProc.Location = new System.Drawing.Point(589, 16);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -203,11 +204,11 @@
             this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb.ForeColor = System.Drawing.Color.Lime;
             this.rtb.IgnoreOutputTextMatchingLastInput = true;
-            this.rtb.Location = new System.Drawing.Point(5, 18);
+            this.rtb.Location = new System.Drawing.Point(4, 34);
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(772, 122);
+            this.rtb.Size = new System.Drawing.Size(772, 223);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
@@ -216,7 +217,7 @@
             // 
             this.result.BackColor = System.Drawing.Color.Black;
             this.result.ForeColor = System.Drawing.Color.Lime;
-            this.result.Location = new System.Drawing.Point(401, 242);
+            this.result.Location = new System.Drawing.Point(396, 273);
             this.result.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(133, 27);
@@ -372,9 +373,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(824, 206);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(843, 362);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

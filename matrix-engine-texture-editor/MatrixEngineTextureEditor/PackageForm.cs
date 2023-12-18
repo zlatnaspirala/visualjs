@@ -22,6 +22,7 @@ namespace matrix_engine {
         private string TEXT_NOLIB = "No dep library exist, please install deps.";
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
         CmdWindowControlTestApp.Android ANDROID_CMD;
+        CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
 
         // dev
         private RegistryKey key;
@@ -111,6 +112,16 @@ namespace matrix_engine {
                 ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
                 key.Close();
             }
+
+            var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
+            if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
+                var ANDROID_CMD_LOCAL = new CmdWindowControlTestApp.Android();
+                ANDROID_CMD_LOCAL.Show();
+                ANDROID_CMD_LOCAL.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH.ToString() + "\"";
+                ANDROID_CMD_LOCAL.btnSendStdinToProcess.PerformClick();
+                ANDROID_CMD_LOCAL.Hide();
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -231,36 +242,82 @@ namespace matrix_engine {
         }
 
         private void buildForAndroid_Click(object sender, EventArgs e) {
+            if (Directory.Exists(ANDROIDSDKPATH.Text.ToString()) != true || ANDROIDSDKPATH.Text.ToString() == "") {
+                MessageBox.Show("Please set ANDROID SDK Path !");
+                return;
+            }
+
             var APP_DIRINFLY = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine";
             // "cd ~/Android/Sdk/tools/bin && ./avdmanager list avd"
             ANDROID_CMD = new CmdWindowControlTestApp.Android();
             ANDROID_CMD.Show();
-            // ANDROID_CMD.txtBxStdin.Text = @"c:";
-            
-            ANDROID_CMD.txtBxStdin.Text = ANDROIDSDKPATH.Text.ToString()[0] + ":";
-            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
 
-            ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROIDSDKPATH.Text.ToString();
-            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            ANDROID_CMD.txtBxCmd.Text = "emulator.exe";
+            ANDROID_CMD.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/emulator";
+            ANDROID_CMD.txtBxArgs.Text = "-list-avds";
+            ANDROID_CMD.btnRunCommand.PerformClick();
+
+            //  HARDCODE for now Pixel_7_Pro_API_30
+            ANDROID_CMD.txtBxArgs.Text = "-avd " + "Pixel_7_Pro_API_30";
+            ANDROID_CMD.btnRunCommand.PerformClick();
+
+            // Thread.Sleep(5000);
+            // I DONT KNOW HOW ADB KNOWS PATH OF MY PROJECT - IT IS A PROBLEM IF 
+            // ANDROID STUDIO SAVE DEFAULT OR LAST OPENED PROJECT - works for now
+            ANDROID_CMD_ADB = new CmdWindowControlTestApp.Android();
+            ANDROID_CMD_ADB.Show();
+            ANDROID_CMD_ADB.txtBxCmd.Text = "adb.exe";
+            ANDROID_CMD_ADB.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
+            ANDROID_CMD_ADB.txtBxArgs.Text = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity";
+            ANDROID_CMD_ADB.btnRunCommand.PerformClick();
+
+            // ANDROID_CMD.txtBxArgs.Text = "-avd ";
+            // ANDROID_CMD.btnRunCommand.PerformClick();            
+            // H:\system-support\android-sdk\platform-tools
+            // ANDROID_CMD.txtBxCmd.Text = "adb.exe";
+            // ANDROID_CMD.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            // ANDROID_CMD.txtBxArgs.Text = "devices";
+            // ANDROID_CMD.btnRunCommand.PerformClick();
+            // ANDROID_CMD.txtBxStdin.Text = @"c:";
+            // ANDROID_CMD.txtBxStdin.Text = ANDROIDSDKPATH.Text.ToString()[0] + ":";
+            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            //  ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROIDSDKPATH.Text.ToString();
+            //  ANDROID_CMD.btnSendStdinToProcess.PerformClick();
 
             // >>>>  $ANDROID_SDK_HOME/.android/avd/
             // C:\Users\Nikola Lukic\.android\avd
+            /*
             var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
             if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
                 // ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROID_AVD_FILES_PATH;
                 ANDROID_CMD.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH.ToString() + "\"";
                 ANDROID_CMD.btnSendStdinToProcess.PerformClick();
             }
-            
+            */
+
+            //            var EMULPATH = ANDROIDSDKPATH.Text.ToString() + "/emulator/";
+
+            // var processStartInfo = new ProcessStartInfo();
+            // processStartInfo.WorkingDirectory = ANDROIDSDKPATH.Text.ToString() + "/emulator";
+            // processStartInfo.FileName = "cmd.exe";
+            // processStartInfo.Arguments = "emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
+
+            // set additional properties     
+            //Process proc = Process.Start(processStartInfo);
 
             // List devices:
             // ANDROID_CMD.txtBxStdin.Text = @"cd tools/bin && avdmanager.bat list device";
             // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-            ANDROID_CMD.txtBxStdin.Text = @"cd emulator && emulator -list-avds";
-            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-            // pixel_xl
-            ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
-            ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+
+            //ANDROID_CMD.txtBxStdin.Text = @"cd emulator";
+            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+            //ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -list-avds";
+            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+
+            //ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
+            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
+
             // -list-avds
             // ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -list-avds";
             // 7.6_Fold-in_with_outer_display_API_30
