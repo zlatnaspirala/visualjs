@@ -36,7 +36,9 @@ namespace matrix_engine {
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.OrangeRed;
             this.label1.Location = new System.Drawing.Point(176, 69);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
@@ -51,18 +53,19 @@ namespace matrix_engine {
             this.textureProjectName.Enabled = false;
             this.textureProjectName.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textureProjectName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.textureProjectName.Location = new System.Drawing.Point(179, 128);
+            this.textureProjectName.Location = new System.Drawing.Point(13, 101);
             this.textureProjectName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textureProjectName.Name = "textureProjectName";
-            this.textureProjectName.Size = new System.Drawing.Size(318, 16);
+            this.textureProjectName.Size = new System.Drawing.Size(102, 16);
             this.textureProjectName.TabIndex = 6;
             this.textureProjectName.Text = "matrixengine";
             // 
             // w
             // 
-            this.w.BackColor = System.Drawing.Color.Black;
+            this.w.BackColor = System.Drawing.Color.Transparent;
             this.w.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.w.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.w.ForeColor = System.Drawing.Color.Orange;
             this.w.Location = new System.Drawing.Point(179, 163);
             this.w.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.w.Name = "w";
@@ -75,13 +78,15 @@ namespace matrix_engine {
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.OrangeRed;
             this.label2.Location = new System.Drawing.Point(159, 13);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(351, 25);
+            this.label2.Size = new System.Drawing.Size(335, 25);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Run MatrixEngine Tool Editor\r\n";
+            this.label2.Text = "Run MatrixEngine 2D Editor\r\n";
             // 
             // pictureBox1
             // 
@@ -98,6 +103,7 @@ namespace matrix_engine {
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.BackgroundImage = global::matrix_engine.Properties.Resources.res2;
             this.ClientSize = new System.Drawing.Size(533, 205);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

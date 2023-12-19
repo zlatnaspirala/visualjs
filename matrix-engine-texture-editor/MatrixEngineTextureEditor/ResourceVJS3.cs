@@ -84,7 +84,7 @@ namespace matrix_engine {
             toolTip1.SetToolTip(this.hideMe, "Hide Resource Form.");
             toolTip1.SetToolTip(this.ADDNEWIMAGE, "Select one or more images. After selecting new items resource will be builded. All new images goews intro one folder with same name.");
             toolTip1.SetToolTip(this.BACK, "Works only for editable resource navigator.");
-
+            /*
             // TEST
             // Obtain a handle to the system image list.
             // Obtain a handle to the system image list.
@@ -129,6 +129,7 @@ namespace matrix_engine {
                 Debug.Assert(himl == hSysImgList); // should be the same imagelist as the one we set
                 listView1.Items.Add(shfi.szDisplayName, shfi.iIcon);
             }
+            */
             // END TEST
         }
 

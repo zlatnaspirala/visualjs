@@ -59,6 +59,7 @@ namespace matrix_engine {
             this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -116,7 +117,7 @@ namespace matrix_engine {
             this.w.BackColor = System.Drawing.Color.Black;
             this.w.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.w.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.w.Location = new System.Drawing.Point(743, 623);
+            this.w.Location = new System.Drawing.Point(740, 670);
             this.w.Name = "w";
             this.w.Size = new System.Drawing.Size(127, 32);
             this.w.TabIndex = 12;
@@ -463,12 +464,26 @@ namespace matrix_engine {
             this.label20.TabIndex = 40;
             this.label20.Text = "Source code for this app.";
             // 
+            // label21
+            // 
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.CausesValidation = false;
+            this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label21.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(12, 670);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(483, 51);
+            this.label21.TabIndex = 42;
+            this.label21.Text = "Matrix-engine also use the great https://cefsharp.github.io/\r\nComing from Visual " +
+    "studio Nuget.\r\n";
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
-            this.ClientSize = new System.Drawing.Size(879, 667);
+            this.ClientSize = new System.Drawing.Size(879, 712);
+            this.Controls.Add(this.label21);
             this.Controls.Add(this.linkLabel10);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.linkLabel9);
@@ -555,5 +570,6 @@ namespace matrix_engine {
         private System.Windows.Forms.LinkLabel linkLabel9;
         private System.Windows.Forms.LinkLabel linkLabel10;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
     }
     }

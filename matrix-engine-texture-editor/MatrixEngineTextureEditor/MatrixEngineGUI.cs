@@ -911,7 +911,17 @@ namespace matrix_engine {
             packager.button1.PerformClick();
             return;
         }
+
+        private void goToMatrixengineSourceToolStripMenuItem_Click(object sender, EventArgs e) {
+            var t = "https://github.com/zlatnaspirala/matrix-engine";
+            Process.Start("chrome.exe", t);
         }
+
+        private void goToVisualJS3SourceToolStripMenuItem_Click(object sender, EventArgs e) {
+            var t = "https://github.com/zlatnaspirala/visualjs";
+            Process.Start("chrome.exe", t);
+        }
+    }
     
     }
 

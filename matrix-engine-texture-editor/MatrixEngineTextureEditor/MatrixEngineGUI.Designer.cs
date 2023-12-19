@@ -115,7 +115,7 @@ namespace matrix_engine
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
-            this.menuStrip1.BackgroundImage = global::matrix_engine.Properties.Resources.bootombar;
+            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.menuStrip1.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
@@ -454,10 +454,11 @@ namespace matrix_engine
             // 
             // mATRIXTEXEDITORToolStripMenuItem
             // 
+            this.mATRIXTEXEDITORToolStripMenuItem.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.mATRIXTEXEDITORToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.android_icon;
             this.mATRIXTEXEDITORToolStripMenuItem.Name = "mATRIXTEXEDITORToolStripMenuItem";
             this.mATRIXTEXEDITORToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.mATRIXTEXEDITORToolStripMenuItem.Text = "MATRIX EDITOR";
+            this.mATRIXTEXEDITORToolStripMenuItem.Text = "ABOUT MATRIX EDITOR";
             this.mATRIXTEXEDITORToolStripMenuItem.Click += new System.EventHandler(this.mATRIXTEXEDITORToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -470,12 +471,14 @@ namespace matrix_engine
             this.goToMatrixengineSourceToolStripMenuItem.Name = "goToMatrixengineSourceToolStripMenuItem";
             this.goToMatrixengineSourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.goToMatrixengineSourceToolStripMenuItem.Text = "Go to matrix-engine source";
+            this.goToMatrixengineSourceToolStripMenuItem.Click += new System.EventHandler(this.goToMatrixengineSourceToolStripMenuItem_Click);
             // 
             // goToVisualJS3SourceToolStripMenuItem
             // 
             this.goToVisualJS3SourceToolStripMenuItem.Name = "goToVisualJS3SourceToolStripMenuItem";
             this.goToVisualJS3SourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
             this.goToVisualJS3SourceToolStripMenuItem.Text = "Go to visualJS3 source";
+            this.goToVisualJS3SourceToolStripMenuItem.Click += new System.EventHandler(this.goToVisualJS3SourceToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem1
             // 

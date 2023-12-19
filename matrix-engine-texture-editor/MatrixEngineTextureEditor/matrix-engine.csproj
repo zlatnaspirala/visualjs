@@ -223,6 +223,7 @@
     <None Include="Resources\me.png" />
     <None Include="Resources\64x64.png" />
     <None Include="Resources\bootombar.png" />
+    <None Include="Resources\res2.png" />
     <Content Include="Resources\resolutions.txt" />
     <None Include="Resources\gui-texture-editor.js" />
     <None Include="Resources\webgl2glmatrix2.jpg" />
