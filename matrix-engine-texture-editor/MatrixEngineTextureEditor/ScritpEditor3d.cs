@@ -19,7 +19,7 @@ namespace matrix_engine {
         public ScritpEditor3d(String P, String APP_NAME, MatrixEngineGUI MAINFORM_) {
             InitializeComponent();
             // APP_DIR - p APP_NAME
-            PATH = P + "\\.js";
+            PATH = P + "\\gui\\app.js";
             // ERROR PATH
             StreamReader sr = new StreamReader(PATH);
             CODE_EDITOR.Text = sr.ReadToEnd().ToString();
@@ -38,7 +38,7 @@ namespace matrix_engine {
                 string PACKAGE_CONTENT = CODE_EDITOR.Text;
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
                 Thread.Sleep(50);
-                MAINFORM.button1.PerformClick();
+                MAINFORM.button2.PerformClick();
             } catch (Exception err) {}
         }
 

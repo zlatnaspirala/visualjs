@@ -24,7 +24,7 @@ namespace matrix_engine {
         CmdWindowControlTestApp.Android ANDROID_CMD;
         CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
 
-        // dev
+        // Local Storage
         private RegistryKey key;
 
         public PackageForm(MatrixEngineGUI MAIN) {
@@ -36,13 +36,11 @@ namespace matrix_engine {
                 return;
             }
 
-            // Environment.SpecialFolder.Desktop
             APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
             if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) {
                 MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 Directory.CreateDirectory(APP_DIR_TEST_EXPORTS);
             }
-            // APP_DIR_TEST_EXPORTS
             webAppExportPath.Text = APP_DIR_TEST_EXPORTS;
         }
 
@@ -56,17 +54,11 @@ namespace matrix_engine {
             if (MAINFORM.cmdKillerProc == null || MAINFORM.cmdKillerProc.IsDisposed == true) {
                 MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
                 MAINFORM.cmdKillerProc.Load += MAINFORM.cmdKillerLoader;
-
                 MAINFORM.cmdKillerProc.TransparencyKey = Color.Turquoise;
                 MAINFORM.cmdKillerProc.BackColor = Color.Turquoise;
-                // MessageBox.Show("No project started. ", "Matrix-engine error msg.", MessageBoxButtons.OK);
             }
-
-            // var APP_NATIVEPATH = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\";
-            // var APP_NATIVEPATHFILE = APP_DIR_TEST + @"\multiplatform\win\cef-sharp\bin\Release\matrix-engine.exe";
-
+            MAINFORM.cmdKillerProc.preventHYBRYD_IF_WEBGL = false;
             MAINFORM.cmdKillerProc.nativeExeBuild.TextChanged += MAINFORM.NATIVE_EXE_DONE;
-
             if (MAINFORM.cmdKillerProc == null) {
                 MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
             }
@@ -105,14 +97,16 @@ namespace matrix_engine {
             if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE") == null) {
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE");
                 key.SetValue("androidSDKPath", "yes");
-                // key.SetValue("app.dir", APP_DIR);
+                key.SetValue("androidAVDPath", "yes");
                 key.Close();
             } else {
                 key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
                 ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
+                ANDROID_AVD_HOME.Text = (string)key.GetValue("androidAVDPath");
                 key.Close();
             }
 
+            // Automatic search for AVD path
             var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
             if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
                 var ANDROID_CMD_LOCAL = new CmdWindowControlTestApp.Android();
@@ -120,8 +114,29 @@ namespace matrix_engine {
                 ANDROID_CMD_LOCAL.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH.ToString() + "\"";
                 ANDROID_CMD_LOCAL.btnSendStdinToProcess.PerformClick();
                 ANDROID_CMD_LOCAL.Hide();
+                Thread.Sleep(2000);
+                ANDROID_CMD_LOCAL.Close();
+                ANDROID_AVD_HOME.Text = ANDROID_AVD_FILES_PATH.ToString();
+                avdDesc.Text = "AVD path detected.";
             }
-            
+            // Search also for $ANDROID_SDK_HOME/.android/avd/
+            string getEnvANdroidSDKPath = Environment.GetEnvironmentVariable("ANDROID_SDK_HOME");
+            string getEnvANdroidAVDPath = Environment.GetEnvironmentVariable("ANDROID_AVD_HOME");
+            if (getEnvANdroidSDKPath == null) {
+                MessageBox.Show("ANDROID_SDK_HOME ENV VAR NOT DEFINED!");
+            }
+            var ANDROID_AVD_FILES_PATH_2 = getEnvANdroidSDKPath + @"\.android\avd";
+            if (Directory.Exists(ANDROID_AVD_FILES_PATH_2)) {
+                var ANDROID_CMD_LOCAL = new CmdWindowControlTestApp.Android();
+                ANDROID_CMD_LOCAL.Show();
+                ANDROID_CMD_LOCAL.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH_2.ToString() + "\"";
+                ANDROID_CMD_LOCAL.btnSendStdinToProcess.PerformClick();
+                ANDROID_CMD_LOCAL.Hide();
+                Thread.Sleep(2000);
+                ANDROID_CMD_LOCAL.Close();
+                ANDROID_AVD_HOME.Text = ANDROID_AVD_FILES_PATH_2.ToString();
+                avdDesc.Text = "AVD path detected.";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -131,7 +146,13 @@ namespace matrix_engine {
         private void button1_Click_1(object sender, EventArgs e) {
             if (NATIVEBuildPATH.Text == "") return;
             var T = NATIVEBuildPATH.Text + @"\me.txt";
-            Process.Start(T);
+            if (File.Exists(T)) {
+                Process.Start(T);
+            } else {
+                // Create me.txt if not exist
+                var PACKAGE_CONTENT = "{ \"APP_STATUS\": \"APP_LOCALHOST\", \"APP_PRODUCTION\": \"https://maximumroulette.com\", \"APP_DEV\": \"https://localhost/dev\", \"APP_LOCALHOST\": \"http://localhost/\" }";
+                File.WriteAllText(T, PACKAGE_CONTENT.ToString());
+            }           
         }
 
         // test not in function
@@ -333,6 +354,49 @@ namespace matrix_engine {
             key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
             key.SetValue("androidSDKPath", ANDROIDSDKPATH.Text);
             key.Close();
+        }
+
+        private void setAVDPath_Click(object sender, EventArgs e) {
+            key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+            key.SetValue("androidSDKPath", ANDROID_AVD_HOME.Text);
+            key.Close();
+        }
+
+        private void exportWebGL_Click(object sender, EventArgs e) {
+            APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            if (Directory.Exists(APP_DIR_TEST) == false) {
+                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (MAINFORM.cmdKillerProc == null || MAINFORM.cmdKillerProc.IsDisposed == true) {
+                MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
+                MAINFORM.cmdKillerProc.Load += MAINFORM.cmdKillerLoader;
+                // MAINFORM.cmdKillerProc.TransparencyKey = Color.Turquoise;
+                // MAINFORM.cmdKillerProc.BackColor = Color.Turquoise;
+            }
+            MAINFORM.cmdKillerProc.preventHYBRYD_IF_WEBGL = true;
+            MAINFORM.cmdKillerProc.exportedwebgl.TextChanged += MAINFORM.webGLFinishBuild;
+            if (MAINFORM.cmdKillerProc == null) {
+                MAINFORM.cmdKillerProc = new CmdWindowControlTestApp.MainForm();
+            }
+            MAINFORM.cmdKillerProc.Show();
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"c:";
+            MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR_TEST;
+            MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"npm run build.gui.app";
+            MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
+
+            MAINFORM.cmdKillerProc.txtBxStdin.Text = @"desktop-build.bat";
+            MAINFORM.cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            MAINFORM.cmdKillerProc.BIGTEXT.Text = "Building native desktop matrix-engine.exe";
+        }
+
+        private void label12_Click(object sender, EventArgs e) {
+
         }
     }
 }

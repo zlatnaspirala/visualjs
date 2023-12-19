@@ -55,6 +55,10 @@ namespace matrix_engine {
             this.linkLabel8 = new System.Windows.Forms.LinkLabel();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.linkLabel9 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -63,6 +67,7 @@ namespace matrix_engine {
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.OrangeRed;
             this.label1.Location = new System.Drawing.Point(15, 11);
@@ -74,6 +79,7 @@ namespace matrix_engine {
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkOrange;
             this.label2.Location = new System.Drawing.Point(12, 357);
@@ -85,6 +91,7 @@ namespace matrix_engine {
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(12, 375);
             this.label3.Name = "label3";
@@ -109,9 +116,9 @@ namespace matrix_engine {
             this.w.BackColor = System.Drawing.Color.Black;
             this.w.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.w.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.w.Location = new System.Drawing.Point(749, 598);
+            this.w.Location = new System.Drawing.Point(743, 623);
             this.w.Name = "w";
-            this.w.Size = new System.Drawing.Size(121, 57);
+            this.w.Size = new System.Drawing.Size(127, 32);
             this.w.TabIndex = 12;
             this.w.Text = "HIDE";
             this.w.UseVisualStyleBackColor = false;
@@ -193,6 +200,7 @@ namespace matrix_engine {
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(536, 331);
             this.label9.Name = "label9";
@@ -214,6 +222,7 @@ namespace matrix_engine {
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(536, 300);
             this.label10.Name = "label10";
@@ -248,6 +257,7 @@ namespace matrix_engine {
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(536, 361);
             this.label11.Name = "label11";
@@ -271,6 +281,7 @@ namespace matrix_engine {
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(536, 393);
             this.label12.Name = "label12";
@@ -294,6 +305,7 @@ namespace matrix_engine {
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(536, 424);
             this.label13.Name = "label13";
@@ -317,6 +329,7 @@ namespace matrix_engine {
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(536, 455);
             this.label14.Name = "label14";
@@ -404,12 +417,62 @@ namespace matrix_engine {
             this.label18.TabIndex = 37;
             this.label18.Text = "Web site:";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Orange;
+            this.label19.Location = new System.Drawing.Point(596, 567);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(209, 15);
+            this.label19.TabIndex = 38;
+            this.label19.Text = "Source code for matrix-engine";
+            // 
+            // linkLabel9
+            // 
+            this.linkLabel9.AutoSize = true;
+            this.linkLabel9.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel9.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.linkLabel9.Location = new System.Drawing.Point(516, 551);
+            this.linkLabel9.Name = "linkLabel9";
+            this.linkLabel9.Size = new System.Drawing.Size(354, 16);
+            this.linkLabel9.TabIndex = 39;
+            this.linkLabel9.TabStop = true;
+            this.linkLabel9.Text = "https://github.com/zlatnaspirala/matrix-engine";
+            // 
+            // linkLabel10
+            // 
+            this.linkLabel10.AutoSize = true;
+            this.linkLabel10.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabel10.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.linkLabel10.Location = new System.Drawing.Point(543, 510);
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.Size = new System.Drawing.Size(309, 16);
+            this.linkLabel10.TabIndex = 41;
+            this.linkLabel10.TabStop = true;
+            this.linkLabel10.Text = "https://github.com/zlatnaspirala/visualjs";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.Orange;
+            this.label20.Location = new System.Drawing.Point(596, 526);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(173, 15);
+            this.label20.TabIndex = 40;
+            this.label20.Text = "Source code for this app.";
+            // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(14)))), ((int)(((byte)(14)))));
             this.ClientSize = new System.Drawing.Size(879, 667);
+            this.Controls.Add(this.linkLabel10);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.linkLabel9);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.linkLabel8);
@@ -488,5 +551,9 @@ namespace matrix_engine {
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.LinkLabel linkLabel9;
+        private System.Windows.Forms.LinkLabel linkLabel10;
+        private System.Windows.Forms.Label label20;
     }
     }

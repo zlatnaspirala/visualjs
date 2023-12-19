@@ -17,8 +17,11 @@ namespace matrix_engine {
     public partial class MatrixEngineGUI : Form {
         public string APP_NAME = "";
         public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
+        public string APP_2D_URL = "";
         CmdWindowControlTestApp.MainForm cmdStream;
         CmdWindowControlTestApp.MainForm cmdLoader;
+        CmdWindowControlTestApp.MainForm cmdWebglRun;
+        CmdWindowControlTestApp.MainForm cmdWebglHOST;
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
         CmdWindowControlTestApp.MainForm cmdVJS3WATCH;
         public CmdWindowControlTestApp.MainForm cmdKillerProc = null;
@@ -33,6 +36,7 @@ namespace matrix_engine {
         public Boolean NODE_DEP_INSTALLER = false;
         private Boolean FLAG_FIRST_TIME = true;
         int Y_POS = 0;
+        private string NO_DEP_TEXT = "No dep library exist, please install deps.";
 
         public void START(String ARG) {
             APP_DIR = ARG;
@@ -53,7 +57,7 @@ namespace matrix_engine {
 
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(NO_DEP_TEXT, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -86,6 +90,7 @@ namespace matrix_engine {
                 packager.NATIVEBuildPATH.Text = LAST_NATIVE_BUILD_CONFIG_PATH;
 
                 cmdKillerProc.LINK.Text = "Saved in " + APP_DIR_TEST_EXPORTS__;
+                packager.button1.PerformClick();
                 return;
             }
         }
@@ -115,6 +120,7 @@ namespace matrix_engine {
         private void detectHost(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
             URLTEXT.Text = navUrl + "/gui.html";
+            APP_2D_URL = URLTEXT.Text;
             if (chromiumWebBrowser1 != null) {
                 chromiumWebBrowser1.Load(URLTEXT.Text);
             }
@@ -128,11 +134,9 @@ namespace matrix_engine {
         private void detectEditorRunStatus(object sender, EventArgs e) {
             string navUrl = cmdLoader.result.Text;
             URLTEXT.Text = navUrl + "\\gui.html";
-
             if (chromiumWebBrowser1 != null) {
                 chromiumWebBrowser1.Load(URLTEXT.Text);
             }
-
             if (FSBrowser != null) {
                 FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
             }
@@ -149,7 +153,7 @@ namespace matrix_engine {
             cmdVJS3EDITOR.Load += cmdEDITORLoader;
             cmdVJS3WATCH = new CmdWindowControlTestApp.MainForm();
             cmdVJS3WATCH.Load += cmdWATCHLoader;
-            // default visible non
+            // Default visible false - must be shown
             cmdVJS3EDITOR.Show();
             cmdVJS3WATCH.Show();
             scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
@@ -157,15 +161,12 @@ namespace matrix_engine {
             scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 60, 25);
             scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
             scriptGUIEditor.cmdVJS3WATCH = cmdVJS3WATCH;
-
-            // test
-            /*scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
+            // MAtrixEngine webGL part
+            scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
             scriptGUIEditor3d.Show();
             scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
-            scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;*/
-            // scriptGUIEditor3d.cmdVJS3WATCH = cmdVJS3WATCH;
-
-            // Res
+            scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            // Resouce form
             resForm = new ResourceVJS3(APP_DIR, this);
             resForm.Show();
             resForm.Location = new Point(0, this.Size.Height / 100 * 65);
@@ -181,10 +182,8 @@ namespace matrix_engine {
             if (args.ToString() != "") {
                 URLStart = args.Replace("url=", "");
                 chromiumWebBrowser1.LoadUrl(URLStart);
-                // FSBrowser.chromiumWebBrowser1.LoadUrl(URLStart);
             } else {
                 chromiumWebBrowser1.LoadUrl(URLStart);
-                // FSBrowser.chromiumWebBrowser1.LoadUrl(URLStart);
                 this.Text = "Matrix-Engine [" + URLStart + "]";
             }
         }
@@ -197,22 +196,17 @@ namespace matrix_engine {
             cmdKillerProc.Show();
             cmdKillerProc.txtBxStdin.Text = @"c:";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-
             cmdKillerProc.txtBxStdin.Text = @"cd " + APP_DIR + @"\2DTextureEditor";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-
             cmdKillerProc.txtBxStdin.Text = @"node res.js";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
-
             button1.PerformClick();
-            //cmdKillerProc.txtBxStdin.Text = @"npm run gui-editor";
-            //cmdKillerProc.btnSendStdinToProcess.PerformClick();
         }
 
         public void buildFinalVisualJS() {
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(NO_DEP_TEXT, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 return;
             }
             cmdKillerProc.txtBxStdin.Text = @"c:";
@@ -229,7 +223,7 @@ namespace matrix_engine {
             // test
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show("No dep library exist, please install deps.", "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(NO_DEP_TEXT, "Matrix-engine error msg.", MessageBoxButtons.OK);
                 return;
             }
             cmdKillerProc.txtBxStdin.Text = @"c:";
@@ -300,6 +294,7 @@ namespace matrix_engine {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
             var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == true) {
+                APP_DIR = APP_DIR_TEST;
                 NODE_DEP_INSTALLER = true;
                 newProjectToolStripMenuItem.Enabled = false;
             }
@@ -342,12 +337,12 @@ namespace matrix_engine {
 
         private void cmdLoaderLoader(object sender, EventArgs e) {
             string TEXTURE_JS_FILE = APP_DIR + @"\\2DTextureEditor\\gui-texture-editor.js";
-            // from amtrix engine git pull
+            // from amtrix engine git pull NOT HANDLED
             StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
             string PACKAGE_CONTENT = sr.ReadToEnd().ToString();
             // from visual studi project static
             // string PACKAGE_CONTENT = matrix_engine.Properties.Resources.gui_texture_editor.ToString();
-
+            // NOT HANDLED
             if (File.Exists(TEXTURE_JS_FILE) != true) {
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
             }
@@ -359,7 +354,7 @@ namespace matrix_engine {
 
             cmdLoader.txtBxStdin.Text = @"cd " + APP_DIR;
             cmdLoader.btnSendStdinToProcess.PerformClick();
-
+            // npm run host-for-gui Refer on canvas2d part
             cmdLoader.txtBxStdin.Text = @"npm run host-for-gui";
             cmdLoader.btnSendStdinToProcess.PerformClick();
         }
@@ -390,6 +385,11 @@ namespace matrix_engine {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            if (APP_2D_URL == "") {
+                MessageBox.Show("2D Texture editor must be runned.", "Matrix-engine", MessageBoxButtons.OK);
+                return; 
+            }
+            URLTEXT.Text = APP_2D_URL;
             if (FLAG_FIRST_TIME == true) {
                 FLAG_FIRST_TIME = false;
                 chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
@@ -634,7 +634,6 @@ namespace matrix_engine {
                 if (chromiumWebBrowser1 != null) {
                     chromiumWebBrowser1.Hide();
                 }
-
                 if (FSBrowser != null && FSBrowser.IsDisposed == false) {
                     FSBrowser.Show();
                     button1.PerformClick();
@@ -643,8 +642,7 @@ namespace matrix_engine {
                     FSBrowser.Show();
                     button1.PerformClick();
                 }
-
-            } catch (Exception err) {
+            } catch (Exception) {
                 FSBrowser = new FS();
                 FSBrowser.Show();
                 button1.PerformClick();
@@ -791,5 +789,129 @@ namespace matrix_engine {
                 Directory.Delete(_EXPORTS, recursive: true);
             }
         }
+
+        private void scriptEditormatrixengineAppToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (scriptGUIEditor3d == null) {
+                scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
+                scriptGUIEditor3d.Show();
+                scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            } else {
+                scriptGUIEditor3d.Show();
+            }
+
+        }
+
+        private void runMatrixengineAppToolStripMenuItem_Click(object sender, EventArgs e) {
+            cmdWebglRun = new CmdWindowControlTestApp.MainForm();
+            cmdWebglRun.Load += cmdWebGLRun;
+            cmdWebglRun.Show();
+            cmdWebglRun.result.TextChanged += detectWebglHost;
+
+            cmdWebglHOST = new CmdWindowControlTestApp.MainForm();
+            cmdWebglHOST.Load += cmdWebGLHOSTING;
+            cmdWebglHOST.Show();
+            cmdWebglHOST.result.TextChanged += detectWebglHost;
+        }
+
+        private void detectWebglHost(object sender, EventArgs e) {
+            MessageBox.Show("Ruuning matrix-engine 3d instance!");
+        }
+        private void cmdWebGLRun(object sender, EventArgs e) {
+            string TEXTURE_JS_FILE = APP_DIR + @"\\gui\\app.js";
+            // from amtrix engine git pull NOT HANDLED
+            StreamReader sr = new StreamReader(TEXTURE_JS_FILE);
+            string PACKAGE_CONTENT = sr.ReadToEnd().ToString();
+            // from visual studi project static
+            // string PACKAGE_CONTENT = matrix_engine.Properties.Resources.gui_texture_editor.ToString();
+            // NOT HANDLED
+            if (File.Exists(TEXTURE_JS_FILE) != true) {
+                File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+            }
+
+            cmdWebglRun.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 3 * this.Size.Height / 4);
+            cmdWebglRun.txtBxStdin.Text = @"c:";
+            cmdWebglRun.btnSendStdinToProcess.PerformClick();
+            cmdWebglRun.txtBxStdin.Text = @"cd " + APP_DIR;
+            cmdWebglRun.btnSendStdinToProcess.PerformClick();
+            // npm run host-for-gui Refer on canvas2d part
+            cmdWebglRun.txtBxStdin.Text = @"npm run gui-app";
+            cmdWebglRun.btnSendStdinToProcess.PerformClick();
+        }
+
+        private void cmdWebGLHOSTING(object sender, EventArgs e) {
+            cmdWebglRun.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 2 * this.Size.Height / 4);
+            cmdWebglHOST.txtBxStdin.Text = @"c:";
+            cmdWebglHOST.btnSendStdinToProcess.PerformClick();
+            cmdWebglHOST.txtBxStdin.Text = @"cd " + APP_DIR;
+            cmdWebglHOST.btnSendStdinToProcess.PerformClick();
+            cmdWebglHOST.txtBxStdin.Text = @"c:";
+            cmdWebglHOST.btnSendStdinToProcess.PerformClick();
+            // host root !
+            cmdWebglHOST.txtBxStdin.Text = @"npm run host-public";
+            cmdWebglHOST.btnSendStdinToProcess.PerformClick();
+            if (chromiumWebBrowser1 != null) {
+                URLTEXT.Text = "http://localhost/public/gui.html";
+                chromiumWebBrowser1.LoadUrl("http://localhost/public/gui.html");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            if (chromiumWebBrowser1 != null) {
+                URLTEXT.Text = "http://localhost/public/gui.html";
+                chromiumWebBrowser1.LoadUrl("http://localhost/public/gui.html");
+            } else {
+                if (FSBrowser != null && FSBrowser.IsDisposed == false && FSBrowser.chromiumWebBrowser1.IsDisposed == false && FSBrowser.Visible == true) {
+                    FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+                }
+            }
+        }
+
+        public void webGLFinishBuild(object sender, EventArgs e) {
+            // EXPORTS
+            MessageBox.Show("JS script builded [build.gui.js] successful.", "Matrix-engine web 3d app builded.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            cmdKillerProc.BIGTEXT.Text = "Copying the new instance to the exports folder.";
+
+            // test maybe baby
+            cmdKillerProc.exportedwebgl.TextChanged -= webGLFinishBuild;
+
+            var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            if (Directory.Exists(APP_DIR_TEST) == false) {
+                MessageBox.Show(NO_DEP_TEXT, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (cmdKillerProc == null) {
+                cmdKillerProc = new CmdWindowControlTestApp.MainForm();
+                cmdKillerProc.Load += cmdKillerLoader;
+            }
+
+            var APP_WEBGL_SRC = APP_DIR_TEST + @"\public\";
+
+
+            var APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
+            if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) {
+                MessageBox.Show("No export folder, please wait.", "Matrix-engine create export/ folder.", MessageBoxButtons.OK);
+                Directory.CreateDirectory(APP_DIR_TEST_EXPORTS);
+            }
+            // MessageBox.Show("Native build exist, nice!");
+            var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "matrix_engine";
+            if (Directory.Exists(APP_DIR_TEST_EXPORTS__) == false) {
+                Directory.CreateDirectory(APP_DIR_TEST_EXPORTS__);
+            } else {
+                MessageBox.Show("Export folder exist, wtf...", "Matrix-engine Not handled.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            cmdKillerProc.txtBxStdin.Text = "xcopy /e /k /h /i \"" + Path.GetDirectoryName(APP_WEBGL_SRC) + "\" \"" + APP_DIR_TEST_EXPORTS__ + "\\" + "\"";
+            cmdKillerProc.btnSendStdinToProcess.PerformClick();
+            // LAST_NATIVE_BUILD_CONFIG_PATH = APP_DIR_TEST_EXPORTS__;
+            packager.webGLBuildPath.Text = APP_DIR_TEST_EXPORTS__;
+
+            cmdKillerProc.LINK.Text = "Saved in " + APP_DIR_TEST_EXPORTS__;
+            packager.button1.PerformClick();
+            return;
+        }
+        }
+    
     }
-}
+

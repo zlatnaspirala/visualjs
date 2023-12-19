@@ -43,6 +43,8 @@ namespace CmdWindowControlTestApp {
         public int _PID_;
         public Boolean preventSignalForHost = false;
 
+        public Boolean preventHYBRYD_IF_WEBGL = false;
+
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -193,23 +195,23 @@ namespace CmdWindowControlTestApp {
         /// </summary>
         /// <param name="text">The standard output text of the running command.</param>
         private void rtb_StdoutTextRead(string text) {
-            // Do custom handling of the standard output text here ...
-            Console.WriteLine("MainForm.EOnStdoutTextRead-text=" + text);
+            // Console.WriteLine("OUTPUT=" + text);
             if (text.Contains("http://127.0.0.1")) {
-                // text = text.Replace("http://127.0.0.1", "http://localhost");
-                if (preventSignalForHost == true) {
-                    return;
-                }
+                if (preventSignalForHost == true) { return; }
                 text = text.Replace("  ", "");
                 result.Text = text;
             } else if (text.Contains("my software")) {
-                resultEditor.Text = text;
+                resultEditor.Text = text + DateTime.Now.ToString("yyyyMMddHHmmssfff");
             } else if (text.Contains("npm audit fix")) {
-                resultNpmI.Text = "npm done";
+                resultNpmI.Text = "npm done" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
             } else if (text.Contains("Build succeeded")) {
-                nativeExeBuild.Text = "native-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                if (preventHYBRYD_IF_WEBGL == false) {
+                    nativeExeBuild.Text = "native-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                } else {
+                    exportedwebgl.Text = "webgl.done" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                }
             } else if (text.Contains("The build file was created")) {
-                buildFinalVJS3.Text = "VJS3 BUILD VISUAL.JS - final build";
+                buildFinalVJS3.Text = "VJS3-final build" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
             }
         }
 
@@ -219,9 +221,8 @@ namespace CmdWindowControlTestApp {
         /// <param name="text">The standard error text of the running command.</param>
         private void rtb_StderrTextRead(string text) {
             // Do custom handling of the standard error text here ...
-            //Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
+            Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
         }
-
 
         private void MainForm_Load(object sender, EventArgs e) {
             this.btnRunCommand.PerformClick();

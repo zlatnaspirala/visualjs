@@ -30,11 +30,9 @@ namespace matrix_engine {
             this.SCRIPT_SRC = new System.Windows.Forms.Label();
             this.saveBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.prepareForPackBtn = new System.Windows.Forms.Button();
             this.backToCodingBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // CODE_EDITOR
@@ -43,7 +41,7 @@ namespace matrix_engine {
             this.CODE_EDITOR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CODE_EDITOR.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CODE_EDITOR.ForeColor = System.Drawing.Color.Black;
-            this.CODE_EDITOR.Location = new System.Drawing.Point(2, 61);
+            this.CODE_EDITOR.Location = new System.Drawing.Point(2, 44);
             this.CODE_EDITOR.Name = "CODE_EDITOR";
             this.CODE_EDITOR.Size = new System.Drawing.Size(690, 517);
             this.CODE_EDITOR.TabIndex = 0;
@@ -64,8 +62,8 @@ namespace matrix_engine {
             // 
             this.SCRIPT_SRC.AutoSize = true;
             this.SCRIPT_SRC.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SCRIPT_SRC.ForeColor = System.Drawing.Color.Lime;
-            this.SCRIPT_SRC.Location = new System.Drawing.Point(9, 41);
+            this.SCRIPT_SRC.ForeColor = System.Drawing.Color.SeaShell;
+            this.SCRIPT_SRC.Location = new System.Drawing.Point(-3, 27);
             this.SCRIPT_SRC.Name = "SCRIPT_SRC";
             this.SCRIPT_SRC.Size = new System.Drawing.Size(72, 14);
             this.SCRIPT_SRC.TabIndex = 10;
@@ -80,9 +78,9 @@ namespace matrix_engine {
             this.saveBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.White;
             this.saveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.saveBtn.Location = new System.Drawing.Point(493, 581);
+            this.saveBtn.Location = new System.Drawing.Point(495, 565);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(125, 36);
+            this.saveBtn.Size = new System.Drawing.Size(125, 27);
             this.saveBtn.TabIndex = 13;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -94,23 +92,13 @@ namespace matrix_engine {
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(622, 581);
+            this.button1.Location = new System.Drawing.Point(624, 565);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 36);
+            this.button1.Size = new System.Drawing.Size(68, 27);
             this.button1.TabIndex = 14;
             this.button1.Text = "HIDE";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 577);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(52, 50);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
             // 
             // prepareForPackBtn
             // 
@@ -149,11 +137,10 @@ namespace matrix_engine {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(694, 620);
+            this.ClientSize = new System.Drawing.Size(694, 595);
             this.Controls.Add(this.backToCodingBtn);
             this.Controls.Add(this.prepareForPackBtn);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.SCRIPT_SRC);
@@ -163,7 +150,6 @@ namespace matrix_engine {
             this.Text = "ScritpEditor";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ScritpEditor_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,7 +161,6 @@ namespace matrix_engine {
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Label SCRIPT_SRC;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button prepareForPackBtn;

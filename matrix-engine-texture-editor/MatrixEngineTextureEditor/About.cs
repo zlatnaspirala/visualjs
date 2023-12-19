@@ -18,6 +18,10 @@ namespace matrix_engine {
         }
         private float FUNY = 0;
         private void w_Click(object sender, EventArgs e) {
+            aTimer.Elapsed -= new ElapsedEventHandler(OnTimedEvent2);
+            aTimer.Elapsed -= new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Enabled = false;
+            aTimer.Close();
             this.Close();
             this.Dispose();
         }
@@ -79,6 +83,7 @@ namespace matrix_engine {
             Pen myPen = new Pen(Color.Red);
             myPen.Width = 2;
             g.DrawLine(myPen, 0, FUNY, this.Width, FUNY);
+            g.DrawLine(myPen, FUNY, 0, FUNY, this.Height);
         }
        }
     }
