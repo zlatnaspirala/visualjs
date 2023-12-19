@@ -178,7 +178,7 @@ namespace matrix_engine {
         }
 
         private void HIDEMEEVENT(object sender, EventArgs e) {
-            Y_POS = Y_POS + 5;
+            Y_POS = Y_POS + 10;
             this.Location = new Point(Location.X, Y_POS);
             if (Y_POS > GetScreen().Height) {
                 timer1.Stop();

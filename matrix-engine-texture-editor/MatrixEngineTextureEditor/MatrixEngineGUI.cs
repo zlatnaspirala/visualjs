@@ -719,9 +719,9 @@ namespace matrix_engine {
         
         private void SHOW_RES_FORM(object sender, EventArgs e) {
             if (resForm != null && resForm.IsDisposed == false) {
-                Y_POS = Y_POS - 10;
+                Y_POS = Y_POS - 12;
                 resForm.Location = new Point(resForm.Location.X, Y_POS);
-                if (Y_POS < GetScreen().Height /100 * 65) {
+                if (Y_POS < GetScreen().Height /100 * 69) {
                     timer1.Stop();
                 }
             }

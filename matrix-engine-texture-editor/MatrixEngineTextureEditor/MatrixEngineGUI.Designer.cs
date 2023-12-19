@@ -74,14 +74,14 @@ namespace matrix_engine
             this.exitEditorModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mATRIXTEXEDITORToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.goToMatrixengineSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.goToVisualJS3SourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.URLTEXT = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
-            this.goToVisualJS3SourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.goToMatrixengineSourceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,10 +114,11 @@ namespace matrix_engine
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.DarkOrange;
-            this.menuStrip1.BackgroundImage = global::matrix_engine.Properties.Resources.android_icon;
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
+            this.menuStrip1.BackgroundImage = global::matrix_engine.Properties.Resources.bootombar;
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.menuStrip1.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startToolStripMenuItem,
             this.buildToolStripMenuItem,
@@ -381,7 +382,7 @@ namespace matrix_engine
             // 
             this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
             this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
-            this.resourcesToolStripMenuItem.Text = "Resources";
+            this.resourcesToolStripMenuItem.Text = "2D Resources";
             this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -459,6 +460,23 @@ namespace matrix_engine
             this.mATRIXTEXEDITORToolStripMenuItem.Text = "MATRIX EDITOR";
             this.mATRIXTEXEDITORToolStripMenuItem.Click += new System.EventHandler(this.mATRIXTEXEDITORToolStripMenuItem_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(251, 6);
+            // 
+            // goToMatrixengineSourceToolStripMenuItem
+            // 
+            this.goToMatrixengineSourceToolStripMenuItem.Name = "goToMatrixengineSourceToolStripMenuItem";
+            this.goToMatrixengineSourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.goToMatrixengineSourceToolStripMenuItem.Text = "Go to matrix-engine source";
+            // 
+            // goToVisualJS3SourceToolStripMenuItem
+            // 
+            this.goToVisualJS3SourceToolStripMenuItem.Name = "goToVisualJS3SourceToolStripMenuItem";
+            this.goToVisualJS3SourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.goToVisualJS3SourceToolStripMenuItem.Text = "Go to visualJS3 source";
+            // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.ForeColor = System.Drawing.Color.White;
@@ -504,23 +522,6 @@ namespace matrix_engine
             this.button2.Text = "WebGL app";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // goToVisualJS3SourceToolStripMenuItem
-            // 
-            this.goToVisualJS3SourceToolStripMenuItem.Name = "goToVisualJS3SourceToolStripMenuItem";
-            this.goToVisualJS3SourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.goToVisualJS3SourceToolStripMenuItem.Text = "Go to visualJS3 source";
-            // 
-            // goToMatrixengineSourceToolStripMenuItem
-            // 
-            this.goToMatrixengineSourceToolStripMenuItem.Name = "goToMatrixengineSourceToolStripMenuItem";
-            this.goToMatrixengineSourceToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.goToMatrixengineSourceToolStripMenuItem.Text = "Go to matrix-engine source";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(251, 6);
             // 
             // MatrixEngineGUI
             // 

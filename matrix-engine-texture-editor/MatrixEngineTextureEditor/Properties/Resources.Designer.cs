@@ -83,6 +83,16 @@ namespace matrix_engine.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bootombar {
+            get {
+                object obj = ResourceManager.GetObject("bootombar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap exitLeft {
             get {
                 object obj = ResourceManager.GetObject("exitLeft", resourceCulture);
