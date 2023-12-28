@@ -266,5 +266,9 @@ namespace CmdWindowControlTestApp {
                 this.Update();
             }
         }
+
+        private void KILLME_Click(object sender, EventArgs e) {
+            
+        }
     }
 }

@@ -20,11 +20,11 @@ namespace matrix_engine {
         public string APP_DIR_TEST_EXPORTS;
         public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
         private string TEXT_NOLIB = "No dep library exist, please install deps.";
+        private string TEXT_ERROR = "Matrix-engine error msg.";
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
         CmdWindowControlTestApp.Android ANDROID_CMD;
         CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
-
-        // Local Storage
+        // Local Storage - Windows Register [regedit.exe]
         private RegistryKey key;
 
         public PackageForm(MatrixEngineGUI MAIN) {
@@ -32,13 +32,13 @@ namespace matrix_engine {
             MAINFORM = MAIN;
             APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, TEXT_ERROR, MessageBoxButtons.OK);
                 return;
             }
 
             APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
             if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) {
-                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, TEXT_ERROR, MessageBoxButtons.OK);
                 Directory.CreateDirectory(APP_DIR_TEST_EXPORTS);
             }
             webAppExportPath.Text = APP_DIR_TEST_EXPORTS;
@@ -47,7 +47,7 @@ namespace matrix_engine {
         private void BuildForHybrid_Click(object sender, EventArgs e) {
             APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, TEXT_ERROR, MessageBoxButtons.OK);
                 return;
             }
 
@@ -93,19 +93,34 @@ namespace matrix_engine {
         }
 
         private void PackageForm_Load(object sender, EventArgs e) {
+            // just to clear register
+            // Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+            // return;
             // GUI CACHE MEMORY
             if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE") == null) {
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE");
-                key.SetValue("androidSDKPath", "yes");
-                key.SetValue("androidAVDPath", "yes");
+                key.SetValue("androidSDKPath", "");
+                key.SetValue("androidAVDPath", "");
+                key.SetValue("androidAppUrlPath", "https://localhost/public/gui.html");
                 key.Close();
             } else {
                 key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
                 ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
                 ANDROID_AVD_HOME.Text = (string)key.GetValue("androidAVDPath");
-                key.Close();
-            }
+                ANDROID_APP_URL.Text = (string)key.GetValue("androidAppUrlPath");
 
+                ANDROID_AVD_HOME.BeginInvoke(new Action(() => {
+                if (ANDROID_AVD_HOME.Text != "") {
+                    string[] AVDS = Directory.GetFiles(ANDROID_AVD_HOME.Text);
+                        foreach (string file in AVDS) {
+                            AVDS_LIST.Items.Add(Path.GetFileName(file));
+                        }
+                        AVDS_LIST.SelectedIndex = 0;
+                        // key.Close();
+                    }
+                }
+                ));
+            }
             // Automatic search for AVD path
             var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
             if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
@@ -118,6 +133,7 @@ namespace matrix_engine {
                 ANDROID_CMD_LOCAL.Close();
                 ANDROID_AVD_HOME.Text = ANDROID_AVD_FILES_PATH.ToString();
                 avdDesc.Text = "AVD path detected.";
+                setAVDPath.PerformClick();
             }
             // Search also for $ANDROID_SDK_HOME/.android/avd/
             string getEnvANdroidSDKPath = Environment.GetEnvironmentVariable("ANDROID_SDK_HOME");
@@ -264,7 +280,7 @@ namespace matrix_engine {
 
         private void buildForAndroid_Click(object sender, EventArgs e) {
             if (Directory.Exists(ANDROIDSDKPATH.Text.ToString()) != true || ANDROIDSDKPATH.Text.ToString() == "") {
-                MessageBox.Show("Please set ANDROID SDK Path !");
+                MessageBox.Show("Please set ANDROID SDK Path !", "Matrix-engine GUI Editor",  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -272,14 +288,14 @@ namespace matrix_engine {
             // "cd ~/Android/Sdk/tools/bin && ./avdmanager list avd"
             ANDROID_CMD = new CmdWindowControlTestApp.Android();
             ANDROID_CMD.Show();
-
             ANDROID_CMD.txtBxCmd.Text = "emulator.exe";
             ANDROID_CMD.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/emulator";
             ANDROID_CMD.txtBxArgs.Text = "-list-avds";
             ANDROID_CMD.btnRunCommand.PerformClick();
 
             //  HARDCODE for now Pixel_7_Pro_API_30
-            ANDROID_CMD.txtBxArgs.Text = "-avd " + "Pixel_7_Pro_API_30";
+            
+            ANDROID_CMD.txtBxArgs.Text = "-avd " + AVDS_LIST.SelectedText;
             ANDROID_CMD.btnRunCommand.PerformClick();
 
             // Thread.Sleep(5000);
@@ -290,60 +306,10 @@ namespace matrix_engine {
             ANDROID_CMD_ADB.txtBxCmd.Text = "adb.exe";
             ANDROID_CMD_ADB.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
             // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
-            ANDROID_CMD_ADB.txtBxArgs.Text = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity";
+            // --es extraKey extraValue
+            // --es GUI_DEV_ARG https://localhost/public/GUI.html
+            ANDROID_CMD_ADB.txtBxArgs.Text = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
             ANDROID_CMD_ADB.btnRunCommand.PerformClick();
-
-            // ANDROID_CMD.txtBxArgs.Text = "-avd ";
-            // ANDROID_CMD.btnRunCommand.PerformClick();            
-            // H:\system-support\android-sdk\platform-tools
-            // ANDROID_CMD.txtBxCmd.Text = "adb.exe";
-            // ANDROID_CMD.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
-            // ANDROID_CMD.txtBxArgs.Text = "devices";
-            // ANDROID_CMD.btnRunCommand.PerformClick();
-            // ANDROID_CMD.txtBxStdin.Text = @"c:";
-            // ANDROID_CMD.txtBxStdin.Text = ANDROIDSDKPATH.Text.ToString()[0] + ":";
-            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-            //  ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROIDSDKPATH.Text.ToString();
-            //  ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-
-            // >>>>  $ANDROID_SDK_HOME/.android/avd/
-            // C:\Users\Nikola Lukic\.android\avd
-            /*
-            var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
-            if (Directory.Exists(ANDROID_AVD_FILES_PATH)) {
-                // ANDROID_CMD.txtBxStdin.Text = @"cd " + ANDROID_AVD_FILES_PATH;
-                ANDROID_CMD.txtBxStdin.Text = "SET ANDROID_AVD_HOME=\"" + ANDROID_AVD_FILES_PATH.ToString() + "\"";
-                ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-            }
-            */
-
-            //            var EMULPATH = ANDROIDSDKPATH.Text.ToString() + "/emulator/";
-
-            // var processStartInfo = new ProcessStartInfo();
-            // processStartInfo.WorkingDirectory = ANDROIDSDKPATH.Text.ToString() + "/emulator";
-            // processStartInfo.FileName = "cmd.exe";
-            // processStartInfo.Arguments = "emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
-
-            // set additional properties     
-            //Process proc = Process.Start(processStartInfo);
-
-            // List devices:
-            // ANDROID_CMD.txtBxStdin.Text = @"cd tools/bin && avdmanager.bat list device";
-            // ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-
-            //ANDROID_CMD.txtBxStdin.Text = @"cd emulator";
-            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-            //ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -list-avds";
-            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-
-            //ANDROID_CMD.txtBxStdin.Text = @"emulator.exe -avd 7.6_Fold-in_with_outer_display_API_30";
-            //ANDROID_CMD.btnSendStdinToProcess.PerformClick();
-
-            // -list-avds
-            // ANDROID_CMD.txtBxStdin.Text = @"cd tools && emulator.exe -list-avds";
-            // 7.6_Fold-in_with_outer_display_API_30
-            // 7.6_Fold-in_with_outer_display_API_30
-
         }
 
         private void ANDROIDSDKPATH_TextChanged(object sender, EventArgs e) {
@@ -358,14 +324,14 @@ namespace matrix_engine {
 
         private void setAVDPath_Click(object sender, EventArgs e) {
             key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
-            key.SetValue("androidSDKPath", ANDROID_AVD_HOME.Text);
+            key.SetValue("androidAVDPath", ANDROID_AVD_HOME.Text);
             key.Close();
         }
 
         private void exportWebGL_Click(object sender, EventArgs e) {
             APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
             if (Directory.Exists(APP_DIR_TEST) == false) {
-                MessageBox.Show(TEXT_NOLIB, "Matrix-engine error msg.", MessageBoxButtons.OK);
+                MessageBox.Show(TEXT_NOLIB, TEXT_ERROR, MessageBoxButtons.OK);
                 return;
             }
 
@@ -397,6 +363,12 @@ namespace matrix_engine {
 
         private void label12_Click(object sender, EventArgs e) {
 
+        }
+
+        private void setAndroidAppUrlBtn_Click(object sender, EventArgs e) {
+            key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+            key.SetValue("androidAppUrlPath", ANDROID_APP_URL.Text);
+            key.Close();
         }
     }
 }

@@ -37,8 +37,12 @@ namespace matrix_engine {
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.BUILDBTN = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.FILEPREVIEW3D = new System.Windows.Forms.WebBrowser();
+            this.DESC = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // FILEPREVIEW
@@ -71,7 +75,7 @@ namespace matrix_engine {
             this.BACK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BACK.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BACK.ForeColor = System.Drawing.Color.DarkOrange;
-            this.BACK.Location = new System.Drawing.Point(3, 5);
+            this.BACK.Location = new System.Drawing.Point(701, 6);
             this.BACK.Name = "BACK";
             this.BACK.Size = new System.Drawing.Size(68, 29);
             this.BACK.TabIndex = 13;
@@ -85,7 +89,7 @@ namespace matrix_engine {
             this.ADDNEWIMAGE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ADDNEWIMAGE.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ADDNEWIMAGE.ForeColor = System.Drawing.Color.DarkOrange;
-            this.ADDNEWIMAGE.Location = new System.Drawing.Point(77, 5);
+            this.ADDNEWIMAGE.Location = new System.Drawing.Point(775, 6);
             this.ADDNEWIMAGE.Name = "ADDNEWIMAGE";
             this.ADDNEWIMAGE.Size = new System.Drawing.Size(187, 29);
             this.ADDNEWIMAGE.TabIndex = 14;
@@ -102,6 +106,7 @@ namespace matrix_engine {
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tabControl1.Location = new System.Drawing.Point(0, 42);
@@ -109,17 +114,21 @@ namespace matrix_engine {
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1333, 307);
             this.tabControl1.TabIndex = 16;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.Maroon;
+            this.tabPage1.Controls.Add(this.BACK);
+            this.tabPage1.Controls.Add(this.ADDNEWIMAGE);
+            this.tabPage1.Controls.Add(this.BUILDBTN);
             this.tabPage1.Controls.Add(this.FILEPREVIEW);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1325, 278);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Editable";
+            this.tabPage1.Text = "2D resources [visualjs]";
             // 
             // hideMe
             // 
@@ -147,7 +156,7 @@ namespace matrix_engine {
             this.BUILDBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BUILDBTN.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BUILDBTN.ForeColor = System.Drawing.Color.DarkOrange;
-            this.BUILDBTN.Location = new System.Drawing.Point(270, 6);
+            this.BUILDBTN.Location = new System.Drawing.Point(968, 6);
             this.BUILDBTN.Name = "BUILDBTN";
             this.BUILDBTN.Size = new System.Drawing.Size(68, 29);
             this.BUILDBTN.TabIndex = 18;
@@ -160,6 +169,36 @@ namespace matrix_engine {
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
             this.toolTip1.ToolTipTitle = "Help and warns";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.FILEPREVIEW3D);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(1325, 278);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "3D Resources [matrix-engine]";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // FILEPREVIEW3D
+            // 
+            this.FILEPREVIEW3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FILEPREVIEW3D.Location = new System.Drawing.Point(0, 0);
+            this.FILEPREVIEW3D.Margin = new System.Windows.Forms.Padding(0);
+            this.FILEPREVIEW3D.MinimumSize = new System.Drawing.Size(33, 25);
+            this.FILEPREVIEW3D.Name = "FILEPREVIEW3D";
+            this.FILEPREVIEW3D.Size = new System.Drawing.Size(1325, 278);
+            this.FILEPREVIEW3D.TabIndex = 1;
+            // 
+            // DESC
+            // 
+            this.DESC.AutoSize = true;
+            this.DESC.ForeColor = System.Drawing.Color.DarkOrange;
+            this.DESC.Location = new System.Drawing.Point(39, 13);
+            this.DESC.Name = "DESC";
+            this.DESC.Size = new System.Drawing.Size(51, 16);
+            this.DESC.TabIndex = 18;
+            this.DESC.Text = "DESC";
+            // 
             // ResourceVJS3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
@@ -167,11 +206,9 @@ namespace matrix_engine {
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImage = global::matrix_engine.Properties.Resources.res2;
             this.ClientSize = new System.Drawing.Size(1333, 349);
-            this.Controls.Add(this.BUILDBTN);
+            this.Controls.Add(this.DESC);
             this.Controls.Add(this.hideMe);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.ADDNEWIMAGE);
-            this.Controls.Add(this.BACK);
             this.Controls.Add(this.labelPath);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -185,6 +222,7 @@ namespace matrix_engine {
             this.Load += new System.EventHandler(this.ResourceVJS3_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +242,8 @@ namespace matrix_engine {
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BUILDBTN;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.WebBrowser FILEPREVIEW3D;
+        private System.Windows.Forms.Label DESC;
     }
 }

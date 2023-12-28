@@ -66,6 +66,7 @@ namespace matrix_engine {
 
         static int Y_POS = 0;
         string RES_PATH = "";
+        string RES3D_PATH = "";
         MatrixEngineGUI MAINFORM;
         public ResourceVJS3(String P, MatrixEngineGUI MAINFORM_) {
             InitializeComponent();
@@ -75,10 +76,13 @@ namespace matrix_engine {
             labelPath.Text = RES_PATH;
             MAINFORM = MAINFORM_;
             Y_POS = Location.Y;
+
+            RES3D_PATH = P + @"public\res";
         }
 
         private void ResourceVJS3_Load(object sender, EventArgs e) {
             FILEPREVIEW.Navigate(RES_PATH);
+            FILEPREVIEW3D.Navigate(RES3D_PATH);
 
             toolTip1.SetToolTip(this.BUILDBTN, "Resource filename or folder cant be with `-` for example  image-test1.png - To make it work rename to image_test1.png !");
             toolTip1.SetToolTip(this.hideMe, "Hide Resource Form.");
@@ -132,13 +136,11 @@ namespace matrix_engine {
             */
             // END TEST
         }
-
         private void BACK_Click(object sender, EventArgs e) {
             if (FILEPREVIEW.CanGoBack == true) {
                 FILEPREVIEW.GoBack();
             }
         }
-
         private void ADDNEWIMAGE_Click(object sender, EventArgs e) {
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 var fileName = this.openFileDialog1.FileName;
@@ -188,6 +190,21 @@ namespace matrix_engine {
 
         private void BUILDBTN_Click(object sender, EventArgs e) {
             MAINFORM.buildRes();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            
+            switch (tabControl1.SelectedIndex) {
+
+                case 0: {
+                        DESC.Text = "This is simply matrix-engine res folder. This resource use gui.html [matrix-engine] level.";
+                        break;
+                    }
+                case 1: {
+                        DESC.Text = "This is resource for 2d texture editor [editor must be active]. Click build for deploy res for the 2d editor[visualjs]";
+                        break;
+                    }
+            }
         }
     }
 }

@@ -95,7 +95,7 @@ namespace matrix_engine {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.BackgroundImage = global::matrix_engine.Properties.Resources.res2;
-            this.ClientSize = new System.Drawing.Size(583, 200);
+            this.ClientSize = new System.Drawing.Size(627, 210);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

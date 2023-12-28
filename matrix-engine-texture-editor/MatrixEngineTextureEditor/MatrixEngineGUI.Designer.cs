@@ -238,6 +238,7 @@ namespace matrix_engine
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
             this.buildToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.buildToolStripMenuItem.Text = "View";
+            this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
             // 
             // nodeWindowsToolStripMenuItem
             // 
@@ -359,7 +360,7 @@ namespace matrix_engine
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
@@ -374,7 +375,7 @@ namespace matrix_engine
             // showToolStripMenuItem1
             // 
             this.showToolStripMenuItem1.Name = "showToolStripMenuItem1";
-            this.showToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
+            this.showToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.showToolStripMenuItem1.Text = "Show";
             this.showToolStripMenuItem1.Click += new System.EventHandler(this.showToolStripMenuItem1_Click);
             // 
@@ -382,7 +383,7 @@ namespace matrix_engine
             // 
             this.resourcesToolStripMenuItem.Name = "resourcesToolStripMenuItem";
             this.resourcesToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
-            this.resourcesToolStripMenuItem.Text = "2D Resources";
+            this.resourcesToolStripMenuItem.Text = "Resources [imgs,fonts,videos]";
             this.resourcesToolStripMenuItem.Click += new System.EventHandler(this.resourcesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -493,14 +494,15 @@ namespace matrix_engine
             // 
             this.URLTEXT.BackColor = System.Drawing.Color.Black;
             this.URLTEXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.URLTEXT.Font = new System.Drawing.Font("Orbitron", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.URLTEXT.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.URLTEXT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.URLTEXT.Location = new System.Drawing.Point(291, 0);
             this.URLTEXT.Multiline = true;
             this.URLTEXT.Name = "URLTEXT";
-            this.URLTEXT.Size = new System.Drawing.Size(728, 28);
+            this.URLTEXT.Size = new System.Drawing.Size(827, 28);
             this.URLTEXT.TabIndex = 4;
             this.URLTEXT.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.URLTEXT.TextChanged += new System.EventHandler(this.URLTEXT_TextChanged);
             // 
             // timer1
             // 
@@ -546,6 +548,7 @@ namespace matrix_engine
             this.Text = "Matrix-Engine GUI Texture Editor ver 1.0.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MinimumSizeChanged += new System.EventHandler(this.MatrixEngineGUI_MinimumSizeChanged);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MatrixEngineGUI_FormClosing);
             this.Load += new System.EventHandler(this.MatrixEngineGUI_Load);
             this.Resize += new System.EventHandler(this.MatrixEngineGUI_Resize);
             this.menuStrip1.ResumeLayout(false);
