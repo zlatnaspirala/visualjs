@@ -8,6 +8,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,6 +21,7 @@ namespace matrix_engine {
         public string APP_DIR_TEST;
         public string APP_DIR_TEST_EXPORTS;
         public string LAST_NATIVE_BUILD_CONFIG_PATH = "";
+        public string A_APK_PATH_DEBUG = "";
         private string TEXT_NOLIB = "No dep library exist, please install deps.";
         private string TEXT_ERROR = "Matrix-engine error msg.";
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
@@ -26,6 +29,15 @@ namespace matrix_engine {
         CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
         // Local Storage - Windows Register [regedit.exe]
         private RegistryKey key;
+        public static string GetLocalIPAddress() {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList) {
+                if (ip.AddressFamily == AddressFamily.InterNetwork) {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
 
         public PackageForm(MatrixEngineGUI MAIN) {
             InitializeComponent();
@@ -97,26 +109,52 @@ namespace matrix_engine {
             // Registry.CurrentUser.DeleteSubKeyTree(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
             // return;
             // GUI CACHE MEMORY
+            // MessageBox.Show(GetLocalIPAddress().ToString());
             if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE") == null) {
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE");
                 key.SetValue("androidSDKPath", "");
                 key.SetValue("androidAVDPath", "");
-                key.SetValue("androidAppUrlPath", "https://localhost/public/gui.html");
+                key.SetValue("androidAppUrlPath", "https://" + GetLocalIPAddress().ToString() + "/public/gui.html");
+                A_APK_PATH_DEBUG = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\app\build\outputs\apk\debug";
+                key.SetValue("androidAPKDebugPath", A_APK_PATH_DEBUG);
+                var A_PROJECT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\";
+                ANDROID_APP_URL.BeginInvoke(new Action(() => {
+                    ANDROID_PROJECT_PATH.Text = A_PROJECT_PATH;
+                    ANDROID_APP_URL.Text = "https://" + GetLocalIPAddress().ToString() + "/public/gui.html";
+                }));
                 key.Close();
             } else {
                 key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
                 ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
                 ANDROID_AVD_HOME.Text = (string)key.GetValue("androidAVDPath");
                 ANDROID_APP_URL.Text = (string)key.GetValue("androidAppUrlPath");
-
+                var A_PROJECT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\";
+                                
                 ANDROID_AVD_HOME.BeginInvoke(new Action(() => {
                 if (ANDROID_AVD_HOME.Text != "") {
-                    string[] AVDS = Directory.GetFiles(ANDROID_AVD_HOME.Text);
+
+                        ANDROID_PROJECT_PATH.Text = A_PROJECT_PATH;
+
+                        string[] AVDS = Directory.GetFiles(ANDROID_AVD_HOME.Text);
                         foreach (string file in AVDS) {
-                            AVDS_LIST.Items.Add(Path.GetFileName(file));
+                            //.GetFileNameWithoutExtension
+                            var L = Path.GetFileName(file).Split('.').Length;
+                            if (L > 2) {
+                                var getName = "";
+                                for (var x=0; x < L-1;x++) {
+                                    if (x > 0) {
+                                        getName = getName + "." + Path.GetFileName(file).Split('.')[x];
+                                    } else {
+                                        getName = Path.GetFileName(file).Split('.')[x];
+                                    }                                    
+                                }
+                                AVDS_LIST.Items.Add(getName);
+                            } else {
+                                AVDS_LIST.Items.Add(Path.GetFileName(file).Split('.')[0]);
+                            }                            
                         }
                         AVDS_LIST.SelectedIndex = 0;
-                        // key.Close();
+                        // key.Close(); ?
                     }
                 }
                 ));
@@ -290,12 +328,9 @@ namespace matrix_engine {
             ANDROID_CMD.Show();
             ANDROID_CMD.txtBxCmd.Text = "emulator.exe";
             ANDROID_CMD.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/emulator";
-            ANDROID_CMD.txtBxArgs.Text = "-list-avds";
-            ANDROID_CMD.btnRunCommand.PerformClick();
-
-            //  HARDCODE for now Pixel_7_Pro_API_30
-            
-            ANDROID_CMD.txtBxArgs.Text = "-avd " + AVDS_LIST.SelectedText;
+            // ANDROID_CMD.txtBxArgs.Text = "-list-avds";
+            // ANDROID_CMD.btnRunCommand.PerformClick();
+            ANDROID_CMD.txtBxArgs.Text = "-avd " + AVDS_LIST.SelectedItem as string;
             ANDROID_CMD.btnRunCommand.PerformClick();
 
             // Thread.Sleep(5000);
@@ -308,6 +343,13 @@ namespace matrix_engine {
             // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
             // --es extraKey extraValue
             // --es GUI_DEV_ARG https://localhost/public/GUI.html
+            // Android emulator is VM he cant access to localhost alias
+            // must be local ip
+
+            // https://stackoverflow.com/questions/7076240/install-an-apk-file-from-command-prompt
+            // adb install -s example.apk
+            // ANDROID_PROJECT_PATH.Text + "";
+
             ANDROID_CMD_ADB.txtBxArgs.Text = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
             ANDROID_CMD_ADB.btnRunCommand.PerformClick();
         }
