@@ -82,6 +82,7 @@ namespace matrix_engine
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
+            this.aLLDEPSLIBSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,7 +192,8 @@ namespace matrix_engine
             // cLEARToolStripMenuItem
             // 
             this.cLEARToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.eXPORTSToolStripMenuItem});
+            this.eXPORTSToolStripMenuItem,
+            this.aLLDEPSLIBSToolStripMenuItem});
             this.cLEARToolStripMenuItem.Name = "cLEARToolStripMenuItem";
             this.cLEARToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.cLEARToolStripMenuItem.Text = "Clear";
@@ -360,7 +362,7 @@ namespace matrix_engine
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
@@ -375,7 +377,7 @@ namespace matrix_engine
             // showToolStripMenuItem1
             // 
             this.showToolStripMenuItem1.Name = "showToolStripMenuItem1";
-            this.showToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.showToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
             this.showToolStripMenuItem1.Text = "Show";
             this.showToolStripMenuItem1.Click += new System.EventHandler(this.showToolStripMenuItem1_Click);
             // 
@@ -528,6 +530,14 @@ namespace matrix_engine
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // aLLDEPSLIBSToolStripMenuItem
+            // 
+            this.aLLDEPSLIBSToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.warning;
+            this.aLLDEPSLIBSToolStripMenuItem.Name = "aLLDEPSLIBSToolStripMenuItem";
+            this.aLLDEPSLIBSToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.aLLDEPSLIBSToolStripMenuItem.Text = "ALL DEPS LIBS";
+            this.aLLDEPSLIBSToolStripMenuItem.Click += new System.EventHandler(this.aLLDEPSLIBSToolStripMenuItem_Click);
+            // 
             // MatrixEngineGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 18F);
@@ -610,6 +620,7 @@ namespace matrix_engine
         private System.Windows.Forms.ToolStripMenuItem goToMatrixengineSourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem goToVisualJS3SourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem aLLDEPSLIBSToolStripMenuItem;
     }
 }
 

@@ -13,6 +13,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace matrix_engine {
@@ -27,6 +28,7 @@ namespace matrix_engine {
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
         CmdWindowControlTestApp.Android ANDROID_CMD;
         CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
+        System.Timers.Timer aTimer;
         // Local Storage - Windows Register [regedit.exe]
         private RegistryKey key;
         public static string GetLocalIPAddress() {
@@ -37,6 +39,14 @@ namespace matrix_engine {
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e) {
+            Console.WriteLine("TIMER TEST 1 !!");
+            aTimer.Elapsed -= new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Enabled = false;
+            this.Invalidate();
+            this.Update();
         }
 
         public PackageForm(MatrixEngineGUI MAIN) {
@@ -110,16 +120,34 @@ namespace matrix_engine {
             // return;
             // GUI CACHE MEMORY
             // MessageBox.Show(GetLocalIPAddress().ToString());
+
+            string getEnvANdroidSDKPath = Environment.GetEnvironmentVariable("ANDROID_SDK_HOME");
+            string getEnvANdroidAVDPath = Environment.GetEnvironmentVariable("ANDROID_AVD_HOME");
+            string getEnvJAVAHOME = Environment.GetEnvironmentVariable("JAVA_HOME");
+            if (getEnvANdroidSDKPath == null) {
+                MessageBox.Show("ANDROID_SDK_HOME ENV VAR NOT DEFINED!");
+            }
+
+            if (getEnvJAVAHOME == null) {
+                MessageBox.Show("JAVA_HOME ENV VAR NOT DEFINED!");
+            } else {
+                JAVA_HOME.Text = getEnvJAVAHOME.ToString();
+            }
+
+            var A_PROJECT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\";
+
             if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE") == null) {
                 key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE");
                 key.SetValue("androidSDKPath", "");
                 key.SetValue("androidAVDPath", "");
+                key.SetValue("androidStudioPath", "");
                 key.SetValue("androidAppUrlPath", "https://" + GetLocalIPAddress().ToString() + "/public/gui.html");
                 A_APK_PATH_DEBUG = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\app\build\outputs\apk\debug";
                 key.SetValue("androidAPKDebugPath", A_APK_PATH_DEBUG);
-                var A_PROJECT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\";
+
                 ANDROID_APP_URL.BeginInvoke(new Action(() => {
                     ANDROID_PROJECT_PATH.Text = A_PROJECT_PATH;
+                    toolTip1.SetToolTip(ANDROID_PROJECT_PATH, ANDROID_PROJECT_PATH.Text);
                     ANDROID_APP_URL.Text = "https://" + GetLocalIPAddress().ToString() + "/public/gui.html";
                 }));
                 key.Close();
@@ -128,10 +156,11 @@ namespace matrix_engine {
                 ANDROIDSDKPATH.Text = (string)key.GetValue("androidSDKPath");
                 ANDROID_AVD_HOME.Text = (string)key.GetValue("androidAVDPath");
                 ANDROID_APP_URL.Text = (string)key.GetValue("androidAppUrlPath");
-                var A_PROJECT_PATH = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\multiplatform\MatrixEngineAndroid\";
-                                
+                ANDROID_STUDIO.Text = (string)key.GetValue("androidStudioPath");
+
                 ANDROID_AVD_HOME.BeginInvoke(new Action(() => {
-                if (ANDROID_AVD_HOME.Text != "") {
+                    ANDROID_APP_URL.Text = "https://" + GetLocalIPAddress().ToString() + "/public/gui.html?GLSL=1.1";
+                    if (ANDROID_AVD_HOME.Text != "") {
 
                         ANDROID_PROJECT_PATH.Text = A_PROJECT_PATH;
 
@@ -141,17 +170,17 @@ namespace matrix_engine {
                             var L = Path.GetFileName(file).Split('.').Length;
                             if (L > 2) {
                                 var getName = "";
-                                for (var x=0; x < L-1;x++) {
+                                for (var x = 0; x < L - 1; x++) {
                                     if (x > 0) {
                                         getName = getName + "." + Path.GetFileName(file).Split('.')[x];
                                     } else {
                                         getName = Path.GetFileName(file).Split('.')[x];
-                                    }                                    
+                                    }
                                 }
                                 AVDS_LIST.Items.Add(getName);
                             } else {
                                 AVDS_LIST.Items.Add(Path.GetFileName(file).Split('.')[0]);
-                            }                            
+                            }
                         }
                         AVDS_LIST.SelectedIndex = 0;
                         // key.Close(); ?
@@ -174,11 +203,7 @@ namespace matrix_engine {
                 setAVDPath.PerformClick();
             }
             // Search also for $ANDROID_SDK_HOME/.android/avd/
-            string getEnvANdroidSDKPath = Environment.GetEnvironmentVariable("ANDROID_SDK_HOME");
-            string getEnvANdroidAVDPath = Environment.GetEnvironmentVariable("ANDROID_AVD_HOME");
-            if (getEnvANdroidSDKPath == null) {
-                MessageBox.Show("ANDROID_SDK_HOME ENV VAR NOT DEFINED!");
-            }
+
             var ANDROID_AVD_FILES_PATH_2 = getEnvANdroidSDKPath + @"\.android\avd";
             if (Directory.Exists(ANDROID_AVD_FILES_PATH_2)) {
                 var ANDROID_CMD_LOCAL = new CmdWindowControlTestApp.Android();
@@ -206,7 +231,7 @@ namespace matrix_engine {
                 // Create me.txt if not exist
                 var PACKAGE_CONTENT = "{ \"APP_STATUS\": \"APP_LOCALHOST\", \"APP_PRODUCTION\": \"https://maximumroulette.com\", \"APP_DEV\": \"https://localhost/dev\", \"APP_LOCALHOST\": \"http://localhost/\" }";
                 File.WriteAllText(T, PACKAGE_CONTENT.ToString());
-            }           
+            }
         }
 
         // test not in function
@@ -255,7 +280,7 @@ namespace matrix_engine {
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
                 HOST_LOCALHOST.txtBxStdin.Text = @"cd " + APP_DIRINFLY;
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
-                HOST_LOCALHOST.txtBxStdin.Text = @"http-server ./ -p " + HOSTPORT.Text; // + " -d true";
+                HOST_LOCALHOST.txtBxStdin.Text = @"http-server -S -C cert.pem ./ -p " + HOSTPORT.Text; // + " -d true";
                 HOST_LOCALHOST.btnSendStdinToProcess.PerformClick();
             } else {
                 // checkedthecheckbox = false;
@@ -316,6 +341,36 @@ namespace matrix_engine {
             Process.Start("msedge.exe", t);
         }
 
+        private void BUILD_SUCCESSFUL(object sender, EventArgs e) {
+            MessageBox.Show("BUILD SUCCESSFUL for android project.");
+        }
+
+        private void BUILD_ANDROID_PROJECT() {
+            // Directory.Delete(ANDROID_PROJECT_PATH.Text.ToString() + @"app\build\outputs\apk\debug\", true);
+
+            Thread.Sleep(2000);
+
+            var GRADLEW = new CmdWindowControlTestApp.Android();
+            GRADLEW.Show();
+            GRADLEW.txtBxCmd.Text = "cmd.exe";
+            GRADLEW.btnRunCommand.PerformClick();
+
+            GRADLEW.txtBxStdin.Text = @"c:";
+            GRADLEW.btnSendStdinToProcess.PerformClick();
+            GRADLEW.result.TextChanged += BUILD_SUCCESSFUL;
+            GRADLEW.txtBxStdin.Text = @"cd " + ANDROID_PROJECT_PATH.Text.ToString();
+            GRADLEW.btnSendStdinToProcess.PerformClick();
+
+            if (ANDROID_STUDIO.Text != "") {
+                GRADLEW.txtBxStdin.Text = "SET JAVA_HOME=\"" + ANDROID_STUDIO.Text.ToString() + "\\jbr\"";
+                GRADLEW.btnSendStdinToProcess.PerformClick();
+            }
+
+            GRADLEW.txtBxStdin.Text = @"gradlew.bat build";
+            GRADLEW.btnSendStdinToProcess.PerformClick();
+
+
+        }
         private void buildForAndroid_Click(object sender, EventArgs e) {
             if (Directory.Exists(ANDROIDSDKPATH.Text.ToString()) != true || ANDROIDSDKPATH.Text.ToString() == "") {
                 MessageBox.Show("Please set ANDROID SDK Path !", "Matrix-engine GUI Editor",  MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -333,13 +388,57 @@ namespace matrix_engine {
             ANDROID_CMD.txtBxArgs.Text = "-avd " + AVDS_LIST.SelectedItem as string;
             ANDROID_CMD.btnRunCommand.PerformClick();
 
-            // Thread.Sleep(5000);
+            Thread.Sleep(3000);
             // I DONT KNOW HOW ADB KNOWS PATH OF MY PROJECT - IT IS A PROBLEM IF 
             // ANDROID STUDIO SAVE DEFAULT OR LAST OPENED PROJECT - works for now
+
+        
             ANDROID_CMD_ADB = new CmdWindowControlTestApp.Android();
             ANDROID_CMD_ADB.Show();
-            ANDROID_CMD_ADB.txtBxCmd.Text = "adb.exe";
-            ANDROID_CMD_ADB.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            ANDROID_CMD_ADB.txtBxCmd.Text = "cmd.exe";
+            //            ANDROID_CMD_ADB.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            // ANDROID_CMD_ADB.txtBxArgs.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            ANDROID_CMD_ADB.btnRunCommand.PerformClick();
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = @"c:";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = @"cd " + ANDROID_PROJECT_PATH.Text.ToString() + @"app\build\outputs\apk\debug";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            // Installing
+            ANDROID_CMD_ADB.txtBxStdin.Text = @"adb install -g app-debug.apk";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            Thread.Sleep(30);
+
+            // ANDROID_CMD_ADB.txtBxArgs.Text = "shell install -g " + ANDROID_PROJECT_PATH.Text.ToString() + @"\app\build\outputs\apk\debug";
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = "c:";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            ANDROID_CMD_ADB.txtBxStdin.Text = @"cd " + ANDROID_PROJECT_PATH.Text.ToString() + @"app\build\outputs\apk\debug";
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            
+            // Installing
+            //ANDROID_CMD_ADB.txtBxStdin.Text = @"adb install -g app-debug.apk";
+           // ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
+            Thread.Sleep(3000);
+
+            // Running
+            var rc = "adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
+            ANDROID_CMD_ADB.txtBxStdin.Text = rc;
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
+
             // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
             // --es extraKey extraValue
             // --es GUI_DEV_ARG https://localhost/public/GUI.html
@@ -349,9 +448,16 @@ namespace matrix_engine {
             // https://stackoverflow.com/questions/7076240/install-an-apk-file-from-command-prompt
             // adb install -s example.apk
             // ANDROID_PROJECT_PATH.Text + "";
+            // I setup 
+            // JAVA_HOME=ANDROID_STUDIO/jbr
+            // H:\android-studio\jbr
+            /*
+            aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 4000;
+            aTimer.Enabled = true;
+            */
 
-            ANDROID_CMD_ADB.txtBxArgs.Text = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
-            ANDROID_CMD_ADB.btnRunCommand.PerformClick();
         }
 
         private void ANDROIDSDKPATH_TextChanged(object sender, EventArgs e) {
@@ -410,6 +516,21 @@ namespace matrix_engine {
         private void setAndroidAppUrlBtn_Click(object sender, EventArgs e) {
             key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
             key.SetValue("androidAppUrlPath", ANDROID_APP_URL.Text);
+            key.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+
+        }
+
+        private void BUILD_ANDROID_APPBTN_Click(object sender, EventArgs e) {
+             BUILD_ANDROID_PROJECT();
+    
+        }
+
+        private void ANDROID_STUDIOBTN_Click(object sender, EventArgs e) {
+            key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
+            key.SetValue("androidStudioPath", ANDROID_STUDIO.Text);
             key.Close();
         }
     }

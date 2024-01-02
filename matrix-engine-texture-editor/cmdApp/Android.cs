@@ -187,22 +187,11 @@ namespace CmdWindowControlTestApp {
         private void rtb_StdoutTextRead(string text) {
             // Do custom handling of the standard output text here ...
             Console.WriteLine("Android.EOnStdoutTextRead-text=" + text);
-            if (text.Contains("http://127.0.0.1")) {
-                // text = text.Replace("http://127.0.0.1", "http://localhost");
-                if (preventSignalForHost == true) {
-                    return;
-                }
-                text = text.Replace("  ", "");
-                result.Text = text;
-            } else if (text.Contains("my software")) {
-                resultEditor.Text = text;
-            } else if (text.Contains("npm audit fix")) {
-                resultNpmI.Text = "npm done";
-            } else if (text.Contains("Build succeeded")) {
-                nativeExeBuild.Text = "native-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
-            } else if (text.Contains("The build file was created")) {
-                buildFinalVJS3.Text = "VJS3 BUILD VISUAL.JS - final build";
-            }
+              if (text.Contains("BUILD SUCCESSFUL")) {
+                  result.Text = text;
+              } else if (text.Contains("Install Success")) {
+                  resultEditor.Text = text;
+              }
         }
 
         /// <summary>

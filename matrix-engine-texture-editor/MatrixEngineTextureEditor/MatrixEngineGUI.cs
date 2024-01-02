@@ -964,6 +964,14 @@ namespace matrix_engine {
         private void buildToolStripMenuItem_Click(object sender, EventArgs e) {
 
         }
+
+        private void aLLDEPSLIBSToolStripMenuItem_Click(object sender, EventArgs e) {
+            DialogResult dialogResult = MessageBox.Show("Are you sure to delete all deps libraries ", "Matrix-Engine GUI" , MessageBoxButtons.YesNo , MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes) {
+                var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\";
+                Directory.Delete(APP_DIR_TEST, true);
+            } // else if (dialogResult == DialogResult.No) {}
+        }
     }
     
     }

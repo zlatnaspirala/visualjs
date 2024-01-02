@@ -62,9 +62,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.killProc);
-            this.groupBox3.Controls.Add(this.CLEAR);
-            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.rtb);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
             this.groupBox3.Controls.Add(this.nativeExeBuild);
@@ -77,7 +74,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(1238, 218);
+            this.groupBox3.Size = new System.Drawing.Size(1056, 218);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
@@ -87,7 +84,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(1101, 0);
+            this.killProc.Location = new System.Drawing.Point(1065, 191);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -100,7 +97,7 @@
             // 
             this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(991, 0);
+            this.CLEAR.Location = new System.Drawing.Point(1065, 156);
             this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.CLEAR.Name = "CLEAR";
             this.CLEAR.Size = new System.Drawing.Size(100, 27);
@@ -113,7 +110,7 @@
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(881, 0);
+            this.button1.Location = new System.Drawing.Point(1065, 121);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -135,7 +132,7 @@
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1230, 192);
+            this.rtb.Size = new System.Drawing.Size(1048, 192);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
@@ -364,7 +361,7 @@
             this.pictureBox1.BackgroundImage = global::CommandWindowControlTestApp.Properties.Resources._64x64;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(1146, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(1065, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 75);
             this.pictureBox1.TabIndex = 44;
@@ -375,9 +372,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1238, 534);
-            this.Controls.Add(this.groupBox3);
+            this.ClientSize = new System.Drawing.Size(1173, 220);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.CLEAR);
+            this.Controls.Add(this.killProc);
             this.Controls.Add(this.LINK);
             this.Controls.Add(this.BIGTEXT);
             this.Controls.Add(this.panel1);
