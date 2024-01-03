@@ -28,6 +28,8 @@ namespace matrix_engine {
         CmdWindowControlTestApp.MainForm HOST_LOCALHOST;
         CmdWindowControlTestApp.Android ANDROID_CMD;
         CmdWindowControlTestApp.Android ANDROID_CMD_ADB;
+        CmdWindowControlTestApp.Android ANDROID_CMD_ADB_RUN;
+        CmdWindowControlTestApp.Android ANDROID_CMD_ADB_LOG;
         System.Timers.Timer aTimer;
         // Local Storage - Windows Register [regedit.exe]
         private RegistryKey key;
@@ -347,29 +349,22 @@ namespace matrix_engine {
 
         private void BUILD_ANDROID_PROJECT() {
             // Directory.Delete(ANDROID_PROJECT_PATH.Text.ToString() + @"app\build\outputs\apk\debug\", true);
-
-            Thread.Sleep(2000);
-
+            // Thread.Sleep(2000);
             var GRADLEW = new CmdWindowControlTestApp.Android();
             GRADLEW.Show();
             GRADLEW.txtBxCmd.Text = "cmd.exe";
             GRADLEW.btnRunCommand.PerformClick();
-
             GRADLEW.txtBxStdin.Text = @"c:";
             GRADLEW.btnSendStdinToProcess.PerformClick();
             GRADLEW.result.TextChanged += BUILD_SUCCESSFUL;
             GRADLEW.txtBxStdin.Text = @"cd " + ANDROID_PROJECT_PATH.Text.ToString();
             GRADLEW.btnSendStdinToProcess.PerformClick();
-
             if (ANDROID_STUDIO.Text != "") {
                 GRADLEW.txtBxStdin.Text = "SET JAVA_HOME=\"" + ANDROID_STUDIO.Text.ToString() + "\\jbr\"";
                 GRADLEW.btnSendStdinToProcess.PerformClick();
             }
-
             GRADLEW.txtBxStdin.Text = @"gradlew.bat build";
             GRADLEW.btnSendStdinToProcess.PerformClick();
-
-
         }
         private void buildForAndroid_Click(object sender, EventArgs e) {
             if (Directory.Exists(ANDROIDSDKPATH.Text.ToString()) != true || ANDROIDSDKPATH.Text.ToString() == "") {
@@ -408,56 +403,9 @@ namespace matrix_engine {
 
             ANDROID_CMD_ADB.txtBxStdin.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
             ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
             // Installing
             ANDROID_CMD_ADB.txtBxStdin.Text = @"adb install -g app-debug.apk";
-            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-            Thread.Sleep(30);
-
-            // ANDROID_CMD_ADB.txtBxArgs.Text = "shell install -g " + ANDROID_PROJECT_PATH.Text.ToString() + @"\app\build\outputs\apk\debug";
-
-            ANDROID_CMD_ADB.txtBxStdin.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
-            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-
-            ANDROID_CMD_ADB.txtBxStdin.Text = "c:";
-            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-            ANDROID_CMD_ADB.txtBxStdin.Text = @"cd " + ANDROID_PROJECT_PATH.Text.ToString() + @"app\build\outputs\apk\debug";
-            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-            
-            // Installing
-            //ANDROID_CMD_ADB.txtBxStdin.Text = @"adb install -g app-debug.apk";
-           // ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-            Thread.Sleep(3000);
-
-            // Running
-            var rc = "adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
-            ANDROID_CMD_ADB.txtBxStdin.Text = rc;
-            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();
-
-            // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
-            // --es extraKey extraValue
-            // --es GUI_DEV_ARG https://localhost/public/GUI.html
-            // Android emulator is VM he cant access to localhost alias
-            // must be local ip
-
-            // https://stackoverflow.com/questions/7076240/install-an-apk-file-from-command-prompt
-            // adb install -s example.apk
-            // ANDROID_PROJECT_PATH.Text + "";
-            // I setup 
-            // JAVA_HOME=ANDROID_STUDIO/jbr
-            // H:\android-studio\jbr
-            /*
-            aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = 4000;
-            aTimer.Enabled = true;
-            */
-
+            ANDROID_CMD_ADB.btnSendStdinToProcess.PerformClick();            
         }
 
         private void ANDROIDSDKPATH_TextChanged(object sender, EventArgs e) {
@@ -532,6 +480,52 @@ namespace matrix_engine {
             key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\ZLATNASPIRALA_MATRIX_ENGINE", true);
             key.SetValue("androidStudioPath", ANDROID_STUDIO.Text);
             key.Close();
+        }
+
+        private void INSTALL_ANDROIDBTN_Click(object sender, EventArgs e) {
+
+            ANDROID_CMD_ADB_RUN = new CmdWindowControlTestApp.Android();
+            ANDROID_CMD_ADB_RUN.Show();
+            ANDROID_CMD_ADB_RUN.txtBxCmd.Text = "adb.exe";
+            ANDROID_CMD_ADB_RUN.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            var rc = "adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
+            var rc2 = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity --es GUI_DEV_ARG " + ANDROID_APP_URL.Text.ToString();
+            ANDROID_CMD_ADB_RUN.txtBxArgs.Text = rc2;
+            // Running
+            ANDROID_CMD_ADB_RUN.btnRunCommand.PerformClick();
+            //ANDROID_CMD_ADB_RUN.txtBxStdin.Text = rc;
+            //ANDROID_CMD_ADB_RUN.btnSendStdinToProcess.PerformClick();
+
+            // adb shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity
+            // --es extraKey extraValue
+            // --es GUI_DEV_ARG https://localhost/public/GUI.html
+            // Android emulator is VM he cant access to localhost alias
+            // must be local ip
+
+            // https://stackoverflow.com/questions/7076240/install-an-apk-file-from-command-prompt
+            // adb install -s example.apk
+            // ANDROID_PROJECT_PATH.Text + "";
+            // I setup 
+            // JAVA_HOME=ANDROID_STUDIO/jbr
+            // H:\android-studio\jbr
+            /*
+            aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            aTimer.Interval = 4000;
+            aTimer.Enabled = true;
+            */
+
+        }
+
+        private void ATTACHCATLOGBTN_Click(object sender, EventArgs e) {
+            ANDROID_CMD_ADB_LOG = new CmdWindowControlTestApp.Android();
+            ANDROID_CMD_ADB_LOG.Show();
+            ANDROID_CMD_ADB_LOG.txtBxCmd.Text = "adb.exe";
+            ANDROID_CMD_ADB_LOG.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            var rc = "logcat ActivityManager:I MyApp:D *:S";
+            ANDROID_CMD_ADB_LOG.txtBxArgs.Text = rc;
+            // Running
+            ANDROID_CMD_ADB_LOG.btnRunCommand.PerformClick();
         }
     }
 }

@@ -80,6 +80,8 @@ namespace matrix_engine {
             this.label20 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label21 = new System.Windows.Forms.Label();
+            this.RUN_ANDROIDBTN = new System.Windows.Forms.Button();
+            this.ATTACHCATLOGBTN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buildcanvas2dBtn
@@ -106,11 +108,11 @@ namespace matrix_engine {
             this.buildForAndroid.ForeColor = System.Drawing.Color.Black;
             this.buildForAndroid.Image = global::matrix_engine.Properties.Resources._64x64;
             this.buildForAndroid.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buildForAndroid.Location = new System.Drawing.Point(533, 650);
+            this.buildForAndroid.Location = new System.Drawing.Point(533, 634);
             this.buildForAndroid.Name = "buildForAndroid";
-            this.buildForAndroid.Size = new System.Drawing.Size(316, 80);
+            this.buildForAndroid.Size = new System.Drawing.Size(316, 30);
             this.buildForAndroid.TabIndex = 3;
-            this.buildForAndroid.Text = "Export webgl web app for Android";
+            this.buildForAndroid.Text = "Install and run emulator";
             this.toolTip1.SetToolTip(this.buildForAndroid, "Run emulator and install apk");
             this.buildForAndroid.UseVisualStyleBackColor = false;
             this.buildForAndroid.Click += new System.EventHandler(this.buildForAndroid_Click);
@@ -708,7 +710,7 @@ namespace matrix_engine {
             this.BUILD_ANDROID_APPBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BUILD_ANDROID_APPBTN.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BUILD_ANDROID_APPBTN.ForeColor = System.Drawing.Color.Black;
-            this.BUILD_ANDROID_APPBTN.Location = new System.Drawing.Point(533, 614);
+            this.BUILD_ANDROID_APPBTN.Location = new System.Drawing.Point(533, 605);
             this.BUILD_ANDROID_APPBTN.Name = "BUILD_ANDROID_APPBTN";
             this.BUILD_ANDROID_APPBTN.Size = new System.Drawing.Size(316, 25);
             this.BUILD_ANDROID_APPBTN.TabIndex = 75;
@@ -760,7 +762,7 @@ namespace matrix_engine {
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label20.Location = new System.Drawing.Point(530, 596);
+            this.label20.Location = new System.Drawing.Point(530, 585);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(116, 15);
             this.label20.TabIndex = 79;
@@ -777,12 +779,47 @@ namespace matrix_engine {
             this.label21.TabIndex = 80;
             this.label21.Text = "Local web server";
             // 
+            // RUN_ANDROIDBTN
+            // 
+            this.RUN_ANDROIDBTN.BackColor = System.Drawing.Color.OrangeRed;
+            this.RUN_ANDROIDBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RUN_ANDROIDBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RUN_ANDROIDBTN.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RUN_ANDROIDBTN.ForeColor = System.Drawing.Color.Black;
+            this.RUN_ANDROIDBTN.Image = global::matrix_engine.Properties.Resources._64x64;
+            this.RUN_ANDROIDBTN.Location = new System.Drawing.Point(533, 668);
+            this.RUN_ANDROIDBTN.Name = "RUN_ANDROIDBTN";
+            this.RUN_ANDROIDBTN.Size = new System.Drawing.Size(316, 81);
+            this.RUN_ANDROIDBTN.TabIndex = 81;
+            this.RUN_ANDROIDBTN.Text = "RUN APK";
+            this.RUN_ANDROIDBTN.UseVisualStyleBackColor = false;
+            this.RUN_ANDROIDBTN.Click += new System.EventHandler(this.INSTALL_ANDROIDBTN_Click);
+            // 
+            // ATTACHCATLOGBTN
+            // 
+            this.ATTACHCATLOGBTN.BackColor = System.Drawing.Color.OrangeRed;
+            this.ATTACHCATLOGBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ATTACHCATLOGBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ATTACHCATLOGBTN.ForeColor = System.Drawing.Color.Black;
+            this.ATTACHCATLOGBTN.Image = global::matrix_engine.Properties.Resources._64x64;
+            this.ATTACHCATLOGBTN.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ATTACHCATLOGBTN.Location = new System.Drawing.Point(533, 753);
+            this.ATTACHCATLOGBTN.Name = "ATTACHCATLOGBTN";
+            this.ATTACHCATLOGBTN.Size = new System.Drawing.Size(316, 30);
+            this.ATTACHCATLOGBTN.TabIndex = 82;
+            this.ATTACHCATLOGBTN.Text = "LOGS";
+            this.toolTip1.SetToolTip(this.ATTACHCATLOGBTN, "Run emulator and install apk");
+            this.ATTACHCATLOGBTN.UseVisualStyleBackColor = false;
+            this.ATTACHCATLOGBTN.Click += new System.EventHandler(this.ATTACHCATLOGBTN_Click);
+            // 
             // PackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1378, 822);
+            this.Controls.Add(this.ATTACHCATLOGBTN);
+            this.Controls.Add(this.RUN_ANDROIDBTN);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.ANDROID_STUDIOBTN);
@@ -908,5 +945,7 @@ namespace matrix_engine {
         public System.Windows.Forms.Label label20;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label21;
+        public System.Windows.Forms.Button RUN_ANDROIDBTN;
+        public System.Windows.Forms.Button ATTACHCATLOGBTN;
     }
 }
