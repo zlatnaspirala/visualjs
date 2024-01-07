@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.rtb = new CmdWindow.CmdWindowBoxSync();
+            this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
+            this.realDevicesTrigger = new System.Windows.Forms.TextBox();
+            this.DL = new System.Windows.Forms.TextBox();
+            this.resultEditor = new System.Windows.Forms.TextBox();
+            this.result = new System.Windows.Forms.TextBox();
             this.killProc = new System.Windows.Forms.Button();
             this.CLEAR = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.rtb = new CmdWindow.CmdWindowBoxSync();
-            this.buildFinalVJS3 = new System.Windows.Forms.TextBox();
-            this.nativeExeBuild = new System.Windows.Forms.TextBox();
-            this.resultNpmI = new System.Windows.Forms.TextBox();
-            this.resultEditor = new System.Windows.Forms.TextBox();
-            this.result = new System.Windows.Forms.TextBox();
             this.btnRunCommand = new System.Windows.Forms.Button();
             this.txtBxStdin = new System.Windows.Forms.TextBox();
             this.btnSendStdinToProcess = new System.Windows.Forms.Button();
@@ -55,6 +55,7 @@
             this.BIGTEXT = new System.Windows.Forms.Label();
             this.LINK = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DESTROYSELF = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -64,8 +65,8 @@
             // 
             this.groupBox3.Controls.Add(this.rtb);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
-            this.groupBox3.Controls.Add(this.nativeExeBuild);
-            this.groupBox3.Controls.Add(this.resultNpmI);
+            this.groupBox3.Controls.Add(this.realDevicesTrigger);
+            this.groupBox3.Controls.Add(this.DL);
             this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.result);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -74,56 +75,16 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(1056, 218);
+            this.groupBox3.Size = new System.Drawing.Size(786, 316);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
             this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
-            // killProc
-            // 
-            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(1065, 191);
-            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.killProc.Name = "killProc";
-            this.killProc.Size = new System.Drawing.Size(100, 27);
-            this.killProc.TabIndex = 41;
-            this.killProc.Text = "HIDE";
-            this.killProc.UseVisualStyleBackColor = true;
-            this.killProc.Click += new System.EventHandler(this.killProc_Click);
-            // 
-            // CLEAR
-            // 
-            this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(1065, 156);
-            this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.CLEAR.Name = "CLEAR";
-            this.CLEAR.Size = new System.Drawing.Size(100, 27);
-            this.CLEAR.TabIndex = 46;
-            this.CLEAR.Text = "CLEAR";
-            this.CLEAR.UseVisualStyleBackColor = true;
-            this.CLEAR.Click += new System.EventHandler(this.CLEAR_Click);
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(1065, 121);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 27);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "COPY";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // rtb
             // 
             this.rtb.BackColor = System.Drawing.Color.Black;
             this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.ExecutingProcess = null;
             this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb.ForeColor = System.Drawing.Color.Lime;
@@ -132,7 +93,7 @@
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1048, 192);
+            this.rtb.Size = new System.Drawing.Size(746, 165);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
@@ -148,27 +109,27 @@
             this.buildFinalVJS3.TabIndex = 45;
             this.toolTip.SetToolTip(this.buildFinalVJS3, "Text to send to the standard input stream of running process.");
             // 
-            // nativeExeBuild
+            // realDevicesTrigger
             // 
-            this.nativeExeBuild.BackColor = System.Drawing.Color.Black;
-            this.nativeExeBuild.ForeColor = System.Drawing.Color.Lime;
-            this.nativeExeBuild.Location = new System.Drawing.Point(401, 276);
-            this.nativeExeBuild.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.nativeExeBuild.Name = "nativeExeBuild";
-            this.nativeExeBuild.Size = new System.Drawing.Size(133, 27);
-            this.nativeExeBuild.TabIndex = 44;
-            this.toolTip.SetToolTip(this.nativeExeBuild, "Text to send to the standard input stream of running process.");
+            this.realDevicesTrigger.BackColor = System.Drawing.Color.Black;
+            this.realDevicesTrigger.ForeColor = System.Drawing.Color.Lime;
+            this.realDevicesTrigger.Location = new System.Drawing.Point(401, 276);
+            this.realDevicesTrigger.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.realDevicesTrigger.Name = "realDevicesTrigger";
+            this.realDevicesTrigger.Size = new System.Drawing.Size(133, 27);
+            this.realDevicesTrigger.TabIndex = 44;
+            this.toolTip.SetToolTip(this.realDevicesTrigger, "Text to send to the standard input stream of running process.");
             // 
-            // resultNpmI
+            // DL
             // 
-            this.resultNpmI.BackColor = System.Drawing.Color.Black;
-            this.resultNpmI.ForeColor = System.Drawing.Color.Lime;
-            this.resultNpmI.Location = new System.Drawing.Point(699, 242);
-            this.resultNpmI.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.resultNpmI.Name = "resultNpmI";
-            this.resultNpmI.Size = new System.Drawing.Size(91, 27);
-            this.resultNpmI.TabIndex = 43;
-            this.toolTip.SetToolTip(this.resultNpmI, "Text to send to the standard input stream of running process.");
+            this.DL.BackColor = System.Drawing.Color.Black;
+            this.DL.ForeColor = System.Drawing.Color.Lime;
+            this.DL.Location = new System.Drawing.Point(699, 242);
+            this.DL.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.DL.Name = "DL";
+            this.DL.Size = new System.Drawing.Size(91, 27);
+            this.DL.TabIndex = 43;
+            this.toolTip.SetToolTip(this.DL, "Text to send to the standard input stream of running process.");
             // 
             // resultEditor
             // 
@@ -192,13 +153,52 @@
             this.result.TabIndex = 40;
             this.toolTip.SetToolTip(this.result, "Text to send to the standard input stream of running process.");
             // 
+            // killProc
+            // 
+            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.killProc.Location = new System.Drawing.Point(761, 153);
+            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.killProc.Name = "killProc";
+            this.killProc.Size = new System.Drawing.Size(100, 27);
+            this.killProc.TabIndex = 41;
+            this.killProc.Text = "HIDE";
+            this.killProc.UseVisualStyleBackColor = true;
+            this.killProc.Click += new System.EventHandler(this.killProc_Click);
+            // 
+            // CLEAR
+            // 
+            this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CLEAR.Location = new System.Drawing.Point(761, 118);
+            this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.CLEAR.Name = "CLEAR";
+            this.CLEAR.Size = new System.Drawing.Size(100, 27);
+            this.CLEAR.TabIndex = 46;
+            this.CLEAR.Text = "CLEAR";
+            this.CLEAR.UseVisualStyleBackColor = true;
+            this.CLEAR.Click += new System.EventHandler(this.CLEAR_Click);
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(761, 83);
+            this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 27);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "COPY";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnRunCommand
             // 
             this.btnRunCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRunCommand.Location = new System.Drawing.Point(2, 107);
+            this.btnRunCommand.Location = new System.Drawing.Point(2, 102);
             this.btnRunCommand.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.btnRunCommand.Name = "btnRunCommand";
-            this.btnRunCommand.Size = new System.Drawing.Size(373, 33);
+            this.btnRunCommand.Size = new System.Drawing.Size(848, 38);
             this.btnRunCommand.TabIndex = 26;
             this.btnRunCommand.Text = "Run And Monitor Process";
             this.btnRunCommand.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@
             this.txtBxArgs.Location = new System.Drawing.Point(169, 69);
             this.txtBxArgs.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxArgs.Name = "txtBxArgs";
-            this.txtBxArgs.Size = new System.Drawing.Size(206, 27);
+            this.txtBxArgs.Size = new System.Drawing.Size(681, 27);
             this.txtBxArgs.TabIndex = 32;
             this.toolTip.SetToolTip(this.txtBxArgs, "Command line arguments to the executable.");
             // 
@@ -290,7 +290,7 @@
             this.txtBxDirectory.Location = new System.Drawing.Point(169, 42);
             this.txtBxDirectory.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtBxDirectory.Name = "txtBxDirectory";
-            this.txtBxDirectory.Size = new System.Drawing.Size(206, 27);
+            this.txtBxDirectory.Size = new System.Drawing.Size(681, 27);
             this.txtBxDirectory.TabIndex = 34;
             this.toolTip.SetToolTip(this.txtBxDirectory, "Directory path to the command, or blank  (assume in PATH environment variable)");
             // 
@@ -330,10 +330,10 @@
             this.panel1.Controls.Add(this.txtBxDirectory);
             this.panel1.Controls.Add(this.txtBxArgs);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(6, 235);
+            this.panel1.Location = new System.Drawing.Point(4, 330);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 307);
+            this.panel1.Size = new System.Drawing.Size(857, 145);
             this.panel1.TabIndex = 41;
             // 
             // BIGTEXT
@@ -361,18 +361,32 @@
             this.pictureBox1.BackgroundImage = global::CommandWindowControlTestApp.Properties.Resources._64x64;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(1065, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(777, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 75);
+            this.pictureBox1.Size = new System.Drawing.Size(71, 70);
             this.pictureBox1.TabIndex = 44;
             this.pictureBox1.TabStop = false;
+            // 
+            // DESTROYSELF
+            // 
+            this.DESTROYSELF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DESTROYSELF.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DESTROYSELF.Location = new System.Drawing.Point(761, 187);
+            this.DESTROYSELF.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.DESTROYSELF.Name = "DESTROYSELF";
+            this.DESTROYSELF.Size = new System.Drawing.Size(100, 27);
+            this.DESTROYSELF.TabIndex = 48;
+            this.DESTROYSELF.Text = "DESTROY";
+            this.DESTROYSELF.UseVisualStyleBackColor = true;
+            this.DESTROYSELF.Click += new System.EventHandler(this.DESTROYSELF_Click);
             // 
             // Android
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1173, 220);
+            this.ClientSize = new System.Drawing.Size(868, 612);
+            this.Controls.Add(this.DESTROYSELF);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button1);
@@ -419,14 +433,15 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Button killProc;
         public System.Windows.Forms.TextBox resultEditor;
-        public System.Windows.Forms.TextBox resultNpmI;
+        public System.Windows.Forms.TextBox DL;
         public System.Windows.Forms.Label BIGTEXT;
-        public System.Windows.Forms.TextBox nativeExeBuild;
+        public System.Windows.Forms.TextBox realDevicesTrigger;
         public System.Windows.Forms.TextBox buildFinalVJS3;
         public System.Windows.Forms.LinkLabel LINK;
         public System.Windows.Forms.Button CLEAR;
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Button DESTROYSELF;
     }
 }
 

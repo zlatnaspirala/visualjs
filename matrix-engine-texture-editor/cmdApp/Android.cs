@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 /***************************************************************************************
@@ -40,13 +41,23 @@ namespace CmdWindowControlTestApp {
         // Command line process that is being monitored for standard output/standard error text output.
         public Process runningProcess;
         public int _PID_;
-
         public Boolean preventSignalForHost = false;
 
+        public Form MAINFORM;
+        public String MYNAME;
+
+
+        public Boolean collectDevicesList = false;
+        public Boolean collectRealDevicesList = false;
         /// <summary>
         /// Initializes a new instance of the <see cref="Android"/> class.
         /// </summary>
-        public Android() {
+        public Android(Form MAINFORM_, String MYNAME_) {
+            if (MAINFORM_ is null) {
+                throw new ArgumentNullException(nameof(MAINFORM_));
+            }
+            MYNAME = MYNAME_;
+            MAINFORM = MAINFORM_;
             InitializeComponent();
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
@@ -187,11 +198,32 @@ namespace CmdWindowControlTestApp {
         private void rtb_StdoutTextRead(string text) {
             // Do custom handling of the standard output text here ...
             Console.WriteLine("Android.EOnStdoutTextRead-text=" + text);
-              if (text.Contains("BUILD SUCCESSFUL")) {
-                  result.Text = text;
-              } else if (text.Contains("Install Success")) {
-                  resultEditor.Text = text;
-              }
+
+            if (collectDevicesList == true) {
+                DL.Text += text;
+            }
+
+            if (collectRealDevicesList == true && realDevicesTrigger.Text == "") {
+                // only first device for now
+                realDevicesTrigger.Text += text;
+            }
+
+            if (text.Contains("BUILD SUCCESSFUL")) {
+                result.Text = text;
+            } else if (text.Contains("Streamed")) {
+              
+            } else if (text.Contains("Success")) {
+                resultEditor.Text = text;
+            } else if (text.Contains("List of devices attached")) {
+                if (MYNAME == "REAL_DEVICES") {
+                    collectRealDevicesList = true;
+                    realDevicesTrigger.Text = "";
+                } else {
+                    // for now only other solution dev  emulators 
+                    collectDevicesList = true;
+                    DL.Text = "";
+                }                
+            }
         }
 
         /// <summary>
@@ -206,7 +238,6 @@ namespace CmdWindowControlTestApp {
 
         private void Android_Load(object sender, EventArgs e) {
             this.btnRunCommand.PerformClick();
-
         }
 
         private void KILL_Click(object sender, EventArgs e) {
@@ -227,6 +258,10 @@ namespace CmdWindowControlTestApp {
 
         private void button1_Click(object sender, EventArgs e) {
             System.Windows.Forms.Clipboard.SetText(rtb.Text);
+        }
+
+        private void DESTROYSELF_Click(object sender, EventArgs e) {
+            MAINFORM.Text = "KILL " + _PID_ + ":" + MYNAME;  
         }
     }
 }
