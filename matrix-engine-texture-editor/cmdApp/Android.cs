@@ -263,5 +263,9 @@ namespace CmdWindowControlTestApp {
         private void DESTROYSELF_Click(object sender, EventArgs e) {
             MAINFORM.Text = "KILL " + _PID_ + ":" + MYNAME;  
         }
+
+        private void rtb_TextChanged(object sender, EventArgs e) {
+
+        }
     }
 }

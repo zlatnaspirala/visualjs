@@ -42,6 +42,7 @@ namespace matrix_engine
             this.makeFinalPackageAndExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cLEARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eXPORTSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aLLDEPSLIBSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.killAllNodeOnMyComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,7 +83,6 @@ namespace matrix_engine
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button2 = new System.Windows.Forms.Button();
-            this.aLLDEPSLIBSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -205,6 +205,14 @@ namespace matrix_engine
             this.eXPORTSToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.eXPORTSToolStripMenuItem.Text = "All Exports packs";
             this.eXPORTSToolStripMenuItem.Click += new System.EventHandler(this.eXPORTSToolStripMenuItem_Click);
+            // 
+            // aLLDEPSLIBSToolStripMenuItem
+            // 
+            this.aLLDEPSLIBSToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.warning;
+            this.aLLDEPSLIBSToolStripMenuItem.Name = "aLLDEPSLIBSToolStripMenuItem";
+            this.aLLDEPSLIBSToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.aLLDEPSLIBSToolStripMenuItem.Text = "ALL DEPS LIBS";
+            this.aLLDEPSLIBSToolStripMenuItem.Click += new System.EventHandler(this.aLLDEPSLIBSToolStripMenuItem_Click);
             // 
             // killAllNodeOnMyComputerToolStripMenuItem
             // 
@@ -410,6 +418,7 @@ namespace matrix_engine
             this.scriptEditorandroidWrapperToolStripMenuItem.Name = "scriptEditorandroidWrapperToolStripMenuItem";
             this.scriptEditorandroidWrapperToolStripMenuItem.Size = new System.Drawing.Size(285, 22);
             this.scriptEditorandroidWrapperToolStripMenuItem.Text = "Script editor [android wrapper]";
+            this.scriptEditorandroidWrapperToolStripMenuItem.Click += new System.EventHandler(this.scriptEditorandroidWrapperToolStripMenuItem_Click);
             // 
             // scriptEditormatrixengineAppToolStripMenuItem
             // 
@@ -529,14 +538,6 @@ namespace matrix_engine
             this.button2.Text = "WebGL app";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // aLLDEPSLIBSToolStripMenuItem
-            // 
-            this.aLLDEPSLIBSToolStripMenuItem.Image = global::matrix_engine.Properties.Resources.warning;
-            this.aLLDEPSLIBSToolStripMenuItem.Name = "aLLDEPSLIBSToolStripMenuItem";
-            this.aLLDEPSLIBSToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.aLLDEPSLIBSToolStripMenuItem.Text = "ALL DEPS LIBS";
-            this.aLLDEPSLIBSToolStripMenuItem.Click += new System.EventHandler(this.aLLDEPSLIBSToolStripMenuItem_Click);
             // 
             // MatrixEngineGUI
             // 

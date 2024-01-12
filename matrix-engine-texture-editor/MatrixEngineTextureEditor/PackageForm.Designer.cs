@@ -81,12 +81,12 @@ namespace matrix_engine {
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ATTACHCATLOGBTN = new System.Windows.Forms.Button();
             this.refreshDeviceListBtn = new System.Windows.Forms.Button();
+            this.installOnRealDeviceBtn = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.RUN_ANDROIDBTN = new System.Windows.Forms.Button();
             this.DEVICES_LIST = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.WITH_SSL = new System.Windows.Forms.CheckBox();
-            this.installOnRealDeviceBtn = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.REAL_DEVICES_LIST = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -429,7 +429,7 @@ namespace matrix_engine {
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label8.Location = new System.Drawing.Point(10, 707);
+            this.label8.Location = new System.Drawing.Point(6, 707);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 15);
             this.label8.TabIndex = 52;
@@ -442,7 +442,7 @@ namespace matrix_engine {
             this.setAndroidSDKBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setAndroidSDKBtn.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setAndroidSDKBtn.ForeColor = System.Drawing.Color.Black;
-            this.setAndroidSDKBtn.Location = new System.Drawing.Point(478, 698);
+            this.setAndroidSDKBtn.Location = new System.Drawing.Point(478, 700);
             this.setAndroidSDKBtn.Name = "setAndroidSDKBtn";
             this.setAndroidSDKBtn.Size = new System.Drawing.Size(46, 25);
             this.setAndroidSDKBtn.TabIndex = 53;
@@ -467,7 +467,7 @@ namespace matrix_engine {
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label9.Location = new System.Drawing.Point(9, 679);
+            this.label9.Location = new System.Drawing.Point(5, 679);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(130, 15);
             this.label9.TabIndex = 55;
@@ -480,7 +480,7 @@ namespace matrix_engine {
             this.setAVDPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setAVDPath.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setAVDPath.ForeColor = System.Drawing.Color.Black;
-            this.setAVDPath.Location = new System.Drawing.Point(478, 671);
+            this.setAVDPath.Location = new System.Drawing.Point(478, 673);
             this.setAVDPath.Name = "setAVDPath";
             this.setAVDPath.Size = new System.Drawing.Size(46, 25);
             this.setAVDPath.TabIndex = 56;
@@ -593,7 +593,7 @@ namespace matrix_engine {
             this.setAndroidAppUrlBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setAndroidAppUrlBtn.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.setAndroidAppUrlBtn.ForeColor = System.Drawing.Color.Black;
-            this.setAndroidAppUrlBtn.Location = new System.Drawing.Point(478, 625);
+            this.setAndroidAppUrlBtn.Location = new System.Drawing.Point(478, 627);
             this.setAndroidAppUrlBtn.Name = "setAndroidAppUrlBtn";
             this.setAndroidAppUrlBtn.Size = new System.Drawing.Size(46, 25);
             this.setAndroidAppUrlBtn.TabIndex = 67;
@@ -607,7 +607,7 @@ namespace matrix_engine {
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label15.Location = new System.Drawing.Point(9, 633);
+            this.label15.Location = new System.Drawing.Point(5, 633);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(132, 15);
             this.label15.TabIndex = 66;
@@ -642,7 +642,7 @@ namespace matrix_engine {
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label16.Location = new System.Drawing.Point(56, 604);
+            this.label16.Location = new System.Drawing.Point(60, 604);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(73, 15);
             this.label16.TabIndex = 69;
@@ -653,7 +653,7 @@ namespace matrix_engine {
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label17.Location = new System.Drawing.Point(10, 736);
+            this.label17.Location = new System.Drawing.Point(26, 736);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(108, 15);
             this.label17.TabIndex = 71;
@@ -693,7 +693,7 @@ namespace matrix_engine {
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label18.Location = new System.Drawing.Point(9, 763);
+            this.label18.Location = new System.Drawing.Point(5, 763);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(131, 15);
             this.label18.TabIndex = 73;
@@ -704,7 +704,7 @@ namespace matrix_engine {
             this.JAVA_HOME.BackColor = System.Drawing.Color.Black;
             this.JAVA_HOME.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.JAVA_HOME.ForeColor = System.Drawing.Color.DarkOrange;
-            this.JAVA_HOME.Location = new System.Drawing.Point(140, 759);
+            this.JAVA_HOME.Location = new System.Drawing.Point(140, 758);
             this.JAVA_HOME.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.JAVA_HOME.Name = "JAVA_HOME";
             this.JAVA_HOME.Size = new System.Drawing.Size(337, 21);
@@ -733,7 +733,7 @@ namespace matrix_engine {
             this.ANDROID_STUDIOBTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ANDROID_STUDIOBTN.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ANDROID_STUDIOBTN.ForeColor = System.Drawing.Color.Black;
-            this.ANDROID_STUDIOBTN.Location = new System.Drawing.Point(478, 778);
+            this.ANDROID_STUDIOBTN.Location = new System.Drawing.Point(478, 780);
             this.ANDROID_STUDIOBTN.Name = "ANDROID_STUDIOBTN";
             this.ANDROID_STUDIOBTN.Size = new System.Drawing.Size(46, 25);
             this.ANDROID_STUDIOBTN.TabIndex = 78;
@@ -747,11 +747,11 @@ namespace matrix_engine {
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label19.Location = new System.Drawing.Point(9, 786);
+            this.label19.Location = new System.Drawing.Point(5, 786);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(104, 15);
+            this.label19.Size = new System.Drawing.Size(135, 15);
             this.label19.TabIndex = 77;
-            this.label19.Text = "Android Studio";
+            this.label19.Text = "Android Studio (opt)";
             // 
             // ANDROID_STUDIO
             // 
@@ -806,6 +806,22 @@ namespace matrix_engine {
             this.toolTip1.SetToolTip(this.refreshDeviceListBtn, "Refresh Devices List");
             this.refreshDeviceListBtn.UseVisualStyleBackColor = false;
             this.refreshDeviceListBtn.Click += new System.EventHandler(this.refreshDeviceListBtn_Click);
+            // 
+            // installOnRealDeviceBtn
+            // 
+            this.installOnRealDeviceBtn.BackColor = System.Drawing.Color.OrangeRed;
+            this.installOnRealDeviceBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.installOnRealDeviceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.installOnRealDeviceBtn.ForeColor = System.Drawing.Color.Black;
+            this.installOnRealDeviceBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.installOnRealDeviceBtn.Location = new System.Drawing.Point(533, 668);
+            this.installOnRealDeviceBtn.Name = "installOnRealDeviceBtn";
+            this.installOnRealDeviceBtn.Size = new System.Drawing.Size(316, 23);
+            this.installOnRealDeviceBtn.TabIndex = 87;
+            this.installOnRealDeviceBtn.Text = "Install and run on real device";
+            this.toolTip1.SetToolTip(this.installOnRealDeviceBtn, "Run emulator and install apk");
+            this.installOnRealDeviceBtn.UseVisualStyleBackColor = false;
+            this.installOnRealDeviceBtn.Click += new System.EventHandler(this.installOnRealDeviceBtn_Click);
             // 
             // label21
             // 
@@ -869,28 +885,12 @@ namespace matrix_engine {
             this.WITH_SSL.Text = "SSL";
             this.WITH_SSL.UseVisualStyleBackColor = true;
             // 
-            // installOnRealDeviceBtn
-            // 
-            this.installOnRealDeviceBtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.installOnRealDeviceBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.installOnRealDeviceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.installOnRealDeviceBtn.ForeColor = System.Drawing.Color.Black;
-            this.installOnRealDeviceBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.installOnRealDeviceBtn.Location = new System.Drawing.Point(533, 668);
-            this.installOnRealDeviceBtn.Name = "installOnRealDeviceBtn";
-            this.installOnRealDeviceBtn.Size = new System.Drawing.Size(316, 23);
-            this.installOnRealDeviceBtn.TabIndex = 87;
-            this.installOnRealDeviceBtn.Text = "Install and run on real device";
-            this.toolTip1.SetToolTip(this.installOnRealDeviceBtn, "Run emulator and install apk");
-            this.installOnRealDeviceBtn.UseVisualStyleBackColor = false;
-            this.installOnRealDeviceBtn.Click += new System.EventHandler(this.installOnRealDeviceBtn_Click);
-            // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label23.Location = new System.Drawing.Point(21, 575);
+            this.label23.Location = new System.Drawing.Point(17, 575);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(117, 15);
             this.label23.TabIndex = 89;

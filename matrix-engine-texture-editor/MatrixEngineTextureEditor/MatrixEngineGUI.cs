@@ -37,6 +37,7 @@ namespace matrix_engine {
         ResourceVJS3 resForm;
         ScritpEditor scriptGUIEditor;
         ScritpEditor3d scriptGUIEditor3d;
+        ScritpEditorAndroid scritpEditorAndroid;
         NewTextureForm NTP;
         LoadForm LOADFORM;
         FS FSBrowser;
@@ -45,6 +46,7 @@ namespace matrix_engine {
         private Boolean FLAG_FIRST_TIME = true;
         int Y_POS = 0;
         private string NO_DEP_TEXT = "No dep library exist, please install deps.";
+        private string TEXT_ERROR = "Matrix-engine error msg.";
         public void START(String ARG) {
             APP_DIR = ARG;
             cmdStream = new CmdWindowControlTestApp.MainForm();
@@ -173,6 +175,15 @@ namespace matrix_engine {
             scriptGUIEditor3d.Show();
             scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
             scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            // scritpEditorAndroid new 
+            if (scritpEditorAndroid != null && scritpEditorAndroid.IsDisposed == false) {
+                scritpEditorAndroid.Show();
+            } else {
+                scritpEditorAndroid = new ScritpEditorAndroid(APP_DIR, APP_NAME, this);
+                scritpEditorAndroid.Show();
+                scritpEditorAndroid.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scritpEditorAndroid.SCRIPT_SRC.Text = APP_DIR;
+            }
             // Resouce form
             resForm = new ResourceVJS3(APP_DIR, this);
             resForm.Show();
@@ -789,6 +800,13 @@ namespace matrix_engine {
         }
 
         private void makeFinalPackageAndExportToolStripMenuItem_Click(object sender, EventArgs e) {
+
+            var APP_DIR_TEST1 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\matrixengine\matrix-engine\";
+            if (Directory.Exists(APP_DIR_TEST1) == false) {
+                MessageBox.Show(NO_DEP_TEXT, TEXT_ERROR, MessageBoxButtons.OK);
+                return;
+            }
+
             packager = new PackageForm(this);
             packager.Show();
         }
@@ -813,7 +831,7 @@ namespace matrix_engine {
         }
 
         private void scriptEditormatrixengineAppToolStripMenuItem_Click(object sender, EventArgs e) {
-            if (scriptGUIEditor3d == null) {
+            if (scriptGUIEditor3d == null || scriptGUIEditor3d.IsDisposed == true) {
                 scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
                 scriptGUIEditor3d.Show();
                 scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
@@ -846,6 +864,35 @@ namespace matrix_engine {
 
         private void detectWebglHost(object sender, EventArgs e) {
             MessageBox.Show("Ruuning matrix-engine 3d instance!");
+
+            if (scritpEditorAndroid != null && scritpEditorAndroid.IsDisposed == false) {
+                scritpEditorAndroid.Show();
+            } else {
+                scritpEditorAndroid = new ScritpEditorAndroid(APP_DIR, APP_NAME, this);
+                scritpEditorAndroid.Show();
+                scritpEditorAndroid.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scritpEditorAndroid.SCRIPT_SRC.Text = APP_DIR;
+            }
+
+            if (scriptGUIEditor != null && scriptGUIEditor.IsDisposed == false) {
+                scriptGUIEditor.Show();
+            } else {
+                scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
+                scriptGUIEditor.Show();
+                scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
+            }
+
+            if (scriptGUIEditor3d != null && scriptGUIEditor3d.IsDisposed == false) {
+                scriptGUIEditor3d.Show();
+            } else {
+                scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
+                scriptGUIEditor3d.Show();
+                scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            }
+
+            button2.PerformClick();
         }
         private void cmdWebGLRunEvent(object sender, EventArgs e) {
             string TEXTURE_JS_FILE = APP_DIR + @"\\gui\\app.js";
@@ -971,6 +1018,17 @@ namespace matrix_engine {
                 var APP_DIR_TEST = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\";
                 Directory.Delete(APP_DIR_TEST, true);
             } // else if (dialogResult == DialogResult.No) {}
+        }
+
+        private void scriptEditorandroidWrapperToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (scritpEditorAndroid != null && scritpEditorAndroid.IsDisposed == false) {
+                scritpEditorAndroid.Show();
+            } else {
+                scritpEditorAndroid = new ScritpEditorAndroid(APP_DIR, APP_NAME, this);
+                scritpEditorAndroid.Show();
+                scritpEditorAndroid.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scritpEditorAndroid.SCRIPT_SRC.Text = APP_DIR;
+            }
         }
     }
     

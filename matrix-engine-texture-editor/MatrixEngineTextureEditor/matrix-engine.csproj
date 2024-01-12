@@ -139,6 +139,12 @@
     <Compile Include="ResourceVJS3.Designer.cs">
       <DependentUpon>ResourceVJS3.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScritpEditorAndroid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScritpEditorAndroid.Designer.cs">
+      <DependentUpon>ScritpEditorAndroid.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScritpEditor3d.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </Compile>
     <EmbeddedResource Include="ResourceVJS3.resx">
       <DependentUpon>ResourceVJS3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScritpEditorAndroid.resx">
+      <DependentUpon>ScritpEditorAndroid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScritpEditor3d.resx">
       <DependentUpon>ScritpEditor3d.cs</DependentUpon>

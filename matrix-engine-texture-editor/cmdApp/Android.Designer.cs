@@ -56,6 +56,7 @@
             this.LINK = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.DESTROYSELF = new System.Windows.Forms.Button();
+            this.initialDRD = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,19 +64,21 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.initialDRD);
             this.groupBox3.Controls.Add(this.rtb);
             this.groupBox3.Controls.Add(this.buildFinalVJS3);
             this.groupBox3.Controls.Add(this.realDevicesTrigger);
             this.groupBox3.Controls.Add(this.DL);
             this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.result);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.Lime;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(786, 316);
+            this.groupBox3.Size = new System.Drawing.Size(752, 219);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Command Window";
@@ -85,6 +88,8 @@
             // 
             this.rtb.BackColor = System.Drawing.Color.Black;
             this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtb.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.ExecutingProcess = null;
             this.rtb.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtb.ForeColor = System.Drawing.Color.Lime;
@@ -93,10 +98,11 @@
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(746, 165);
+            this.rtb.Size = new System.Drawing.Size(744, 193);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
+            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
             // 
             // buildFinalVJS3
             // 
@@ -146,7 +152,7 @@
             // 
             this.result.BackColor = System.Drawing.Color.Black;
             this.result.ForeColor = System.Drawing.Color.Lime;
-            this.result.Location = new System.Drawing.Point(267, 140);
+            this.result.Location = new System.Drawing.Point(332, 220);
             this.result.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(133, 27);
@@ -330,10 +336,10 @@
             this.panel1.Controls.Add(this.txtBxDirectory);
             this.panel1.Controls.Add(this.txtBxArgs);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(4, 330);
+            this.panel1.Location = new System.Drawing.Point(4, 220);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(857, 145);
+            this.panel1.Size = new System.Drawing.Size(740, 146);
             this.panel1.TabIndex = 41;
             // 
             // BIGTEXT
@@ -380,12 +386,23 @@
             this.DESTROYSELF.UseVisualStyleBackColor = true;
             this.DESTROYSELF.Click += new System.EventHandler(this.DESTROYSELF_Click);
             // 
+            // initialDRD
+            // 
+            this.initialDRD.BackColor = System.Drawing.Color.Black;
+            this.initialDRD.ForeColor = System.Drawing.Color.Lime;
+            this.initialDRD.Location = new System.Drawing.Point(508, 373);
+            this.initialDRD.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.initialDRD.Name = "initialDRD";
+            this.initialDRD.Size = new System.Drawing.Size(133, 27);
+            this.initialDRD.TabIndex = 46;
+            this.toolTip.SetToolTip(this.initialDRD, "Text to send to the standard input stream of running process.");
+            // 
             // Android
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(868, 612);
+            this.ClientSize = new System.Drawing.Size(868, 219);
             this.Controls.Add(this.DESTROYSELF);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox3);
@@ -442,6 +459,7 @@
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Button DESTROYSELF;
+        public System.Windows.Forms.TextBox initialDRD;
     }
 }
 

@@ -1,12 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.Sockets;
@@ -46,11 +42,11 @@ namespace matrix_engine {
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e) {
-            Console.WriteLine("TIMER TEST 1 !!");
+           /* Console.WriteLine("TIMER TEST 1 !!");
             aTimer.Elapsed -= new ElapsedEventHandler(OnTimedEvent);
             aTimer.Enabled = false;
             this.Invalidate();
-            this.Update();
+            this.Update(); */
         }
 
         public PackageForm(MatrixEngineGUI MAIN) {
@@ -187,6 +183,20 @@ namespace matrix_engine {
                     }
                 }
                 ));
+
+                ANDROID_CMD_REAL_DEVICESLIST = new CmdWindowControlTestApp.Android(this, "REAL_DEVICES");
+                ANDROID_CMD_REAL_DEVICESLIST.Show();
+                ANDROID_CMD_REAL_DEVICESLIST.txtBxCmd.Text = "cmd.exe";
+                ANDROID_CMD_REAL_DEVICESLIST.btnRunCommand.PerformClick();
+                ANDROID_CMD_REAL_DEVICESLIST.txtBxStdin.Text = "SET PATH=%PATH%;" + ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+                ANDROID_CMD_REAL_DEVICESLIST.btnSendStdinToProcess.PerformClick();
+                ANDROID_CMD_REAL_DEVICESLIST.realDevicesTrigger.TextChanged += detectIRDL;
+                ANDROID_CMD_REAL_DEVICESLIST.txtBxStdin.Text = "adb devices";
+                ANDROID_CMD_REAL_DEVICESLIST.btnSendStdinToProcess.PerformClick();
+
+                Thread.Sleep(2000);
+                ANDROID_CMD_REAL_DEVICESLIST.Close();
+
             }
             // Automatic search for AVD path
             var ANDROID_AVD_FILES_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\.android\avd";
@@ -512,6 +522,30 @@ namespace matrix_engine {
                         REAL_DEVICES_LIST.Items.Add(DD);
                         MessageBox.Show("D=" + DD);
                         installOnRealDeviceProc(DD);
+                    }
+                }
+            }
+            REAL_DEVICES_LIST.SelectedItem = REAL_DEVICES_LIST.Items[0];
+        }
+
+        public void detectIRDL(object sender, EventArgs e) {
+            // REAL DEVICE LIST
+            //MessageBox.Show(this.ANDROID_CMD_REAL_DEVICESLIST.realDevicesTrigger.Text);
+            var HANDLER_ = this.ANDROID_CMD_REAL_DEVICESLIST.realDevicesTrigger.Text;
+            HANDLER_ = HANDLER_.Replace("offline", "");
+            // ??
+            string[] getList = HANDLER_.Split(new[] { "device" }, StringSplitOptions.None);
+            foreach (string D in getList) {
+                if (REAL_DEVICES_LIST.Items.Contains(D) == true) {
+                    MessageBox.Show("ALREDY IN LIST");
+                } else {
+                    // Not sure for more than 2 devices! For now works!
+                    string DD = "";
+                    if (D != "" && D.Length > 2) {
+                        DD = D.Remove(D.Length - 1);
+                        REAL_DEVICES_LIST.Items.Add(DD);
+                        MessageBox.Show("init D=" + DD);
+                        // installOnRealDeviceProc(DD);
                     }
                 }
             }
