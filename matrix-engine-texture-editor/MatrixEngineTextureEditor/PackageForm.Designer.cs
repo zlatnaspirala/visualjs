@@ -89,6 +89,8 @@ namespace matrix_engine {
             this.WITH_SSL = new System.Windows.Forms.CheckBox();
             this.label23 = new System.Windows.Forms.Label();
             this.REAL_DEVICES_LIST = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buildcanvas2dBtn
@@ -268,7 +270,7 @@ namespace matrix_engine {
             // 
             this.isSelfHost.AutoSize = true;
             this.isSelfHost.ForeColor = System.Drawing.Color.DarkOrange;
-            this.isSelfHost.Location = new System.Drawing.Point(1023, 227);
+            this.isSelfHost.Location = new System.Drawing.Point(971, 252);
             this.isSelfHost.Name = "isSelfHost";
             this.isSelfHost.Size = new System.Drawing.Size(141, 20);
             this.isSelfHost.TabIndex = 40;
@@ -281,7 +283,7 @@ namespace matrix_engine {
             this.HOSTPORT.BackColor = System.Drawing.Color.Black;
             this.HOSTPORT.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HOSTPORT.ForeColor = System.Drawing.Color.DarkOrange;
-            this.HOSTPORT.Location = new System.Drawing.Point(1066, 248);
+            this.HOSTPORT.Location = new System.Drawing.Point(1014, 273);
             this.HOSTPORT.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.HOSTPORT.Name = "HOSTPORT";
             this.HOSTPORT.Size = new System.Drawing.Size(70, 21);
@@ -293,7 +295,7 @@ namespace matrix_engine {
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label4.Location = new System.Drawing.Point(1020, 250);
+            this.label4.Location = new System.Drawing.Point(968, 275);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 15);
             this.label4.TabIndex = 42;
@@ -828,7 +830,7 @@ namespace matrix_engine {
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Orbitron", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label21.Location = new System.Drawing.Point(1016, 159);
+            this.label21.Location = new System.Drawing.Point(964, 184);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(201, 22);
             this.label21.TabIndex = 80;
@@ -868,7 +870,7 @@ namespace matrix_engine {
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label22.Location = new System.Drawing.Point(1017, 181);
+            this.label22.Location = new System.Drawing.Point(965, 206);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(119, 15);
             this.label22.TabIndex = 85;
@@ -878,7 +880,7 @@ namespace matrix_engine {
             // 
             this.WITH_SSL.AutoSize = true;
             this.WITH_SSL.ForeColor = System.Drawing.Color.DarkOrange;
-            this.WITH_SSL.Location = new System.Drawing.Point(1023, 201);
+            this.WITH_SSL.Location = new System.Drawing.Point(971, 226);
             this.WITH_SSL.Name = "WITH_SSL";
             this.WITH_SSL.Size = new System.Drawing.Size(59, 20);
             this.WITH_SSL.TabIndex = 86;
@@ -908,12 +910,36 @@ namespace matrix_engine {
             this.REAL_DEVICES_LIST.Size = new System.Drawing.Size(337, 24);
             this.REAL_DEVICES_LIST.TabIndex = 88;
             // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Orbitron", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label24.Location = new System.Drawing.Point(964, 39);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(391, 44);
+            this.label24.TabIndex = 90;
+            this.label24.Text = "Strongly recommended:\r\n To use public dev server with SSL.";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.Firebrick;
+            this.label25.Location = new System.Drawing.Point(1141, 169);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(107, 15);
+            this.label25.TabIndex = 91;
+            this.label25.Text = "not guaranteed";
+            // 
             // PackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1378, 822);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.REAL_DEVICES_LIST);
             this.Controls.Add(this.installOnRealDeviceBtn);
@@ -1058,5 +1084,7 @@ namespace matrix_engine {
         public System.Windows.Forms.Button installOnRealDeviceBtn;
         public System.Windows.Forms.Label label23;
         private System.Windows.Forms.ComboBox REAL_DEVICES_LIST;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
     }
 }
