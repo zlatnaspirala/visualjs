@@ -60,17 +60,8 @@ namespace matrix_engine {
         }
 
         private void prepareForPackBtn_Click(object sender, EventArgs e) {
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("runEditor();", "// READONLY_LINE runEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditor();", "// READONLY_LINE loadEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditorObjects();", "// READONLY_LINE loadEditorObjects();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE APPLICATION.EDITOR = false;", " APPLICATION.EDITOR = false;");
+            // CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("runEditor();", "// READONLY_LINE runEditor();");
         }
 
-        private void backToCodingBtn_Click(object sender, EventArgs e) {
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE runEditor();", "runEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE loadEditor();", "loadEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE loadEditorObjects();", "loadEditorObjects();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("APPLICATION.EDITOR = false;", "// READONLY_LINE APPLICATION.EDITOR = false;");
-        }
     }
 }

@@ -110,6 +110,7 @@ namespace matrix_engine
             this.button1.Size = new System.Drawing.Size(166, 28);
             this.button1.TabIndex = 1;
             this.button1.Text = "2dCanvas Texture";
+            this.toolTip1.SetToolTip(this.button1, "You need to run 2d texture editor (visualjs)");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -434,8 +435,8 @@ namespace matrix_engine
             this.exitEditorModeToolStripMenuItem});
             this.editorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(144, 20);
-            this.editorToolStripMenuItem.Text = "Editor [2D Texture]";
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(138, 20);
+            this.editorToolStripMenuItem.Text = "2DTexture Editor ";
             // 
             // opetEditorModeToolStripMenuItem
             // 
@@ -536,6 +537,7 @@ namespace matrix_engine
             this.button2.Size = new System.Drawing.Size(122, 28);
             this.button2.TabIndex = 5;
             this.button2.Text = "WebGL app";
+            this.toolTip1.SetToolTip(this.button2, "Load matrix-engine app");
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -556,7 +558,7 @@ namespace matrix_engine
             this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "MatrixEngineGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Matrix-Engine GUI Texture Editor ver 1.0.0";
+            this.Text = "Matrix-Engine GUI Editor ver 1.0.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MinimumSizeChanged += new System.EventHandler(this.MatrixEngineGUI_MinimumSizeChanged);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MatrixEngineGUI_FormClosing);

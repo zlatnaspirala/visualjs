@@ -31,8 +31,8 @@ namespace matrix_engine {
             this.saveBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.prepareForPackBtn = new System.Windows.Forms.Button();
-            this.backToCodingBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // CODE_EDITOR
@@ -83,6 +83,7 @@ namespace matrix_engine {
             this.saveBtn.Size = new System.Drawing.Size(125, 27);
             this.saveBtn.TabIndex = 13;
             this.saveBtn.Text = "Save";
+            this.toolTip1.SetToolTip(this.saveBtn, "To affect this changes you need to BUILD android project from packager");
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -100,46 +101,24 @@ namespace matrix_engine {
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // prepareForPackBtn
+            // pictureBox1
             // 
-            this.prepareForPackBtn.BackColor = System.Drawing.Color.Black;
-            this.prepareForPackBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.prepareForPackBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prepareForPackBtn.ForeColor = System.Drawing.Color.Lime;
-            this.prepareForPackBtn.Image = global::matrix_engine.Properties.Resources.transparentDark20;
-            this.prepareForPackBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.prepareForPackBtn.Location = new System.Drawing.Point(5, 624);
-            this.prepareForPackBtn.Name = "prepareForPackBtn";
-            this.prepareForPackBtn.Size = new System.Drawing.Size(196, 29);
-            this.prepareForPackBtn.TabIndex = 16;
-            this.prepareForPackBtn.Text = "Prepare for final build";
-            this.prepareForPackBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.prepareForPackBtn, "Simple deactivate editor .");
-            this.prepareForPackBtn.UseVisualStyleBackColor = false;
-            this.prepareForPackBtn.Click += new System.EventHandler(this.prepareForPackBtn_Click);
-            // 
-            // backToCodingBtn
-            // 
-            this.backToCodingBtn.BackColor = System.Drawing.Color.Black;
-            this.backToCodingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backToCodingBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backToCodingBtn.ForeColor = System.Drawing.Color.Lime;
-            this.backToCodingBtn.Location = new System.Drawing.Point(5, 657);
-            this.backToCodingBtn.Name = "backToCodingBtn";
-            this.backToCodingBtn.Size = new System.Drawing.Size(196, 29);
-            this.backToCodingBtn.TabIndex = 17;
-            this.backToCodingBtn.Text = "Back to coding";
-            this.backToCodingBtn.UseVisualStyleBackColor = false;
-            this.backToCodingBtn.Click += new System.EventHandler(this.backToCodingBtn_Click);
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = global::matrix_engine.Properties.Resources._64x64;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(644, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(48, 46);
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
             // 
             // ScritpEditorAndroid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(694, 595);
-            this.Controls.Add(this.backToCodingBtn);
-            this.Controls.Add(this.prepareForPackBtn);
+            this.ClientSize = new System.Drawing.Size(694, 597);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.saveBtn);
@@ -150,6 +129,7 @@ namespace matrix_engine {
             this.Text = "ScritpEditor";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ScritpEditor_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,7 +143,6 @@ namespace matrix_engine {
         private System.Windows.Forms.Button button1;
         public System.Windows.Forms.Label SCRIPT_SRC;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button prepareForPackBtn;
-        private System.Windows.Forms.Button backToCodingBtn;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
