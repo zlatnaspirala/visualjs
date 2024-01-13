@@ -31,30 +31,35 @@ namespace matrix_engine {
             this.saveBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.prepareForPackBtn = new System.Windows.Forms.Button();
-            this.backToCodingBtn = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // CODE_EDITOR
             // 
             this.CODE_EDITOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CODE_EDITOR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CODE_EDITOR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CODE_EDITOR.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CODE_EDITOR.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CODE_EDITOR.ForeColor = System.Drawing.Color.Black;
-            this.CODE_EDITOR.Location = new System.Drawing.Point(2, 44);
+            this.CODE_EDITOR.Location = new System.Drawing.Point(0, 0);
             this.CODE_EDITOR.Name = "CODE_EDITOR";
-            this.CODE_EDITOR.Size = new System.Drawing.Size(690, 517);
+            this.CODE_EDITOR.Size = new System.Drawing.Size(622, 635);
             this.CODE_EDITOR.TabIndex = 0;
             this.CODE_EDITOR.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Orbitron", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Orbitron", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkOrange;
-            this.label1.Location = new System.Drawing.Point(7, 5);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(319, 25);
+            this.label1.Size = new System.Drawing.Size(287, 22);
             this.label1.TabIndex = 9;
             this.label1.Text = "Matrix-Engine Code Editor";
             // 
@@ -63,7 +68,7 @@ namespace matrix_engine {
             this.SCRIPT_SRC.AutoSize = true;
             this.SCRIPT_SRC.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SCRIPT_SRC.ForeColor = System.Drawing.Color.SeaShell;
-            this.SCRIPT_SRC.Location = new System.Drawing.Point(-3, 27);
+            this.SCRIPT_SRC.Location = new System.Drawing.Point(296, 0);
             this.SCRIPT_SRC.Name = "SCRIPT_SRC";
             this.SCRIPT_SRC.Size = new System.Drawing.Size(72, 14);
             this.SCRIPT_SRC.TabIndex = 10;
@@ -78,9 +83,9 @@ namespace matrix_engine {
             this.saveBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.White;
             this.saveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.saveBtn.Location = new System.Drawing.Point(495, 565);
+            this.saveBtn.Location = new System.Drawing.Point(354, 3);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(125, 27);
+            this.saveBtn.Size = new System.Drawing.Size(154, 27);
             this.saveBtn.TabIndex = 13;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -92,66 +97,65 @@ namespace matrix_engine {
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(624, 565);
+            this.button1.Location = new System.Drawing.Point(514, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(68, 27);
+            this.button1.Size = new System.Drawing.Size(105, 27);
             this.button1.TabIndex = 14;
             this.button1.Text = "HIDE";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // prepareForPackBtn
+            // flowLayoutPanel1
             // 
-            this.prepareForPackBtn.BackColor = System.Drawing.Color.Black;
-            this.prepareForPackBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.prepareForPackBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prepareForPackBtn.ForeColor = System.Drawing.Color.Lime;
-            this.prepareForPackBtn.Image = global::matrix_engine.Properties.Resources.transparentDark20;
-            this.prepareForPackBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.prepareForPackBtn.Location = new System.Drawing.Point(5, 624);
-            this.prepareForPackBtn.Name = "prepareForPackBtn";
-            this.prepareForPackBtn.Size = new System.Drawing.Size(196, 29);
-            this.prepareForPackBtn.TabIndex = 16;
-            this.prepareForPackBtn.Text = "Prepare for final build";
-            this.prepareForPackBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip1.SetToolTip(this.prepareForPackBtn, "Simple deactivate editor .");
-            this.prepareForPackBtn.UseVisualStyleBackColor = false;
-            this.prepareForPackBtn.Click += new System.EventHandler(this.prepareForPackBtn_Click);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.saveBtn);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 665);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(622, 36);
+            this.flowLayoutPanel1.TabIndex = 16;
             // 
-            // backToCodingBtn
+            // flowLayoutPanel2
             // 
-            this.backToCodingBtn.BackColor = System.Drawing.Color.Black;
-            this.backToCodingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backToCodingBtn.Font = new System.Drawing.Font("Stormfaze", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backToCodingBtn.ForeColor = System.Drawing.Color.Lime;
-            this.backToCodingBtn.Location = new System.Drawing.Point(5, 657);
-            this.backToCodingBtn.Name = "backToCodingBtn";
-            this.backToCodingBtn.Size = new System.Drawing.Size(196, 29);
-            this.backToCodingBtn.TabIndex = 17;
-            this.backToCodingBtn.Text = "Back to coding";
-            this.backToCodingBtn.UseVisualStyleBackColor = false;
-            this.backToCodingBtn.Click += new System.EventHandler(this.backToCodingBtn_Click);
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel2.Controls.Add(this.label1);
+            this.flowLayoutPanel2.Controls.Add(this.SCRIPT_SRC);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(622, 30);
+            this.flowLayoutPanel2.TabIndex = 17;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.CODE_EDITOR);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 30);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(622, 635);
+            this.panel1.TabIndex = 18;
             // 
             // ScritpEditor3d
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(694, 595);
-            this.Controls.Add(this.backToCodingBtn);
-            this.Controls.Add(this.prepareForPackBtn);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.SCRIPT_SRC);
-            this.Controls.Add(this.CODE_EDITOR);
+            this.ClientSize = new System.Drawing.Size(622, 701);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ScritpEditor3d";
             this.Text = "ScritpEditor";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ScritpEditor_Load);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -163,7 +167,8 @@ namespace matrix_engine {
         private System.Windows.Forms.Button button1;
         public System.Windows.Forms.Label SCRIPT_SRC;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button prepareForPackBtn;
-        private System.Windows.Forms.Button backToCodingBtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

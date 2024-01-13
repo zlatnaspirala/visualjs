@@ -42,17 +42,16 @@ namespace CmdWindowControlTestApp {
         public Process runningProcess;
         public int _PID_;
         public Boolean preventSignalForHost = false;
-
         public Boolean preventHYBRYD_IF_WEBGL = false;
-
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
+
+        public string STATUS_BUILD_GUI_ME = "NO";
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
@@ -212,6 +211,12 @@ namespace CmdWindowControlTestApp {
                 }
             } else if (text.Contains("The build file was created")) {
                 buildFinalVJS3.Text = "VJS3-final build" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+            } else if (text.Contains("browserify")) {
+                // buildgui.Text = "STATUS_BUILD_GUI_ME";
+                STATUS_BUILD_GUI_ME = "YES";
+            } else if (text.Contains("matrix-engine>")) {
+                buildgui.Text = "Build gui 3d ME done.";
+                STATUS_BUILD_GUI_ME = "NO";
             }
         }
 
@@ -269,6 +274,10 @@ namespace CmdWindowControlTestApp {
 
         private void KILLME_Click(object sender, EventArgs e) {
             
+        }
+
+        private void rtb_TextChanged(object sender, EventArgs e) {
+
         }
     }
 }

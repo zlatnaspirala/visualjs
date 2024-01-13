@@ -32,14 +32,25 @@ namespace matrix_engine {
             toolTip1.SetToolTip(this.SCRIPT_SRC, "Click to open in file explorer.");
         }
 
+        public void test(object sender, EventArgs e) {
+            MessageBox.Show("GOOD", "GOOD");
+        }
         private void saveBtn_Click(object sender, EventArgs e) {
             try {
                 string TEXTURE_JS_FILE = PATH;
                 string PACKAGE_CONTENT = CODE_EDITOR.Text;
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
-                // Thread.Sleep(50);
+                Thread.Sleep(100);
                 // MAINFORM.button2.PerformClick();
-            } catch (Exception err) {}
+                if (MAINFORM.cmdWebglRun != null && MAINFORM.cmdWebglRun.IsDisposed == false) {
+                    MAINFORM.cmdWebglRun.buildgui.Text = "";
+                    MAINFORM.cmdWebglRun.buildgui.TextChanged += test;
+                    MAINFORM.cmdWebglRun.btnSendStdinToProcess.PerformClick();
+                }
+
+            } catch (Exception err) {
+                MessageBox.Show("ERROR IN SAVE PROCEDURE", err.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e) {

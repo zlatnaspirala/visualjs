@@ -28,7 +28,7 @@ namespace matrix_engine {
         public string APP_2D_URL = "";
         CmdWindowControlTestApp.MainForm cmdStream;
         CmdWindowControlTestApp.MainForm cmdLoader;
-        CmdWindowControlTestApp.MainForm cmdWebglRun;
+        public CmdWindowControlTestApp.MainForm cmdWebglRun;
         CmdWindowControlTestApp.MainForm cmdWebglHOST;
         CmdWindowControlTestApp.MainForm cmdVJS3EDITOR;
         CmdWindowControlTestApp.MainForm cmdVJS3WATCH;
@@ -205,7 +205,7 @@ namespace matrix_engine {
                 this.Text = "Matrix-Engine [" + URLStart + "]";
             }
         }
-        private void chromiumWebBrowser1_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) {}
+        private void chromiumWebBrowser1_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e) { }
 
         public void buildRes() {
             if (cmdKillerProc == null || cmdKillerProc.IsDisposed) {
@@ -253,9 +253,9 @@ namespace matrix_engine {
             ///
             var APP_DIR_TEST_EXPORTS = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\matrix-texture-tool\exports\";
             if (Directory.Exists(APP_DIR_TEST_EXPORTS) == false) { Directory.CreateDirectory(APP_DIR_TEST_EXPORTS); }
-              var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "2dcanvas";
-            
-          
+            var APP_DIR_TEST_EXPORTS__ = APP_DIR_TEST_EXPORTS + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + "2dcanvas";
+
+
             cmdKillerProc.txtBxStdin.Text = "xcopy /e /k /h /i \"" + APP_DIR_TEST + "\" \"" + APP_DIR_TEST_EXPORTS__ + "\\" + "\"";
             cmdKillerProc.btnSendStdinToProcess.PerformClick();
             packager.webAppExportPath.Text = APP_DIR_TEST_EXPORTS__;
@@ -325,7 +325,7 @@ namespace matrix_engine {
         private void cmdWATCHLoader(object sender, EventArgs e) {
 
             // cmdVJS3WATCH.Size = new Size(this.Size.Width/2, this.Size.Height/5);
-            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 100*55, Location.Y + this.Size.Height / 4);
+            cmdVJS3WATCH.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + this.Size.Height / 4);
 
             cmdVJS3WATCH.txtBxStdin.Text = @"c:";
             cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
@@ -334,6 +334,7 @@ namespace matrix_engine {
             cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
 
             // "gui-editor": "watchify ./2DTextureEditor/gui-texture-editor.js -p [esmify --noImplicitAny] -o ./2DTextureEditor/builds/gui.tex.js",
+            // In some reason watch not working
             cmdVJS3WATCH.txtBxStdin.Text = @"npm run gui-editor-watch";
             cmdVJS3WATCH.btnSendStdinToProcess.PerformClick();
 
@@ -379,14 +380,14 @@ namespace matrix_engine {
 
         private void cdmStreamWizardloaded(object sender, EventArgs e) {
             // Install new instance - for now matrix-engine
-            cmdStream.Size = new Size(this.Size.Width /100 * 90, this.Size.Height / 4);
-            cmdStream.Location = new Point(Location.X + this.Size.Width / 100 * 5 , Location.Y + this.Size.Height / 4);
+            cmdStream.Size = new Size(this.Size.Width / 100 * 90, this.Size.Height / 4);
+            cmdStream.Location = new Point(Location.X + this.Size.Width / 100 * 5, Location.Y + this.Size.Height / 4);
             // cmdStream.FormBorderStyle = FormBorderStyle.None;
             // cmdStream.BackColor = Color.FromArgb(205, Color.OrangeRed)
             cmdStream.Text = "Download and install deps library for matrix-engine...";
             cmdStream.BIGTEXT.Text = "Download deps library [matrix engine] please wait...";
             cmdStream.txtBxStdin.Text = @"c:";
-            cmdStream.btnSendStdinToProcess.PerformClick();            
+            cmdStream.btnSendStdinToProcess.PerformClick();
             cmdStream.txtBxStdin.Text = @"cd " + APP_DIR;
             cmdStream.btnSendStdinToProcess.PerformClick();
             cmdStream.txtBxStdin.Text = @"git clone https://github.com/zlatnaspirala/matrix-engine.git";
@@ -400,7 +401,7 @@ namespace matrix_engine {
         private void button1_Click(object sender, EventArgs e) {
             if (APP_2D_URL == "") {
                 MessageBox.Show("You have to start the 2d texture editor first", "Matrix-engine", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; 
+                return;
             }
             URLTEXT.Text = APP_2D_URL;
             if (FLAG_FIRST_TIME == true) {
@@ -424,8 +425,8 @@ namespace matrix_engine {
         private async void ClearCache() {
             try {
                 using (var devToolsClient = chromiumWebBrowser1.GetDevToolsClient()) {
-                var response = await devToolsClient.Network.ClearBrowserCacheAsync();
-                chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
+                    var response = await devToolsClient.Network.ClearBrowserCacheAsync();
+                    chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
                 }
             } catch (Exception err) {
                 MessageBox.Show("ERROR IN CLEAR CACHE [chromiumWebBrowser1]", err.ToString());
@@ -439,13 +440,13 @@ namespace matrix_engine {
                     FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
                 }
             } catch (Exception err) {
-                MessageBox.Show( "PLease wait one sec... ", err.ToString());
+                MessageBox.Show("PLease wait one sec... ", err.ToString());
                 Thread.Sleep(1000);
                 using (var devToolsClient = FSBrowser.chromiumWebBrowser1.GetDevToolsClient()) {
                     var response = await devToolsClient.Network.ClearBrowserCacheAsync();
                     FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
                 }
-                
+
 
             }
         }
@@ -572,8 +573,8 @@ namespace matrix_engine {
             k.Type = KeyEventType.KeyDown;
             k.IsSystemKey = false;
             if (FSBrowser != null) {
-              FSBrowser.chromiumWebBrowser1.Focus();
-              FSBrowser.chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
+                FSBrowser.chromiumWebBrowser1.Focus();
+                FSBrowser.chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
             }
             if (chromiumWebBrowser1 != null) {
                 chromiumWebBrowser1.Focus();
@@ -591,7 +592,16 @@ namespace matrix_engine {
                 cmdVJS3EDITOR.Hide();
                 cmdVJS3WATCH.Hide();
             } else {
-                MessageBox.Show("You need to run editor first!", "Info", MessageBoxButtons.OK);
+                //  MessageBox.Show("You need to run editor first!", "Info", MessageBoxButtons.OK);
+            }
+            if (cmdKillerProc.IsDisposed == false || cmdKillerProc != null) {
+                cmdKillerProc.Hide();
+            }
+            if (cmdStream.IsDisposed == false || cmdStream != null) {
+                cmdStream.Hide();
+            }
+            if (cmdWebglHOST.IsDisposed == false || cmdWebglHOST != null) {
+                cmdWebglHOST.Hide();
             }
         }
 
@@ -658,7 +668,17 @@ namespace matrix_engine {
                 cmdVJS3EDITOR.Show();
                 cmdVJS3WATCH.Show();
             } else {
-                MessageBox.Show("You need to run editor first!", "Info", MessageBoxButtons.OK);
+               // MessageBox.Show("You need to run editor first!", "Info", MessageBoxButtons.OK);
+            }
+
+            if (cmdKillerProc != null && cmdKillerProc.IsDisposed == false) {
+                cmdKillerProc.Show();
+            }
+            if (cmdStream != null && cmdStream.IsDisposed == false) {
+                cmdStream.Show();
+            }
+            if (cmdWebglHOST != null && cmdWebglHOST.IsDisposed == false) {
+                cmdWebglHOST.Show();
             }
         }
 
@@ -843,12 +863,10 @@ namespace matrix_engine {
         }
 
         private void runMatrixengineAppToolStripMenuItem_Click(object sender, EventArgs e) {
-
             if (cmdWebglHOST != null) {
                 MessageBox.Show("Matrix-engine [3d part] hosting already runned...", "Matrix-Engine", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             cmdWebglRun = new CmdWindowControlTestApp.MainForm();
             cmdWebglRun.Load += cmdWebGLRunEvent;
             cmdWebglRun.Show();
@@ -858,13 +876,10 @@ namespace matrix_engine {
             cmdWebglHOST.Load += cmdWebGLHOSTING;
             cmdWebglHOST.Show();
             cmdWebglHOST.result.TextChanged += detectWebglHost;
-
-
         }
 
         private void detectWebglHost(object sender, EventArgs e) {
             MessageBox.Show("Ruuning matrix-engine 3d instance!");
-
             if (scritpEditorAndroid != null && scritpEditorAndroid.IsDisposed == false) {
                 scritpEditorAndroid.Show();
             } else {
@@ -911,8 +926,8 @@ namespace matrix_engine {
             cmdWebglRun.btnSendStdinToProcess.PerformClick();
             cmdWebglRun.txtBxStdin.Text = @"cd " + APP_DIR;
             cmdWebglRun.btnSendStdinToProcess.PerformClick();
-            // npm run host-for-gui Refer on canvas2d part
-            cmdWebglRun.txtBxStdin.Text = @"npm run gui-app";
+            // npm run host-for-gui Refer on canvas2d part WATCH NOT WORK FOR NOW!
+            cmdWebglRun.txtBxStdin.Text = @"npm run build.gui.app";
             cmdWebglRun.btnSendStdinToProcess.PerformClick();
         }
 
@@ -934,11 +949,21 @@ namespace matrix_engine {
         }
 
         private void button2_Click(object sender, EventArgs e) {
+
+            if (chromiumWebBrowser1 != null && chromiumWebBrowser1.IsDisposed == false && chromiumWebBrowser1.Visible == true) {
+            
+            }
+            if (FSBrowser != null && FSBrowser.IsDisposed == false && FSBrowser.chromiumWebBrowser1.IsDisposed == false && FSBrowser.Visible == true) {
+                
+            }
+
             if (chromiumWebBrowser1 != null) {
+                ClearCache();
                 URLTEXT.Text = "http://localhost/public/gui.html";
                 chromiumWebBrowser1.LoadUrl("http://localhost/public/gui.html");
             } else {
                 if (FSBrowser != null && FSBrowser.IsDisposed == false && FSBrowser.chromiumWebBrowser1.IsDisposed == false && FSBrowser.Visible == true) {
+                    ClearCachePopup();
                     URLTEXT.Text = "http://localhost/public/gui.html";
                     FSBrowser.chromiumWebBrowser1.LoadUrl(URLTEXT.Text);
                 }

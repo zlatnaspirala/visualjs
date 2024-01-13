@@ -56,6 +56,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.KILL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buildgui = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +67,6 @@
             this.groupBox3.Controls.Add(this.BIGTEXT);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.CLEAR);
-            this.groupBox3.Controls.Add(this.killProc);
             this.groupBox3.Controls.Add(this.rtb);
             this.groupBox3.Controls.Add(this.result);
             this.groupBox3.Controls.Add(this.exported2d);
@@ -75,6 +75,8 @@
             this.groupBox3.Controls.Add(this.resultNpmI);
             this.groupBox3.Controls.Add(this.resultEditor);
             this.groupBox3.Controls.Add(this.exportedwebgl);
+            this.groupBox3.Controls.Add(this.buildgui);
+            this.groupBox3.Controls.Add(this.killProc);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.OrangeRed;
@@ -82,7 +84,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(1042, 258);
+            this.groupBox3.Size = new System.Drawing.Size(1042, 244);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Terminal";
@@ -112,7 +114,7 @@
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(718, 0);
+            this.button1.Location = new System.Drawing.Point(823, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -125,7 +127,7 @@
             // 
             this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(826, 0);
+            this.CLEAR.Location = new System.Drawing.Point(933, 0);
             this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.CLEAR.Name = "CLEAR";
             this.CLEAR.Size = new System.Drawing.Size(100, 27);
@@ -138,7 +140,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(933, 0);
+            this.killProc.Location = new System.Drawing.Point(928, 84);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -153,17 +155,18 @@
             this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.ExecutingProcess = null;
-            this.rtb.Font = new System.Drawing.Font("Cinzel Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb.Font = new System.Drawing.Font("Noto Sans Cond", 11.25F, System.Drawing.FontStyle.Bold);
             this.rtb.ForeColor = System.Drawing.Color.DarkOrange;
             this.rtb.IgnoreOutputTextMatchingLastInput = true;
             this.rtb.Location = new System.Drawing.Point(4, 23);
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1034, 232);
+            this.rtb.Size = new System.Drawing.Size(1034, 218);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
+            this.rtb.TextChanged += new System.EventHandler(this.rtb_TextChanged);
             // 
             // result
             // 
@@ -378,12 +381,19 @@
             this.panel1.Size = new System.Drawing.Size(378, 307);
             this.panel1.TabIndex = 41;
             // 
+            // buildgui
+            // 
+            this.buildgui.Location = new System.Drawing.Point(897, 206);
+            this.buildgui.Name = "buildgui";
+            this.buildgui.Size = new System.Drawing.Size(100, 27);
+            this.buildgui.TabIndex = 50;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1042, 258);
+            this.ClientSize = new System.Drawing.Size(1042, 244);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -433,6 +443,7 @@
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.TextBox exported2d;
         public System.Windows.Forms.TextBox exportedwebgl;
+        public System.Windows.Forms.TextBox buildgui;
     }
 }
 
