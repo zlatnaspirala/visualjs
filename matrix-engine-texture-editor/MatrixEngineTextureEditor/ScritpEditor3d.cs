@@ -37,8 +37,8 @@ namespace matrix_engine {
                 string TEXTURE_JS_FILE = PATH;
                 string PACKAGE_CONTENT = CODE_EDITOR.Text;
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
-                Thread.Sleep(50);
-                MAINFORM.button2.PerformClick();
+                // Thread.Sleep(50);
+                // MAINFORM.button2.PerformClick();
             } catch (Exception err) {}
         }
 

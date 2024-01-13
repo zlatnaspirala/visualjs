@@ -91,6 +91,7 @@ namespace matrix_engine {
             this.REAL_DEVICES_LIST = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.RUN_ANDROIDBTN_NOARG = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buildcanvas2dBtn
@@ -607,7 +608,7 @@ namespace matrix_engine {
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Orbitron", 8.999999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.OrangeRed;
             this.label15.Location = new System.Drawing.Point(5, 633);
             this.label15.Name = "label15";
@@ -765,6 +766,7 @@ namespace matrix_engine {
             this.ANDROID_STUDIO.Name = "ANDROID_STUDIO";
             this.ANDROID_STUDIO.Size = new System.Drawing.Size(337, 21);
             this.ANDROID_STUDIO.TabIndex = 76;
+            this.toolTip1.SetToolTip(this.ANDROID_STUDIO, "This is optimal , you no neeed to have android studio.");
             // 
             // label20
             // 
@@ -800,11 +802,13 @@ namespace matrix_engine {
             this.refreshDeviceListBtn.BackgroundImage = global::matrix_engine.Properties.Resources._return;
             this.refreshDeviceListBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.refreshDeviceListBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refreshDeviceListBtn.ForeColor = System.Drawing.Color.Black;
-            this.refreshDeviceListBtn.Location = new System.Drawing.Point(746, 771);
+            this.refreshDeviceListBtn.Font = new System.Drawing.Font("Orbitron", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.refreshDeviceListBtn.ForeColor = System.Drawing.Color.White;
+            this.refreshDeviceListBtn.Location = new System.Drawing.Point(676, 771);
             this.refreshDeviceListBtn.Name = "refreshDeviceListBtn";
-            this.refreshDeviceListBtn.Size = new System.Drawing.Size(29, 29);
+            this.refreshDeviceListBtn.Size = new System.Drawing.Size(99, 29);
             this.refreshDeviceListBtn.TabIndex = 84;
+            this.refreshDeviceListBtn.Text = "Get device";
             this.toolTip1.SetToolTip(this.refreshDeviceListBtn, "Refresh Devices List");
             this.refreshDeviceListBtn.UseVisualStyleBackColor = false;
             this.refreshDeviceListBtn.Click += new System.EventHandler(this.refreshDeviceListBtn_Click);
@@ -846,9 +850,11 @@ namespace matrix_engine {
             this.RUN_ANDROIDBTN.Image = global::matrix_engine.Properties.Resources._64x64;
             this.RUN_ANDROIDBTN.Location = new System.Drawing.Point(533, 695);
             this.RUN_ANDROIDBTN.Name = "RUN_ANDROIDBTN";
-            this.RUN_ANDROIDBTN.Size = new System.Drawing.Size(316, 73);
+            this.RUN_ANDROIDBTN.Size = new System.Drawing.Size(137, 73);
             this.RUN_ANDROIDBTN.TabIndex = 81;
-            this.RUN_ANDROIDBTN.Text = "RUN APK";
+            this.RUN_ANDROIDBTN.Text = "RUN APK (APP_URL)";
+            this.toolTip1.SetToolTip(this.RUN_ANDROIDBTN, "Run android app with custom URL. After change APP_URL no need for rebuild android" +
+        " project.");
             this.RUN_ANDROIDBTN.UseVisualStyleBackColor = false;
             this.RUN_ANDROIDBTN.Click += new System.EventHandler(this.INSTALL_ANDROIDBTN_Click);
             // 
@@ -862,7 +868,7 @@ namespace matrix_engine {
             this.DEVICES_LIST.ItemHeight = 16;
             this.DEVICES_LIST.Location = new System.Drawing.Point(533, 774);
             this.DEVICES_LIST.Name = "DEVICES_LIST";
-            this.DEVICES_LIST.Size = new System.Drawing.Size(207, 24);
+            this.DEVICES_LIST.Size = new System.Drawing.Size(137, 24);
             this.DEVICES_LIST.TabIndex = 83;
             // 
             // label22
@@ -909,6 +915,7 @@ namespace matrix_engine {
             this.REAL_DEVICES_LIST.Name = "REAL_DEVICES_LIST";
             this.REAL_DEVICES_LIST.Size = new System.Drawing.Size(337, 24);
             this.REAL_DEVICES_LIST.TabIndex = 88;
+            this.toolTip1.SetToolTip(this.REAL_DEVICES_LIST, "If this filed is empty just use GET DEVICES BTN. ");
             // 
             // label24
             // 
@@ -932,12 +939,32 @@ namespace matrix_engine {
             this.label25.TabIndex = 91;
             this.label25.Text = "not guaranteed";
             // 
+            // RUN_ANDROIDBTN_NOARG
+            // 
+            this.RUN_ANDROIDBTN_NOARG.BackColor = System.Drawing.Color.OrangeRed;
+            this.RUN_ANDROIDBTN_NOARG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.RUN_ANDROIDBTN_NOARG.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RUN_ANDROIDBTN_NOARG.Font = new System.Drawing.Font("Orbitron", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RUN_ANDROIDBTN_NOARG.ForeColor = System.Drawing.Color.Black;
+            this.RUN_ANDROIDBTN_NOARG.Image = global::matrix_engine.Properties.Resources._64x64;
+            this.RUN_ANDROIDBTN_NOARG.Location = new System.Drawing.Point(676, 695);
+            this.RUN_ANDROIDBTN_NOARG.Name = "RUN_ANDROIDBTN_NOARG";
+            this.RUN_ANDROIDBTN_NOARG.Size = new System.Drawing.Size(173, 73);
+            this.RUN_ANDROIDBTN_NOARG.TabIndex = 92;
+            this.RUN_ANDROIDBTN_NOARG.Text = "RUN APK";
+            this.toolTip1.SetToolTip(this.RUN_ANDROIDBTN_NOARG, "Run android app normally with no args.\r\n If you changed androidScript then you ne" +
+        "ed to rebuild project one more time [also install and run] to see changes on dev" +
+        "ice. ");
+            this.RUN_ANDROIDBTN_NOARG.UseVisualStyleBackColor = false;
+            this.RUN_ANDROIDBTN_NOARG.Click += new System.EventHandler(this.RUN_ANDROIDBTN_NOARG_Click);
+            // 
             // PackageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1378, 822);
+            this.Controls.Add(this.RUN_ANDROIDBTN_NOARG);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label23);
@@ -1086,5 +1113,6 @@ namespace matrix_engine {
         private System.Windows.Forms.ComboBox REAL_DEVICES_LIST;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
+        public System.Windows.Forms.Button RUN_ANDROIDBTN_NOARG;
     }
 }

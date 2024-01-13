@@ -112,7 +112,7 @@
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(598, 0);
+            this.button1.Location = new System.Drawing.Point(718, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 27);
@@ -125,7 +125,7 @@
             // 
             this.CLEAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CLEAR.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CLEAR.Location = new System.Drawing.Point(706, 0);
+            this.CLEAR.Location = new System.Drawing.Point(826, 0);
             this.CLEAR.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.CLEAR.Name = "CLEAR";
             this.CLEAR.Size = new System.Drawing.Size(100, 27);
@@ -138,7 +138,7 @@
             // 
             this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(813, 0);
+            this.killProc.Location = new System.Drawing.Point(933, 0);
             this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.killProc.Name = "killProc";
             this.killProc.Size = new System.Drawing.Size(100, 27);
@@ -153,8 +153,8 @@
             this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.ExecutingProcess = null;
-            this.rtb.Font = new System.Drawing.Font("David CLM", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.rtb.ForeColor = System.Drawing.Color.Coral;
+            this.rtb.Font = new System.Drawing.Font("Cinzel Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtb.ForeColor = System.Drawing.Color.DarkOrange;
             this.rtb.IgnoreOutputTextMatchingLastInput = true;
             this.rtb.Location = new System.Drawing.Point(4, 23);
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -388,10 +388,10 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);

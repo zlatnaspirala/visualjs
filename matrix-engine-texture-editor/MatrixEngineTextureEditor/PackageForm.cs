@@ -194,7 +194,7 @@ namespace matrix_engine {
                 ANDROID_CMD_REAL_DEVICESLIST.txtBxStdin.Text = "adb devices";
                 ANDROID_CMD_REAL_DEVICESLIST.btnSendStdinToProcess.PerformClick();
 
-                Thread.Sleep(2000);
+                Thread.Sleep(200);
                 ANDROID_CMD_REAL_DEVICESLIST.Close();
 
             }
@@ -646,6 +646,16 @@ namespace matrix_engine {
 
         private void AVDS_LIST_SelectedIndexChanged(object sender, EventArgs e) {
 
+        }
+
+        private void RUN_ANDROIDBTN_NOARG_Click(object sender, EventArgs e) {
+            ANDROID_CMD_ADB_RUN = new CmdWindowControlTestApp.Android(this, "ANDROID_CMD_ADB_RUN");
+            ANDROID_CMD_ADB_RUN.Show();
+            ANDROID_CMD_ADB_RUN.txtBxCmd.Text = "adb.exe";
+            ANDROID_CMD_ADB_RUN.txtBxDirectory.Text = ANDROIDSDKPATH.Text.ToString() + "/platform-tools";
+            var rc2 = "shell am start -n com.nikolalukic.matrixengineandroid/com.nikolalukic.matrixengineandroid.MainActivity";
+            ANDROID_CMD_ADB_RUN.txtBxArgs.Text = rc2;
+            ANDROID_CMD_ADB_RUN.btnRunCommand.PerformClick();
         }
     }
 }
