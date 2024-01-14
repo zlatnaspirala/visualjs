@@ -16,11 +16,11 @@ namespace matrix_engine {
         MatrixEngineGUI MAINFORM;
         public string PATH = "";
         public CmdWindowControlTestApp.Android cmdVJS3WATCH;
+        Boolean PREVENT_SAVE = false;
+
         public ScritpEditor3d(String P, String APP_NAME, MatrixEngineGUI MAINFORM_) {
             InitializeComponent();
-            // APP_DIR - p APP_NAME
             PATH = P + "\\gui\\app.js";
-            // ERROR PATH
             StreamReader sr = new StreamReader(PATH);
             CODE_EDITOR.Text = sr.ReadToEnd().ToString();
             sr.Close();
@@ -28,28 +28,31 @@ namespace matrix_engine {
         }
 
         private void ScritpEditor_Load(object sender, EventArgs e) {
-            // empty
             toolTip1.SetToolTip(this.SCRIPT_SRC, "Click to open in file explorer.");
         }
 
         public void test(object sender, EventArgs e) {
-            MessageBox.Show("GOOD", "GOOD");
+            // MessageBox.Show("Matrix-engine project js pack builded.", "Status good");
+            PREVENT_SAVE = false;
+            MAINFORM.button2.PerformClick();
         }
         private void saveBtn_Click(object sender, EventArgs e) {
-            try {
-                string TEXTURE_JS_FILE = PATH;
-                string PACKAGE_CONTENT = CODE_EDITOR.Text;
-                File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
-                Thread.Sleep(100);
-                // MAINFORM.button2.PerformClick();
-                if (MAINFORM.cmdWebglRun != null && MAINFORM.cmdWebglRun.IsDisposed == false) {
-                    MAINFORM.cmdWebglRun.buildgui.Text = "";
-                    MAINFORM.cmdWebglRun.buildgui.TextChanged += test;
-                    MAINFORM.cmdWebglRun.btnSendStdinToProcess.PerformClick();
+            if (PREVENT_SAVE == false) {
+                PREVENT_SAVE = true;
+                try {
+                    string TEXTURE_JS_FILE = PATH;
+                    string PACKAGE_CONTENT = CODE_EDITOR.Text;
+                    File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
+                    Thread.Sleep(100);
+                    if (MAINFORM.cmdWebglRun != null && MAINFORM.cmdWebglRun.IsDisposed == false) {
+                        MAINFORM.cmdWebglRun.buildgui.Text = "";
+                        MAINFORM.cmdWebglRun.buildgui.TextChanged += test;
+                        MAINFORM.cmdWebglRun.btnSendStdinToProcess.PerformClick();
+                    }
+                } catch (Exception err) {
+                    MessageBox.Show("Matrix-Engine GUI: " + err.ToString(), "ERROR IN SAVE PROCEDURE, TRY AGAIN!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    PREVENT_SAVE = false;
                 }
-
-            } catch (Exception err) {
-                MessageBox.Show("ERROR IN SAVE PROCEDURE", err.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -71,17 +74,7 @@ namespace matrix_engine {
         }
 
         private void prepareForPackBtn_Click(object sender, EventArgs e) {
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("runEditor();", "// READONLY_LINE runEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditor();", "// READONLY_LINE loadEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("loadEditorObjects();", "// READONLY_LINE loadEditorObjects();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE APPLICATION.EDITOR = false;", " APPLICATION.EDITOR = false;");
-        }
-
-        private void backToCodingBtn_Click(object sender, EventArgs e) {
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE runEditor();", "runEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE loadEditor();", "loadEditor();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("// READONLY_LINE loadEditorObjects();", "loadEditorObjects();");
-            CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("APPLICATION.EDITOR = false;", "// READONLY_LINE APPLICATION.EDITOR = false;");
+            // CODE_EDITOR.Text = CODE_EDITOR.Text.Replace("runEditor();", "// READONLY_LINE runEditor();");
         }
     }
 }

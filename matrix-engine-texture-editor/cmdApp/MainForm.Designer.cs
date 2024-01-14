@@ -34,7 +34,6 @@
             this.BIGTEXT = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.CLEAR = new System.Windows.Forms.Button();
-            this.killProc = new System.Windows.Forms.Button();
             this.rtb = new CmdWindow.CmdWindowBoxSync();
             this.result = new System.Windows.Forms.TextBox();
             this.exported2d = new System.Windows.Forms.TextBox();
@@ -43,6 +42,8 @@
             this.resultNpmI = new System.Windows.Forms.TextBox();
             this.resultEditor = new System.Windows.Forms.TextBox();
             this.exportedwebgl = new System.Windows.Forms.TextBox();
+            this.buildgui = new System.Windows.Forms.TextBox();
+            this.killProc = new System.Windows.Forms.Button();
             this.btnRunCommand = new System.Windows.Forms.Button();
             this.txtBxStdin = new System.Windows.Forms.TextBox();
             this.btnSendStdinToProcess = new System.Windows.Forms.Button();
@@ -56,7 +57,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.KILL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buildgui = new System.Windows.Forms.TextBox();
+            this.ADDRESSINUSE = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +78,7 @@
             this.groupBox3.Controls.Add(this.exportedwebgl);
             this.groupBox3.Controls.Add(this.buildgui);
             this.groupBox3.Controls.Add(this.killProc);
+            this.groupBox3.Controls.Add(this.ADDRESSINUSE);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox3.ForeColor = System.Drawing.Color.OrangeRed;
@@ -84,7 +86,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox3.Size = new System.Drawing.Size(1042, 244);
+            this.groupBox3.Size = new System.Drawing.Size(1042, 177);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Terminal";
@@ -136,19 +138,6 @@
             this.CLEAR.UseVisualStyleBackColor = true;
             this.CLEAR.Click += new System.EventHandler(this.CLEAR_Click);
             // 
-            // killProc
-            // 
-            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.killProc.Location = new System.Drawing.Point(928, 84);
-            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.killProc.Name = "killProc";
-            this.killProc.Size = new System.Drawing.Size(100, 27);
-            this.killProc.TabIndex = 41;
-            this.killProc.Text = "HIDE";
-            this.killProc.UseVisualStyleBackColor = true;
-            this.killProc.Click += new System.EventHandler(this.killProc_Click);
-            // 
             // rtb
             // 
             this.rtb.BackColor = System.Drawing.Color.Black;
@@ -162,7 +151,7 @@
             this.rtb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtb.Multiline = true;
             this.rtb.Name = "rtb";
-            this.rtb.Size = new System.Drawing.Size(1034, 218);
+            this.rtb.Size = new System.Drawing.Size(1034, 151);
             this.rtb.TabIndex = 0;
             this.rtb.StdoutTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StdoutTextRead);
             this.rtb.StderrTextRead += new ProcessReadWriteUtils.StringReadEventHandler(this.rtb_StderrTextRead);
@@ -236,6 +225,26 @@
             this.exportedwebgl.Name = "exportedwebgl";
             this.exportedwebgl.Size = new System.Drawing.Size(100, 27);
             this.exportedwebgl.TabIndex = 49;
+            // 
+            // buildgui
+            // 
+            this.buildgui.Location = new System.Drawing.Point(897, 206);
+            this.buildgui.Name = "buildgui";
+            this.buildgui.Size = new System.Drawing.Size(100, 27);
+            this.buildgui.TabIndex = 50;
+            // 
+            // killProc
+            // 
+            this.killProc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.killProc.Font = new System.Drawing.Font("Orbitron", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.killProc.Location = new System.Drawing.Point(928, 84);
+            this.killProc.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.killProc.Name = "killProc";
+            this.killProc.Size = new System.Drawing.Size(100, 27);
+            this.killProc.TabIndex = 41;
+            this.killProc.Text = "HIDE";
+            this.killProc.UseVisualStyleBackColor = true;
+            this.killProc.Click += new System.EventHandler(this.killProc_Click);
             // 
             // btnRunCommand
             // 
@@ -381,24 +390,23 @@
             this.panel1.Size = new System.Drawing.Size(378, 307);
             this.panel1.TabIndex = 41;
             // 
-            // buildgui
+            // ADDRESSINUSE
             // 
-            this.buildgui.Location = new System.Drawing.Point(897, 206);
-            this.buildgui.Name = "buildgui";
-            this.buildgui.Size = new System.Drawing.Size(100, 27);
-            this.buildgui.TabIndex = 50;
+            this.ADDRESSINUSE.Location = new System.Drawing.Point(823, 113);
+            this.ADDRESSINUSE.Name = "ADDRESSINUSE";
+            this.ADDRESSINUSE.Size = new System.Drawing.Size(100, 27);
+            this.ADDRESSINUSE.TabIndex = 51;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1042, 244);
+            this.ClientSize = new System.Drawing.Size(1042, 177);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -444,6 +452,7 @@
         public System.Windows.Forms.TextBox exported2d;
         public System.Windows.Forms.TextBox exportedwebgl;
         public System.Windows.Forms.TextBox buildgui;
+        public System.Windows.Forms.TextBox ADDRESSINUSE;
     }
 }
 

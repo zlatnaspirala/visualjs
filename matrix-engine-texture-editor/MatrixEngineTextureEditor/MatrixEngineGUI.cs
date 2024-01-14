@@ -572,11 +572,11 @@ namespace matrix_engine {
             k.Modifiers = CefEventFlags.None;
             k.Type = KeyEventType.KeyDown;
             k.IsSystemKey = false;
-            if (FSBrowser != null) {
+            if (FSBrowser != null && FSBrowser.IsDisposed == false) {
                 FSBrowser.chromiumWebBrowser1.Focus();
                 FSBrowser.chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
             }
-            if (chromiumWebBrowser1 != null) {
+            if (chromiumWebBrowser1 != null && chromiumWebBrowser1.IsDisposed == false) {
                 chromiumWebBrowser1.Focus();
                 chromiumWebBrowser1.GetBrowser().GetHost().SendKeyEvent(k);
             }
@@ -889,14 +889,14 @@ namespace matrix_engine {
                 scritpEditorAndroid.SCRIPT_SRC.Text = APP_DIR;
             }
 
-            if (scriptGUIEditor != null && scriptGUIEditor.IsDisposed == false) {
+            /*if (scriptGUIEditor != null && scriptGUIEditor.IsDisposed == false) {
                 scriptGUIEditor.Show();
             } else {
                 scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
                 scriptGUIEditor.Show();
                 scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 60, 25);
                 scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
-            }
+            }*/
 
             if (scriptGUIEditor3d != null && scriptGUIEditor3d.IsDisposed == false) {
                 scriptGUIEditor3d.Show();
@@ -907,6 +907,11 @@ namespace matrix_engine {
                 scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
             }
 
+            if (cmdWebglHOST != null && cmdWebglHOST.IsDisposed == false) {
+                cmdWebglHOST.Hide();
+            }
+
+            cmdWebglRun.WindowState = FormWindowState.Minimized;
             button2.PerformClick();
         }
         private void cmdWebGLRunEvent(object sender, EventArgs e) {
@@ -921,7 +926,7 @@ namespace matrix_engine {
                 File.WriteAllText(TEXTURE_JS_FILE, PACKAGE_CONTENT);
             }
 
-            cmdWebglRun.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 3 * this.Size.Height / 4);
+            cmdWebglRun.Location = new Point(Location.X + Size.Width / 100 * 43, Location.Y + 3 * this.Size.Height / 4);
             cmdWebglRun.txtBxStdin.Text = @"c:";
             cmdWebglRun.btnSendStdinToProcess.PerformClick();
             cmdWebglRun.txtBxStdin.Text = @"cd " + APP_DIR;
@@ -929,10 +934,44 @@ namespace matrix_engine {
             // npm run host-for-gui Refer on canvas2d part WATCH NOT WORK FOR NOW!
             cmdWebglRun.txtBxStdin.Text = @"npm run build.gui.app";
             cmdWebglRun.btnSendStdinToProcess.PerformClick();
+
+            if (scritpEditorAndroid != null && scritpEditorAndroid.IsDisposed == false) {
+                scritpEditorAndroid.Show();
+            } else {
+                scritpEditorAndroid = new ScritpEditorAndroid(APP_DIR, APP_NAME, this);
+                scritpEditorAndroid.Show();
+                scritpEditorAndroid.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scritpEditorAndroid.SCRIPT_SRC.Text = APP_DIR;
+            }
+
+            /*if (scriptGUIEditor != null && scriptGUIEditor.IsDisposed == false) {
+                scriptGUIEditor.Show();
+            } else {
+                scriptGUIEditor = new ScritpEditor(APP_DIR, APP_NAME, this);
+                scriptGUIEditor.Show();
+                scriptGUIEditor.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scriptGUIEditor.SCRIPT_SRC.Text = APP_DIR;
+            }*/
+
+            if (scriptGUIEditor3d != null && scriptGUIEditor3d.IsDisposed == false) {
+                scriptGUIEditor3d.Show();
+            } else {
+                scriptGUIEditor3d = new ScritpEditor3d(APP_DIR, APP_NAME, this);
+                scriptGUIEditor3d.Show();
+                scriptGUIEditor3d.Location = new Point(this.Size.Width / 100 * 60, 25);
+                scriptGUIEditor3d.SCRIPT_SRC.Text = APP_DIR;
+            }
+
+        }
+
+        public void testAlreadyHosted(object sender, EventArgs e) {
+            MessageBox.Show("Web server already runned", "Matrix-Engine", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cmdWebGLHOSTING(object sender, EventArgs e) {
-            cmdWebglRun.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 2 * this.Size.Height / 4);
+
+            cmdWebglHOST.ADDRESSINUSE.TextChanged += testAlreadyHosted;
+            cmdWebglHOST.Location = new Point(Location.X + Size.Width / 100 * 55, Location.Y + 3 * this.Size.Height / 4);
             cmdWebglHOST.txtBxStdin.Text = @"c:";
             cmdWebglHOST.btnSendStdinToProcess.PerformClick();
             cmdWebglHOST.txtBxStdin.Text = @"cd " + APP_DIR;
@@ -942,10 +981,11 @@ namespace matrix_engine {
             // host root !
             cmdWebglHOST.txtBxStdin.Text = @"npm run host-public";
             cmdWebglHOST.btnSendStdinToProcess.PerformClick();
-            if (chromiumWebBrowser1 != null) {
+
+            /*if (chromiumWebBrowser1 != null) {
                 URLTEXT.Text = "http://localhost/public/gui.html";
                 chromiumWebBrowser1.LoadUrl("http://localhost/public/gui.html");
-            }
+            }*/
         }
 
         private void button2_Click(object sender, EventArgs e) {

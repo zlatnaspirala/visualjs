@@ -195,7 +195,10 @@ namespace CmdWindowControlTestApp {
         /// <param name="text">The standard output text of the running command.</param>
         private void rtb_StdoutTextRead(string text) {
             // Console.WriteLine("OUTPUT=" + text);
-            if (text.Contains("http://127.0.0.1")) {
+            if (text.Contains("listen EADDRINUSE")) {
+                // buildgui.Text = "Build gui 3d ME done.";
+                ADDRESSINUSE.Text = "true";
+            } else if (text.Contains("http://127.0.0.1")) {
                 if (preventSignalForHost == true) { return; }
                 text = text.Replace("  ", "");
                 result.Text = text;
@@ -227,6 +230,12 @@ namespace CmdWindowControlTestApp {
         private void rtb_StderrTextRead(string text) {
             // Do custom handling of the standard error text here ...
             Console.WriteLine("MainForm.EOnStderrTextRead- text=" + text);
+            if (text.Contains("listen EADDRINUSE")) {
+                // buildgui.Text = "Build gui 3d ME done.";
+                ADDRESSINUSE.Text = "true";
+                this.Close();
+                this.Dispose();
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e) {

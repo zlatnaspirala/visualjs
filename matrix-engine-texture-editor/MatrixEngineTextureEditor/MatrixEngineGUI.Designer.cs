@@ -116,6 +116,7 @@ namespace matrix_engine
             // 
             // menuStrip1
             // 
+            this.menuStrip1.AllowItemReorder = true;
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
