@@ -5,6 +5,7 @@ import ActivateModifiers from './lib/proto_modify';
 import {CREATE_SYSTEM_BUTTONS} from './lib/program_modul';
 import {GET_ALL_GAME_OBJECTS, runEditor} from "./lib/editor/editor";
 import { randLetter, VIEW } from './lib/init';
+
 /**
  * @description 
  * Convert to lowercase letters. 

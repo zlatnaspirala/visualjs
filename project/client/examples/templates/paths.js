@@ -20,37 +20,37 @@ HOLDER.TYPE_OF_GAME_OBJECT = "CUSTOM";
 SMODULE.NEW_OBJECT("REC_PATH", 10, 8, 18, 5, 1);
 REC_PATH.CREATE_TEXTBOX("Stop Recording", 10, "black", "red");
 REC_PATH.TEXTBOX.EDIT = false;
-REC_PATH.TEXTBOX.font = font = "13px Arial";
+REC_PATH.TEXTBOX.font =  "13px Arial";
 
 SMODULE.NEW_OBJECT("PATH__CLEAR", 28, 8, 18, 5, 1);
 PATH__CLEAR.CREATE_TEXTBOX("Clear and Start Recording after 3s", 10, "black", "red");
 PATH__CLEAR.TEXTBOX.EDIT = false;
-PATH__CLEAR.TEXTBOX.font = font = "13px Arial";
+PATH__CLEAR.TEXTBOX.font = "13px Arial";
 
 SMODULE.NEW_OBJECT("SWITH_DRAW_TYPE", 10, 13, 18, 5, 1);
 SWITH_DRAW_TYPE.CREATE_TEXTBOX("Draw type : POINTS ", 10, "black", "red");
 SWITH_DRAW_TYPE.TEXTBOX.EDIT = false;
-SWITH_DRAW_TYPE.TEXTBOX.font = font = "13px Arial";
+SWITH_DRAW_TYPE.TEXTBOX.font = "13px Arial";
 
 SMODULE.NEW_OBJECT("NAME_FOR_SAVE", 28, 13, 18, 5, 1);
 NAME_FOR_SAVE.CREATE_TEXTBOX("Enter name here", 10, "black", "lime");
 NAME_FOR_SAVE.TEXTBOX.EDIT = true;
-NAME_FOR_SAVE.TEXTBOX.font = font = "13px Arial";
+NAME_FOR_SAVE.TEXTBOX.font =  "13px Arial";
 
 SMODULE.NEW_OBJECT("SAVE_TO_LS", 28, 18, 18, 5, 1);
 SAVE_TO_LS.CREATE_TEXTBOX("Save to localstorage", 10, "black", "green");
 SAVE_TO_LS.TEXTBOX.EDIT = false;
-SAVE_TO_LS.TEXTBOX.font = font = "13px Arial";
+SAVE_TO_LS.TEXTBOX.font =  "13px Arial";
 
 SMODULE.NEW_OBJECT("SWITH_RECORD_TYPE", 10, 18, 18, 5, 1);
 SWITH_RECORD_TYPE.CREATE_TEXTBOX("ON_MOUSE_MOVE", 10, "black", "green");
 SWITH_RECORD_TYPE.TEXTBOX.EDIT = false;
-SWITH_RECORD_TYPE.TEXTBOX.font = font = "13px Arial";
+SWITH_RECORD_TYPE.TEXTBOX.font =  "13px Arial";
 
 SMODULE.NEW_OBJECT("__CLEAR", 10, 23, 18, 5, 1);
 __CLEAR.CREATE_TEXTBOX("Pencil clear", 10, "black", "green");
 __CLEAR.TEXTBOX.EDIT = false;
-__CLEAR.TEXTBOX.font = font = "13px Arial";
+__CLEAR.TEXTBOX.font =  "13px Arial";
 
 __CLEAR.TAP = function () {
     IamPathGameObject.PENCIL.CLEAR();
@@ -65,7 +65,7 @@ SAVE_TO_LS.TAP = function () {
 SMODULE.NEW_OBJECT("dataAboutPencil", 10, 28, 36, 5, 1);
 dataAboutPencil.CREATE_TEXTBOX("Pencil control", 10, "black", "green");
 dataAboutPencil.TEXTBOX.EDIT = false;
-dataAboutPencil.TEXTBOX.font = font = "13px Arial";
+dataAboutPencil.TEXTBOX.font =  "13px Arial";
 dataAboutPencil.ON_UPDATE_SYS = function () {
 
     dataAboutPencil.TEXTBOX.TEXT = "Buffer size:" + IamPathGameObject.PENCIL.PATH.length + " . Keep low value < 1000 .";
@@ -127,7 +127,7 @@ PATH__CLEAR.TAP = function () {
 
     IamPathGameObject.PENCIL.CLEAR();
 
-    IamPathGameObject.ON_UPDATE_SYS = ROOT_GAME_OBJECT.ON_UPDATE_SYS_RECORD_ONLY_TAP; //clear colector
+    IamPathGameObject.ON_UPDATE_SYS = IamPathGameObject.ON_UPDATE_SYS_RECORD_ONLY_TAP; //clear colector
     setTimeout(function () {
         IamPathGameObject.PENCIL.RECORD = true;
         REC_PATH.TEXTBOX.TEXT = "Stop recording";

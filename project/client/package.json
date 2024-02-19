@@ -6,6 +6,8 @@
   "scripts": {
     "app": "watchify application.js -p esmify -o builds/visual.js",
     "build.app": "browserify application.js -p esmify > builds/visual.js",
+    "pencil": "watchify appPencil.js -p esmify -o builds/visual.js",
+    "build.pencil": "browserify appPencil.js -p esmify > builds/visual.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

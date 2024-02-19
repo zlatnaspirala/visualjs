@@ -24,8 +24,9 @@ var _math = require("./lib/math");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ONLY WHEN EDITOR IS ACTIVE!
-(0, _editor.runEditor)();
-(0, _proto_modify.default)(); // Run Instance from here
+// runEditor();
+(0, _proto_modify.default)();
+window.SYS = _system.default; // Run Instance from here
 
 _system.default.DOM.CREATE_SURFACE("SURF", "HELLO_WORLD", 100, 99.4, "DIAMETRIC");
 
@@ -33,13 +34,18 @@ HELLO_WORLD.ENGINE.EXIT_EDIT_MODE();
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER"); // Keyboard
 // ONLY WHEN EDITOR IS ACTIVE!
+// CREATE_SYSTEM_BUTTONS();
 
-(0, _program_modul.CREATE_SYSTEM_BUTTONS)();
 (0, _onresize.attachResize)(); // ONLY WHEN EDITOR IS DEACTIVE AND AFTER BUILD!
 // SYS.SCRIPT.LOAD('starter/visual.js', true).then((test)=> {
-// console.log("You can still add some post script")
-// console.log("Write yor code here!")
+//   console.log("You can still add some post script")
+//   console.log("Write yor code here!")
 // })
+
+_system.default.SCRIPT.LOAD('./examples/templates/paths.js', true).then(test => {
+  console.log("You can still add some post script");
+  console.log("Write yor code here!");
+});
 
 addEventListener("postScriptReady", e => {
   console.log("EVENT<postScriptReady>");
@@ -56,8 +62,7 @@ _system.default.SCRIPT.LOAD("res/animations/resource.js");
 
 window.ML = _ml.default;
 window.APPLICATION = _manifest.default; // ONLY WHEN EDITOR IS ACTIVE!
-
-(0, _editor.GET_ALL_GAME_OBJECTS)();
+// GET_ALL_GAME_OBJECTS();
 
 },{"./lib/audio/audio":2,"./lib/editor/editor":6,"./lib/events/onresize":10,"./lib/init":13,"./lib/math":14,"./lib/multilanguage/ml":16,"./lib/program_modul":19,"./lib/proto_modify":20,"./lib/system":21,"./manifest/manifest":22}],2:[function(require,module,exports){
 "use strict";
@@ -1624,7 +1629,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
         //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
 
-        if (isOdd(a)) {
+        if ((0, _math.isOdd)(a)) {
           SURF.beginPath();
           SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
           SURF.moveTo(value_.x, value_.y);
@@ -1643,7 +1648,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
         //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
 
-        if (isEven(a)) {
+        if ((0, _math.isEven)(a)) {
           SURF.beginPath();
           SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
           SURF.moveTo(value_.x, value_.y);
@@ -1660,7 +1665,7 @@ function GAME_OBJECT(name, modul, x, y, w, h, speed, PROGRAM_NAME) {
         SURF.strokeStyle = ROOT_GAME_OBJECT.PENCIL.COLOR; //SURF.beginPath();
         //SURF.arc(value_.x,value_.y,ROOT_GAME_OBJECT.PENCIL.WIDTH,0,2*Math.PI);
 
-        if (isOdd(a)) {
+        if ((0, _math.isOdd)(a)) {
           SURF.beginPath();
           SURF.lineWidth = ROOT_GAME_OBJECT.PENCIL.WIDTH;
           SURF.moveTo(value_.x, value_.y);

@@ -1,5 +1,5 @@
 
-import {POSITION, DIMENSION} from '../math';
+import {POSITION, DIMENSION, isOdd, isEven} from '../math';
 import SYS from '../system';
 import {RIGHT_MENU_BUTTON} from '../draw_functions/systems';
 import {RECT} from '../draw_functions/rect';
