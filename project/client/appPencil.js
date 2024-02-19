@@ -22,6 +22,15 @@ HELLO_WORLD.ENGINE.EXIT_EDIT_MODE();
 HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
+SYS.SCRIPT.LOAD("res/audio/resource.audio.js", false).then((test) => {
+  SYS.SCRIPT.LOAD("res/animations/resource.js");
+  SYS.SCRIPT.LOAD('./examples/templates/paths.js', true).then((test) => {
+    console.log("You can still add some post script")
+    console.log("Write yor code here!")
+  })
+});
+
+
 // Keyboard
 // ONLY WHEN EDITOR IS ACTIVE!
 // CREATE_SYSTEM_BUTTONS();
@@ -34,12 +43,6 @@ attachResize();
 //   console.log("Write yor code here!")
 // })
 
-SYS.SCRIPT.LOAD('./examples/templates/paths.js', true).then((test)=> {
-
-  console.log("You can still add some post script")
-  console.log("Write yor code here!")
-})
-
 addEventListener("postScriptReady", (e) => {
   console.log("EVENT<postScriptReady>");
   console.log("Object from editor are defined here ->", ssss);
@@ -49,8 +52,7 @@ addEventListener("postScriptReady", (e) => {
   ssss.POSITION.TRANSLATE_BY_X(2);
 });
 
-SYS.SCRIPT.LOAD("res/audio/resource.audio");
-SYS.SCRIPT.LOAD("res/animations/resource.js");
+
 
 window.ML = ML;
 window.APPLICATION = APPLICATION;

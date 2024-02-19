@@ -42,7 +42,7 @@ addEventListener("postScriptReady", (e) => {
   ssss.POSITION.TRANSLATE_BY_X(2);
 });
 
-SYS.SCRIPT.LOAD("res/audio/resource.audio");
+SYS.SCRIPT.LOAD("res/audio/resource.audio.js");
 SYS.SCRIPT.LOAD("res/animations/resource.js");
 
 window.ML = ML;

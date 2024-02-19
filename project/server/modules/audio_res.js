@@ -42,7 +42,7 @@
 
           if((i + 1) == items.length) {
             FILE_STRING += "\nAUDIO_RESOURCE.SUM = " + SUM_OF_AUDIOS + "; ";
-            CreateFile(APPLICATION.PATH_OF_WWW + "res/audio/resource.audio", FILE_STRING);
+            CreateFile(APPLICATION.PATH_OF_WWW + "res/audio/resource.audio.js", FILE_STRING);
           }
         }
 
