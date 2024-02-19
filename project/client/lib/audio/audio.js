@@ -3,6 +3,7 @@
  * @constructor
  * @param res
  */
+
 export function AUDIO_RES(res) {
 
     var ROOT_AUDIO = this;

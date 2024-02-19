@@ -35,11 +35,10 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
 _system.default.SCRIPT.LOAD("res/audio/resource.audio.js", false).then(test => {
-  _system.default.SCRIPT.LOAD("res/animations/resource.js");
+  _system.default.SCRIPT.LOAD("res/animations/resource.js", false);
 
   _system.default.SCRIPT.LOAD('./examples/templates/paths.js', true).then(test => {
-    console.log("You can still add some post script");
-    console.log("Write yor code here!");
+    console.log("You can still add some post script!!!");
   });
 }); // Keyboard
 // ONLY WHEN EDITOR IS ACTIVE!
@@ -896,6 +895,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.KEYBOARD = KEYBOARD;
 
+var _init = require("../init");
+
 var _system = _interopRequireDefault(require("../system"));
 
 var _keyboard_editor = _interopRequireDefault(require("./keyboard_editor"));
@@ -982,7 +983,7 @@ function KEYBOARD(c) {
     if (e.keyCode == 8) {
       _system.default.DEBUG.LOG("textbox delete last char!");
 
-      ROOT.CAPTURE_CHAR = remove_last(ROOT.CAPTURE_CHAR);
+      ROOT.CAPTURE_CHAR = (0, _init.remove_last)(ROOT.CAPTURE_CHAR);
     } else if (e.keyCode == 13) {
       ROOT.ENTER_PRESSED = true;
     } else {
@@ -1164,7 +1165,7 @@ function KEYBOARD(c) {
   }, false);
 }
 
-},{"../system":21,"./keyboard_editor":9}],9:[function(require,module,exports){
+},{"../init":13,"../system":21,"./keyboard_editor":9}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

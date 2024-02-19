@@ -1,4 +1,3 @@
-
 /**
  * @description
  * Make javascript audio resources objects data,
@@ -7,8 +6,7 @@
  * @email zlatnaspirala@gmail.com
  */
 
- module.exports = audio_res = (config) => {
-
+module.exports = audio_res = (config) => {
   var fs = require("fs");
 
   var APPLICATION = config;
@@ -27,12 +25,10 @@
       for(var i = 0;i < items.length;i++) {
         var local = items[i];
         local = local.replace(".", "_");
-
         if(i == 0) {
           FILE_STRING += ' \nvar AUDIO_RESOURCE = new Object(); AUDIO_RESOURCE = {"source":[';
           SUM_OF_AUDIOS++;
         }
-
         if('resource.audio' != items[i]) {
           FILE_STRING = " " + FILE_STRING + "'" + items[i] + "' , \n";
 
@@ -45,9 +41,7 @@
             CreateFile(APPLICATION.PATH_OF_WWW + "res/audio/resource.audio.js", FILE_STRING);
           }
         }
-
       }
-
     });
   }
 

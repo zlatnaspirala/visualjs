@@ -23,10 +23,9 @@ HELLO_WORLD.ENGINE.CREATE_MODUL("STARTER");
 var SMODULE = HELLO_WORLD.ENGINE.MODULES.ACCESS_MODULE("STARTER");
 
 SYS.SCRIPT.LOAD("res/audio/resource.audio.js", false).then((test) => {
-  SYS.SCRIPT.LOAD("res/animations/resource.js");
+  SYS.SCRIPT.LOAD("res/animations/resource.js", false);
   SYS.SCRIPT.LOAD('./examples/templates/paths.js', true).then((test) => {
-    console.log("You can still add some post script")
-    console.log("Write yor code here!")
+    console.log("You can still add some post script!!!")
   })
 });
 

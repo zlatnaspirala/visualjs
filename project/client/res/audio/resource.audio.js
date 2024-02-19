@@ -7,5 +7,5 @@ var AUDIO_RESOURCE = new Object(); AUDIO_RESOURCE = {"source":['bet_btns.ogg' ,
 'start_reel1.ogg' , 
 'stop.ogg' , 
  ] }; 
-
+ 
 AUDIO_RESOURCE.SUM = 1; 
